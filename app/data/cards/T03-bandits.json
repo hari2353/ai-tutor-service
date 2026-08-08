@@ -1,11 +1,67 @@
-{"flashcards":[
-{"id":"T03-bandits-c1","topic":"Bandits","q":"Why does fixed-epsilon epsilon-greedy have LINEAR regret?","a":"A constant fraction epsilon of every round (forever, not just early on) is spent choosing uniformly at random, including arms already confidently known to be bad -- this constant per-round expected regret contribution sums to linear growth in total rounds, unlike UCB/Thompson's logarithmic regret.","module":"T03-bandits"},
-{"id":"T03-bandits-c2","topic":"Bandits","q":"UCB1 formula and the statistical principle behind it?","a":"argmax(mean_i + sqrt(2*ln(t)/n_i)). The bonus comes from a Chernoff-Hoeffding bound: with high probability mean_i+bonus_i upper-bounds the true mean. 'Optimism under uncertainty' -- act as if every arm is as good as its plausible best case; bonus shrinks as n_i grows, auto-tapering exploration -> O(log t) regret.","module":"T03-bandits"},
-{"id":"T03-bandits-c3","topic":"Bandits","q":"Thompson sampling for Bernoulli arms -- update rule and selection rule?","a":"Beta(1,1) prior, update to Beta(alpha+1,beta) on success / Beta(alpha,beta+1) on failure (closed-form conjugate). Sample ONE value per arm's posterior each round, pick the arm with the highest SAMPLE (not highest mean) -- wide (uncertain) posteriors naturally get explored more.","module":"T03-bandits"},
-{"id":"T03-bandits-c4","topic":"Bandits","q":"LinUCB: how does it extend UCB to context, and what's the confidence bonus derived from?","a":"Per-arm ridge regression theta_i_hat=(D_i^T D_i+lambda*I)^-1 D_i^T c_i estimates reward as x.theta_i. Bonus = alpha*sqrt(x^T(D_i^TD_i+lambda*I)^-1 x), from the ridge regression's own uncertainty -- grows in under-explored directions of context space, personalizing explore/exploit per context.","module":"T03-bandits"},
-{"id":"T03-bandits-c5","topic":"Bandits","q":"Why doesn't a raw high-cardinality user ID help LinUCB generalize across users?","a":"LinUCB's benefit comes from sharing statistical strength across similar contexts via the linear model. A raw ID with no inherent structure gives nothing to generalize from -- it must see that exact ID before learning anything about it, same as one-hot IDs offering no cross-category information transfer elsewhere in this track.","module":"T03-bandits"},
-{"id":"T03-bandits-c6","topic":"Bandits","q":"Define cumulative regret and why it's the correct bandit evaluation metric.","a":"sum_t(best_arm_reward - chosen_arm_reward). Correct because it penalizes the COST of exploration itself, not just whether the algorithm eventually found the best arm -- an algorithm that converges correctly but wastes huge reward getting there has high regret despite 'succeeding'.","module":"T03-bandits"},
-{"id":"T03-bandits-c7","topic":"Bandits","q":"Why must an exploring bandit sometimes serve a suboptimal option to a real user, and what's the production safeguard?","a":"By definition, any exploring algorithm must occasionally choose a non-best-known arm to gather information, or it's pure exploitation with no correction mechanism. Safeguard: an explicit safety floor excluding catastrophic options from the exploration set, or a hard cap on exploration traffic share.","module":"T03-bandits"},
-{"id":"T03-bandits-c8","topic":"Bandits","q":"Why can't you evaluate a new bandit policy by naively averaging old-policy logged rewards for actions the new policy would pick?","a":"Old-policy logs contain outcomes at a frequency proportional to how often the OLD policy chose each action -- restricting to 'rounds where policies agree' conditions on a biased subsample, not an unbiased estimate of the new policy's full-deployment performance. Fix: inverse propensity scoring, reweighting by 1/P(old policy chose this action).","module":"T03-bandits"},
-{"id":"T03-bandits-c9","topic":"Bandits","q":"Bandit vs fixed-horizon A/B test -- when is each the right tool?","a":"Bandit: ongoing/repeated decisions where allocation should adapt continuously (recommendation ranking, pricing). Fixed A/B test: one-time permanent ship/no-ship decision between a small set of variants, where rigorous significance testing matters more than continuous adaptation.","module":"T03-bandits"}
-]}
+{
+  "flashcards": [
+    {
+      "id": "T03-bandits-c1",
+      "topic": "Bandits",
+      "q": "Why does fixed-epsilon epsilon-greedy have LINEAR regret?",
+      "a": "A constant fraction epsilon of every round (forever, not just early on) is spent choosing uniformly at random, including arms already confidently known to be bad -- this constant per-round expected regret contribution sums to linear growth in total rounds, unlike UCB/Thompson's logarithmic regret.",
+      "module": "T03-bandits"
+    },
+    {
+      "id": "T03-bandits-c2",
+      "topic": "Bandits",
+      "q": "UCB1 formula and the statistical principle behind it?",
+      "a": "argmax(mean_i + sqrt(2*ln(t)/n_i)). The bonus comes from a Chernoff-Hoeffding bound: with high probability mean_i+bonus_i upper-bounds the true mean. 'Optimism under uncertainty' -- act as if every arm is as good as its plausible best case; bonus shrinks as n_i grows, auto-tapering exploration -> O(log t) regret.",
+      "module": "T03-bandits"
+    },
+    {
+      "id": "T03-bandits-c3",
+      "topic": "Bandits",
+      "q": "Thompson sampling for Bernoulli arms -- update rule and selection rule?",
+      "a": "Beta(1,1) prior, update to Beta(alpha+1,beta) on success / Beta(alpha,beta+1) on failure (closed-form conjugate). Sample ONE value per arm's posterior each round, pick the arm with the highest SAMPLE (not highest mean) -- wide (uncertain) posteriors naturally get explored more.",
+      "module": "T03-bandits"
+    },
+    {
+      "id": "T03-bandits-c4",
+      "topic": "Bandits",
+      "q": "LinUCB: how does it extend UCB to context, and what's the confidence bonus derived from?",
+      "a": "Per-arm ridge regression theta_i_hat=(D_i^T D_i+lambda*I)^-1 D_i^T c_i estimates reward as x.theta_i. Bonus = alpha*sqrt(x^T(D_i^TD_i+lambda*I)^-1 x), from the ridge regression's own uncertainty -- grows in under-explored directions of context space, personalizing explore/exploit per context.",
+      "module": "T03-bandits"
+    },
+    {
+      "id": "T03-bandits-c5",
+      "topic": "Bandits",
+      "q": "Why doesn't a raw high-cardinality user ID help LinUCB generalize across users?",
+      "a": "LinUCB's benefit comes from sharing statistical strength across similar contexts via the linear model. A raw ID with no inherent structure gives nothing to generalize from -- it must see that exact ID before learning anything about it, same as one-hot IDs offering no cross-category information transfer elsewhere in this track.",
+      "module": "T03-bandits"
+    },
+    {
+      "id": "T03-bandits-c6",
+      "topic": "Bandits",
+      "q": "Define cumulative regret and why it's the correct bandit evaluation metric.",
+      "a": "sum_t(best_arm_reward - chosen_arm_reward). Correct because it penalizes the COST of exploration itself, not just whether the algorithm eventually found the best arm -- an algorithm that converges correctly but wastes huge reward getting there has high regret despite 'succeeding'.",
+      "module": "T03-bandits"
+    },
+    {
+      "id": "T03-bandits-c7",
+      "topic": "Bandits",
+      "q": "Why must an exploring bandit sometimes serve a suboptimal option to a real user, and what's the production safeguard?",
+      "a": "By definition, any exploring algorithm must occasionally choose a non-best-known arm to gather information, or it's pure exploitation with no correction mechanism. Safeguard: an explicit safety floor excluding catastrophic options from the exploration set, or a hard cap on exploration traffic share.",
+      "module": "T03-bandits"
+    },
+    {
+      "id": "T03-bandits-c8",
+      "topic": "Bandits",
+      "q": "Why can't you evaluate a new bandit policy by naively averaging old-policy logged rewards for actions the new policy would pick?",
+      "a": "Old-policy logs contain outcomes at a frequency proportional to how often the OLD policy chose each action -- restricting to 'rounds where policies agree' conditions on a biased subsample, not an unbiased estimate of the new policy's full-deployment performance. Fix: inverse propensity scoring, reweighting by 1/P(old policy chose this action).",
+      "module": "T03-bandits"
+    },
+    {
+      "id": "T03-bandits-c9",
+      "topic": "Bandits",
+      "q": "Bandit vs fixed-horizon A/B test -- when is each the right tool?",
+      "a": "Bandit: ongoing/repeated decisions where allocation should adapt continuously (recommendation ranking, pricing). Fixed A/B test: one-time permanent ship/no-ship decision between a small set of variants, where rigorous significance testing matters more than continuous adaptation.",
+      "module": "T03-bandits"
+    }
+  ]
+}

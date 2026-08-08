@@ -1,0 +1,130 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-agent-loop-from-scratch-c1",
+      "topic": "The Agent Loop From Scratch",
+      "q": "What IS an agent, mechanically?",
+      "a": "A loop around a stateless model: send messages + tool schemas, model returns text (done) or tool calls, execute them, append results, repeat. ~40 lines.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c2",
+      "topic": "The Agent Loop From Scratch",
+      "q": "Why is agent cost quadratic in turns?",
+      "a": "The model is stateless. Every turn re-sends the entire message history, so turn N pays for turns 1..N. Total cost grows as the square of turn count.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c3",
+      "topic": "The Agent Loop From Scratch",
+      "q": "The six stop conditions for an agent loop?",
+      "a": "1) model returns no tool call 2) step cap (10-25) 3) token budget 4) cost budget 5) wall-clock deadline 6) no-progress detector.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c4",
+      "topic": "The Agent Loop From Scratch",
+      "q": "Which stop condition fires most often in production?",
+      "a": "The no-progress detector. The common failure isn't infinite exploration, it's the model repeating an identical tool call that will never succeed.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c5",
+      "topic": "The Agent Loop From Scratch",
+      "q": "How do you implement no-progress detection?",
+      "a": "Hash (tool_name, sorted args) into a counter. At 3 repeats, return a tool RESULT telling the model to change approach - not an exception.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c6",
+      "topic": "The Agent Loop From Scratch",
+      "q": "What happens when a tool throws?",
+      "a": "Catch it and return a readable error string as the tool result, so the model can route around it. Propagating the exception discards all prior work in the run.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c7",
+      "topic": "The Agent Loop From Scratch",
+      "q": "When should you NOT catch a tool exception?",
+      "a": "When it's a bug in your harness rather than the tool's dependency. A model cannot fix your KeyError - crash loudly instead of shipping an agent that looks merely stupid.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c8",
+      "topic": "The Agent Loop From Scratch",
+      "q": "Agent reliability math at 95% per step?",
+      "a": "0.95^10 is about 60%. At 85% per step, 10 steps is about 20%. 0.95^50 is 8%. Reliability is multiplicative.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c9",
+      "topic": "The Agent Loop From Scratch",
+      "q": "What fixes compounding agent failure?",
+      "a": "Not a better model. Fewer steps, checkpointing so failures resume instead of restart, and human approval at consequential points.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c10",
+      "topic": "The Agent Loop From Scratch",
+      "q": "Three context-management levers, in order?",
+      "a": "1) Truncate tool results at the tool boundary (highest leverage) 2) Compact at ~70% of window: recap old turns, keep recent verbatim 3) Externalise to file/store so state survives compaction.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c11",
+      "topic": "The Agent Loop From Scratch",
+      "q": "What must never be compacted away?",
+      "a": "messages[0] / the system prompt, the original task statement, and any pending obligation. Carry an explicit open-items list through every compaction.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c12",
+      "topic": "The Agent Loop From Scratch",
+      "q": "What does a framework like LangGraph actually give you?",
+      "a": "Persistence and checkpointing (the real reason), streaming, interrupt()/HITL, per-node retry semantics, observability hooks, subgraph composition. NOT the loop.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c13",
+      "topic": "The Agent Loop From Scratch",
+      "q": "When is an agent the WRONG choice?",
+      "a": "When the steps are known in advance - write the pipeline. When one prompt suffices. When work is long-running or multi-party - use a durable workflow engine.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c14",
+      "topic": "The Agent Loop From Scratch",
+      "q": "Difference between ReAct and the agent loop?",
+      "a": "ReAct is the prompting pattern (interleave reasoning and action). The loop is the harness executing it. ReAct originally parsed Thought/Action/Observation text; native tool calling replaced that.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c15",
+      "topic": "The Agent Loop From Scratch",
+      "q": "How do you make a mutating tool safe to retry?",
+      "a": "Idempotency keys: client generates a key per logical operation, server stores (key to result) and returns the stored result on repeat. Read-only tools are naturally safe.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c16",
+      "topic": "The Agent Loop From Scratch",
+      "q": "How do you test a nondeterministic agent?",
+      "a": "Separate layers. Harness (stops, budgets, dispatch, compaction) is deterministic - unit test against a scripted fake model. Tools tested independently. Only end-to-end needs eval-style golden trajectories.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c17",
+      "topic": "The Agent Loop From Scratch",
+      "q": "Why does human-in-the-loop force durable execution?",
+      "a": "A human may take a day to approve. You must persist loop state before the consequential action and rehydrate on approval - an in-process loop cannot survive that wait.",
+      "module": "T07-agent-loop-from-scratch"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-c18",
+      "topic": "The Agent Loop From Scratch",
+      "q": "Single agent with 20 tools, or 5 specialists with 4 each?",
+      "a": "Start with one agent and good tools. Multi-agent costs routing errors, handoff context loss, harder debugging, more latency. Split only for parallelisable subtasks, needed context isolation, or differing permissions.",
+      "module": "T07-agent-loop-from-scratch"
+    }
+  ]
+}

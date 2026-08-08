@@ -1,0 +1,17 @@
+#!/bin/sh
+# Runs after: git merge, git pull.
+#
+# The `regen` merge driver resolves generated aggregates by keeping one side
+# verbatim rather than merging them. That is clean, but not yet correct -- the
+# kept side reflects only one person's fragments. Rebuild from all fragments
+# now so the working tree is right before anyone commits again.
+for PY in python3 python py; do
+  command -v "$PY" >/dev/null 2>&1 && break
+done
+if ! command -v "$PY" >/dev/null 2>&1; then
+  echo "post-merge: no python found -- run 'python app/build_data.py' yourself"
+  exit 0
+fi
+echo "post-merge: regenerating indexes from fragments..."
+"$PY" app/build_data.py || echo "post-merge: build_data.py failed -- run it manually before committing"
+"$PY" app/learning_path.py >/dev/null 2>&1 || true

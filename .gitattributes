@@ -2,3 +2,30 @@
 *.png binary
 *.sh text eol=lf
 *.ps1 text eol=crlf
+
+# ---------------------------------------------------------------------------
+# Generated aggregates. build_data.py rebuilds these wholesale from the
+# per-module fragments in app/data/cards/ and app/data/drillsets/, so their
+# content is derived, never authored.
+#
+# Two people working in parallel BOTH regenerate them, so a textual merge
+# produces a guaranteed conflict in a multi-megabyte file on every merge --
+# and resolving it by hand is meaningless, because the correct answer is
+# "regenerate from the fragments" either way.
+#
+# merge=regen resolves them without conflict markers; the post-merge hook
+# then reruns build_data.py so the result is correct rather than just clean.
+# Register both, once per clone:  pwsh scripts/setup-collab.ps1
+#
+# linguist-generated keeps them out of GitHub diffs and language stats.
+# ---------------------------------------------------------------------------
+app/data/curriculum.json  merge=regen linguist-generated=true
+app/data/flashcards.json  merge=regen linguist-generated=true
+app/data/drills.json      merge=regen linguist-generated=true
+app/data/problems.json    merge=regen linguist-generated=true
+app/data/*.js             merge=regen linguist-generated=true
+CONTENT-STATUS.md         merge=regen linguist-generated=true
+LEARNING-PATH.md          merge=regen linguist-generated=true
+
+# Fragments are the source of truth and are one file per module, so two people
+# writing different modules never touch the same file. Normal merge applies.
