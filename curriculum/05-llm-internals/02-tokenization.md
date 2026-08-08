@@ -2,7 +2,7 @@
 
 > **Track:** T05 LLM Internals · **Time:** 2h · **Prereqs:** T05-autoregression
 > **Module id:** `T05-tokenization` · **Tags:** internals
-> **Lab:** `labs/py/02-tokenization/` (create if not present — not yet in this repo)
+> **Lab:** `labs/py/03-bpe-tokenizer/`
 
 ## The 30-second version
 

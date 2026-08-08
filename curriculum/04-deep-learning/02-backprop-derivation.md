@@ -2,7 +2,7 @@
 
 > **Track:** T04 Deep Learning · **Time:** 2.5h · **Prereqs:** T04-neural-net-math · **Updated:** 2026-08-03
 > **Module id:** `T04-backprop-derivation` · **Tags:** fundamentals, critical
-> **Lab:** `labs/python/02-backprop-derivation/`
+> **Lab:** `labs/py/05-backprop-by-hand/`
 
 ## The 30-second version
 

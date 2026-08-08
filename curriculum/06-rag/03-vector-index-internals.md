@@ -2,6 +2,7 @@
 
 > **Track:** T06 RAG (Retrieval-Augmented Generation) · **Time:** 3h · **Prereqs:** 01-chunking, basic linear algebra (dot product, L2 distance) · **Updated:** 2026-07-26
 > **Module id:** `T06-vector-index-internals` · **Tags:** sprint, retrieval, critical
+> **Lab:** `labs/py/04-hnsw-index/`
 
 ## The 30-second version
 
