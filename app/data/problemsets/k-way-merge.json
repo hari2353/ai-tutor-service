@@ -1,0 +1,23 @@
+{"problems": [
+  {"id": "lc-21", "title": "Merge Two Sorted Lists", "pattern": "K-Way Merge", "difficulty": "Easy",
+   "url": "https://leetcode.com/problems/merge-two-sorted-lists/", "module": "T02-p14-k-way-merge",
+   "notes": "the k=2 base case that every merge-k problem below reduces to"},
+  {"id": "lc-88", "title": "Merge Sorted Array", "pattern": "K-Way Merge", "difficulty": "Easy",
+   "url": "https://leetcode.com/problems/merge-sorted-array/", "module": "T02-p14-k-way-merge",
+   "notes": "merge from the back to front so you never overwrite an unread element of nums1 in place"},
+  {"id": "lc-1305", "title": "All Elements in Two Binary Search Trees", "pattern": "K-Way Merge", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/all-elements-in-two-binary-search-trees/", "module": "T02-p14-k-way-merge",
+   "notes": "in-order traverse both BSTs into sorted lists, then merge two sorted lists — a k=2 general-tree variant"},
+  {"id": "lc-378", "title": "Kth Smallest Element in a Sorted Matrix", "pattern": "K-Way Merge", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/", "module": "T02-p14-k-way-merge",
+   "notes": "treat each row as one of k sorted lists, heap-merge until the kth pop; binary search on value is the O(n log(max-min)) alternative"},
+  {"id": "lc-23", "title": "Merge k Sorted Lists", "pattern": "K-Way Merge", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/merge-k-sorted-lists/", "module": "T02-p14-k-way-merge",
+   "notes": "min-heap of size k, or divide-and-conquer pairwise merge — both hit O(N log k); the pattern's namesake problem"},
+  {"id": "lc-632", "title": "Smallest Range Covering Elements from K Lists", "pattern": "K-Way Merge", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/", "module": "T02-p14-k-way-merge",
+   "notes": "min-heap across all k lists while tracking the current max — classic multi-list sweep, advance whichever list is smallest"},
+  {"id": "lc-1439", "title": "Find the Kth Smallest Sum of a Matrix With Sorted Rows", "pattern": "K-Way Merge", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows/", "module": "T02-p14-k-way-merge",
+   "notes": "k-way merge generalized: combine the running result row-by-row, keeping only the k smallest sums at each step"}
+]}

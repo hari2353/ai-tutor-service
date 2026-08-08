@@ -1,0 +1,23 @@
+{"problems": [
+  {"id": "lc-1584", "title": "Min Cost to Connect All Points", "pattern": "MST & Max-Flow", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/min-cost-to-connect-all-points/", "module": "T02-graph-mst-flow",
+   "notes": "Prim's or Kruskal's MST on a complete graph of Manhattan distances — Prim's with a heap avoids materializing all n^2 edges"},
+  {"id": "lc-1135", "title": "Connecting Cities With Minimum Cost", "pattern": "MST & Max-Flow", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/connecting-cities-with-minimum-cost/", "module": "T02-graph-mst-flow",
+   "notes": "textbook Kruskal's with union-find; sort edges by cost, union until n-1 edges are used or it's infeasible"},
+  {"id": "lc-2492", "title": "Minimum Score of a Path Between Two Cities", "pattern": "MST & Max-Flow", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/", "module": "T02-graph-mst-flow",
+   "notes": "union-find grouping + track the minimum edge weight per component — MST machinery repurposed for a min-over-component query"},
+  {"id": "lc-1489", "title": "Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree", "pattern": "MST & Max-Flow", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/", "module": "T02-graph-mst-flow",
+   "notes": "run Kruskal's with each edge force-included and force-excluded in turn, compare the resulting MST weight to the baseline"},
+  {"id": "lc-778", "title": "Swim in Rising Water", "pattern": "MST & Max-Flow", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/swim-in-rising-water/", "module": "T02-graph-mst-flow",
+   "notes": "binary search + BFS, or a Prim's-flavored 'minimax path' using a min-heap of the next lowest reachable cell"},
+  {"id": "lc-1168", "title": "Optimize Water Distribution in a Village", "pattern": "MST & Max-Flow", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/optimize-water-distribution-in-a-village/", "module": "T02-graph-mst-flow",
+   "notes": "reframe as MST with a virtual source node 0, where a well's cost becomes the weight of an edge from node 0"},
+  {"id": "lc-1349", "title": "Maximum Students Taking Exam", "pattern": "MST & Max-Flow", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/maximum-students-taking-exam/", "module": "T02-graph-mst-flow",
+   "notes": "bitmask DP that's conceptually bipartite-matching-adjacent: row-by-row transitions between compatible seat masks"}
+]}

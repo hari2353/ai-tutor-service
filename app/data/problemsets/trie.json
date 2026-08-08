@@ -1,0 +1,23 @@
+{"problems": [
+  {"id": "lc-208", "title": "Implement Trie (Prefix Tree)", "pattern": "Trie", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/implement-trie-prefix-tree/", "module": "T02-p18-trie",
+   "notes": "the data structure itself — get insert/search/startsWith right first, everything else builds on this"},
+  {"id": "lc-211", "title": "Design Add and Search Words Data Structure", "pattern": "Trie", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/design-add-and-search-words-data-structure/", "module": "T02-p18-trie",
+   "notes": "trie + DFS to handle the '.' wildcard character, branching into every child when a dot is hit"},
+  {"id": "lc-648", "title": "Replace Words", "pattern": "Trie", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/replace-words/", "module": "T02-p18-trie",
+   "notes": "trie prefix lookup — walk the trie for each word and stop at the shortest root that matches"},
+  {"id": "lc-1268", "title": "Search Suggestions System", "pattern": "Trie", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/search-suggestions-system/", "module": "T02-p18-trie",
+   "notes": "trie (or sorted-array + binary search) powering autocomplete — the classic product-facing trie interview question"},
+  {"id": "lc-676", "title": "Implement Magic Dictionary", "pattern": "Trie", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/implement-magic-dictionary/", "module": "T02-p18-trie",
+   "notes": "trie + DFS allowing exactly one character mismatch along the path — a controlled fuzzy match"},
+  {"id": "lc-820", "title": "Short Encoding of Words", "pattern": "Trie", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/short-encoding-of-words/", "module": "T02-p18-trie",
+   "notes": "build a trie of reversed words so shared suffixes overlap; leaves in the trie are the words you actually need to store"},
+  {"id": "lc-212", "title": "Word Search II", "pattern": "Trie", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/word-search-ii/", "module": "T02-p18-trie",
+   "notes": "build a trie of the dictionary, DFS the board, and prune trie branches as you find words — far faster than searching the board per word"}
+]}

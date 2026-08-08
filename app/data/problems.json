@@ -1,4 +1,2255 @@
 {
   "version": "0.2",
-  "problems": []
+  "problems": [
+    {
+      "id": "lc-743",
+      "title": "Network Delay Time",
+      "pattern": "Advanced Graphs (Dijkstra/Bellman-Ford/Floyd-Warshall)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/network-delay-time/",
+      "module": "T02-adv-graphs",
+      "notes": "textbook Dijkstra from a single source; the answer is the max of all shortest distances, or -1 if unreachable"
+    },
+    {
+      "id": "lc-787",
+      "title": "Cheapest Flights Within K Stops",
+      "pattern": "Advanced Graphs (Dijkstra/Bellman-Ford/Floyd-Warshall)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/cheapest-flights-within-k-stops/",
+      "module": "T02-adv-graphs",
+      "notes": "Bellman-Ford limited to k+1 relaxation rounds; plain Dijkstra needs a state-augmented (node, stops) graph instead"
+    },
+    {
+      "id": "lc-1631",
+      "title": "Path With Minimum Effort",
+      "pattern": "Advanced Graphs (Dijkstra/Bellman-Ford/Floyd-Warshall)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/path-with-minimum-effort/",
+      "module": "T02-adv-graphs",
+      "notes": "Dijkstra where 'distance' is minimized max-edge-weight along the path, not the summed weight"
+    },
+    {
+      "id": "lc-1514",
+      "title": "Path with Maximum Probability",
+      "pattern": "Advanced Graphs (Dijkstra/Bellman-Ford/Floyd-Warshall)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/path-with-maximum-probability/",
+      "module": "T02-adv-graphs",
+      "notes": "Dijkstra with multiplication instead of addition \u2014 use a max-heap since probabilities shrink as you multiply"
+    },
+    {
+      "id": "lc-1976",
+      "title": "Number of Ways to Arrive at Destination",
+      "pattern": "Advanced Graphs (Dijkstra/Bellman-Ford/Floyd-Warshall)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/",
+      "module": "T02-adv-graphs",
+      "notes": "Dijkstra plus a count-ways-to-reach-in-shortest-time DP layered on top of the standard relaxation step"
+    },
+    {
+      "id": "lc-399",
+      "title": "Evaluate Division",
+      "pattern": "Advanced Graphs (Dijkstra/Bellman-Ford/Floyd-Warshall)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/evaluate-division/",
+      "module": "T02-adv-graphs",
+      "notes": "weighted-graph BFS/DFS, or Floyd-Warshall for small graphs \u2014 build the graph from the equations before answering queries"
+    },
+    {
+      "id": "lc-1334",
+      "title": "Find the City With the Smallest Number of Neighbors at a Threshold Distance",
+      "pattern": "Advanced Graphs (Dijkstra/Bellman-Ford/Floyd-Warshall)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/",
+      "module": "T02-adv-graphs",
+      "notes": "Floyd-Warshall all-pairs shortest paths, O(n^3) is fine since n <= 100 \u2014 a good 'when is cubic acceptable' discussion"
+    },
+    {
+      "id": "lc-1091",
+      "title": "Shortest Path in Binary Matrix",
+      "pattern": "Advanced Graphs (Dijkstra/Bellman-Ford/Floyd-Warshall)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/shortest-path-in-binary-matrix/",
+      "module": "T02-adv-graphs",
+      "notes": "plain BFS on a grid with 8-directional moves \u2014 a good baseline before layering on A*-style heuristics"
+    },
+    {
+      "id": "lc-847",
+      "title": "Shortest Path Visiting All Nodes",
+      "pattern": "Advanced Graphs (Dijkstra/Bellman-Ford/Floyd-Warshall)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/shortest-path-visiting-all-nodes/",
+      "module": "T02-adv-graphs",
+      "notes": "BFS over (node, visited-bitmask) state space \u2014 a Held-Karp-style shortest path over a small node count"
+    },
+    {
+      "id": "lc-784",
+      "title": "Letter Case Permutation",
+      "pattern": "Backtracking",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/letter-case-permutation/",
+      "module": "T02-p21-backtracking",
+      "notes": "simplest possible backtracking warm-up \u2014 branch on 'change case or don't' at each letter, good before N-Queens"
+    },
+    {
+      "id": "lc-17",
+      "title": "Letter Combinations of a Phone Number",
+      "pattern": "Backtracking",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
+      "module": "T02-p21-backtracking",
+      "notes": "backtracking over a digit-to-letters map \u2014 simple, but sets up the exact recursion template used everywhere else"
+    },
+    {
+      "id": "lc-79",
+      "title": "Word Search",
+      "pattern": "Backtracking",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/word-search/",
+      "module": "T02-p21-backtracking",
+      "notes": "DFS + backtrack on a grid: mark a cell visited in-place, recurse, then restore it on the way back up"
+    },
+    {
+      "id": "lc-131",
+      "title": "Palindrome Partitioning",
+      "pattern": "Backtracking",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/palindrome-partitioning/",
+      "module": "T02-p21-backtracking",
+      "notes": "backtrack over cut points; precompute isPalindrome[i][j] with DP so you never re-check the same substring"
+    },
+    {
+      "id": "lc-93",
+      "title": "Restore IP Addresses",
+      "pattern": "Backtracking",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/restore-ip-addresses/",
+      "module": "T02-p21-backtracking",
+      "notes": "backtrack with hard constraints (exactly 4 segments, each 0-255, no leading zeros) \u2014 pruning early is the whole game"
+    },
+    {
+      "id": "lc-216",
+      "title": "Combination Sum III",
+      "pattern": "Backtracking",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/combination-sum-iii/",
+      "module": "T02-p21-backtracking",
+      "notes": "fixed count (k) AND fixed sum (n), digits 1-9 each used at most once \u2014 two simultaneous constraints to prune on"
+    },
+    {
+      "id": "lc-51",
+      "title": "N-Queens",
+      "pattern": "Backtracking",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/n-queens/",
+      "module": "T02-p21-backtracking",
+      "notes": "THE canonical backtracking problem; track used columns and both diagonals with sets for O(1) conflict checks"
+    },
+    {
+      "id": "lc-52",
+      "title": "N-Queens II",
+      "pattern": "Backtracking",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/n-queens-ii/",
+      "module": "T02-p21-backtracking",
+      "notes": "same search as N-Queens but count solutions only \u2014 a good 'can you simplify unnecessary bookkeeping' check"
+    },
+    {
+      "id": "lc-37",
+      "title": "Sudoku Solver",
+      "pattern": "Backtracking",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/sudoku-solver/",
+      "module": "T02-p21-backtracking",
+      "notes": "backtracking + constraint propagation; row/col/box bitmasks speed candidate lookup up considerably over brute force"
+    },
+    {
+      "id": "lc-980",
+      "title": "Unique Paths III",
+      "pattern": "Backtracking",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/unique-paths-iii/",
+      "module": "T02-p21-backtracking",
+      "notes": "backtracking that must visit every empty cell exactly once \u2014 a Hamiltonian-path-flavored constraint, not just reachability"
+    },
+    {
+      "id": "lc-111",
+      "title": "Minimum Depth of Binary Tree",
+      "pattern": "BFS (Tree/Graph)",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/minimum-depth-of-binary-tree/",
+      "module": "T02-p07-bfs",
+      "notes": "BFS beats DFS here \u2014 the first leaf you find IS the answer, no need to explore the whole tree"
+    },
+    {
+      "id": "lc-102",
+      "title": "Binary Tree Level Order Traversal",
+      "pattern": "BFS (Tree/Graph)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+      "module": "T02-p07-bfs",
+      "notes": "canonical BFS; queue + snapshot the queue size at the top of each loop to know where one level ends"
+    },
+    {
+      "id": "lc-637",
+      "title": "Average of Levels in Binary Tree",
+      "pattern": "BFS (Tree/Graph)",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/average-of-levels-in-binary-tree/",
+      "module": "T02-p07-bfs",
+      "notes": "same level-order skeleton as 102, aggregate per level instead of collecting \u2014 good speed-round warm-up"
+    },
+    {
+      "id": "lc-199",
+      "title": "Binary Tree Right Side View",
+      "pattern": "BFS (Tree/Graph)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/binary-tree-right-side-view/",
+      "module": "T02-p07-bfs",
+      "notes": "BFS: take the last node visited per level; or DFS right-first and record the first node seen at each depth"
+    },
+    {
+      "id": "lc-994",
+      "title": "Rotting Oranges",
+      "pattern": "BFS (Tree/Graph)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/rotting-oranges/",
+      "module": "T02-p07-bfs",
+      "notes": "multi-source BFS \u2014 every rotten orange starts in the queue at level 0, not just a single source"
+    },
+    {
+      "id": "lc-542",
+      "title": "01 Matrix",
+      "pattern": "BFS (Tree/Graph)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/01-matrix/",
+      "module": "T02-p07-bfs",
+      "notes": "multi-source BFS from every zero cell simultaneously \u2014 much faster than BFS-per-cell from each 1"
+    },
+    {
+      "id": "lc-200",
+      "title": "Number of Islands",
+      "pattern": "BFS (Tree/Graph)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/number-of-islands/",
+      "module": "T02-p07-bfs",
+      "notes": "BFS or DFS flood fill both work; interviewer usually wants you to name both and justify which you pick"
+    },
+    {
+      "id": "lc-133",
+      "title": "Clone Graph",
+      "pattern": "BFS (Tree/Graph)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/clone-graph/",
+      "module": "T02-p07-bfs",
+      "notes": "BFS/DFS + a hash map from old node to new node preserves graph structure, including cycles, while cloning"
+    },
+    {
+      "id": "lc-127",
+      "title": "Word Ladder",
+      "pattern": "BFS (Tree/Graph)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/word-ladder/",
+      "module": "T02-p07-bfs",
+      "notes": "BFS over an implicit graph (edges = 1-letter edits); precompute wildcard buckets so you don't rebuild edges at O(n^2*L)"
+    },
+    {
+      "id": "lc-136",
+      "title": "Single Number",
+      "pattern": "Bitwise XOR",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/single-number/",
+      "module": "T02-p12-bitwise-xor",
+      "notes": "XOR cancels pairs (a^a=0, a^0=a) \u2014 the pattern's namesake problem, O(n) time O(1) space"
+    },
+    {
+      "id": "lc-191",
+      "title": "Number of 1 Bits",
+      "pattern": "Bitwise XOR",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/number-of-1-bits/",
+      "module": "T02-p12-bitwise-xor",
+      "notes": "n & (n-1) clears the lowest set bit \u2014 know this trick cold, it reappears constantly in bit-manipulation problems"
+    },
+    {
+      "id": "lc-231",
+      "title": "Power of Two",
+      "pattern": "Bitwise XOR",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/power-of-two/",
+      "module": "T02-p12-bitwise-xor",
+      "notes": "n & (n-1) == 0 reuses the same lowest-set-bit trick to check for exactly one bit set"
+    },
+    {
+      "id": "lc-137",
+      "title": "Single Number II",
+      "pattern": "Bitwise XOR",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/single-number-ii/",
+      "module": "T02-p12-bitwise-xor",
+      "notes": "count bits mod 3 per position when every other number appears exactly 3 times \u2014 plain XOR no longer works"
+    },
+    {
+      "id": "lc-260",
+      "title": "Single Number III",
+      "pattern": "Bitwise XOR",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/single-number-iii/",
+      "module": "T02-p12-bitwise-xor",
+      "notes": "XOR everything, take any set bit to split numbers into two groups, then XOR each group separately"
+    },
+    {
+      "id": "lc-371",
+      "title": "Sum of Two Integers",
+      "pattern": "Bitwise XOR",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/sum-of-two-integers/",
+      "module": "T02-p12-bitwise-xor",
+      "notes": "add without +/-: XOR is the sum-without-carry, (AND << 1) is the carry \u2014 loop until the carry reaches zero"
+    },
+    {
+      "id": "lc-421",
+      "title": "Maximum XOR of Two Numbers in an Array",
+      "pattern": "Bitwise XOR",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/",
+      "module": "T02-p12-bitwise-xor",
+      "notes": "build a bit-trie greedily from the highest bit down, always trying to branch into the opposite bit at each level"
+    },
+    {
+      "id": "lc-268",
+      "title": "Missing Number",
+      "pattern": "Cyclic Sort",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/missing-number/",
+      "module": "T02-p05-cyclic-sort",
+      "notes": "XOR or the sum-formula both beat cyclic sort here \u2014 know all three, the interviewer will probe which is 'better' and why"
+    },
+    {
+      "id": "lc-448",
+      "title": "Find All Numbers Disappeared in an Array",
+      "pattern": "Cyclic Sort",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/",
+      "module": "T02-p05-cyclic-sort",
+      "notes": "in-place cyclic sort, or sign-marking at index |nums[i]|-1, gets you O(n) time and O(1) extra space"
+    },
+    {
+      "id": "lc-645",
+      "title": "Set Mismatch",
+      "pattern": "Cyclic Sort",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/set-mismatch/",
+      "module": "T02-p05-cyclic-sort",
+      "notes": "cyclic sort finds the swapped pair (the duplicate and the missing number) in a single pass"
+    },
+    {
+      "id": "lc-442",
+      "title": "Find All Duplicates in an Array",
+      "pattern": "Cyclic Sort",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/find-all-duplicates-in-an-array/",
+      "module": "T02-p05-cyclic-sort",
+      "notes": "sign-marking variant of cyclic sort: values are 1..n, so index into the array itself as a visited set"
+    },
+    {
+      "id": "lc-769",
+      "title": "Max Chunks To Make Sorted",
+      "pattern": "Cyclic Sort",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/max-chunks-to-make-sorted/",
+      "module": "T02-p05-cyclic-sort",
+      "notes": "not cyclic sort itself, but the same 'permutation of 0..n-1 in place' reasoning: a chunk closes when runningMax == index"
+    },
+    {
+      "id": "lc-41",
+      "title": "First Missing Positive",
+      "pattern": "Cyclic Sort",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/first-missing-positive/",
+      "module": "T02-p05-cyclic-sort",
+      "notes": "THE cyclic sort problem: place nums[i] at index nums[i]-1 in place, then scan for the first index that's still wrong, O(n)/O(1)"
+    },
+    {
+      "id": "lc-104",
+      "title": "Maximum Depth of Binary Tree",
+      "pattern": "DFS (Tree/Graph)",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+      "module": "T02-p08-dfs",
+      "notes": "the 'hello world' of tree recursion \u2014 every other DFS problem below is a variation on this shape"
+    },
+    {
+      "id": "lc-112",
+      "title": "Path Sum",
+      "pattern": "DFS (Tree/Graph)",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/path-sum/",
+      "module": "T02-p08-dfs",
+      "notes": "root-to-leaf recursion carrying a running sum; the base case (leaf check) is where people slip up"
+    },
+    {
+      "id": "lc-543",
+      "title": "Diameter of Binary Tree",
+      "pattern": "DFS (Tree/Graph)",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/diameter-of-binary-tree/",
+      "module": "T02-p08-dfs",
+      "notes": "classic 'return height, update a global max on the way back up' combo \u2014 the template for path-sum-style hards later"
+    },
+    {
+      "id": "lc-113",
+      "title": "Path Sum II",
+      "pattern": "DFS (Tree/Graph)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/path-sum-ii/",
+      "module": "T02-p08-dfs",
+      "notes": "same as Path Sum but collect all paths \u2014 append on the way down, pop on the way back up (backtracking the path list)"
+    },
+    {
+      "id": "lc-98",
+      "title": "Validate Binary Search Tree",
+      "pattern": "DFS (Tree/Graph)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/validate-binary-search-tree/",
+      "module": "T02-p08-dfs",
+      "notes": "pass down a (low, high) bound at every node \u2014 comparing only to the immediate parent is the classic bug"
+    },
+    {
+      "id": "lc-236",
+      "title": "Lowest Common Ancestor of a Binary Tree",
+      "pattern": "DFS (Tree/Graph)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",
+      "module": "T02-p08-dfs",
+      "notes": "post-order DFS returning 'found p / found q / found both' up the call stack \u2014 no parent pointers needed"
+    },
+    {
+      "id": "lc-105",
+      "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+      "pattern": "DFS (Tree/Graph)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+      "module": "T02-p08-dfs",
+      "notes": "preorder's first element is always the root; inorder splits it into left/right \u2014 precompute an index map for O(n)"
+    },
+    {
+      "id": "lc-130",
+      "title": "Surrounded Regions",
+      "pattern": "DFS (Tree/Graph)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/surrounded-regions/",
+      "module": "T02-p08-dfs",
+      "notes": "DFS from the border inward to mark safe cells first, then flip everything untouched \u2014 inverted flood-fill thinking"
+    },
+    {
+      "id": "lc-124",
+      "title": "Binary Tree Maximum Path Sum",
+      "pattern": "DFS (Tree/Graph)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+      "module": "T02-p08-dfs",
+      "notes": "each node returns its best downward-only path for the parent, but the global answer can bend through both children"
+    },
+    {
+      "id": "lc-329",
+      "title": "Longest Increasing Path in a Matrix",
+      "pattern": "DFS (Tree/Graph)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/longest-increasing-path-in-a-matrix/",
+      "module": "T02-p08-dfs",
+      "notes": "DFS + memoization turns an exponential search into O(mn) \u2014 the grid is a DAG because values strictly increase"
+    },
+    {
+      "id": "lc-141",
+      "title": "Linked List Cycle",
+      "pattern": "Fast & Slow Pointers",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/linked-list-cycle/",
+      "module": "T02-p03-fast-slow",
+      "notes": "Floyd's cycle detection, the pattern's namesake \u2014 fast/slow meet iff a cycle exists"
+    },
+    {
+      "id": "lc-876",
+      "title": "Middle of the Linked List",
+      "pattern": "Fast & Slow Pointers",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/middle-of-the-linked-list/",
+      "module": "T02-p03-fast-slow",
+      "notes": "slow reaches the middle exactly when fast hits the end \u2014 the building block for LL reversal and reorder problems"
+    },
+    {
+      "id": "lc-234",
+      "title": "Palindrome Linked List",
+      "pattern": "Fast & Slow Pointers",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/palindrome-linked-list/",
+      "module": "T02-p03-fast-slow",
+      "notes": "find the middle (fast/slow) + reverse the second half, O(1) space instead of an O(n) array copy"
+    },
+    {
+      "id": "lc-160",
+      "title": "Intersection of Two Linked Lists",
+      "pattern": "Fast & Slow Pointers",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/intersection-of-two-linked-lists/",
+      "module": "T02-p03-fast-slow",
+      "notes": "two-pointer length-equalize trick: walk both, hop each to the other list's head at the end, they meet in O(1) space"
+    },
+    {
+      "id": "lc-202",
+      "title": "Happy Number",
+      "pattern": "Fast & Slow Pointers",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/happy-number/",
+      "module": "T02-p03-fast-slow",
+      "notes": "cycle detection on a functional graph, not a linked list \u2014 proves the technique generalizes beyond next-pointers"
+    },
+    {
+      "id": "lc-142",
+      "title": "Linked List Cycle II",
+      "pattern": "Fast & Slow Pointers",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/linked-list-cycle-ii/",
+      "module": "T02-p03-fast-slow",
+      "notes": "after fast/slow meet, reset one pointer to head and advance both by one \u2014 the distance proof is the real interview question"
+    },
+    {
+      "id": "lc-287",
+      "title": "Find the Duplicate Number",
+      "pattern": "Fast & Slow Pointers",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/find-the-duplicate-number/",
+      "module": "T02-p03-fast-slow",
+      "notes": "array-as-linked-list trick: treat nums[i] as next[i], then run Floyd's \u2014 the array is never mutated, unlike cyclic sort"
+    },
+    {
+      "id": "lc-143",
+      "title": "Reorder List",
+      "pattern": "Fast & Slow Pointers",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/reorder-list/",
+      "module": "T02-p03-fast-slow",
+      "notes": "find middle + reverse second half + merge alternately \u2014 three techniques chained into one solution"
+    },
+    {
+      "id": "lc-457",
+      "title": "Circular Array Loop",
+      "pattern": "Fast & Slow Pointers",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/circular-array-loop/",
+      "module": "T02-p03-fast-slow",
+      "notes": "direction-consistency check turns this into fast/slow with a twist: a valid cycle can't change sign mid-loop"
+    },
+    {
+      "id": "lc-1791",
+      "title": "Find Center of Star Graph",
+      "pattern": "Applied Graphs",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/find-center-of-star-graph/",
+      "module": "T02-graph-applied",
+      "notes": "trivial but a good 'read graph structure fast' warm-up \u2014 the center is whichever node appears in both of the first edge's endpoints twice"
+    },
+    {
+      "id": "lc-1462",
+      "title": "Course Schedule IV",
+      "pattern": "Applied Graphs",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/course-schedule-iv/",
+      "module": "T02-graph-applied",
+      "notes": "precompute all-pairs reachability (Floyd-Warshall or per-node DFS in topo order) \u2014 a realistic dependency-resolution query problem"
+    },
+    {
+      "id": "lc-2192",
+      "title": "All Ancestors of a Node in a Directed Acyclic Graph",
+      "pattern": "Applied Graphs",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/",
+      "module": "T02-graph-applied",
+      "notes": "DFS/BFS from each node, or propagate ancestor sets forward in topo order \u2014 a realistic 'who depends on this' query"
+    },
+    {
+      "id": "lc-851",
+      "title": "Loud and Rich",
+      "pattern": "Applied Graphs",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/loud-and-rich/",
+      "module": "T02-graph-applied",
+      "notes": "DFS memoized over a DAG of 'richer than' relations \u2014 a dependency-propagation problem much like GraphRAG entity resolution"
+    },
+    {
+      "id": "lc-2049",
+      "title": "Count Nodes With the Highest Score",
+      "pattern": "Applied Graphs",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/count-nodes-with-the-highest-score/",
+      "module": "T02-graph-applied",
+      "notes": "subtree-size product scoring \u2014 PageRank-adjacent 'importance' scoring computed with a single post-order DFS"
+    },
+    {
+      "id": "lc-1443",
+      "title": "Minimum Time to Collect All Apples in a Tree",
+      "pattern": "Applied Graphs",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/minimum-time-to-collect-all-apples-in-a-tree/",
+      "module": "T02-graph-applied",
+      "notes": "DFS the tree; only count edges on a root-to-apple path, and count them twice since you must walk back"
+    },
+    {
+      "id": "lc-1857",
+      "title": "Largest Color Value in a Directed Graph",
+      "pattern": "Applied Graphs",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/largest-color-value-in-a-directed-graph/",
+      "module": "T02-graph-applied",
+      "notes": "topo sort + DP tracking a 26-color frequency vector per node; a cycle means no valid topo order, so return -1"
+    },
+    {
+      "id": "lc-997",
+      "title": "Find the Town Judge",
+      "pattern": "Graph Traversal & Cycle Detection",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/find-the-town-judge/",
+      "module": "T02-graph-core",
+      "notes": "in-degree/out-degree counting \u2014 a graph problem disguised as trivia; the judge has indegree n-1 and outdegree 0"
+    },
+    {
+      "id": "lc-463",
+      "title": "Island Perimeter",
+      "pattern": "Graph Traversal & Cycle Detection",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/island-perimeter/",
+      "module": "T02-graph-core",
+      "notes": "simple grid DFS/BFS, or count edges directly: 4 per land cell minus 2 per land-land adjacency"
+    },
+    {
+      "id": "lc-785",
+      "title": "Is Graph Bipartite?",
+      "pattern": "Graph Traversal & Cycle Detection",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/is-graph-bipartite/",
+      "module": "T02-graph-core",
+      "notes": "2-color via BFS/DFS; a graph is bipartite iff it has no odd-length cycle, which coloring detects directly"
+    },
+    {
+      "id": "lc-841",
+      "title": "Keys and Rooms",
+      "pattern": "Graph Traversal & Cycle Detection",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/keys-and-rooms/",
+      "module": "T02-graph-core",
+      "notes": "pure reachability DFS/BFS from room 0 \u2014 can every node be visited from the start?"
+    },
+    {
+      "id": "lc-1466",
+      "title": "Reorder Routes to Make All Paths Lead to the City Zero",
+      "pattern": "Graph Traversal & Cycle Detection",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/",
+      "module": "T02-graph-core",
+      "notes": "DFS from city 0 on the undirected view of the graph, counting edges that point the 'wrong' way (away from 0)"
+    },
+    {
+      "id": "lc-1042",
+      "title": "Flower Planting With No Adjacent",
+      "pattern": "Graph Traversal & Cycle Detection",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/flower-planting-with-no-adjacent/",
+      "module": "T02-graph-core",
+      "notes": "graph coloring with only 4 colors needed, since every node has at most 3 neighbors by the problem's constraints"
+    },
+    {
+      "id": "lc-1129",
+      "title": "Shortest Path with Alternating Colors",
+      "pattern": "Graph Traversal & Cycle Detection",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/shortest-path-with-alternating-colors/",
+      "module": "T02-graph-core",
+      "notes": "BFS over an augmented (node, lastEdgeColor) state space \u2014 plain BFS on the node graph alone loses the alternation constraint"
+    },
+    {
+      "id": "lc-996",
+      "title": "Number of Squareful Arrays",
+      "pattern": "Graph Traversal & Cycle Detection",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/number-of-squareful-arrays/",
+      "module": "T02-graph-core",
+      "notes": "model valid adjacent pairs (sum is a perfect square) as graph edges, then Hamiltonian-path-style backtracking over permutations"
+    },
+    {
+      "id": "lc-1361",
+      "title": "Validate Binary Tree Nodes",
+      "pattern": "SCC, Bridges & Articulation Points",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/validate-binary-tree-nodes/",
+      "module": "T02-graph-scc",
+      "notes": "in-degree check (exactly one root, everyone else indegree 1) plus a reachability/cycle check from that root"
+    },
+    {
+      "id": "lc-959",
+      "title": "Regions Cut By Slashes",
+      "pattern": "SCC, Bridges & Articulation Points",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/regions-cut-by-slashes/",
+      "module": "T02-graph-scc",
+      "notes": "union-find on four sub-triangles per grid cell \u2014 a connectivity-structure warm-up before true SCC/bridge problems"
+    },
+    {
+      "id": "lc-2076",
+      "title": "Process Restricted Friend Requests",
+      "pattern": "SCC, Bridges & Articulation Points",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/process-restricted-friend-requests/",
+      "module": "T02-graph-scc",
+      "notes": "union-find with a restriction check before every union \u2014 reject a merge if it would connect two restricted people"
+    },
+    {
+      "id": "lc-1192",
+      "title": "Critical Connections in a Network",
+      "pattern": "SCC, Bridges & Articulation Points",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/critical-connections-in-a-network/",
+      "module": "T02-graph-scc",
+      "notes": "Tarjan's bridge-finding via discovery/low-link times \u2014 the canonical bridges problem, memorize the low-link update rule"
+    },
+    {
+      "id": "lc-2360",
+      "title": "Longest Cycle in a Graph",
+      "pattern": "SCC, Bridges & Articulation Points",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/longest-cycle-in-a-graph/",
+      "module": "T02-graph-scc",
+      "notes": "functional graph (each node has out-degree <= 1); iterative timestamp/coloring detects the cycle length without recursion overflow"
+    },
+    {
+      "id": "lc-928",
+      "title": "Minimize Malware Spread II",
+      "pattern": "SCC, Bridges & Articulation Points",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/minimize-malware-spread-ii/",
+      "module": "T02-graph-scc",
+      "notes": "connected components + removal-impact analysis; removing an infected node can only help if it's the sole bridge to a clean component"
+    },
+    {
+      "id": "lc-1568",
+      "title": "Minimum Number of Days to Disconnect Island",
+      "pattern": "SCC, Bridges & Articulation Points",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/minimum-number-of-days-to-disconnect-island/",
+      "module": "T02-graph-scc",
+      "notes": "articulation-point-flavored grid problem \u2014 the answer is always 0, 1, or 2; brute-force removing 1 or 2 cells is enough"
+    },
+    {
+      "id": "lc-505",
+      "title": "The Maze II",
+      "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/the-maze-ii/",
+      "module": "T02-graph-shortest",
+      "notes": "Dijkstra where each edge weight is the rolling distance until you hit a wall, not a fixed 1 \u2014 the state transition is unusual"
+    },
+    {
+      "id": "lc-1786",
+      "title": "Number of Restricted Paths From First to Last Node",
+      "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/",
+      "module": "T02-graph-shortest",
+      "notes": "run Dijkstra from the destination first to get distanceToLastNode, then DP-count strictly-decreasing-distance paths"
+    },
+    {
+      "id": "lc-2039",
+      "title": "The Time When the Network Becomes Idle",
+      "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/the-time-when-the-network-becomes-idle/",
+      "module": "T02-graph-shortest",
+      "notes": "unweighted BFS shortest paths from the master server, then a closed-form simulation of resend timing per node"
+    },
+    {
+      "id": "lc-864",
+      "title": "Shortest Path to Get All Keys",
+      "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/shortest-path-to-get-all-keys/",
+      "module": "T02-graph-shortest",
+      "notes": "BFS over (position, keys-bitmask) state space \u2014 locks can only be passed once the matching key bit is set"
+    },
+    {
+      "id": "lc-882",
+      "title": "Reachable Nodes In Subdivided Graph",
+      "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/reachable-nodes-in-subdivided-graph/",
+      "module": "T02-graph-shortest",
+      "notes": "Dijkstra on the original graph first, then account separately for partially-traveled subdivided edges near the frontier"
+    },
+    {
+      "id": "lc-1928",
+      "title": "Minimum Cost to Reach Destination in Time",
+      "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/minimum-cost-to-reach-destination-in-time/",
+      "module": "T02-graph-shortest",
+      "notes": "Dijkstra/DP over (node, time-used) \u2014 a resource-constrained shortest path where cost and time are optimized separately"
+    },
+    {
+      "id": "lc-2045",
+      "title": "Second Minimum Time to Reach Destination",
+      "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/second-minimum-time-to-reach-destination/",
+      "module": "T02-graph-shortest",
+      "notes": "BFS tracking the two smallest distinct distances per node, plus a traffic-light parity adjustment to convert hops into real time"
+    },
+    {
+      "id": "lc-455",
+      "title": "Assign Cookies",
+      "pattern": "Greedy",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/assign-cookies/",
+      "module": "T02-adv-greedy",
+      "notes": "sort both arrays, two-pointer greedy match \u2014 the simplest possible greedy exchange-argument warm-up"
+    },
+    {
+      "id": "lc-55",
+      "title": "Jump Game",
+      "pattern": "Greedy",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/jump-game/",
+      "module": "T02-adv-greedy",
+      "notes": "track the farthest reachable index greedily in one pass \u2014 no need to actually simulate every jump path"
+    },
+    {
+      "id": "lc-45",
+      "title": "Jump Game II",
+      "pattern": "Greedy",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/jump-game-ii/",
+      "module": "T02-adv-greedy",
+      "notes": "BFS-flavored greedy: expand the current 'level's' farthest reach, incrementing jumps only when you must"
+    },
+    {
+      "id": "lc-134",
+      "title": "Gas Station",
+      "pattern": "Greedy",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/gas-station/",
+      "module": "T02-adv-greedy",
+      "notes": "if total gas >= total cost a solution exists; greedy reset-start-on-deficit finds it in one linear pass"
+    },
+    {
+      "id": "lc-763",
+      "title": "Partition Labels",
+      "pattern": "Greedy",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/partition-labels/",
+      "module": "T02-adv-greedy",
+      "notes": "greedy window sizing using each character's last-occurrence index \u2014 close a partition once you've passed every last-index in it"
+    },
+    {
+      "id": "lc-122",
+      "title": "Best Time to Buy and Sell Stock II",
+      "pattern": "Greedy",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/",
+      "module": "T02-adv-greedy",
+      "notes": "sum every positive day-over-day price delta \u2014 proving this equals the optimal multi-transaction profit is the interview bar"
+    },
+    {
+      "id": "lc-406",
+      "title": "Queue Reconstruction by Height",
+      "pattern": "Greedy",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/queue-reconstruction-by-height/",
+      "module": "T02-adv-greedy",
+      "notes": "sort by height descending then k ascending, insert each person at index k \u2014 insertion order is the greedy insight"
+    },
+    {
+      "id": "lc-621",
+      "title": "Task Scheduler",
+      "pattern": "Greedy",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/task-scheduler/",
+      "module": "T02-adv-greedy",
+      "notes": "closed-form greedy using the most-frequent-task count and idle slots, or simulate directly with a max-heap"
+    },
+    {
+      "id": "lc-135",
+      "title": "Candy",
+      "pattern": "Greedy",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/candy/",
+      "module": "T02-adv-greedy",
+      "notes": "two greedy passes (left-to-right, then right-to-left), take the max of both passes at each position"
+    },
+    {
+      "id": "lc-21",
+      "title": "Merge Two Sorted Lists",
+      "pattern": "K-Way Merge",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/merge-two-sorted-lists/",
+      "module": "T02-p14-k-way-merge",
+      "notes": "the k=2 base case that every merge-k problem below reduces to"
+    },
+    {
+      "id": "lc-88",
+      "title": "Merge Sorted Array",
+      "pattern": "K-Way Merge",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/merge-sorted-array/",
+      "module": "T02-p14-k-way-merge",
+      "notes": "merge from the back to front so you never overwrite an unread element of nums1 in place"
+    },
+    {
+      "id": "lc-1305",
+      "title": "All Elements in Two Binary Search Trees",
+      "pattern": "K-Way Merge",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/all-elements-in-two-binary-search-trees/",
+      "module": "T02-p14-k-way-merge",
+      "notes": "in-order traverse both BSTs into sorted lists, then merge two sorted lists \u2014 a k=2 general-tree variant"
+    },
+    {
+      "id": "lc-378",
+      "title": "Kth Smallest Element in a Sorted Matrix",
+      "pattern": "K-Way Merge",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/",
+      "module": "T02-p14-k-way-merge",
+      "notes": "treat each row as one of k sorted lists, heap-merge until the kth pop; binary search on value is the O(n log(max-min)) alternative"
+    },
+    {
+      "id": "lc-23",
+      "title": "Merge k Sorted Lists",
+      "pattern": "K-Way Merge",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/merge-k-sorted-lists/",
+      "module": "T02-p14-k-way-merge",
+      "notes": "min-heap of size k, or divide-and-conquer pairwise merge \u2014 both hit O(N log k); the pattern's namesake problem"
+    },
+    {
+      "id": "lc-632",
+      "title": "Smallest Range Covering Elements from K Lists",
+      "pattern": "K-Way Merge",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/",
+      "module": "T02-p14-k-way-merge",
+      "notes": "min-heap across all k lists while tracking the current max \u2014 classic multi-list sweep, advance whichever list is smallest"
+    },
+    {
+      "id": "lc-1439",
+      "title": "Find the Kth Smallest Sum of a Matrix With Sorted Rows",
+      "pattern": "K-Way Merge",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows/",
+      "module": "T02-p14-k-way-merge",
+      "notes": "k-way merge generalized: combine the running result row-by-row, keeping only the k smallest sums at each step"
+    },
+    {
+      "id": "lc-416",
+      "title": "Partition Equal Subset Sum",
+      "pattern": "0/1 Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/partition-equal-subset-sum/",
+      "module": "T02-p15-knapsack-01",
+      "notes": "subset-sum-as-knapsack: target = totalSum/2, dp[t] = can we hit exactly t using each number once"
+    },
+    {
+      "id": "lc-494",
+      "title": "Target Sum",
+      "pattern": "0/1 Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/target-sum/",
+      "module": "T02-p15-knapsack-01",
+      "notes": "reframe +/- assignment as subset-sum knapsack: P - N = target and P + N = total, solve for the positive subset sum"
+    },
+    {
+      "id": "lc-1049",
+      "title": "Last Stone Weight II",
+      "pattern": "0/1 Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/last-stone-weight-ii/",
+      "module": "T02-p15-knapsack-01",
+      "notes": "minimize |sumA - sumB| by finding the subset sum closest to total/2 via 0/1 knapsack"
+    },
+    {
+      "id": "lc-474",
+      "title": "Ones and Zeroes",
+      "pattern": "0/1 Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/ones-and-zeroes/",
+      "module": "T02-p15-knapsack-01",
+      "notes": "2D knapsack capacity (zeros budget, ones budget) \u2014 extends the 1D DP to two simultaneous constraints"
+    },
+    {
+      "id": "lc-698",
+      "title": "Partition to K Equal Sum Subsets",
+      "pattern": "0/1 Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/partition-to-k-equal-sum-subsets/",
+      "module": "T02-p15-knapsack-01",
+      "notes": "backtracking with a bucket-fill mindset, or bitmask DP over subset states \u2014 generalizes Partition Equal Subset Sum to k groups"
+    },
+    {
+      "id": "lc-2140",
+      "title": "Solving Questions With Brainpower",
+      "pattern": "0/1 Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/solving-questions-with-brainpower/",
+      "module": "T02-p15-knapsack-01",
+      "notes": "0/1 knapsack shaped as 'take or skip with a cooldown' \u2014 solving question i locks out the next brainpower[i] questions"
+    },
+    {
+      "id": "lc-2915",
+      "title": "Length of the Longest Subsequence That Sums to Target",
+      "pattern": "0/1 Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/length-of-the-longest-subsequence-that-sums-to-target/",
+      "module": "T02-p15-knapsack-01",
+      "notes": "0/1 knapsack where the DP tracks max subsequence length per achievable sum, not just feasibility"
+    },
+    {
+      "id": "lc-2787",
+      "title": "Ways to Express an Integer as Sum of Powers",
+      "pattern": "0/1 Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/ways-to-express-an-integer-as-sum-of-powers/",
+      "module": "T02-p15-knapsack-01",
+      "notes": "0/1 knapsack counting ways: items are x-th powers of 1..n, each usable at most once, count subsets summing to n"
+    },
+    {
+      "id": "lc-879",
+      "title": "Profitable Schemes",
+      "pattern": "0/1 Knapsack DP",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/profitable-schemes/",
+      "module": "T02-p15-knapsack-01",
+      "notes": "3D 0/1 knapsack (people used, profit achieved) with a 'cap profit at target' trick to keep the state space bounded"
+    },
+    {
+      "id": "lc-70",
+      "title": "Climbing Stairs",
+      "pattern": "Unbounded Knapsack DP",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/climbing-stairs/",
+      "module": "T02-p16-knapsack-unbounded",
+      "notes": "unbounded-knapsack-shaped: choose a step of 1 or 2, unlimited times \u2014 the simplest possible intro to this pattern"
+    },
+    {
+      "id": "lc-322",
+      "title": "Coin Change",
+      "pattern": "Unbounded Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/coin-change/",
+      "module": "T02-p16-knapsack-unbounded",
+      "notes": "classic unbounded knapsack minimizing count: dp[amt] = min over coins of dp[amt-coin] + 1"
+    },
+    {
+      "id": "lc-518",
+      "title": "Coin Change II",
+      "pattern": "Unbounded Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/coin-change-ii/",
+      "module": "T02-p16-knapsack-unbounded",
+      "notes": "counting ways, not minimizing \u2014 loop coins in the outer loop and amount inner, or you'll count permutations as distinct"
+    },
+    {
+      "id": "lc-279",
+      "title": "Perfect Squares",
+      "pattern": "Unbounded Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/perfect-squares/",
+      "module": "T02-p16-knapsack-unbounded",
+      "notes": "same shape as Coin Change with the 'coins' being perfect squares up to n"
+    },
+    {
+      "id": "lc-377",
+      "title": "Combination Sum IV",
+      "pattern": "Unbounded Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/combination-sum-iv/",
+      "module": "T02-p16-knapsack-unbounded",
+      "notes": "order matters here, so it's really a permutations count despite the name \u2014 loop amount outer, candidates inner"
+    },
+    {
+      "id": "lc-139",
+      "title": "Word Break",
+      "pattern": "Unbounded Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/word-break/",
+      "module": "T02-p16-knapsack-unbounded",
+      "notes": "unbounded knapsack over strings: dp[i] = true if any dp[j] is true and s[j:i] is in the dictionary"
+    },
+    {
+      "id": "lc-983",
+      "title": "Minimum Cost For Tickets",
+      "pattern": "Unbounded Knapsack DP",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/minimum-cost-for-tickets/",
+      "module": "T02-p16-knapsack-unbounded",
+      "notes": "unbounded choice at each travel day among {1-day, 7-day, 30-day} passes, DP only over days you actually travel"
+    },
+    {
+      "id": "lc-1449",
+      "title": "Form Largest Integer With Digits That Add up to Target",
+      "pattern": "Unbounded Knapsack DP",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/form-largest-integer-with-digits-that-add-up-to-target/",
+      "module": "T02-p16-knapsack-unbounded",
+      "notes": "unbounded knapsack maximizing digit count first, then a greedy lexicographic tie-break among equal-length results"
+    },
+    {
+      "id": "lc-206",
+      "title": "Reverse Linked List",
+      "pattern": "Linked List Reversal",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/reverse-linked-list/",
+      "module": "T02-p06-ll-reversal",
+      "notes": "iterative 3-pointer reversal (prev/curr/next); state the recursive version too, it's a common follow-up"
+    },
+    {
+      "id": "lc-83",
+      "title": "Remove Duplicates from Sorted List",
+      "pattern": "Linked List Reversal",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/remove-duplicates-from-sorted-list/",
+      "module": "T02-p06-ll-reversal",
+      "notes": "simplest pointer-surgery warm-up before the harder rewiring problems below"
+    },
+    {
+      "id": "lc-92",
+      "title": "Reverse Linked List II",
+      "pattern": "Linked List Reversal",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/reverse-linked-list-ii/",
+      "module": "T02-p06-ll-reversal",
+      "notes": "reverse a sub-range in place; getting the pre-range and post-range stitching exactly right is the whole problem"
+    },
+    {
+      "id": "lc-24",
+      "title": "Swap Nodes in Pairs",
+      "pattern": "Linked List Reversal",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/swap-nodes-in-pairs/",
+      "module": "T02-p06-ll-reversal",
+      "notes": "the k=2 special case of Reverse Nodes in k-Group \u2014 solve this first before generalizing"
+    },
+    {
+      "id": "lc-61",
+      "title": "Rotate List",
+      "pattern": "Linked List Reversal",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/rotate-list/",
+      "module": "T02-p06-ll-reversal",
+      "notes": "find the length, connect tail to head to make a ring, then break it at the new starting point"
+    },
+    {
+      "id": "lc-148",
+      "title": "Sort List",
+      "pattern": "Linked List Reversal",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/sort-list/",
+      "module": "T02-p06-ll-reversal",
+      "notes": "merge sort on a linked list: fast/slow split + merge two sorted lists, O(1) extra space unlike array merge sort"
+    },
+    {
+      "id": "lc-203",
+      "title": "Remove Linked List Elements",
+      "pattern": "Linked List Reversal",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/remove-linked-list-elements/",
+      "module": "T02-p06-ll-reversal",
+      "notes": "dummy-head trick avoids special-casing removal of the head node \u2014 use it everywhere in this pattern"
+    },
+    {
+      "id": "lc-445",
+      "title": "Add Two Numbers II",
+      "pattern": "Linked List Reversal",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/add-two-numbers-ii/",
+      "module": "T02-p06-ll-reversal",
+      "notes": "reverse both lists (or use two stacks) so you can add from the least-significant digit without mutating input order"
+    },
+    {
+      "id": "lc-25",
+      "title": "Reverse Nodes in k-Group",
+      "pattern": "Linked List Reversal",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
+      "module": "T02-p06-ll-reversal",
+      "notes": "count k nodes ahead, reverse that block, recurse/iterate on the rest, then stitch the blocks back together"
+    },
+    {
+      "id": "lc-56",
+      "title": "Merge Intervals",
+      "pattern": "Merge Intervals",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/merge-intervals/",
+      "module": "T02-p04-merge-intervals",
+      "notes": "sort by start, merge whenever curr.start <= prevEnd \u2014 the template every other problem in this set builds on"
+    },
+    {
+      "id": "lc-57",
+      "title": "Insert Interval",
+      "pattern": "Merge Intervals",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/insert-interval/",
+      "module": "T02-p04-merge-intervals",
+      "notes": "three-phase linear scan: before / overlapping / after \u2014 no need to re-sort since the input is already sorted"
+    },
+    {
+      "id": "lc-435",
+      "title": "Non-overlapping Intervals",
+      "pattern": "Merge Intervals",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/non-overlapping-intervals/",
+      "module": "T02-p04-merge-intervals",
+      "notes": "greedy: sort by end time, always keep the earliest-finishing interval, count how many you had to drop"
+    },
+    {
+      "id": "lc-452",
+      "title": "Minimum Number of Arrows to Burst Balloons",
+      "pattern": "Merge Intervals",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/",
+      "module": "T02-p04-merge-intervals",
+      "notes": "same greedy shape as Non-overlapping Intervals, sort by end \u2014 an arrow can pop every balloon it overlaps"
+    },
+    {
+      "id": "lc-253",
+      "title": "Meeting Rooms II",
+      "pattern": "Merge Intervals",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/meeting-rooms-ii/",
+      "module": "T02-p04-merge-intervals",
+      "notes": "min rooms needed = max concurrent overlap; solve with sorted start/end two-pointer sweep or a min-heap of end times"
+    },
+    {
+      "id": "lc-986",
+      "title": "Interval List Intersections",
+      "pattern": "Merge Intervals",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/interval-list-intersections/",
+      "module": "T02-p04-merge-intervals",
+      "notes": "two-pointer merge across two already-sorted interval lists; advance whichever interval ends first"
+    },
+    {
+      "id": "lc-1094",
+      "title": "Car Pooling",
+      "pattern": "Merge Intervals",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/car-pooling/",
+      "module": "T02-p04-merge-intervals",
+      "notes": "interval problem in disguise: a difference array over pickup/dropoff points turns capacity checking into a prefix sum"
+    },
+    {
+      "id": "lc-1288",
+      "title": "Remove Covered Intervals",
+      "pattern": "Merge Intervals",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/remove-covered-intervals/",
+      "module": "T02-p04-merge-intervals",
+      "notes": "sort by start ascending, end descending; track the max end seen so far to detect full coverage in one pass"
+    },
+    {
+      "id": "lc-759",
+      "title": "Employee Free Time",
+      "pattern": "Merge Intervals",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/employee-free-time/",
+      "module": "T02-p04-merge-intervals",
+      "notes": "flatten every employee's schedule, sort, merge, then read the gaps between merged intervals as the free time"
+    },
+    {
+      "id": "lc-704",
+      "title": "Binary Search",
+      "pattern": "Modified Binary Search",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/binary-search/",
+      "module": "T02-p11-binary-search",
+      "notes": "the template every variant below builds on \u2014 get the lo/hi/mid bounds and loop condition exactly right"
+    },
+    {
+      "id": "lc-35",
+      "title": "Search Insert Position",
+      "pattern": "Modified Binary Search",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/search-insert-position/",
+      "module": "T02-p11-binary-search",
+      "notes": "this is lower_bound; same loop as binary search, just return lo instead of -1 on a miss"
+    },
+    {
+      "id": "lc-374",
+      "title": "Guess Number Higher or Lower",
+      "pattern": "Modified Binary Search",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/guess-number-higher-or-lower/",
+      "module": "T02-p11-binary-search",
+      "notes": "binary search against an oracle function instead of an array \u2014 sets up 'search the answer space' problems below"
+    },
+    {
+      "id": "lc-33",
+      "title": "Search in Rotated Sorted Array",
+      "pattern": "Modified Binary Search",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+      "module": "T02-p11-binary-search",
+      "notes": "figure out which half is sorted by comparing nums[lo] to nums[mid], then decide which half to search"
+    },
+    {
+      "id": "lc-153",
+      "title": "Find Minimum in Rotated Sorted Array",
+      "pattern": "Modified Binary Search",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+      "module": "T02-p11-binary-search",
+      "notes": "compare mid to the right boundary, not the left, to converge on the rotation pivot"
+    },
+    {
+      "id": "lc-34",
+      "title": "Find First and Last Position of Element in Sorted Array",
+      "pattern": "Modified Binary Search",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/",
+      "module": "T02-p11-binary-search",
+      "notes": "two binary searches: lower_bound(target) and lower_bound(target+1)-1 \u2014 don't linear-scan from a single hit"
+    },
+    {
+      "id": "lc-74",
+      "title": "Search a 2D Matrix",
+      "pattern": "Modified Binary Search",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/search-a-2d-matrix/",
+      "module": "T02-p11-binary-search",
+      "notes": "treat the matrix as a flattened sorted array via mid -> (mid/cols, mid%cols), one binary search, not two"
+    },
+    {
+      "id": "lc-875",
+      "title": "Koko Eating Bananas",
+      "pattern": "Modified Binary Search",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/koko-eating-bananas/",
+      "module": "T02-p11-binary-search",
+      "notes": "binary search on the answer space (eating speed), not the input array \u2014 the feasibility check is monotonic in speed"
+    },
+    {
+      "id": "lc-1011",
+      "title": "Capacity To Ship Packages Within D Days",
+      "pattern": "Modified Binary Search",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/",
+      "module": "T02-p11-binary-search",
+      "notes": "same 'binary search the answer' template as Koko \u2014 recognizing the monotonic feasibility function is the real skill"
+    },
+    {
+      "id": "lc-4",
+      "title": "Median of Two Sorted Arrays",
+      "pattern": "Modified Binary Search",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
+      "module": "T02-p11-binary-search",
+      "notes": "binary search on the partition point of the smaller array, O(log(min(m,n))) \u2014 the classic 'hard' binary search"
+    },
+    {
+      "id": "lc-496",
+      "title": "Next Greater Element I",
+      "pattern": "Monotonic Stack",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/next-greater-element-i/",
+      "module": "T02-p20-monotonic-stack",
+      "notes": "monotonic stack + hash map, the pattern's simplest form \u2014 pop while the stack top is smaller than the current element"
+    },
+    {
+      "id": "lc-1475",
+      "title": "Final Prices With a Special Discount in a Shop",
+      "pattern": "Monotonic Stack",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/final-prices-with-a-special-discount-in-a-shop/",
+      "module": "T02-p20-monotonic-stack",
+      "notes": "the simplest genuinely monotonic-stack-shaped easy problem \u2014 next-smaller-or-equal-element in disguise"
+    },
+    {
+      "id": "lc-739",
+      "title": "Daily Temperatures",
+      "pattern": "Monotonic Stack",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/daily-temperatures/",
+      "module": "T02-p20-monotonic-stack",
+      "notes": "store indices on the stack, not values, so you can compute the distance to the next warmer day"
+    },
+    {
+      "id": "lc-503",
+      "title": "Next Greater Element II",
+      "pattern": "Monotonic Stack",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/next-greater-element-ii/",
+      "module": "T02-p20-monotonic-stack",
+      "notes": "circular array: iterate 2n times and mod the index instead of physically doubling the array"
+    },
+    {
+      "id": "lc-901",
+      "title": "Online Stock Span",
+      "pattern": "Monotonic Stack",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/online-stock-span/",
+      "module": "T02-p20-monotonic-stack",
+      "notes": "monotonic stack storing (price, span) pairs for an online/streaming variant \u2014 collapse spans as you pop"
+    },
+    {
+      "id": "lc-402",
+      "title": "Remove K Digits",
+      "pattern": "Monotonic Stack",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/remove-k-digits/",
+      "module": "T02-p20-monotonic-stack",
+      "notes": "greedy monotonic stack: pop a bigger digit while removals remain and the next digit is smaller"
+    },
+    {
+      "id": "lc-316",
+      "title": "Remove Duplicate Letters",
+      "pattern": "Monotonic Stack",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/remove-duplicate-letters/",
+      "module": "T02-p20-monotonic-stack",
+      "notes": "monotonic stack + 'last occurrence index' so you never pop a character you'll still need later in the string"
+    },
+    {
+      "id": "lc-84",
+      "title": "Largest Rectangle in Histogram",
+      "pattern": "Monotonic Stack",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
+      "module": "T02-p20-monotonic-stack",
+      "notes": "THE canonical hard monotonic stack problem; push a sentinel bar of height 0 to flush the stack cleanly at the end"
+    },
+    {
+      "id": "lc-85",
+      "title": "Maximal Rectangle",
+      "pattern": "Monotonic Stack",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/maximal-rectangle/",
+      "module": "T02-p20-monotonic-stack",
+      "notes": "reduce each row to a histogram of consecutive 1s, then reuse Largest Rectangle in Histogram as a subroutine per row"
+    },
+    {
+      "id": "lc-1584",
+      "title": "Min Cost to Connect All Points",
+      "pattern": "MST & Max-Flow",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/min-cost-to-connect-all-points/",
+      "module": "T02-graph-mst-flow",
+      "notes": "Prim's or Kruskal's MST on a complete graph of Manhattan distances \u2014 Prim's with a heap avoids materializing all n^2 edges"
+    },
+    {
+      "id": "lc-1135",
+      "title": "Connecting Cities With Minimum Cost",
+      "pattern": "MST & Max-Flow",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/connecting-cities-with-minimum-cost/",
+      "module": "T02-graph-mst-flow",
+      "notes": "textbook Kruskal's with union-find; sort edges by cost, union until n-1 edges are used or it's infeasible"
+    },
+    {
+      "id": "lc-2492",
+      "title": "Minimum Score of a Path Between Two Cities",
+      "pattern": "MST & Max-Flow",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/",
+      "module": "T02-graph-mst-flow",
+      "notes": "union-find grouping + track the minimum edge weight per component \u2014 MST machinery repurposed for a min-over-component query"
+    },
+    {
+      "id": "lc-1489",
+      "title": "Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree",
+      "pattern": "MST & Max-Flow",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/",
+      "module": "T02-graph-mst-flow",
+      "notes": "run Kruskal's with each edge force-included and force-excluded in turn, compare the resulting MST weight to the baseline"
+    },
+    {
+      "id": "lc-778",
+      "title": "Swim in Rising Water",
+      "pattern": "MST & Max-Flow",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/swim-in-rising-water/",
+      "module": "T02-graph-mst-flow",
+      "notes": "binary search + BFS, or a Prim's-flavored 'minimax path' using a min-heap of the next lowest reachable cell"
+    },
+    {
+      "id": "lc-1168",
+      "title": "Optimize Water Distribution in a Village",
+      "pattern": "MST & Max-Flow",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/optimize-water-distribution-in-a-village/",
+      "module": "T02-graph-mst-flow",
+      "notes": "reframe as MST with a virtual source node 0, where a well's cost becomes the weight of an edge from node 0"
+    },
+    {
+      "id": "lc-1349",
+      "title": "Maximum Students Taking Exam",
+      "pattern": "MST & Max-Flow",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/maximum-students-taking-exam/",
+      "module": "T02-graph-mst-flow",
+      "notes": "bitmask DP that's conceptually bipartite-matching-adjacent: row-by-row transitions between compatible seat masks"
+    },
+    {
+      "id": "lc-303",
+      "title": "Range Sum Query - Immutable",
+      "pattern": "Segment Tree & Fenwick (BIT)",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/range-sum-query-immutable/",
+      "module": "T02-adv-trees",
+      "notes": "a plain prefix-sum array is enough here \u2014 the contrast with the Mutable version below is the point of pairing them"
+    },
+    {
+      "id": "lc-307",
+      "title": "Range Sum Query - Mutable",
+      "pattern": "Segment Tree & Fenwick (BIT)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/range-sum-query-mutable/",
+      "module": "T02-adv-trees",
+      "notes": "THE Fenwick tree / segment tree intro problem \u2014 point update and range query both in O(log n)"
+    },
+    {
+      "id": "lc-1310",
+      "title": "XOR Queries of a Subarray",
+      "pattern": "Segment Tree & Fenwick (BIT)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/xor-queries-of-a-subarray/",
+      "module": "T02-adv-trees",
+      "notes": "prefix-XOR array answers each query in O(1) \u2014 a gentler range-query problem before jumping into lazy propagation"
+    },
+    {
+      "id": "lc-315",
+      "title": "Count of Smaller Numbers After Self",
+      "pattern": "Segment Tree & Fenwick (BIT)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/count-of-smaller-numbers-after-self/",
+      "module": "T02-adv-trees",
+      "notes": "BIT over coordinate-compressed values while iterating right-to-left, counting smaller values already inserted"
+    },
+    {
+      "id": "lc-493",
+      "title": "Reverse Pairs",
+      "pattern": "Segment Tree & Fenwick (BIT)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/reverse-pairs/",
+      "module": "T02-adv-trees",
+      "notes": "merge-sort counting or a BIT over compressed values \u2014 same shape as Count of Smaller Numbers with a factor-of-2 condition"
+    },
+    {
+      "id": "lc-218",
+      "title": "The Skyline Problem",
+      "pattern": "Segment Tree & Fenwick (BIT)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/the-skyline-problem/",
+      "module": "T02-adv-trees",
+      "notes": "segment tree or a sweep line + multiset of active heights \u2014 the canonical hard sweep-line problem"
+    },
+    {
+      "id": "lc-732",
+      "title": "My Calendar III",
+      "pattern": "Segment Tree & Fenwick (BIT)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/my-calendar-iii/",
+      "module": "T02-adv-trees",
+      "notes": "segment tree with lazy propagation for range increment, or a sorted TreeMap sweep over event deltas"
+    },
+    {
+      "id": "lc-643",
+      "title": "Maximum Average Subarray I",
+      "pattern": "Sliding Window",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/maximum-average-subarray-i/",
+      "module": "T02-p02-sliding-window",
+      "notes": "fixed-size window baseline; maintain the running sum by subtracting the outgoing element and adding the incoming one"
+    },
+    {
+      "id": "lc-3",
+      "title": "Longest Substring Without Repeating Characters",
+      "pattern": "Sliding Window",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+      "module": "T02-p02-sliding-window",
+      "notes": "variable window + map of last-seen index lets you jump the left pointer instead of stepping it one at a time"
+    },
+    {
+      "id": "lc-424",
+      "title": "Longest Repeating Character Replacement",
+      "pattern": "Sliding Window",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/longest-repeating-character-replacement/",
+      "module": "T02-p02-sliding-window",
+      "notes": "window is valid iff (len - maxFreq) <= k; the window never needs to shrink below the best length ever seen"
+    },
+    {
+      "id": "lc-567",
+      "title": "Permutation in String",
+      "pattern": "Sliding Window",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/permutation-in-string/",
+      "module": "T02-p02-sliding-window",
+      "notes": "fixed-size window + frequency-count match; compare counts, not sorted substrings"
+    },
+    {
+      "id": "lc-209",
+      "title": "Minimum Size Subarray Sum",
+      "pattern": "Sliding Window",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/minimum-size-subarray-sum/",
+      "module": "T02-p02-sliding-window",
+      "notes": "shrink-while-condition-holds template, minimizing length instead of maximizing it \u2014 the mirror image of most window problems"
+    },
+    {
+      "id": "lc-438",
+      "title": "Find All Anagrams in a String",
+      "pattern": "Sliding Window",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/find-all-anagrams-in-a-string/",
+      "module": "T02-p02-sliding-window",
+      "notes": "fixed window + frequency array, collect every match instead of stopping at the first one like Permutation in String"
+    },
+    {
+      "id": "lc-1004",
+      "title": "Max Consecutive Ones III",
+      "pattern": "Sliding Window",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/max-consecutive-ones-iii/",
+      "module": "T02-p02-sliding-window",
+      "notes": "flip-k-zeros framed as a sliding window with a budget counter; window shrinks only when the budget is exceeded"
+    },
+    {
+      "id": "lc-76",
+      "title": "Minimum Window Substring",
+      "pattern": "Sliding Window",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/minimum-window-substring/",
+      "module": "T02-p02-sliding-window",
+      "notes": "THE canonical hard sliding window; expand until valid, then shrink-while-valid to tighten \u2014 memorize this template cold"
+    },
+    {
+      "id": "lc-239",
+      "title": "Sliding Window Maximum",
+      "pattern": "Sliding Window",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/sliding-window-maximum/",
+      "module": "T02-p02-sliding-window",
+      "notes": "monotonic deque inside a sliding window \u2014 bridges this pattern with the monotonic stack pattern"
+    },
+    {
+      "id": "lc-30",
+      "title": "Substring with Concatenation of All Words",
+      "pattern": "Sliding Window",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/substring-with-concatenation-of-all-words/",
+      "module": "T02-p02-sliding-window",
+      "notes": "multi-word fixed window; run the scan once per word-length offset to keep it linear instead of O(n*m)"
+    },
+    {
+      "id": "lc-1408",
+      "title": "String Matching in an Array",
+      "pattern": "String Algorithms (KMP/Z/Rolling Hash)",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/string-matching-in-an-array/",
+      "module": "T02-adv-strings",
+      "notes": "naive substring matching warm-up \u2014 small n makes brute force fine here, before KMP is actually needed"
+    },
+    {
+      "id": "lc-28",
+      "title": "Find the Index of the First Occurrence in a String",
+      "pattern": "String Algorithms (KMP/Z/Rolling Hash)",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/",
+      "module": "T02-adv-strings",
+      "notes": "implement KMP's failure function by hand \u2014 this IS the point of the problem, not just calling indexOf"
+    },
+    {
+      "id": "lc-459",
+      "title": "Repeated Substring Pattern",
+      "pattern": "String Algorithms (KMP/Z/Rolling Hash)",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/repeated-substring-pattern/",
+      "module": "T02-adv-strings",
+      "notes": "KMP failure-function trick: the string is periodic iff n % (n - fail[n-1]) == 0"
+    },
+    {
+      "id": "lc-187",
+      "title": "Repeated DNA Sequences",
+      "pattern": "String Algorithms (KMP/Z/Rolling Hash)",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/repeated-dna-sequences/",
+      "module": "T02-adv-strings",
+      "notes": "rolling hash (or bit-encode each of ACGT in 2 bits) over fixed-length windows to detect repeats in O(n)"
+    },
+    {
+      "id": "lc-214",
+      "title": "Shortest Palindrome",
+      "pattern": "String Algorithms (KMP/Z/Rolling Hash)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/shortest-palindrome/",
+      "module": "T02-adv-strings",
+      "notes": "run KMP's failure function on s + '#' + reverse(s) to find the longest palindromic prefix in one pass"
+    },
+    {
+      "id": "lc-1392",
+      "title": "Longest Happy Prefix",
+      "pattern": "String Algorithms (KMP/Z/Rolling Hash)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/longest-happy-prefix/",
+      "module": "T02-adv-strings",
+      "notes": "a direct application of the KMP failure array \u2014 the answer is just fail[n-1], no searching needed at all"
+    },
+    {
+      "id": "lc-1044",
+      "title": "Longest Duplicate Substring",
+      "pattern": "String Algorithms (KMP/Z/Rolling Hash)",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/longest-duplicate-substring/",
+      "module": "T02-adv-strings",
+      "notes": "binary search on the candidate length + Rabin-Karp rolling hash to check feasibility at each length in O(n)"
+    },
+    {
+      "id": "lc-1863",
+      "title": "Sum of All Subset XOR Totals",
+      "pattern": "Subsets / Combinatorics",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/sum-of-all-subset-xor-totals/",
+      "module": "T02-p10-subsets",
+      "notes": "brute-force all 2^n subsets warm-up before you need backtracking with real pruning"
+    },
+    {
+      "id": "lc-78",
+      "title": "Subsets",
+      "pattern": "Subsets / Combinatorics",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/subsets/",
+      "module": "T02-p10-subsets",
+      "notes": "iterative doubling (append each existing subset + new element) or backtracking \u2014 state both, iterative avoids recursion depth"
+    },
+    {
+      "id": "lc-90",
+      "title": "Subsets II",
+      "pattern": "Subsets / Combinatorics",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/subsets-ii/",
+      "module": "T02-p10-subsets",
+      "notes": "sort first, then skip adjacent duplicates at the same recursion depth to avoid duplicate subsets"
+    },
+    {
+      "id": "lc-46",
+      "title": "Permutations",
+      "pattern": "Subsets / Combinatorics",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/permutations/",
+      "module": "T02-p10-subsets",
+      "notes": "backtracking with a 'used' set, or swap-in-place to avoid extra memory \u2014 the swap version is the sharper follow-up"
+    },
+    {
+      "id": "lc-47",
+      "title": "Permutations II",
+      "pattern": "Subsets / Combinatorics",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/permutations-ii/",
+      "module": "T02-p10-subsets",
+      "notes": "sort + skip duplicate branch: if nums[i]==nums[i-1] and !used[i-1], skip \u2014 the exact condition trips people up live"
+    },
+    {
+      "id": "lc-77",
+      "title": "Combinations",
+      "pattern": "Subsets / Combinatorics",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/combinations/",
+      "module": "T02-p10-subsets",
+      "notes": "choose k of n; prune early when remaining candidates are fewer than what's still needed"
+    },
+    {
+      "id": "lc-39",
+      "title": "Combination Sum",
+      "pattern": "Subsets / Combinatorics",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/combination-sum/",
+      "module": "T02-p10-subsets",
+      "notes": "unbounded reuse of each candidate \u2014 the recursive call keeps the same start index instead of advancing it"
+    },
+    {
+      "id": "lc-40",
+      "title": "Combination Sum II",
+      "pattern": "Subsets / Combinatorics",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/combination-sum-ii/",
+      "module": "T02-p10-subsets",
+      "notes": "each candidate used at most once, plus a duplicate skip at the same recursion depth \u2014 same trick as Subsets II"
+    },
+    {
+      "id": "lc-22",
+      "title": "Generate Parentheses",
+      "pattern": "Subsets / Combinatorics",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/generate-parentheses/",
+      "module": "T02-p10-subsets",
+      "notes": "constrained backtracking: track open/close counts as the pruning rule instead of generating-then-filtering"
+    },
+    {
+      "id": "lc-703",
+      "title": "Kth Largest Element in a Stream",
+      "pattern": "Top-K Elements",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/kth-largest-element-in-a-stream/",
+      "module": "T02-p13-top-k",
+      "notes": "maintain a fixed-size min-heap of size k; the root is always the kth largest seen so far"
+    },
+    {
+      "id": "lc-215",
+      "title": "Kth Largest Element in an Array",
+      "pattern": "Top-K Elements",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+      "module": "T02-p13-top-k",
+      "notes": "quickselect gives average O(n) vs a heap's O(n log k) \u2014 state the tradeoff and the worst-case quickselect risk"
+    },
+    {
+      "id": "lc-347",
+      "title": "Top K Frequent Elements",
+      "pattern": "Top-K Elements",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/top-k-frequent-elements/",
+      "module": "T02-p13-top-k",
+      "notes": "bucket sort by frequency beats a heap for true O(n) \u2014 frequency is bounded by array length, so buckets are cheap"
+    },
+    {
+      "id": "lc-692",
+      "title": "Top K Frequent Words",
+      "pattern": "Top-K Elements",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/top-k-frequent-words/",
+      "module": "T02-p13-top-k",
+      "notes": "tie-break lexicographically when frequencies match \u2014 the heap comparator gets fiddly, know it cold"
+    },
+    {
+      "id": "lc-451",
+      "title": "Sort Characters By Frequency",
+      "pattern": "Top-K Elements",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/sort-characters-by-frequency/",
+      "module": "T02-p13-top-k",
+      "notes": "bucket-by-frequency then expand each bucket \u2014 the same skeleton as Top K Frequent Elements, applied to all elements"
+    },
+    {
+      "id": "lc-1642",
+      "title": "Furthest Building You Can Reach",
+      "pattern": "Top-K Elements",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/furthest-building-you-can-reach/",
+      "module": "T02-p13-top-k",
+      "notes": "greedy + min-heap: spend ladders on the biggest jumps encountered, fall back to bricks for the rest"
+    },
+    {
+      "id": "lc-373",
+      "title": "Find K Pairs with Smallest Sums",
+      "pattern": "Top-K Elements",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/find-k-pairs-with-smallest-sums/",
+      "module": "T02-p13-top-k",
+      "notes": "seed the heap with (nums1[i], nums2[0]) pairs, push (i, j+1) on every pop \u2014 a top-k problem shaped like k-way merge"
+    },
+    {
+      "id": "lc-1985",
+      "title": "Find the Kth Largest Integer in the Array",
+      "pattern": "Top-K Elements",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/find-the-kth-largest-integer-in-the-array/",
+      "module": "T02-p13-top-k",
+      "notes": "numbers are given as strings that overflow normal integer types \u2014 compare by length first, then lexicographically"
+    },
+    {
+      "id": "lc-207",
+      "title": "Course Schedule",
+      "pattern": "Topological Sort",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/course-schedule/",
+      "module": "T02-p17-topological-sort",
+      "notes": "detect a cycle via Kahn's BFS or 3-color DFS \u2014 a cycle exists iff not all nodes get ordered"
+    },
+    {
+      "id": "lc-210",
+      "title": "Course Schedule II",
+      "pattern": "Topological Sort",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/course-schedule-ii/",
+      "module": "T02-p17-topological-sort",
+      "notes": "same as Course Schedule but return the actual order \u2014 Kahn's BFS is the natural fit since it builds the order directly"
+    },
+    {
+      "id": "lc-802",
+      "title": "Find Eventual Safe States",
+      "pattern": "Topological Sort",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/find-eventual-safe-states/",
+      "module": "T02-p17-topological-sort",
+      "notes": "topo sort on the reversed graph (or 3-color DFS) to find nodes that can never reach a cycle"
+    },
+    {
+      "id": "lc-310",
+      "title": "Minimum Height Trees",
+      "pattern": "Topological Sort",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/minimum-height-trees/",
+      "module": "T02-p17-topological-sort",
+      "notes": "leaf-trimming BFS ('onion peeling') \u2014 a topological-sort-flavored technique for finding a tree's centroid(s)"
+    },
+    {
+      "id": "lc-444",
+      "title": "Sequence Reconstruction",
+      "pattern": "Topological Sort",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/sequence-reconstruction/",
+      "module": "T02-p17-topological-sort",
+      "notes": "topo sort uniqueness check: the order is unique iff exactly one node has indegree 0 at every step"
+    },
+    {
+      "id": "lc-1136",
+      "title": "Parallel Courses",
+      "pattern": "Topological Sort",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/parallel-courses/",
+      "module": "T02-p17-topological-sort",
+      "notes": "Kahn's BFS where the answer is the number of levels/rounds processed, not the order itself"
+    },
+    {
+      "id": "lc-2115",
+      "title": "Find All Possible Recipes from Given Supplies",
+      "pattern": "Topological Sort",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/",
+      "module": "T02-p17-topological-sort",
+      "notes": "topo sort where raw supplies are pre-satisfied indegree-0 nodes; recipes unlock only once all ingredients are ready"
+    },
+    {
+      "id": "lc-269",
+      "title": "Alien Dictionary",
+      "pattern": "Topological Sort",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/alien-dictionary/",
+      "module": "T02-p17-topological-sort",
+      "notes": "build edges from the first differing letter of adjacent words, then topo sort; watch the 'longer word is a prefix' invalid case"
+    },
+    {
+      "id": "lc-2392",
+      "title": "Build a Matrix With Conditions",
+      "pattern": "Topological Sort",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/build-a-matrix-with-conditions/",
+      "module": "T02-p17-topological-sort",
+      "notes": "topo sort on rows and columns independently and simultaneously, then combine the two orderings into one matrix"
+    },
+    {
+      "id": "lc-208",
+      "title": "Implement Trie (Prefix Tree)",
+      "pattern": "Trie",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/implement-trie-prefix-tree/",
+      "module": "T02-p18-trie",
+      "notes": "the data structure itself \u2014 get insert/search/startsWith right first, everything else builds on this"
+    },
+    {
+      "id": "lc-211",
+      "title": "Design Add and Search Words Data Structure",
+      "pattern": "Trie",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
+      "module": "T02-p18-trie",
+      "notes": "trie + DFS to handle the '.' wildcard character, branching into every child when a dot is hit"
+    },
+    {
+      "id": "lc-648",
+      "title": "Replace Words",
+      "pattern": "Trie",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/replace-words/",
+      "module": "T02-p18-trie",
+      "notes": "trie prefix lookup \u2014 walk the trie for each word and stop at the shortest root that matches"
+    },
+    {
+      "id": "lc-1268",
+      "title": "Search Suggestions System",
+      "pattern": "Trie",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/search-suggestions-system/",
+      "module": "T02-p18-trie",
+      "notes": "trie (or sorted-array + binary search) powering autocomplete \u2014 the classic product-facing trie interview question"
+    },
+    {
+      "id": "lc-676",
+      "title": "Implement Magic Dictionary",
+      "pattern": "Trie",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/implement-magic-dictionary/",
+      "module": "T02-p18-trie",
+      "notes": "trie + DFS allowing exactly one character mismatch along the path \u2014 a controlled fuzzy match"
+    },
+    {
+      "id": "lc-820",
+      "title": "Short Encoding of Words",
+      "pattern": "Trie",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/short-encoding-of-words/",
+      "module": "T02-p18-trie",
+      "notes": "build a trie of reversed words so shared suffixes overlap; leaves in the trie are the words you actually need to store"
+    },
+    {
+      "id": "lc-212",
+      "title": "Word Search II",
+      "pattern": "Trie",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/word-search-ii/",
+      "module": "T02-p18-trie",
+      "notes": "build a trie of the dictionary, DFS the board, and prune trie branches as you find words \u2014 far faster than searching the board per word"
+    },
+    {
+      "id": "lc-1046",
+      "title": "Last Stone Weight",
+      "pattern": "Two Heaps",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/last-stone-weight/",
+      "module": "T02-p09-two-heaps",
+      "notes": "single max-heap warm-up before graduating to problems that need two heaps at once"
+    },
+    {
+      "id": "lc-973",
+      "title": "K Closest Points to Origin",
+      "pattern": "Two Heaps",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/k-closest-points-to-origin/",
+      "module": "T02-p09-two-heaps",
+      "notes": "max-heap of size k, or quickselect for O(n) average \u2014 know both, quickselect is the standard follow-up"
+    },
+    {
+      "id": "lc-264",
+      "title": "Ugly Number II",
+      "pattern": "Two Heaps",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/ugly-number-ii/",
+      "module": "T02-p09-two-heaps",
+      "notes": "min-heap generating candidates in order, or a 3-pointer DP \u2014 the DP version avoids heap overhead entirely"
+    },
+    {
+      "id": "lc-767",
+      "title": "Reorganize String",
+      "pattern": "Two Heaps",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/reorganize-string/",
+      "module": "T02-p09-two-heaps",
+      "notes": "max-heap by frequency: always place the most frequent remaining char that isn't the previous one placed"
+    },
+    {
+      "id": "lc-295",
+      "title": "Find Median from Data Stream",
+      "pattern": "Two Heaps",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/find-median-from-data-stream/",
+      "module": "T02-p09-two-heaps",
+      "notes": "the canonical two-heaps problem: max-heap for the lower half, min-heap for the upper half, rebalance to keep sizes within 1"
+    },
+    {
+      "id": "lc-480",
+      "title": "Sliding Window Median",
+      "pattern": "Two Heaps",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/sliding-window-median/",
+      "module": "T02-p09-two-heaps",
+      "notes": "two heaps + lazy deletion, since a heap can't cheaply remove an arbitrary element as the window slides"
+    },
+    {
+      "id": "lc-502",
+      "title": "IPO",
+      "pattern": "Two Heaps",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/ipo/",
+      "module": "T02-p09-two-heaps",
+      "notes": "greedy + two heaps: a min-heap of projects by required capital (unlocking) and a max-heap by profit (among affordable)"
+    },
+    {
+      "id": "lc-630",
+      "title": "Course Schedule III",
+      "pattern": "Two Heaps",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/course-schedule-iii/",
+      "module": "T02-p09-two-heaps",
+      "notes": "greedy + max-heap: take courses sorted by deadline, evict the longest-duration one already taken if you overshoot"
+    },
+    {
+      "id": "lc-167",
+      "title": "Two Sum II - Input Array Is Sorted",
+      "pattern": "Two Pointers",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/",
+      "module": "T02-p01-two-pointers",
+      "notes": "classic two-pointer intro; contrast with the hash-map Two Sum I on an unsorted array"
+    },
+    {
+      "id": "lc-283",
+      "title": "Move Zeroes",
+      "pattern": "Two Pointers",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/move-zeroes/",
+      "module": "T02-p01-two-pointers",
+      "notes": "slow write-pointer / fast read-pointer in-place partition, single pass, no extra array"
+    },
+    {
+      "id": "lc-125",
+      "title": "Valid Palindrome",
+      "pattern": "Two Pointers",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/valid-palindrome/",
+      "module": "T02-p01-two-pointers",
+      "notes": "pointer-in-pointer-out with alnum skipping; watch case folding and unicode edge cases"
+    },
+    {
+      "id": "lc-15",
+      "title": "3Sum",
+      "pattern": "Two Pointers",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/3sum/",
+      "module": "T02-p01-two-pointers",
+      "notes": "sort + fix one index + two pointers; the dedup logic (skip equal neighbors) is the actual interview bar"
+    },
+    {
+      "id": "lc-11",
+      "title": "Container With Most Water",
+      "pattern": "Two Pointers",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/container-with-most-water/",
+      "module": "T02-p01-two-pointers",
+      "notes": "greedy two-pointer proof: always move the shorter wall, never the taller one \u2014 be ready to prove why"
+    },
+    {
+      "id": "lc-16",
+      "title": "3Sum Closest",
+      "pattern": "Two Pointers",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/3sum-closest/",
+      "module": "T02-p01-two-pointers",
+      "notes": "same sweep as 3Sum but track the running best diff instead of collecting exact-zero triples"
+    },
+    {
+      "id": "lc-18",
+      "title": "4Sum",
+      "pattern": "Two Pointers",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/4sum/",
+      "module": "T02-p01-two-pointers",
+      "notes": "generalizes 3Sum with an extra fixed index; a good prompt to discuss general k-sum recursion"
+    },
+    {
+      "id": "lc-75",
+      "title": "Sort Colors",
+      "pattern": "Two Pointers",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/sort-colors/",
+      "module": "T02-p01-two-pointers",
+      "notes": "Dutch National Flag three-pointer partition, one pass, O(1) space \u2014 the canonical follow-up to quicksort partition"
+    },
+    {
+      "id": "lc-42",
+      "title": "Trapping Rain Water",
+      "pattern": "Two Pointers",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/trapping-rain-water/",
+      "module": "T02-p01-two-pointers",
+      "notes": "two-pointer O(1)-space solution beats the prefix-max-array O(n)-space solution; know both and the tradeoff"
+    },
+    {
+      "id": "lc-1971",
+      "title": "Find if Path Exists in Graph",
+      "pattern": "Union-Find",
+      "difficulty": "Easy",
+      "url": "https://leetcode.com/problems/find-if-path-exists-in-graph/",
+      "module": "T02-p19-union-find",
+      "notes": "the simplest possible union-find (or BFS/DFS) intro \u2014 build the DSU, union every edge, compare roots"
+    },
+    {
+      "id": "lc-547",
+      "title": "Number of Provinces",
+      "pattern": "Union-Find",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/number-of-provinces/",
+      "module": "T02-p19-union-find",
+      "notes": "union-find (or DFS) over an adjacency-matrix graph, count the number of distinct components at the end"
+    },
+    {
+      "id": "lc-684",
+      "title": "Redundant Connection",
+      "pattern": "Union-Find",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/redundant-connection/",
+      "module": "T02-p19-union-find",
+      "notes": "the edge that first tries to connect two already-connected nodes is the answer \u2014 union-find catches it in one pass"
+    },
+    {
+      "id": "lc-721",
+      "title": "Accounts Merge",
+      "pattern": "Union-Find",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/accounts-merge/",
+      "module": "T02-p19-union-find",
+      "notes": "union-find over emails (not accounts), then group by root and sort each group's emails"
+    },
+    {
+      "id": "lc-1319",
+      "title": "Number of Operations to Make Network Connected",
+      "pattern": "Union-Find",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/number-of-operations-to-make-network-connected/",
+      "module": "T02-p19-union-find",
+      "notes": "you need (components - 1) extra cables, but only if edges >= nodes-1 \u2014 check feasibility before computing the answer"
+    },
+    {
+      "id": "lc-261",
+      "title": "Graph Valid Tree",
+      "pattern": "Union-Find",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/graph-valid-tree/",
+      "module": "T02-p19-union-find",
+      "notes": "valid tree iff exactly n-1 edges AND fully connected (no cycle) \u2014 union-find's union-returns-false-on-cycle catches both conditions"
+    },
+    {
+      "id": "lc-990",
+      "title": "Satisfiability of Equality Equations",
+      "pattern": "Union-Find",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/satisfiability-of-equality-equations/",
+      "module": "T02-p19-union-find",
+      "notes": "union all '==' constraints first, then check every '!=' constraint against the same DSU \u2014 order matters"
+    },
+    {
+      "id": "lc-1101",
+      "title": "The Earliest Moment When Everyone Become Friends",
+      "pattern": "Union-Find",
+      "difficulty": "Medium",
+      "url": "https://leetcode.com/problems/the-earliest-moment-when-everyone-become-friends/",
+      "module": "T02-p19-union-find",
+      "notes": "sort logs by timestamp, union incrementally, stop the moment exactly one component remains"
+    },
+    {
+      "id": "lc-305",
+      "title": "Number of Islands II",
+      "pattern": "Union-Find",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/number-of-islands-ii/",
+      "module": "T02-p19-union-find",
+      "notes": "union-find with online updates \u2014 track and update the island count incrementally after each land addition"
+    },
+    {
+      "id": "lc-685",
+      "title": "Redundant Connection II",
+      "pattern": "Union-Find",
+      "difficulty": "Hard",
+      "url": "https://leetcode.com/problems/redundant-connection-ii/",
+      "module": "T02-p19-union-find",
+      "notes": "the directed version: handle the 'node has two parents' case and the 'pure cycle' case separately before unioning"
+    }
+  ]
 }

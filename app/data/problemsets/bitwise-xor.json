@@ -1,0 +1,23 @@
+{"problems": [
+  {"id": "lc-136", "title": "Single Number", "pattern": "Bitwise XOR", "difficulty": "Easy",
+   "url": "https://leetcode.com/problems/single-number/", "module": "T02-p12-bitwise-xor",
+   "notes": "XOR cancels pairs (a^a=0, a^0=a) — the pattern's namesake problem, O(n) time O(1) space"},
+  {"id": "lc-191", "title": "Number of 1 Bits", "pattern": "Bitwise XOR", "difficulty": "Easy",
+   "url": "https://leetcode.com/problems/number-of-1-bits/", "module": "T02-p12-bitwise-xor",
+   "notes": "n & (n-1) clears the lowest set bit — know this trick cold, it reappears constantly in bit-manipulation problems"},
+  {"id": "lc-231", "title": "Power of Two", "pattern": "Bitwise XOR", "difficulty": "Easy",
+   "url": "https://leetcode.com/problems/power-of-two/", "module": "T02-p12-bitwise-xor",
+   "notes": "n & (n-1) == 0 reuses the same lowest-set-bit trick to check for exactly one bit set"},
+  {"id": "lc-137", "title": "Single Number II", "pattern": "Bitwise XOR", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/single-number-ii/", "module": "T02-p12-bitwise-xor",
+   "notes": "count bits mod 3 per position when every other number appears exactly 3 times — plain XOR no longer works"},
+  {"id": "lc-260", "title": "Single Number III", "pattern": "Bitwise XOR", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/single-number-iii/", "module": "T02-p12-bitwise-xor",
+   "notes": "XOR everything, take any set bit to split numbers into two groups, then XOR each group separately"},
+  {"id": "lc-371", "title": "Sum of Two Integers", "pattern": "Bitwise XOR", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/sum-of-two-integers/", "module": "T02-p12-bitwise-xor",
+   "notes": "add without +/-: XOR is the sum-without-carry, (AND << 1) is the carry — loop until the carry reaches zero"},
+  {"id": "lc-421", "title": "Maximum XOR of Two Numbers in an Array", "pattern": "Bitwise XOR", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/", "module": "T02-p12-bitwise-xor",
+   "notes": "build a bit-trie greedily from the highest bit down, always trying to branch into the opposite bit at each level"}
+]}

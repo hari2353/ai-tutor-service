@@ -1,67 +1,99 @@
-# Committing and sharing this repo
+# Repo, sharing, and the day-to-day loop
 
-Git operations run far too slowly through the agent's sandbox mount to complete
-inside its command timeout (707 files over a mounted Windows filesystem). On your
-own machine they take seconds. Run these yourself.
+**Live at `https://github.com/hari2353/ai-tutor-service` (private).**
+Pushed 2026-08-09: 1,507 objects, 12.92 MiB, `main` tracking `origin/main`.
 
-## One-time: commit and push
+Note that `gh` (GitHub CLI) is **not installed** on this machine. Everything below uses
+plain git plus the GitHub web UI. If you want the CLI: `winget install --id GitHub.cli`,
+then restart PowerShell so `gh` lands on `PATH`.
+
+## Add your friend
+
+Repo → **Settings → Collaborators → Add people** → their username, **Write** permission.
+
+Then they clone and set up:
+
+```powershell
+git clone https://github.com/hari2353/ai-tutor-service.git
+cd ai-tutor-service
+pwsh scripts/setup-collab.ps1     # REQUIRED, once per clone -- see CONTRIBUTING.md §3
+python app/build_data.py
+```
+
+Skipping `setup-collab` is the one mistake that will hurt: without it, every merge dumps
+conflict markers into a 2.7 MB generated JSON file. Git does not ship hooks or merge
+drivers over the wire (they execute code), so each clone must opt in locally.
+
+Read `CONTRIBUTING.md` before writing modules — it has the parallel workflow, the
+fragment-vs-aggregate rule, and the five module-writing rules.
+
+## Day-to-day
 
 ```powershell
 cd F:\v1\ai-tutor-service
+git pull                          # post-merge hook regenerates indexes automatically
 
-git config user.name  "Hari Siva Rami Dwarampudi"
-git config user.email "haribhamireddy@gmail.com"
+# ... work ...
+
+python app/build_data.py          # regenerate; merges card and drill fragments
+python app/tests/review_gate.py   # house format -- expect 452 pass, 0 fail
+bash app/tests/run.sh             # DOM and SM-2 tests
+python app/learning_path.py       # refresh LEARNING-PATH.md
 
 git add -A
-git commit -m "AI tutor service: 36 tracks, 452 modules, 313 written"
-
-# authenticate (agent will never run this for you)
-gh auth login
-
-# create the repo and push. Use --private unless you intend it public:
-# the STAR bank and resume-systems modules contain your real work history.
-gh repo create ai-tutor-service --private --source=. --remote=origin --push
+git commit -m "..."
+git push
 ```
 
-If you prefer the web UI: create an empty repo on GitHub, then
+`git add -A` takes roughly 45 seconds here. That is normal for ~1,900 files over a Windows
+filesystem, not a hang.
 
-```powershell
-git remote add origin https://github.com/<you>/ai-tutor-service.git
-git branch -M main
-git push -u origin main
-```
+## Keep it private
 
-## Sharing with your friend
+The repo contains, deliberately:
 
-```powershell
-gh repo add-collaborator <their-github-username> --permission push
-```
-
-## Before you push — check this
-
-`.gitignore` already excludes `interview_prep_queue.json` (live job listings).
-
-But the repository **does** contain, by design:
-
-- `curriculum/14-behavioral-principal/01-star-bank.md` — 30 STAR stories built
-  from your real resume, including employer, metrics and project detail
-- `curriculum/10-system-design/09-resume-systems.md` — your flagship systems
-  written up as formal design docs
+- `curriculum/14-behavioral-principal/01-star-bank.md` — 30 STAR stories from your real CV:
+  employer, systems, metrics, and what went wrong in each
+- `curriculum/10-system-design/09-resume-systems.md` — your flagship systems as formal
+  design docs, with architecture and scale numbers
+- `curriculum/14-behavioral-principal/04-company-specific.md` — which stories to lead with
+  at which employer
 - `progress/` — your study state
 
-None of that is secret, but it is personal and it is specific about your
-employer's systems. **Private repo unless you have decided otherwise.**
+No credentials, but all of it is specific about your employer's internals and your own
+interview strategy. A public repo hands a future interviewer your prep notes.
 
-If you want the curriculum public and the personal material out, move those two
-files plus `progress/` into a second private repo before the first push —
-rewriting history afterwards is much harder than not committing it.
+If you ever want the curriculum public, move those three files plus `progress/` into a
+separate private repo **before** the first public push. Rewriting history afterwards is far
+harder than not committing it.
 
-## Routine, after every work session
+## Secrets: scanned, clean
 
-```powershell
-python app/build_data.py        # regenerate index + merge fragments
-python app/tests/review_gate.py # house-format check
-bash app/tests/run.sh           # app + lab tests
-python app/learning_path.py     # refresh LEARNING-PATH.md
-git add -A && git commit -m "..." && git push
+Checked for AWS keys, OpenAI/Anthropic keys, GitHub tokens, Slack tokens, Google API keys,
+private key blocks and real JWTs. One hit, a false positive: the literal string
+`-----BEGIN PRIVATE KEY-----` inside a SPIFFE teaching example in
+`curriculum/30-auth-security/07-sso-federation.md`, where the value is
+`(never leaves this workload)`.
+
+`.gitignore` covers `interview_prep_queue.json` (live job listings), `__pycache__/`,
+`.venv/`, `node_modules/` and OS droppings.
+
+## Repository size
+
+~39 MB working tree. The four largest tracked files are generated aggregates:
+
 ```
+2.7M  app/data/flashcards.json
+2.7M  app/data/drills.json
+2.6M  app/data/drills.js
+2.5M  app/data/flashcards.js
+```
+
+Tracked **on purpose**: the app loads them from `file://` with no build step, so a fresh
+clone opens by double-clicking `app/index.html` without anyone running Python first. The
+cost is that every regeneration rewrites ~10 MB, so history grows faster than a normal
+repo. `.gitattributes` marks them `linguist-generated` to keep them out of diffs.
+
+If that ever becomes a problem the fix is to untrack the `.js` files and add a build step
+to the README — but do it deliberately, because it breaks the zero-setup property that
+makes the app pleasant to use.
