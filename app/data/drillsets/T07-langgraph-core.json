@@ -1,0 +1,95 @@
+{
+  "drills": [
+    {
+      "id": "T07-langgraph-core-d1",
+      "module": "T07-langgraph-core",
+      "q": "Name the three things you define to build a LangGraph graph, plus the fourth step.",
+      "a": "State (schema + a reducer per key), nodes (functions returning partial state updates), edges (static, conditional, or Command/Send). Then compile. Nodes do the work; edges decide what runs next.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-langgraph-core-d2",
+      "module": "T07-langgraph-core",
+      "q": "A node returns `{\"findings\": [\"x\"]}`. What happens to the existing value of `findings`?",
+      "a": "Whatever the reducer for that channel says. With no reducer it is overwritten (last write wins). With `Annotated[list, operator.add]` the lists are concatenated. The node returns a partial UPDATE, not a state; merge semantics are the channel's business, not the node's.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-langgraph-core-d3",
+      "module": "T07-langgraph-core",
+      "q": "Quote the error you get when two parallel nodes write the same unannotated state key.",
+      "a": "`langgraph.errors.InvalidUpdateError: At key '<k>': Can receive only one value per step. Use an Annotated key to handle multiple values.`",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-langgraph-core-d4",
+      "module": "T07-langgraph-core",
+      "q": "How many checkpoints does `START -> A -> B -> END` produce, and what are they?",
+      "a": "Four. Step -1: the input write, `next=('__start__',)`. Step 0: input applied, `next=('A',)`. Step 1: A's output, `next=('B',)`. Step 2: B's output, `next=()` meaning complete.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-langgraph-core-d5",
+      "module": "T07-langgraph-core",
+      "q": "Write the state schema for a Send-based map-reduce over subqueries. Which line is load-bearing and why?",
+      "a": "```python\nclass S(TypedDict):\n    subqueries: list[str]\n    findings: Annotated[list[dict], operator.add]\n```\nThe `Annotated[..., operator.add]` on `findings` is load-bearing: N parallel Send workers all write that channel in one super-step, which without a reducer is `InvalidUpdateError` N times over.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-langgraph-core-d6",
+      "module": "T07-langgraph-core",
+      "q": "You wrote `graph.invoke(inp, config={\"configurable\": {\"recursion_limit\": 25}})` and the limit has no effect. Why, and what is the default?",
+      "a": "`recursion_limit` is a TOP-LEVEL config key, not a `configurable` entry, so nesting it is silently ignored. The default is 1000 super-steps as of langgraph 1.0.6 (it was 25 for the first two years), so the framework will not stop a runaway agent for you. Set it explicitly and carry your own step/cost budget in state.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-langgraph-core-d7",
+      "module": "T07-langgraph-core",
+      "q": "Your graph ran both the node `Command(goto=...)` targeted AND an unexpected second node. Why?",
+      "a": "The node also has a static `add_edge` from it. `Command(goto=...)` ADDS a dynamic edge; it does not replace static edges, so both destinations execute. Use either static edges or dynamic routing from a given node, never both.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-langgraph-core-d8",
+      "module": "T07-langgraph-core",
+      "q": "Implement graceful degradation when a loop is approaching the recursion limit, without raising.",
+      "a": "Add `remaining_steps: RemainingSteps` (from `langgraph.managed`) to the state; the runtime populates it. Route on it: `def route(s): return \"wrap_up\" if s[\"remaining_steps\"] <= 2 else \"model\"`. Proactive beats reactive: the graph completes normally, the partial answer is checkpointed, and the user gets a best-effort result instead of a `GraphRecursionError`.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-langgraph-core-d9",
+      "module": "T07-langgraph-core",
+      "q": "Your graph passed CI and raises `InvalidUpdateError` in production. How do you prevent the CLASS of bug, not the instance?",
+      "a": "A startup assertion or CI test that walks the state schema and fails on any list/dict-typed key with no `Annotated` reducer, plus a test exercising every conditional edge's multi-destination return. Prod hit a path CI never took: a conditional edge returning two destinations, a node acquiring a second static out-edge (which fans out in parallel), or a Send producing more than one item.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-langgraph-core-d10",
+      "module": "T07-langgraph-core",
+      "q": "A model calls the same per-thread subagent twice in parallel and you get checkpoint conflicts. Explain and fix.",
+      "a": "A subgraph compiled with `checkpointer=True` has one checkpoint namespace per thread, so two concurrent calls write the same namespace and conflict. Fixes: prevent parallel calls (disable parallel tool calling, or a tool-call limit middleware), switch to per-invocation persistence (`checkpointer=None`) if it doesn't need memory, or wrap each subagent in its own `StateGraph` with a unique node name so each gets a stable distinct namespace.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-langgraph-core-d11",
+      "module": "T07-langgraph-core",
+      "q": "Design the streaming for a chat UI over a LangGraph agent. Which modes, and what breaks on Python 3.10?",
+      "a": "`stream_mode=[\"messages\",\"updates\",\"custom\"]` with `version=\"v2\"`; filter `messages` by `metadata[\"langgraph_node\"]` so only the user-facing node streams, tag internal structured-output models `nostream`, use `get_stream_writer()` for tool progress, and `subgraphs=True` + `chunk[\"ns\"]` to attribute nested output. On Python <3.11 async: `get_stream_writer()` does not work (take a `writer: StreamWriter` param instead) and you must pass `RunnableConfig` explicitly into `await model.ainvoke(msgs, config)` or callbacks don't propagate and token streaming silently emits nothing.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-langgraph-core-d12",
+      "module": "T07-langgraph-core",
+      "q": "An interviewer asks you to justify adopting LangGraph for a five-node linear pipeline. What do you say?",
+      "a": "Don't. A linear pipeline with no branching, no cycles, and no resume requirement is a function; the graph adds a state schema, a serialisation step, a framework in the stack trace, and migration cost for nothing. LangGraph earns its keep when there is branching you need to audit, fan-out you need to merge correctly, or a durable-resume requirement. Saying this is a stronger signal than enthusiasm.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-langgraph-core-d13",
+      "module": "T07-langgraph-core",
+      "q": "Where do a Postgres connection, a tenant id, a 400KB document, and a user's food preference each belong?",
+      "a": "Connection: runtime context (`context_schema` + `Runtime[Ctx]`) — not serialisable, and not checkpointed. Tenant id: runtime context too, so it isn't duplicated into every checkpoint. 400KB document: object storage or the `Store`, with only the key in state, because full channel values are re-serialised every super-step. Food preference: the `Store`, namespaced `(user_id, \"memories\")`, because it must persist ACROSS threads.",
+      "difficulty": "mid"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T10-principal-layer-d1",
+      "module": "T10-principal-layer",
+      "q": "Name the three multi-tenancy isolation models in order of increasing resource sharing.",
+      "a": "Silo (dedicated stack per tenant) -> bridge (mixed, some shared some siloed by tenant tier) -> pool (everything shared, isolated logically).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T10-principal-layer-d2",
+      "module": "T10-principal-layer",
+      "q": "A pool-model service enforces tenant isolation only via 'remember to add WHERE tenant_id = ? to every query.' What class of bug does this produce, and what's the durable fix?",
+      "a": "Cross-tenant object-level authorization bypass (OWASP API1) -- a convention gets violated the first time an endpoint is written under deadline pressure. Durable fix: enforce at a layer new code can't bypass, e.g. Postgres row-level security or a mandatory data-access wrapper requiring a tenant context to construct any query.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T10-principal-layer-d3",
+      "module": "T10-principal-layer",
+      "q": "State the unit-cost formula and identify what makes a cost breakdown actually actionable versus just informative.",
+      "a": "unit_cost = (direct allocations + shared costs / stated allocation method) / units delivered. It's actionable when it names the DOMINANT line item -- the one that scales linearly with the growth metric -- not just a total; a breakdown with 15 roughly-equal items tells you nothing about what to optimize.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T10-principal-layer-d4",
+      "module": "T10-principal-layer",
+      "q": "Compute: 10M requests/month, LLM inference at avg 800 tokens in + 200 out, blended $6/M tokens. What's the monthly inference cost, and why does this number matter more than the total bill?",
+      "a": "10M x (800+200) tokens = 10^10 tokens = 10,000M tokens x $6/M = $60,000/mo... using the module's blended rate: 1M tokens/req total x 10M req = 10,000M tok x $6/M = $60,000/mo (module example used slightly different mix, ~$48k). It matters more than the total because it's the line item that scales LINEARLY with the metric the product wants to grow -- doubling usage without a caching/routing change doubles this cost specifically, not the whole bill uniformly.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-principal-layer-d5",
+      "module": "T10-principal-layer",
+      "q": "Distinguish what dual-write-with-reconciliation validates versus what shadow traffic validates in a migration.",
+      "a": "Dual-write + reconciliation validates DATA consistency: does the new store's data match the old store's data. Shadow traffic validates BEHAVIORAL correctness: does the new system's computed output/decision match the legacy system's, using duplicated (not routed) production requests, before any user-facing traffic depends on it.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-principal-layer-d6",
+      "module": "T10-principal-layer",
+      "q": "A team's reconciliation job has reported zero drift for two weeks. Is it safe to decommission the legacy system? What must be checked first?",
+      "a": "Not automatically. Check whether the reconciliation job would actually catch every class of drift it claims to (a checksum comparison can miss a row-level replacement that happens to produce the same checksum), and verify it against an injected known-bad record. A clean report could mean the job stopped running silently, not that the systems agree.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-principal-layer-d7",
+      "module": "T10-principal-layer",
+      "q": "Why does decommissioning the legacy system immediately after cutover looks fine but is actually a rollback failure waiting to happen?",
+      "a": "Rollback's cheapness depends entirely on the legacy system still being live and capable of resuming service. Removing it as soon as the new system 'looks stable' trades away the safety net before confidence in the new system was actually earned (proven via a stated observation window), not just assumed because nothing broke yet.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-principal-layer-d8",
+      "module": "T10-principal-layer",
+      "q": "Write a one-sentence test for whether an RFC's 'alternatives considered' section is real analysis versus decorative filler.",
+      "a": "Could a smart reader who disagreed with your recommendation use this section, in your own words, to argue for a different option -- i.e. does each rejected alternative state its actual cost AND the scenario where it would have been the correct choice, rather than being strawmanned or left cost-free.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-principal-layer-d9",
+      "module": "T10-principal-layer",
+      "q": "An RFC gets approved, then re-litigated three weeks later when a senior engineer raises an objection nobody addressed. Diagnose the PROCESS failure, not the technical decision.",
+      "a": "The objection was predictable but wasn't surfaced before the review -- either the draft wasn't routed past the people most likely to raise it, or the risks-and-mitigations section didn't anticipate it. Fix: route future drafts past the harshest likely skeptic before the formal review round, treating 'what would the harshest reasonable reviewer say' as a required pass, not an optional nicety.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-principal-layer-d10",
+      "module": "T10-principal-layer",
+      "q": "How should the rigor of a decision document (Slack message + ADR vs. full RFC) scale, and who decides which category a decision falls into?",
+      "a": "Scale rigor to how expensive the decision is to REVERSE and how many teams it constrains -- a cheap two-way door doesn't need a 5-page RFC, an org-wide one-way door does. The categorization rule itself needs to be a stated, lightweight, discoverable norm (e.g. 'touches more than one team's data model or is expensive to reverse -> RFC'), not a fresh judgment call each time, or the norm itself becomes a recurring point of disagreement.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-principal-layer-d11",
+      "module": "T10-principal-layer",
+      "q": "You inherit a multi-tenant system with no documented isolation tier per tenant, no cost attribution, and no migration history. What do you audit first and why?",
+      "a": "The isolation boundary first: verify tenant scoping is enforced at a layer that can't be bypassed (RLS, mandatory wrapper) rather than only by application convention. It's the highest-blast-radius unknown -- a cross-tenant data exposure is a failure you don't get a second chance to catch before it's exploited or reported, whereas cost attribution and migration documentation are recoverable if delayed a quarter.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-principal-layer-d12",
+      "module": "T10-principal-layer",
+      "q": "A migration project is being deprioritized against feature work. Reframe the 'we should modernize this' argument in the same unit-cost language the rest of this module uses.",
+      "a": "Name the ongoing ost in comparable terms: engineering hours/quarter spent on workarounds, incident rate or MTTR delta attributable to the legacy system, and a specific dated cliff (vendor EOL, scaling ceiling with a stated headroom number) if one exists. Separate the 'cliff' argument (time-boxed, revisable if the estimate is wrong) from the 'ongoing tax' argument (accrues regardless of the cliff date), so a revised cliff estimate doesn't kill the whole business case, only the urgency framing.",
+      "difficulty": "staff"
+    }
+  ]
+}

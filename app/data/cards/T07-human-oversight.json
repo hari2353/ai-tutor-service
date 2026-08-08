@@ -1,0 +1,165 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-human-oversight-c1",
+      "topic": "Human Oversight Design",
+      "q": "What is a gate a function of?",
+      "a": "gate = f(irreversibility, blast radius, externality), with rate risk handled independently as a cap. NOT a function of how scary the tool's name is, and never a function of what the model asked for — prompt injection's whole purpose is to make the agent believe an action is authorised.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c2",
+      "topic": "Human Oversight Design",
+      "q": "The gate ladder from reversible-small to unbounded-destructive.",
+      "a": "reversible + small → AUTO + LOG (+ audit sample). reversible + bounded → NOTIFY-AND-PROCEED + undo window. irreversible OR external-visible OR financial → SYNCHRONOUS APPROVAL with a diff. irreversible + multi-record or high value → DUAL APPROVAL (four-eyes). unbounded destructive → PROHIBITED, not in the toolset. Delete stays gated at every autonomy level.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c3",
+      "topic": "Human Oversight Design",
+      "q": "Why does externality dominate reversibility?",
+      "a": "Because anything a third party observes — email, payment, public post, filed document — is irreversible in practice even when the database row can be rolled back. You cannot un-send. So an action that is reversible in your data model but sends an email is tiered as irreversible.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c4",
+      "topic": "Human Oversight Design",
+      "q": "Five properties to register per tool, at registration time not call time.",
+      "a": "Class (read_only | write | financial | destructive); reversibility (trivial | compensating | none); max blast radius (one | bounded | unbounded); externality (none | internal | external_visible); rate risk plus a cap. The four-tier class vocabulary alone is insufficient because 'write' spans a draft edit and a production config overwrite.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c5",
+      "topic": "Human Oversight Design",
+      "q": "The most under-used oversight pattern, and why it beats an approval.",
+      "a": "Dry run + diff + deterministic invariant checks. The agent computes the exact change and a validator asserts invariants — row count in bounds, no rows outside the tenant, no field crossing a threshold, target matches a pattern. Most of what a reviewer would catch is expressible as an assertion, so it runs in milliseconds on 100% of actions instead of 90 seconds on 10%.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c6",
+      "topic": "Human Oversight Design",
+      "q": "Second-best pattern: reversibility instead of approval.",
+      "a": "Soft delete with a 7-day tombstone, a staged email that sends after 10 minutes unless cancelled, a config change behind a feature flag. Each converts an approval into an undo, which costs a human nothing in the normal case. Approvals scale linearly with volume; undo windows do not.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c7",
+      "topic": "Human Oversight Design",
+      "q": "Six requirements for a review to be meaningful.",
+      "a": "1) Show the DIFF, not the intent. 2) Evidence inline at the decision point. 3) 'No' is one click, has a reason code, and is respected (no instant re-propose). 4) Bounded queue within computed review capacity. 5) Time budgeted, and NO bulk-approve affordance on irreversible classes. 6) Measured by error injection — corrupt a small random percentage of proposals and track catch rate.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c8",
+      "topic": "Human Oversight Design",
+      "q": "Four telemetry signals that detect rubber-stamping.",
+      "a": "Approval decision p50 latency under ~5s on a decision designed to take 45-90s. Override/rejection rate near 0%, meaning the gate is decorative. Gated volume above computed review capacity, which is unplanned sampling with unknown coverage. Any bulk-approve usage on an irreversible class, which is a design bug because the affordance should not exist.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c9",
+      "topic": "Human Oversight Design",
+      "q": "The alert-fatigue base rates that predict gate decay.",
+      "a": "~2,992 security alerts per day with 63% unaddressed (Vectra 2026); 46% of alerts are false positives (Microsoft SOC 2026); 73% of security teams name false positives as their top detection challenge and 76% cite alert fatigue (SANS 2025); ~90% of SOCs report backlog overwhelm; 71% of analysts report burnout (Tines). Approval queues obey the same physics.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c10",
+      "topic": "Human Oversight Design",
+      "q": "Why is error injection the only real test of a gate, and how do you run it ethically?",
+      "a": "Because a gate with a low catch rate is not oversight, it is a latency tax plus accountability laundering — the human's signature transfers blame without transferring scrutiny. Run it disclosed as part of the role, agreed with people managers, never used for individual performance management, and reported only in aggregate. Framed as a fire drill it is standard practice; framed as gotcha surveillance it destroys the trust the control depends on.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c11",
+      "topic": "Human Oversight Design",
+      "q": "Six escalation decisions you must make explicitly.",
+      "a": "1) Timeout default per tier — FAIL-CLOSED for irreversible/financial, fail-open only for reversible+bounded and logged as timeout not approval. 2) Request expiry with preconditions re-validated at execution. 3) Who may approve, with separation of duties. 4) Tiering with target response times and fallbacks. 5) Batching rules — per-item for irreversible, never select-all across a heterogeneous batch. 6) A tested kill switch.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c12",
+      "topic": "Human Oversight Design",
+      "q": "Why does an approval bind to a diff rather than an intent?",
+      "a": "Because approving a 40-minute-old proposal is approving a stale world state. Requests carry an expiry, and preconditions are re-validated at execution time with a failure if they moved. Otherwise an approved action executes against changed data, which is a classic incident.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c13",
+      "topic": "Human Oversight Design",
+      "q": "Separation of duties for agents — three concrete rules.",
+      "a": "The requester cannot approve. The agent cannot approve itself, so any 'agent:' principal is rejected as an approver in the broker. The approver must hold the permission for the underlying action in their own right. And the agent must never hold the credential that grants approval.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c14",
+      "topic": "Human Oversight Design",
+      "q": "The audit record field everyone forgets, and the second one.",
+      "a": "First: THE EVIDENCE BUNDLE THE REVIEWER WAS SHOWN (or its hash). Without it you cannot distinguish informed approval from a rubber stamp, and it catches the bug where the UI showed something different from the request. Second: DECISION LATENCY, which is your rubber-stamp detector. Also store the policy id + version, or 'why was this gated this way' is unanswerable.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c15",
+      "topic": "Human Oversight Design",
+      "q": "What EU AI Act Article 14 actually requires, and when.",
+      "a": "High-risk systems from 2 August 2026 must be DESIGNED so oversight persons can: understand the system's capacities and limitations; remain aware of the tendency to over-rely on it (automation bias is named in the text); correctly interpret output; decide not to use, or disregard, override, or reverse it; and intervene or halt via a stop button or comparable procedure. Article 26 adds deployer duties. Penalties to €35M or 6-7% of global turnover depending on provision.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c16",
+      "topic": "Human Oversight Design",
+      "q": "Why does Article 14 being a DESIGN obligation matter to an engineer?",
+      "a": "Because a UI that makes override impractical is non-compliant even with a human present. A rubber-stamped queue is a compliance finding, not just a quality problem. Staffing a queue does not discharge the obligation; the interface has to make meaningful review and override realistic.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c17",
+      "topic": "Human Oversight Design",
+      "q": "What is actually on an enterprise buyer's oversight checklist?",
+      "a": "A tested kill switch; scoped short-lived per-agent credentials rather than a shared service account; an exportable immutable audit log with defined retention; RBAC with separation of duties on approvals; documented risk tiers and which actions require human approval; data residency and retention for prompts, traces, and evidence bundles; and a named accountable owner.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c18",
+      "topic": "Human Oversight Design",
+      "q": "The gates-versus-value arithmetic.",
+      "a": "net = S − g·R − wait_cost, break-even at g = S/R, where S is minutes saved, R is minutes of review, g is the gated fraction. S=10 R=1.5 → gate everything and keep 85%. S=10 R=5 → keep 50%. S=2 R=1.5 → keep 25% and rubber-stamping is CERTAIN because the economics force speed. wait_cost is the forgotten term: a synchronous gate blocks the run.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c19",
+      "topic": "Human Oversight Design",
+      "q": "Why is durable checkpointing a prerequisite for approval gates?",
+      "a": "Because a synchronous mid-run gate means the run must suspend to storage and resume, not sit in memory holding a connection through a lunch break or a deploy. LangGraph interrupt() plus a Postgres checkpointer, or Temporal signals, is the reference shape. Without it, approval latency turns into lost runs and held resources.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c20",
+      "topic": "Human Oversight Design",
+      "q": "How do you resolve the gates-versus-velocity argument without politics?",
+      "a": "Evidence-based autonomy ratcheting: start gated per action class, measure the error rate and the reviewer catch rate, and graduate a class from approval to notify-and-proceed after a defined volume of clean executions, with automatic demotion on incident. Validate a proposed loosening by shadow-running it first. Deletes and unbounded-blast-radius actions never graduate.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c21",
+      "topic": "Human Oversight Design",
+      "q": "When is a human gate the WRONG answer?",
+      "a": "When a deterministic check does the same job in milliseconds on 100% of actions. When the action can be made reversible instead. When the reviewer lacks the expertise to judge, since the gate then transfers liability without adding scrutiny. When the queue would exceed review capacity, where explicit sampling with known coverage beats an over-capacity queue. And when latency is structurally intolerable — redesign the action rather than faking a 200ms gate.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c22",
+      "topic": "Human Oversight Design",
+      "q": "Who is accountable when an agent does something wrong?",
+      "a": "A named human. Every agent has an owner; actions attribute through the delegation chain to a person — the principal it acted for, the reviewer who approved, the owner who deployed it with those permissions. 'The AI did it' is never a resolution, and deployer duties under Article 26 cannot be delegated to a vendor or a model. A 3-second approval is the DESIGN's failure, not the reviewer's.",
+      "module": "T07-human-oversight"
+    },
+    {
+      "id": "T07-human-oversight-c23",
+      "topic": "Human Oversight Design",
+      "q": "Rank oversight investments by protection per unit of cost.",
+      "a": "1) Remove the action from the toolset. 2) Scoped short-lived per-agent credentials, so unpermitted actions fail at the API. 3) Deterministic invariants + dry-run diffs. 4) Reversibility. 5) Rate caps — the only thing that bounds a runaway loop. 6) Narrow, well-designed approval gates on the genuinely irreversible set. 7) Immutable audit with evidence digest and decision latency. 8) Error-injection catch-rate measurement. Dead last: adding more gates.",
+      "module": "T07-human-oversight"
+    }
+  ]
+}

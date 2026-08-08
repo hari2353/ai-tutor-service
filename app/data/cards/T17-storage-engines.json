@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-storage-engines-c1",
+      "topic": "Storage Engines",
+      "q": "B+Tree vs LSM-Tree: the one-sentence structural difference?",
+      "a": "B+Tree updates in place and stays sorted on disk at all times; LSM-Tree never updates in place, writing to an in-memory memtable then flushing immutable sorted SSTables, deferring reorganization to background compaction.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c2",
+      "topic": "Storage Engines",
+      "q": "B-Tree fanout formula and typical value?",
+      "a": "fanout ≈ page_size / (key_size + pointer_size). For a 16KB InnoDB page, 16-byte key, 8-byte pointer: fanout ≈ 680.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c3",
+      "topic": "Storage Engines",
+      "q": "B-Tree height for 100M rows at fanout ~680?",
+      "a": "log_680(100,000,000) ≈ 3 levels. With upper levels cached, warm lookup is ~1-2 real disk I/Os, not literal log N reads.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c4",
+      "topic": "Storage Engines",
+      "q": "Define write amplification, read amplification, space amplification.",
+      "a": "WA = physical bytes written / logical bytes written. RA = disk reads per logical read. SA = physical bytes on disk / logical live bytes.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c5",
+      "topic": "Storage Engines",
+      "q": "Typical amplification numbers: B-Tree vs LSM (leveled)?",
+      "a": "B-Tree: WA ~3-4x, RA ~1-2x, SA ~1.1-1.5x. LSM leveled: WA ~20-30x+, RA ~1-2x with tuned bloom filters (5-10x+ without), SA ~1.1-1.3x tuned (spikes ~2x mid-compaction).",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c6",
+      "topic": "Storage Engines",
+      "q": "Size-tiered vs leveled compaction tradeoff?",
+      "a": "Size-tiered: lower write amplification (~10-15x) but overlapping key ranges raise read amplification and space can spike ~2x. Leveled: higher write amplification (~20-30x+) but non-overlapping levels give lower read amplification and tighter space usage.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c7",
+      "topic": "Storage Engines",
+      "q": "What is Time-Window Compaction Strategy (TWCS) and when do you use it?",
+      "a": "Buckets SSTables by time window, compacts only within a window, and drops whole expired files instead of rewriting them. Right choice for time-series data with uniform TTL expiry.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c8",
+      "topic": "Storage Engines",
+      "q": "What does a bloom filter buy an LSM-Tree, with real numbers?",
+      "a": "Probabilistic 'definitely not present / maybe present' check per SSTable. RocksDB default ~10 bits/key gives ~1% false positive rate, letting reads skip disk I/O on ~99% of files that don't contain the key.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c9",
+      "topic": "Storage Engines",
+      "q": "RUM conjecture — what does it say?",
+      "a": "Read, Update, Memory (space) amplification cannot all be minimized simultaneously — optimizing any two makes the third worse. It's a proven tradeoff, not an engineering habit.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c10",
+      "topic": "Storage Engines",
+      "q": "What causes B-Tree write amplification mechanically?",
+      "a": "A single row update dirties an entire page (8-16KB), and the whole page gets flushed even though only a fraction logically changed; a page split doubles this by dirtying two pages.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c11",
+      "topic": "Storage Engines",
+      "q": "Which real systems use B+Tree vs LSM storage?",
+      "a": "B+Tree family: Postgres, MySQL/InnoDB, SQL Server. LSM family: Cassandra, RocksDB-backed stores (MyRocks, TiKV, CockroachDB's Pebble/RocksDB), ScyllaDB.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c12",
+      "topic": "Storage Engines",
+      "q": "Leading indicator that an LSM store's read latency is about to degrade?",
+      "a": "L0 file count or pending-compaction-bytes climbing — compaction has fallen behind ingest. Instrument and alert on this before it shows up in read p99.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c13",
+      "topic": "Storage Engines",
+      "q": "Workload fit rule of thumb for choosing storage engine family?",
+      "a": "OLTP / read-heavy / mixed workloads -> B+Tree (Postgres, InnoDB). Write-firehose / high-ingest / logs / time-series -> LSM (Cassandra, RocksDB). Large analytical scans -> neither; columnar storage.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c14",
+      "topic": "Storage Engines",
+      "q": "Why can L0 SSTables be more expensive to read from than lower levels?",
+      "a": "L0 files are flushed independently from separate memtable snapshots, so their key ranges can overlap; a point read may need to check every L0 file, unlike lower levels (leveled compaction) where each level has non-overlapping ranges.",
+      "module": "T17-storage-engines"
+    },
+    {
+      "id": "T17-storage-engines-c15",
+      "topic": "Storage Engines",
+      "q": "Default page sizes: Postgres vs InnoDB?",
+      "a": "Postgres: 8 KB pages. InnoDB: 16 KB pages by default.",
+      "module": "T17-storage-engines"
+    }
+  ]
+}

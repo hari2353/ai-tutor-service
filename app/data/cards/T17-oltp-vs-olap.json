@@ -1,0 +1,102 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-oltp-vs-olap-c1",
+      "topic": "OLTP vs OLAP",
+      "q": "Single diagnostic question to decide OLTP vs OLAP shape for a workload?",
+      "a": "Does a single request touch one entity (a row, a small related set) or millions of rows? One entity -> OLTP shape. Millions -> OLAP shape. Resolves ~80% of cases immediately.",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c2",
+      "topic": "OLTP vs OLAP",
+      "q": "Where does most of a columnar engine's speedup actually come from?",
+      "a": "Both I/O savings (read only needed columns, 5-20x compression) AND vectorised execution (batches of 1000s of values per CPU op, SIMD-friendly, cache-friendly) - the CPU efficiency piece is a large fraction of the 10-100x speedup, not just less I/O.",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c3",
+      "topic": "OLTP vs OLAP",
+      "q": "Name three columnar compression techniques and what each exploits.",
+      "a": "Dictionary encoding: replaces repeated values with small integer codes (low-cardinality columns). Run-length encoding: (value,count) pairs for consecutive repeats. Delta encoding: stores difference from previous value (monotonic columns like timestamps/IDs).",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c4",
+      "topic": "OLTP vs OLAP",
+      "q": "Typical OLTP vs OLAP latency budgets and concurrency?",
+      "a": "OLTP: p99 single-digit to low tens of ms, 1-few hundred rows/query, thousands of concurrent small transactions. OLAP: seconds to minutes acceptable, millions-billions rows/query, tens of concurrent large queries.",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c5",
+      "topic": "OLTP vs OLAP",
+      "q": "What is chunk skipping / predicate pushdown in a columnar engine?",
+      "a": "Columnar files split into row-group chunks with stored min/max stats; a query's predicate is checked against chunk stats before reading any data, letting the engine skip entire chunks that can't match.",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c6",
+      "topic": "OLTP vs OLAP",
+      "q": "What breaks chunk skipping even on a partitioned table?",
+      "a": "Filtering on a column that isn't the physical partition/cluster key, or wrapping the filtered column in a function (e.g. DATE(created_at)=X) so the engine can't compare it against stored chunk statistics.",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c7",
+      "topic": "OLTP vs OLAP",
+      "q": "What is the honest limitation of HTAP systems?",
+      "a": "The same CPU, memory, and I/O bandwidth ultimately serve both workloads - a zero-sum resource contention problem that architecture can manage/bound (dual engines, throughput ceilings) but not eliminate.",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c8",
+      "topic": "OLTP vs OLAP",
+      "q": "How does TiDB architecturally achieve HTAP, and what is that really similar to?",
+      "a": "Two separate engines: TiKV (row store) and TiFlash (columnar), replicated via Raft in near-real-time, can run on separate nodes. Architecturally closer to 'CDC replication packaged inside one product' than a single engine truly serving both patterns.",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c9",
+      "topic": "OLTP vs OLAP",
+      "q": "Snowflake Unistore hybrid tables - what's the documented throughput ceiling?",
+      "a": "Roughly 1,000 operations/second with active data around 500GB - far below what a dedicated OLTP engine sustains, a direct consequence of one storage layer satisfying both access patterns.",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c10",
+      "topic": "OLTP vs OLAP",
+      "q": "What is the pragmatic default architecture for near-real-time analytics over operational data?",
+      "a": "CDC (e.g. Debezium reading the WAL/binlog) streaming into Kafka, landing in a columnar store (ClickHouse/BigQuery/Snowflake). Typical lag: seconds to low tens of seconds - simpler and more mature than adopting full HTAP for most requirements.",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c11",
+      "topic": "OLTP vs OLAP",
+      "q": "What historical pain caused the classic ETL-into-separate-warehouse pattern to emerge?",
+      "a": "Heavy analytical queries run directly against the same row store serving live transactions held locks and consumed buffer pool/cache the transactional workload needed, degrading OLTP latency unpredictably whenever a report ran.",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c12",
+      "topic": "OLTP vs OLAP",
+      "q": "What's the classic, entirely predictable production incident in this space?",
+      "a": "A heavy ad hoc analytics report run directly against the OLTP primary (or a shared replica) starves transactional p99 latency for the query's full duration. Fix: dedicated read replica or CDC pipeline, not running it at off-peak hours and hoping.",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c13",
+      "topic": "OLTP vs OLAP",
+      "q": "Rough I/O reduction for a columnar query needing 2 of 50 columns, before compression?",
+      "a": "Roughly 25x less data read (2/50), before compression is even applied - with typical 5-20x compression on top, total I/O reduction for this query shape is often 100x+.",
+      "module": "T17-oltp-vs-olap"
+    },
+    {
+      "id": "T17-oltp-vs-olap-c14",
+      "topic": "OLTP vs OLAP",
+      "q": "As the fraction of columns needed per query approaches all of them, what happens to the columnar advantage?",
+      "a": "It shrinks toward parity and can even lose to row storage, since reassembling a full row from many separate column files adds overhead - the columnar advantage is specific to few-columns/many-rows access patterns.",
+      "module": "T17-oltp-vs-olap"
+    }
+  ]
+}

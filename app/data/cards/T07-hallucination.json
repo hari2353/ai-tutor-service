@@ -1,0 +1,158 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-hallucination-c1",
+      "topic": "Hallucination",
+      "q": "The two orthogonal axes of the hallucination taxonomy, and the engineering consequence.",
+      "a": "Faithfulness (consistency with the PROVIDED source/instruction) vs factuality (consistency with the WORLD); and intrinsic (contradicts the source) vs extrinsic (source is silent). Consequence: faithfulness is testable this quarter with the source in hand via NLI; factuality is a fact-checking product with its own corpus, freshness, and dispute problems. Scope to faithfulness.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c2",
+      "topic": "Hallucination",
+      "q": "Map each taxonomy cell to a detector and an action.",
+      "a": "Intrinsic faithfulness → NLI CONTRADICTION vs cited chunk → DROP the sentence, log a corpus conflict. Extrinsic faithfulness → NLI neutral (no entailment above tau) → flag unsupported or abstain. Intrinsic factuality → retrieve then NLI → correct or abstain. Extrinsic factuality → search/KB/human → mark unverified, usually out of scope.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c3",
+      "topic": "Hallucination",
+      "q": "Three independent reasons hallucination is structural, not a bug.",
+      "a": "1) NO NULL TOKEN — decoding must emit a distribution every step, so 'I don't know' is a learned sequence, not an escape hatch. 2) Lossy fact storage means approximate recall returns a plausible NEIGHBOUR — right shape, wrong value — which is why hallucinations are never absurd. 3) Kalai & Vempala (STOC 2024): a CALIBRATED model must hallucinate arbitrary facts at a rate >= monofact rate − miscalibration, independent of architecture and data quality.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c4",
+      "topic": "Hallucination",
+      "q": "What is the monofact rate and why does it matter?",
+      "a": "The fraction of facts appearing exactly ONCE in the training corpus, related to the Good-Turing missing-mass estimator. Kalai & Vempala (arXiv:2311.14648) proved a calibrated model's hallucination rate on arbitrary facts is bounded below by it minus miscalibration; a 2026 PNAS study (arXiv:2502.08666) validated the prediction empirically. It is why 'zero hallucination' is not available for facts recalled from weights.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c5",
+      "topic": "Hallucination",
+      "q": "Why does post-training make hallucination worse rather than better?",
+      "a": "score(guess) = p(correct) > 0 while score('I don't know') = 0, so any process optimising binary accuracy selects FOR guessing — Kalai et al. arXiv:2509.04664 and the Nature 2026 follow-on. And RLHF degrades calibration, so the guess arrives sounding certain. A single hallucination benchmark cannot outvote hundreds of accuracy benchmarks.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c6",
+      "topic": "Hallucination",
+      "q": "Why is fluency a trap when reviewing for hallucination?",
+      "a": "Because lossy parametric recall returns items from the plausible neighbourhood: a fabricated section number looks like a section number, a fabricated year looks like a year. 'It read fine to me' is not a QA process, and human review without the source document open is worthless.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c7",
+      "topic": "Hallucination",
+      "q": "Quote four hallucination rates with the task attached.",
+      "a": "Vectara HHEM summarisation 2026 frontier: ~1.0-2.5% (from 3-8% in 2023) — the easiest task, NOT a production number. FACTS Benchmark Suite: no model above 70%, leader 68.8%. AA-Omniscience (6k questions, 6 domains, refusal free, error penalised): most frontier models score BELOW ZERO. PersonQA (o3/o4-mini system card): o1 16% → o3 33% → o4-mini 48%.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c8",
+      "topic": "Hallucination",
+      "q": "Does a newer/bigger model hallucinate less?",
+      "a": "Not automatically. OpenAI's o3/o4-mini system card (April 2025) reports PersonQA hallucination at 16% for o1, 33% for o3, 48% for o4-mini, noting the newer models make more claims overall so produce both more accurate and more inaccurate ones, and that 'more research is needed'. AA-Omniscience shows knowledge and reliability are partly decoupled. Gate upgrades on your own hallucination suite.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c9",
+      "topic": "Hallucination",
+      "q": "Detection methods ranked by effectiveness per dollar.",
+      "a": "1) NLI grounding vs the provided source — best value; MiniCheck-FT5 ~770M ≈ Claude 3 Opus on LLM-AggreFact, 10-40ms batched; Bedrock contextual grounding filters >75% of hallucinated RAG responses. 2) Semantic entropy — n generations + O(n·|C|) NLI, ~0.60 AUROC on hard sets, blind to consistent falsehood. 3) SelfCheckGPT — n=20, AUC-PR ~0.53-0.67. 4) Retrieval verification — only method for FACTUALITY, 1+ retrieval per claim. 5) Internal-state probes — 1 forward pass, white-box, distribution-specific. 6) LLM judge — 10-100x, correlated if same family.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c10",
+      "topic": "Hallucination",
+      "q": "Gate vs router: why does it matter for an imperfect detector?",
+      "a": "A gate suppresses below threshold; at ~0.6 AUROC that costs many correct answers per error prevented, and the loss is invisible because suppressed correct answers generate no complaints. A router picks among actions — answer, answer+flags, deeper verification, clarify, escalate — so a weak signal degrades into 'spend more compute' rather than 'withhold a correct answer'. Prove it with the risk-coverage curve at equal risk and equal coverage.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c11",
+      "topic": "Hallucination",
+      "q": "The honest ranking of what reduces hallucination.",
+      "a": "1) Grounding in retrieval (+ relevance filter). 2) Constrained decoding / schema / citation-id grammar — eliminates CLASSES, near-free. 3) Verification passes (drop contradictions, flag unsupported). 4) Abstention. 5) Decomposition + tools for arithmetic/dates/lookup/aggregation. 6) Abstention fine-tuning. 7) Decoding interventions (CAD/DoLa/ITI). 8) Prompting, last.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c12",
+      "topic": "Hallucination",
+      "q": "Why is constrained decoding ranked above verification?",
+      "a": "Because it is a STRUCTURAL impossibility rather than a probabilistic improvement, and it is nearly free. A schema with enums makes an out-of-vocabulary category impossible; a citation grammar over in-context ids makes a fabricated doc id impossible; a regex-constrained field makes a malformed identifier impossible. It does not touch free-text factual claims, which is why it is second, not first.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c13",
+      "topic": "Hallucination",
+      "q": "Give the numbers proving 'be accurate' prompting is insufficient.",
+      "a": "A clinical adversarial study measured hallucination at 65.9% under the default prompt and 44.2% with a mitigation prompt — a real 22-point improvement and still 44%. Prompting cannot create knowledge the model lacks or install a null token.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c14",
+      "topic": "Hallucination",
+      "q": "Why does temperature 0 not reduce hallucination?",
+      "a": "Same clinical study: 66.5% at zero temperature versus 65.9% default — statistically indistinguishable; broader work finds temperature in 0.0-1.0 has no significant effect on problem-solving accuracy. The failure is not sampling noise: the model's MODE is frequently the plausible falsehood. Greedy decoding buys reproducibility, which matters for debugging and evals, not truth.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c15",
+      "topic": "Hallucination",
+      "q": "Full list of things that do NOT work.",
+      "a": "'Be accurate' / 'don't hallucinate' instructions (65.9% → 44.2%, still 44%); temperature 0 alone (66.5% vs 65.9%); a bigger or newer model (PersonQA 16% → 33% → 48%); more context (context rot; deep-research fact check 79% → 17% from 2 to 150 tool calls); self-verification by the same model (correlated errors); RLHF (degrades calibration); and a single detector used as a hard gate.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c16",
+      "topic": "Hallucination",
+      "q": "Name and explain RAG-induced distraction.",
+      "a": "Irrelevant retrieved chunks make output WORSE than no retrieval, so more k is not more grounding. Observable signature: an eval sweep where accuracy at k=10 is worse than at k=3, per-chunk relevance scores showing a long low-relevance tail, and traces where the answer references a chunk unrelated to the question. A relevance filter on retrieved chunks is part of grounding, not an optional extra.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c17",
+      "topic": "Hallucination",
+      "q": "The three ways hallucination behaves worse inside an agent loop.",
+      "a": "1) It COMPOUNDS — a fabricated intermediate becomes the premise of step 7, which is internally coherent and wrong. 2) Fabricated TOOL ARGUMENTS execute: a well-formed but invented record id, path, or filter runs with no reader to catch it. 3) Uncertainty is LAUNDERED at subagent handoffs — a summary reads as fact to the supervisor. Fix: check on the OBSERVATION path before results enter context, and again before any side-effecting call.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c18",
+      "topic": "Hallucination",
+      "q": "The eval trap that makes internal scores rise while complaints rise.",
+      "a": "A binary-accuracy internal leaderboard pays your own team to guess, exactly as Kalai et al. describe for the industry. Also: a golden set drawn from happy-path traffic with no false premises, underspecified questions, or genuinely unanswerable cases; and response-level rather than claim-level scoring, so nine right claims plus one fabrication scores well. Fix: AA-Omniscience-style scoring (reward correct, penalise wrong, refusal neutral) plus adversarial cases plus claim-level metrics.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c19",
+      "topic": "Hallucination",
+      "q": "The production mitigation pipeline, in order.",
+      "a": "1) Retrieve + relevance-filter chunks. 2) Constrain the output shape (schema, enums, citation-id grammar). 3) Generate with an explicit prefer-context instruction. 4) Verify per sentence with an NLI gate and drop contradictions. 5) Route on the ensemble signal. 6) BOUNDED regeneration, max 2, then abstain. 7) Log with versions and sample for human audit.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c20",
+      "topic": "Hallucination",
+      "q": "Where is hallucination acceptable or desirable, and what is the boundary rule?",
+      "a": "Brainstorming, naming, fiction, marketing variants, hypothesis generation, synthetic training data, adversarial test-case generation — where producing plausible content absent from the source IS the feature and a human is the filter. Boundary rule: nothing downstream may treat the output as fact, so creative-surface outputs carry a provenance marker and factual surfaces treat unmarked pasted content as unverified.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c21",
+      "topic": "Hallucination",
+      "q": "Decoding-time interventions: name three and the measured effect.",
+      "a": "Context-Aware Decoding (CAD, arXiv:2305.14739) contrasts logits with and without context to force trust in the context, reporting ≈14.3% factuality gain for LLaMA on summarisation and being especially strong on knowledge conflicts. DoLa contrasts early vs late layer logits. ITI shifts activations along truthfulness directions. All need white-box access, deliver modest gains, and rank seventh.",
+      "module": "T07-hallucination"
+    },
+    {
+      "id": "T07-hallucination-c22",
+      "topic": "Hallucination",
+      "q": "What do you tell an executive who asks when hallucinations will be fixed?",
+      "a": "'Not fixed, bounded — here is the bound and the plan.' Then: it is structural with a proven statistical floor for facts recalled from weights, so the goal is an error budget like latency or availability; our measured unsupported-sentence rate is X% at Y% coverage on our own golden set, measured this way; the next three interventions in priority order with expected effect and cost; and the human gate on irreversible actions stays regardless of the model, because the residual rate will never be zero.",
+      "module": "T07-hallucination"
+    }
+  ]
+}

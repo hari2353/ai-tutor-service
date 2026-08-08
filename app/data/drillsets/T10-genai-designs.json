@@ -1,0 +1,172 @@
+{
+  "drills": [
+    {
+      "id": "T10-genai-designs-d1",
+      "module": "T10-genai-designs",
+      "q": "First thing you do when told 'design RAG over 10 million documents'.",
+      "a": "Convert the number. ~6 pages and ~10 chunks of 400 tokens per doc is ~100M chunks and ~40B tokens. Only then can you choose an index, because a 10M-vector and a 100M-vector system are different architectures.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T10-genai-designs-d2",
+      "module": "T10-genai-designs",
+      "q": "Bytes per vector at 1024 dimensions for fp16, int8 and binary quantization.",
+      "a": "fp16 2 KB, int8 1 KB, binary (1 bit/dim) 128 bytes. So 100M vectors is 200 GB / 100 GB / 12.8 GB before graph overhead, which is why you search binary and rescore full precision.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T10-genai-designs-d3",
+      "module": "T10-genai-designs",
+      "q": "At what vector count does a dedicated vector database start earning its operational cost?",
+      "a": "Roughly 5-10 million. Below that, pgvector on the Postgres you already run is the right answer and adding a stateful system is cost with no measurable benefit.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T10-genai-designs-d4",
+      "module": "T10-genai-designs",
+      "q": "Honest production hit rate for a semantic cache, and the starting threshold.",
+      "a": "20-45% for most workloads, 30-70% on FAQ-shaped traffic. Threshold is embedding-model specific (~0.83 MPNet, ~0.78 Albert); GPTCache's suggested 0.7 is too loose. Start near 0.92, watch false positives for 48 hours, tune down in 0.01 steps.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T10-genai-designs-d5",
+      "module": "T10-genai-designs",
+      "q": "Users with restrictive permissions report 'no results found' far more often than everyone else. Diagnose.",
+      "a": "ACLs are being applied AFTER retrieval, so top-k is computed over documents the user cannot see and then emptied. Trace signature: results_before_filter=10, results_after_filter=0. Fix: push tenant and ACL predicates into the ANN filter, and accept that filtered ANN is slower and filter cardinality now affects p99.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-genai-designs-d6",
+      "module": "T10-genai-designs",
+      "q": "Recall@10 dropped 30 points overnight with no change to the retriever code. What happened?",
+      "a": "The embedding model changed (or a library default did) without a reindex, so queries embedded with model B are being searched against an index built with model A. Fix: make the embedding model id part of the index name and refuse to query on mismatch.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-genai-designs-d7",
+      "module": "T10-genai-designs",
+      "q": "Judge scores are high and users keep reporting that the numbers in answers are wrong. Most likely cause.",
+      "a": "A chunk boundary split a table from its header, so the value is right and the label is wrong. Fluent, well-cited, and incorrect, which is exactly what a judge rewards. Fix: layout-aware chunking with tables atomic up to a hard cap, header propagation, and a table-specific eval slice.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-genai-designs-d8",
+      "module": "T10-genai-designs",
+      "q": "Why two-tier rate limiting in a gateway rather than just a Redis check?",
+      "a": "A pure Redis check adds a round trip to every request and makes Redis a hard dependency; local-only permits N-fold overshoot with N replicas. Admit locally against a leased share of the global budget, refresh the lease every ~200 ms, and state the bounded overshoot per lease window as a number rather than hiding it.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-genai-designs-d9",
+      "module": "T10-genai-designs",
+      "q": "Your gateway ledger under-reports 12% against the provider invoice. Where is the leak?",
+      "a": "Streaming. Tokens are accounted on normal stream close but not on client disconnect, and the provider still bills the partial generation. Fix: account on both paths, reconcile nightly against the provider usage export, and alert at 3% drift.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-genai-designs-d10",
+      "module": "T10-genai-designs",
+      "q": "One tenant's 3 AM batch job triples everyone else's p99. Two mitigations.",
+      "a": "Per-tenant RPM/TPM buckets so no tenant can consume shared capacity, plus a global reserve pool that no single tenant can exceed. Secondary: separate priority queues so interactive traffic is not behind batch, and a per-tenant concurrency cap on the runner pool if agents are involved.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-genai-designs-d11",
+      "module": "T10-genai-designs",
+      "q": "Uniform VLM parsing of 4M pages/day versus adaptive routing. Show the arithmetic.",
+      "a": "Uniform VLM: 4M x $0.006 = $24k/day = $720k/month. Routed at 60% text-layer ($0.0002) / 30% OCR ($0.0015) / 10% VLM ($0.006): $480 + $1,800 + $2,400 = ~$4.7k/day = ~$140k/month. A 5x saving, which is why the router is the first design decision and not an optimisation.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-genai-designs-d12",
+      "module": "T10-genai-designs",
+      "q": "A guardrail service adds 3 detectors at 25 ms each. How do you keep it off the critical path?",
+      "a": "Run the detectors in PARALLEL (not chained, so ~25 ms not 75 ms) and run the whole input rail CONCURRENTLY with retrieval, which makes it nearly free on the wall clock at the cost of retrieval work you may discard. Batch on GPU for throughput. The real cost is not compute, it is the false-positive rate.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-genai-designs-d13",
+      "module": "T10-genai-designs",
+      "q": "Your guardrail block rate dropped to zero overnight and nobody noticed. What is the bug and the general lesson?",
+      "a": "A detector timed out or errored and the rail failed open. Lesson: set fail-open versus fail-closed explicitly per rail (PII egress fails closed, a topic classifier fails open) and alert on a ZERO block rate, because the absence of a signal is a signal and monitoring only for spikes misses this entire class.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-genai-designs-d14",
+      "module": "T10-genai-designs",
+      "q": "Semantic cache hit rate rose from 30% to 70% after a threshold change. Ship it?",
+      "a": "Not without a hit-quality audit, because that is the exact shape of a false-positive increase. Shadow-sample 2-5% of hits through the miss path and compare with the judge for a continuous false-positive estimate. Track hit rate and hit QUALITY as two metrics; a hit-rate improvement with no quality audit is not an improvement.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-genai-designs-d15",
+      "module": "T10-genai-designs",
+      "q": "Agent A calls agent B across team boundaries. Whose permissions and whose budget?",
+      "a": "Permissions: the originating principal's, INTERSECTED with the callee's scopes, never unioned, or you have built privilege escalation by composition (a confused deputy, and the enterprise MCP identity-propagation gap in a different costume). Budget: hierarchical, with the child's spend counting against the parent's ceiling, or a nested call is an unbounded budget hole.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-genai-designs-d16",
+      "module": "T10-genai-designs",
+      "q": "GDPR erasure request against an agent memory service. Why is this not a DELETE?",
+      "a": "Deletion must reach fact rows, embeddings, graph edges, extraction job logs, trace payloads, downstream caches, and eval fixtures if real user data leaked into them. That is a data-lineage requirement: a per-user partition key propagated everywhere plus a documented, tested erasure job with a completion report. Answering 'delete from the memory table' shows you have never shipped this under a privacy review.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-genai-designs-d17",
+      "module": "T10-genai-designs",
+      "q": "Eval scores are up and production quality is down. Diagnose and prevent.",
+      "a": "Overfitting to the golden set, or the set no longer represents traffic. Prevention: a 20% holdout never used for iteration, continuous human-reviewed live sampling into the set, and a MEASURED correlation between eval-score delta and production-metric delta over the last N releases. If that correlation is weak your gate is decorative. Being able to state the correlation is a level marker; 'we have 400 evals' is not.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-genai-designs-d18",
+      "module": "T10-genai-designs",
+      "q": "How fast can a 5% prompt canary detect a 3 percentage-point quality regression, and what is the only way to go faster?",
+      "a": "Roughly 400 scored sessions are needed to detect a 3 pp judge delta, so at 5% of 8,000 sessions/day that is ~400/day: a one-day detection floor regardless of tooling. The only way faster is a larger canary share, which trades exposure for detection speed. State that as the tradeoff rather than promising faster detection.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-genai-designs-d19",
+      "module": "T10-genai-designs",
+      "q": "Deflection is 55% and the business is unhappy. Explain.",
+      "a": "Deflection alone is uninterpretable. Either the intent mix shifted toward easy categories (resets deflect >70%, nuanced complaints rarely break 25%, so the headline moves with mix not quality), or the agent stopped escalating things it should, which raises deflection while re-contact rate and CSAT fall. Diagnose by slicing by intent and pairing with re-contact; the fix is sometimes to lower deflection deliberately.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-genai-designs-d20",
+      "module": "T10-genai-designs",
+      "q": "You routed 58% of traffic to a cheap model, the bill is down 45%, and aggregate judge scores are flat. Why is that not sufficient evidence?",
+      "a": "Because a flat aggregate hides per-slice erosion: one intent can be down 12 points while the mean moves 0.1. Score quality PER ROUTE, sliced by intent and tenant, and alert on route-level regression, never on the aggregate. Also verify per completed TASK rather than per token, because a weaker model that malforms tool calls and loops extra times costs more and is slower.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-genai-designs-d21",
+      "module": "T10-genai-designs",
+      "q": "A table spans three pages of a PDF. What does a naive pipeline do and what is the fix?",
+      "a": "Page-by-page processing loses it: three fragments, none with the full header context, all individually fluent and jointly wrong. Fix: detect continuation by repeated headers and column-signature match, merge before chunking, and keep the merged table as one chunk even if it breaks the size target.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-genai-designs-d22",
+      "module": "T10-genai-designs",
+      "q": "Code assistant: why can inline completion not use the repo index?",
+      "a": "The latency contract. p95 200 ms leaves no room for a network round trip plus ANN plus rerank, and acceptance rate falls as p95 crosses ~300 ms. Inline uses local buffer context, imports and recent edits with a small cached model; chat (p95 ~2 s) uses graph-plus-vector retrieval; agentic edit uses tools iteratively over minutes. Three tiers, three context strategies, and conflating them is the most common error in this design.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-genai-designs-d23",
+      "module": "T10-genai-designs",
+      "q": "Design a multimodal video search system. Do not use any design from the module.",
+      "a": "Same six slots. Clarify: hours of video, sampling rate, is audio in scope, latency, tenancy. Write path: decode, sample keyframes, caption/embed frames, transcribe audio, align on timecode, index both modalities. Read path: two-stage, ANN over frame and transcript embeddings then a VLM rerank on top candidates, returning timecoded segments. Decisions: sampling rate against recall, per-frame versus per-shot embedding, unified versus per-modality index. Cost: frames-per-hour times embedding cost on write, VLM rerank on read. Failure: sampling misses a short event, observable as recall collapsing on brief-action queries.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-genai-designs-d24",
+      "module": "T10-genai-designs",
+      "q": "Name four GenAI designs you would refuse to build, with the threshold.",
+      "a": "RAG when the corpus is under ~50-100k tokens of stable content (use a cached prefix and delete five failure modes). A dedicated vector DB under ~5-10M vectors (use pgvector). A gateway below ~$10-20k/month of spend or a handful of consumers. An orchestration platform below 5-10 agents. Also: cross-session memory in v1, a semantic cache on low-repetition or auth-dependent answers, a guardrail service presented as the security boundary, self-hosting below ~40-50% sustained utilisation, and a router before the bill has been attributed.",
+      "difficulty": "staff"
+    }
+  ]
+}

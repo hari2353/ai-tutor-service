@@ -1,0 +1,102 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-normalization-c1",
+      "topic": "Normalization",
+      "q": "Define a functional dependency.",
+      "a": "X -> Y means every row sharing the same X value must have the same Y value - knowing X determines Y. Every normal form is defined purely in terms of which FDs are/aren't allowed relative to candidate keys.",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c2",
+      "topic": "Normalization",
+      "q": "What does 1NF require?",
+      "a": "Atomic values and no repeating groups - no comma-separated lists in a column, no col1/col2 repeating-group pairs.",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c3",
+      "topic": "Normalization",
+      "q": "What does 2NF forbid, and when is it automatically satisfied?",
+      "a": "Forbids partial dependencies - every non-key attribute must depend on the WHOLE key, not just part of it. Automatically satisfied by any table with a single-column primary key; only a real constraint with composite keys.",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c4",
+      "topic": "Normalization",
+      "q": "What does 3NF forbid?",
+      "a": "Transitive dependencies - a non-key attribute depending on another non-key attribute rather than directly on the key (key -> A -> B is the violation shape).",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c5",
+      "topic": "Normalization",
+      "q": "What loophole does BCNF close that 3NF leaves open?",
+      "a": "3NF only forbids non-key attributes transitively depending on the key; BCNF additionally requires every determinant of every non-trivial FD to be a candidate key - closing the case where a determinant is part of one candidate key but not a full candidate key itself, in a table with overlapping candidate keys.",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c6",
+      "topic": "Normalization",
+      "q": "Give the classic BCNF-violates-but-3NF-satisfies example.",
+      "a": "course_enrollment(student_id, course_id, instructor), key (student_id, course_id), with course_id -> instructor. This is 3NF (instructor isn't reached via a non-key attribute) but violates BCNF since course_id alone doesn't determine student_id, so it isn't a candidate key yet is a determinant.",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c7",
+      "topic": "Normalization",
+      "q": "Why isn't BCNF decomposition always dependency-preserving?",
+      "a": "Decomposing to BCNF can split a functional dependency across two tables such that checking it requires rejoining them, losing the ability to enforce that constraint with a single-table check - unlike 3NF decomposition, which is guaranteed to preserve dependencies.",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c8",
+      "topic": "Normalization",
+      "q": "What does 4NF forbid, define a multi-valued dependency.",
+      "a": "X ->> Y: the set of Y values associated with X is independent of any other attribute in the table. 4NF forbids combining two independent multi-valued facts about one entity into a single table, which forces storing their cross product.",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c9",
+      "topic": "Normalization",
+      "q": "Give an example of a 4NF violation and its fix.",
+      "a": "product_tags_warehouses(product_id, tag, warehouse_id) where tags and warehouses are independent - a product with 3 tags and 2 warehouses needs 6 rows instead of 5. Fix: split into product_tags(product_id, tag) and product_warehouses(product_id, warehouse_id).",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c10",
+      "topic": "Normalization",
+      "q": "Name the three classic anomalies with one-line definitions.",
+      "a": "Update anomaly: duplicated fact updated in some but not all rows -> inconsistency. Insert anomaly: can't record one entity's fact until an unrelated fact is also available. Delete anomaly: deleting a row to remove one fact accidentally destroys a different, unrelated fact stored in the same row.",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c11",
+      "topic": "Normalization",
+      "q": "What two things must be true for denormalization to be a sound engineering decision, not a shortcut?",
+      "a": "You must be able to name (1) the exact anomaly being reintroduced, and (2) the specific consistency mechanism keeping the duplicate correct (trigger, write-through, CDC sync, or an explicitly accepted staleness window). No mechanism means it's a scheduled bug, not a decision.",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c12",
+      "topic": "Normalization",
+      "q": "What's the practical default normal form for OLTP schema design?",
+      "a": "3NF (or BCNF where they diverge) - eliminates essentially all common anomalies with a manageable number of tables. 4NF/5NF only worth pursuing when a genuine multi-valued-dependency problem is actually identified.",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c13",
+      "topic": "Normalization",
+      "q": "How do you empirically check whether a candidate functional dependency actually holds in real data?",
+      "a": "Group rows by the candidate determinant's value(s) and check whether every group has a single consistent dependent value - any group with more than one distinct value violates the FD in the sampled data (though absence of violation doesn't logically prove the FD holds universally).",
+      "module": "T17-normalization"
+    },
+    {
+      "id": "T17-normalization-c14",
+      "topic": "Normalization",
+      "q": "Why do star schemas/OLAP dimensional models count as a legitimate default case for denormalization?",
+      "a": "The read pattern (few large scans, rare updates to dimension data) makes anomaly risk low and join-avoidance benefit high - this is the clearest case where denormalization is a first-class design tool, not an exception requiring special justification.",
+      "module": "T17-normalization"
+    }
+  ]
+}

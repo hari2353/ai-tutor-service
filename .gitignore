@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+node_modules/
+
+# operational data from the job-hunter agent, not curriculum: a live queue of
+# real listings being targeted. Stays on disk, stays out of history.
+interview_prep_queue.json
+
+# OneDrive / Windows shell droppings
+desktop.ini
+Thumbs.db
+.DS_Store
+
+# app/data/*.js and *.json ARE tracked on purpose: the app loads them from
+# file:// with no build step, so a fresh clone must open by double-click
+# without anyone running Python first.

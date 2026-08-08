@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-index-design-c1",
+      "topic": "Index Design",
+      "q": "Rule for composite index column order?",
+      "a": "Equality-filtered columns first (relative order among them barely matters), the single range/inequality-filtered column last. Only a left-anchored prefix ending at the first range predicate can narrow the scan.",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c2",
+      "topic": "Index Design",
+      "q": "What can columns AFTER the first range predicate in a composite index do?",
+      "a": "Only filter rows already found by the prefix scan - they cannot narrow the scan further, and the cost of reading/checking those rows is already paid.",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c3",
+      "topic": "Index Design",
+      "q": "What is an index-only scan and what does it require?",
+      "a": "A scan answered entirely from index leaf pages with zero heap fetches. Requires every needed column present in the index (key or INCLUDE) and the visibility map confirming no MVCC check against the heap is needed.",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c4",
+      "topic": "Index Design",
+      "q": "What does 'Heap Fetches: N' (N>0) under an Index Only Scan in EXPLAIN ANALYZE indicate?",
+      "a": "The visibility map is stale for some rows, degrading toward a normal index scan for those rows. Fix: VACUUM the table and check autovacuum is keeping up.",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c5",
+      "topic": "Index Design",
+      "q": "When is a partial index the right choice?",
+      "a": "When queries consistently filter on a predicate matching a minority of rows - index only that subset for a much smaller index with write cost only on matching rows.",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c6",
+      "topic": "Index Design",
+      "q": "When is an expression index required instead of a plain column index?",
+      "a": "Whenever the query filters on a FUNCTION of a column (e.g. lower(email)) - a plain index on the raw column cannot serve that predicate because the planner can't infer the implication.",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c7",
+      "topic": "Index Design",
+      "q": "GIN vs GiST tradeoff?",
+      "a": "GIN: ~3x faster lookups, ~3x slower build, high write overhead (many inverted entries per row) - best for read-heavy static data. GiST: lossy (rechecks candidates), faster to update - best for write-heavy dynamic data.",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c8",
+      "topic": "Index Design",
+      "q": "What does BRIN store, and what makes it useless?",
+      "a": "Min/max (or similar summary) per physical block range, not per row - tiny footprint. Useless if data isn't physically correlated with the indexed column (check pg_stats.correlation); provides zero pruning benefit if row order doesn't track logical column order.",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c9",
+      "topic": "Index Design",
+      "q": "What is Postgres HOT and how does updating an indexed column affect it?",
+      "a": "Heap-Only Tuple optimization avoids updating any index when an UPDATE doesn't touch indexed columns and the new row fits on the same page. Updating ANY indexed column disables HOT for that row's update, forcing ALL indexes on the table to be maintained, not just the one on the changed column.",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c10",
+      "topic": "Index Design",
+      "q": "How do you check if an existing Postgres index is safe to drop?",
+      "a": "Check pg_stat_user_indexes.idx_scan over a representative window (a full week, to catch periodic jobs) - zero scans is a strong candidate. Also check redundancy: an index on (a) is often subsumed by one on (a,b).",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c11",
+      "topic": "Index Design",
+      "q": "Why do low-selectivity indexes (e.g. boolean or 3-value status column) get ignored by the planner?",
+      "a": "Once estimated selectivity crosses roughly single-digit percent of the table, random-access index-then-heap-fetch reads for that many rows cost more than one sequential scan pass, so the planner correctly prefers a seq scan - making the index pure write cost with zero read benefit.",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c12",
+      "topic": "Index Design",
+      "q": "How do you build an index on a production table without blocking writes?",
+      "a": "CREATE INDEX CONCURRENTLY - avoids the exclusive lock a plain CREATE INDEX takes, at the cost of two full table scans instead of one, and can leave an INVALID index if interrupted (must manually drop and retry).",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c13",
+      "topic": "Index Design",
+      "q": "What did Postgres 18 add for multicolumn B-tree indexes?",
+      "a": "Skip scan - lets the planner use an index efficiently even when the query omits an equality condition on a leading column, probing each distinct leading value's slice individually. Softens but doesn't eliminate the 'leading column must be constrained' rule.",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c14",
+      "topic": "Index Design",
+      "q": "Postgres index types - name all five and their primary use.",
+      "a": "B-tree: equality/range/sort (default). GIN: arrays/JSONB/full-text. GiST: geometric/ranges/nearest-neighbor. BRIN: huge physically-ordered tables. Hash: pure equality only, rarely beats B-tree.",
+      "module": "T17-index-design"
+    },
+    {
+      "id": "T17-index-design-c15",
+      "topic": "Index Design",
+      "q": "What is fastupdate on a GIN index?",
+      "a": "Buffers new entries in a pending list rather than updating the main index structure immediately, trading some read overhead (checking the pending list too) for much cheaper writes.",
+      "module": "T17-index-design"
+    }
+  ]
+}

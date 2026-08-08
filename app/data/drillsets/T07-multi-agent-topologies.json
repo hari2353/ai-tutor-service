@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T07-multi-agent-topologies-d1",
+      "module": "T07-multi-agent-topologies",
+      "q": "Name the five topologies.",
+      "a": "Supervisor (orchestrator-worker), hierarchical (supervisor of supervisors), swarm/handoff (peer-to-peer), blackboard (shared typed state, no messaging), debate (N independent attempts plus critique rounds).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d2",
+      "module": "T07-multi-agent-topologies",
+      "q": "Interviewer says 'design a multi-agent system for customer support'. What is your first move?",
+      "a": "Do not accept the premise. Start with one agent with the union of the tools, measure it, then split only where a specific condition demands it - here permission tier (refunds behind their own agent with an approval gate) and untrusted content quarantine. Never answer with researcher / writer / critic.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d3",
+      "module": "T07-multi-agent-topologies",
+      "q": "Recite the five costs of decomposition.",
+      "a": "Routing errors, context handoff loss, latency multiplication, cost multiplication, debugging difficulty.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d4",
+      "module": "T07-multi-agent-topologies",
+      "q": "A supervisor routes at 92% accuracy over three hops. What is your correct-routing rate before any worker does anything?",
+      "a": "0.92^3 ~ 78%. Routing errors are multiplicative and silent - you get a confident answer from the wrong specialist. Symptom: a worker whose most common reply is 'this isn't my area', or a long tail in the route-distribution histogram.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d5",
+      "module": "T07-multi-agent-topologies",
+      "q": "Why is 'we have 30 tools' not a reason to split into agents?",
+      "a": "Because it converts a tool-selection problem into a routing problem PLUS a handoff problem, and routing has the same failure mode with more machinery. Cheaper fixes first: better descriptions, remove overlap, group behind higher-level tools, add tool search. Split on blast radius (permission tier), not on cardinality.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d6",
+      "module": "T07-multi-agent-topologies",
+      "q": "Your multi-agent system is 12x the cost for a 5% quality gain. What comparison have you not run?",
+      "a": "The single agent given the SAME 12x budget: bigger model, more steps, more retries, self-consistency over 5 samples, better retrieval. That comparison often reverses the conclusion, which is why Anthropic's finding that token usage alone explains ~80% of browsing-eval performance variance is double-edged - much of the multi-agent gain is paying more, not organising better.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d7",
+      "module": "T07-multi-agent-topologies",
+      "q": "Where would you look FIRST for multi-agent cost?",
+      "a": "Full-history handoffs. If the framework transfers the whole conversation to each agent you pay N x for the same prefix and get no isolation benefit. Switch to distilled returns with a token budget and pointers. Second: routing overhead, one LLM call per hop, pure tax. Third: unbounded rounds in any conversational component.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d8",
+      "module": "T07-multi-agent-topologies",
+      "q": "Your GroupChat never terminates. Fix it.",
+      "a": "Never rely on conversational termination. Add an explicit max-rounds cap AND a structured 'done' signal the agents must emit, plus a no-progress detector on repeated identical contributions. Termination must be a harness property, not an emergent politeness outcome.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d9",
+      "module": "T07-multi-agent-topologies",
+      "q": "Explain sycophantic conformity and how you would see it in a trace.",
+      "a": "An agent abandons its correct independent answer to agree with a confident peer. In a trace: round-0 answer diversity collapsing to unanimity by round 1 regardless of correctness. Mitigations: enforce independence in round 0, use different models and materially different prompts, assign an explicit devil's advocate, cap at 2 rounds - or drop debate for self-consistency.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d10",
+      "module": "T07-multi-agent-topologies",
+      "q": "Two conditions for splitting that are SECURITY arguments rather than performance arguments.",
+      "a": "1) Different permission/trust tier: an agent that can spend money should be separate precisely so its tools, guardrails, and approval gates can differ. 2) Untrusted content quarantine: a tool-less summariser reads the scraped page or attachment, so an injected instruction lands in a context with nothing to attack, and the main agent never sees raw HTML.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d11",
+      "module": "T07-multi-agent-topologies",
+      "q": "Debug a multi-agent failure. What do you need and how do you classify it?",
+      "a": "Need: one trace id across all agents; a span per invocation with subtask in, structured return out, tokens, cost, outcome; the routing decision with its stated reason; the handoff payload verbatim. Classify with MAST's three categories: specification/design (subtask underspecified, overlapping scopes), inter-agent misalignment (handoff dropped or distorted context, contradictory assumptions), or verification failure (nobody checked and a plausible-but-wrong result propagated). Most time goes into the subtask instruction and the handoff contract, not the agents' prompts.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d12",
+      "module": "T07-multi-agent-topologies",
+      "q": "Design an agent system spanning two companies.",
+      "a": "This is interop, not decomposition. Use A2A (Linux Foundation, 1.0 April 2026, 150+ orgs, signed Agent Cards for cryptographic identity, defined task lifecycle, multi-tenancy). Inside my boundary I still run one agent or an orchestrator with read-only subagents. The remote agent is a tool with a network boundary: timeouts, retries with idempotency keys, circuit breaker, an SLA, an auth story - and its output is UNTRUSTED content that must not drive my tool calls directly.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d13",
+      "module": "T07-multi-agent-topologies",
+      "q": "Give the decision procedure from 'one prompt' to 'multi-agent'.",
+      "a": "One prompt suffices? use it. Steps known in advance? a workflow/DAG, not an agent. Can one agent with the union of tools do it? ONE AGENT - default, stop here. Tool selection degrading? better descriptions, fewer tools, grouping, tool search. Context blowing up? truncate at tool, clear, compact, then ephemeral read-only subagents. Have one of the six conditions? split minimally: orchestrator plus read-only subagents, writes single-threaded, add a verifier before a second worker, and prove it with an eval against the single-agent baseline before shipping.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d14",
+      "module": "T07-multi-agent-topologies",
+      "q": "You have one day, not a week, to justify or kill the multi-agent design. What do you do?",
+      "a": "Build the single-agent baseline: same golden tasks, same tools, one number for success rate, tokens, latency, and cost. It is the difference between an architecture decision and a preference, and shipping a multi-agent system with no single-agent baseline is the specific mistake MAST is a 1,600-trace catalogue of.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-multi-agent-topologies-d15",
+      "module": "T07-multi-agent-topologies",
+      "q": "Parallel work genuinely needs to write. Preserve the single-writer principle.",
+      "a": "Serialise the writes, not the thinking: workers PROPOSE structured changes, the orchestrator validates, resolves conflicts, and applies them in a defined order. That is blackboard-with-a-controller. If even that is impossible you need optimistic concurrency, idempotency keys, and compensating transactions - at which point ask whether a durable workflow engine with LLM activities is a better abstraction than an agent topology.",
+      "difficulty": "staff"
+    }
+  ]
+}

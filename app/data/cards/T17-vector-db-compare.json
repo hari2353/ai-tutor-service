@@ -1,0 +1,95 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-vector-db-compare-c1",
+      "topic": "Vector DB Comparison",
+      "q": "Is FAISS a vector database?",
+      "a": "No. It's a C++/Python library of ANN algorithms (IVF, PQ, HNSW, GPU variants) with no server, no persistence beyond manual index serialization, no metadata filtering, no replication, no multi-tenancy.",
+      "module": "T17-vector-db-compare"
+    },
+    {
+      "id": "T17-vector-db-compare-c2",
+      "topic": "Vector DB Comparison",
+      "q": "What is the HNSW memory formula and what does it evaluate to for 10M vectors at 1536 dimensions, M=16?",
+      "a": "bytes_per_vector ~= 1.1 * (4*dim + 8*M). At 1536-dim, M=16: 6,899 B/vector -> 69.0 GB RAM for 10M vectors. This is algorithm math, not vendor-specific.",
+      "module": "T17-vector-db-compare"
+    },
+    {
+      "id": "T17-vector-db-compare-c3",
+      "topic": "Vector DB Comparison",
+      "q": "What is the honest crossover reasoning for leaving pgvector for a dedicated vector database?",
+      "a": "Not a raw vector count. Three concrete forcing functions: (1) HNSW build/rebuild time exceeding your maintenance window, (2) filtered-query p99 missing an SLA a filter-aware index would solve, (3) needing horizontal write scaling pgvector's single-primary architecture doesn't provide.",
+      "module": "T17-vector-db-compare"
+    },
+    {
+      "id": "T17-vector-db-compare-c4",
+      "topic": "Vector DB Comparison",
+      "q": "How does Weaviate's native multi-tenancy differ from Qdrant/Milvus's approach?",
+      "a": "Weaviate physically isolates each tenant (dedicated shard/collection), sidestepping the filtered-ANN problem for the tenant boundary entirely. Qdrant filters on an indexed tenant payload field inside HNSW traversal; Milvus uses partition-based tenancy, both filtering within a shared index.",
+      "module": "T17-vector-db-compare"
+    },
+    {
+      "id": "T17-vector-db-compare-c5",
+      "topic": "Vector DB Comparison",
+      "q": "What are the four causes to check, in order, when cosine similarity returns a confidently wrong top result?",
+      "a": "1) Embedding model/version mismatch between index and query time (most common). 2) Missing or inconsistent normalization. 3) Distance-metric mismatch vs. the model's training objective. 4) Stale index (document changed, vector never re-embedded).",
+      "module": "T17-vector-db-compare"
+    },
+    {
+      "id": "T17-vector-db-compare-c6",
+      "topic": "Vector DB Comparison",
+      "q": "What is the concrete diagnostic for a suspected embedding pipeline drift?",
+      "a": "Re-embed a known corpus item with the CURRENT pipeline and compare to the stored vector via cosine similarity. Self-similarity should be ~1.0; if it isn't, the pipeline has drifted (model version, normalization) and that's the fault, not the vector database.",
+      "module": "T17-vector-db-compare"
+    },
+    {
+      "id": "T17-vector-db-compare-c7",
+      "topic": "Vector DB Comparison",
+      "q": "Which vector database is most distributed-systems-heavy, and what does it trade for that?",
+      "a": "Milvus: Kubernetes-native architecture separating compute from storage, independently scalable query/data nodes, billion-scale headroom -- at the highest operational burden of the group.",
+      "module": "T17-vector-db-compare"
+    },
+    {
+      "id": "T17-vector-db-compare-c8",
+      "topic": "Vector DB Comparison",
+      "q": "How does hybrid (dense+sparse) search implementation differ between Weaviate/Qdrant and pgvector?",
+      "a": "Weaviate and Qdrant ship Reciprocal Rank Fusion (RRF) of dense + BM25/sparse as a native, single-query feature. pgvector requires manually pairing Postgres full-text search (tsvector) with the vector column and fusing scores yourself -- real work, not a missing capability.",
+      "module": "T17-vector-db-compare"
+    },
+    {
+      "id": "T17-vector-db-compare-c9",
+      "topic": "Vector DB Comparison",
+      "q": "Name four cases where vector search is the wrong retrieval tool entirely.",
+      "a": "Exact lookups (use a B-tree), pure structured/filter-driven queries with no semantic component (use SQL), small keyword-heavy corpora (BM25 wins), and domains requiring literal explainability (opaque cosine scores have no human-readable decomposition).",
+      "module": "T17-vector-db-compare"
+    },
+    {
+      "id": "T17-vector-db-compare-c10",
+      "topic": "Vector DB Comparison",
+      "q": "Why is cosine similarity only mathematically equivalent to normalized dot product under a specific condition, and what breaks if that condition is violated?",
+      "a": "Only equivalent when both vectors are unit-normalized. If a model doesn't normalize its output but the system computes similarity via raw dot product (or applies double-normalization), the resulting score no longer measures what's assumed, producing plausible-looking but wrong relevance.",
+      "module": "T17-vector-db-compare"
+    },
+    {
+      "id": "T17-vector-db-compare-c11",
+      "topic": "Vector DB Comparison",
+      "q": "Why is a high-cardinality tenant_id filter the expensive case for every HNSW-based vector database, not just one vendor's implementation flaw?",
+      "a": "HNSW's greedy search routes through nearest UNFILTERED neighbors. Post-filter can strand search away from filter-valid nodes; pre-filter has no index over an arbitrary subset and degenerates to brute force. High cardinality shrinks the valid subset the most, worsening both failure modes structurally, regardless of vendor.",
+      "module": "T17-vector-db-compare"
+    },
+    {
+      "id": "T17-vector-db-compare-c12",
+      "topic": "Vector DB Comparison",
+      "q": "What does quantization actually change in the memory-math tradeoff, and is it vendor-specific?",
+      "a": "Quantization (scalar quantization ~halves memory; PQ or binary quantization can cut it 10-30x) is the real lever that changes bytes/vector at a real recall cost. It's an algorithm/config decision available across most vector databases, not something unique to switching vendors.",
+      "module": "T17-vector-db-compare"
+    },
+    {
+      "id": "T17-vector-db-compare-c13",
+      "topic": "Vector DB Comparison",
+      "q": "When is FAISS exactly the right tool despite having none of a database's features?",
+      "a": "When you want to own the surrounding infrastructure yourself: in-process/embedded search with no network hop, a read-only batch-built index, a research context needing full algorithm control (including GPU indexes), or a system where you're already building the service layer and just need the ANN kernel.",
+      "module": "T17-vector-db-compare"
+    }
+  ]
+}

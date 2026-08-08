@@ -1,0 +1,81 @@
+{
+  "drills": [
+    {
+      "id": "T18-snowflake-d1",
+      "module": "T18-snowflake",
+      "q": "Explain how Snowflake's micro-partition pruning works mechanically, and why it needs no user-managed index.",
+      "a": "Every table is automatically divided into immutable micro-partitions (50-500MB uncompressed, ~16MB compressed), each carrying per-column min, max, null-count, and distinct-count metadata. A query's WHERE predicate is checked against that metadata before any data is scanned; any partition whose range can't satisfy the predicate is skipped entirely. No index needs to be built or maintained - pruning effectiveness instead depends on how well physical row ordering across micro-partitions matches the query's filter columns, which is what clustering keys control.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-snowflake-d2",
+      "module": "T18-snowflake",
+      "q": "A team is seeing queries queue during peak concurrent usage. They respond by upgrading the warehouse to the next size up. Was that the right fix, and why or why not?",
+      "a": "No - queueing from many concurrent queries competing for one warehouse is a concurrency problem, fixed by scaling OUT (multi-cluster warehouse, auto-scale adding more clusters of the same size) not scaling UP. A bigger single warehouse still serializes queries one at a time per cluster; it does nothing for queueing and just costs more per hour. Scale up is the right fix specifically for one slow query that's memory-constrained and spilling.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-snowflake-d3",
+      "module": "T18-snowflake",
+      "q": "Explain the three Snowflake caching layers and the tradeoff of setting auto-suspend very aggressively.",
+      "a": "Result cache (account-wide, keyed on exact SQL text plus unchanged data, ~24h retention, zero compute cost on hit), local disk/warehouse cache (recently-scanned micro-partitions on the running warehouse's SSD, lost entirely when the warehouse suspends), and remote storage (durable source of truth, slowest). Setting auto-suspend very aggressively maximizes idle-credit savings but means nearly every query after a pause hits a cold local-disk cache, trading credit savings for consistently higher per-query latency - and for bursty workloads, frequent suspend/resume cycles can also add warm-up overhead that partially offsets the savings.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-snowflake-d4",
+      "module": "T18-snowflake",
+      "q": "How does zero-copy clone avoid the storage cost of copying a 50TB table, and what retention does the clone inherit versus get independently?",
+      "a": "The clone is a new table pointing at the same underlying immutable micro-partitions as the source - nothing is physically copied, and storage cost only appears once the clone or source diverges, and even then only for newly-written micro-partitions. This works because micro-partitions are immutable, so a shared reference is safe. The clone inherits the source's Time Travel/Fail-safe state at the moment of cloning, but from then on it has its own independent retention clock - it does not continue sharing the source's future retention window.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-snowflake-d5",
+      "module": "T18-snowflake",
+      "q": "Standard Edition caps Time Travel at 1 day. Explain the real-world consequence and why teams often discover this the hard way.",
+      "a": "A Standard-tier team has roughly a day to catch a bad load or accidental delete via self-service Time Travel; past that, the only remaining recourse is Fail-safe - a fixed, non-configurable 7-day, support-mediated (not self-service) recovery window, not a quick fix. Teams frequently learn this during an actual incident rather than planning for it, because upgrading to Enterprise Edition afterward is a procurement decision, not a five-minute configuration change.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-snowflake-d6",
+      "module": "T18-snowflake",
+      "q": "A query profile shows heavy spilling to remote storage. Explain what's happening and why a clustering key wouldn't fix it.",
+      "a": "Spilling to remote storage means an operator (large sort, hash join, aggregation) needed more working memory than the warehouse's local memory and even local disk could provide, so intermediate results spilled to the slowest storage tier - a strong signal the warehouse is undersized for that query's working set. A clustering key wouldn't fix this because clustering improves pruning (how much data is scanned before processing begins); spilling happens after data is already read, during in-memory processing - the two address different stages of query execution.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-snowflake-d7",
+      "module": "T18-snowflake",
+      "q": "A team adds a clustering key to a large table hoping to speed up a common query, but the automatic-clustering credit line item grows and query performance doesn't improve. Diagnose.",
+      "a": "Most likely the clustering key doesn't actually match the query's real filter/join predicates - check query history for the actual columns used in WHERE/JOIN clauses rather than assuming. It's also possible the table has high write volume that constantly reshuffles the clustering, making maintenance expensive without commensurate pruning benefit. Verify via the query profile's partitions-scanned ratio before keeping the key; if it's not improving that ratio for the target queries, drop it rather than keep paying background compute for no benefit.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-snowflake-d8",
+      "module": "T18-snowflake",
+      "q": "Design the warehouse topology for a company with nightly ETL, a live BI dashboard used by 200 analysts, and occasional data-science ad-hoc queries. Justify the isolation.",
+      "a": "Three separate warehouses minimum: an ETL warehouse (sized to the heaviest transform, aggressive ~30s auto-suspend since nothing interactive waits on it), a BI warehouse (multi-cluster with auto-scale for the 200-analyst concurrency, ~60s auto-suspend balancing cold-start latency against idle cost), and a separately sized/billed ad-hoc/data-science warehouse so a runaway exploratory query doesn't degrade the BI dashboard's SLA. Isolating by workload type is the entire point of Snowflake's separated storage/compute architecture - sharing one warehouse across all three defeats it.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-snowflake-d9",
+      "module": "T18-snowflake",
+      "q": "A CFO asks why the Snowflake bill tripled this month with no new use cases. Describe your diagnostic sequence.",
+      "a": "Start with ACCOUNT_USAGE.WAREHOUSE_METERING_HISTORY to identify which warehouse's credit consumption actually grew. Then determine whether it's from more query volume, longer-running queries (check query profile for spilling, indicating an undersized warehouse), more idle time (an auto-suspend regression or usage-pattern shift), or a new/unused clustering key consuming background automatic-clustering credits. This is a diagnostic funnel across multiple possible causes, not a single query - jumping to one root cause without ruling out the others risks a wrong fix.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-snowflake-d10",
+      "module": "T18-snowflake",
+      "q": "Explain when Snowpark changes your architecture for a Python-heavy transformation pipeline versus pulling data into pandas, and what it does NOT solve.",
+      "a": "Snowpark compiles DataFrame-style Python operations into SQL executed inside Snowflake's own engine, so data never leaves Snowflake's storage/compute boundary - no network transfer of the full dataset, no separate compute cluster, and the transformation benefits from the same pruning and warehouse elasticity as any SQL query. It does not solve the need for genuine ML training loops requiring GPU frameworks or arbitrary Python libraries with native extensions - those workloads still need to leave Snowflake, and Snowpark narrows the transformation-work gap without replacing a full ML platform.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-snowflake-d11",
+      "module": "T18-snowflake",
+      "q": "When is Snowflake usually the wrong platform choice, stated plainly?",
+      "a": "Heavy ML/feature-engineering pipelines or large-scale unstructured data processing, where Snowpark narrows the gap but doesn't replace a real ML platform like Databricks' MLflow/GPU-cluster stack. Also a poor fit for a single small, predictable job that doesn't need elastic multi-cluster concurrency - you'd be paying for flexibility you don't use.",
+      "difficulty": "warmup"
+    }
+  ]
+}

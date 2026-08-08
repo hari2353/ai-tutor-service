@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-react-agent-internals-c1",
+      "topic": "create_react_agent",
+      "q": "What are the two mandatory nodes create_react_agent wires into a StateGraph?",
+      "a": "`agent` (calls the model with tools bound, returns an AIMessage) and `tools` (a ToolNode that dispatches every tool_call on the last message and returns matched ToolMessages).",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c2",
+      "topic": "create_react_agent",
+      "q": "What reducer does AgentState's `messages` key use, and what does it do differently from operator.add?",
+      "a": "add_messages. It merges by message id, replacing an existing message when the incoming one shares an id, instead of blindly concatenating like operator.add.",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c3",
+      "topic": "create_react_agent",
+      "q": "Distinguish should_continue from tools_condition.",
+      "a": "should_continue is the private, three-way routing function create_react_agent wires internally (tools / structured response / end). tools_condition is the public, two-way standalone utility in langgraph.prebuilt for people building their own StateGraph who want the same tool-calls check.",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c4",
+      "topic": "create_react_agent",
+      "q": "What happens when remaining_steps < 2 and the model's response has tool calls?",
+      "a": "The graph short-circuits without raising and returns a synthetic final AIMessage: \"Sorry, need more steps to process this request.\" This is a soft, graceful-degradation path, distinct from GraphRecursionError.",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c5",
+      "topic": "create_react_agent",
+      "q": "How does remaining_steps differ from recursion_limit?",
+      "a": "recursion_limit is a hard cap on super-steps (default 1000 since langgraph 1.0.6) set as a top-level config key; exceeding it raises GraphRecursionError. remaining_steps is a soft, auto-decremented managed value specific to create_react_agent that degrades gracefully to a canned message instead of raising.",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c6",
+      "topic": "create_react_agent",
+      "q": "A pre_model_hook returns {\"messages\": [...]}. What's the effect versus returning {\"llm_input_messages\": [...]}?",
+      "a": "\"messages\" writes through the add_messages reducer into permanent graph state (a real edit). \"llm_input_messages\" feeds a different list to this one model call only, without persisting the change.",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c7",
+      "topic": "create_react_agent",
+      "q": "What does pre_model_hook's return dict require at minimum?",
+      "a": "At least one of `messages` or `llm_input_messages` must be present.",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c8",
+      "topic": "create_react_agent",
+      "q": "What is the documented bug pattern with post_model_hook and tool routing?",
+      "a": "With post_model_hook present, routing goes through post_model_hook_router, which determines pending tool calls by diffing tool_call ids on the last AIMessage against existing ToolMessages, not the plain tool_calls check. A hook that mutates or drops messages can break that diff and silently skip tool dispatch.",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c9",
+      "topic": "create_react_agent",
+      "q": "What's the behavioral difference between version=\"v1\" and version=\"v2\" tool dispatch?",
+      "a": "v1: all tool calls in one AIMessage execute inside a single ToolNode invocation as one graph step; a per-node policy applies to the whole batch. v2 (default): each tool call becomes its own Send targeting its own ToolNode task, so retry/timeout policies apply per individual call.",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c10",
+      "topic": "create_react_agent",
+      "q": "What does the tools node do by default when a tool raises an exception?",
+      "a": "ToolNode catches it and returns it as a ToolMessage containing the error text rather than propagating it, the framework-level version of 'errors are observations, not exceptions.'",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c11",
+      "topic": "create_react_agent",
+      "q": "What does response_format actually add to the graph, and when does it run?",
+      "a": "A terminal generate_structured_response node, reached only when the loop would otherwise exit to END (no pending tool calls). It makes one additional schema-constrained model call and writes state[\"structured_response\"]; messages are untouched.",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c12",
+      "topic": "create_react_agent",
+      "q": "What constraint applies to interrupt_before/interrupt_after with create_react_agent that doesn't apply to a hand-rolled StateGraph?",
+      "a": "Breakpoints can only target nodes that actually exist in the prebuilt's fixed topology: \"agent\", \"tools\", and whichever hook/structured-response nodes were configured, because you didn't build the graph yourself.",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c13",
+      "topic": "create_react_agent",
+      "q": "What is create_react_agent's deprecation status as of LangGraph 1.0?",
+      "a": "Deprecated in favor of create_agent from the langchain package (same LangGraph runtime, but with a composable 6-hook AgentMiddleware system instead of two fixed hook slots). Still functional with no published removal date.",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c14",
+      "topic": "create_react_agent",
+      "q": "Name a concrete reason to drop create_react_agent for a hand-rolled StateGraph.",
+      "a": "Needing more than one tool-execution phase, branching beyond a simple tool-calls-yes/no check, fan-out beyond per-call Send dispatch, or per-tool (rather than global) approval gating — the prebuilt has exactly one tools node and two fixed hook seams.",
+      "module": "T07-react-agent-internals"
+    },
+    {
+      "id": "T07-react-agent-internals-c15",
+      "topic": "create_react_agent",
+      "q": "What invariant does ToolNode's 1:1 tool_call_id matching enforce, and what breaks if it's violated?",
+      "a": "Every tool_use call gets exactly one matching ToolMessage before the next model call. Violating it (e.g. a hook dropping a ToolMessage) produces an API 400 on malformed conversation, the same failure mode T07-loop-engineering names for cancelled or partially-failed turns.",
+      "module": "T07-react-agent-internals"
+    }
+  ]
+}

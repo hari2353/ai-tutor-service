@@ -1,0 +1,228 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-react-pattern-raw-c1",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "What single axis separates ReAct, Plan-Execute, Reflexion and ToT?",
+      "a": "Where the decision point sits relative to the observations. ReAct decides AFTER each observation; Plan-Execute decides BEFORE any observation; Reflexion decides AGAIN after a failed attempt; ToT decides ACROSS parallel branches.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c2",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "What are the three parts of ReAct in 2026, and what replaced what?",
+      "a": "Thought = the model's reasoning/thinking content block. Action = a structured tool_use block from the API. Observation = a tool_result block keyed by tool_use_id. Native tool calling replaced regex-parsing `Thought:/Action:/Observation:` out of free text. Parse-failure rate went from ~2-8% of turns to 0.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c3",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "What happens if you drop the reasoning block when appending the assistant turn?",
+      "a": "You have re-implemented act-only, which is the exact ablation the ReAct paper showed FAILS on identical observations. Symptom: the agent stops adapting to surprises and repeats the previous action. With some providers it also invalidates the thinking-block signature and errors, which is the better outcome.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c4",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Give a mechanism (not 'it thinks more') for why a reasoning trace improves action selection.",
+      "a": "Four: (1) Locality - the thought puts a compressed task-relevant summary adjacent to the decision point instead of making the decode re-derive it from 20k tokens. (2) Factorisation - replaces hard P(action|history) with P(thought|history) then P(action|thought,history). (3) Exception handling - a surprising observation needs somewhere to be processed; without a thought slot the only output channel is the action, so it repeats. (4) Steerability - thoughts are text, so a human can edit two and change downstream behaviour.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c5",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "What does a ReAct reasoning trace cost, as a formula?",
+      "a": "Extra input tokens = thought_len x n(n+1)/2, because every thought is re-sent on every subsequent turn. At 120 tokens over 10 steps: 120 x 55 = 6,600 extra input tokens. Quadratic, which is why 'make the thoughts longer' is not a strategy.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c6",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "ReAct's headline numbers from Yao et al. (arXiv Oct 2022 / ICLR 2023)?",
+      "a": "+34% absolute success rate on ALFWorld and +10% on WebShop over imitation and RL baselines, with only one or two in-context examples. Motivation: CoT alone hallucinates (ungrounded); act-only cannot synthesise (their ablation had identical observations and still failed).",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c7",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "What are the three (four) components of Plan-and-Execute, and which does everyone forget?",
+      "a": "Planner (ordered steps, optionally a dependency DAG), Executor (runs step i with a SMALL context), Solver (synthesises from plan + all outputs), plus an optional Replanner edge. People forget the Solver, and they forget that the replan edge is where the entire cost saving goes.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c8",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Quantify the Plan-Execute saving, and the point at which it disappears.",
+      "a": "8-step task, 1,500-token system prompt, 800-token observations: ReAct re-sends everything each turn = ~38,880 input tokens; Plan-Execute = 1 planner + 8 small stateless executors + 1 solver = ~15,000. About 2.6x cheaper and the executors parallelise. But one replan at step 4 costs ~+4,700 tokens plus re-running the tail, and TWO replans make Plan-Execute more expensive than ReAct with worse adaptivity.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c9",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "What are the three real reasons to use Plan-and-Execute?",
+      "a": "Cost (~2-3x fewer input tokens), latency (executors parallelise, so 8 sequential round trips collapse to ~3), and auditability (the plan is a diffable artifact a human can review before anything executes). NOT intelligence.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c10",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Name the plan lock-in failure mode and its observable symptom.",
+      "a": "Plan lock-in: the plan was committed before any observation, so a mid-trajectory failure never changes it. Symptom in the trace: plan_hash constant across every step, replan_count == 0, and the final answer references an entity that an earlier observation reported as missing. Classic shape: step 3 returns 'relation does not exist', steps 4-8 aggregate over an empty set, solver describes zero rows as a trend.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c11",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Fix for plan lock-in: add a replanner?",
+      "a": "No. Add a deterministic GATE: after each step, a cheap non-LLM check on whether the observation invalidates any downstream step's precondition, and pay for an LLM replan only when the gate fires. A blanket replan-after-every-step is just ReAct with extra latency and a worse name.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c12",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "What is ReWOO and what does it save?",
+      "a": "Reasoning WithOut Observation: the planner emits ALL tool calls up front with variable substitution (#E2 refers to step 2's output), so the executor is a dumb runtime with no LLM in the orchestration loop and only the solver sees results. Reported 30-50% fewer tokens than ReAct on equivalent multi-step tasks. Breaks when tool results are unexpected, because it committed before seeing any observation.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c13",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Reflexion's four pieces?",
+      "a": "Actor (produces a trajectory, typically a ReAct agent), Evaluator (scores it: unit tests / game engine / EM / heuristic / LLM judge), Self-reflection (turns trajectory + score into VERBAL feedback), Memory (episodic buffer of reflections injected into attempt k+1). The 'policy update' is a paragraph appended to the prompt - verbal reinforcement learning, no gradients.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c14",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Reflexion's headline numbers, and the column that matters?",
+      "a": "HumanEval pass@1 91% vs GPT-4's 80%; ALFWorld 130/134 (~97%) in 12 trials vs ReAct's 75%; HotpotQA 61% -> 75% EM on 100 sampled questions. The column that matters is the verdict source: unit tests, game engine success flag, exact match vs ground truth. Every headline gain is verifier-backed, so mechanically it is retry-with-a-grounded-failure-explanation, not introspection.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c15",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "What did Huang et al. (ICLR 2024) find about self-correction?",
+      "a": "INTRINSIC self-correction (model critiques itself with no external feedback) fails to reliably improve reasoning on GSM8K, CommonSenseQA and HotpotQA, and sometimes degrades it. Sharpest finding is methodological: several published self-correction gains were artifacts of a deliberately weak INITIAL prompt - strengthen the first prompt and the benefit largely evaporates.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c16",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Three metrics for a reflection loop.",
+      "a": "Help rate (wrong -> right), harm rate (right -> wrong), and cost per net-correct answer. Log the (pre_verdict, post_verdict) pair on every invocation - that pair IS the measurement. If harm >= help you have shipped a random-answer-perturber, and an accuracy-only dashboard hides it because the effects partly cancel.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c17",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Why would asking a model to critique its own answer ever make it worse?",
+      "a": "Sycophancy - the FlipFlop result: challenge a model on a correct answer and it frequently flips to a wrong one, so 'are you sure?' is not a neutral operation. Plus correlated errors: generator and evaluator are the same model with the same training distribution, so 'this looks right' carries very little evidence about correctness.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c18",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Rank verdict sources for a critique loop, best to worst.",
+      "a": "compiler / unit tests / type checker / schema validation / SQL EXPLAIN > assertions on known invariants, checksums, row-count sanity bounds > a second DIFFERENT model as judge (decorrelated errors, some value) > the same model asked 'are you sure?' (~worthless, measurable harm). If you cannot name the source in one word you do not have a reflection loop.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c19",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Degeneration of thought: what is it and how do you detect it?",
+      "a": "The reflection repeats the same flawed diagnosis across attempts. Detect: cosine similarity between reflection k and k-1 above ~0.9, near-zero diff between successive attempts' outputs, pass rate flat while token spend grows linearly. Response: abort at 2-3 attempts, escalate to a human or a different tool.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c20",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "When is Tree-of-Thought worth it? Three conditions.",
+      "a": "All three required: (1) single-pass accuracy demonstrably well below ceiling on your task, (2) intermediate states cheaply and OBJECTIVELY scoreable (test, arithmetic, schema, solver - not an LLM judge), (3) you genuinely need the branches, e.g. enumerating alternatives a human will compare. Game of 24 hits all three: 74% with GPT-4 + ToT vs 4% with CoT.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c21",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "What does ToT cost, and what is the bottleneck?",
+      "a": "10-100x tokens of a single pass, O(k^d) evaluations worst case for breadth k depth d. The bottleneck is the per-node SCORER: if it is an LLM judge, the scorer is the whole algorithm and you are paying 100x for a random walk with correlated errors. A deterministic checker per node drops cost by roughly an order of magnitude. Cut breadth before depth.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c22",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Current (2026) numbers on self-consistency with strong models.",
+      "a": "Gemini-2.5-Flash-Lite on HotpotQA: +0.4% across 20 sampled paths at ~20x token cost, curve fluctuating not rising. Gemini-2.5-Pro on MATH-500: 98% single-pass -> 99.6% at 15 paths, i.e. +1.6% for ~15x compute. Flash-Lite on MATH-500 PEAKED around 10 paths and DECLINED beyond 15 - negative returns, not just diminishing, because extra samples inject spurious paths the aggregator cannot suppress.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c23",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "How much can you cut self-consistency sampling without losing accuracy?",
+      "a": "Adaptive-consistency (early stop on convergence) cut sample usage 7.9x for under 0.1% accuracy loss; criteria-based early stopping cut ~70% with negligible loss. Both say the useful sampling threshold is per-item and is dropping as models improve - so use difficulty-aware routing, not a blanket k.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c24",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "The decision rule for picking a reasoning pattern.",
+      "a": "1) Do later steps depend on what earlier steps RETURN? Yes -> ReAct. No AND decomposition stable up front -> Plan-Execute/ReWOO plus a gate. 2) Cheap external verdict? Yes -> retry-with-critique, cap 2-3, track help/harm/cost-per-net-correct. No -> do NOT add self-critique. 3) Single-pass accuracy below ceiling AND nodes cheaply scoreable? -> self-consistency k=3-5 first; ToT only if you need the tree. 4) Default for a new agent: plain ReAct loop, no reflection, no ToT. Add one pattern at a time and eval each.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c25",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Where does the boundary sit now that reasoning models do internal deliberation?",
+      "a": "The line is 'does it touch the world'. Absorbed by the model: single-turn deliberation, branching over candidates, verifying arithmetic/logic within one answer, short self-correction inside one response - so external ToT and self-consistency mostly no longer beat native extended thinking on math and code. Not absorbed: side effects (a real tool call producing a real observation), durable state across a boundary, any REAL verifier (a test suite is not a thought), and all control machinery. Reasoning models ate the Thought half of ReAct and left the Act/Observe half untouched.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c26",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Rank the four patterns by how much reasoning models eroded them.",
+      "a": "Most eroded: ToT / self-consistency (largely subsumed for math and code; external gains now sub-2% at 15-20x cost). Then Reflexion (split: introspection half absorbed, verifier-driven retry half untouched and never absorbable - a compiler is not a thought). Then Plan-Execute (models plan natively, but the ARTIFACT survives for cost, parallelism and human review - reasons orthogonal to model capability). Least eroded: ReAct, because Act/Observe is a statement about the world, not about the model.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c27",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Is LangGraph's create_react_agent the ReAct paper?",
+      "a": "No. It is a tool-calling loop inspired by ReAct: model call, if the response has tool_calls run the tool node, append ToolMessages, repeat until no tool calls. There is no mandatory Thought step and no text parsing. As of 2026 it is deprecated in favour of create_agent in the langchain package with a middleware system.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c28",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Why was 'always plan before every action' (literal ReAct prompting) shown to be wrong?",
+      "a": "arXiv 2509.03581 (Crafter environment): always planning is computationally expensive and DEGRADES performance on long-horizon tasks, while never planning limits performance. Neither pole wins - the allocation is the thing. Practically: set thinking budget per turn, high on branch points, zero on mechanical steps.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c29",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Your ReAct reasoning traces are blowing the context but later steps genuinely depend on earlier ones. What do you do?",
+      "a": "Keep ReAct and attack the trace. (1) Truncate observations at the TOOL boundary - 40KB JSON becomes 2KB plus a pointer. (2) Drop or summarise OLD thoughts while keeping recent ones verbatim: thoughts are locally useful, facts are globally useful, so compact thoughts before facts. (3) Set the thinking budget per turn. Never drop the current turn's reasoning block, and promote any thought recording a decision or open obligation into an explicit open-items list.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c30",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "Three things wrong with the 2022 text-parsed ReAct implementation.",
+      "a": "(1) stop=['\\nObservation:'] is mandatory and fragile - forget it and the model fabricates the observation and reasons against fiction; symptom is an Observation: line with no matching tool-log entry. (2) The regex is a parser for an unspecified grammar - quotes, nested brackets, markdown fences and newlines all break it, ~2-8% of turns, each costing a full round trip plus the whole scratchpad re-sent. (3) No arity or type checking - search[], search[a, b] and serach[x] are all syntactically fine and semantically garbage.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c31",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "The composition that actually ships in production.",
+      "a": "Plan-Execute as the outer orchestration, ReAct sub-agents inside each step, one verifier-gated retry at the boundary. Plan for auditability and cost, loop for adaptivity, retry only where there is a test. And do not stack more than that: four patterns is four multiplicative cost centres and four independent failure modes you cannot attribute a regression to.",
+      "module": "T07-react-pattern-raw"
+    },
+    {
+      "id": "T07-react-pattern-raw-c32",
+      "topic": "ReAct Implemented Raw + Plan-Execute + Reflexion",
+      "q": "What does Anthropic's Building Effective Agents say that is relevant here?",
+      "a": "The most successful implementations were not using complex frameworks or specialised libraries; find the simplest solution possible and increase complexity only when needed; add complexity ONLY when it demonstrably improves outcomes. Its evaluator-optimizer pattern is Reflexion's honest form: use it when there are clear evaluation criteria and iterative refinement gives measurable value. And their SWE-bench work spent more time optimising TOOLS than prompts - better tool descriptions usually beat any reasoning pattern you could bolt on.",
+      "module": "T07-react-pattern-raw"
+    }
+  ]
+}

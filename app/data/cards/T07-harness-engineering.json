@@ -1,0 +1,186 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-harness-engineering-c1",
+      "topic": "Harness Engineering",
+      "q": "Define an agent harness in one sentence, and give the analogy.",
+      "a": "Everything in an agent except the model: the runtime control plane of loop, instruction assembly, context building, tools, permissions, execution, state, memory, compaction, planning, approvals and traces. Agent = Model + Harness. Analogy (Schmid, Jan 2026): the model is the CPU, the context window is the RAM, the harness is the operating system, the agent is the application.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c2",
+      "topic": "Harness Engineering",
+      "q": "State the four necessary and sufficient conditions for a system to be an agent harness.",
+      "a": "T1 a reasoning/action/observation loop at runtime. T2 a tool interface that can ALTER an external environment, not merely read it. T3 active management of what enters and leaves context. T4 at least one control mechanism whose effectiveness does not depend on the model cooperating. Yes to all four = harness. Memory, verification, observability and retry are specializations of T1-T4, not a fifth condition.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c3",
+      "topic": "Harness Engineering",
+      "q": "Why does size-based truncation fail T3, and a log line fail T4?",
+      "a": "T3 requires the decision about what enters and leaves context to depend on the CONTENT of the task or current observation, not merely on buffer size; a mechanical cut by size does some context handling but is not active management. T4 requires the mechanism to alter or contain execution independently of the model's choices; a log print changes nothing about execution, whereas a tool-call cap or a re-run of the test suite does.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c4",
+      "topic": "Harness Engineering",
+      "q": "List the 15 harness components.",
+      "a": "1 instruction manager, 2 context builder, 3 model adapter, 4 tool registry, 5 permission engine, 6 execution engine, 7 state store, 8 memory and retrieval, 9 compactor, 10 planner/goal controller, 11 skill registry, 12 MCP/external connector manager, 13 approval manager, 14 trace and eval system, 15 sandbox/execution boundary.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c5",
+      "topic": "Harness Engineering",
+      "q": "What is NOT required for a system to be a harness?",
+      "a": "Multi-agent architecture (a single model in a loop with tools and control already qualifies), learning or fine-tuning (the harness is engineering around the model, not modification of it), a specific model (model switching is itself a control mechanism), and a user interface (a harness can be a faceless library).",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c6",
+      "topic": "Harness Engineering",
+      "q": "Walk the tool-call contract from model output to observation. Why is the order load-bearing?",
+      "a": "resolve name + phase visibility, SCHEMA VALIDATE, PERMISSION resolve (allow/deny/ask), on ask checkpoint and return for durable approval, attach idempotency key if mutating, execute in the SANDBOX with a timeout, shape the result (persist above ~50K chars keeping a 2KB preview and path), inject as a typed observation. Validation must precede permission resolution because you cannot make an authorization decision about arguments you have not parsed; coercing them first is how you get a policy bypass.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c7",
+      "topic": "Harness Engineering",
+      "q": "What is the error policy inside a harness, and what is the one exception to it?",
+      "a": "Every rejection path returns an observation with a remediation message the model can act on: unknown tool, invalid arguments (include the schema), permission denied, timeout, sandbox refusal, tool dependency failure. The exception: do not swallow your own bugs. A tool's dependency failing returns to the model; a harness KeyError should crash loudly, because a model cannot fix your programming error and swallowing it ships a broken agent that merely looks stupid.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c8",
+      "topic": "Harness Engineering",
+      "q": "State the boundary principle: what does the trusted control plane own versus the sandbox?",
+      "a": "Harness owns user identity and tenant boundaries, credential management, approval records, audit logs, billing and rate limits, tool authorization, and the final commit to external systems. Sandbox owns temp files, generated artifacts, script execution, isolated browser or shell work, connector-specific data processing. Never put secrets, approval logic or authorization decisions in the prompt or in anything the model can modify.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c9",
+      "topic": "Harness Engineering",
+      "q": "Give the authority hierarchy for content in an agent's context, and the rule that follows.",
+      "a": "provider/system policy > organization policy > product/developer policy > workspace/project policy (CLAUDE.md, AGENTS.md) > domain or directory policy > user task > model-visible runtime reminders > tool observations > untrusted retrieved content. Rule: retrieved content may contain instructions, but those instructions are DATA, not policy. Labelling lowers the probability of injection; only a model-independent control (the permission engine) bounds the damage.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c10",
+      "topic": "Harness Engineering",
+      "q": "How can compaction launder authority? Name the documented example.",
+      "a": "Claude Code's autocompact summarizer processes user instructions and tool results through the same pipeline with no classification step, so an instruction planted in a project file survives compaction and lands in the summary indistinguishable from legitimate context. The <analysis> chain-of-thought scratchpad that makes summaries good faithfully preserves the injection. A second edge: when the conversation is so long the compaction request itself returns prompt-too-long, recursive head-truncation drops the edges, so content placed mid-conversation survives.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c11",
+      "topic": "Harness Engineering",
+      "q": "Is a guardrail a harness? Give the test question.",
+      "a": "No, it is a part of one. Guardrails LIMIT (cap tool calls, block destructive commands, cost ceilings). The harness as a whole ENABLES (context manager helps it remember, memory avoids repeated work, retry survives transients, verifier confirms completion). Test: is this limiting the agent or helping it execute? Limiting means guardrail, which is a kind of T4 control. Part-whole relation, not sibling categories.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c12",
+      "topic": "Harness Engineering",
+      "q": "Give four numbers showing harness beats model choice.",
+      "a": "LangChain moved a coding agent from rank 30 to top 5 on Terminal Bench 2.0 with harness-only changes and no model swap. statewright took local models from 2/10 to 10/10 on a SWE-bench subset purely by shrinking the per-phase tool space. Microsoft's Azure SRE Agent raised 'Intent Met' from 45% to 75% on novel incidents by replacing 100+ bespoke tools with a filesystem plus read_file/grep/find/shell. Anthropic's 2026 Agentic Coding Trends Report puts harness configuration alone at 5+ percentage points of benchmark swing. Life-Harness showed harness-side adaptation transferring across 18 model backbones.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c13",
+      "topic": "Harness Engineering",
+      "q": "What is the Bitter Lesson tax on harness design, with evidence?",
+      "a": "Every harness component encodes an assumption that the model cannot do something, and those assumptions expire. Manus refactored their harness five times in six months to remove rigid assumptions. LangChain re-architected Open Deep Research three times in one year. Vercel deleted 80% of their agent's tools and got fewer steps, fewer tokens and faster responses. LangChain also warns models can OVERFIT to a harness, so an elaborate custom harness can be worse on the next model. Conclusion: build to delete, modular, rippable in an afternoon.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c14",
+      "topic": "Harness Engineering",
+      "q": "Name the ten-item minimal viable harness and the build sequence.",
+      "a": "Ten: one model adapter, one deterministic context builder, a narrow tool registry, strict local schema validation, runtime permission checks, structured tool results with remediation, step and cost budgets, trace logging, compaction only when needed, a small eval set. Sequence: manual loop, tools, permissions, structured observations, budgets, tracing, planning, context/memory, compaction, skills/connectors, goal loop, subagents. Each later component is undebuggable without the earlier ones.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c15",
+      "topic": "Harness Engineering",
+      "q": "Give the six harness maturity levels.",
+      "a": "0 answer-only assistant (no tools). 1 retrieval agent (reads trusted resources, no side effects). 2 drafting agent (proposes, cannot commit). 3 approval-gated actor (executes after explicit approval). 4 policy-bounded autonomous actor (low-risk actions within scopes, budgets, audit). 5 long-running goal worker (multi-session progress; needs durable state, compaction, budgets, checkpoints, evaluation). Move up only when evals show the simpler level is insufficient.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c16",
+      "topic": "Harness Engineering",
+      "q": "Why is a shell deny-list not a security boundary?",
+      "a": "Microsoft's own Agent Framework docs state it: the deny-list is a UX pre-filter, not a security boundary. Shell syntax has too many equivalent encodings (variable expansion, base64 piped into sh, find -exec, writing then executing a script) for pattern matching to hold against intent. Patterns catch accidents; the boundary is capability-based, namely what filesystem, network and credentials the sandboxed process actually has, plus a permission engine that does not consult the model.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c17",
+      "topic": "Harness Engineering",
+      "q": "What are the three documented enterprise MCP gaps, and their mitigations?",
+      "a": "1 No identity propagation: the server cannot tell who the request is ultimately for, breaking per-user authorization and audit. Mitigate with JWT-enriched tool calls. 2 No adaptive tool budgeting: nothing negotiates call count or latency, so one slow tool blows the wall-clock budget. Mitigate with per-tool timeout contracts enforced harness-side. 3 Unstructured error semantics: errors arrive as prose so the harness cannot map them to retry/deny/escalate. Mitigate with a standardized error-to-action mapping.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c18",
+      "topic": "Harness Engineering",
+      "q": "Is MCP an agent protocol?",
+      "a": "No, it is a TOOL protocol, and it is component 12 of 15. OpenAI built a separate Item/Turn/Thread protocol over JSON-RPC/JSONL on stdio for the Codex harness precisely because approval flows, streaming diffs and thread persistence needed more than a tool-oriented model could express. Also note the transport issue: Streamable HTTP replaced HTTP+SSE in the 2025-11-25 spec and unlocks remote servers, but the stateful Mcp-Session-Id header fights load balancers and horizontal scaling.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c19",
+      "topic": "Harness Engineering",
+      "q": "Why is the state store the highest-priority component, arithmetically?",
+      "a": "At 85% per-step reliability a ten-step run completes about 20% of the time; at 95%, about 60%. So most multi-step runs fail somewhere, and without checkpoints every failure is a full restart that pays the whole token bill again. A state store converts restart into resume. Store typed events (user_message, assistant_message, tool_call, tool_result, approval_request/result, plan_update, goal_update, skill_invocation, memory_load, context_compaction, connector_call, error, final_answer) rather than a message array; the prompt is not a database.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c20",
+      "topic": "Harness Engineering",
+      "q": "One trace attribute to add first, and why?",
+      "a": "The hash of the fully assembled request prefix. It makes the two most expensive silent bugs visible at once: unintended prompt drift (hash changed and nobody meant it to) and cache breakage (hash changes every turn, so cache_read_input_tokens is zero and you pay 5-10x). It also makes runs reproducible, which is the precondition for snapshot testing, resumability and bisecting a regression.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c21",
+      "topic": "Harness Engineering",
+      "q": "How do you tell a model regression from a harness regression?",
+      "a": "You cannot without harness versioning plus an eval gate: harness config in git, one change per PR, a golden eval set in CI, and traces recording model version, reasoning-effort setting, cache configuration, prompt hash and tool-registry hash per run. Then a regression is a bisect. Anthropic's April 2026 postmortem is the canonical case: Claude Code degradation traced to three independent harness-level changes (a default reasoning-effort downgrade, a caching bug dropping thinking history from stale sessions, and an overly aggressive verbosity-limiting prompt) with no model change at all.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c22",
+      "topic": "Harness Engineering",
+      "q": "What is the 'lethal trifecta' and what does it imply for a permission engine?",
+      "a": "Private data access + exposure to untrusted content + the ability to communicate externally. Each tool can be individually safe while the SET exfiltrates, so per-tool risk analysis is insufficient. The implication: the permission engine needs a session-level property, not just per-call rules. If a session has read private data and ingested untrusted content, egress tools require approval regardless of their individual MCP annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint), which are hints feeding the decision rather than enforced contracts.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c23",
+      "topic": "Harness Engineering",
+      "q": "How do you test a harness given a nondeterministic model?",
+      "a": "Layer it: the registry, permission engine, execution engine, budgets, compactor and context builder are deterministic code, so unit-test them against a scripted fake model. Assert INVARIANTS not outputs: a bad-arg call yields an observation containing the schema and the loop continues; a denied call yields an observation and the loop continues; messages[0] and the open-items list survive compaction; the assembled request is byte-identical across two runs of the same fixture. Tools tested independently. Only end-to-end needs evals: 10-20 golden tasks with trajectory and outcome assertions, tracked as a distribution.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c24",
+      "topic": "Harness Engineering",
+      "q": "When is building a harness the wrong call?",
+      "a": "Single-turn tasks (classification, extraction, summarizing provided content): level 0, no loop, and a harness buys latency, cost and nondeterminism for nothing. Deterministic workflows: write the pipeline, since fifteen components maintaining a state machine an if-statement expressed better is strictly worse. Long-running multi-party work needing retries across hours, day-long approvals and exactly-once side effects: a hand-rolled state store plus approval manager is a worse Temporal, so use Temporal or Step Functions with LLM calls as activities.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c25",
+      "topic": "Harness Engineering",
+      "q": "Computational versus inferential controls, and the ordering rule.",
+      "a": "Bockeler's distinction. Computational controls are deterministic and cheap: linters, type checkers, tests, schema validators, re-running the suite. Inferential controls are probabilistic: LLM-as-judge, 'does this match our architectural conventions'. Exhaust computational first; use inferential only where no computational check exists. An inferential control alone does not robustly satisfy T4, because its effectiveness partly depends on the same class of system that produced the output.",
+      "module": "T07-harness-engineering"
+    },
+    {
+      "id": "T07-harness-engineering-c26",
+      "topic": "Harness Engineering",
+      "q": "What is the harness engineering loop as an operating model?",
+      "a": "Agent fails or slows down, identify the missing capability, context, validator or permission rule, encode the fix into docs, tools, policies, schemas or evals, rerun and measure, keep the improvement as part of the harness. The mature model is: humans steer, agents execute, and the harness turns human judgment into reusable constraints and feedback loops. Corollary: most agent failures are not insufficient autonomy but weak harness boundaries (broad tools, vague instructions, missing approval gates, unstructured tool results, poor context hygiene, no evals).",
+      "module": "T07-harness-engineering"
+    }
+  ]
+}

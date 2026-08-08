@@ -1,0 +1,116 @@
+{
+  "drills": [
+    {
+      "id": "T07-human-oversight-d1",
+      "module": "T07-human-oversight",
+      "q": "What three action properties determine gate placement?",
+      "a": "Irreversibility, blast radius, and externality — with rate risk handled separately as a cap. Not the tool's name, and never the model's stated intent.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-human-oversight-d2",
+      "module": "T07-human-oversight",
+      "q": "An action is reversible in the database but sends an email. Which tier and why?",
+      "a": "Irreversible. Externality dominates reversibility: anything a third party observes is irreversible in practice regardless of what your data model can roll back. You cannot un-send.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-human-oversight-d3",
+      "module": "T07-human-oversight",
+      "q": "Give the gate ladder in five rungs.",
+      "a": "reversible+small → auto+log; reversible+bounded → notify-and-proceed with an undo window; irreversible or external-visible or financial → synchronous approval with a diff; irreversible with multi-record or high value → dual approval; unbounded destructive → prohibited, not in the toolset. Deletes stay gated at every autonomy level.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-human-oversight-d4",
+      "module": "T07-human-oversight",
+      "q": "Your gates are being rubber-stamped. How do you know from telemetry?",
+      "a": "Approval p50 latency under about 5 seconds on a decision designed to take 45-90 seconds; override rate near zero; gated volume above computed review capacity; and any bulk-approve usage on an irreversible class. Then confirm with error injection and measure the catch rate.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-human-oversight-d5",
+      "module": "T07-human-oversight",
+      "q": "Fix a rubber-stamped queue. Four changes, and one thing you do NOT do.",
+      "a": "Reduce the number of gates so attention concentrates; replace intent with a computed diff plus inline evidence; remove any bulk-approve affordance on irreversible classes; make rejection one click with a reason code and ensure it is respected rather than instantly re-proposed. Do NOT retrain the reviewers — this is a design failure, and the catch-rate decay is the design signal.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-human-oversight-d6",
+      "module": "T07-human-oversight",
+      "q": "Design oversight for an agent processing refunds up to $500.",
+      "a": "Register issue_refund as financial, compensating reversibility, external-visible, rate-risky. Under $50 with an entailed policy citation and matching invoice: auto-execute, notify, 10-minute cancel window. $50-500: synchronous single approval showing the balance diff plus the invoice span and policy section. Above $500: out of scope, escalate. Independently: a rate cap per hour and a per-day currency total. Plus SoD in the broker, 15-minute expiry failing closed, preconditions re-validated at execution, and an audit record with params, diff, policy version, evidence digest, reviewer, reason code, latency.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-human-oversight-d7",
+      "module": "T07-human-oversight",
+      "q": "The approval service is down. What happens, per tier?",
+      "a": "Irreversible, financial, and destructive fail CLOSED — the run suspends or abandons and notifies. Reversible bounded actions may fail open only if blocking is itself a harm, and the outcome is logged distinctly as auto-approved-by-timeout, never silently as an approval. Runs must be checkpointed so suspension is resumable, and timeout outcomes are a monitored metric.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-human-oversight-d8",
+      "module": "T07-human-oversight",
+      "q": "An agent must update 50,000 records. Design the oversight.",
+      "a": "Not primarily with an approval — a human cannot review 50,000 of anything. Dry run producing a diff summary (counts by change type, value distribution, the exact WHERE clause, 20 sampled before/after rows including edge cases); automated invariants (affected count in band, no rows outside the tenant, no field crossing a threshold, target matching an approved pattern); staged batch execution with abort on anomaly; one human approval of the PLAN, the invariants, and the tested undo path; plus a rate cap and idempotency keys so a resumed run cannot double-apply.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-human-oversight-d9",
+      "module": "T07-human-oversight",
+      "q": "In that bulk-update design, what is the human actually approving?",
+      "a": "The plan, the invariants, and the existence of a tested rollback. Their real job is confirming the intent matches the diff summary and that an undo exists — a judgment humans are good at and assertion engines are not. Approving 50,000 individual rows looks like oversight and is not.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-human-oversight-d10",
+      "module": "T07-human-oversight",
+      "q": "How do you keep prompt injection from defeating a gate?",
+      "a": "Gate selection is a pure function of registered action properties and computed parameters, evaluated in the harness at the tool boundary, so no text in context can change the tier. Per-agent scoped short-lived credentials make unpermitted actions fail at the API. The broker rejects any agent principal as an approver. And the reviewer sees the computed diff, never the agent's summary, which is attacker-controlled text.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-human-oversight-d11",
+      "module": "T07-human-oversight",
+      "q": "List the audit fields, then name the two most-forgotten.",
+      "a": "Agent@version, prompt@version, model@version; principal and credential scope; requested action with full params and the computed diff; policy id@version; reviewer, decision, reason code, decision latency; overrides; result and rollback. Most forgotten: the evidence bundle the reviewer was shown (or its hash), and the decision latency.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-human-oversight-d12",
+      "module": "T07-human-oversight",
+      "q": "State the gates-versus-value arithmetic and the case where rubber-stamping is certain.",
+      "a": "net = S − g·R − wait_cost, break-even g = S/R. At S=10, R=1.5 you keep 85% at full gating. At S=2, R=1.5 you keep 25% and the reviewer is the bottleneck, so the economics force speed and rubber-stamping is certain. wait_cost is the forgotten term: a synchronous gate blocks the run, which is why durable checkpointing is a prerequisite.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-human-oversight-d13",
+      "module": "T07-human-oversight",
+      "q": "How do you raise an auto-approve threshold responsibly?",
+      "a": "Evidence ratchet, not a meeting. Require a defined volume of the class passing approval with no reviewer override and no downstream dispute, then shadow-run the proposed policy: keep gating while recording what it WOULD have auto-approved, and compare against reviewer decisions. Promote only below a stated disagreement threshold, wire automatic demotion on incident, and never let deletes or unbounded actions participate.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-human-oversight-d14",
+      "module": "T07-human-oversight",
+      "q": "Compliance insists on a human in the loop for every action. How do you respond?",
+      "a": "With arithmetic and catch-rate data, not principle: review capacity, queue volume, decision p50 latency, and error-injection catch rate at the current gate count versus a narrower set. Compliance usually wants demonstrable control, and a documented deterministic control with a measured catch rate plus a sampled human audit is often a stronger artefact than an unmeasured universal gate. If they still require it, it is their risk decision, implemented with the queue staffed to capacity and stated in writing.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-human-oversight-d15",
+      "module": "T07-human-oversight",
+      "q": "Rank oversight investments by protection per unit of cost, and name the last.",
+      "a": "Remove the action; scoped short-lived per-agent credentials; deterministic invariants and dry-run diffs; reversibility; rate caps; narrow approval gates on the irreversible set; immutable audit with evidence digest and latency; error-injection measurement. Last: adding more gates — past the review-capacity limit, each extra gate reduces attention per gate and total protection can fall.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-human-oversight-d16",
+      "module": "T07-human-oversight",
+      "q": "A reviewer approved a bad action in three seconds. Whose failure?",
+      "a": "The oversight design's. A 3-second p50 on a minute-long decision means the queue was over capacity, the UI showed intent instead of a diff, or a bulk-approve affordance existed that should not. Blaming the reviewer is how organisations avoid fixing the system and how they lose the reviewer. The accountable party is the owner of the oversight design.",
+      "difficulty": "mid"
+    }
+  ]
+}

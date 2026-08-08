@@ -1,0 +1,102 @@
+{
+  "drills": [
+    {
+      "id": "T08-agent-eval-d1",
+      "module": "T08-agent-eval",
+      "q": "Give a concrete example where outcome-only eval passes but the agent run is actually broken.",
+      "a": "An agent asked to 'pause my subscription' calls cancel_subscription instead of pause_subscription, then summarizes 'your subscription has been paused.' The final text reads correct; only a tool-call-accuracy or state check catches the wrong tool call.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T08-agent-eval-d2",
+      "module": "T08-agent-eval",
+      "q": "List the four eval layers for agents in order, one line each.",
+      "a": "Tool-call accuracy (binary, per call). Trajectory eval (golden fuzzy-match or 6-dimension judge). Task completion vs actual state (never agent's own text). Cost/steps per task (first-class, tracked as p50/p95).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T08-agent-eval-d3",
+      "module": "T08-agent-eval",
+      "q": "Your sandbox eval environment is fully mocked with no real side effects. How do you still check task completion correctly?",
+      "a": "Make the mock stateful and inspectable - a real in-memory or test database the tool calls actually mutate (as tau-bench does) - so 'state after the run' is a queryable artifact, rather than trusting the agent's or the mock's return value at face value.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-agent-eval-d4",
+      "module": "T08-agent-eval",
+      "q": "Your agent's pass@1 is 78% but pass^8 is 25%. Is the agent broken? What do you do?",
+      "a": "Not necessarily broken, but unreliable enough not to promise consistent behavior at that task. Investigate whether variance concentrates in one high-variance sub-step (e.g. one flaky argument-extraction case) rather than being uniform - targeted fixes to that step move pass^k more than generic prompt tuning.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T08-agent-eval-d5",
+      "module": "T08-agent-eval",
+      "q": "How do you build a golden trajectory, and what's the single biggest mistake teams make?",
+      "a": "Record a real/expert-solved run, have a domain expert edit it into canonical form, annotate required/forbidden/optional calls. Biggest mistake: building the set entirely from happy-path traces, so error recovery and policy-edge-case regressions go completely undetected.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-agent-eval-d6",
+      "module": "T08-agent-eval",
+      "q": "A tool's argument schema just changed and every golden trajectory referencing it now fails. Is that a real regression?",
+      "a": "No - that's golden-set staleness, not an agent regression. Version goldens alongside tool schemas; treat mass failure right after a schema change as a signal to update the goldens, not evidence the agent broke.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-agent-eval-d7",
+      "module": "T08-agent-eval",
+      "q": "Why must cost and steps-per-task be tracked as p50 AND p95, not just mean?",
+      "a": "A mean cost of $0.08/task can hide a p95 of $1.20/task from a small number of runs spiraling into long tool-call chains - that tail is usually where real production incidents and budget blowouts live, invisible in a single mean number.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-agent-eval-d8",
+      "module": "T08-agent-eval",
+      "q": "Design a CI gate for an agent eval suite that won't get disabled by the team within a month.",
+      "a": "Never gate on a single run - N>=3-5 repeats, aggregate/pass^k with a pre-registered threshold. Separate deterministic hard-gates (tool-call accuracy, state) from statistical judge-based gates (drop across a run-set). Pin agent and judge model versions. Quarantine known-flaky tasks rather than letting them block unrelated PRs.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T08-agent-eval-d9",
+      "module": "T08-agent-eval",
+      "q": "An agent's tool-call accuracy is perfect but users still report bad experiences. Where do you look?",
+      "a": "Tool-call accuracy doesn't capture trajectory quality (wasteful-but-technically-correct paths, poor error recovery, excessive step count/latency) or whether the full sequence actually solved the user's goal. Check the six-dimension trajectory judge breakdown and latency/step-count distributions specifically.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T08-agent-eval-d10",
+      "module": "T08-agent-eval",
+      "q": "How do the biases from LLM-as-judge apply when using a judge to score full agent trajectories, and what's the additional risk?",
+      "a": "Verbosity, self-preference, and position bias (when comparing trajectories pairwise) all carry over directly. Additional risk: trajectory traces are long, so the judge's own long-context degradation is a failure mode a short single-turn judge call doesn't face - calibrate with more human review time per trace.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T08-agent-eval-d11",
+      "module": "T08-agent-eval",
+      "q": "How would you evaluate a multi-agent system where a supervisor delegates to sub-agents?",
+      "a": "Evaluate each sub-agent's trajectory and tool-call accuracy independently (attributable regressions), plus the supervisor's routing/delegation decisions as their own trajectory-scored layer, plus handoff-fidelity checks - does the sub-agent's uncertainty/caveats survive being summarized back to the supervisor without being silently dropped.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T08-agent-eval-d12",
+      "module": "T08-agent-eval",
+      "q": "Your full eval suite takes 6 hours with N=5 repeats. How do you make this practical for CI?",
+      "a": "Tier it: a fast, small, high-signal subset (highest-risk/frequency tasks, full rigor) gates every PR in minutes; the full suite runs on a slower cadence (nightly/pre-release) and gates the actual release. Periodically validate the fast subset actually correlates with the full suite's failure modes.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-agent-eval-d13",
+      "module": "T08-agent-eval",
+      "q": "Why should tool-call argument correctness usually be a deterministic check rather than an LLM judge call?",
+      "a": "Deterministic verification (exact match, regex, range/verifier function) is cheaper, faster, and carries no judge bias for arguments that can be checked mechanically. Reserve an LLM judge only for genuinely open-ended fields (free-text search query) with no deterministic 'close enough' notion.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T08-agent-eval-d14",
+      "module": "T08-agent-eval",
+      "q": "Name the reference benchmark shape worth imitating for building your own domain-specific agent eval, and its key metric.",
+      "a": "tau-bench/tau2-bench: realistic multi-turn tool-and-simulated-user tasks against a real mutable backend, checked against actual state plus a policy document. Key metric: pass^k, which forces confronting nondeterminism instead of reporting an optimistic pass@1.",
+      "difficulty": "mid"
+    }
+  ]
+}

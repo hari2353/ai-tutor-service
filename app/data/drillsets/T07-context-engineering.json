@@ -1,0 +1,102 @@
+{
+  "drills": [
+    {
+      "id": "T07-context-engineering-d1",
+      "module": "T07-context-engineering",
+      "q": "Context engineering vs prompt engineering in one sentence each.",
+      "a": "Prompt engineering: authoring a fixed set of instructions once. Context engineering: deciding on every turn of a loop which tokens occupy a finite attention budget, most of which were generated (tool results, prior assistant turns) rather than authored.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-context-engineering-d2",
+      "module": "T07-context-engineering",
+      "q": "Why is cost quadratic in turns?",
+      "a": "The model is stateless, so the whole prefix re-sends every turn while it also grows. cumulative_input = turns*base + growth*turns*(turns-1)/2.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-context-engineering-d3",
+      "module": "T07-context-engineering",
+      "q": "Name the five context zones and which lever touches which.",
+      "a": "Zone 1 stable prefix (cache it, never reorder). Zone 2 protected: task, constraints, open items, IDs, last correction (never compacted). Zone 3 retrieved/recap (rebuilt each turn; compaction writes here). Zone 4 working set: last N turns and recent tool output (compaction and context editing operate here). Zone 5 headroom for max_tokens. Subagents and progress files move work out of zones 3 and 4 entirely.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-context-engineering-d4",
+      "module": "T07-context-engineering",
+      "q": "Turn 40, the agent used the wrong order id. Root cause and two fixes.",
+      "a": "The summariser dropped the identifier, because summaries lose numbers and IDs first. Fixes: a Verbatim values section in the recap schema, plus mechanical ID verification that regexes identifiers out of the compacted region and refuses the compaction if any are missing. Structural fix: put the ID in the protected block so the summariser never sees it.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-context-engineering-d5",
+      "module": "T07-context-engineering",
+      "q": "You get a 400: tool_result without a matching tool_use. What did your compactor do wrong?",
+      "a": "It cut the boundary between a tool_use block and its tool_result, orphaning one half. Fixes: snap the split boundary forward past any message starting with a tool_result, and refuse to compact while a tool call is pending.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-context-engineering-d6",
+      "module": "T07-context-engineering",
+      "q": "Give a context-editing config where enabling it makes things WORSE.",
+      "a": "A 150k stable prefix with a small trigger and no clear_at_least, clearing ~2k every couple of turns. You reclaim almost nothing and pay a full cache write repeatedly, so cost rises with no quality change.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-context-engineering-d7",
+      "module": "T07-context-engineering",
+      "q": "Anthropic reported 29% and 39%. Which is which, and what is the interesting reading?",
+      "a": "Context editing alone: +29% on an internal agentic-search eval. Memory tool plus context editing: +39%. The interesting reading is that 29 of the 39 points came from REMOVING stale tool results rather than adding recall, which is the strongest published evidence that subtraction beats addition on long tool-heavy runs. Separately, a 100-turn web search eval saw 84% fewer tokens.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-context-engineering-d8",
+      "module": "T07-context-engineering",
+      "q": "Cost is 4x the estimate. Six fixes in priority order.",
+      "a": "1) Get the per-zone token ledger; do not guess. 2) Truncate tool results at the tool boundary. 3) Verify the stable prefix is byte-stable and cached (~0.1x on reads). 4) Enable tool-result clearing with a sensible clear_at_least. 5) Compact at 60% and route the summary call to a cheaper model. 6) Only then consider subagents or a smaller main model. The first four also improve QUALITY, because they remove distractors.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-context-engineering-d9",
+      "module": "T07-context-engineering",
+      "q": "The agent keeps retrying an approach that already failed after a compaction. Fix.",
+      "a": "The recap schema had no 'Failed approaches' section. Add it, and make it explicit that omitting failures causes the next turn to retry them. It is the highest-value section after Open items.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-context-engineering-d10",
+      "module": "T07-context-engineering",
+      "q": "Write the compaction survival test you would put in CI.",
+      "a": "A scripted-model golden run: a hard constraint at turn 1, an identifier at turn 3, an open item created at turn 10. Force three compactions. Assert at turn 90 that the constraint, the open item, and the identifier are all present and exact. Deterministic, cheap, and it catches the entire class of compaction-loss bugs.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-context-engineering-d11",
+      "module": "T07-context-engineering",
+      "q": "Design the context strategy for a 3-hour codebase migration agent.",
+      "a": "Zone 1: cached system prompt plus a deliberately small tool set (glob, grep, read, edit, run_tests). Zone 2: protected block regenerated each turn from progress.md - task, success criteria, the do-not-touch constraint, open items, verbatim values. Zone 3: <progress_so_far> from the last compaction. Zone 4: last ~6 turns, every tool truncating at the boundary (grep returns file:line, tests return failures only). Just-in-time retrieval over pre-loading. Tool-result clearing with keep 5 and exclude_tools protecting the plan. Compaction at 60% with the six-section schema plus ID verification. Read-only subagents for exploration returning 1.5k with pointers. Never let a subagent write.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-context-engineering-d12",
+      "module": "T07-context-engineering",
+      "q": "Three hours means many compactions. How do you stop quality collapsing?",
+      "a": "Make the append-only progress FILE the source of truth, not the recap chain, so each compaction seeds from the file rather than from the previous summary - otherwise you get summaries of summaries and brevity-bias collapse. Cap compactions per run and alert past ~4, because more than that means per-turn growth is the real bug and the fix is upstream at the tool.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-context-engineering-d13",
+      "module": "T07-context-engineering",
+      "q": "Defend 'more tokens makes agents worse' to a skeptical staff engineer.",
+      "a": "Three mechanisms: n^2 pairwise attention dilutes per-relationship mass; training distributions are short-sequence dominated so there are fewer parameters for context-wide dependencies; position-encoding interpolation trades positional precision for length. One measurement: 20-50% accuracy loss from 10k to 100k+ across 18 frontier models, with distractors and needle-question dissimilarity driving more damage than raw length. Corollary: 'just in case' retrieval is negative-value, and subtraction is the highest-leverage operation available.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-context-engineering-d14",
+      "module": "T07-context-engineering",
+      "q": "One week to improve context handling. What do you do each day?",
+      "a": "Day 1: instrument the per-zone token ledger; everything after is guessing without it. Days 2-3: fix the two tools returning the most tokens per call to return summaries plus pointers (free, improves cost AND quality). Day 4: enable tool-result clearing with clear_at_least sized from the cache break-even. Day 5: the protected block, a progress file, and the compaction survival test in CI. Explicitly NOT: building a subagent architecture or tuning a summariser prompt - lower leverage, higher risk.",
+      "difficulty": "staff"
+    }
+  ]
+}

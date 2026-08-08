@@ -1,0 +1,200 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-loop-engineering-c1",
+      "topic": "Loop Engineering",
+      "q": "Name the two distinct token quantities in an agent loop and how they behave differently.",
+      "a": "context_tokens is what is in THIS agent's window right now: it drives compaction, is per-agent, and DECREASES when you compact. billed_tokens is everything the run has ever paid for, including every subagent's isolated context and every summarizer call: it drives cost, is per-run, and only increases. Compaction lowers the first and raises the second, so enforcing a cost budget against context_tokens makes spend appear to fall while you pay more.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c2",
+      "topic": "Loop Engineering",
+      "q": "How do cost, steps and wall-clock compose across nested subagents?",
+      "a": "Cost and billed tokens are additive and must be RESERVED before dispatch, not checked, because check-then-spend is a TOCTOU bug that lets N parallel children overshoot by up to Nx. Steps need TWO counters: local_steps (this loop's cap) and tree_steps (run-wide), because a child's steps must not terminate the parent early but must consume the run's total. Wall-clock is inherited as an ABSOLUTE monotonic timestamp; passing a duration gives each nested level its own full timeout, so three levels of 600s becomes 1,800s.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c3",
+      "topic": "Loop Engineering",
+      "q": "Describe the budget reservation pattern and its diagnostic symptom when missing.",
+      "a": "At delegation time the parent pessimistically debits the child's maximum from its own remaining budget, hands the child a budget capped at that reservation, and credits back (reservation - actual) on return. Because the debit happens once in the parent's thread before any child starts, no lock is needed. Symptom when missing: p99 run cost sits at roughly fanout x the configured cap while every individual subagent trace shows it stayed under budget.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c4",
+      "topic": "Loop Engineering",
+      "q": "List the nine stop conditions.",
+      "a": "1 verified natural termination (no tool call AND verification passes). 2 local step cap. 3 tree step cap. 4 billed-token budget. 5 cost budget. 6 absolute wall-clock deadline. 7 no-progress detector. 8 compaction circuit breaker. 9 external interrupt (user cancel, kill switch, policy revocation, parent cancellation), cooperative at a tool boundary.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c5",
+      "topic": "Loop Engineering",
+      "q": "Describe the five-level compaction cascade with triggers and costs.",
+      "a": "1 Tool-result budget: single result over ~50,000 chars, persist to disk keeping a 2 KB preview and path, zero cost, reversible. 2 Snip: stale scaffolding, zero cost, must report tokens freed. 3 Microcompact: cold path (cache expired, ~5 min TTL) rewrites old tool results; hot path uses API-level cache_edits to preserve a 100K+ cached prefix; zero API calls. 4 Context collapse: ~90% utilisation, projection-based folding, zero cost, REVERSIBLE. 5 Autocompact: ~87% utilisation, forks a summarizer, one API call, IRREVERSIBLE. Collapse active suppresses autocompact.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c6",
+      "topic": "Loop Engineering",
+      "q": "Cheap compaction freed 30K tokens and expensive autocompact fired anyway. Why?",
+      "a": "The autocompact threshold is computed from the last assistant message's usage, which still reflects the pre-snip context size. The freed tokens were not credited to the trigger. Claude Code threads snipTokensFreed into the threshold calculation for exactly this. General rule: every cheap shaper must report tokens_freed and every later trigger must compute from the corrected number.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c7",
+      "topic": "Loop Engineering",
+      "q": "How does compaction interact with tool-result truncation, and which is higher leverage?",
+      "a": "Truncation changes the RATE of context growth; compaction changes the LEVEL. Truncating at the tool boundary is strictly higher leverage because those tokens never enter context, so compaction fires less often and you make fewer irreversible summarizer calls. A high compaction rate means the bug is upstream: fix the tool. Also: compaction must preserve persisted-output pointers verbatim, or Level 1's disk path gets paraphrased away and the artifact becomes unreachable.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c8",
+      "topic": "Loop Engineering",
+      "q": "Why does microcompact have two code paths?",
+      "a": "Cache state. Any modification to old messages invalidates the cached prefix from that point. When the cache is already cold (user idle past the ~5-minute TTL) the rebuild is inevitable, so it directly rewrites message content to a placeholder. When the cache is hot, holding 100K+ tokens, direct modification is a large cost hit, so the edit is expressed as API-level cache_edits blocks that delete tool-result references server-side while the local message array is returned unchanged. The paths are mutually exclusive and cold takes priority.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c9",
+      "topic": "Loop Engineering",
+      "q": "What must happen immediately after a heavy compaction, and why?",
+      "a": "Post-compaction recovery, because the immediate failure is the agent re-reading files it just edited or making contradictory changes. Concretely: restore the last ~5 recently-read files at up to 5K tokens each, restore activated skills at up to 25K tokens total, re-announce deferred tools, agent lists and MCP directives, reset context-collapse state, and restore plan-mode state if it was active.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c10",
+      "topic": "Loop Engineering",
+      "q": "Why does compaction need a circuit breaker? Give the incident numbers.",
+      "a": "Because if the context is irrecoverably over limit, the fourth attempt fails too. Anthropic's March 2026 telemetry showed 1,279 sessions with 50+ consecutive autocompact failures, the worst hitting 3,272, wasting roughly 250,000 API calls per day globally. The fix was MAX_CONSECUTIVE_AUTOCOMPACT_FAILURES = 3. General principle: any self-healing mechanism inside a loop needs a breaker, or the fix becomes the new failure mode.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c11",
+      "topic": "Loop Engineering",
+      "q": "How should you count context tokens, and what is the error rate of the naive approach?",
+      "a": "Anchor on the usage field returned by the most recent API response as ground truth and estimate only the messages added since. That yields under 5% error with no tokenizer round-trip. Pure client-side tokenizer estimation carries 30%+ error, which is enough to fire the compaction cascade too early (wasting the cache) or too late (413 prompt-too-long).",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c12",
+      "topic": "Loop Engineering",
+      "q": "Argument-hash repeat detection never fires but the agent is stuck. Why, and what replaces it?",
+      "a": "The model varies its arguments while making no progress: search('clickhouse OOM'), search('clickhouse out of memory'), search('clickhouse memory error') are three distinct hashes and zero progress. Replace with a state-delta signature: dirty-file hashes, passing-test count, closed-todo count, artifact count. Unchanged for K about 4 steps is evidence, not a heuristic.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c13",
+      "topic": "Loop Engineering",
+      "q": "Give the three-stage no-progress escalation.",
+      "a": "K about 4: nudge, naming the specific absence ('no file modified, no test outcome changed, no todo closed in 4 steps'), ask for the current hypothesis, require a different approach. K about 7: constrain, shrinking the visible tool registry to the phase-relevant subset. K about 10: escalate, stop with stop_reason='no_progress' and hand the trajectory to a human rather than burning the remaining budget. All interventions are delivered as observations, never exceptions.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c14",
+      "topic": "Loop Engineering",
+      "q": "Why inject the remaining budget into the model's context?",
+      "a": "Because temporal awareness appears orthogonal to reasoning capability: explicit temporal feedback in the loop measurably improves performance on deadline-constrained tasks. An agent that knows it has six steps and 240 seconds left triages; an agent that does not, explores. Harness-side enforcement alone wastes capability. LangChain ships this as time-budget warnings injected into context.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c15",
+      "topic": "Loop Engineering",
+      "q": "Name five loop invariants and the symptom each violation produces.",
+      "a": "messages[0] byte-identical across iterations, else cache_read near zero and cost 5-10x. Every tool_use id has exactly one matching tool_result before the next model call, else API 400 after a partial failure or cancellation. thinking blocks preserved when returning tool results, else silent multi-step reasoning degradation with no error. Task, open_items and persisted-output paths survive every compaction, else turn-40 amnesia or an unreachable artifact. context_tokens strictly decreases across a successful compaction, else you paid for a no-op.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c16",
+      "topic": "Loop Engineering",
+      "q": "Which loop invariant should you build first, and why?",
+      "a": "Determinism of context assembly: replaying the event log to step k must produce a byte-identical assembled request. It is the precondition for everything else, since without it you cannot snapshot-test, cannot resume correctly, and cannot bisect a regression. It fails for boring reasons: a dict whose iteration order varies, a datetime.now() in the prompt, tools listed in set order, or an injected file whose contents changed.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c17",
+      "topic": "Loop Engineering",
+      "q": "What are the three requirements for a resumable loop?",
+      "a": "1 A typed append-only event log rather than a message array, with messages derived from events. 2 Deterministic reconstruction, so rehydrate(events[:k]) is byte-identical to the original step k: logical clock rather than now(), stable ordering, versioned prompt templates recorded in the event, resolved file contents stored rather than paths. 3 Checkpoint boundaries chosen around side effects: checkpoint after appending the tool result, and make the execution-to-persistence gap safe with idempotency keys.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c18",
+      "topic": "Loop Engineering",
+      "q": "What is hibernate-and-wake, and how is it stronger than checkpointing?",
+      "a": "The loop must be able to end deliberately, write a handoff artifact, and be resumed by a FRESH context that never saw the earlier turns. Meta's Ranking Engineer Agent does this to resume interrupted 6-hour tasks across multi-day pipelines; Anthropic's version is an initializer agent handing off to a coding agent with feature lists, git commits and test gates as cross-session state. Design rule: the handoff artifact must be sufficient alone. Test: kill the process, start a fresh one, see whether it makes progress.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c19",
+      "topic": "Loop Engineering",
+      "q": "Give the worked reliability table for a 12-step task and state which controls buy the most.",
+      "a": "Bare loop p=0.90: 0.90^12 = 28%. Plus errors-as-observations p=0.94: 48%. Plus no-progress detection: about 55%. Omitting compaction (0.94^8 x 0.85^4): 32%, showing compaction removes a floor rather than raising a ceiling. Plus checkpoint-and-resume with up to 2 retries, collapsing transient failure (0.036^3 about 0) to p=0.976: 0.976^12 = 75%. Plus a deterministic verifier: reported drops 75% to 72% but TRUE-correct rises about 67% to 72%. Biggest wins: errors-as-observations and resume, roughly +19 points each.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c20",
+      "topic": "Loop Engineering",
+      "q": "Why won't a better model remove the need for loop controls?",
+      "a": "It moves p, which is exponentiated, so it genuinely helps: 0.98^12 = 79% with no controls. But it does not address the failure classes structurally. A better model still hits a 503, still exceeds the context window at turn 40, still occasionally claims success on a red suite. And the evidence points to spending on the harness: LangChain moved a coding agent from rank 30 to top 5 on Terminal Bench 2.0 with harness-only changes and no model swap. Controls compose with model quality, they do not compete with it.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c21",
+      "topic": "Loop Engineering",
+      "q": "Give the reference numbers for Claude Code's production loop.",
+      "a": "A 1,729-line async generator with a 1,421-line while(true) body and 9 distinct named continue points. State machine rather than recursion, because recursion blew the call stack on long conversations. Token budget checked TWICE per iteration, before the model call and after. Streaming tool execution: a 5-tool-call turn goes from 30s sequential to 18s, a 40% latency win from architecture alone. And stop_reason === 'tool_use' is not reliably set, so detect tool calls by watching for tool_use blocks during streaming.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c22",
+      "topic": "Loop Engineering",
+      "q": "Why check the budget twice in one loop iteration?",
+      "a": "The checks answer different questions. Before the model call: should we spend the next request at all given what is left? After: did this response push us over, and should we inject a 'you have N steps left' nudge or stop? Skipping the pre-call check means you always pay for one more request than the budget allowed, which at large output sizes is not a rounding error.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c23",
+      "topic": "Loop Engineering",
+      "q": "What should you log per iteration, and which two fields matter most?",
+      "a": "run and parent-run id, iteration, phase, model/version/reasoning-effort, prompt_prefix_hash, full usage including cache read/write, context_tokens before and after, cumulative billed tokens and USD, compaction levels fired with tokens freed and compaction cost, per-tool-call name/decision/validation/latency/bytes, progress_signature, steps_without_progress, transition_reason, and latency split into TTFT/total/tool-wall. The two that matter most: prompt_prefix_hash (catches prompt drift and cache breakage) and transition_reason (turns 'it looped' into 'it took the reactive_compact transition 40 times').",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c24",
+      "topic": "Loop Engineering",
+      "q": "cost_budget is your most common stop_reason. Raise the cap?",
+      "a": "No. That means the agent does not work and the budget is hiding it. Budgets are backstops, not design. Fix it with fewer steps or better tools: truncate tool results at the source, give one good tool instead of three weak ones, cache aggressively, route simple turns to a smaller model. Raising the cap converts a bounded failure into an unbounded one, and it is the easiest wrong decision in the space because it is a one-line config change.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c25",
+      "topic": "Loop Engineering",
+      "q": "p99 step count is 24 and the mean is 4. Diagnose.",
+      "a": "A bimodal distribution: most tasks finish fast, a tail hits the step cap. This is why you alert on p99 for steps and cost, since the mean hides runaways entirely. Segment the tail by stop_reason and transition_reason. local_step_budget with flat progress_signature means stuck runs, so fix progress detection and tools. A single dominant transition_reason like reactive_compact means fix upstream truncation. Correlation with one tool's error rate means fix the tool. Do not just lower the cap; that converts slow failures into fast ones and silently drops tasks that legitimately needed 15 steps.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c26",
+      "topic": "Loop Engineering",
+      "q": "Streaming tool execution: what does it buy and what does it cost?",
+      "a": "Buys roughly 40% latency: a 5-tool-call turn goes from 30s sequential to 18s when tool 1 starts while the model is still generating call 3. Costs correctness surface: cancellation, ordering and partial-failure semantics get materially harder, and the specific failure is a cancelled or partially-failed turn leaving a tool_use with no matching tool_result, which is an API 400 on the next call. Prerequisite: your 1:1 pairing invariant plus synthesizing a 'cancelled' tool result on the cancel path.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c27",
+      "topic": "Loop Engineering",
+      "q": "Agent-controlled versus harness-controlled compaction: which and when?",
+      "a": "Harness-controlled at a token threshold is the default and the correct starting point. Agent-controlled (the model calls a compression tool when it judges the moment safe) is better in principle because it avoids reactive-at-limit compaction interrupting a subtask mid-flight and corrupting in-flight reasoning; the Active Context Compression result is 22.7% token reduction with no accuracy loss on long-horizon tasks. But it adds a failure mode where the model never calls the tool and you hit the wall anyway. Ship threshold-based first, add the tool second, keep the threshold as the backstop.",
+      "module": "T07-loop-engineering"
+    },
+    {
+      "id": "T07-loop-engineering-c28",
+      "topic": "Loop Engineering",
+      "q": "When should you not build the full loop apparatus?",
+      "a": "Short read-only tasks: a step cap and a deadline suffice; the nine conditions and five-level cascade are a response to long runs. Deterministic workflows: write the pipeline. When Temporal or Step Functions already exists in the org: event log, deterministic replay, checkpointing, idempotent retries and day-long human pauses IS a workflow engine and you will build a worse one, so keep loop POLICY (compaction, progress detection, verification) and buy loop DURABILITY. When a managed harness already ships it, for example Agent Framework's iteration limit, compaction strategy, per-call history persistence, approvals and OpenTelemetry.",
+      "module": "T07-loop-engineering"
+    }
+  ]
+}

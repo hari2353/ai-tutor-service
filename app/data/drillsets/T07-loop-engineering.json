@@ -1,0 +1,214 @@
+{
+  "drills": [
+    {
+      "id": "T07-loop-engineering-d1",
+      "module": "T07-loop-engineering",
+      "q": "Name the two token quantities in a loop and say which one drives compaction and which drives cost.",
+      "a": "context_tokens drives compaction (per-agent, shrinks when you compact). billed_tokens drives cost (per-run, includes subagents and summarizer calls, only grows).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-loop-engineering-d2",
+      "module": "T07-loop-engineering",
+      "q": "List the nine stop conditions.",
+      "a": "Verified natural termination, local step cap, tree step cap, billed-token budget, cost budget, absolute wall-clock deadline, no-progress detector, compaction circuit breaker, external interrupt.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-loop-engineering-d3",
+      "module": "T07-loop-engineering",
+      "q": "Name the five compaction levels in order, cheapest first.",
+      "a": "Tool-result budget (persist at ~50K chars, 2 KB preview), snip, microcompact, context collapse (~90%, reversible), autocompact (~87%, one API call, irreversible). Four of the five cost zero API calls.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-loop-engineering-d4",
+      "module": "T07-loop-engineering",
+      "q": "Three subagents run in parallel under a $1.00 run budget. Each stayed under budget. Total spend was $2.90. What happened?",
+      "a": "Time-of-check-to-time-of-use on a shared counter: all three read the same remaining budget, all passed, all spent. Fix is reservation, where the parent pessimistically debits each child's maximum before dispatch and credits back the unspent portion on return.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d5",
+      "module": "T07-loop-engineering",
+      "q": "Your nested agent tree takes 3x the configured timeout. Root cause?",
+      "a": "The deadline was passed as a duration, so each nesting level restarted its own clock. Pass an absolute monotonic timestamp that children inherit and never re-derive.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d6",
+      "module": "T07-loop-engineering",
+      "q": "Why do steps need two counters while cost needs only one?",
+      "a": "A child's steps must not consume the parent's local cap, or the parent terminates early through no fault of its own; but they must consume the run-wide tree cap, or N children multiply your ceiling by N. Cost is unambiguously additive up the tree, so one counter suffices, but it must be reserved rather than checked.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d7",
+      "module": "T07-loop-engineering",
+      "q": "A subagent burned 120K tokens. How much did the parent's context grow, and how much did the bill grow?",
+      "a": "The parent's context grew roughly by the size of the returned summary, not 120K, because isolation is the point of the subagent (measured at about 67% fewer tokens than skills in multi-domain scenarios). The run's bill grew by the full 120K plus any compaction the child performed. Isolation is a context property, not a cost property.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-loop-engineering-d8",
+      "module": "T07-loop-engineering",
+      "q": "Cheap shapers freed 30K tokens and the expensive summarizer fired anyway. Why?",
+      "a": "The autocompact threshold was computed from the last assistant message's usage, which still reflected the pre-snip size. Freed tokens were not credited. Every shaper must report tokens_freed and every later trigger must compute from the corrected number.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-loop-engineering-d9",
+      "module": "T07-loop-engineering",
+      "q": "Why does microcompact have a hot path and a cold path?",
+      "a": "Cache state. Cold (idle past the ~5-minute TTL): the rebuild is inevitable, so rewrite message content directly. Hot (100K+ cached prefix): direct modification would invalidate the cache, so use API-level cache_edits to delete tool-result references server-side and return the local message array unchanged. Mutually exclusive, cold takes priority.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-loop-engineering-d10",
+      "module": "T07-loop-engineering",
+      "q": "Name five things compaction can break.",
+      "a": "Drops a pending obligation (carry open_items). Paraphrases away a persisted-output path so a large artifact becomes unreachable. Invalidates the prompt cache from the point of modification. Launders authority, since user instructions and untrusted tool results go through the same summarizer with no classification step. Causes immediate post-compaction confusion, so you need recovery: restore last ~5 read files at up to 5K tokens each, skills up to 25K total, re-announce tools and MCP directives, restore plan mode.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-loop-engineering-d11",
+      "module": "T07-loop-engineering",
+      "q": "Compaction keeps failing. What do you do, and what are the incident numbers?",
+      "a": "Circuit-break at 3 consecutive failures; if the context is irrecoverably over limit, the fourth attempt fails too. Anthropic's March 2026 telemetry: 1,279 sessions with 50+ consecutive autocompact failures, worst 3,272, roughly 250,000 wasted API calls per day, fixed with MAX_CONSECUTIVE_AUTOCOMPACT_FAILURES = 3.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d12",
+      "module": "T07-loop-engineering",
+      "q": "What is the error rate of client-side token estimation versus anchoring on server usage?",
+      "a": "Pure client-side tokenizer estimation carries 30%+ error. Anchoring on the most recent response's usage field and estimating only the delta gives under 5%, with no tokenizer round-trip.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d13",
+      "module": "T07-loop-engineering",
+      "q": "Your hash-based no-progress detector never fires but the agent is clearly stuck. Why?",
+      "a": "The model varies arguments while making no progress. Three near-identical searches produce three distinct hashes and zero forward motion. Detect on state delta instead: dirty-file hashes, passing-test count, closed-todo count, artifact count.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d14",
+      "module": "T07-loop-engineering",
+      "q": "Give the three-stage escalation for a stuck agent with rough thresholds.",
+      "a": "K about 4: nudge naming the specific absence and demanding a hypothesis plus a different approach. K about 7: shrink the visible tool set to the phase-relevant subset. K about 10: stop with stop_reason='no_progress' and escalate the trajectory to a human. All as observations, never exceptions.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d15",
+      "module": "T07-loop-engineering",
+      "q": "The task has no natural progress metric. What does that tell you?",
+      "a": "Create one if you can (passing-test count, lint-error count, unresolved-todo count, requirements with evidence attached). If you genuinely cannot, that is important information: you also cannot verify completion, so natural termination is an unverifiable claim and the task needs a human gate rather than autonomy.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-loop-engineering-d16",
+      "module": "T07-loop-engineering",
+      "q": "Why inject remaining steps, seconds and dollars into the model's context?",
+      "a": "Temporal awareness appears orthogonal to reasoning capability, and explicit temporal feedback measurably improves deadline-constrained performance. An agent that knows it has six steps left triages; one that does not, explores.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d17",
+      "module": "T07-loop-engineering",
+      "q": "You get an API 400 'invalid conversation' after a partially failed turn. Which invariant broke?",
+      "a": "1:1 pairing: every tool_use id must have exactly one matching tool_result before the next model call. On cancellation or partial failure, synthesize a tool_result saying 'cancelled' rather than omitting it.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d18",
+      "module": "T07-loop-engineering",
+      "q": "Multi-step reasoning quality degraded with no error in the logs. Likely cause?",
+      "a": "thinking blocks were dropped when returning tool results. They must be preserved; omitting them silently breaks multi-step reasoning, and thinking mode cannot change mid-turn.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-loop-engineering-d19",
+      "module": "T07-loop-engineering",
+      "q": "Which loop invariant do you build first, and why?",
+      "a": "Determinism: replaying the event log to step k must produce a byte-identical assembled request. It is the precondition for snapshot testing, correct resumption and bisecting a regression, and it fails for boring reasons (unstable dict order, datetime.now(), set-ordered tool lists, changed injected files).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-loop-engineering-d20",
+      "module": "T07-loop-engineering",
+      "q": "Name the three requirements for a resumable loop.",
+      "a": "A typed append-only event log with messages derived from events; deterministic rehydration (logical clock, stable ordering, versioned templates, resolved file contents); and checkpoint boundaries around side effects, checkpointing after the tool result with idempotency keys making the execution-to-persistence gap safe.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d21",
+      "module": "T07-loop-engineering",
+      "q": "An 8-hour task exceeds one context window. Is checkpointing enough?",
+      "a": "No. You need hibernate-and-wake: the loop must end deliberately, write a handoff artifact, and be resumable by a fresh context that never saw the earlier turns. The handoff artifact must be sufficient alone. Test: kill the process, start fresh, see whether it progresses.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-loop-engineering-d22",
+      "module": "T07-loop-engineering",
+      "q": "Compute completion for a 12-step task at p=0.90 and at p=0.976. What control gets you from the first to the second?",
+      "a": "0.90^12 = 28%. 0.976^12 = 75%. Errors-as-observations lifts p from 0.90 to 0.94 (48%), and checkpoint-and-resume with up to two retries collapses transient failure (0.036^3 about 0) to p=0.976. Those two controls are roughly +19 points each and are the two cheapest to build.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-loop-engineering-d23",
+      "module": "T07-loop-engineering",
+      "q": "What does adding a deterministic verifier do to your reported completion rate?",
+      "a": "It lowers it and raises true correctness. False successes that previously counted as completions become detected failures, so reported drops (about 75% to 72% in the worked model) while true-correct rises (about 67% to 72%). Your dashboard gets worse when you improve the system, which is why people resist it.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-loop-engineering-d24",
+      "module": "T07-loop-engineering",
+      "q": "Why check budgets twice per iteration?",
+      "a": "Pre-call asks whether to spend the next request at all; post-call asks whether this response pushed us over and whether to nudge or stop. Without the pre-call check you always pay for one more request than the budget allowed.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-loop-engineering-d25",
+      "module": "T07-loop-engineering",
+      "q": "If you could add only two trace fields, which and why?",
+      "a": "prompt_prefix_hash, which makes silent prompt drift and cache breakage visible at once, and transition_reason, which turns 'it looped' into 'it took the reactive_compact transition 40 times'. Without transition_reason a nine-continue-point loop is a black box even with full token accounting.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d26",
+      "module": "T07-loop-engineering",
+      "q": "p99 steps is 24, mean is 4. What is your first move?",
+      "a": "Segment, do not tune. Group the tail by stop_reason and transition_reason: local_step_budget with flat progress_signature means stuck runs; a single dominant transition means an upstream issue like context pressure; correlation with one tool's error rate means fix the tool. The tail is a different population.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d27",
+      "module": "T07-loop-engineering",
+      "q": "cost_budget is your top stop_reason. What do you do?",
+      "a": "Not raise the cap. It means the agent does not work and the budget is hiding it. Reduce steps or improve tools: truncate results at the source, consolidate weak tools, cache, route simple turns to a smaller model. Budgets are backstops, not design.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d28",
+      "module": "T07-loop-engineering",
+      "q": "How do you know the model has finished emitting tool calls so you can start executing?",
+      "a": "Not from stop_reason. Claude Code's own source notes that stop_reason === 'tool_use' is not always set correctly, so watch for tool_use blocks during streaming and treat the end of the content stream as the boundary. Depending on stop_reason for control flow is a loop bug that only shows up under load.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-loop-engineering-d29",
+      "module": "T07-loop-engineering",
+      "q": "Your long session dies at the context limit even though 'compaction is enabled'. First thing to check?",
+      "a": "Whether compaction is actually armed. Microsoft Agent Framework silently disables it unless you supply both a max context window size and a max output size, or a custom strategy. Assert at startup that compaction is armed, and alarm if it never fires during a run of more than 50 turns.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-loop-engineering-d30",
+      "module": "T07-loop-engineering",
+      "q": "When should you not build this loop machinery yourself?",
+      "a": "Short read-only tasks (step cap plus deadline suffices). Deterministic workflows (write the pipeline). When Temporal or Step Functions exists in the org, since event log plus deterministic replay plus checkpointing plus idempotent retries plus day-long pauses is a workflow engine you will build worse: keep loop policy, buy loop durability. Or when a managed harness already ships the controls you need.",
+      "difficulty": "warmup"
+    }
+  ]
+}

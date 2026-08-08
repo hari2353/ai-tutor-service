@@ -1,0 +1,95 @@
+{
+  "drills": [
+    {
+      "id": "T07-production-agent-loops-d1",
+      "module": "T07-production-agent-loops",
+      "q": "Name the four things that change between a demo loop and a production loop.",
+      "a": "Budget enforcement (client-only to shared/server-side), failure recovery (restart to resume-from-checkpoint), cancellation (Ctrl-C to cooperative flag at safe boundaries), and output (blocking response to multi-granularity streaming).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-production-agent-loops-d2",
+      "module": "T07-production-agent-loops",
+      "q": "Your run is scaled across 4 workers and each independently checks a $1.00 budget object before spending. Actual spend hits $3.80. What happened and what's the fix?",
+      "a": "Time-of-check-to-time-of-use: each worker's in-process budget check saw headroom independently, so multiple workers spent against the same logical cap. Fix: a shared, atomically-updated ledger (Redis/Postgres) as the actual enforcement point, with reservation (debit max-possible before the call, credit back after) rather than plain check-then-spend.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-production-agent-loops-d3",
+      "module": "T07-production-agent-loops",
+      "q": "A 10-step agent runs at 85% per-step reliability. What's the uncheckpointed completion rate, and what exactly does adding checkpointing change about that number?",
+      "a": "0.85^10 ~= 20%. Checkpointing does not raise this number -- it doesn't make any step more reliable. It lowers the COST of a failure: a failure now resumes from the last durable checkpoint instead of restarting from step zero, so a failure at step 7 loses one step's work instead of seven.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-production-agent-loops-d4",
+      "module": "T07-production-agent-loops",
+      "q": "Where should a checkpoint be taken relative to a tool call, and why not right before the tool executes?",
+      "a": "After the tool result is durably recorded, before the next model call. A crash mid-model-call then safely resumes by re-issuing a request that hasn't happened. Checkpointing before execution wouldn't help the hard case anyway -- a crash mid-execution can leave the side effect done with no recorded result, which only an idempotency key on the tool (not checkpoint placement) can fix.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-production-agent-loops-d5",
+      "module": "T07-production-agent-loops",
+      "q": "Why is an agent kill switch cooperative instead of preemptive?",
+      "a": "You can't forcibly interrupt an in-flight tool call without risking a half-completed side effect (e.g. a send-email call that completes after the kill but before your code records it). The flag is checked at safe boundaries between steps; a slow tool must accept and check its own cancellation token internally, since the harness can't reach inside a black-box call.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-production-agent-loops-d6",
+      "module": "T07-production-agent-loops",
+      "q": "What is a hard kill, when do you escalate to it, and why is it not correctness-safe by itself?",
+      "a": "Terminating the worker process outright (SIGKILL-equivalent), used after soft kill fails to resolve within a grace period (mirroring SIGTERM-then-SIGKILL, ~30s typical). It's not correctness-safe because it can leave a tool call executed with no recorded result -- recovery requires every mutating tool to have an idempotency key so the next attempt can check 'did this already happen' rather than repeat it.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-production-agent-loops-d7",
+      "module": "T07-production-agent-loops",
+      "q": "A run shows status 'cancelled' in your DB but tool-side logs show activity 30 seconds later. Diagnose.",
+      "a": "The kill-flag check interval is too coarse -- likely checked once per full loop iteration while a single tool call inside that iteration runs long (e.g. 90s). The gap between 'flag set' and 'worker checks flag' is exactly the observed lag; fix by checking at finer-grained boundaries (between model call and tool execution, and inside long tool calls via a cancellation token).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-production-agent-loops-d8",
+      "module": "T07-production-agent-loops",
+      "q": "Name the three streaming granularities for a production agent UI and what each one is for.",
+      "a": "Token (raw model deltas, fixes perceived latency during generation), step (harness-synthesized tool-call status events, fixes silence during tool execution), event (budget/checkpoint/compaction state, fixes transparency and debuggability).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-production-agent-loops-d9",
+      "module": "T07-production-agent-loops",
+      "q": "Users report a 5-tool-call agent turn as 'hung' even though it finished correctly in 25 seconds. Why, and what's the fix?",
+      "a": "Tool execution produces no text tokens, so a token-only streaming client sees pure silence for the whole 25 seconds. Fix: emit step-level events ('using tool: X') during tool execution -- harness-side, zero cost at the model layer.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-production-agent-loops-d10",
+      "module": "T07-production-agent-loops",
+      "q": "A model turn returns 3 parallel tool_use blocks; one tool fails. What do you send back, and what happens if you omit the failed one?",
+      "a": "A tool_result for all three, including is_error: true for the failed one -- never omit it. Omitting it leaves a tool_use with no matching tool_result, which the API rejects on the next request (every tool_use id needs exactly one paired tool_result).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-production-agent-loops-d11",
+      "module": "T07-production-agent-loops",
+      "q": "Retries against a recovering upstream are making its recovery slower. What's missing, and does respecting retry-after alone fix it?",
+      "a": "A fleet-level retry budget and jitter. Respecting retry-after alone doesn't fix it because every worker honoring the same value retries in sync, hitting the recovering service in one wave. Add full jitter on top, plus cap aggregate retries at a fraction of total request volume across the fleet.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-production-agent-loops-d12",
+      "module": "T07-production-agent-loops",
+      "q": "Why do you alert on p99 step count and cost per run rather than the mean?",
+      "a": "Step-count distributions are commonly bimodal: most runs finish fast, and a tail hits the step cap. A mean blends the tail into the fast majority and hides the runaway population entirely; p99 surfaces it.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-production-agent-loops-d13",
+      "module": "T07-production-agent-loops",
+      "q": "When would you deliberately NOT build durable checkpointing, a distributed kill switch, and a shared budget ledger?",
+      "a": "For short, synchronous, single-user tasks finishing in a few seconds -- a step cap and deadline suffice and the full apparatus is overhead. Also skip building it if the org already has a workflow engine (Temporal/Step Functions) that already provides checkpointing and durable retries, or if a managed agent platform already runs the loop server-side with these built in.",
+      "difficulty": "mid"
+    }
+  ]
+}

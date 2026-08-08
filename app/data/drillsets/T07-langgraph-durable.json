@@ -1,0 +1,102 @@
+{
+  "drills": [
+    {
+      "id": "T07-langgraph-durable-d1",
+      "module": "T07-langgraph-durable",
+      "q": "What is the minimum config needed to run a checkpointed graph, and what happens without it?",
+      "a": "`config={\"configurable\": {\"thread_id\": \"...\"}}`. Without a `thread_id` the checkpointer cannot save or resume state, and `interrupt()` cannot work at all, because `thread_id` is the primary key it loads from.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-langgraph-durable-d2",
+      "module": "T07-langgraph-durable",
+      "q": "Name the checkpointer implementations and the package each ships in.",
+      "a": "`InMemorySaver` in `langgraph-checkpoint` (bundled). `SqliteSaver`/`AsyncSqliteSaver` in `langgraph-checkpoint-sqlite`. `PostgresSaver`/`AsyncPostgresSaver`/`ShallowPostgresSaver` in `langgraph-checkpoint-postgres`. `CosmosDBSaver` in `langchain-azure-cosmosdb`. Match the async variant to `ainvoke`/`astream` or you block the event loop.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-langgraph-durable-d3",
+      "module": "T07-langgraph-durable",
+      "q": "State the reliability arithmetic for a 10-step agent at 85% per-step success, and what it implies about cost.",
+      "a": "0.85^10 ~= 20%, so four runs in five fail somewhere. Without checkpointing every failed run discards all completed work, making expected cost per successful completion roughly 1/0.20 = 5x a clean run. With checkpointing a failure at step 8 resumes at step 8, so a retry costs the remaining steps.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-langgraph-durable-d4",
+      "module": "T07-langgraph-durable",
+      "q": "A process dies mid-super-step with nodes A, B, C running in parallel and C throwing. What re-runs?",
+      "a": "Only C, and it re-runs from its FIRST LINE. A and B had their writes persisted at task level via `put_writes` before the super-step's snapshot committed (the `checkpoint_writes` table), so they are not re-executed. Pending writes protect siblings, not the failing node.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-langgraph-durable-d5",
+      "module": "T07-langgraph-durable",
+      "q": "A reviewer bounced a refund request three times and support now has four audit rows. Explain and fix.",
+      "a": "The audit insert was before the `interrupt()`. Resume restarts the node from line one, so the insert ran once per attempt plus the original. Fix: put the interrupt in a node that does nothing but interrupt and return the decision, and do the mutation in a downstream node that runs once after the decision is durable. If it must stay, make it an upsert or attach an idempotency key derived from `(thread_id, checkpoint_id)`.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-langgraph-durable-d6",
+      "module": "T07-langgraph-durable",
+      "q": "Your `interrupt()` never surfaces to the caller and the graph just completes. What did you do?",
+      "a": "Wrapped it in a bare `try/except Exception`. `interrupt()` pauses by raising a special `GraphBubbleUp` exception; a bare except catches it and the pause is swallowed. Catch specific exception types, or move the interrupt outside the try block.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-langgraph-durable-d7",
+      "module": "T07-langgraph-durable",
+      "q": "A node asks for name, then age only if `state['needs_age']`, then city. The user's city answer comes back as their age. Why?",
+      "a": "Resume values are matched to `interrupt()` calls STRICTLY BY INDEX within the task. Conditionally skipping the second interrupt shifts every subsequent index, so answer #2 lands on the third prompt. Keep the interrupt sequence in a node fixed and unconditional; move conditional prompts into separate nodes.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-langgraph-durable-d8",
+      "module": "T07-langgraph-durable",
+      "q": "Write the production Postgres setup and call out every non-obvious line.",
+      "a": "```python\npool = ConnectionPool(DB_URI, min_size=2, max_size=20,\n    kwargs={\"autocommit\": True, \"row_factory\": dict_row})\ncheckpointer = PostgresSaver(pool, serde=EncryptedSerializer.from_pycryptodome_aes())\ncheckpointer.setup()\n```\n`autocommit=True` or `.setup()` may not persist the DDL. `row_factory=dict_row` or every read raises `TypeError: tuple indices must be integers or slices, not str`. `setup()` belongs in a migration job (creates `checkpoints`, `checkpoint_blobs`, `checkpoint_writes`, `checkpoint_migrations`). `EncryptedSerializer` because checkpoints are plaintext prompts and outputs otherwise. Also set `LANGGRAPH_STRICT_MSGPACK=true`. Use `AsyncPostgresSaver` for async graphs.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-langgraph-durable-d9",
+      "module": "T07-langgraph-durable",
+      "q": "Design HITL for a refund approval a human may take three days to action. Name six decisions.",
+      "a": "1) `PostgresSaver`, never in-memory. 2) `thread_id` derived from the refund id so any replica can resume. 3) A node that ONLY interrupts, payload carrying everything needed to render the decision. 4) On interrupt, enqueue a review task and notify — never block a worker, since the graph waits indefinitely and nothing tells the human they have work. 5) The mutation in its own downstream node with an idempotency key from `(thread_id, checkpoint_id)` and a TTL over three days, run under `durability=\"sync\"`. 6) A sweeper that finds threads with interrupts pending longer than N hours and escalates.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-langgraph-durable-d10",
+      "module": "T07-langgraph-durable",
+      "q": "You called `update_state(cfg, values={\"messages\": [corrected]})` on a channel using `operator.add` and now the history has both versions. Fix?",
+      "a": "`update_state` values pass through the channel's reducer, so `operator.add` appended rather than replaced. Either wrap the value in `Overwrite([...])` to bypass the reducer, or use `add_messages` as the reducer so a message with a matching `id` replaces the existing one instead of being appended.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-langgraph-durable-d11",
+      "module": "T07-langgraph-durable",
+      "q": "What is the single highest-value integration test in a durable agent codebase, and why can't `InMemorySaver` run it?",
+      "a": "Two separate processes against one Postgres: process 1 starts the run to the interrupt and exits; process 2 (fresh interpreter, same DB, same `thread_id`) resumes and completes. `InMemorySaver` cannot pass it because the state lived on process 1's heap — which is exactly the property under test, and exactly the incident it prevents.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-langgraph-durable-d12",
+      "module": "T07-langgraph-durable",
+      "q": "You need to rename a state key and a node, and there are interrupted threads live. What's the plan?",
+      "a": "Expand/contract, like a DB column. State key: add the new key, dual-write both from the node, deploy, backfill or let live threads drain, then remove the old key in a later deploy — a straight rename LOSES saved state. Node rename: topology changes are only safe for COMPLETED threads; for interrupted ones renaming or removing a node is unsafe, so drain interrupted threads first, or add the new node and keep the old one as a no-op alias until nothing routes to it.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-langgraph-durable-d13",
+      "module": "T07-langgraph-durable",
+      "q": "When would you use Temporal instead of, or alongside, LangGraph checkpointers?",
+      "a": "When durability spans hours to days across multiple services, when you need cross-service compensation with real guarantees, when you need mature in-flight workflow visibility, or when the org already runs it. LangGraph gives agent-native primitives (token streaming, `interrupt()`, time travel over a message list) but documents at-least-once side effects. The pragmatic architecture for money movement is LangGraph for the reasoning loop and a durable engine for the transactional steps.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-langgraph-durable-d14",
+      "module": "T07-langgraph-durable",
+      "q": "Checkpoint writes are dominating p99 latency on a long chat thread. Three fixes, cheapest first.",
+      "a": "1) Switch `durability=\"sync\"` to `\"async\"` on the non-mutating path. 2) Get large payloads out of state — the full value of every channel is re-serialised each super-step, so a growing message list plus document text is quadratic; keep ids in state and blobs in a store. 3) `DeltaChannel` (beta, langgraph>=1.2) stores only the per-step delta with `snapshot_frequency=K` to bound read latency. Also: own a retention/archival job, since nothing prunes checkpoints.",
+      "difficulty": "mid"
+    }
+  ]
+}

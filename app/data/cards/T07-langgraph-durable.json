@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-langgraph-durable-c1",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "What four methods does `BaseCheckpointSaver` implement, and what does each surface as?",
+      "a": "`.put` (store a full snapshot; one write per super-step), `.put_writes` (per-task intermediate writes = pending-writes recovery), `.get_tuple` (surfaces as `graph.get_state()`), `.list` (surfaces as `graph.get_state_history()`). Async twins: `.aput`, `.aput_writes`, `.aget_tuple`, `.alist`, used automatically by `ainvoke`/`astream`.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c2",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "What does `put_writes` protect against?",
+      "a": "Within one super-step, each node's writes are persisted as task rows before the super-step's snapshot commits. If A, B, C run in parallel and C throws, A and B's writes are already durable and are NOT re-executed on resume. Only C re-runs. It protects siblings, NOT the failing node itself.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c3",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "Why does `InMemorySaver` not survive a deploy, and what is the second failure people miss?",
+      "a": "It is a Python dict on the process heap: a rolling deploy, K8s SIGTERM, autoscaler eviction, spot reclaim, or OOM kill destroys it. Second failure: it breaks at TWO REPLICAS even with no restart — the resume request load-balances to a pod with an empty dict. Symptom: `Command(resume=...)` on an unknown thread, so the graph silently starts over and the approval is ignored.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c4",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "What is `ShallowPostgresSaver` and what do you lose?",
+      "a": "A Postgres checkpointer that keeps only the LATEST checkpoint per thread. Durable and resumable, but `get_state_history()` is empty — no time travel, no forking, no audit trail of how the thread got here. Choose it deliberately, not by accident.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c5",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "List the `StateSnapshot` fields.",
+      "a": "`values` (channel values), `next` (tuple of nodes to run; `()` = complete), `config` (thread_id, checkpoint_ns, checkpoint_id), `metadata` (`source` in input|loop|update, `writes`, `step`), `created_at`, `parent_config` (None for the first), `tasks` (PregelTask: `id`, `name`, `error`, `interrupts`, optional `state`).",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c6",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "What are the possible values of `checkpoint_ns`?",
+      "a": "`\"\"` for the root graph; `\"node_name:uuid\"` for a subgraph invoked as that node; nested subgraphs join with `|`, e.g. `\"outer:uuid|inner:uuid\"`. Readable inside a node via `config[\"configurable\"][\"checkpoint_ns\"]`. Renaming a node changes the namespace and breaks interrupted threads about to enter it.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c7",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "What does `graph.invoke(None, prior_snapshot.config)` do, and what is the trap?",
+      "a": "Replay: nodes before that checkpoint are skipped (results already saved), nodes after it re-execute. The trap is that it is NOT a cached read — LLM calls, API calls, and interrupts all fire again and may return different results. Replaying from the final checkpoint (`next == ()`) is a no-op.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c8",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "What does `graph.update_state(...)` actually do, and what are its two subtleties?",
+      "a": "It FORKS: creates a new checkpoint branching from the specified one, leaving the original history intact. It does not roll back. Subtleties: (1) values pass through REDUCERS, so an `operator.add` channel accumulates your 'replacement' — wrap in `Overwrite` to replace; (2) `as_node=` attributes the update to a node, controlling which node runs next.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c9",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "When must you pass `as_node` explicitly to `update_state`?",
+      "a": "Three cases: parallel branches wrote in the same step so LangGraph can't infer which was last (otherwise `InvalidUpdateError`); the thread has no execution history (setting up state in a test); or you want to skip a node by making the graph think it already ran.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c10",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "Mechanically, what happens when a node calls `interrupt()`?",
+      "a": "It raises a special `GraphBubbleUp` exception the runtime catches; the runtime writes the checkpoint, surfaces the JSON-serialisable payload, and waits INDEFINITELY. Read it via `result[\"__interrupt__\"]` (v1 invoke), `result.interrupts` (v2), or `stream.interrupts`/`stream.interrupted` (`stream_events(version=\"v3\")`). Resume with `Command(resume=value)` on the same `thread_id`; that value becomes the return of `interrupt()`.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c11",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "State the four rules of writing a node that contains `interrupt()`.",
+      "a": "1) No mutating side effects before the interrupt — move them after or into their own node, because the node re-runs from its first line on every resume. 2) Never wrap `interrupt()` in a bare `try/except`; it works by raising, so `except Exception` swallows the pause. 3) Never conditionally skip or reorder interrupts — resume values are matched STRICTLY BY INDEX within the task. 4) Payloads must be JSON-serialisable: no functions, no class instances.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c12",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "What happens to in-flight tool side effects on resume, and what are the four mitigations in order?",
+      "a": "Sibling that completed in a failed super-step: safe (pending writes). The node that failed or interrupted: everything before that point RE-RUNS, because resume restarts the node from line one. Mitigations: (1) move the side effect after the interrupt or into its own node; (2) make it naturally idempotent (upsert, not insert); (3) idempotency key derived deterministically as `f\"{thread_id}:{checkpoint_id}:{op}\"` with TTL > the approval window; (4) wrap it in a `@task` so a completed result is retrieved on replay.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c13",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "Does LangGraph give you exactly-once side effects?",
+      "a": "No. It documents at-least-once and instructs you to make side effects idempotent: if a task starts but fails to complete, resumption re-runs it. Exactly-once is a property of the downstream system or of an idempotency layer you own, never of the orchestrator. Claiming otherwise fails the question.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c14",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "Name the three durability modes and what each loses on a crash.",
+      "a": "`\"exit\"`: writes only on exit (success, error, or interrupt) — a mid-run crash loses everything since the start; HITL still works because an interrupt counts as an exit. `\"async\"`: writes asynchronously while the next step runs — small window of loss; good default. `\"sync\"`: writes before the next step starts — nothing lost, highest overhead; use it around steps with external side effects.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c15",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "Why must a custom Postgres connection/pool use `autocommit=True` and `row_factory=dict_row`?",
+      "a": "`autocommit=True` is required or `.setup()` may not persist the DDL, so your tables silently never get created. `row_factory=dict_row` is required because the saver reads columns by name (`row[\"col\"]`); the default `tuple_row` raises `TypeError: tuple indices must be integers or slices, not str` on every read.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c16",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "What does `PostgresSaver.setup()` create, and where should you call it?",
+      "a": "`checkpoints`, `checkpoint_blobs`, `checkpoint_writes`, and a `checkpoint_migrations` table. It is idempotent but belongs in a migration job, not on every worker boot: N workers racing DDL on cold start is avoidable, and in a locked-down environment the app role may not have DDL rights.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c17",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "Two security settings every production checkpointer needs, and why.",
+      "a": "`serde=EncryptedSerializer.from_pycryptodome_aes()` (reads `LANGGRAPH_AES_KEY`) because checkpoints hold full prompts, tool arguments, and outputs in PLAINTEXT by default. And `LANGGRAPH_STRICT_MSGPACK=true` (or an explicit `allowed_msgpack_modules` list) so a compromised checkpoint store isn't a code-execution path into your workers via deserialisation.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c18",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "State the reliability arithmetic that justifies checkpointing.",
+      "a": "Reliability is multiplicative: p^n. 0.95^10 ~= 60%, 0.85^10 ~= 20%, 0.95^50 ~= 8%. At 0.85 over 10 steps, four runs in five fail somewhere; un-checkpointed, each retry re-pays the whole trajectory, so expected cost per success is ~5x a clean run. Checkpointing makes a failure at step 8 cost the remaining steps, not all of them. Retry raises p; checkpointing makes failure cheap. They are complements.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c19",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "How do you handle SIGTERM mid-run in langgraph >= 1.2, and what does drain NOT guarantee?",
+      "a": "Create a `RunControl`, register `signal.signal(SIGTERM, lambda *_: control.request_drain(\"sigterm\"))`, pass `control=control` to `invoke`, and catch `GraphDrained`; resume later with `invoke(None, config)`. Drain is COOPERATIVE and applies at the next super-step boundary. It does NOT cancel asyncio tasks or kill threads, so pair it with per-node timeouts and a hard supervisor deadline.",
+      "module": "T07-langgraph-durable"
+    },
+    {
+      "id": "T07-langgraph-durable-c20",
+      "topic": "LangGraph II: Checkpointers, interrupt()/HITL, Durable Resume",
+      "q": "Which graph and state changes are safe with live threads?",
+      "a": "For threads at the END of the graph: any topology change (add, remove, rename nodes and edges). For INTERRUPTED threads: all topology changes EXCEPT renaming or removing nodes, since a thread may be about to enter one. For state: adding and removing keys is fully compatible; RENAMING a key loses its saved state; incompatible type changes can break threads holding old values. Ship renames expand/contract.",
+      "module": "T07-langgraph-durable"
+    }
+  ]
+}

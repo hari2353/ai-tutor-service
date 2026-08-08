@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T17-elasticsearch-d1",
+      "module": "T17-elasticsearch",
+      "q": "You index a document and immediately search for it and get zero hits. Is this a bug?",
+      "a": "No -- documents become searchable only after the next refresh (default every 1 second), so a sub-second gap between index and searchability is expected near-real-time behavior.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-elasticsearch-d2",
+      "module": "T17-elasticsearch",
+      "q": "What's the difference between what refresh guarantees and what flush guarantees?",
+      "a": "Refresh guarantees visibility to search (new segment created). Flush guarantees durability (segments fsync'd to disk and translog cleared). A refreshed-but-not-flushed document is searchable but relies on the translog for crash recovery.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-elasticsearch-d3",
+      "module": "T17-elasticsearch",
+      "q": "A term query against a text field for an exact multi-word value returns no results even though the data is clearly there. What's wrong?",
+      "a": "The text field is analyzed into separate tokens; a term query compares the raw string against those tokens and never matches a whole phrase. Use a keyword field/sub-field for exact matching instead.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-elasticsearch-d4",
+      "module": "T17-elasticsearch",
+      "q": "You're about to bulk-load 500M documents. What's the standard refresh_interval playbook?",
+      "a": "Raise refresh_interval (or set -1) before the bulk load to reduce segment churn and merge pressure, then re-enable it and optionally force a refresh once the load completes.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-elasticsearch-d5",
+      "module": "T17-elasticsearch",
+      "q": "What do the BM25 parameters k1 and b each control?",
+      "a": "k1 controls term-frequency saturation (diminishing returns for repeated term occurrences); b controls document-length normalization (discounting term frequency relative to average document length).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-elasticsearch-d6",
+      "module": "T17-elasticsearch",
+      "q": "Should a hard condition like tenant_id = 42 go in a query clause or a filter clause, and why?",
+      "a": "Filter clause -- it's a yes/no eligibility check with no relevance contribution, and filters are cacheable and cheaper than scored query clauses.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-elasticsearch-d7",
+      "module": "T17-elasticsearch",
+      "q": "Cluster heap usage keeps climbing and latency degrades even though data volume has been flat for months. What should you suspect?",
+      "a": "Oversharding -- too many small shards accumulating per-shard memory and cluster-state overhead unrelated to actual data volume.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-elasticsearch-d8",
+      "module": "T17-elasticsearch",
+      "q": "What's the recommended shard size range, and how do you fix an already-oversharded index?",
+      "a": "Roughly 10-50GB per shard. Fix by reindexing into fewer, larger shards (or using _shrink for read-only indices) -- primary shard count can't be reduced live in place.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-elasticsearch-d9",
+      "module": "T17-elasticsearch",
+      "q": "A dashboard needs to page through 200,000 search results sequentially. from/size or search_after?",
+      "a": "search_after -- from/size cost grows with page depth and hits a hard ceiling (max_result_window, default 10,000); search_after uses a cursor from the last result's sort values for depth-independent sequential paging.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-elasticsearch-d10",
+      "module": "T17-elasticsearch",
+      "q": "A cardinality aggregation on a high-cardinality field returns a count that's off by a couple percent. Is this a bug?",
+      "a": "No -- cardinality aggregations use HyperLogLog++ by default, an approximate algorithm trading exactness for bounded memory. precision_threshold can be raised for tighter accuracy at higher memory cost.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-elasticsearch-d11",
+      "module": "T17-elasticsearch",
+      "q": "Users report search rankings look wrong for certain queries. What's your first diagnostic step, mechanically?",
+      "a": "Run the query with explain:true (or the _explain API) to get the exact per-term BM25 score breakdown, rather than guessing at relevance tuning blind.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-elasticsearch-d12",
+      "module": "T17-elasticsearch",
+      "q": "Your team already runs Elasticsearch for log search and now wants semantic search over the same documents at moderate scale. Add a dedicated vector DB or use Elasticsearch's native vector search?",
+      "a": "Use Elasticsearch's native dense_vector/HNSW support with hybrid RRF fusion -- it avoids new infrastructure and lets one request blend lexical and vector scores on the same documents; a dedicated vector DB is justified mainly at very large pure-vector scale with heavy filtering/multi-tenancy needs.",
+      "difficulty": "staff"
+    }
+  ]
+}

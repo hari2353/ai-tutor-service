@@ -1,0 +1,158 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-tool-engineering-c1",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "What is the core asymmetry that explains all of tool design?",
+      "a": "A traditional client has cheap memory, perfect recall, and reads docs once. A model has PAID context, no memory, and re-reads your description every single turn. So `list_contacts()` returning 5,000 rows is correct software and a broken tool. Your REST API is not your tool surface; one-to-one wrapping is the default mistake.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c2",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Why is the tool description prompt engineering rather than documentation?",
+      "a": "It is loaded into context every turn and is the primary thing steering tool selection and parameter construction. Anthropic reports that precise description refinements alone took Claude Sonnet 3.5 to state-of-the-art on SWE-bench Verified, and that Claude's web search tool was needlessly appending `2025` to queries until the description was fixed.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c3",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Give three canonical tool consolidations.",
+      "a": "`list_users` + `list_events` + `create_event` -> `schedule_event`. `read_logs` -> `search_logs` (matching lines plus context). `get_customer_by_id` + `list_transactions` + `list_notes` -> `get_customer_context`. Each removes definitions from context AND moves the loop/filter/join out of the model's reasoning into deterministic code.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c4",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "What are the two most common tool-use failures, and give the named example.",
+      "a": "Wrong tool selection and wrong parameters — especially with near-identical names. The named example is `notification-send-user` vs `notification-send-channel`. Fix: merge behind one tool with a `target_type` enum, or rename so the names differ structurally.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c5",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Six parameter-design rules that reduce model error.",
+      "a": "`user_id` not `user` (ambiguity). `Literal[...]` enums not free strings. Flat over deeply nested (valid JSON does not imply correct usage). Document formats with an example (`ISO 8601, e.g. 2026-07-26`). Explicit `max_results` with a default. `response_format: Literal[\"concise\",\"detailed\"]` so verbosity is a choice.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c6",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Should tool results return UUIDs?",
+      "a": "Usually not in the default shape. Anthropic found that resolving arbitrary alphanumeric UUIDs to semantically meaningful names (or a 0-indexed scheme) significantly improves retrieval precision by reducing hallucinations. Expose technical ids only in `response_format=\"detailed\"` for chaining calls, or resolve names to ids server-side inside the tool.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c7",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "What do `input_examples` buy you that JSON Schema cannot?",
+      "a": "Usage conventions schema can't express: date format (`2024-11-06` vs an ISO timestamp), id conventions (`USR-12345` vs UUID), when to populate nested objects, and which optional parameter groups correlate. Anthropic measured complex parameter handling improving from 72% to 90%. Guidance: 1-5 examples, realistic data, full/partial/minimal variety, only where the schema is genuinely ambiguous.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c8",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Where does tool-result truncation belong and what must the truncation message contain?",
+      "a": "In the TOOL, not the loop — the tool knows what's relevant and doing it in the loop means you already paid to serialise and transport the payload. Claude Code's default cap is 25,000 tokens per response. The message must contain the counts AND the specific corrective action (which parameter to narrow). 'Output truncated' teaches the model nothing and it will re-request with a bigger limit.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c9",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Four mechanisms for keeping tool responses small, and how much a concise format saves.",
+      "a": "Pagination, range selection, filtering, and truncation — all with sensible default parameter values. Drop low-signal fields (`uuid`, `mime_type`, `etag`, `_links`, `256px_image_url`). In Anthropic's Slack example a `\"concise\"` response was 72 tokens versus 206 for `\"detailed\"`, roughly one third.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c10",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Which tool failures become observations and which should crash?",
+      "a": "The tool's dependency failing (503, 429, 404, 403) becomes a readable string the model can route around, with the corrective action in it. A bug in YOUR harness (`KeyError` in dispatch) should be logged with the traceback and fail loudly, because the model cannot fix it and swallowing it ships an agent that looks merely stupid. Also: 'no results' is SUCCESS, not an error — misclassifying it produces identical-retry loops.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c11",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Who should generate the idempotency key for a mutating tool, and how?",
+      "a": "The HARNESS, never the model — a model regenerates a different key on retry, producing exactly the duplicates the key was meant to prevent. Derive it deterministically from execution identity: `f\"{thread_id}:{checkpoint_id}:{tool}\"` in LangGraph, or `f\"{run_id}:{step}:{tool}:{hash(args)}\"`. Store `(key -> response)` atomically with `INSERT ... ON CONFLICT DO NOTHING` plus a rowcount check; TTL must exceed the max retry window.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c12",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Name the five risk tiers and the one load-bearing line in the dispatcher.",
+      "a": "`read_only`, `write_reversible`, `write_external`, `financial`, `destructive`. The load-bearing line is `tier = RISK.get(name, \"destructive\")` — default unclassified tools to the MOST dangerous tier so adding one without classifying it fails closed. Enforce in the dispatcher, not the prompt: 'don't delete without asking' is a suggestion, a dispatcher that refuses without an approval token is a control.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c13",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Name the four MCP tool annotations, their defaults, and their limitation.",
+      "a": "`readOnlyHint` (default false), `destructiveHint` (default TRUE), `idempotentHint` (default false), `openWorldHint` (default TRUE), shipped in the 2025-03-26 spec revision. Defaults are deliberately pessimistic, so an unannotated tool is assumed destructive, non-idempotent, and open-world. Limitation: they are HINTS a server asserts about ITSELF with no enforcement. Use them to reduce friction on trusted tools; never as a security boundary.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c14",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "What isolation do you need to run LLM-generated code, and what are the cold-start numbers?",
+      "a": "microVM (Firecracker, Kata), not a container — containers share the host kernel so one kernel bug is a host escape. gVisor (a user-space kernel; Modal runs multi-tenant sandboxes on it) is an acceptable middle. Firecracker boots in ~125ms with under 5 MiB overhead per VM and up to 150 VMs/sec/host; E2B ~150ms, Daytona ~90ms. The latency excuse for weaker isolation is gone.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c15",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Isolation alone is not enough. What else does a sandbox need?",
+      "a": "No credentials inside and no reachable cloud metadata endpoint (169.254.169.254). Network egress DENIED by default then allowlisted — isolation with open egress is still an exfiltration channel. CPU/memory/wall-clock/disk/process caps. Read-only root plus a small tmpfs, no host bind mounts. Non-root with seccomp/AppArmor, no CAP_SYS_ADMIN. And log the code, not just the result.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c16",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Quantify how tool selection degrades with tool count.",
+      "a": "Berkeley Function Calling data: calendar-scheduling accuracy fell from 43% to 2% as the tool set went from 4 to 51 tools. RAG-MCP (arXiv 2505.03275): baseline selection accuracy 13.62% with a large tool set, 43.13% with retrieval-based selection, plus over 50% fewer prompt tokens. Practitioner reports put measurable degradation at 10-15 tools, with 20+ clearly worse than a focused set of 5-8.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c17",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "How much context do MCP tool definitions actually consume?",
+      "a": "A five-server setup (GitHub 35 tools ~26K tokens, Slack 11 ~21K, Sentry 5 ~3K, Grafana 5 ~3K, Splunk 2 ~2K) is 58 tools and ~55K tokens BEFORE the conversation starts. Jira alone is ~17K. Anthropic measured 134K tokens of tool definitions internally before optimising.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c18",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "List the fixes for too many tools, cheapest first.",
+      "a": "1) DELETE tools nothing selects (instrument selection frequency). 2) Consolidate around human tasks. 3) Fix names and descriptions, disambiguate confusable pairs. 4) Namespace by service then resource. 5) Gate by state/permission so only valid tools are bound. 6) Retrieval/search over a tool index (`defer_loading: true` + a tool-search tool). 7) Subagents with scoped tool sets — SECOND resort, not first.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c19",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "What does a tool-search / deferred-loading approach measure out at?",
+      "a": "~500 tokens loaded upfront instead of ~72K for 50+ MCP tools; total context ~8.7K versus ~77K, an 85% reduction. MCP eval accuracy improved 49% -> 74% on Opus 4 and 79.5% -> 88.1% on Opus 4.5. It does not break prompt caching, because deferred tools were never in the cached prefix. Use it above ~10 tools or >10K tokens of definitions; skip it below 10 tools or when every tool is used every session.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c20",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "Make the case for and against having the model write code that calls your tools.",
+      "a": "For: intermediate results never enter context — 2,000+ expense line items (200KB) collapsed to ~1KB; average tokens 43,588 -> 27,297 (37%); knowledge retrieval 25.6% -> 28.5%; GAIA 46.5% -> 51.2%; 20 calls in one code block eliminates 19 inference round-trips; MCP-as-code reports reach 150K -> 2K tokens (~98.7%). Against: arbitrary code execution is now part of your control flow, so you own the whole microVM/egress/credentials problem, and it hides intermediate results the model may need to reason over.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c21",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "How do you test tools in three layers, and which need a model?",
+      "a": "L1 unit tests (no model): happy path, empty result, 404, 429, 403, and a payload big enough to trigger truncation with an assertion the message is ACTIONABLE; property-test that two calls with the same idempotency key produce one side effect and identical responses. L2 contract tests in CI (no model): description length, per-parameter descriptions, enums where needed, examples validate, names unique and not confusable, every mutating tool has a tier and a key. L3 evals (model needed): realistic multi-step tasks that do NOT name the tool, with a held-out test set.",
+      "module": "T07-tool-engineering"
+    },
+    {
+      "id": "T07-tool-engineering-c22",
+      "topic": "Tool Engineering: Schemas, Errors, Idempotency, Sandboxing",
+      "q": "What metrics do you collect in a tool eval, beyond accuracy?",
+      "a": "Tool-call count, total tokens, per-call and per-task latency, tool error rate by error class, and WHICH tools were selected. Redundant calls point at bad pagination defaults; invalid-parameter errors point at thin descriptions or missing examples; selection frequency tells you which tools to delete. Also read raw transcripts, because what agents OMIT from their stated reasoning is often more informative than what they say.",
+      "module": "T07-tool-engineering"
+    }
+  ]
+}

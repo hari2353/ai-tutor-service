@@ -1,0 +1,158 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-attribution-c1",
+      "topic": "Attribution & Grounding",
+      "q": "The citation strength ladder, and where the real gap is.",
+      "a": "fabricated → well-formed → resolves → topically relevant → ENTAILED → entailed + located. The 2026 deep-research audit (arXiv:2605.06635) measured link-works at 94-100%, topical relevance at 80-96%, and FACT CHECK at 24-77%. Everything below 'entailed' is a decoration, and the gap between 'relevant' and 'entailed' is the whole problem.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c2",
+      "topic": "Attribution & Grounding",
+      "q": "State the AIS criterion and its two load-bearing clauses.",
+      "a": "Rashkin et al. 2021: sentence x is attributable to source s if a generic reader would agree that 'According to s, x' is true, with x interpreted in the context of the full response. Clause 1 ('according to s') means truth in the world is NOT the test — attribution is not truth. Clause 2 ('in context') is why you must decontextualise a sentence before checking it.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c3",
+      "topic": "Attribution & Grounding",
+      "q": "Define ALCE citation recall and citation precision.",
+      "a": "Recall(s) = 1 if concat(cited docs) entails s, else 0 — 'is this sentence supported at all by what it cites?' Precision(d) = d alone entails s, OR removing d breaks entailment of the remainder — 'is each citation pulling its weight?' Headline metric = unsupported-sentence rate = 1 − mean recall.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c4",
+      "topic": "Attribution & Grounding",
+      "q": "Why does citation precision exist as a metric?",
+      "a": "Because recall is trivially gameable: cite five documents per sentence and recall rises while the user's ability to check anything falls. Precision penalises the shotgun. Practically also cap citations per sentence at 2-3, since a citation list is only useful if a human will actually click it.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c5",
+      "topic": "Attribution & Grounding",
+      "q": "Five mechanisms by which post-hoc citation produces confident wrong citations.",
+      "a": "1) The answer already exists, so retrieval is evidence-SEEKING for a fixed conclusion. 2) Retrieval scores similarity, not entailment — negation barely moves an embedding, so the most similar chunk often states the opposite. 3) 'Cite your sources' makes citation mandatory, so 'nothing supports this' is unreachable. 4) The verifier is the generator, so errors are correlated. 5) The citation marker is just a token; the decoder cannot distinguish supported from unsupported.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c6",
+      "topic": "Attribution & Grounding",
+      "q": "Post-hoc citation vs grounded generation, in one line each.",
+      "a": "Post-hoc asks 'what supports what I already said?' — that question has an answer for every claim, true or false. Grounded generation asks 'what can I say given this evidence?' — that question can have no answer, which is exactly why it is safer.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c7",
+      "topic": "Attribution & Grounding",
+      "q": "The four levels a citation fails at, and which dominates.",
+      "a": "0 fabricated (invented DOI/case number) — rare with retrieval, resolve the id. 1 wrong locator (right doc, wrong section) — common with document-level citations. 2 RELEVANT BUT UNSUPPORTING — the DOMINANT mode, 24-77% fact-check accuracy, only NLI catches it. 3 supports but misleading (superseded, cherry-picked, contradicted elsewhere) — underreported, needs corpus hygiene not more entailment.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c8",
+      "topic": "Attribution & Grounding",
+      "q": "Grounded generation techniques, weakest to strongest.",
+      "a": "1) Ids in context plus a soft 'cite only these' instruction — routinely violated. 2) Citation-CONSTRAINED DECODING over the in-context id set — kills fabricated ids structurally, near-free. 3) ATTRIBUTE FIRST then generate (arXiv:2403.17104) — extract spans, then generate from the spans only with raw chunks removed; costs 2 calls, ~1.4-1.8x tokens, lower fluency, lower coverage. 4) Structured claims carrying evidence id + quote, with a verbatim substring check.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c9",
+      "topic": "Attribution & Grounding",
+      "q": "The verbatim quote check: what is it and what does it catch that NLI misses?",
+      "a": "An exact normalised substring comparison of the quoted span against the cited document. Cost ~0. It catches paraphrased-quote fabrication, which NLI happily entails because the paraphrase captures the gist. Free deterministic checks that catch what probabilistic checks miss always go first.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c10",
+      "topic": "Attribution & Grounding",
+      "q": "Hard ceiling on grounded generation.",
+      "a": "You cannot cite what you did not retrieve. Grounding converts a hallucination problem into a retrieval-recall problem: if the answer is in the doc ranked 40th, grounded generation abstains and post-hoc citation confabulates. Abstention is better, but the fix is retrieval, not attribution.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c11",
+      "topic": "Attribution & Grounding",
+      "q": "Attribution granularity: three options and the default.",
+      "a": "Response-level = 1 verification call and meaningless ('some of this is supported' is not a claim). SENTENCE-level = ~8-25 calls per answer, the DEFAULT, matches how users check. Claim-level (atomic decomposition, FActScore-style) = 3-8x sentence cost, for medical/legal/financial.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c12",
+      "topic": "Attribution & Grounding",
+      "q": "Decontextualisation: what is it and what breaks without it?",
+      "a": "Resolving references in a sentence against the preceding response before checking it. Without it, 'It was raised to 4.5% in March' is not an evaluable hypothesis, so the NLI model returns neutral and you get a FALSE 'unsupported' flag. This is the single most common cause of a verifier flagging 40% of good sentences. Fix with a heuristic subject-prepend or one LLM rewrite per RESPONSE (not per sentence).",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c13",
+      "topic": "Attribution & Grounding",
+      "q": "Why must you split long premises for NLI, and what do you get for free?",
+      "a": "NLI models are trained on premise/hypothesis pairs of a couple of sentences; feed a 1,200-1,500 token chunk and entailment drifts toward neutral. Split into overlapping 3-sentence windows, score each, and MAX-POOL. Free bonus: the winning window is your span-level locator, which is what the UI needs anyway.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c14",
+      "topic": "Attribution & Grounding",
+      "q": "Which entailment checker, and why not just prompt a frontier model?",
+      "a": "MiniCheck-FT5 (~770M, flan-t5-large) matches Claude 3 Opus and approaches GPT-4 on LLM-AggreFact at a fraction of the cost; AlignScore-large is 355M on RoBERTa-large; HHEM-2.1-open is smaller still and beats several larger models; LettuceDetect flags unsupported SPANS. A frontier judge is 10-100x cost and, if same family as the generator, has correlated errors. Cascade: small checker everywhere, frontier judge only near the threshold band.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c15",
+      "topic": "Attribution & Grounding",
+      "q": "Why does more search make attribution worse?",
+      "a": "Attention dilution during synthesis. The 2026 deep-research audit ablated search depth: GPT-5.4 fact-check accuracy fell from 79% at 2 tool calls to 17% at 150, while link validity and relevance stayed above 92%. Provider pattern matched: models generating the MOST citations had the LOWEST fact-check accuracy. Selective citation beats exhaustive citation.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c16",
+      "topic": "Attribution & Grounding",
+      "q": "A citation passes entailment and the answer is still wrong. Name the ways.",
+      "a": "The cited document is SUPERSEDED (v1.4 entails it, v2.1 overrides). The span is CHERRY-PICKED (the exception, not the rule). The corpus is internally inconsistent and retrieval silently picked a side. Or the source itself is wrong — AIS is 'according to s', so attribution says nothing about truth. Fixes are corpus and retrieval fixes: effective_from / superseded_by metadata filtered at retrieval, plus a contradiction sweep.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c17",
+      "topic": "Attribution & Grounding",
+      "q": "How do you detect cherry-picking or corpus conflict automatically?",
+      "a": "Run the NLI checker in the CONTRADICTION direction across the other retrieved chunks. If one retrieved chunk contradicts the generated sentence at high confidence while another entails it, the correct output is 'your documents disagree, here are both', not a confident answer. Costs another k entailment calls.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c18",
+      "topic": "Attribution & Grounding",
+      "q": "Does RAG solve hallucination? Give the numbers.",
+      "a": "No, it reduces it. Stanford RegLab (Magesh et al., J. Empirical Legal Studies 2025): commercial legal RAG products hallucinated 17% (Lexis+ AI) to 33% (Westlaw AI-AR) versus 43% for GPT-4, while one vendor marketed '100% hallucination-free linked legal citations'. RAG moves the failure from parametric fabrication to mis-attribution, mis-ranking, and stale corpus content.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c19",
+      "topic": "Attribution & Grounding",
+      "q": "The benchmark pair to quote when someone says hallucination is solved.",
+      "a": "Vectara HHEM summarisation 2026: frontier models ~1.0-2.5% (from 3-8% in 2023) on 7,700+ articles — the EASIEST grounding task, source in context. FACTS Benchmark Suite (Grounding v2 + parametric + search + multimodal): NO model breaks 70%, Gemini 3 Pro leads at 68.8%. Same models, two orders of difficulty.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c20",
+      "topic": "Attribution & Grounding",
+      "q": "Why is your internal citation-precision number not comparable to a paper's?",
+      "a": "2026 audit work (arXiv:2606.23915, 'Do LLM Attribution Metrics Transfer?') finds metric-human agreement varies substantially across datasets and constructs. Your number is a RELATIVE instrument for tracking your own regressions. Anchor it with a human audit of ~100 sentences per release.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c21",
+      "topic": "Attribution & Grounding",
+      "q": "When should you NOT show citations?",
+      "a": "When there is exactly one source (highlight the span in the doc viewer instead — citation is disambiguation among sources). When the output is creative or synthesis-heavy (section-level provenance plus an on-demand sources view). When the claim comes from general knowledge and no source is being asserted (mark it unsourced rather than finding a plausible source). And when you cannot verify, since an unverified citation is a false trust signal.",
+      "module": "T07-attribution"
+    },
+    {
+      "id": "T07-attribution-c22",
+      "topic": "Attribution & Grounding",
+      "q": "Verifying citations for a web-browsing agent: what changes?",
+      "a": "Page content is mutable, paywalled, or JS-rendered. So: SNAPSHOT at fetch time with a content hash and verify against the snapshot, not a re-fetch; cite snapshot id + URL + retrieval timestamp, since 'the page said this on date X' is the only supportable claim; verify per section during synthesis rather than once at the end; cap sources per section; and treat 'link works' as a fetcher health check, never as an attribution metric.",
+      "module": "T07-attribution"
+    }
+  ]
+}

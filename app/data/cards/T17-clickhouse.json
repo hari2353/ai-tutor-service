@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-clickhouse-c1",
+      "topic": "ClickHouse",
+      "q": "Name the four mechanical reasons ClickHouse is fast.",
+      "a": "Columnar storage (scan only needed columns), sparse primary index (binary search over per-granule entries), compression on sorted columnar data (5-20x+), and vectorized execution (SIMD, block-at-a-time operators).",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c2",
+      "topic": "ClickHouse",
+      "q": "What is the default index_granularity and what does it mean?",
+      "a": "8192 rows per granule (adaptive since 19.x, targeting ~10MB uncompressed for wide rows). The sparse primary index stores one entry per granule, not per row.",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c3",
+      "topic": "ClickHouse",
+      "q": "Is the MergeTree primary index unique or a B-tree?",
+      "a": "Neither. It's a sparse, sorted array of per-granule starting key values, binary-searched to find candidate granule ranges -- not a per-row structure and not a tree.",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c4",
+      "topic": "ClickHouse",
+      "q": "What causes the 'Too many parts' error and what's the primary fix?",
+      "a": "Frequent small inserts create parts faster than background merges can absorb, hitting a protective ceiling (default ~3000 active parts/partition). Primary fix: batch inserts client-side (10K-500K rows per insert, every 1-2s) rather than raising the limit.",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c5",
+      "topic": "ClickHouse",
+      "q": "Why does ClickHouse never merge parts across partitions, and what's the practical consequence?",
+      "a": "Partitions are physically separate directories of parts by design. Over-partitioning (e.g. per-minute or high-cardinality keys) multiplies independent small-part pools, each accumulating unmerged parts -- coarser partitioning (monthly vs daily) is a common fix for too-many-parts.",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c6",
+      "topic": "ClickHouse",
+      "q": "Which three operations are memory-bound in ClickHouse (not streaming), and why?",
+      "a": "High-cardinality GROUP BY (hash table sized to distinct groups, not rows scanned), JOIN (right-hand table loaded fully into memory for the hash join), and unbounded ORDER BY (must hold or spill the whole result set).",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c7",
+      "topic": "ClickHouse",
+      "q": "What's the difference in outcome between a query hitting max_memory_usage vs the server hitting the Linux OOM killer?",
+      "a": "max_memory_usage kills only the offending query with a clean exception. The Linux OOM killer (triggered if max_server_memory_usage_to_ram_ratio, default 0.9, is exceeded) can kill the whole clickhouse-server process, taking down every other running query too.",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c8",
+      "topic": "ClickHouse",
+      "q": "How do you diagnose which query caused an OOM after the fact?",
+      "a": "Query system.query_log WHERE type = 'QueryFinish' ordered by memory_usage descending to find the actual offending query pattern rather than guessing from the OOM alert.",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c9",
+      "topic": "ClickHouse",
+      "q": "How do you prevent a GROUP BY or ORDER BY from OOMing instead of failing outright?",
+      "a": "Enable max_bytes_before_external_group_by (or external_sort for ORDER BY) so the operation spills partial state to disk past a memory threshold, trading latency for not needing unbounded memory.",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c10",
+      "topic": "ClickHouse",
+      "q": "Why are JOINs expensive in ClickHouse mechanically?",
+      "a": "The default hash join loads the entire right-hand table into an in-memory hash table before probing with the left side, so the right table's size (not overall query row count) drives memory pressure, and probing is row-level random access that breaks columnar-scan locality.",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c11",
+      "topic": "ClickHouse",
+      "q": "What are the three recommended ways to avoid expensive live JOINs in ClickHouse?",
+      "a": "Put the smaller table on the right side of any join you must do, use a Dictionary engine (fully in-memory, O(1) lookup) for small frequently-joined dimension tables, and denormalize static large-dimension attributes onto the fact table at ingestion time.",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c12",
+      "topic": "ClickHouse",
+      "q": "A ReplacingMergeTree table shows duplicate rows right after insert. Why, and how do you get a correct read immediately?",
+      "a": "Deduplication happens at merge time, not insert time, and merges haven't run yet. Query with FINAL to force on-the-fly deduplication (at real CPU/latency cost) rather than assuming upsert-on-write.",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c13",
+      "topic": "ClickHouse",
+      "q": "Difference between a ClickHouse projection and a materialized view?",
+      "a": "A projection is an alternate physical layout of the SAME table that the optimizer transparently picks (no cross-table joins allowed). A materialized view is a trigger on insert that writes results into a SEPARATE target table, moving aggregation from query time to insert time.",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c14",
+      "topic": "ClickHouse",
+      "q": "Name three shapes of workload where ClickHouse is the wrong choice.",
+      "a": "Point updates/deletes at OLTP frequency (mutations are heavyweight async part rewrites), high-concurrency transactional writes with many small inserts (triggers too-many-parts), and any need for multi-statement ACID transactions or strict single-row current-value consistency.",
+      "module": "T17-clickhouse"
+    },
+    {
+      "id": "T17-clickhouse-c15",
+      "topic": "ClickHouse",
+      "q": "Why does denormalizing make sense in ClickHouse when it's an anti-pattern in Postgres?",
+      "a": "Postgres has cheap, transactional row-level updates so keeping normalized data in sync is cheap; ClickHouse updates are expensive async mutations and joins are the expensive operation, so paying the ingestion-time cost of denormalized writes once beats paying a live-join cost on every query.",
+      "module": "T17-clickhouse"
+    }
+  ]
+}

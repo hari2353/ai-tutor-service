@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T17-storage-engines-d1",
+      "module": "T17-storage-engines",
+      "q": "What's the fundamental structural difference between a B+Tree and an LSM-Tree?",
+      "a": "B+Tree updates in place, staying sorted on disk always, paying reorganization cost (splits) per write. LSM-Tree never updates in place — writes buffer in a memtable, flush as immutable SSTables, and background compaction merges them, deferring reorganization off the write path.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-storage-engines-d2",
+      "module": "T17-storage-engines",
+      "q": "Derive B-Tree height for 100M rows with fanout 680.",
+      "a": "height = log_680(100,000,000) ≈ 3. With top levels cache-resident, a warm lookup is typically 1-2 real disk I/Os despite the log N framing.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-storage-engines-d3",
+      "module": "T17-storage-engines",
+      "q": "Define write, read, and space amplification with typical numbers for each engine family.",
+      "a": "WA = physical/logical bytes written, RA = disk reads per logical read, SA = physical/logical live bytes on disk. B-Tree: WA ~3-4x, RA ~1-2x, SA ~1.1-1.5x. LSM leveled: WA ~20-30x+, RA ~1-2x tuned / 5-10x+ untuned, SA ~1.1-1.3x tuned, spikes to 2x+ mid-compaction.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-storage-engines-d4",
+      "module": "T17-storage-engines",
+      "q": "Size-tiered vs leveled compaction: what's the actual tradeoff, and which minimizes what?",
+      "a": "Size-tiered: lower write amplification (~10-15x), but overlapping key ranges across files raise read amplification and space can spike toward 2x mid-merge. Leveled: higher write amplification (~20-30x+, data rewritten roughly once per level), but non-overlapping key ranges per level give lower read amplification and tighter space usage.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-storage-engines-d5",
+      "module": "T17-storage-engines",
+      "q": "Mechanically, what causes B-Tree write amplification vs LSM write amplification?",
+      "a": "B-Tree: one row update dirties a whole page (8-16KB), and the whole page flushes even though only a fraction logically changed; splits double this. LSM: a key gets physically rewritten roughly once per compaction pass, and the number of passes it survives grows with the number of levels the dataset has grown into.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-storage-engines-d6",
+      "module": "T17-storage-engines",
+      "q": "An LSM-backed store's read latency has been climbing for two weeks. What do you check first, and why not add an index?",
+      "a": "Check compaction metrics first: L0 file count and pending-compaction-bytes. Compaction has almost certainly fallen behind write throughput, so more files must be checked per read. Adding an index is a red flag here — the read path already uses the LSM's sorted structure and bloom filters; this is an operational compaction-debt problem on the write/background side.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-storage-engines-d7",
+      "module": "T17-storage-engines",
+      "q": "What does a bloom filter buy an LSM-Tree, with real numbers, and what happens under memory pressure?",
+      "a": "It gives a fast 'definitely not present / maybe present' check per SSTable; RocksDB's default ~10 bits/key yields ~1% false-positive rate, skipping disk reads on ~99% of files that don't contain the key. Under memory pressure, bloom filters can get evicted from cache, forcing a real disk read just to check membership — a common cause of latency regressions after a memory-limit change.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-storage-engines-d8",
+      "module": "T17-storage-engines",
+      "q": "State the RUM conjecture and explain why you can't minimize write, read, and space amplification simultaneously.",
+      "a": "Read, Update, Memory(space) amplification form a proven tradeoff triangle: optimizing any two makes the third worse. B-Trees optimize read and space at the cost of update cost; LSM-Trees optimize update cost at the cost of read and space — neither is a strict improvement, they occupy different points on the curve.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-storage-engines-d9",
+      "module": "T17-storage-engines",
+      "q": "Design the compaction strategy for a metrics/time-series system with 30-day uniform TTL retention.",
+      "a": "Time-Window Compaction Strategy: bucket SSTables by write-time window, compact only within a window, never merge across windows. When a window's TTL fully expires, drop the entire file(s) rather than rewriting to remove a few expired keys — turns expiry into a cheap file delete instead of a rewrite.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-storage-engines-d10",
+      "module": "T17-storage-engines",
+      "q": "Why does an LSM sometimes need close to 2x the dataset's logical size in disk space mid-operation?",
+      "a": "During a compaction (especially full/major compaction), the input SSTables and the newly-written merged output file coexist on disk until the merge finishes and inputs are deleted, temporarily requiring close to double the steady-state footprint. This must be planned for in disk provisioning, not just steady-state size.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-storage-engines-d11",
+      "module": "T17-storage-engines",
+      "q": "When would you choose Cassandra/RocksDB over Postgres, and what's the mistake version of that choice?",
+      "a": "Choose LSM-backed storage when sustained write throughput is the primary constraint and reads are less latency-sensitive or served through a separate cache/index. It's a mistake when the workload needs multi-row ACID transactions, complex joins, or is read-dominated with unpredictable access patterns — Postgres's B-Tree plus mature planner and transactions wins there.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-storage-engines-d12",
+      "module": "T17-storage-engines",
+      "q": "Why does B-Tree lookup cost stay roughly constant as data grows, while LSM write amplification grows with data size?",
+      "a": "B-Tree height (log_fanout(N)) grows extremely slowly with N at typical fanouts (~680), so per-write page touches stay roughly constant. LSM levels grow (each ~10x the last) as data volume grows, and a surviving key is rewritten roughly once per level it passes through, so total write amplification for long-lived keys scales with the number of levels.",
+      "difficulty": "staff"
+    }
+  ]
+}

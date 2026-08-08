@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-mvcc-isolation-c1",
+      "topic": "MVCC & Isolation",
+      "q": "What are xmin and xmax, and what's the Postgres tuple visibility rule?",
+      "a": "xmin = transaction ID that created the tuple version, xmax = transaction ID that deleted/superseded it (0/unset = live). Visible to a snapshot if xmin's txn committed before the snapshot AND (xmax unset OR xmax's txn hasn't committed as of the snapshot).",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c2",
+      "topic": "MVCC & Isolation",
+      "q": "When is a Postgres transaction's snapshot taken, per isolation level?",
+      "a": "Read Committed: a fresh snapshot at the start of EVERY statement (so two SELECTs in one transaction can see different data - read skew possible). Repeatable Read / Serializable: ONE snapshot at transaction start, reused for the whole transaction.",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c3",
+      "topic": "MVCC & Isolation",
+      "q": "2PL vs MVCC - the core tradeoff.",
+      "a": "2PL: shared lock on read, exclusive on write, held until commit; readers block writers and vice versa; needs predicate locks (not just row locks) to stop phantoms. MVCC: readers see an older committed version instead of waiting, so readers never block writers or vice versa - at the cost of write-write conflicts needing detection (first-committer-wins) and write skew slipping through.",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c4",
+      "topic": "MVCC & Isolation",
+      "q": "Define all six anomalies in one line each.",
+      "a": "Dirty read: see another txn's uncommitted write. Dirty write: overwrite another txn's uncommitted write. Read skew: same row read twice in one txn, different committed values. Phantom read: predicate query's result set changes mid-txn. Lost update: same row read-modify-write, one write clobbers the other. Write skew: DIFFERENT rows, disjoint writes jointly violate an invariant neither write alone broke.",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c5",
+      "topic": "MVCC & Isolation",
+      "q": "The doctors-on-call write skew repro, in one sentence.",
+      "a": "Invariant: at least 1 doctor on call. Alice and Bob both on call; each reads count=2 from their own snapshot, each independently concludes it's safe to go off-call, each updates only their own row, both commit -> final count = 0, invariant violated, no write-write conflict ever detected.",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c6",
+      "topic": "MVCC & Isolation",
+      "q": "Why does snapshot isolation prevent read skew but NOT write skew?",
+      "a": "Read skew is prevented directly by the fixed snapshot (repeated reads see one consistent point in time). Write skew isn't about the snapshot changing - it's about an invariant relating two transactions' independent decisions, violated by writes to DIFFERENT rows, which SI's same-row conflict detection never checks.",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c7",
+      "topic": "MVCC & Isolation",
+      "q": "Level -> anomalies permitted, memorize the table.",
+      "a": "Read Uncommitted: all possible except dirty write. Read Committed: dirty read/write prevented, rest possible. Repeatable Read (ANSI min): + read skew prevented. Snapshot Isolation (Postgres REPEATABLE READ): + phantom + lost update prevented; WRITE SKEW STILL POSSIBLE. Serializable: everything prevented.",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c8",
+      "topic": "MVCC & Isolation",
+      "q": "Real default isolation level per database.",
+      "a": "Postgres, Oracle, SQL Server -> READ COMMITTED. MySQL/InnoDB -> REPEATABLE READ (with gap locks that suppress most phantoms beyond the ANSI minimum).",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c9",
+      "topic": "MVCC & Isolation",
+      "q": "The Oracle SERIALIZABLE gotcha.",
+      "a": "Oracle's SERIALIZABLE is implemented as snapshot isolation, not true serializability - no SSI, no 2PL predicate locking at that level. Write skew is still possible on Oracle SERIALIZABLE despite the name.",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c10",
+      "topic": "MVCC & Isolation",
+      "q": "How does Postgres's SSI detect write skew without blocking readers?",
+      "a": "SERIALIZABLE transactions take SIREAD locks on data they read - bookkeeping only, never blocking. A later write to SIREAD-covered data creates an rw-antidependency edge. If edges form a cycle through a pivot transaction (incoming + outgoing rw-antidependency to concurrent transactions), Postgres aborts one transaction with a serialization failure, forcing a retry.",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c11",
+      "topic": "MVCC & Isolation",
+      "q": "Two fixes for write skew besides full SERIALIZABLE, and when each wins.",
+      "a": "SELECT ... FOR UPDATE on the invariant-backing rows - targeted, cheap, but requires correctly enumerating every dangerous read. Atomic conditional UPDATE ... WHERE cond (e.g. seats_available > 0) - best for simple capacity checks, folds check-then-write into one atomic statement, avoids held-lock time and retry loops.",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c12",
+      "topic": "MVCC & Isolation",
+      "q": "Lost update vs write skew - the key structural difference.",
+      "a": "Lost update: SAME row read by both, one write overwrites the other, an update is literally lost. Write skew: DIFFERENT rows written, no write is lost or overwritten - the invariant relating the two rows is the casualty, not any single value.",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c13",
+      "topic": "MVCC & Isolation",
+      "q": "Why does snapshot isolation prevent lost update in Postgres specifically?",
+      "a": "First-committer-wins: the second transaction's write to the SAME row triggers a serialization failure (must retry) rather than silently overwriting. This is a real protection SI provides - it's write skew (disjoint rows) that survives, not same-row lost update.",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c14",
+      "topic": "MVCC & Isolation",
+      "q": "What does XID wraparound risk mean operationally?",
+      "a": "Postgres XIDs are 32-bit, wrapping every ~4 billion transactions. Autovacuum's 'freeze' rewrites old tuples' xmin to a frozen sentinel to prevent ambiguity. An under-vacuumed high-write table risks Postgres forcing itself into read-only mode to prevent corruption as the counter approaches wraparound.",
+      "module": "T17-mvcc-isolation"
+    },
+    {
+      "id": "T17-mvcc-isolation-c15",
+      "topic": "MVCC & Isolation",
+      "q": "Why do predicate locks matter for 2PL, and what happens without them?",
+      "a": "Row locks alone only stop conflicts on rows that already existed when the lock was taken - they don't stop phantoms. Predicate locks lock the range/condition a query scanned, so a NEW row inserted into that range is caught too; without them, phantom reads slip through even under strict 2PL.",
+      "module": "T17-mvcc-isolation"
+    }
+  ]
+}

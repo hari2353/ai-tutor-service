@@ -1,0 +1,130 @@
+:root{
+  --bg:#07090d; --bg2:#0d1117; --panel:#121821; --panel2:#171f2b;
+  --line:#22303f; --line2:#2e415a;
+  --fg:#d7e2ee; --dim:#7d8fa3; --dimmer:#54637a;
+  --acc:#3ddc97; --acc2:#4aa8ff; --warn:#ffb84d; --bad:#ff6b6b; --gold:#ffd76a;
+  --mono:ui-monospace,"SFMono-Regular","JetBrains Mono",Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:
+    radial-gradient(1200px 600px at 15% -10%, #10202b 0%, transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, #17122b 0%, transparent 55%),
+    var(--bg);
+  color:var(--fg); font-family:var(--mono); font-size:14px; line-height:1.55;
+  min-height:100vh; display:flex; flex-direction:column;
+}
+h1,h2,h3{margin:0 0 .4rem; letter-spacing:.02em}
+h1{font-size:1.1rem}
+h2{font-size:1rem; color:var(--acc)}
+h3{font-size:.9rem}
+small{font-size:.72rem}
+.muted{color:var(--dim)}
+.dimmer{color:var(--dimmer)}
+button{font-family:var(--mono); cursor:pointer}
+a{color:var(--acc2)}
+
+/* ---------- topbar ---------- */
+#topbar{
+  display:flex; justify-content:space-between; align-items:center; gap:1rem;
+  padding:.8rem 1.2rem; border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,#0c1219,#080b10);
+  flex-wrap:wrap;
+}
+.brand{display:flex; gap:.7rem; align-items:center}
+.logo{color:var(--acc); font-size:1.3rem; letter-spacing:-2px}
+#mode-line{color:var(--warn); letter-spacing:.12em}
+.hud{display:flex; gap:1.6rem; flex-wrap:wrap}
+.hud-cell{min-width:92px}
+.hud-cell label{display:block; font-size:.62rem; color:var(--dimmer); letter-spacing:.18em}
+.hud-cell strong{font-size:1.25rem; color:var(--acc)}
+.hud-cell span{margin-left:.35rem; font-size:.7rem}
+.xpbar{height:4px; background:var(--line); border-radius:2px; margin-top:4px; overflow:hidden; width:120px}
+.xpbar i{display:block; height:100%; background:linear-gradient(90deg,var(--acc),var(--acc2)); width:0}
+
+/* ---------- tabs ---------- */
+#tabs{display:flex; gap:.25rem; padding:.5rem 1.2rem 0; border-bottom:1px solid var(--line); flex-wrap:wrap}
+#tabs button{
+  background:transparent; border:1px solid transparent; border-bottom:none;
+  color:var(--dim); padding:.45rem .9rem; font-size:.78rem; border-radius:6px 6px 0 0;
+}
+#tabs button:hover{color:var(--fg)}
+#tabs button.active{background:var(--panel); border-color:var(--line); color:var(--acc)}
+
+/* ---------- layout ---------- */
+main{flex:1; padding:1.2rem; max-width:1180px; width:100%; margin:0 auto}
+footer{
+  padding:.6rem 1.2rem; border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; font-size:.7rem; color:var(--dimmer); flex-wrap:wrap; gap:.5rem;
+}
+.grid{display:grid; gap:.9rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{
+  background:linear-gradient(180deg,var(--panel),var(--bg2));
+  border:1px solid var(--line); border-radius:10px; padding:.9rem 1rem;
+}
+.card.hi{border-color:var(--acc); box-shadow:0 0 0 1px rgba(61,220,151,.12), 0 8px 30px -18px var(--acc)}
+.row{display:flex; justify-content:space-between; align-items:center; gap:.6rem}
+.tag{
+  display:inline-block; font-size:.62rem; padding:.1rem .45rem; border-radius:4px;
+  border:1px solid var(--line2); color:var(--dim); margin-right:.25rem; white-space:nowrap;
+}
+.tag.crit{border-color:var(--bad); color:var(--bad)}
+.tag.A{border-color:var(--warn); color:var(--warn)}
+.tag.B{border-color:var(--line2); color:var(--dimmer)}
+.btn{
+  background:var(--panel2); border:1px solid var(--line2); color:var(--fg);
+  padding:.35rem .8rem; border-radius:6px; font-size:.75rem;
+}
+.btn:hover{border-color:var(--acc); color:var(--acc)}
+.btn.p{background:var(--acc); color:#06231a; border-color:var(--acc); font-weight:700}
+.btn.p:hover{filter:brightness(1.12); color:#06231a}
+.btn.d{border-color:var(--bad); color:var(--bad)}
+.btn.sm{padding:.2rem .5rem; font-size:.68rem}
+hr{border:none; border-top:1px solid var(--line); margin:.9rem 0}
+ul{margin:.3rem 0 .3rem 1.1rem; padding:0}
+li{margin:.15rem 0}
+code{background:#0b1017; border:1px solid var(--line); padding:.05rem .3rem; border-radius:4px; font-size:.78rem}
+textarea{
+  width:100%; min-height:180px; background:#080c11; color:var(--fg);
+  border:1px solid var(--line); border-radius:8px; padding:.7rem; font-family:var(--mono); font-size:.75rem;
+}
+
+/* ---------- module rows ---------- */
+.mod{
+  display:flex; align-items:center; gap:.6rem; padding:.4rem .55rem;
+  border:1px solid transparent; border-radius:7px;
+}
+.mod:hover{background:var(--panel2); border-color:var(--line)}
+.mod .t{flex:1; min-width:0}
+.mod .t b{font-weight:600; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.dot{width:9px; height:9px; border-radius:50%; background:var(--line2); flex:none}
+.dot.doing{background:var(--warn); box-shadow:0 0 8px var(--warn)}
+.dot.done{background:var(--acc); box-shadow:0 0 8px var(--acc)}
+.locked{opacity:.42}
+
+/* ---------- progress ---------- */
+.bar{height:6px; background:var(--line); border-radius:3px; overflow:hidden; margin-top:.35rem}
+.bar i{display:block; height:100%; background:linear-gradient(90deg,var(--acc2),var(--acc))}
+
+/* ---------- flashcards ---------- */
+.fc{min-height:200px; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:1rem}
+.fc .q{font-size:1.05rem; color:var(--fg)}
+.fc .a{font-size:.92rem; color:var(--acc); white-space:pre-wrap; text-align:left}
+.grades{display:flex; gap:.4rem; justify-content:center; flex-wrap:wrap}
+
+/* ---------- badges ---------- */
+.badge{text-align:center; padding:.9rem .5rem; border-radius:10px; border:1px solid var(--line); background:var(--panel)}
+.badge.on{border-color:var(--gold); background:linear-gradient(180deg,#211c0d,var(--bg2))}
+.badge .i{font-size:1.7rem; filter:grayscale(1) opacity(.35)}
+.badge.on .i{filter:none}
+.badge b{display:block; font-size:.74rem; margin-top:.3rem}
+.badge small{color:var(--dimmer); font-size:.64rem}
+
+table{width:100%; border-collapse:collapse; font-size:.76rem}
+th,td{text-align:left; padding:.35rem .5rem; border-bottom:1px solid var(--line)}
+th{color:var(--dimmer); font-weight:400; font-size:.66rem; letter-spacing:.1em}
+tr:hover td{background:var(--panel2)}
+.empty{color:var(--dimmer); padding:2rem; text-align:center; border:1px dashed var(--line); border-radius:10px}

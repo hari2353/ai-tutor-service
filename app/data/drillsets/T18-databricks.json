@@ -1,0 +1,81 @@
+{
+  "drills": [
+    {
+      "id": "T18-databricks-d1",
+      "module": "T18-databricks",
+      "q": "Explain how Delta Lake achieves ACID transactions on an object store, and name the isolation level it actually provides.",
+      "a": "It relies on exactly one atomic primitive: creating the next-numbered _delta_log/*.json commit file if it doesn't already exist (S3 conditional PUT, ADLS, GCS all provide this). Readers reconstruct table state by replaying add/remove actions. Writers use optimistic concurrency: two writers touching disjoint files both succeed, but overlapping writes conflict and one must retry - this is snapshot isolation, not full serializability.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-databricks-d2",
+      "module": "T18-databricks",
+      "q": "A team's time-travel queries started failing with file-not-found errors past a week old, even though the table's history is supposed to go back 30 days. Diagnose.",
+      "a": "delta.logRetentionDuration defaults to 30 days (log history retained) but delta.deletedFileRetentionDuration defaults to only 7 days (how long removed data files survive on disk). A scheduled VACUUM with default settings deletes files older than 7 days regardless of the 30-day log promise, so VERSION AS OF queries past a week find the log entry but not the underlying Parquet file. Fix: raise deletedFileRetentionDuration to match the actual time-travel SLA before running scheduled VACUUM.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-databricks-d3",
+      "module": "T18-databricks",
+      "q": "Z-ORDER vs liquid clustering: explain the mechanical difference and when you'd still keep an existing Z-ORDERed table rather than migrate it.",
+      "a": "Z-ORDER fully rewrites every touched file on each run, so re-clustering a continuously growing table means reprocessing data that was already well-clustered. Liquid clustering is incremental - OPTIMIZE only processes files needing reclustering - handles skewed cardinality better, and allows changing the clustering key without a full rewrite. You'd keep an existing Z-ORDERed table if it's large, rarely rewritten, already stable, and well-clustered - migration itself costs a full rewrite, so opportunistic migration beats a blanket project.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-databricks-d4",
+      "module": "T18-databricks",
+      "q": "Photon is enabled on a cluster but a data scientist reports no speedup on their pipeline. What's the most likely explanation, and how would you verify it?",
+      "a": "The pipeline is likely dominated by Python/Scala UDF logic, which still crosses the JVM/Python boundary Photon can't vectorize - Photon only accelerates the SQL/DataFrame hot path (scans, joins, aggregations, writes). Verify by checking the Spark UI/query plan for stages spent in UDF execution versus native operators; if UDFs dominate, rewriting hot-path logic as native SQL/DataFrame expressions is the fix, not enabling Photon harder.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-databricks-d5",
+      "module": "T18-databricks",
+      "q": "Explain Unity Catalog's three-level namespace and why it matters for governance beyond just naming convention.",
+      "a": "catalog.schema.table, versus the legacy two-level database.table under Hive Metastore. The catalog level provides a real, coarse-grained access-control boundary you can grant to an entire business unit or environment (e.g., separate dev/prod catalogs), which Hive Metastore never had. It also unifies governance across tables, views, volumes (unstructured files), functions, and ML models under one permission model, with automatic column-level lineage captured with no manual instrumentation.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-databricks-d6",
+      "module": "T18-databricks",
+      "q": "A team disables scheduled OPTIMIZE/predictive optimization on a streaming-fed table to avoid disrupting their nightly batch window. Three months later, dashboard latency has crept up significantly with no code change. Explain the failure mode and how you'd have caught it earlier.",
+      "a": "Every micro-batch/streaming commit writes new small files; without compaction, small-file count grows continuously, and read latency degrades because query engines pay per-file object-store GET overhead across thousands of tiny files instead of hundreds of well-sized ones. This is silent, gradual degradation - nothing fails outright until an SLA is blown. Catch it earlier by tracking file count and average file size per table (via DESCRIBE DETAIL) over time and alerting when average file size drops below a threshold, rather than waiting for a latency complaint.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-databricks-d7",
+      "module": "T18-databricks",
+      "q": "Explain why Delta's open file format alone doesn't eliminate Databricks lock-in, and what Databricks has done about it.",
+      "a": "For years the real dependency lived in the catalog, not the storage format - Unity Catalog was Databricks-proprietary, and it's the catalog that enforces access control and captures lineage, which is where operational dependency actually accumulates even when the underlying Parquet+JSON-log format is technically open. Databricks addressed this by open-sourcing Unity Catalog's core (2024) and adding server-side support for the Iceberg REST Catalog protocol, positioning it as an interoperable catalog rather than a Databricks-only governance plane.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-databricks-d8",
+      "module": "T18-databricks",
+      "q": "Finance reports the Databricks bill doubled with no new workloads added. Walk through your diagnostic sequence and the two most common root causes.",
+      "a": "DBU cost is billed separately from the underlying cloud VM cost, so check both bills, not just DBU line items. The two most common root causes: (1) an interactive All-Purpose cluster left attached/running that should have been migrated to scheduled Jobs Compute (40-60% cheaper per DBU and auto-terminates), and (2) a notebook that got informally promoted to 'production' without ever moving off All-Purpose Compute. Cluster utilization and idle-time reports per cluster/workspace are the fastest way to confirm either.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-databricks-d9",
+      "module": "T18-databricks",
+      "q": "Design the cluster strategy for a team running 20 scheduled ETL jobs and 30 analysts doing ad-hoc SQL, and justify each compute-type choice.",
+      "a": "ETL jobs on Jobs Compute (40-60% cheaper per DBU than All-Purpose, auto-terminates, ideally job clusters or a shared pool to amortize startup latency). Analysts on SQL Warehouses, likely serverless to avoid idle cost off-hours, sized for concurrency via multi-cluster rather than one oversized warehouse. Nobody runs production ETL on an interactive All-Purpose cluster attached to a notebook - that's the single most common source of unexplained Databricks cost.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-databricks-d10",
+      "module": "T18-databricks",
+      "q": "What can't Lakeflow/DLT expectations express, and how did a pipeline silently drop 15% of rows for two weeks before anyone noticed?",
+      "a": "Expectations are row-scoped constraints - they can't express cross-row invariants like 'row count shouldn't drop more than 20% day over day' or referential integrity against another table. An upstream schema or semantic change started violating an expect_or_drop constraint, which by design fails silently from the pipeline's perspective (rows just vanish, the pipeline doesn't halt). Catching this requires monitoring the expectation's pass/fail metrics directly (which Databricks emits) with an alert on drop-rate change, not relying on pipeline-failure alerts alone.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-databricks-d11",
+      "module": "T18-databricks",
+      "q": "When is Databricks the wrong platform choice, stated plainly, and what would you recommend instead?",
+      "a": "A pure BI/SQL shop with no ML, no streaming, and no need for Spark-scale processing - you'd be paying for and operationally owning a Spark-and-ML-oriented platform's surface (clusters, Photon, MLflow) for a workload that doesn't need any of it. Snowflake or BigQuery will usually be cheaper and require less ongoing tuning for that workload shape.",
+      "difficulty": "warmup"
+    }
+  ]
+}

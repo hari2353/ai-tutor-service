@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T07-framework-matrix-d1",
+      "module": "T07-framework-matrix",
+      "q": "A colleague recommends AutoGen for a brand-new 2026 multi-agent project. What's your pushback?",
+      "a": "AutoGen is in maintenance mode; Microsoft redirected its roadmap to Microsoft Agent Framework (GA 1.0, 2026-04-03), which merges AutoGen's orchestration with Semantic Kernel's production features. New work should target Agent Framework, not a frozen project.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-framework-matrix-d2",
+      "module": "T07-framework-matrix",
+      "q": "Your ADK-based agent works fine in dev but loses all session state on every restart in production. Diagnose.",
+      "a": "Almost certainly still using InMemorySessionService, which is explicitly a development-only convenience. Production needs VertexAiSessionService backed by Vertex AI Agent Engine.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-framework-matrix-d3",
+      "module": "T07-framework-matrix",
+      "q": "A task needs durable resume across a crash and a multi-day human approval gate, but the team is building on OpenAI's Agents SDK because it's simple. What's missing, and what are the options?",
+      "a": "The SDK has no native cross-process checkpointing — Sessions cover in-run memory, not crash durability. Options: build durability yourself, put the agent behind a durable orchestrator like Temporal, or switch to LangGraph/ADK which have native checkpointing.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-framework-matrix-d4",
+      "module": "T07-framework-matrix",
+      "q": "A CrewAI-based workflow now needs 'if the ticket is high-priority, route to path A with extra validation, else path B, then converge on a shared summary step.' Can CrewAI's Process express this cleanly?",
+      "a": "No — CrewAI's Process is sequential or hierarchical, neither of which expresses conditional branching-then-convergence cleanly. Either bolt external dispatch logic around separate crews per path, or migrate the branching portion to a graph-based framework.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-framework-matrix-d5",
+      "module": "T07-framework-matrix",
+      "q": "A benchmark leaderboard shows Framework X scoring 15 points higher than Framework Y on a public agent benchmark. Should this decide your framework choice?",
+      "a": "Not directly. Framework choice alone has been shown to swing benchmark scores by up to 30pp on the identical model, which means the swing is dominated by graph design and tool set, not framework brand. Benchmark your own representative task before committing.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-framework-matrix-d6",
+      "module": "T07-framework-matrix",
+      "q": "You need real-time voice and video interaction with an agent, not request-response chat. Which framework has a genuine edge, and why?",
+      "a": "Google ADK — it ships native bidirectional (Bidi) multimodal streaming (text/audio/video) as a first-class production feature, ahead of the other frameworks' streaming maturity for this specific use case.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-framework-matrix-d7",
+      "module": "T07-framework-matrix",
+      "q": "Your team is building a 3-tool research agent, no approval gate, no multi-agent need, single model provider. Which framework, and why?",
+      "a": "Hand-rolled, or the thinnest SDK from your model provider. No durability, HITL, or multi-agent requirement exists, so every heavier framework on the matrix is paying for problems this task doesn't have.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-framework-matrix-d8",
+      "module": "T07-framework-matrix",
+      "q": "Why might a framework with a fixed multi-agent topology built two years ago be worse with a 2026 model than it was with a 2024 model?",
+      "a": "Per the Bitter Lesson framing, every structural component encodes an assumption the model can't do something, and those assumptions expire as models improve. A rigid decomposition built for a weaker model can actively fight a stronger model that would do better with fewer tools and a shorter loop.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-framework-matrix-d9",
+      "module": "T07-framework-matrix",
+      "q": "Code written against LangGraph's streaming API from 18 months ago just broke after a routine upgrade. Why, and how do you prevent it next time?",
+      "a": "LangGraph has been through three streaming wire formats in fifteen months (v1 tuples, v2 StreamPart, v3 typed projections). Prevent it by pinning version= explicitly rather than relying on the default, and treating the streaming surface as unstable across releases.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-framework-matrix-d10",
+      "module": "T07-framework-matrix",
+      "q": "Compare LangGraph's interrupt()+resume to OpenAI Agents SDK's guardrails as human-oversight mechanisms.",
+      "a": "interrupt() suspends the run to durable storage at an arbitrary point and Command(resume=...) continues, supporting a multi-day approval. Guardrails run input/output validation in parallel and fail fast — a real safety check, but not a durable, arbitrary-point pause; it stops a bad output rather than holding a run open for a human days later.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-framework-matrix-d11",
+      "module": "T07-framework-matrix",
+      "q": "You inherit a working AutoGen codebase. Leadership asks if you should rewrite it immediately. What do you say?",
+      "a": "No immediate rewrite needed — maintenance mode still means bug fixes and security patches flow, so a working system isn't on fire. Stop new AutoGen-specific feature development, evaluate Microsoft Agent Framework's migration path, and prioritize migration by how much the code leans on AutoGen's conversational-turn-taking patterns that don't map cleanly onto the successor.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-framework-matrix-d12",
+      "module": "T07-framework-matrix",
+      "q": "Both LangGraph and OpenAI's Agents SDK support multi-agent, but neither makes it the core abstraction the way ADK and CrewAI do. What's the design tradeoff?",
+      "a": "LangGraph (subgraphs/Send) and the OpenAI SDK (handoffs) treat multi-agent as composition on top of a single-agent primitive, so you don't pay a multi-agent abstraction tax for tasks that don't need it. ADK/CrewAI bake it in from the start, which is convenient if you know you need delegation but can bias teams toward premature decomposition when a single agent with good tools would suffice.",
+      "difficulty": "staff"
+    }
+  ]
+}

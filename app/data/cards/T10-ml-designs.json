@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T10-ml-designs-c1",
+      "topic": "ML System Design Method",
+      "q": "What is the 9-slot template every ML system design in T10-ml-designs follows, in order?",
+      "a": "1) Problem framing (the label, including its delay/proxy). 2) Requirements + 3 clarifying questions. 3) Scale (numbers shown). 4) Features + leakage risk per feature. 5) Model + serving (derived from 3 and 4). 6) Metrics (offline vs online, and why they diverge). 7) The hard part (one sentence). 8) Failure modes with an observable symptom. 9) 3 follow-ups with answers. The label sits upstream of everything because it determines which features are even legal at serving time.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c2",
+      "topic": "Label Definition",
+      "q": "Why is 'fraud' not a valid label, and what is the actual production label?",
+      "a": "Fraud is never directly observed. The real label is usually 'a chargeback was filed and upheld within 90-120 days of the transaction,' which means: confirmed labels don't exist for up to 4 months, unreported fraud is a permanent false negative baked into the label, and merchant disputes for non-fraud reasons (buyer's remorse) pollute the positive class. Any fraud design that doesn't name this delay and noise floor hasn't engaged with the real problem.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c3",
+      "topic": "Label Definition",
+      "q": "Why is raw click a bad label for feed ranking, ads CTR, and search ranking alike?",
+      "a": "Click alone rewards clickbait and outrage because those reliably generate a tap regardless of true relevance or quality. Production systems use a weighted composite: feed ranking blends like/comment/share/hide with business-tuned weights captured in a fixed post-impression window; search blends click/cart/purchase discounted by position. The label is a design decision, not an observed fact.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c4",
+      "topic": "Leakage",
+      "q": "What is a 'point-in-time join' and what breaks without one?",
+      "a": "A point-in-time join attaches a feature's value as it existed strictly before the label's timestamp, not the feature's current value. Without it, e.g. an author's 'all-time CTR' computed via a nightly batch job that isn't point-in-time joined leaks future engagement into a past training row (a January post scored with a CTR that includes March data). Symptom: an offline AUC that looks implausibly good (0.95+ on a hard problem).",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c5",
+      "topic": "Architecture",
+      "q": "What forces the two-stage retrieval-then-ranking architecture, and when is it overkill?",
+      "a": "Catalog size x request QPS: e.g. feed ranking at 150k QPS peak scoring 500 candidates each is 75M scores/sec, infeasible for one heavy model pass, forcing cheap retrieval (ANN/rules) to cut the pool before an expensive ranker scores the survivors. It's overkill when the catalog is a few thousand items or fewer and scoring everything directly fits the latency budget -- derive the architecture from the arithmetic, don't assume it.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c6",
+      "topic": "Metrics",
+      "q": "Why does offline AUC/NDCG diverge from online engagement even when computed correctly (no leakage)?",
+      "a": "Two structural reasons: (1) off-policy bias -- offline evaluation only has labels for items the CURRENT policy chose to show, so it can't see how unseen candidates would have performed; (2) feed/recsys effects compound over days through novelty and habituation that a single-session offline slice cannot capture. A model can improve offline while online engagement stays flat or drops.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c7",
+      "topic": "Metrics",
+      "q": "Why PR-AUC instead of ROC-AUC for fraud and spam detection?",
+      "a": "Under extreme class imbalance (fraud/spam positive rate often under 0.5-1%), ROC-AUC looks deceptively good even for a weak model because it's dominated by the large negative class. PR-AUC (precision-recall) is sensitive to how the model performs on the rare positive class, which is the class that actually matters operationally.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c8",
+      "topic": "Failure Modes",
+      "q": "What is a feedback loop failure mode in recommendation/feed systems, and its observable symptom?",
+      "a": "The model's own exposure decisions shape what data the next model trains on: items shown get more engagement signal, so the next model favors them more, narrowing what gets shown further. Symptom: author/topic/item diversity (entropy) trends down over weeks even while raw engagement holds flat -- invisible unless diversity is tracked as its own metric.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c9",
+      "topic": "Failure Modes",
+      "q": "What is position bias and how is it corrected?",
+      "a": "Training data (clicks logged from production) overweights top-slot outcomes because items placed first get clicked partly BECAUSE of position, not just relevance. Symptom: rank inversions once an item moves to a different position after retraining. Fixed by including position as a training feature and zeroing it at serving time, or by IPS (inverse propensity score) reweighting.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c10",
+      "topic": "Failure Modes",
+      "q": "Why did a feature store NOT fully solve training-serving skew, and what actually causes skew even with one deployed?",
+      "a": "A feature store guarantees a feature's VALUE is stored once and read from one place, but not that the transformation CODE producing that value is shared. If the batch pipeline (Spark) and the streaming/online service reimplement 'the same' feature independently, they can silently diverge (different null-handling, rounding). Symptom: offline metric healthy, online metric flat or negative with no code crash.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c11",
+      "topic": "Churn / Causal Framing",
+      "q": "Why is churn prediction actually an uplift/causal problem disguised as classification?",
+      "a": "The model's real job is not 'predict who will churn accurately' but 'identify users where an intervention changes the outcome.' A model can have excellent offline AUC while a retention campaign built on it has zero effect, because it may be finding correlates of loyalty (would stay regardless) rather than save-ability. Proving the campaign works requires a held-out control group of flagged users who receive no intervention.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c12",
+      "topic": "A/B Testing Platform",
+      "q": "What is sample ratio mismatch (SRM) and why does it invalidate an experiment?",
+      "a": "SRM is when the observed variant split (e.g. 48/52) diverges from the configured allocation (50/50) by more than chance, detected via a chi-squared test on assignment counts. It's almost always caused by a bug in assignment or logging (one variant loses users before an event fires), not randomization itself. Any experiment with significant SRM must have its results discarded regardless of what the outcome metric shows.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c13",
+      "topic": "A/B Testing Platform",
+      "q": "Why does individual-level randomization break for marketplace/social features, and what replaces it?",
+      "a": "Treatment for one user can spill over to another: a treated rider's unfilled request changes supply available to a control rider in the same market; a treated user's friend in the control group is indirectly affected. Fix: cluster-based randomization (geographic markets, social communities) or switchback designs (alternate the whole market between treatment/control over time), matching the randomization unit to where the spillover actually happens.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c14",
+      "topic": "ETA Prediction",
+      "q": "Why does DoorDash's production ETA architecture separate a 'base model' from a 'decision layer'?",
+      "a": "The base model outputs a predicted DISTRIBUTION over completion time (not a point estimate), and a separate decision layer decides what number to actually SHOW the user -- which deliberately differs from the mean because the cost of being late (cancellations, complaints) is usually higher than being early, so the shown value is a calibrated upper quantile (e.g. 75th percentile), plus the decision layer handles multi-order batching logic the base model doesn't need to know about.",
+      "module": "T10-ml-designs"
+    },
+    {
+      "id": "T10-ml-designs-c15",
+      "topic": "Recommendations Platform",
+      "q": "In the 8-service recsys platform, what criterion decided the service boundaries, and what's the honest cost?",
+      "a": "Independent scaling and independent failure, not data entity boundaries: vector search and the recommendation engine are read-heavy/latency-bound, the event processor is write-heavy/throughput-bound, the profile processor is batch. Putting them in one process means scaling for the worst of the three and letting a bad batch job take down serving. Honest cost: eight deploy pipelines, eight dashboards, and cross-service tracing to answer a one-line question -- services that always deploy together are one service with extra network hops.",
+      "module": "T10-ml-designs"
+    }
+  ]
+}

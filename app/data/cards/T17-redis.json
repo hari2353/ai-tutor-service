@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-redis-c1",
+      "topic": "Redis",
+      "q": "Why is every single Redis command atomic with no locking code?",
+      "a": "Redis executes commands on a single thread with no interleaving between commands. Since Redis 6 the socket I/O layer is multi-threaded, but command execution itself is still single-threaded.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c2",
+      "topic": "Redis",
+      "q": "What is the KEYS incident and what's the fix?",
+      "a": "KEYS * walks the entire keyspace on the single command thread, blocking every other client for the whole scan (can spike p99 from ~1ms to seconds). Fix: SCAN with a cursor does bounded work per call and interleaves with other commands.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c3",
+      "topic": "Redis",
+      "q": "RDB vs AOF: what does each guarantee on crash?",
+      "a": "RDB is a periodic point-in-time snapshot; you lose everything since the last snapshot (commonly minutes). AOF logs every write; durability depends on appendfsync: always loses <=1 command (disk-fsync speed throughput), everysec (default) loses ~1s, no defers to OS flush (~30s on Linux).",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c4",
+      "topic": "Redis",
+      "q": "How many hash slots does Redis Cluster use and how is a key mapped to one?",
+      "a": "16,384 slots. slot = CRC16(key) mod 16384. Each slot is owned by exactly one primary node.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c5",
+      "topic": "Redis",
+      "q": "What causes a CROSSSLOT error and how do you fix it?",
+      "a": "A multi-key command (MGET, transactions, multi-key Lua) references keys that hash to different slots. Fix: hash tags -- wrap the shared part of the key in {} (e.g. {user:42}:profile) so only that substring is hashed, co-locating related keys on one slot.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c6",
+      "topic": "Redis",
+      "q": "What's the default maxmemory-policy and why is it usually wrong for a cache?",
+      "a": "noeviction -- once maxmemory is hit, writes fail with an OOM error while reads keep working. A cache workload usually wants allkeys-lru or allkeys-lfu so cold data is evicted instead of writes failing.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c7",
+      "topic": "Redis",
+      "q": "What's the correctness hole in a naive SET key val NX EX ttl distributed lock?",
+      "a": "The TTL is a guess at critical-section duration. If the holder pauses (GC, VM stall, network partition) longer than the TTL, the lock expires and a second process can acquire it -- two processes can believe they hold the lock simultaneously with nothing detecting it.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c8",
+      "topic": "Redis",
+      "q": "What is Kleppmann's specific critique of Redlock?",
+      "a": "Redlock has no fencing token. A process that acquires the lock and then pauses (GC, VM migration) past the TTL can resume believing it still holds the lock and write to the protected resource after a different process has legitimately acquired the lock -- nothing stops the stale write because the resource itself can't tell the writer is stale.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c9",
+      "topic": "Redis",
+      "q": "What actually fixes the Redlock fencing gap, and where does the fix live?",
+      "a": "A fencing token: a monotonically increasing number issued with each lock acquisition, checked and rejected by the PROTECTED RESOURCE if it's lower than the last accepted token. The fix must live at the resource, not the lock service, since the lock service can't know the writer has gone stale after it resumes from a pause.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c10",
+      "topic": "Redis",
+      "q": "What's the honest conclusion about Redis distributed locks?",
+      "a": "They are a performance optimization to reduce duplicate work (e.g. preventing two cron instances from both running an expensive job), not a correctness mechanism for anything where two processes concurrently holding the lock would be a real safety violation.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c11",
+      "topic": "Redis",
+      "q": "Sentinel vs Cluster: what problem does each solve?",
+      "a": "Sentinel provides automatic failover for a primary/replica set where the whole dataset fits on one node -- it solves availability. Cluster shards the keyspace across multiple primaries via hash slots -- it solves capacity, with each shard optionally having its own replicas for HA.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c12",
+      "topic": "Redis",
+      "q": "Why does a Redis Stream keep growing even after every consumer has processed and acked every message?",
+      "a": "Streams are append-only; XACK just marks a message as no longer pending, it doesn't delete it. Without XTRIM (MAXLEN/MINID), every message ever added stays in memory forever.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c13",
+      "topic": "Redis",
+      "q": "When is Redis Streams the right choice over Kafka, and when is Kafka better?",
+      "a": "Streams fit single-region workloads under roughly 200k events/sec per stream, already-on-Redis teams, and bounded in-memory retention. Kafka fits durable disk-backed retention independent of memory, throughput beyond that range, multiple independent uncoordinated consumers, or strict exactly-once semantics.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c14",
+      "topic": "Redis",
+      "q": "Which Redis structure would you use for a leaderboard and why?",
+      "a": "A sorted set (ZSet): O(log N) insert/update via its internal skip list plus hash table, and O(log N + M) range queries for top-N or range-by-score lookups.",
+      "module": "T17-redis"
+    },
+    {
+      "id": "T17-redis-c15",
+      "topic": "Redis",
+      "q": "What does HyperLogLog trade away to count distinct elements in fixed space?",
+      "a": "Exactness -- it gives an approximate cardinality estimate (~0.81% standard error) using a fixed ~12KB regardless of element count, and cannot enumerate which elements were seen, only estimate how many there were.",
+      "module": "T17-redis"
+    }
+  ]
+}

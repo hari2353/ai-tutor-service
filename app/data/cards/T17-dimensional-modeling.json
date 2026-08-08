@@ -1,0 +1,102 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-dimensional-modeling-c1",
+      "topic": "Dimensional Modeling",
+      "q": "Define 'grain' and explain why it's the most consequential dimensional modeling decision.",
+      "a": "Grain is the precise definition of what one fact-table row represents, as a business-process sentence. It's most consequential because you can always aggregate a fine grain up to coarse, but you can never disaggregate a coarse grain back down - a wrong grain choice requires a rebuild, not a migration.",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c2",
+      "topic": "Dimensional Modeling",
+      "q": "Star vs snowflake schema - what's the tradeoff and which is the default?",
+      "a": "Star: each dimension flattened/denormalized into one table, fewer joins. Snowflake: dimension hierarchies normalized into sub-tables, more joins, easier single-point hierarchy updates. Star is the default recommendation today since storage is cheap and join count dominates query latency.",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c3",
+      "topic": "Dimensional Modeling",
+      "q": "Define additive, semi-additive, and non-additive measures with an example of each.",
+      "a": "Additive: sums safely across any dimension (revenue). Semi-additive: sums across some dimensions not others (account balance - safe across accounts, not across time). Non-additive: never sum directly (ratios, unit price - recompute from components instead).",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c4",
+      "topic": "Dimensional Modeling",
+      "q": "Why is summing account balance across time wrong, and what should you do instead?",
+      "a": "Balance is semi-additive - summable across accounts at a fixed point in time, but summing across time produces a meaningless number (balance Monday + balance Tuesday isn't a real quantity). Use the latest value or a proper average instead.",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c5",
+      "topic": "Dimensional Modeling",
+      "q": "SCD Type 1 vs Type 2 vs Type 3 - one line each.",
+      "a": "Type 1: overwrite in place, no history. Type 2: insert a new versioned row with a new surrogate key and effective dates, preserving full history (the default choice). Type 3: add a previous_X column, preserving only one prior value.",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c6",
+      "topic": "Dimensional Modeling",
+      "q": "What is SCD Type 6 and why use it?",
+      "a": "Hybrid of Type 1 (current column) + Type 2 (versioned rows) + Type 3 (previous column) - 1+2+3=6. Use when downstream reports need both point-in-time-correct joins AND an always-current value in the same row without a second join.",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c7",
+      "topic": "Dimensional Modeling",
+      "q": "Why does SCD Type 2 require a surrogate key?",
+      "a": "A natural key alone can't represent one business entity having multiple valid attribute versions over time without breaking key uniqueness. A surrogate key gives each version a unique identity so fact rows unambiguously reference the version that was current at the time.",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c8",
+      "topic": "Dimensional Modeling",
+      "q": "What is a conformed dimension and why does it matter?",
+      "a": "A dimension built once with consistent keys/definitions/grain, reused identically across multiple fact tables. Enables drill-across queries comparing metrics across facts using the same dimension definition; without it, two teams' incompatible dim_customer variants make cross-fact comparisons meaningless.",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c9",
+      "topic": "Dimensional Modeling",
+      "q": "Name the three fact table types and their use.",
+      "a": "Transaction fact: one row per discrete event (most common, most granular). Periodic snapshot fact: one row per entity per fixed interval regardless of activity (needed for semi-additive measures like balance). Accumulating snapshot fact: one row per process instance, updated in place as it progresses through stages.",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c10",
+      "topic": "Dimensional Modeling",
+      "q": "What is a mixed-grain fact table and why is it a correctness bug?",
+      "a": "A fact table with rows at inconsistent grains (e.g. order-level shipping-fee rows mixed with order-line-level rows). Naive SUM() double-counts or miscounts unless every query remembers to filter by row type - a silent correctness bug, not a performance issue.",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c11",
+      "topic": "Dimensional Modeling",
+      "q": "What is the one-big-table (OBT) debate in dimensional modeling?",
+      "a": "Modern columnar engines' compression and vectorised execution let some teams flatten facts and all dimension attributes into one wide table, matching or beating star-schema join performance, at the cost of losing conformed-dimension reuse and update locality (a changed attribute must be rewritten everywhere it's embedded).",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c12",
+      "topic": "Dimensional Modeling",
+      "q": "What does dbt snapshot automate?",
+      "a": "SCD Type 2 mechanics as declarative config (unique key, strategy timestamp/check, tracked columns) instead of hand-written upsert/versioning ETL logic - the standard modern tool for this.",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c13",
+      "topic": "Dimensional Modeling",
+      "q": "What does a semantic layer (dbt MetricFlow, Cube, LookML) provide for measure additivity?",
+      "a": "Lets teams declare a measure's correct aggregation rule once (e.g. 'balance resolves to latest value, never summed across time'), enforced consistently across every downstream query/dashboard rather than relying on each analyst remembering the rule.",
+      "module": "T17-dimensional-modeling"
+    },
+    {
+      "id": "T17-dimensional-modeling-c14",
+      "topic": "Dimensional Modeling",
+      "q": "What is Kimball's 'bus matrix' used for?",
+      "a": "A grid of business processes/fact tables against shared candidate dimensions, built and agreed on before teams independently build fact tables, to catch incompatible dimension definitions before they're built rather than reconciling them afterward.",
+      "module": "T17-dimensional-modeling"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "drills": [
+    {
+      "id": "T17-vector-db-compare-d1",
+      "module": "T17-vector-db-compare",
+      "q": "Is FAISS a vector database? What is it instead?",
+      "a": "No. It's a C++/Python library of ANN algorithms with no server, persistence, filtering, replication, or multi-tenancy built in.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-vector-db-compare-d2",
+      "module": "T17-vector-db-compare",
+      "q": "Give the HNSW memory formula.",
+      "a": "bytes_per_vector ~= 1.1 * (4*dim + 8*M)",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-vector-db-compare-d3",
+      "module": "T17-vector-db-compare",
+      "q": "Compute bytes/vector and total GB for 1M vectors, 768 dimensions, M=16.",
+      "a": "1.1*(4*768+8*16) = 1.1*(3072+128) = 3,520 B/vector -> 3.5 GB total.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-vector-db-compare-d4",
+      "module": "T17-vector-db-compare",
+      "q": "Name the three concrete forcing functions to leave pgvector for a dedicated vector database -- not 'vector count'.",
+      "a": "Build/rebuild time exceeding the maintenance window, filtered-query p99 missing an SLA, and needing horizontal write scaling.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-vector-db-compare-d5",
+      "module": "T17-vector-db-compare",
+      "q": "A top search result is confidently wrong but latency and infra look healthy. What's the first thing to check?",
+      "a": "Embedding model/version mismatch between index time and query time -- the most common real cause.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-vector-db-compare-d6",
+      "module": "T17-vector-db-compare",
+      "q": "Describe the concrete diagnostic for a suspected stale or drifted embedding pipeline.",
+      "a": "Re-embed a known corpus item with the current pipeline, compare cosine similarity to the stored vector for that same item -- should be ~1.0. If not, the pipeline (model version, normalization) has drifted.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-vector-db-compare-d7",
+      "module": "T17-vector-db-compare",
+      "q": "How does Weaviate's multi-tenancy architecturally differ from Qdrant's and Milvus's, and what problem does it sidestep?",
+      "a": "Weaviate physically isolates tenants (dedicated shard/collection per tenant), sidestepping the filtered-ANN reconciliation problem entirely. Qdrant/Milvus filter within a shared index (payload field / partition), inheriting pre/post-filter cost tradeoffs.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-vector-db-compare-d8",
+      "module": "T17-vector-db-compare",
+      "q": "Name four scenarios where vector search is the wrong retrieval tool entirely.",
+      "a": "Exact lookups (B-tree), pure structured filter queries (SQL), small keyword-heavy corpora (BM25 wins), and hard explainability requirements (opaque cosine score).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-vector-db-compare-d9",
+      "module": "T17-vector-db-compare",
+      "q": "Why is a high-cardinality filter like tenant_id the expensive case for both pre-filtering and post-filtering, across every HNSW-based vector database?",
+      "a": "Pre-filter has no index over an arbitrary small subset, degenerating to brute force. Post-filter's greedy search routes through nearest unfiltered neighbors and can strand away from filter-valid nodes. High cardinality shrinks the valid subset the most, worsening both -- structural to HNSW, not vendor-specific.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-vector-db-compare-d10",
+      "module": "T17-vector-db-compare",
+      "q": "A team running a 200K-document internal search tool wants to adopt Milvus. What's the pushback?",
+      "a": "At 200K documents none of Milvus's differentiators (K8s-native compute/storage separation, billion-scale headroom) are used, but the team pays full operational cost of a distributed system. Push back toward naming the actual requirement; without one this is precautionary over-engineering -- pgvector or FAISS-backed service would serve this scale cheaply.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-vector-db-compare-d11",
+      "module": "T17-vector-db-compare",
+      "q": "Design the vector storage strategy for a platform starting at 500K vectors on pgvector, expected to reach 80M vectors with multi-tenant ACL requirements in 18 months.",
+      "a": "Start on pgvector. Instrument the three forcing functions from day one (HNSW rebuild time trend, filtered p99 by tenant size, write throughput ceiling). Re-evaluate against measured numbers as corpus grows, since pgvector's viable ceiling keeps moving upward. If fine-grained per-tenant isolation is the dominant driver, that points to Weaviate; if raw scale is the driver, that points to Milvus -- name which axis is actually forcing the eventual migration.",
+      "difficulty": "staff"
+    }
+  ]
+}

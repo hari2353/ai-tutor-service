@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T08-llm-as-judge-c1",
+      "topic": "LLM-as-Judge",
+      "q": "Three modes of LLM-as-judge and the one weakness each is most vulnerable to.",
+      "a": "Pointwise (absolute score) - score anchor drifts across sessions. Pairwise (A vs B) - position bias, verbosity bias. Reference-based (vs gold answer) - penalizes valid paraphrases that don't textually resemble the reference.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c2",
+      "topic": "LLM-as-Judge",
+      "q": "Position bias: what is it and the measured magnitude?",
+      "a": "Swapping the order of two candidates in a pairwise prompt shifts the win rate 10-15 percentage points independent of quality (Zheng et al., MT-Bench 2023). Mitigation: run both orderings, treat a flipped verdict as a tie.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c3",
+      "topic": "LLM-as-Judge",
+      "q": "Verbosity bias: magnitude and mitigation.",
+      "a": "15-30 points of inflated preference for longer answers regardless of quality, across GPT-4/Claude/PaLM-2 judges (Wang et al., 2023). Mitigate with an explicit 'do not prefer length' rubric line plus length-bucketed analysis.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c4",
+      "topic": "LLM-as-Judge",
+      "q": "Self-preference bias: magnitude and the correct structural fix.",
+      "a": "A judge scores its own model family's outputs 10-25% higher than equivalent-quality outputs from another family (arXiv:2410.21819). No rubric wording reliably surfaces it - the fix is structural: never use the same model family as both judge and candidate in a decision-driving comparison.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c5",
+      "topic": "LLM-as-Judge",
+      "q": "Judge calibration workflow, in order.",
+      "a": "1) Sample 100-300 real traces. 2) 2-3 humans label on the exact rubric. 3) Compute inter-annotator agreement (Cohen's kappa for 2 raters, Krippendorff's alpha for 3+). 4) Judge scores the same traces. 5) Compute judge-vs-human kappa. Ship only if >=0.6; re-calibrate on any rubric or judge model change.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c6",
+      "topic": "LLM-as-Judge",
+      "q": "Cohen's kappa vs Krippendorff's alpha - when do you use which?",
+      "a": "Cohen's kappa: exactly 2 raters, nominal/ordinal categories. Krippendorff's alpha: 3+ raters, ordinal/interval scales, tolerates missing observations. Both correct for chance agreement, unlike raw percent agreement.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c7",
+      "topic": "LLM-as-Judge",
+      "q": "Kappa/alpha interpretation thresholds.",
+      "a": "<0.4: rubric ambiguous, fix the rubric first. 0.4-0.6: weak, tune it. >0.6: acceptable for production. >0.8: strong. A judge-vs-human kappa above human-human kappa is a red flag for collusion on a superficial correlate, not a win.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c8",
+      "topic": "LLM-as-Judge",
+      "q": "When is a cheap judge sufficient vs when do you need a frontier model?",
+      "a": "Cheap judge (small/fine-tuned/mini model): near-checklist criteria a human could apply in under 10 seconds without re-reading source material - runs CI gates and 100% of production sampling. Frontier judge: criteria requiring real judgment (nuanced correctness, subtle harm) - runs calibration sets and adjudicates hard/ambiguous cases.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c9",
+      "topic": "LLM-as-Judge",
+      "q": "What is G-Eval and why does it beat naive 'output a number' prompting?",
+      "a": "G-Eval (Liu et al., 2023) has the judge generate its own chain-of-thought evaluation steps from the criterion, fills them in as a form, then takes a probability-weighted score across top logprobs. Externalizing reasoning before scoring reduces anchoring on surface cues; probability-weighting smooths single-token sampling noise.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c10",
+      "topic": "LLM-as-Judge",
+      "q": "The shared-blind-spot failure mode.",
+      "a": "If judge and generator share a training-data blind spot, the judge certifies a fabrication as correct because it matches the judge's own equally-wrong prior. Fix: ground the judge in something external to both models - a retrieved source or verified gold answer, not just the judge's own recall.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c11",
+      "topic": "LLM-as-Judge",
+      "q": "Faithfulness vs factuality when judging RAG answers - why keep them separate?",
+      "a": "Faithfulness = matches the provided context; factuality = matches the world. A response can be faithful to a wrong retrieved chunk (factually wrong) or unfaithful to context but factually correct. Conflating them into one score hides whether retrieval or generation broke.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c12",
+      "topic": "LLM-as-Judge",
+      "q": "Rubric design rules that reduce judge bias.",
+      "a": "Concrete anchor examples per score level, not adjectives. Explicitly exclude dimensions not being scored (length, formatting, judge's own style preference). One criterion per rubric call, not three conflated together. Ask for reasoning before the score.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c13",
+      "topic": "LLM-as-Judge",
+      "q": "A judge-vs-human kappa comes back at 0.95 - is that automatically good news?",
+      "a": "No - audit it. Extremely high agreement can mean the judge and humans are both keying off a superficial correlate (length, style) rather than the true quality signal. Check agreement on an adversarial subset built to break that correlate before trusting the aggregate.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c14",
+      "topic": "LLM-as-Judge",
+      "q": "How do you build a CI gate on an LLM judge that doesn't flake?",
+      "a": "Pin the judge model version explicitly (never 'latest'). Run pairwise comparisons in both orderings, treat a flip as a tie. Gate on the judge's calibrated agreement threshold, not an arbitrary score cutoff. Track judge-vs-human kappa itself as a monitored metric so drift shows before it silently degrades the gate.",
+      "module": "T08-llm-as-judge"
+    },
+    {
+      "id": "T08-llm-as-judge-c15",
+      "topic": "LLM-as-Judge",
+      "q": "Frontier models on adversarial bias benchmarks - the headline 2026 finding.",
+      "a": "A 2026 study found frontier judge models exceeding 50% error rates on challenging bias-stress-test benchmarks despite strong aggregate correlation scores - meaning a judge can look reliable on average while failing hard on the exact dimension a specific eval is testing.",
+      "module": "T08-llm-as-judge"
+    }
+  ]
+}

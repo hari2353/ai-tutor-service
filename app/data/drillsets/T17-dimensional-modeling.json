@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T17-dimensional-modeling-d1",
+      "module": "T17-dimensional-modeling",
+      "q": "Define grain and explain the asymmetry that makes it the most consequential dimensional modeling decision.",
+      "a": "Grain is the precise definition of what one fact-table row represents, stated as a business-process sentence. The asymmetry: you can always aggregate a fine grain up to a coarser one in a query, but you can never disaggregate a coarse grain back down once the detail wasn't captured - a wrong grain choice requires rebuilding history, not migrating it.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-dimensional-modeling-d2",
+      "module": "T17-dimensional-modeling",
+      "q": "Star vs snowflake schema: what's the actual tradeoff, and when would you choose snowflake over the star default?",
+      "a": "Star flattens each dimension into one denormalized table (fewer joins, faster typical BI queries); snowflake normalizes dimension hierarchies into sub-tables (smaller storage, easier single-point updates, more joins). Star is the default because storage is cheap and join count dominates latency; choose snowflake when a hierarchy attribute changes independently and frequently enough that updating one normalized row beats rewriting a denormalized column across a huge dimension table.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-dimensional-modeling-d3",
+      "module": "T17-dimensional-modeling",
+      "q": "Explain additive, semi-additive, and non-additive measures, and describe the classic error each miscategorization causes.",
+      "a": "Additive (revenue, units) sums safely across any dimension. Semi-additive (account balance, inventory) sums safely across some dimensions (accounts, at a point in time) but not others (time) - summing across time gives a meaningless number. Non-additive (ratios, unit price) should never be summed directly; naive averaging ignores differing row weights, so the correct computation recomputes from underlying additive components (sum(revenue)/sum(qty), not avg(price)). Getting this wrong produces a plausible but silently incorrect dashboard number with no error.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-dimensional-modeling-d4",
+      "module": "T17-dimensional-modeling",
+      "q": "Walk through SCD Type 2 mechanics precisely and explain why it structurally requires a surrogate key.",
+      "a": "On a tracked attribute change, the current row is closed (valid_to set, is_current flipped false) and a new row is inserted with a new surrogate key, the new value, and an open valid_to. The natural key stays constant across versions, but a natural key alone can't represent one entity having multiple valid attribute versions without breaking key uniqueness - the surrogate key gives each version distinct identity so fact rows unambiguously reference the version correct at the time the fact occurred.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-dimensional-modeling-d5",
+      "module": "T17-dimensional-modeling",
+      "q": "Compare SCD Types 1, 2, 3, and 6, giving a scenario where each is the right choice.",
+      "a": "Type 1 (overwrite, no history): fixing a typo where history has no value. Type 2 (versioned rows): address or sales-rep changes needing point-in-time-correct historical reports. Type 3 (previous-value column): a 'current vs immediately prior' comparison report needing no deeper history. Type 6 (hybrid 1+2+3): when reports need both a point-in-time-correct join and an always-current value in the same row without a second join.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-dimensional-modeling-d6",
+      "module": "T17-dimensional-modeling",
+      "q": "What is a conformed dimension, and why do drill-across queries depend on it?",
+      "a": "A dimension built once with consistent surrogate keys, attribute definitions, and grain, reused identically across every fact table referencing that entity type. Comparing metrics across fact tables (e.g. sales volume vs support-ticket volume by customer segment) requires both facts to agree on what the segment means and how customers map to it - without conforming, two independently-built dimension variants make cross-fact comparisons meaningless even though the query runs and returns a number.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-dimensional-modeling-d7",
+      "module": "T17-dimensional-modeling",
+      "q": "A fact table mixes order-level summary rows (one shipping-fee row per order) with order-line-level rows (one per product). Diagnose the problem and the fix.",
+      "a": "This is a mixed-grain fact table, a correctness bug: any naive SUM(amount) double-counts or miscounts unless every query remembers to filter by row type. Fix by splitting into separate fact tables at consistent grains (order-level and line-item-level), or allocating the shipping fee proportionally into the line-item grain if a single table is required - structurally removing the failure mode rather than relying on query-author discipline with a row_type discriminator.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-dimensional-modeling-d8",
+      "module": "T17-dimensional-modeling",
+      "q": "What is the one-big-table (OBT) debate in dimensional modeling, and where does OBT genuinely make sense versus star schema?",
+      "a": "Modern columnar engines' compression and vectorised execution let a fully denormalized wide table match or beat star-schema join performance, but it sacrifices conformed-dimension reuse and update locality (a changed shared attribute must be rewritten everywhere it's embedded). OBT makes sense for narrower, single-purpose marts serving a few closely related reports; star schemas remain more maintainable for warehouses serving many fact tables that need to share dimension definitions consistently.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-dimensional-modeling-d9",
+      "module": "T17-dimensional-modeling",
+      "q": "Design a dimensional model for a subscription business needing both 'MRR as of any historical month' and 'current subscription tier per customer', explaining the fact table type and SCD choice.",
+      "a": "A periodic snapshot fact table (one row per subscription per month) captures MRR and status at each month-end - semi-additive, summable across subscriptions at a point in time but not across months. dim_plan/dim_customer use SCD Type 2 so each snapshot joins the tier active in that month, correctly attributing historical MRR. Type 6 on dim_plan (current-tier column plus Type 2 versioned columns) supports 'current tier' queries without an extra join to find the latest version.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-dimensional-modeling-d10",
+      "module": "T17-dimensional-modeling",
+      "q": "Why is 'you can always aggregate up but never disaggregate down' the central argument for grain, and when does that argument not fully apply?",
+      "a": "A fine-grained fact table can always produce a coarser total via SUM(), but a coarse-grained table can never recover finer detail it never captured. The argument weakens when the source system itself never records finer-grained detail at all (you can't extract line-item detail from a source that only ever stored order totals), in which case achievable grain is bounded by the source, not a free modeling choice.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-dimensional-modeling-d11",
+      "module": "T17-dimensional-modeling",
+      "q": "How does a semantic layer (dbt MetricFlow, Cube, LookML) change how measure additivity is handled versus raw analyst SQL, and what does it NOT replace?",
+      "a": "It lets teams declare a measure's correct aggregation rule once (e.g. balance resolves to latest-value, never summed across time), enforced automatically across every downstream query or dashboard built against it, rather than depending on every analyst remembering the rule. It doesn't replace the analytical judgment of correctly classifying a measure as additive/semi-additive/non-additive in the first place - it only prevents inconsistent application of that classification once made.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-dimensional-modeling-d12",
+      "module": "T17-dimensional-modeling",
+      "q": "What is Kimball's bus matrix and what problem does it prevent?",
+      "a": "A grid of business processes/fact tables against shared candidate dimensions, built and agreed on before teams independently build fact tables. It prevents the scenario where two teams build incompatible versions of what should be the same conformed dimension (e.g. two different dim_customer definitions), catching the conflict during planning rather than discovering it after both fact tables are already in production.",
+      "difficulty": "mid"
+    }
+  ]
+}

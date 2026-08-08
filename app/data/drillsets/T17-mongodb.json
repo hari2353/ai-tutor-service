@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T17-mongodb-d1",
+      "module": "T17-mongodb",
+      "q": "Explain the read-then-write race condition in MongoDB precisely, and why findOneAndUpdate fixes it structurally rather than just 'being atomic.'",
+      "a": "A find() followed by a separate update() leaves an unprotected window between the read and write where a concurrent request can perform the identical read (seeing the same pre-update state) and act on the same stale decision. findOneAndUpdate evaluates the filter condition and applies the mutation as one atomic server-side operation, so there's no separate application-level check step for a concurrent caller to race against - if the condition no longer holds by execution time, it simply matches nothing.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-mongodb-d2",
+      "module": "T17-mongodb",
+      "q": "What is the trap that catches engineers who already know findOneAndUpdate exists, and what's the fix?",
+      "a": "Performing a separate prior find() to decide whether to call findOneAndUpdate at all, then basing business logic on that separate read rather than on findOneAndUpdate's own return value - this reintroduces the identical race with an extra read in front of it. The condition must be evaluated inside the atomic operation's own filter, never in application code beforehand.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-mongodb-d3",
+      "module": "T17-mongodb",
+      "q": "Rank the five approaches to fixing a check-then-write race in MongoDB and explain when you'd reach for something beyond the cheapest option.",
+      "a": "1) Atomic update operator with the condition embedded in the filter - cheapest, for simple comparisons. 2) findOneAndUpdate with a conditional filter - when you need the document back in the same round trip. 3) Optimistic concurrency via a version field - when the condition is too complex for a simple filter comparison. 4) Unique/partial index - when the invariant is uniqueness itself. 5) Multi-document transactions - only for genuinely cross-document invariants no single atomic operation can express.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-mongodb-d4",
+      "module": "T17-mongodb",
+      "q": "Explain WiredTiger's document-level concurrency model and how it improved on MongoDB's original MMAPv1 engine.",
+      "a": "WiredTiger uses MVCC (readers get point-in-time snapshots, never blocked by writers) plus fine-grained intent locking down to the document level via optimistic concurrency control - only writers targeting the SAME document actually serialize; different documents in the same collection proceed with zero contention. MMAPv1 locked at the collection level, meaning any write could block unrelated concurrent writes to the same collection - a much coarser model WiredTiger's adoption as default (MongoDB 3.2) fixed.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-mongodb-d5",
+      "module": "T17-mongodb",
+      "q": "What is the unbounded array anti-pattern, why does it degrade performance well before the 16MB document limit, and what's the fix?",
+      "a": "An array embedded in a document that grows indefinitely (e.g. an activity log) eventually forces the document to exceed its allocated disk space on append, causing WiredTiger to relocate the entire document - turning an incremental append into a full-document rewrite with progressively worsening write latency, long before the 16MB hard limit is hit. Fix: the bucket pattern (bounded sub-documents per time window/count) or moving the growing data into its own referenced collection.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-mongodb-d6",
+      "module": "T17-mongodb",
+      "q": "Explain w:1 vs w:majority write concern and precisely what can happen to a w:1 write during a primary failover.",
+      "a": "w:1 is acknowledged once only the primary applies the write, before it necessarily replicates anywhere. If the primary fails before replicating it and a different secondary (without that write) is elected primary, the write is rolled back despite being acknowledged as successful. w:majority requires majority acknowledgment before success, and because any future primary must have replicated at least as far as any majority-acknowledged write, it survives any failover.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-mongodb-d7",
+      "module": "T17-mongodb",
+      "q": "What does a causally consistent session guarantee beyond plain readConcern:majority, and how is it different from linearizability?",
+      "a": "Plain majority reads only guarantee non-rollback-able data, but successive reads in the same session routed to secondaries with different replication lag can still appear to go backward in time. A causally consistent session tracks a logical clock across the session's operations, guaranteeing read-your-own-writes, monotonic reads, monotonic writes, and writes-follow-reads - a strictly weaker and cheaper guarantee than linearizability, which orders operations across ALL clients globally, not just within one causal session.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-mongodb-d8",
+      "module": "T17-mongodb",
+      "q": "Why does a monotonically increasing shard key create a worsening hot-shard problem, and what does hashed sharding trade away to fix it?",
+      "a": "Range-based sharding on a monotonic key means every new document's value exceeds all previous ones, so every write lands in the chunk owning the highest range on one shard - the problem gets worse as write volume grows, not better with more shards. Hashed sharding spreads monotonic values pseudo-randomly across shards, fixing the hot-shard problem, but destroys the ability to route a range query on that field to a contiguous subset of shards - range queries then scatter-gather across all shards.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-mongodb-d9",
+      "module": "T17-mongodb",
+      "q": "Why is $lookup typically much more expensive than a relational join, and what's the senior guidance on using it?",
+      "a": "$lookup performs close to a nested-loop-with-index when the foreign collection has an index on the compared field, but degrades toward a full collection scan per input document without one - a worse cost curve than a relational hash/merge join over the same data, with cross-shard $lookup adding network overhead on top. Guidance: use it sparingly, always index the foreign field when used, and treat a constant $lookup pattern on a hot path as a signal to embed the data instead.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-mongodb-d10",
+      "module": "T17-mongodb",
+      "q": "When should you reach for multi-document transactions in MongoDB, and why is 'we use transactions for most of our writes' considered a schema smell?",
+      "a": "Use them for operations genuinely spanning multiple documents/collections that no reasonable embedding could avoid, like a funds transfer between two account documents. Needing transactions across most hot-path writes suggests the schema wasn't designed around MongoDB's core strength (atomic single-document operations on well-embedded documents), and is a signal to revisit the schema rather than to keep relying on transaction overhead (held resources, execution time limits, added latency) as the default correctness mechanism.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-mongodb-d11",
+      "module": "T17-mongodb",
+      "q": "A sharded MongoDB cluster has one shard at 90% disk/CPU while others sit at 30%. Diagnose the likely causes and explain what MongoDB 8.0's improved resharding tools do and don't fix here.",
+      "a": "Likely a shard key problem: low cardinality (too few distinct values to split chunks), a monotonically increasing key concentrating writes on one shard, or skew (one dominant value, e.g. a large tenant). Diagnose via the key's value/chunk distribution (sh.status()). MongoDB 8.0's sh.shardAndDistributeCollection() makes the operational process of fixing a bad key faster once identified, but doesn't retroactively fix the underlying data/access-pattern skew itself - genuine tenant skew needs an architectural response like isolation, not just faster rebalancing.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-mongodb-d12",
+      "module": "T17-mongodb",
+      "q": "Design a job-claiming mechanism for a shared MongoDB job queue that guarantees no job is claimed by two workers, and explain the schema pitfall to avoid.",
+      "a": "Each job is its own document (status: pending/claimed/done). A worker claims via findOneAndUpdate({status:'pending'}, {$set:{status:'claimed', claimed_by, claimed_at}}, {sort:{priority:-1}}) - the atomic filter-plus-update ensures only one worker's call can transition a given job, since a concurrent worker's identical query won't match it once claimed. Add a staleness check and periodic reclaim for crashed workers. Avoid storing jobs as array elements on one 'queue' document (unbounded-array anti-pattern) - each job must be its own document in its own collection.",
+      "difficulty": "staff"
+    }
+  ]
+}

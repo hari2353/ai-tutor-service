@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T10-principal-layer-c1",
+      "topic": "Multi-Tenancy",
+      "q": "What are the silo, pool, and bridge tenant isolation models, and their core tradeoff?",
+      "a": "Silo: each tenant gets a dedicated stack (compute, DB), highest isolation, highest cost/tenant, most operational overhead (N stacks to patch). Pool: tenants share everything, isolated logically (row-level tenant_id), lowest cost, highest noisy-neighbour risk. Bridge: mixed by tenant tier -- shared for most, siloed for high-value or compliance-sensitive tenants. Core tradeoff: isolation strength vs. cost and operational simplicity.",
+      "module": "T10-principal-layer"
+    },
+    {
+      "id": "T10-principal-layer-c2",
+      "topic": "Multi-Tenancy",
+      "q": "Why is pool-model tenant isolation enforced only by application code a security bug waiting to happen?",
+      "a": "It's a CONVENTION (remembering to add WHERE tenant_id = ?), not a GUARANTEE, and conventions get violated the first time someone writes a new endpoint under deadline pressure. The durable fix is enforcement at a layer new code cannot bypass: database row-level security (Postgres RLS), a mandatory data-access wrapper that requires a tenant context to construct any query, or a service-mesh-level check on the tenant claim.",
+      "module": "T10-principal-layer"
+    },
+    {
+      "id": "T10-principal-layer-c3",
+      "topic": "Multi-Tenancy",
+      "q": "Quantify the noisy-neighbour problem: 200 DB connections, 500 tenants, one tenant opens 50 concurrent connections for a bulk export. What happens?",
+      "a": "Average budget is 200/500 = 0.4 connections/tenant. One tenant's 50 concurrent connections consumes 25% of total pool capacity, degrading every other tenant's p99 latency in lockstep -- a fully predictable outcome from the arithmetic, not a rare edge case. Fix: per-tenant connection/rate quotas enforced at the pool or gateway layer, not just monitored.",
+      "module": "T10-principal-layer"
+    },
+    {
+      "id": "T10-principal-layer-c4",
+      "topic": "Cost Modeling",
+      "q": "What is the unit-cost formula, and what's the actual skill beyond plugging in numbers?",
+      "a": "unit_cost = (direct allocations + shared costs allocated by a stated method) / units delivered. The actual skill is finding the DOMINANT line item -- the one that scales linearly with the metric you're trying to grow -- not just producing a total. E.g. in an LLM feature, inference cost can be 83% of the bill and the only item that scales with request volume; naming that unprompted, with arithmetic shown, is the deliverable.",
+      "module": "T10-principal-layer"
+    },
+    {
+      "id": "T10-principal-layer-c5",
+      "topic": "Cost Modeling",
+      "q": "What is the FinOps cost-attribution maturity ladder?",
+      "a": "Beginner: coarse-grained monthly cost per feature. Intermediate: per-request or per-job cost with telemetry-driven allocation and dashboards. Advanced: real-time, per-unit, tenant-aware cost integrated into CI and autoscaling with automated remediation. Most orgs sit in the middle; claiming a maturity you don't have is worse than stating your actual level with a next step.",
+      "module": "T10-principal-layer"
+    },
+    {
+      "id": "T10-principal-layer-c6",
+      "topic": "Migration Strategy",
+      "q": "Name the four migration building blocks and what each one actually validates.",
+      "a": "Strangler fig: a routing facade incrementally shifts traffic from legacy to new (meant to be temporary, often isn't). Dual-write + reconciliation: writes go to both stores, a scheduled diff job catches drift (validates DATA consistency). Backfill-then-cutover: bulk-migrate historical data before any live traffic moves (simpler when staleness is tolerable). Shadow traffic: production requests are duplicated to the new system to compare behavior before cutover (validates BEHAVIORAL correctness, distinct from data consistency).",
+      "module": "T10-principal-layer"
+    },
+    {
+      "id": "T10-principal-layer-c7",
+      "topic": "Migration Strategy",
+      "q": "What is the single most reported production failure across strangler-fig and dual-write migrations?",
+      "a": "Treating the technique as a plan rather than a proof: dual-writing without ever running the reconciliation job to completion, or running it once at project start and never again as drift silently accumulates over the following weeks. The reconciliation job's own drift rate should be a dashboarded, alertable metric, not a one-time script.",
+      "module": "T10-principal-layer"
+    },
+    {
+      "id": "T10-principal-layer-c8",
+      "topic": "Migration Strategy",
+      "q": "Why does decommissioning the legacy system right after cutover break rollback, and what's the fix?",
+      "a": "Rollback ('flip the router back') is only cheap if the legacy system is still live and capable of resuming service. Decommissioning it as soon as the new system 'looks stable' removes the safety net before confidence in the new system is actually earned (vs. just being quiet). Fix: keep the legacy path live until a stated confidence bar is met (e.g. a zero-drift observation window), not a stated calendar date.",
+      "module": "T10-principal-layer"
+    },
+    {
+      "id": "T10-principal-layer-c9",
+      "topic": "RFC Writing",
+      "q": "What's the test for whether an 'alternatives considered' section is real, not decorative?",
+      "a": "Could a smart reader who disagreed with your recommendation use this section to argue for a different option, using your own words? A real section states what each rejected option costs AND what scenario it would actually have been correct for (not strawmanned). A decorative section lists options with no stated cost and never mentions when the rejected option would have won.",
+      "module": "T10-principal-layer"
+    },
+    {
+      "id": "T10-principal-layer-c10",
+      "topic": "RFC Writing",
+      "q": "What's the difference between an RFC and an ADR, and why does conflating them produce a bad document?",
+      "a": "An RFC proposes a change and exists to gather input before a decision; once decided, it should be archived, not maintained. An ADR (Architecture Decision Record) captures the decision itself in a short, durable format (context, decision, consequences) meant to be read months later. Conflating them produces a document too long to be a quick durable reference and too settled-sounding to invite real debate while still open.",
+      "module": "T10-principal-layer"
+    },
+    {
+      "id": "T10-principal-layer-c11",
+      "topic": "RFC Writing",
+      "q": "What's the standard RFC structure and length, and the failure mode of skipping the risks section?",
+      "a": "Summary (1 paragraph) -> Motivation (cost of status quo, not preference) -> Proposal -> Alternatives considered (with tradeoffs) -> Risks and mitigations -> Implementation/rollout plan, held to roughly 2-5 pages since length past that point is read by fewer people, not more thoroughly. Skipping risks/mitigations means the room's hardest objection surfaces reactively in a comment thread or gets the decision re-litigated weeks after 'approval' instead of being addressed on the page.",
+      "module": "T10-principal-layer"
+    },
+    {
+      "id": "T10-principal-layer-c12",
+      "topic": "Calibration",
+      "q": "How should the rigor of a decision-making artifact (Slack message vs. full RFC) scale?",
+      "a": "With how expensive the decision is to reverse and how many people/teams it structurally constrains -- the same reversible-vs-one-way-door judgment as T10-tech-selection. A cheap, reversible config default doesn't need a 5-page RFC. A data-model or public-API choice other teams will build on for years does, because under-processing a one-way door silently constrains everyone downstream, while over-processing a two-way door just wastes an afternoon.",
+      "module": "T10-principal-layer"
+    }
+  ]
+}

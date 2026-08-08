@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-sqlserver-c1",
+      "topic": "SQL Server",
+      "q": "Why is 'the clustered index IS the table' the key fact for SQL Server index design?",
+      "a": "The clustered index's leaf level stores the actual row data in key order (no separate heap). Every nonclustered index leaf stores the clustering key as its row locator, so a wide/volatile clustering key bloats every nonclustered index on the table, not just itself.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c2",
+      "topic": "SQL Server",
+      "q": "What is a key lookup and when does the optimizer stop using the index because of it?",
+      "a": "A second seek into the clustered index to fetch columns a nonclustered index doesn't carry. Past an estimated row count where per-row lookup cost exceeds a scan's cost, the optimizer flips the plan to a scan. Fix: INCLUDE the needed columns to make it a covering index.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c3",
+      "topic": "SQL Server",
+      "q": "Define parameter sniffing precisely.",
+      "a": "The first execution of a parameterized query/procedure compiles a plan using that call's actual parameter values via the column histogram; every later call reuses the cached plan by query text regardless of its own parameter values. Correct when data is uniform, wrong when skewed.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c4",
+      "topic": "SQL Server",
+      "q": "What is the observable symptom of bad parameter sniffing in production?",
+      "a": "A stored procedure fast for months suddenly runs slow for one specific parameter value with no code change. sys.dm_exec_query_stats + sys.dm_exec_query_plan shows a large gap between estimated and actual rows on the current call.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c5",
+      "topic": "SQL Server",
+      "q": "Compare OPTION(RECOMPILE), OPTIMIZE FOR UNKNOWN, and PSP optimization as parameter-sniffing fixes.",
+      "a": "RECOMPILE: fresh correct plan every call, pays compile cost every call - fine for rare/expensive queries. OPTIMIZE FOR UNKNOWN: one average-case plan, cheap but mediocre for both extremes. PSP optimization (SQL Server 2022, compat 160+): multiple plans bucketed by sniffed value's cardinality range, for EQUALITY predicates only.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c6",
+      "topic": "SQL Server",
+      "q": "How do you distinguish parameter sniffing from stale statistics as root cause?",
+      "a": "Stale statistics produce bad row estimates uniformly across all parameter values (recent bulk load/delete not yet reflected). Sniffing produces good estimates for the sniffed value and bad estimates specifically for differently-distributed values. Check sys.dm_db_stats_properties for staleness first - UPDATE STATISTICS is cheaper to try.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c7",
+      "topic": "SQL Server",
+      "q": "How is SQL Server's default READ COMMITTED different from Postgres's?",
+      "a": "SQL Server's default READ COMMITTED is LOCK-based: shared locks on reads (released as the scan moves on), exclusive locks on writes held until commit - readers and writers DO block each other. Postgres's READ COMMITTED is MVCC-based from the start; readers never block writers by default.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c8",
+      "topic": "SQL Server",
+      "q": "What does RCSI fix and what does it cost?",
+      "a": "READ_COMMITTED_SNAPSHOT ON switches READ COMMITTED to row versioning: readers see the last-committed version as of statement start, no reader/writer blocking. Cost: every old row version touched gets copied to the TEMPDB version store - size and stripe tempdb before enabling on a high-write database.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c9",
+      "topic": "SQL Server",
+      "q": "Legacy CE vs new CE - what changed and why is it risky to upgrade?",
+      "a": "SQL Server 2014 shipped a new cardinality estimator (compat level >=120) with different cross-predicate correlation assumptions than legacy CE (compat <=110, or forced via trace flag 9481). Upgrading compat level can silently reshape plans across the WHOLE workload at once - test against real production queries first.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c10",
+      "topic": "SQL Server",
+      "q": "What makes columnstore indexes fast for aggregation?",
+      "a": "Column-wise compressed storage means a query touching 3 of 40 columns only reads those 3 columns' compressed segments (vs rowstore reading every column of every row). Batch mode execution processes ~900 rows per operator call instead of 1, amortizing CPU overhead - typically cited as another 2-4x on top of storage/compression wins.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c11",
+      "topic": "SQL Server",
+      "q": "What is segment elimination and what condition does it require?",
+      "a": "Each columnstore segment carries min/max metadata per column; a filtering query can skip segments whose range can't satisfy the predicate, without decompressing them. Requires the data be physically ordered/correlated relative to the filtered column - a randomly-inserted timestamp gives every segment a similar min/max spread, eliminating nothing.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c12",
+      "topic": "SQL Server",
+      "q": "CCI vs NCCI - what's the difference and when do you use each?",
+      "a": "Clustered Columnstore Index (CCI) replaces the table's row storage entirely. Nonclustered Columnstore Index (NCCI) adds columnar storage alongside an existing rowstore clustered index. NCCI is the 'operational analytics' pattern: OLTP point lookups keep using the B-tree, analytics hit the columnstore, on the same table.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c13",
+      "topic": "SQL Server",
+      "q": "When is a clustered columnstore index the wrong choice?",
+      "a": "For tables needing frequent singleton point lookups or small, frequent updates. Columnstore's unit of work is the rowgroup/segment, and the delta-store mechanism absorbing small inserts before compression adds its own overhead under high-frequency small writes.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c14",
+      "topic": "SQL Server",
+      "q": "Why does a plan guide count as a real operational risk even though it 'fixes' a query?",
+      "a": "It's invisible in the source code - the next engineer debugging the same procedure has no way to discover it without knowing to check sys.plan_guides. Prefer an in-code query hint or PSP optimization wherever the source is modifiable.",
+      "module": "T17-sqlserver"
+    },
+    {
+      "id": "T17-sqlserver-c15",
+      "topic": "SQL Server",
+      "q": "What causes columnstore insert-rate degradation over time and what's the SQL Server operational fix?",
+      "a": "Background compression (the tuple mover) falling behind insert volume, leaving too many delta-store rowgroups uncompressed - the SQL Server analogue of ClickHouse's 'too many parts'. Fix: batch inserts into larger, less frequent operations, or manually run ALTER INDEX ... REORGANIZE to force the tuple mover to catch up.",
+      "module": "T17-sqlserver"
+    }
+  ]
+}

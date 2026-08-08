@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T07-agent-cost-routing-d1",
+      "module": "T07-agent-cost-routing",
+      "q": "Give the write and read cost multipliers for prompt caching at the 5-minute TTL.",
+      "a": "Write: 1.25x standard input price. Read: roughly 0.1x (90% discount).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-agent-cost-routing-d2",
+      "module": "T07-agent-cost-routing",
+      "q": "How many cache hits does it take to break even at the 5-minute TTL versus the 1-hour TTL?",
+      "a": "5-minute TTL: 1 hit (1.25+0.1=1.35 vs 2x uncached). 1-hour TTL: 3 hits (2+0.2=2.2 vs 3x uncached) -- the higher write cost needs more reads to amortize.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-cost-routing-d3",
+      "module": "T07-agent-cost-routing",
+      "q": "cache_read_input_tokens is zero across ten requests with what looks like an identical prompt. What do you check first?",
+      "a": "A silent invalidator: a timestamp or UUID interpolated into the system prompt, non-deterministic JSON key ordering, or a tool list that reorders between calls. Diff the actual rendered prompt bytes between two requests rather than assuming the cache_control marker is misplaced.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-cost-routing-d4",
+      "module": "T07-agent-cost-routing",
+      "q": "A 3K-token prompt caches on one model but not on another with no error. Why?",
+      "a": "Minimum cacheable prefix length differs by model generation and is not monotonic (roughly 512 to 4,096 tokens across generations). Below the minimum, caching silently fails -- usage.cache_creation_input_tokens shows 0, no error is raised.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-cost-routing-d5",
+      "module": "T07-agent-cost-routing",
+      "q": "How do you set the boundary for routing between a cheap and expensive model?",
+      "a": "Empirically: collect a labeled sample of real production traffic, get quality judgments for both models on it, fit a classifier or threshold predicting whether the cheap model matches the expensive one, and validate on a held-out set. Not intuition, not prompt length alone.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-agent-cost-routing-d6",
+      "module": "T07-agent-cost-routing",
+      "q": "Give RouteLLM's published cost/quality result.",
+      "a": "Over 85% cost reduction on MT-Bench while retaining 95% of the stronger model's judged quality, sending only 14% of queries to the expensive model in the best-tuned configuration.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-agent-cost-routing-d7",
+      "module": "T07-agent-cost-routing",
+      "q": "You upgraded the expensive model in your routing pair but kept the old threshold. What breaks?",
+      "a": "The threshold was calibrated against the OLD quality gap between the two models, not an absolute difficulty scale. An upgrade shifts that gap, so the stale threshold either overspends (routing too much to the now-stronger model unnecessarily) or underspends quality (leaving traffic that needs the upgrade on the cheap model). You must recalibrate, not assume transfer.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-agent-cost-routing-d8",
+      "module": "T07-agent-cost-routing",
+      "q": "Distinguish model routing from a fallback chain in one sentence each, and say why they get conflated.",
+      "a": "Routing: predictive, decides where a request SHOULD go based on evaluated difficulty. Fallback: reactive, decides where a request goes AFTER a 429/5xx/refusal. Conflated because 'try cheap, escalate on suspicion' looks like fallback syntax but is really an uncalibrated router that also inherits fallback's double-round-trip latency cost.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-cost-routing-d9",
+      "module": "T07-agent-cost-routing",
+      "q": "Why are fallback chains an availability tool rather than a cost tool?",
+      "a": "Every fallback firing costs the latency of the failed attempt plus the successful one -- a chain of three targets can cost three sequential round trips in the worst case. That latency cost is the point of a resilience mechanism (survive an outage), not a cost-saving one; using it purely to save money hides an unpriced latency cost.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-cost-routing-d10",
+      "module": "T07-agent-cost-routing",
+      "q": "What is the Batch API discount and its constraint, and how does it compound with caching?",
+      "a": "50% off input and output on every model, with up to 24-hour turnaround (unsuitable for latency-sensitive work). It compounds with caching as an independent discount: a batch job over a cached corpus can land near 5% of the naive rate for the cached-and-batched portion (50% batch x ~10% cache read).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-cost-routing-d11",
+      "module": "T07-agent-cost-routing",
+      "q": "A tenant is 'within budget' on your dashboard but you got paged for a cost spike anyway. What's missing?",
+      "a": "Rate-of-change alerting. Cumulative-spend-only dashboards miss a tenant whose spend has doubled week-over-week but hasn't yet crossed the absolute cap -- that trend is the leading indicator a rate alert catches before the budget is actually blown.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-cost-routing-d12",
+      "module": "T07-agent-cost-routing",
+      "q": "During an incident, 'which feature caused this spend spike' takes 40 minutes to answer from logs. What should have been in place?",
+      "a": "Request-time tagging: every request tagged with a feature/workflow identifier AT THE POINT OF THE CALL, so attribution is a query against tagged data rather than a reconstruction from untagged logs after the fact.",
+      "difficulty": "mid"
+    }
+  ]
+}

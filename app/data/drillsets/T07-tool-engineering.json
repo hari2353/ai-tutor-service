@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T07-tool-engineering-d1",
+      "module": "T07-tool-engineering",
+      "q": "Why is `list_contacts` a bad tool and `search_contacts` a good one?",
+      "a": "`list_contacts` returns everything and forces the model to brute-force read it token by token, burning paid context. That's correct for a program with cheap memory and wrong for a model. Test for every tool: can you name the human task it corresponds to? `search_contacts` and `message_contact` pass; `list_contacts` doesn't.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-tool-engineering-d2",
+      "module": "T07-tool-engineering",
+      "q": "Rewrite `def get(user, status)` to reduce model error. Name each change.",
+      "a": "`def search_orders(customer_id: str, status: Literal[\"pending\",\"shipped\",\"delivered\"], since: str, max_results: int = 20, response_format: Literal[\"concise\",\"detailed\"] = \"concise\")`. Changes: verb_noun name; `customer_id` not `user` (removes id/name/email ambiguity); enum instead of free string; `since` documented as ISO 8601 with an example; an explicit result cap with a default; and a verbosity control so ids are only returned when needed.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-tool-engineering-d3",
+      "module": "T07-tool-engineering",
+      "q": "A tool returns 200KB of JSON. Where do you fix it and what does the fix look like?",
+      "a": "In the tool. Filter to high-signal fields, paginate, add range selection, truncate at a sensible default (Claude Code caps at 25,000 tokens). The truncation message must state the counts and the specific corrective action: 'showing 50 of 4,812 matches; narrow with level= or request_id=, or reduce since_minutes, rather than raising max_lines.' Fixing it in the loop means you already paid to serialise and transport 200KB.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-tool-engineering-d4",
+      "module": "T07-tool-engineering",
+      "q": "Write the error taxonomy for a tool dispatcher. Six cases.",
+      "a": "Unknown tool -> list available plus a did-you-mean from close matches. Validation error -> compact message + the schema + a valid example call. 429 -> `retry_after` plus 'do something else first'. 404 -> 'verify the id with search_x first'. 403 -> 'do NOT retry; tell the user what approval is needed'. Broad catch-all -> log the traceback for YOU, return type and message to the model with 'try a different approach'. Every path returns a readable string; nothing raises into the loop.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-tool-engineering-d5",
+      "module": "T07-tool-engineering",
+      "q": "Your agent calls `search_logs(\"timeout\")` three times in a row with identical arguments. Two likely tool-side causes.",
+      "a": "(1) The tool returns an ERROR for zero results, so the model thinks the call failed and retries; make it a successful empty result and say so in the description. (2) The response was truncated with no guidance, so the model re-requests hoping for more; make the truncation message name the parameters to narrow. Both are tool bugs, not loop bugs — though a no-progress detector hashing (tool, args) is the loop-side backstop.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-tool-engineering-d6",
+      "module": "T07-tool-engineering",
+      "q": "You added an `idempotency_key` parameter to `create_ticket` and still got duplicates on retry. Why?",
+      "a": "The MODEL is generating the key, so on retry it generates a different one. The harness must supply it, derived deterministically from execution identity — `f\"{thread_id}:{checkpoint_id}:create_ticket\"` or `f\"{run_id}:{step}:{tool}:{hash(args)}\"` — and inject it, so it's identical across re-runs by construction. Also verify the server stores `(key -> response)` atomically (`INSERT ... ON CONFLICT DO NOTHING` + rowcount), because read-then-write races.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-tool-engineering-d7",
+      "module": "T07-tool-engineering",
+      "q": "Accuracy dropped after you added the twelfth tool. Give the diagnosis with numbers and the fix order.",
+      "a": "Selection degrades with tool count: BFCL shows 43% -> 2% going from 4 to 51 tools, and RAG-MCP measured 13.62% -> 43.13% by exposing only a retrieved subset. Fix order: delete unselected tools, consolidate around human tasks, fix names/descriptions and disambiguate confusable pairs, namespace by service then resource, gate by state and permission, then tool search / retrieval (~85% context cut, MCP evals 49%->74% on Opus 4). Subagents with scoped tool sets are the SECOND resort, not the first.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-tool-engineering-d8",
+      "module": "T07-tool-engineering",
+      "q": "Design the risk-tier gate. What is the single most important default?",
+      "a": "```python\ntier = RISK.get(name, \"destructive\")\nif tier in {\"financial\", \"destructive\"} and name not in approvals:\n    raise ApprovalRequired(name, tier, args)\n```\nThe default of `\"destructive\"` for unclassified tools is the important part: adding a tool without classifying it fails CLOSED. Enforce in the dispatcher, never in the system prompt. MCP's annotations use the same pessimistic-default logic (`destructiveHint` defaults to true) but are self-asserted hints with no enforcement, so they reduce friction on trusted tools and are not a security boundary.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-tool-engineering-d9",
+      "module": "T07-tool-engineering",
+      "q": "A tool executes model-generated Python. Give the seven-item sandbox checklist and the number that kills the 'containers are fast enough' argument.",
+      "a": "1) microVM (Firecracker/Kata) or gVisor, one per session, destroyed after — containers share the host kernel. 2) No credentials inside, no reachable metadata endpoint. 3) Egress denied by default, allowlisted per destination. 4) CPU/memory/wall-clock/disk/process caps. 5) Read-only root plus small tmpfs, no host mounts. 6) Non-root, seccomp, no CAP_SYS_ADMIN. 7) Log the code, not just the result. The number: Firecracker boots in ~125ms with <5 MiB overhead per VM (E2B ~150ms, Daytona ~90ms), so choosing a weaker boundary for speed is no longer defensible.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-tool-engineering-d10",
+      "module": "T07-tool-engineering",
+      "q": "You've sandboxed the code execution tool properly. Are you safe from prompt injection? Explain.",
+      "a": "No. Untrusted content arriving in a tool RESULT enters context as an observation and can instruct the model, and the sandbox doesn't touch that path. You don't defend it by detecting injections; you defend it by ensuring the tools available at that moment cannot do what the injection asks — risk tiering with approval gates, and per-user least-privilege credentials rather than a service account that can read every tenant's data (a confused-deputy vulnerability waiting for an injection).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-tool-engineering-d11",
+      "module": "T07-tool-engineering",
+      "q": "Write two layer-2 contract tests that need no model and catch a whole class of bug.",
+      "a": "```python\nassert len(t.description) > 120           # thin descriptions can't steer\nfor p, spec in props.items():\n    assert spec.get(\"description\")        # undocumented parameter\nif t.tier != \"read_only\":\n    assert t.needs_idem_key               # mutating tool with no key\nassert SequenceMatcher(None, a, b).ratio() < 0.90   # confusable names\n```\nThese run in CI and catch 'someone added a tool without a description', 'someone shipped a mutating tool without idempotency', and `notification-send-user` vs `-channel` before a model ever sees them.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-tool-engineering-d12",
+      "module": "T07-tool-engineering",
+      "q": "Write a strong and a weak eval task for a support agent, and say why the difference matters.",
+      "a": "Strong: 'Customer 9182 reported being charged three times for a single purchase attempt. Find all relevant log entries and determine whether any other customers were affected.' Weak: 'Search the payment logs for purchase_complete and customer_id=9182.' The weak task names the tool and its arguments, so it measures nothing about selection or parameter construction — it only checks the function works, which layer-1 unit tests already do for free.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-tool-engineering-d13",
+      "module": "T07-tool-engineering",
+      "q": "You improved your tool descriptions and your eval score went up 12 points. What's the first thing you check?",
+      "a": "Whether you have a HELD-OUT test set, because otherwise you overfit descriptions to your fixtures. Anthropic's reporting is that held-out sets revealed real gains beyond hand-written expert implementations — and also that they were what caught overfitting. Report train and held-out numbers separately.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-tool-engineering-d14",
+      "module": "T07-tool-engineering",
+      "q": "You inherit an agent with 40 tools from six MCP servers, slow and inaccurate. Plan the first week.",
+      "a": "Measure first: per-tool selection frequency, error rate by class, tokens returned, truncation rate, latency. Then delete the unselected tail; find and fix confusable name pairs; rewrite descriptions on the highest-error tools and add `input_examples` where invalid-parameter errors cluster; add truncation to the biggest-payload tools; `defer_loading` the rarely-used servers with a tool-search tool while keeping the 3-5 most-used loaded. Build a held-out eval before touching descriptions so you can prove it worked. Expect the context arithmetic to shock: 58 tools across five servers is ~55K tokens before turn 1.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-tool-engineering-d15",
+      "module": "T07-tool-engineering",
+      "q": "Your agent runs in LangGraph behind a human approval gate. What does that change about tool design?",
+      "a": "Two things. The node re-runs from its first line on every resume, so a mutating tool called before the `interrupt()` fires once per approval attempt — put the mutation in its own downstream node with a harness-supplied idempotency key from `(thread_id, checkpoint_id)` and a TTL longer than the maximum approval window. And the gate is where risk tiers become real: the dispatcher raises `ApprovalRequired` for `financial`/`destructive`, which the graph turns into an `interrupt()` carrying the tool name, arguments, and a human-readable summary. Note LangGraph documents at-least-once, not exactly-once.",
+      "difficulty": "staff"
+    }
+  ]
+}

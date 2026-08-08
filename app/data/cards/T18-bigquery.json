@@ -1,0 +1,102 @@
+{
+  "flashcards": [
+    {
+      "id": "T18-bigquery-c1",
+      "topic": "BigQuery",
+      "q": "BigQuery's two pricing models and the rough break-even between them?",
+      "a": "On-demand: $6.25/TiB scanned, first 1 TiB/month free. Capacity: $0.04/slot-hr (Standard) or $0.06/slot-hr (Enterprise). Break-even is roughly 467 TiB scanned/month - below that on-demand tends cheaper, above it reservations usually win.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c2",
+      "topic": "BigQuery",
+      "q": "Why does SELECT * cost more than selecting needed columns, mechanically, and does LIMIT reduce cost?",
+      "a": "BigQuery's columnar storage bills for every column read regardless of use - SELECT * reads them all. LIMIT reduces rows RETURNED, not bytes SCANNED, so it does not reduce query cost; a SELECT * ... LIMIT 10 on a 10TB table still scans the whole matched dataset.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c3",
+      "topic": "BigQuery",
+      "q": "Give the concrete cost numbers for SELECT * on a 500GB table (full vs 3-column) and a 10TB table.",
+      "a": "500GB full scan (SELECT *) ~$3.13; scanning just 3 of 20 columns (~30GB) ~$0.19 - about 16x cheaper. A naive SELECT * on a 10TB unpartitioned table costs ~$62.50 in one query.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c4",
+      "topic": "BigQuery",
+      "q": "Partitioning vs clustering - what does each skip?",
+      "a": "Partitioning skips entire physical segments (commonly by date) based on a filter. Clustering (up to 4 columns) sorts rows within each partition, skipping blocks within a partition for range/equality filters. Combined, well-targeted queries typically see 90-99% bytes-scanned reduction.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c5",
+      "topic": "BigQuery",
+      "q": "BigQuery's long-term storage discount - how does it trigger and reset?",
+      "a": "Active storage (touched in last 90 days): $0.02/GB/month. Untouched 90+ consecutive days: automatic 50% discount to $0.01/GB/month, applied per PARTITION, not per table. Any write to a partition resets its 90-day clock to zero.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c6",
+      "topic": "BigQuery",
+      "q": "Storage Write API vs legacy streaming inserts?",
+      "a": "Legacy streaming inserts offer only at-least-once delivery (needs manual dedup). The Storage Write API (recommended) offers exactly-once semantics via stream offsets, better throughput, and lower cost: $0.025/GB with first 2 TiB/month free.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c7",
+      "topic": "BigQuery",
+      "q": "How do materialized views reduce query cost?",
+      "a": "They precompute and store a query result; when a subsequent query can be served from the view, BigQuery bills only for the bytes in the materialized view, not the full source table - often an order-of-magnitude cost reduction for repeated aggregations.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c8",
+      "topic": "BigQuery",
+      "q": "Why does LAST_VALUE() often return the wrong row in a window function query?",
+      "a": "The default window frame is RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW, so without explicitly extending the frame to UNBOUNDED FOLLOWING, LAST_VALUE just returns the current row every time - one of the most common silent window-function bugs.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c9",
+      "topic": "BigQuery",
+      "q": "Why is NOT IN against a subquery dangerous, and what's the safer pattern?",
+      "a": "If the subquery's column can contain NULL, NOT IN against a list containing even one NULL makes the whole condition evaluate to unknown for every row, silently returning zero rows. The safer pattern is a LEFT JOIN ... WHERE right.col IS NULL anti-join.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c10",
+      "topic": "BigQuery",
+      "q": "What's the classic UTC-truncation bug with DATE(ts)?",
+      "a": "DATE(ts) truncates a TIMESTAMP to a calendar day in UTC by default, which can shift the reported 'day' of an event for users far from UTC (e.g., 11pm Pacific on the 14th reports as the 15th). Use DATE(ts, 'America/Los_Angeles') with an explicit timezone for business-aligned rollups.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c11",
+      "topic": "BigQuery",
+      "q": "Gaps-and-islands pattern: how do you group consecutive dates, and what breaks it?",
+      "a": "Subtract ROW_NUMBER() (ordered by date) from the date itself - this produces a constant value for each consecutive run, which you group by to collapse islands. It breaks if there are duplicate dates per entity, which throws off the row-number-to-date alignment; deduplicate first.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c12",
+      "topic": "BigQuery",
+      "q": "TIMESTAMP vs DATETIME vs DATE in BigQuery?",
+      "a": "TIMESTAMP is timezone-aware, stored in UTC, absolute. DATETIME is a civil date-time with no timezone attached. DATE is calendar-date only. Conflating them, especially truncating TIMESTAMP without specifying timezone, is a common source of off-by-one-day bugs.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c13",
+      "topic": "BigQuery",
+      "q": "Why should you never use FLOAT64 for financial calculations in BigQuery?",
+      "a": "Floating-point representation error compounds across aggregations and can produce cent-level discrepancies that fail reconciliation with a finance system. Use NUMERIC/BIGNUMERIC (fixed precision decimal types) for anything financial instead.",
+      "module": "T18-bigquery"
+    },
+    {
+      "id": "T18-bigquery-c14",
+      "topic": "BigQuery",
+      "q": "What does UNNEST do to rows with an empty array, and how do you preserve them?",
+      "a": "A plain (inner) comma-join UNNEST drops rows where the array is empty, since an empty array produces zero output rows. Use LEFT JOIN UNNEST(...) to preserve the parent row with NULLs when the array is empty.",
+      "module": "T18-bigquery"
+    }
+  ]
+}
