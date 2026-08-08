@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T26-nvidia-cosmos-c1",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "What are the three separable parts of the Cosmos platform?",
+      "a": "(1) A GPU-accelerated data-curation pipeline: 20M hours of raw video reduced to ~100M clips. (2) Open-weight world foundation models under the NVIDIA Open Model License: Predict (generation), Transfer (spatially-controlled translation), Reason (physical-commonsense VLM). (3) A tokenizer family, continuous and discrete, at up to 2048x total compression. It sits above Omniverse/OpenUSD/PhysX and Isaac Sim/Isaac Lab.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c2",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "Why is Cosmos not a simulator, mechanically?",
+      "a": "A simulator gives step(dt) -> state, reset(seed) -> exact state, deterministic replay, and queryable contact forces. A video WFM gives sampled pixels: no reset, no seed-to-state map, no forces, stochastic sampler. You can build a dataset from it; you cannot run an RL loop inside it. Throughput seals it: ~380 s on an H100 for 5 s of 7B video, about 76x slower than real time for ONE environment, against Isaac Lab running 2,048-4,096 environments each faster than real time.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c3",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "Cosmos 1.0 model sizes and output specification?",
+      "a": "Diffusion: 7B and 14B, each in Text2World and Video2World. Autoregressive: 4B and 12B base, 5B and 13B Video2World. Text2World emits 121 frames = 5 s at 24 fps at 1280x704; Video2World predicts the next 120 frames from one image. Ratios 960x960 / 960x704 / 704x960 / 1280x704 / 704x1280; fps configurable 12-40; prompts under 300 words; BF16 only, Linux only, Ampere/Hopper/Blackwell.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c4",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "Cosmos 7B and 14B Text2World inference time and peak VRAM by offload tier?",
+      "a": "One H100, end to end excluding init: 7B ~380 s, 14B ~590 s per clip. Peak VRAM 7B by offload tier: 74.0 (upsampler) -> 57.1 (+guardrails) -> 38.5 (+T5) -> 38.3 (+tokenizer) -> 24.4 GB (+diffusion model). 14B: >80 -> 70.5 -> 51.9 -> 51.7 -> 39.0 GB. The 24.4 GB figure is what makes a 24 GB RTX 4090 marginally viable.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c5",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "Decode the Cosmos tokenizer naming, and what does it buy?",
+      "a": "{C|D}{I|V}<temporal>x<spatial>x<spatial>: C continuous, D discrete, I image, V video. CV8x8x8 = continuous video, 8x temporal, 8x8 spatial. DV8x16x16 = discrete, 8x temporal, 16x16 spatial. Spatial 8x8 or 16x16, temporal 4x or 8x, max total 2048x. A 121-frame 1280x704 clip is 327M raw RGB values and about 211,200 latent tokens through CV8x8x8, roughly 1,550x fewer elements. Continuous feeds diffusion; discrete feeds autoregressive.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c6",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "How do you take apart NVIDIA's '9,000 trillion tokens' claim?",
+      "a": "20M hours = 7.2e10 s, ~1.73e12 frames at 24 fps. 9e15 / 1.73e12 requires ~5,200 tokens per frame, which is the right order for 1280x704 at 8x8 spatial with 8x temporal pooling. So it is arithmetically reachable, but only by tokenising the ENTIRE UNCURATED 20M-hour corpus. The curated set is ~100M clips at ~211,200 tokens each = ~2.1e13, about 21 trillion. The headline is ~430x higher than the plausible training-token figure.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c7",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "What are the four Cosmos guardrail components and their thresholds?",
+      "a": "Pre-generation: a human-curated keyword blocklist, and Aegis (Aegis-AI-Content-Safety-LlamaGuard-LLM-Defensive-1.0, a Llama-Guard variant on Llama2-7B, 13 risk categories). Post-generation: a multi-class video content safety filter over SigLIP embeddings, and a RetinaFace face blur that pixelates any detection larger than 20x20 pixels. Offloading guardrails saves ~17 GB on the 7B path (74.0 -> 57.1 GB); it does not eliminate the compute.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c8",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "What does the NVIDIA Open Model License actually oblige you to do?",
+      "a": "Version dated 6 January 2025. Permits commercial use and derivatives; NVIDIA disclaims ownership of outputs. But: explicitly REVOCABLE; auto-terminates if you bypass, disable, reduce the efficacy of, or circumvent any safety guardrail or guardrail hyperparameter; auto-terminates on patent/copyright litigation against the model; requires 'Built on NVIDIA Cosmos' attribution that propagates to any AI model trained or fine-tuned on Cosmos OUTPUTS; Delaware law, exclusive jurisdiction Santa Clara County; NVIDIA may update it unilaterally.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c9",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "The two halves of the sim-to-real gap, and which one Cosmos addresses?",
+      "a": "Appearance gap: textures, lighting, lens, sensor noise, weather. Dynamics gap: friction, mass, compliance, actuator backlash, control latency, contact resolution. Cosmos Transfer addresses the appearance half well, because control conditioning on segmentation/depth preserves real geometry and changes only the look. It addresses the dynamics half essentially not at all: a video model has no representation of force and its objective contains no penalty for a violated contact constraint. In contact-rich manipulation the dynamics gap usually dominates.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c10",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "How do you measure which half of the sim-to-real gap you have?",
+      "a": "Three numbers. S_sim: train and evaluate entirely in simulation, the ceiling. S_realvision: keep dynamics simulated and swap in real imagery of the same scene; S_sim - S_realvision is the appearance gap. S_realdyn: run on hardware with vision out of the loop (state-based policy on proprioception plus fiducial/mocap object pose); S_sim - S_realdyn is the dynamics gap. Whichever drop is larger decides where the budget goes. Answering 'you just try it and see' is an admission of guessing.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c11",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "What synthetic-to-real ratio and volumes does the published DreamGen/GR00T work use?",
+      "a": "Co-training sampling ratio 1:1 neural trajectories to real trajectories. Volume: ~3,000 neural trajectories per task for RoboCasa simulation tasks, and only ~100 per task for real-world tasks. Effect: GR00T N1.5 reached 38.3% on a 12-task DreamGen suite versus 13.1% for GR00T N1; synthetic data helped consistently across 30/100/300-demo regimes and in a real-world 10%-data regime; up to +8.8% even when real demonstrations were already plentiful.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c12",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "What is the observable symptom of synthetic-data diversity collapse, and how do you measure it?",
+      "a": "Symptom: adding 10x more generated clips stops improving the policy and then makes it worse, while validation loss keeps dropping. Measure effective rank (exp of the entropy of the normalised singular-value spectrum) of synthetic versus real embeddings on a FROZEN third-party encoder such as DINOv2 or SigLIP; a synth/real ratio below about 0.6 is collapse. Also measure coverage: the fraction of real samples with a synthetic neighbour inside their own k-NN radius. Fix with stratified scenario prompting and embedding-level dedup, not by generating more.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c13",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "Why is the Cosmos data-curation pipeline arguably the real product, and what are its numbers?",
+      "a": "Stages: shot-boundary splitting, motion/quality/text-overlay filtering, deduplication, VLM captioning, uniform re-encode. 20M hours takes ~40 days on Hopper or ~14 days on Blackwell against a stated 3.4 years CPU-only, roughly 89x. The bottleneck is video decode/encode, not model inference, which is why fixed-function hardware wins. Systems detail: L40S has both NVDEC and NVENC while H100 has only NVDEC, so your most expensive training GPU is the wrong choice for the re-encode stage. Curation and search survive even if every WFM is replaced.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c14",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "What do OpenUSD, UsdPhysics, PhysX, Isaac Sim and Isaac Lab each contribute?",
+      "a": "OpenUSD is a layered composition system for scenes, not just a file format, which is what makes procedural scene generation tractable. UsdPhysics standardises rigid bodies, colliders, joints and materials inside USD so mass and friction travel with the asset. PhysX is the GPU rigid-body engine with a reduced-coordinate articulation solver. Isaac Sim adds RTX rendering, sensor models and ROS bridges. Isaac Lab is the vectorised RL/IL layer with a declarative randomisation manager. Isaac Sim 5.0 and Isaac Lab 2.2 went GA at SIGGRAPH, August 2025; Isaac Lab 3.0 adds multi-backend physics over PhysX, Newton and OVPhysX.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c15",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "Why does Isaac Lab get thousands of environments on one GPU, and what does that cost?",
+      "a": "The win is eliminating the serialisation boundary: physics stepping, observation assembly and the policy forward/backward all live in the same device memory as torch tensors, with no host copy and no process boundary. Typical locomotion configs run 2,048-4,096 parallel environments. Costs: all environments must step in lockstep at the same timestep; heterogeneous asset topologies are awkward; and rendering does NOT amortise like physics, so adding cameras collapses throughput. Train state-based first, add vision late.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c16",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "What is the Cosmos hardware floor, and why does it matter as an engineering constraint?",
+      "a": "Isaac Sim 5.1's stated minimum is an RTX 4080 with 16 GB VRAM and 32 GB system RAM. Isaac Lab benchmarks run on L40 (48 GB), RTX Pro 6000 (96 GB) and RTX 5090 (32 GB). Cosmos inference is tested only on Linux, only at BF16, only on Ampere/Hopper/Blackwell. There is no AMD path, no Apple path, no CPU-only CI path. Consequence: every engineer needs an NVIDIA GPU, CI needs GPU runners, and cloud spend is denominated in NVIDIA instance types. Price it rather than being annoyed by it.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c17",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "What are Cosmos Predict 2.5, Transfer 2.5 and Cosmos 3?",
+      "a": "Predict 2.5 (Oct 2025): 2B and 14B, unifying Text2World, Image2World and Video2World into one model, trained on 200M curated clips, using Cosmos Reason 1 (7B) as the text encoder, extending output to 30 seconds. Transfer 2.5: 2B, described as 3.5x smaller than Transfer1-7B, control modalities edge/blur/depth/segmentation, reporting up to 60% better 3D lane and cuboid detection than Transfer1-7B-Sample-AV (measured with LATR and BEVFormer). Cosmos 3 (arXiv:2606.02800, June 2026): omnimodal Mixture-of-Transformers over language, image, video, audio and action.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c18",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "What is the missing experiment that would settle whether synthetic data is worth the money?",
+      "a": "Fix a real-data budget N and total compute C. Arm A: N real + M synthetic. Arm B: N real + the same compute C on longer training and stronger classical augmentation. Arm C: the DOLLAR cost of generating M synthetic trajectories spent on more real demonstrations instead, so the comparison is budget-matched not data-matched. Evaluate on a held-out suite chosen by a disinterested party, >=20 trials/task, confidence intervals, >=3 seeds, with no eval contamination. DreamGen's ablations answer 'does adding synthetic data help?' (yes) but not 'is it the best use of this budget?' (unknown) because there is no Arm C.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c19",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "The synthetic-versus-teleop cost arithmetic (derived, not published)?",
+      "a": "At ~380 s per 5-second clip on one H100 for the 7B diffusion model, one H100-hour yields ~9.5 clips or ~47 seconds of video. 100 hours of generated video is therefore ~7,600 H100-hours, roughly $23k-30k at $3-4 per H100-hour, before curation, before discarding bad generations, before guardrail rejections. The same $30k buys roughly 400-750 fully-loaded teleoperator hours, or ~24,000-45,000 real demonstrations at 60 per hour. Not decisive, since synthetic covers scenarios you cannot safely stage, but a principal engineer should walk into the design review having done it.",
+      "module": "T26-nvidia-cosmos"
+    },
+    {
+      "id": "T26-nvidia-cosmos-c20",
+      "topic": "NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim",
+      "q": "What is the contamination guard specific to neural-trajectory synthetic data?",
+      "a": "Neural trajectories are generated FROM real episodes, so a generated clip inherits its seed episode's scene. If that seed episode's scene later lands in your eval split, your synthetic training data is a paraphrase of your test set and the improvement is memorisation. Guard by tracking seed_episode_id through generation and asserting that no training sample's seed episode maps to an eval scene, in addition to the ordinary scene-overlap check and asserting zero generated samples in eval. This leak is invisible to every metric you would normally look at.",
+      "module": "T26-nvidia-cosmos"
+    }
+  ]
+}

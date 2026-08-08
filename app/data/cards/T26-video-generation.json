@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T26-video-generation-c1",
+      "topic": "Video Generation",
+      "q": "What did DiT (Peebles and Xie, 2022/2023) change about diffusion model architecture, and what was the key empirical claim?",
+      "a": "DiT replaced the U-Net backbone in latent diffusion with a ViT-style transformer operating on patchified latent tokens. The key claim: FID scales predictably as a function of transformer Gflops (depth, width, token count), the same shape as LLM scaling laws. DiT-XL/2 reached FID 2.27 on ImageNet 256x256.",
+      "module": "T26-video-generation"
+    },
+    {
+      "id": "T26-video-generation-c2",
+      "topic": "Video Generation",
+      "q": "What is AdaLN-Zero and why is the gate initialized to zero?",
+      "a": "AdaLN-Zero conditions each DiT block on timestep+condition embeddings via a regressed scale, shift, and gate. The gate's final linear layer is zero-initialized so every block starts training as an exact identity function, giving DiT-scale models training stability from step one without careful warmup.",
+      "module": "T26-video-generation"
+    },
+    {
+      "id": "T26-video-generation-c3",
+      "topic": "Video Generation",
+      "q": "How does video generation extend the DiT architecture, and why does this make video far more expensive than image generation?",
+      "a": "Video is compressed spatially and temporally by a VAE, then decomposed into spacetime patches that act as transformer tokens. Attention cost is quadratic in total token count, which scales with frames x spatial patches, so doubling duration at fixed resolution roughly quadruples attention cost, and doubling both duration and resolution multiplies cost by roughly 16x.",
+      "module": "T26-video-generation"
+    },
+    {
+      "id": "T26-video-generation-c4",
+      "topic": "Video Generation",
+      "q": "What is flow matching, and how does its training objective differ from classic diffusion?",
+      "a": "Flow matching (Lipman et al. 2022) picks an explicit probability path between noise and data and regresses the velocity field along it via simulation-free L2 loss, rather than predicting the score of an implicit reverse-time SDE the way diffusion does. Diffusion is recoverable as one specific path choice within the flow-matching framework.",
+      "module": "T26-video-generation"
+    },
+    {
+      "id": "T26-video-generation-c5",
+      "topic": "Video Generation",
+      "q": "What is rectified flow, and why does a straight-line path enable fewer sampling steps?",
+      "a": "Rectified flow prescribes a straight-line interpolation between noise and data (x_t = (1-t)x0 + t*x1) with a constant target velocity (x1-x0). A straight path has low curvature, so a coarse numerical integrator (even a single Euler step in the limit) tracks it accurately, unlike a curved diffusion path which needs many small steps to avoid discretization error.",
+      "module": "T26-video-generation"
+    },
+    {
+      "id": "T26-video-generation-c6",
+      "topic": "Video Generation",
+      "q": "Why did the industry shift from DDPM-style diffusion training to flow matching by 2024-25 in production models like SD3.5, FLUX, Veo, and Movie Gen?",
+      "a": "Flow matching's low-curvature paths need far fewer sampling steps for comparable quality, and at the scale of serving millions of generations a day, a ~10x reduction in required sampling steps is a direct, large cut to serving cost and latency -- the primary driver of adoption.",
+      "module": "T26-video-generation"
+    },
+    {
+      "id": "T26-video-generation-c7",
+      "topic": "Video Generation",
+      "q": "What is a consistency model, and how does it differ from simply running a diffusion model with fewer sampling steps?",
+      "a": "A consistency model (Song et al. 2023) is explicitly trained so any point along a deterministic noise-to-data trajectory maps to the same clean output, allowing generation in 1-4 evaluations. Simply truncating a standard diffusion/flow model's step count produces a blurry, degraded sample because it was never trained to be accurate at that coarse a step size.",
+      "module": "T26-video-generation"
+    },
+    {
+      "id": "T26-video-generation-c8",
+      "topic": "Video Generation",
+      "q": "Give the concrete cost/quality numbers for Latent Consistency Model (LCM) distillation from Stable Diffusion.",
+      "a": "A 768x768, 2-4-step LCM distills from a pretrained SD checkpoint in roughly 32 A100-GPU-hours, delivers a 10-100x inference speedup, and matches 25-50-step DDIM sampling on FID/text-alignment at 2-4 steps -- but quality degrades sharply as step count is pushed toward true 1-step generation.",
+      "module": "T26-video-generation"
+    },
+    {
+      "id": "T26-video-generation-c9",
+      "topic": "Video Generation",
+      "q": "What does VBench2 evaluate, and why does its physics-and-commonsense dimension matter for judging a video model release?",
+      "a": "VBench2 decomposes video generation quality into consistency (subject/background), physics-and-commonsense, human motion, and creative composition. The physics dimension matters because it shows every current model, including frontier ones, still has a real, measured gap between looking physically plausible and actually being physically consistent.",
+      "module": "T26-video-generation"
+    },
+    {
+      "id": "T26-video-generation-c10",
+      "topic": "Video Generation",
+      "q": "What are the observed 2026 temporal-consistency failure modes for Sora 2 versus Veo 3 on longer generations?",
+      "a": "Independent 2026 comparisons report Sora 2 showing visible color jittering, brightness shifts, and frame freezing with static optical flow on longer clips, while Veo 3 produces sharper, more temporally stable frames with smoother motion -- both still show distinct, unresolved failure modes past short durations.",
+      "module": "T26-video-generation"
+    },
+    {
+      "id": "T26-video-generation-c11",
+      "topic": "Video Generation",
+      "q": "Why is it a category error to use a video diffusion model as a physics-accurate world model or robot training data source?",
+      "a": "Video diffusion models optimize for visual plausibility under the training distribution, not an explicit physical constraint -- nothing in the DiT/flow-matching stack enforces physical consistency, only statistical resemblance to training footage. Actual physics simulators (Isaac Sim, MuJoCo) remain the correct source for physically-grounded training signal.",
+      "module": "T26-video-generation"
+    },
+    {
+      "id": "T26-video-generation-c12",
+      "topic": "Video Generation",
+      "q": "What is the 2026 competitive differentiator among top video-gen vendors, and what does it look like in practice?",
+      "a": "Controllability, not raw fidelity, since fidelity has converged across top vendors. Examples: Kling 3.0's Motion Control and Omni Video (separating camera trajectory from character motion), Runway Gen-4.5's motion brush and reference-driven character consistency, Veo 3.1's reference images for consistency control.",
+      "module": "T26-video-generation"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T22-consensus-c1",
+      "topic": "Probabilistic vs Deterministic Finality",
+      "q": "What's the core difference between probabilistic and deterministic finality?",
+      "a": "Probabilistic (Nakamoto/PoW): reversal probability shrinks exponentially with confirmations but never hits exactly zero. Deterministic (Casper FFG, classical BFT): once a specific checkable condition is met, reverting requires provably violating an economic/safety guarantee -- a different kind of claim, not just a smaller number.",
+      "module": "T22-consensus"
+    },
+    {
+      "id": "T22-consensus-c2",
+      "topic": "Nakamoto Catchup Formula",
+      "q": "What does Satoshi's whitepaper formula say about a 30%-hashpower attacker after 10 confirmations?",
+      "a": "About a 4.2% chance of overturning the transaction (verified: P=0.0417 at q=0.3, z=10). Drops to 0.25% at 20 confirmations. '6 confirmations is safe' is a heuristic for a weaker assumed attacker, not a universal guarantee.",
+      "module": "T22-consensus"
+    },
+    {
+      "id": "T22-consensus-c3",
+      "topic": "Casper FFG Finalization",
+      "q": "How does a checkpoint become 'finalized' under Casper FFG?",
+      "a": "A checkpoint attested by >=2/3 of staked ETH becomes 'justified'. If two consecutive epochs are both justified, the earlier one becomes 'finalized'. Total time ~12.8 minutes (two 6.4-minute epochs) under normal conditions.",
+      "module": "T22-consensus"
+    },
+    {
+      "id": "T22-consensus-c4",
+      "topic": "Casper FFG Safety Guarantee",
+      "q": "What does it take to revert a finalized Casper FFG checkpoint?",
+      "a": "Validators controlling at least one-third of all staked ETH must provably violate a slashing condition -- an action that automatically destroys a large, documented fraction of their own capital.",
+      "module": "T22-consensus"
+    },
+    {
+      "id": "T22-consensus-c5",
+      "topic": "Slashing Conditions",
+      "q": "What are the two conditions that trigger validator slashing on Ethereum?",
+      "a": "Equivocation (signing two different blocks for the same slot) and contradictory attestations (double votes across checkpoints for the same epoch, or surround votes).",
+      "module": "T22-consensus"
+    },
+    {
+      "id": "T22-consensus-c6",
+      "topic": "Correlation Penalty",
+      "q": "Why does the slashing penalty scale with how many validators are slashed together?",
+      "a": "An isolated slashing event looks like an operational accident; many validators slashed simultaneously is the signature of a coordinated attack -- exactly the >=1/3-of-stake scenario the mechanism deters. The correlation penalty makes coordinated attacks catastrophically expensive, up to 100% of stake.",
+      "module": "T22-consensus"
+    },
+    {
+      "id": "T22-consensus-c7",
+      "topic": "PBFT Quorum",
+      "q": "In classical BFT with n=3f+1 validators, how many votes are needed for quorum?",
+      "a": "2f+1 votes (just over two-thirds). For n=10: f=3, needs 7 votes. This same two-thirds threshold appears in Casper FFG because both rely on the same proof: any two quorums of more than two-thirds must overlap by more than one-third, guaranteeing at least one honest validator in both.",
+      "module": "T22-consensus"
+    },
+    {
+      "id": "T22-consensus-c8",
+      "topic": "Why PBFT Can't Be Permissionless",
+      "q": "Why can't classical BFT protocols work for an open, permissionless network like Bitcoin?",
+      "a": "PBFT's safety proof requires knowing the total validator count n and bounding faulty count at f<=(n-1)/3, which requires knowing who the participants are. In a permissionless network, an attacker could create unlimited fake identities (Sybil attack) to exceed any assumed f bound.",
+      "module": "T22-consensus"
+    },
+    {
+      "id": "T22-consensus-c9",
+      "topic": "51% Attack Cost (Bitcoin, 2026)",
+      "q": "What does a 51% attack on Bitcoin cost as of mid-2026?",
+      "a": "Network hashrate ~1000 EH/s; reaching 51% needs ~480 EH/s more, roughly 1.78 million mining rigs at 270 TH/s each, ~$5.2 billion in hardware capex alone, plus $1M+/hour in electricity during the attack.",
+      "module": "T22-consensus"
+    },
+    {
+      "id": "T22-consensus-c10",
+      "topic": "Scalability Trilemma Mechanism",
+      "q": "What is the mechanical reason behind the decentralization/security/scalability trilemma?",
+      "a": "Raising throughput directly (bigger/faster blocks) increases the compute/storage/bandwidth burden of running a full validating node. If that burden exceeds what ordinary participants can afford, fewer better-resourced operators end up validating -- concentrating the node set and reducing decentralization.",
+      "module": "T22-consensus"
+    },
+    {
+      "id": "T22-consensus-c11",
+      "topic": "Weak Subjectivity",
+      "q": "What is 'weak subjectivity' in Ethereum's proof-of-stake design?",
+      "a": "A new node syncing from scratch can't purely derive trust from genesis the way PoW theoretically can, since old, sold validator keys could still sign an alternate history cheaply (long-range attack risk). It needs a recent, socially-trusted checkpoint to bootstrap safely instead.",
+      "module": "T22-consensus"
+    },
+    {
+      "id": "T22-consensus-c12",
+      "topic": "Choosing Consensus for Permissioned Settlement",
+      "q": "Why would a 20-bank interbank settlement system use classical BFT rather than PoW or PoS?",
+      "a": "Participants are known, small, and accountable -- exactly PBFT's precondition. This gives instant deterministic finality with no energy cost and no probabilistic waiting period, at the cost of needing formal governance for validator-set changes, which the banks already have.",
+      "module": "T22-consensus"
+    }
+  ]
+}

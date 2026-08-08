@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T20-rust-services-c1",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "What trait does an axum `Router` implement, and what is its `Error` type?",
+      "a": "`tower::Service<Request<Body>, Response = Response<Body>, Error = Infallible>`. Because the error type is uninhabited, axum has no error channel: every failure must already be a `Response`. That is why raw `tower::timeout::Timeout` (Error = `Box<dyn Error>`) needs `HandleErrorLayer`, and why `tower_http::timeout::TimeoutLayer` (returns 408 as a response) is the one you actually use.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c2",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "Why can a body extractor like `Json<T>` only appear as the last handler argument?",
+      "a": "Arguments 1..15 are bound by `FromRequestParts` (takes `&mut http::request::Parts`, head only, so many can run in sequence); the last is bound by `FromRequest` (takes `Request` by value because a body is a stream consumable once). axum's `Handler` impl is macro-generated for arities 1 through 16 exactly. Misplacing it fails the whole `Handler` bound, hence `#[axum::debug_handler]`.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c3",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "`State<S>` vs `Extension<T>`: how does each fail when you forget to provide it?",
+      "a": "`State` fails at compile time: `Router<S>` carries the required state in its type and `axum::serve` requires `Router<()>`, so a missing `with_state` will not build. `Extension` fails at runtime with a 500 and `Missing request extension: Extension of type 'T' was not found`. Use `State` for startup-known data, `Extension` only for per-request data injected by middleware. Note `State` is cloned per request, so every field must be `Arc`-shaped.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c4",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "Why can `.layer(RequireAuth)` silently protect nothing?",
+      "a": "`Router::layer` wraps only routes that exist on the router at the moment it is called. `Router::new().layer(auth).route(\"/admin\", get(h))` wraps an empty router, so `/admin` is unauthenticated with no compile error and no warning. Add all `.route()`/`.nest()` calls first, then `.layer()` last. `route_layer` panics if no routes have been declared, which is the guard `layer` deliberately lacks.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c5",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "`Router::layer` vs `Router::route_layer` for an auth middleware?",
+      "a": "`layer` also wraps the fallback, so an auth layer added with it turns every 404 into a 401. `route_layer` runs only when the request matched a route, which is exactly what authorization wants. axum's docs say this explicitly: `route_layer` is 'useful for middleware that returns early (such as authorization) which might otherwise convert a 404 Not Found into a 401 Unauthorized'.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c6",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "Which direction does middleware ordering run in `ServiceBuilder` vs chained `Router::layer`?",
+      "a": "Opposite directions. `ServiceBuilder::new().layer(A).layer(B).service(s)` builds `A(B(s))`, so A sees the request first (tower's docs: 'layers added first will be called with the request first'). Chained `Router::layer(A).layer(B)` builds `B(A(router))`, so B sees it first. The convention that avoids the whole class of bug is one `ServiceBuilder` passed to one `.layer()` call.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c7",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "List the sqlx `PoolOptions::new()` defaults that matter, and which one you change first.",
+      "a": "`max_connections = 10`, `min_connections = 0`, `acquire_timeout = 30 s`, `idle_timeout = 600 s`, `max_lifetime = 1800 s`, `test_before_acquire = true`, `acquire_slow_threshold = 2 s`, `fair = true`, statement cache 100. Change `acquire_timeout` to ~3 s first: the 30 s default turns pool exhaustion into a stall the client has already timed out on, instead of a fast 503 you can see in your own metrics.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c8",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "How do you size a sqlx connection pool, and what is the binding constraint?",
+      "a": "Little's Law: `L = rps x seconds_of_connection_time_per_request`. At 2,000 rps holding a connection 3 ms, L = 6; divide by target utilisation 0.7 for ~9, since queueing delay grows as 1/(1-rho). The binding constraint is the database: `(replicas + maxSurge) x max_connections <= Postgres max_connections (default 100) - 3 reserved`. Beyond that, use PgBouncer transaction pooling, not a bigger Postgres limit.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c9",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "Why do you get intermittent `prepared statement \"sqlx_s_7\" does not exist` behind PgBouncer?",
+      "a": "sqlx uses named prepared statements cached per connection (`statement_cache_capacity` default 100). PgBouncer in transaction mode reuses server connections across clients, so the cached name may not exist on the connection you get. Fix: PgBouncer 1.21+ with `max_prepared_statements > 0`, or `PgConnectOptions::statement_cache_capacity(0)` (costs a parse per query). Same root cause breaks sqlx's session-scoped migration advisory lock, so use `Migrator::set_locking(false)`.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c10",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "What does `cargo sqlx prepare` produce, and how do you keep it honest in CI?",
+      "a": "It runs every `query!` macro against a live database and writes one JSON file per unique query into `.sqlx/`, named by the SHA-256 of the SQL. Commit it and build with `SQLX_OFFLINE=true`. Gate it with `cargo sqlx prepare --check --workspace` in CI plus a Postgres service container, or a stale cache fails the build with 'set DATABASE_URL to use query macros online, or run cargo sqlx prepare'.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c11",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "sqlx `query!` column-annotation syntax: what do `!`, `?` and `: Type` mean?",
+      "a": "`as \"x!\"` forces non-null (`T` not `Option<T>`), `as \"x?\"` forces nullable, `as \"x: MyType\"` overrides the Rust type, `as \"x!: MyType\"` does both. You need them because Postgres reports nullability conservatively for aggregates, expressions, and the nullable side of a LEFT JOIN. sqlx 0.9.0 changed this inference ('force generic plan'), a listed breaking change that can produce a wave of type errors on upgrade.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c12",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "Inside a sqlx transaction, what is the silent data-integrity bug?",
+      "a": "Executing against `&pool` instead of `&mut *tx`. `&pool` checks out a different connection, so those statements run outside the transaction and commit independently. No compiler error. Grep for `&pool`/`&state.db` in any function that also calls `begin()`. Related: `Drop` on a `Transaction` issues a ROLLBACK (queued, since Drop cannot be async), and `tx.begin()` on an existing transaction issues a SAVEPOINT.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c13",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "Why does `log` fail for async Rust services, and what does `tracing` do instead?",
+      "a": "`log` correlates by (timestamp, thread id, module). On a Tokio multi-thread runtime one worker interleaves polls from thousands of tasks and work-stealing migrates a task across workers, so thread id partitions nothing and one request's lines are non-contiguous. `tracing` attaches a span to the *future*: `.instrument(span)` / `#[instrument]` enters at the start of every poll and exits at every return, so context follows the task. Spans nest, so a deep `error!` carries all ancestor fields.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c14",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "Why must you never hold a `span.enter()` guard across an `.await`?",
+      "a": "`Span::enter()` sets a thread-local current span. At the `.await` the task yields and the worker immediately polls a different task, whose events are then attributed to your span. Result: traces where unrelated requests nest inside each other, only reproducible under concurrency. Use `#[tracing::instrument]` or `.instrument(span)`, which enter and exit around each individual `poll`.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c15",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "Give the measured cargo-chef numbers and the caveat.",
+      "a": "Reference service (axum + sqlx + tracing, 179 crates, rustc 1.97.1, 2 vCPU): cold build 117 s, warm build with dependencies cached 24 s, a 4.9x win. Consistent with ~5x reported on a ~500-dependency commercial codebase and ~9x on ExpressVPN's repo. Caveat: with no persistent Docker layer cache, cargo-chef adds a planner stage and a dummy-source build on top of the real one and can make builds slower (a documented 5 min to 25 min case).",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c16",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "Base image sizes (compressed amd64, Aug 2026) and which one you ship.",
+      "a": "`rust:latest` 569.3 MiB, `rust:1.97-slim` 308.1 MiB (builders only). `debian:bookworm-slim` 26.9 MiB, `alpine:3.22` 3.6 MiB, `gcr.io/distroless/cc-debian12` 8.75 MiB, `distroless/static-debian12` 0.67 MiB. Ship `distroless/cc-debian12:nonroot`: glibc, no shell, no package manager, UID 65532. With a 3.38 MiB stripped binary the final image is ~12 MiB compressed / ~26 MB on disk.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c17",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "What is the musl trap, and what is the symptom?",
+      "a": "musl's `malloc` serialises multithreaded allocation far harder than glibc's ptmalloc (which uses up to 8 x ncores arenas). Rust allocates constantly, so it lands on the hot path; reported slowdowns reach 7x, worsening with thread count. Symptom: throughput scales to 2 threads then flattens or regresses as cores are added, with `perf` showing cycles in musl's malloc lock path. Fix: build glibc and use distroless/cc, or if static is mandatory set `#[global_allocator]` to mimalloc or jemalloc.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c18",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "Why is `panic = \"abort\"` wrong for a service?",
+      "a": "It removes unwind tables, which makes `std::panic::catch_unwind` a no-op. `tower_http::catch_panic::CatchPanicLayer` stops working and Tokio's per-task panic isolation (`JoinError::is_panic`) stops working, so one malformed request that trips an `unwrap()` kills the whole process and every in-flight request with it. Ship `panic = \"unwind\"` (the default) plus `CatchPanicLayer` and `RUST_BACKTRACE=1`.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c19",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "Design rule for liveness vs readiness probes, and the Kubernetes defaults that matter.",
+      "a": "Liveness must depend on nothing external (a constant handler), or one database blip restarts every replica at once and the recovery is a reconnect storm. Readiness may ping the database, with an internal 300-500 ms timeout because `timeoutSeconds` defaults to 1. Defaults: `periodSeconds 10`, `timeoutSeconds 1`, `failureThreshold 3`, so a default liveness config SIGKILLs 30 s after the first failure. Add a `startupProbe` to cover migrations and pool warm-up.",
+      "module": "T20-rust-services"
+    },
+    {
+      "id": "T20-rust-services-c20",
+      "topic": "Building a Service: axum, sqlx, tracing, Docker, and Deploying It",
+      "q": "Measured memory profile of an axum+sqlx service, and the two ways Rust still uses too much.",
+      "a": "Measured on 2 vCPU with rustc 1.97.1: 3,140 KiB RSS idle, 3,540 KiB after 3,000 requests, 3 OS threads, single-digit-ms startup. Spring Boot equivalents typically sit at 150-400 MB with 25-60 threads and 2-8 s startup. Rust's failure modes: glibc arena growth (up to 8 x ncores arenas retaining freed memory; fix with `MALLOC_ARENA_MAX=2` or jemalloc/mimalloc), and OOM as SIGKILL with exit code 137 and no stack trace, since there is no `OutOfMemoryError`.",
+      "module": "T20-rust-services"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T22-scaling-d1",
+      "module": "T22-scaling",
+      "q": "What's the mechanical difference between a fraud proof and a validity proof? Not the marketing description -- the actual guarantee each provides.",
+      "a": "Fraud proof is reactive: the system assumes correctness by default and relies on someone actively detecting and proving a claim wrong within a bounded challenge window. Validity proof is proactive: a cryptographic proof accompanying the claim mathematically demonstrates correctness before it's ever accepted, requiring no challenge period and no assumption anyone is watching.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T22-scaling-d2",
+      "module": "T22-scaling",
+      "q": "Why do optimistic rollup withdrawals to L1 take roughly a week, and how do production systems make this invisible to most users?",
+      "a": "The L1 contract can't treat L2 state as final until the challenge window (~7 days historically) passes without a successful fraud proof -- shortening it for UX would weaken the security margin. Production systems use third-party liquidity providers who front users their withdrawal immediately for a fee, then collect the genuine withdrawal once the real window elapses.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-scaling-d3",
+      "module": "T22-scaling",
+      "q": "Does using a fast-withdrawal liquidity provider on an optimistic rollup change the security model for the withdrawing user?",
+      "a": "Yes, meaningfully: the user is now trusting the liquidity provider's solvency and honesty for the immediate funds, rather than relying purely on the trust-minimized native bridge mechanism -- a real, if usually small, additional trust dependency traded for speed.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-scaling-d4",
+      "module": "T22-scaling",
+      "q": "Why is data availability described as 'the real bottleneck' rather than raw computation, for rollup scaling?",
+      "a": "A rollup's security (fraud-proof challengeability, independent state reconstruction) depends entirely on the underlying transaction data being retrievable, not merely a claimed state root. Plasma's specific failure was committing to a state root while leaving data off-chain -- an operator withholding data could make the exit/challenge mechanism unusable regardless of computational correctness.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-scaling-d5",
+      "module": "T22-scaling",
+      "q": "Explain precisely why fraud-proof security only requires one honest watcher, not a majority.",
+      "a": "The sequencer posts a bond alongside every batch claim; a successful fraud proof from ANY single party slashes it and rewards the challenger. Submitting fraud is a strictly losing bet given any meaningfully nonzero probability that at least one economically-motivated party is watching at any point during the entire challenge window.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-scaling-d6",
+      "module": "T22-scaling",
+      "q": "What happens to fraud-proof security if literally nobody is watching during a specific batch's challenge window?",
+      "a": "This is a real, named concern (the 'verifier's dilemma'/liveness assumption): security depends on at least one economically-motivated watcher existing with sufficient incentive to run the watching infrastructure. This is why rollup ecosystems specifically encourage or incentivize independent watchtower/challenger infrastructure rather than assuming it emerges automatically.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-scaling-d7",
+      "module": "T22-scaling",
+      "q": "Name three major bridge hacks, their approximate losses, and the specific mechanism each exploited. What's the common structural thread?",
+      "a": "Ronin (Mar 2022, ~$625M): 5-of-9 validator key compromise, no smart-contract bug needed. Wormhole (Feb 2022, ~$320M): signature-verification bug minted 120K wETH with no real deposit. Nomad (Aug 2022, ~$190M): trusted-root set to zero address, letting anyone spoof withdrawals. Common thread: each bypassed the bridge's own custom attestation mechanism, not either connected chain's actual consensus.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-scaling-d8",
+      "module": "T22-scaling",
+      "q": "Since the major named bridge hacks are from 2021-2022, hasn't bridge security improved substantially since then?",
+      "a": "The pattern hasn't stopped: 2026 alone recorded well over $340M in bridge-specific losses across dozens of incidents in H1, with bridge vulnerabilities accounting for close to half of one quarter's total DeFi losses. Bridges remain an actively, currently exploited category, not a solved historical problem.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-scaling-d9",
+      "module": "T22-scaling",
+      "q": "A team wants to build a new DeFi protocol requiring users to move assets between three chains. How would you approach the bridge component?",
+      "a": "Treat the bridge as the primary security review focus, disproportionate to attention given application logic elsewhere -- this is where risk historically concentrates. Prefer existing, higher-threshold, longer-audit-history bridge infrastructure over building custom. Minimize value held in any single bridge's locked pool, and design explicit circuit breakers given how fast these losses typically occur (often one transaction).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-scaling-d10",
+      "module": "T22-scaling",
+      "q": "Does using a well-established, audited bridge provider fully outsource bridge risk?",
+      "a": "Reduces but doesn't eliminate it -- every bridge hack discussed (Ronin, Wormhole, Nomad, Poly Network) involved infrastructure considered reputable and, in most cases, audited at the time of exploit. Due diligence is necessary but the historical record argues against treating 'audited and established' as sufficient to stop monitoring and limiting exposure.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-scaling-d11",
+      "module": "T22-scaling",
+      "q": "What specifically did EIP-4844 change, and why was posting rollup data via regular L1 calldata (pre-2024) a real, quantifiable problem?",
+      "a": "Pre-2024, rollups posted data as regular calldata, priced like any other data and permanently stored by every L1 full node forever -- a growing direct and indirect (permanent state growth) cost for data only needing temporary availability. EIP-4844 introduced 'blobs': a separate, cheaper lane, pruned after ~18 days, cutting the ongoing storage burden while retaining enough window for fraud-proof/reconstruction needs.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-scaling-d12",
+      "module": "T22-scaling",
+      "q": "If blobs are pruned after ~18 days, does old rollup transaction data become permanently unavailable after that point?",
+      "a": "L1 blob storage isn't meant to be Ethereum's permanent historical archive -- L2s and third-party archival services are expected to independently retain older data. The ~18-day window covers live security use cases (active fraud-proof challenges, near-term verification) specifically; 'L1 blob storage' and 'permanent historical record' are deliberately not the same guarantee.",
+      "difficulty": "staff"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T13-technical-writing-d1",
+      "module": "T13-technical-writing",
+      "q": "Name Nygard's five ADR sections in order, and the one rule about numbering.",
+      "a": "Title, Context, Decision, Status, Consequences. Numbers are assigned sequentially and monotonically and are never reused; a reversed decision gets a new ADR and the old one's Status becomes \"superseded by ADR-NNN\".",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T13-technical-writing-d2",
+      "module": "T13-technical-writing",
+      "q": "Classify each as goal or non-goal: (a) \"the service should not crash\", (b) \"ACID compliance\", (c) \"median model-update lead time under 2 days\", (d) \"migrating the other 7 services off the JVM\".",
+      "a": "(a) neither, it is a negated goal and belongs in Goals or nowhere. (b) valid non-goal, the canonical example: could reasonably have been a goal, deliberately excluded, and you might still pick a solution that provides it. (c) goal, and a good one because it is measurable and falsifiable. (d) valid non-goal, because it is the scope question reviewers will otherwise raise four separate times.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T13-technical-writing-d3",
+      "module": "T13-technical-writing",
+      "q": "Rewrite as value-neutral ADR Context: \"Weaviate is bloated, expensive, and a pain to operate.\"",
+      "a": "\"Weaviate is the eighth independently operated stateful service in a platform with a 4-engineer on-call rotation. It accounted for 3 of 11 retrieval-path pages last quarter, none caused by a retrieval defect. Its managed tier prices per stored vector; at 41M vectors that is $X/month against a $Y/month budget.\" Same argumentative work, zero advocacy, so a reader who disagrees with the decision still trusts the section.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T13-technical-writing-d4",
+      "module": "T13-technical-writing",
+      "q": "In one sentence each: what artifact do you write for (a) a genuinely ambiguous storage choice with three defensible options, (b) a decision already made that you want a durable record of, (c) a change where there is no real tradeoff?",
+      "a": "(a) Design doc / RFC, because you need reviewers who can still change your mind. (b) ADR, which is honest about being a record rather than pretending to seek input. (c) Nothing; write the code. Google's own guidance is that a doc with no trade-offs is an implementation manual and you should have written the program instead.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T13-technical-writing-d5",
+      "module": "T13-technical-writing",
+      "q": "Write the deciding-criterion sentence for choosing pgvector over Weaviate, in the form the module recommends.",
+      "a": "\"We weighted operational surface above p99 retrieval latency because we have 4 on-call engineers and 8 services and no dedicated platform group; a team with a platform group would reasonably weight the other way.\" It names the criterion, admits it is a weighting rather than a law, and tells a disagreeing reviewer exactly where to push, which is a faster conversation than attacking the conclusion.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-technical-writing-d6",
+      "module": "T13-technical-writing",
+      "q": "Your ADR's Consequences section lists three benefits and no costs. What are the two things wrong with it?",
+      "a": "First, it is factually incomplete: Nygard specifies all consequences, positive, negative and neutral, because the negative ones become the Context for the next ADR. Second, it is strategically self-defeating: an all-upside section reads as marketing and triggers adversarial review, whereas leading with the regression (\"p99 rises from 45ms to 70ms\") buys the benefit of the doubt on everything else in the document.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-technical-writing-d7",
+      "module": "T13-technical-writing",
+      "q": "Three separate reviewers ask \"why not option X?\" about an option you already rejected in the doc. What does that tell you and what do you do?",
+      "a": "It is evidence your rejection was not argued, not that they did not read. Either X was omitted or it was strawmanned, so readers reconstruct the real version themselves. Fix: rewrite X at its strongest in its advocate's words, ideally asking the advocate to review that paragraph, then name the deciding criterion and what would flip it. Answering three threads individually is 3x the latency and produces an adversarial tone.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-technical-writing-d8",
+      "module": "T13-technical-writing",
+      "q": "Turn \"Phase 2: roll out to more traffic once we're confident\" into a real gate.",
+      "a": "\"Phase 2 (week 3-4): 5% then 25% live traffic. Gate to phase 3: p99 < 50ms at 900 RPS, error rate within 0.01% of the incumbent path, |score delta| < 1e-6 on 99.9% of shadow-sampled requests over 72h, no scoring-attributable CTR regression on any of the 8 surfaces. Rollback: split to 0% via config push, ~90 seconds, no data migration.\" \"Once we're confident\" is where a schedule goes to die.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-technical-writing-d9",
+      "module": "T13-technical-writing",
+      "q": "All the comments on your 12-page doc are about naming, the diagram, and formatting. Diagnose and fix.",
+      "a": "Bikeshedding, Parkinson's law of triviality: reviewers comment on the part they can evaluate in 90 seconds, which is the trivial part everyone understands. Fixes: put the decision and its one deciding number in the first three sentences so skimmers still receive it; state explicitly which sections are open for feedback this round and which are not; pre-review with the two most likely blockers before going wide, so the substantive objections are already in the doc when it lands.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-technical-writing-d10",
+      "module": "T13-technical-writing",
+      "q": "Why is \"what does this foreclose?\" a sharper question than \"what are the downsides?\" Give an example from a vector-store decision.",
+      "a": "Downsides are costs you pay now: visible, bounded, usually already priced in. Foreclosure is optionality you destroy, which is invisible at decision time and unbounded. Example: standardising on 1024-dim embeddings and building the HNSW index around them forecloses cheap experimentation with other models, because a dimension change means a ~50-minute rebuild on 41M rows plus re-tuning the hybrid fusion weights, turning \"try a new embedding model\" from an afternoon into a scheduled operation. Nobody would list that under \"downsides\" because it is not a cost today.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-technical-writing-d11",
+      "module": "T13-technical-writing",
+      "q": "A VP mandates a design doc for every project over two weeks. You think most of them are waste. What do you actually do?",
+      "a": "Comply and write the 1-page version, because the mandate is almost always a reaction to a real failure such as a project that shipped without cross-cutting security or privacy review. Then attack the real problem with evidence: measure what fraction of those docs contain an alternatives section with a genuinely considered rejected option. If it is under half, the mandate is manufacturing implementation manuals, and you have a data-backed case for gating one-way doors (data model, public API, anything with a migration) and merely advising on two-way doors.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-technical-writing-d12",
+      "module": "T13-technical-writing",
+      "q": "Name the live disagreement about ADR mutability and take a position with a reason.",
+      "a": "Nygard's position is immutability: supersede, never edit, because the record's value is what the team believed at the time with the information it had. Many MADR-in-practice shops edit in place. Position: immutability wins, because an edited corpus reads as though the team was always right, teaches nothing about how decisions are made, and destroys the one thing that cannot be reconstructed, the constraint set that no longer exists. The cost of immutability is a reader who must follow a supersession chain, which is cheap and mechanical.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-technical-writing-d13",
+      "module": "T13-technical-writing",
+      "q": "An interviewer says \"design docs matter less now that code is cheap to generate.\" Respond.",
+      "a": "Push back on the premise. Cheap implementation raises the cost of building the wrong thing quickly and at volume, so the decision matters more, not less. What got cheaper is producing an implementation; what did not is knowing which one to produce, which is precisely the doc's job. Concede the real change: in-repo ADRs now have a second consumer in coding agents, which raises the value of hygiene (stable numbers, accurate Status, superseded-not-deleted) because an agent infers staleness worse than a human does.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-technical-writing-d14",
+      "module": "T13-technical-writing",
+      "q": "Your team ships an approved design and two teams build to different readings of it. What section failed, and why is that the likely culprit rather than the design section?",
+      "a": "Non-goals. Goals were written but the boundaries were not, so each team filled the gap with its own assumption. The divergence is almost always a scope question the doc never answered rather than a technical ambiguity, because a technically ambiguous design section usually generates review comments, whereas an unstated scope boundary generates silent, confident, incompatible assumptions.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-technical-writing-d15",
+      "module": "T13-technical-writing",
+      "q": "Give the 90-second verbal form of a design decision, the structure you would use in an interview when asked to walk through a doc you wrote.",
+      "a": "Six beats: the decision in one sentence; the goal that drove it, with a number; the single most important non-goal; the strongest rival option stated fairly; the deciding criterion, admitted as a weighting; and what would flip it. Then one beat on what review changed, which is the part that proves the doc was real rather than a paper trail. If you have to reach for context that is not in the document to give this answer, the document is missing it.",
+      "difficulty": "staff"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T22-bitcoin-ethereum-d1",
+      "module": "T22-bitcoin-ethereum",
+      "q": "Explain how Bitcoin's UTXO model prevents double-spending, mechanically.",
+      "a": "A UTXO is either currently in the unspent set or it isn't. Spending consumes (deletes) referenced input UTXOs and creates new output UTXOs. Attempting to spend an already-spent UTXO fails a direct set-membership check. No global balance or transaction-ordering logic is needed for this defense, which is why UTXO validation across unrelated UTXOs is naturally parallelizable.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-d2",
+      "module": "T22-bitcoin-ethereum",
+      "q": "Why does Ethereum need a nonce, and what specifically does it prevent?",
+      "a": "Each account tracks a nonce that must increment by exactly one per transaction, in strict order. This prevents replay (resubmitting an already-executed transaction) and enforces canonical ordering, since the account model has no equivalent to 'consume the input, it's gone' -- a balance is a mutable number.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-d3",
+      "module": "T22-bitcoin-ethereum",
+      "q": "Why is UTXO validation naturally parallelizable and account-model validation naturally sequential (per account)?",
+      "a": "UTXO transactions reference disjoint prior outputs with no shared ordering dependency, so unrelated spends validate concurrently. Account-model transactions from the same account must apply in exact nonce order because each transaction's validity depends on the account's state after the immediately preceding transaction -- an inherently sequential per-account dependency chain; cross-account remains parallel.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-d4",
+      "module": "T22-bitcoin-ethereum",
+      "q": "What problem does gas actually solve, precisely?",
+      "a": "The EVM is Turing-complete, so by Turing's 1936 halting-problem result no general algorithm can determine in advance whether an arbitrary program terminates. Gas assigns every opcode a fixed cost and halts execution unconditionally when the limit is exhausted, guaranteeing termination within bounded steps -- sidestepping the halting problem rather than solving it.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-d5",
+      "module": "T22-bitcoin-ethereum",
+      "q": "If a transaction runs out of gas partway through execution, does the sender get anything back?",
+      "a": "No: state changes revert as if the transaction never happened, but gas consumed up to the point of failure is still charged and not refunded, since real computational work was genuinely performed by every node that validated the attempt.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-d6",
+      "module": "T22-bitcoin-ethereum",
+      "q": "Why is SSTORE (writing to contract storage) so much more expensive than other EVM operations, in gas terms?",
+      "a": "A storage write permanently modifies the contract's storage trie, cascading into recomputing that trie's root, the account's global state trie entry, and the block's overall state root -- work every full node must persist forever. Stack/memory operations are transaction-scoped and discarded after execution. Writing 0->nonzero costs 20,000 gas cold, the most expensive common op.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-d7",
+      "module": "T22-bitcoin-ethereum",
+      "q": "What is the Merkle Patricia Trie, and what does putting its root in the block header actually buy you?",
+      "a": "A trie combining efficient prefix-based key lookup (Patricia trie, keys from Keccak256-hashed addresses) with Merkle hashing (tamper-evident node identifiers). The state root in the block header commits the entire global state to 32 bytes, letting any party verify a compact proof of a specific account's state without downloading the full multi-hundred-GB state.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-d8",
+      "module": "T22-bitcoin-ethereum",
+      "q": "Does a Merkle Patricia Trie proof establish that state is correct, or just that it exists?",
+      "a": "Existence/inclusion only. A state root faithfully commits to whatever state produced it, valid or not. Validity (that the state was reached via correctly-executed, correctly-signed transactions from genesis) is established by full block validation and consensus, not by the trie structure itself.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-d9",
+      "module": "T22-bitcoin-ethereum",
+      "q": "A startup wants a high-frequency trading system settling on-chain from a single account submitting hundreds of transactions per minute. What does the account model's nonce requirement mean for their design?",
+      "a": "Every transaction must be assigned and confirmed in strict nonce order -- if one transaction stalls, everything after it blocks until it confirms or is explicitly replaced (same-nonce, higher-fee replacement). At high frequency, careful pending-vs-confirmed nonce tracking and automated stuck-transaction replacement become hard operational requirements, not edge cases.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-d10",
+      "module": "T22-bitcoin-ethereum",
+      "q": "Would a UTXO-based chain avoid the single-account nonce-bottleneck problem that high-frequency trading hits on Ethereum?",
+      "a": "Largely yes for this specific bottleneck: independent UTXOs from the same wallet don't share a sequential-ordering requirement the way one account's nonce stream does, so many parallel UTXO transactions from the same wallet (using disjoint UTXOs) don't block each other -- a legitimate point in UTXO's favor for this use case, not a reason to declare account model strictly worse overall.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-d11",
+      "module": "T22-bitcoin-ethereum",
+      "q": "Why did Bitcoin deliberately choose not to make Bitcoin Script Turing-complete? Was this an oversight Ethereum later fixed?",
+      "a": "Not an oversight -- a deliberate tradeoff. A non-Turing-complete script (no loops, bounded ops) lets every node bound validation cost in advance without needing gas-like metering, minimizing attack surface for Bitcoin's payment-focused goal. Ethereum made the opposite deliberate tradeoff (arbitrary programmability, requiring gas metering) for its general-purpose-platform goal.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-d12",
+      "module": "T22-bitcoin-ethereum",
+      "q": "Why is 'Ethereum's account model is strictly better than Bitcoin's UTXO model' a red flag answer?",
+      "a": "It's a tradeoff, not a settled conclusion. UTXO's set-based structure gives natural parallel validation and better coin-level privacy properties (why Zcash and privacy chains build on UTXO-like foundations); account model gives natural persistent contract storage. Each is the better choice for different problems -- treating one as universally superior misses the actual engineering tradeoff.",
+      "difficulty": "staff"
+    }
+  ]
+}

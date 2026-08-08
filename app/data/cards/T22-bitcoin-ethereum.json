@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T22-bitcoin-ethereum-c1",
+      "topic": "UTXO Double-Spend Defense",
+      "q": "How does the UTXO model prevent double-spending, mechanically?",
+      "a": "A UTXO either exists in the current unspent set or it doesn't. Spending consumes (deletes) referenced input UTXOs and creates new outputs. Attempting to spend an already-spent UTXO fails a direct set-membership check -- no global balance or ordering logic needed.",
+      "module": "T22-bitcoin-ethereum"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-c2",
+      "topic": "Account Nonce Defense",
+      "q": "What does Ethereum's per-account nonce prevent, and why is it needed?",
+      "a": "Replay attacks (resubmitting an already-executed transaction) and enforces canonical transaction ordering. Needed because the account model has no UTXO-style 'consume the input, it's gone' mechanism -- balance is a mutable number, so without the nonce nothing stops rebroadcasting a signed transaction.",
+      "module": "T22-bitcoin-ethereum"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-c3",
+      "topic": "Parallelism Difference",
+      "q": "Why is UTXO validation naturally parallelizable while account-model validation is sequential per account?",
+      "a": "UTXO transactions reference disjoint prior outputs with no shared state creating ordering dependencies. Account transactions from the same account must apply in exact nonce order since each depends on the state after the immediately preceding transaction -- a sequential dependency chain per account (cross-account remains parallel).",
+      "module": "T22-bitcoin-ethereum"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-c4",
+      "topic": "Why Gas Exists",
+      "q": "What specific computer-science problem does gas solve?",
+      "a": "The halting problem. The EVM is Turing-complete, so no static algorithm can determine if an arbitrary program terminates. Gas assigns every opcode a cost and halts execution unconditionally at the limit, guaranteeing termination within bounded steps -- sidestepping rather than solving the halting problem.",
+      "module": "T22-bitcoin-ethereum"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-c5",
+      "topic": "Gas Not Refunded on Revert",
+      "q": "If a transaction runs out of gas partway through, does the sender get gas back?",
+      "a": "No. State changes revert, but gas consumed up to the failure point is still charged and not refunded, since real computational work was genuinely performed by every validating node.",
+      "module": "T22-bitcoin-ethereum"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-c6",
+      "topic": "SLOAD/SSTORE Gas Costs",
+      "q": "What do cold vs warm SLOAD cost, and what does a fresh SSTORE cost, post EIP-2929?",
+      "a": "Cold SLOAD: 2,100 gas. Warm SLOAD: 100 gas (21x cheaper). SSTORE writing a previously-zero slot to non-zero: 20,000 gas cold (22,100 total with access cost) -- the most expensive common EVM operation.",
+      "module": "T22-bitcoin-ethereum"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-c7",
+      "topic": "Why SSTORE Is Expensive",
+      "q": "Why is SSTORE priced so much higher than stack or memory operations?",
+      "a": "A storage write permanently modifies the contract's storage trie, cascading into recomputing that trie's root, the account's state trie entry, and the block's overall state root -- work every full node must do and persist forever. Stack/memory are transaction-scoped and discarded after execution.",
+      "module": "T22-bitcoin-ethereum"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-c8",
+      "topic": "EIP-1559 Fee Structure",
+      "q": "What are the two parts of an Ethereum transaction fee since EIP-1559 (Aug 2021)?",
+      "a": "Base fee: algorithmically set per block (adjusts up to 12.5%/block based on fullness), and BURNED (not paid to anyone). Priority fee (tip): goes to the block proposer as an inclusion incentive.",
+      "module": "T22-bitcoin-ethereum"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-c9",
+      "topic": "Merkle Patricia Trie",
+      "q": "What is a Merkle Patricia Trie and what does the state root in the block header provide?",
+      "a": "A trie combining Patricia trie's efficient prefix-based key lookup (keys = Keccak256 hashes of addresses) with Merkle hashing's tamper-evidence. The state root commits the entire global state (every balance, every contract's storage) to 32 bytes, enabling compact verifiable proofs of any account's state without downloading the full state.",
+      "module": "T22-bitcoin-ethereum"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-c10",
+      "topic": "Proof of Inclusion vs Validity",
+      "q": "Does a Merkle Patricia Trie proof establish that state is correct?",
+      "a": "No -- only that it matches a committed root (inclusion/existence). Validity (that the state was reached through correctly-executed, correctly-signed transactions from genesis) comes from full block validation and consensus, not the trie structure itself.",
+      "module": "T22-bitcoin-ethereum"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-c11",
+      "topic": "Bitcoin Script Not Turing-Complete",
+      "q": "Why did Bitcoin deliberately choose not to make Bitcoin Script Turing-complete?",
+      "a": "A non-Turing-complete script (no loops, bounded ops) lets every node bound validation cost in advance with no need for gas-like metering. A deliberate design choice for predictability and a narrow attack surface, not a limitation Ethereum later 'fixed'.",
+      "module": "T22-bitcoin-ethereum"
+    },
+    {
+      "id": "T22-bitcoin-ethereum-c12",
+      "topic": "Nonce Gap Stalls Queue",
+      "q": "What happens to an Ethereum account's pending transactions if one transaction's nonce gets stuck?",
+      "a": "Every later-nonce transaction from that account is blocked until the missing nonce confirms or is explicitly replaced (same-nonce, higher-fee replacement) -- nonces must apply in strict sequential order with no gaps.",
+      "module": "T22-bitcoin-ethereum"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T09-gpu-cost-c1",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "What is the cost identity that every GPU cost question reduces to?",
+      "a": "$/1M tokens = (instance $/hr) / (tokens/hr at full batch) / utilisation. Three levers: procurement (~2x range), physics/instance class (<2x, and often inverted from intuition), and scheduling+utilisation (3-10x). Most engineers optimise the weakest term first.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c2",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "Give the KV cache formula, and the one field people get wrong.",
+      "a": "kv_bytes_per_token = 2 (K and V) x n_layers x n_key_value_heads x head_dim x dtype_bytes. The trap is using num_attention_heads instead of num_key_value_heads, which overstates GQA models by 4-8x. Llama 3.1 8B: 2 x 32 x 8 x 128 x 2 = 131,072 bytes = 128 KiB/token. Llama 3.3 70B: 2 x 80 x 8 x 128 x 2 = 320 KiB/token.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c3",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "Break down the VRAM budget vLLM actually allocates.",
+      "a": "usable = physical VRAM x gpu_memory_utilization (default 0.92). Then KV pool = usable - model weights - profiled activation workspace (2-4 GiB, scales with max_num_batched_tokens and CUDA-graph capture). The KV pool is your concurrency budget and it is spent in tokens, not requests.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c4",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "How many concurrent sequences does Llama 3.1 8B BF16 fit on an H100 80GB, and on an A10G 24GB?",
+      "a": "H100: 79.6 GiB x 0.92 = 73.2 usable, minus 15.0 weights minus ~3 activations = 55.2 GiB pool = 452,800 tokens = 55 sequences at 8k context (221 at 2k). A10G: 22.5 x 0.92 = 20.7, minus 15.0 minus ~1.5 = 4.2 GiB pool = 34,700 tokens = 8 sequences at 4k context. The model fits on the A10G and cannot be served from it.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c5",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "Why is decode memory-bandwidth-bound, and how do you derive tokens/sec from it?",
+      "a": "Every decode step reads all weights once plus the entire live KV cache. step_time >= (weight_bytes + B x avg_ctx x kv_per_token) / HBM_bandwidth; throughput = B / step_time. Llama 8B on H100 (3.35 TB/s): weight floor 1.606e10 / 3.35e12 = 4.79 ms, so 209 steps/s. At B=256, ctx 1800, KV adds 60.4 GB per step, total 22.8 ms, giving ~11,200 output tok/s.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c6",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "How do you derive prefill throughput, and how does it compare to decode?",
+      "a": "Prefill is compute-bound: roughly 2 x params FLOPs per prompt token. H100 dense BF16 ~989 TFLOP/s at 35-50% serving MFU, so ~4.0e14 / (2 x 8.03e9) = ~24,900 prompt tokens/s for an 8B. Decode on the same card is ~11,200 tok/s. Same GPU, ~2.2x different rate, and the two phases contend for it. Quoting one tokens/sec number for a workload is a red flag.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c7",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "Which is cheaper per token: a $12.29/hr H100 or a $1.21/hr A10G?",
+      "a": "The H100, by 3.7x. H100 at ~11,200 tok/s produces 40.32M tokens/hr, so $12.29/40.32 = $0.305 per 1M output tokens. A10G at ~300 tok/s produces 1.08M/hr, so $1.212/1.08 = $1.12 per 1M. The small card loses on both factors at once: less bandwidth (slower steps) and less VRAM (smaller batch). Caveat: at concurrency 8 the H100 does ~1,670 tok/s = $2.04/1M and now loses. Big GPUs are cheap only when saturated.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c8",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "How do you compute reserved-instance breakeven, and what are the current numbers?",
+      "a": "breakeven_utilisation = reserved_hourly_rate / on_demand_hourly_rate. us-east-1 as of 2026-08-05: g5.2xlarge 1yr $0.7636/$1.212 = 63.0% of hours; 3yr $0.5236 = 43.2%. p5.48xlarge 3yr $43.157/$98.32 = 43.9%. The question is never 'do we want a discount' but 'will this instance run more than 43% of the next three years'.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c9",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "What is the surprising relationship between spot and reserved pricing on GPU instances right now?",
+      "a": "On several GPU SKUs in us-east-1 (2026-08-05), 3-year standard reserved is CHEAPER than spot with no interruption risk: g5.2xlarge $0.5236 RI vs $0.5954 spot; p4d.24xlarge $12.499 vs $13.067; p5.48xlarge $43.157 vs $57.762 (a 34% gap). Conclusion: reserve the baseline you are confident about, and use spot only for capacity above that line.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c10",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "What are the spot/preemption notice windows per cloud?",
+      "a": "AWS EC2 Spot: 2-minute interruption notice, plus a rebalance recommendation typically 10-20 min earlier that is not guaranteed to precede it. GCP Spot VM: 30 seconds, best effort, no max lifetime. GCP Preemptible VM: 30 seconds and a hard 24-hour lifetime. Azure Spot: minimum 30 seconds via Scheduled Events Preempt signal, and immediate eviction with no notice is documented as possible.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c11",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "Why is spot interruption frequency the wrong way to think about spot risk?",
+      "a": "Interruptions are pool-scoped, not instance-scoped. When capacity for one instance type in one AZ is reclaimed, every replica you have in that pool goes at once, so a ten-replica fleet can reach zero in 120 seconds regardless of a '<5%' frequency bucket. That number is a per-pool hazard rate, not ten independent coin flips. Mitigate with instance-type and AZ diversification plus a non-interruptible floor at minimum viable capacity.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c12",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "Why is nvidia-smi GPU utilisation the wrong autoscaling signal for an LLM endpoint?",
+      "a": "It measures the fraction of time at least one kernel was resident, not the fraction of peak FLOPs or bandwidth. During decode the SMs stall on memory the whole time, so batch 1 and batch 256 both read near 100%. A replica at 95% GPU with an empty queue is healthy; one at 45% GPU with 200 waiting is saturated on KV pool. The metric cannot distinguish them. CPU is worse: it tells you about your tokenizer.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c13",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "Which vLLM metrics do you scale and alert on?",
+      "a": "Scale on vllm:num_requests_waiting relative to vllm:num_requests_running. SLO trigger: vllm:time_to_first_token_seconds p95. Early warning: vllm:kv_cache_usage_perc (renamed from vllm:gpu_cache_usage_perc) above ~0.85 sustained. Correctness invariant: vllm:num_preemptions must be zero; any sustained rise is a sizing bug, not a tuning opportunity. Routing quality: vllm:prefix_cache_hits / vllm:prefix_cache_queries.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c14",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "State the headroom equation and why GPU fleets run at 40-60%.",
+      "a": "required_headroom >= traffic growth rate x scale-out latency. A cold GPU replica takes 3-8 minutes (15-30s scrape + 30s KEDA poll + 15s HPA sync + 60-180s node + 60-200s image pull + 20-140s weights + 20-90s engine init and CUDA-graph capture). If traffic doubles in 5 minutes and L is 5 minutes, you need 100% headroom, so the utilisation ceiling is 50%. Cutting the cold start from 300s to 90s lifts the ceiling to ~77%.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c15",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "What does the largest quantisation study report, and what is the deployment-mode nuance?",
+      "a": "Kurtic et al. (ACL 2025, arXiv:2411.02355), >500,000 evaluations across the Llama-3.1 family: FP8 W8A8 effectively lossless at all scales, well-tuned INT8 W8A8 loses 1-3%, INT4 weight-only (W4A16) rivals 8-bit. The nuance: W4A16 is most cost-efficient for synchronous low-concurrency setups, W8A8 dominates in asynchronous continuous batching, because W4A16 dequantises to 16-bit for the matmul and stops paying once you are compute-bound.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c16",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "Name the three ways quantisation buys capacity, not just one.",
+      "a": "1) Smaller weights leave more VRAM for KV, so bigger batch: 8B BF16 15.0 GiB vs FP8 7.5 vs W4A16 ~4.2, which on a 24 GiB A10G takes the KV pool from 4.2 to ~15.0 GiB, a 3.6x concurrency increase. 2) Fewer weight bytes read per decode step, so higher steps/sec: FP8 gives 2.4 ms instead of 4.79 ms on H100. 3) --kv-cache-dtype fp8 halves KV per token (128 KiB to 64 KiB on 8B), doubling concurrency at fixed context.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c17",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "What does PagedAttention actually fix, with the number?",
+      "a": "Pre-2023 servers pre-allocated a contiguous KV buffer per sequence sized to max_model_len, so a 100-token generation against a 4,096-token limit wasted 4,000 tokens of VRAM. The vLLM paper (Kwon et al., SOSP 2023) measured 60-80% of KV memory lost to internal and external fragmentation. Paging in fixed blocks (vLLM DEFAULT_BLOCK_SIZE = 16 tokens) caps internal waste at 15 tokens per sequence, under 1% of the pool.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c18",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "What does vLLM preemption look like in logs, and what are the four fixes in order?",
+      "a": "Log: 'Sequence group N is preempted by PreemptionMode.RECOMPUTE mode because there is not enough KV cache space' (V1 defaults to RECOMPUTE, not SWAP). Symptom: bimodal latency and throughput below what the same fleet did at lower load. Fixes: raise gpu_memory_utilization toward but not past ~0.95; set --kv-cache-dtype fp8; lower max_num_seqs or max_num_batched_tokens; raise tensor_parallel_size so weights shard and each GPU has more KV room.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c19",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "What are the current vLLM V1 scheduling defaults you should know cold?",
+      "a": "gpu_memory_utilization 0.92; block_size 16; chunked prefill ON by default whenever supported; prefix caching ON by default; preemption mode RECOMPUTE. max_num_batched_tokens / max_num_seqs for the OpenAI API server: 8192 / 1024 on a device with >=70 GiB that is not an A100, otherwise 2048 / 256. Smaller token budgets improve ITL, larger improve TTFT; docs suggest >8192 for throughput.",
+      "module": "T09-gpu-cost"
+    },
+    {
+      "id": "T09-gpu-cost-c20",
+      "topic": "GPU Capacity & Cost Engineering, Autoscaling, Spot",
+      "q": "Your GPU bill doubled with flat request volume. What are the four things to check, in order?",
+      "a": "1) Average context length: longer RAG chunks or retained history is a linear multiplier on KV per sequence and inversely on batch size. 2) Output token distribution, especially reasoning/extended-thinking tokens, which can multiply decode load 10x with no request-rate change. 3) Prefix cache hit rate: a template change that moved a timestamp or user id to the front collapses vllm:prefix_cache_hits. 4) Utilisation: blocked scale-down or a PodDisruptionBudget pinning nodes. Prevention: alert on $/1M tokens, not total spend.",
+      "module": "T09-gpu-cost"
+    }
+  ]
+}

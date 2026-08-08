@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T23-error-correction-c1",
+      "topic": "Error Correction",
+      "q": "Define T1 and T2, and state the relationship between them.",
+      "a": "T1 = energy relaxation time (|1⟩→|0⟩ decay, P(relaxed by t)=1−e^(-t/T1)). T2 = dephasing time (coherence remaining = e^(-t/T2)). Always T2 ≤ 2T1.",
+      "module": "T23-error-correction"
+    },
+    {
+      "id": "T23-error-correction-c2",
+      "topic": "Error Correction",
+      "q": "What does NISQ stand for and what does it bound?",
+      "a": "Noisy Intermediate-Scale Quantum (Preskill, 2018) — tens to low-thousands of physical qubits, no error correction, performance bounded by gate error accumulation and the T1/T2 coherence budget. More physical qubits alone does not leave the NISQ regime.",
+      "module": "T23-error-correction"
+    },
+    {
+      "id": "T23-error-correction-c3",
+      "topic": "Error Correction",
+      "q": "Why was quantum error correction believed impossible before 1995?",
+      "a": "No-cloning forbids copying an unknown state for redundancy/majority-vote, and directly measuring a qubit to check for errors collapses any superposition — seemingly making both classical error-correction strategies unusable.",
+      "module": "T23-error-correction"
+    },
+    {
+      "id": "T23-error-correction-c4",
+      "topic": "Error Correction",
+      "q": "What was Shor and Steane's (1995-96) key insight that made quantum error correction possible?",
+      "a": "Measuring stabilizers (syndrome operators) reveals which error occurred without revealing the encoded logical state — the syndrome outcome is the same whether the logical qubit is |0⟩_L, |1⟩_L, or any superposition.",
+      "module": "T23-error-correction"
+    },
+    {
+      "id": "T23-error-correction-c5",
+      "topic": "Error Correction",
+      "q": "What does the 3-qubit bit-flip repetition code protect against, and what does it miss?",
+      "a": "Protects only against X (bit-flip) errors via Z0Z1/Z1Z2 syndrome parity checks that uniquely locate a single flip. Z (phase-flip) errors pass through completely undetected — a separate phase-flip code (or Shor's 9-qubit code combining both) is needed for full protection.",
+      "module": "T23-error-correction"
+    },
+    {
+      "id": "T23-error-correction-c6",
+      "topic": "Error Correction",
+      "q": "What is the 'discretization of errors' result?",
+      "a": "Any single-qubit error can be written as a linear combination of I, X, Y, Z. Combined with measurement's discreteness, correcting just the discrete set {I,X,Y,Z} suffices to correct arbitrary continuous single-qubit errors, not just those four operators.",
+      "module": "T23-error-correction"
+    },
+    {
+      "id": "T23-error-correction-c7",
+      "topic": "Error Correction",
+      "q": "What is a surface code's 'code distance' and the threshold condition?",
+      "a": "Code distance d roughly measures the minimum physical errors needed to cause an undetected logical error — larger d uses more physical qubits. Below the threshold (~1% physical 2-qubit gate error for surface codes), increasing d exponentially decreases logical error rate; above threshold, more qubits make it worse.",
+      "module": "T23-error-correction"
+    },
+    {
+      "id": "T23-error-correction-c8",
+      "topic": "Error Correction",
+      "q": "What did Google's Willow chip demonstrate in 2026 that was a genuine first?",
+      "a": "Below-threshold error correction on real hardware — increasing code distance measurably reduced the observed logical error rate, confirming threshold theory holds in practice, not just simulation.",
+      "module": "T23-error-correction"
+    },
+    {
+      "id": "T23-error-correction-c9",
+      "topic": "Error Correction",
+      "q": "Why is a vendor's 'N physical qubits' claim not a good proxy for usable computation?",
+      "a": "Physical qubit count commonly differs from logical (error-corrected) qubit count by two to three orders of magnitude, since the physical-to-logical ratio is estimated at hundreds to low thousands of physical qubits per logical qubit at current error rates.",
+      "module": "T23-error-correction"
+    },
+    {
+      "id": "T23-error-correction-c10",
+      "topic": "Error Correction",
+      "q": "What was the Microsoft/Quantinuum H2 milestone in March 2026?",
+      "a": "12 logical qubits at a logical error rate around 2-in-1000 — a genuinely newsworthy engineering milestone despite the small logical qubit count, because it demonstrates real fault-tolerant logical qubits, not just physical ones.",
+      "module": "T23-error-correction"
+    },
+    {
+      "id": "T23-error-correction-c11",
+      "topic": "Error Correction",
+      "q": "What is the practical difference between error mitigation and error correction?",
+      "a": "Mitigation (ZNE, readout correction, dynamical decoupling, probabilistic error cancellation) statistically compensates for noise on uncorrected NISQ hardware with overhead that grows (sometimes exponentially) with circuit size. Error correction structurally protects encoded information and scales per the fault-tolerance threshold theorem.",
+      "module": "T23-error-correction"
+    },
+    {
+      "id": "T23-error-correction-c12",
+      "topic": "Error Correction",
+      "q": "Why do surface codes dominate practical implementations over theoretically-better quantum LDPC codes?",
+      "a": "Surface codes need only 2D nearest-neighbor connectivity, matching real superconducting chip layouts, and have a well-characterized, comparatively forgiving threshold. LDPC codes need longer-range/higher connectivity current hardware doesn't natively support well — an open, unresolved architecture competition.",
+      "module": "T23-error-correction"
+    }
+  ]
+}

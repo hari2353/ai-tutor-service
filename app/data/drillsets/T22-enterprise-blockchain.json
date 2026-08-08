@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T22-enterprise-blockchain-d1",
+      "module": "T22-enterprise-blockchain",
+      "q": "A product manager proposes 'we should put our supply chain data on a blockchain so all our vendors can trust it.' How do you respond?",
+      "a": "Apply the trust test: who currently operates the system, and would vendors already trust that operator? If yes, a well-designed database with access control and audit logging solves 'vendors can trust the data hasn't been tampered with' far more cheaply. If vendors specifically distrust your company as sole operator (a genuine multi-party trust gap), the harder conversation about permissioned ledgers or public chains actually applies.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d2",
+      "module": "T22-enterprise-blockchain",
+      "q": "Explain precisely why TradeLens failed, and why 'the technology didn't work' is the wrong explanation.",
+      "a": "The underlying Hyperledger Fabric technology generally functioned as designed. The failure was governance: TradeLens was co-owned by Maersk and IBM, and competing ocean carriers were asked to share commercially sensitive operational data with a platform controlled by their direct competitor. No property of the ledger technology fixes that competitive-disincentive reality.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d3",
+      "module": "T22-enterprise-blockchain",
+      "q": "What's the 'oracle problem for physical goods,' and why does it limit blockchain provenance tracking's actual value?",
+      "a": "A blockchain's cryptographic integrity guarantees only that data hasn't been tampered with AFTER recording, not that it was accurate WHEN recorded. If a farmer, shipper, or processor has an incentive to misreport, the blockchain faithfully, tamper-evidently records the misreport with the same integrity as it would record the truth -- a structural limitation independent of governance issues.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d4",
+      "module": "T22-enterprise-blockchain",
+      "q": "A fintech wants to build a cross-border remittance product. When would you recommend a public blockchain versus traditional payment rails?",
+      "a": "If existing correspondent banking is reliable and reasonably priced, traditional rails are simpler and better-understood by regulators/users. A public blockchain becomes compelling specifically where corridors have unreliable banking infrastructure, high correspondent fees/delays, or genuine capital-control censorship risk (criteria 3+4 of the decision test actually apply).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d5",
+      "module": "T22-enterprise-blockchain",
+      "q": "Why did stablecoins and tokenized Treasuries succeed where TradeLens-style consortium blockchains failed? Isn't 'multiple parties needing shared trust' the same pattern?",
+      "a": "The surface pattern is similar but the trust problem differs in kind. TradeLens needed COMPETITORS to voluntarily share sensitive data on infrastructure controlled by one of their own rivals -- a governance problem no ledger fixes. Stablecoins/RWAs use an already-existing, nobody-controls-it public settlement layer that no participant needs to be granted access to or convinced to trust a competitor's operation of.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d6",
+      "module": "T22-enterprise-blockchain",
+      "q": "Your CTO wants a private permissioned blockchain for internal audit logging across the company's own microservices, no external parties involved. What's your assessment?",
+      "a": "Resolves cleanly against the decision test: your company is unambiguously the trusted operator since there's no external party's distrust to solve. A cryptographically tamper-evident audit log (Merkle-tree hash chaining applied to a conventional append-only log) delivers the desired tamper-detection property without any distributed-consensus overhead, since there's no adversarial multi-party consensus problem when one company operates every node.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d7",
+      "module": "T22-enterprise-blockchain",
+      "q": "What if the internal audit-log concern is specifically that a compromised or malicious insider with database admin access could tamper undetected?",
+      "a": "A real, legitimate concern, but solved by the same tamper-evidence mechanism (hash-chained, cryptographically signed append-only logs, ideally with the latest hash periodically published externally, outside that insider's control) without needing blockchain's distributed-consensus machinery -- the requirement is 'detect tampering,' not 'distributed consensus among mutually distrusting parties.'",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d8",
+      "module": "T22-enterprise-blockchain",
+      "q": "A government wants a national land registry on a public blockchain to prevent corrupt officials from fraudulently altering records. Is this a good use case?",
+      "a": "One of the module's genuinely stronger candidates: if the credible threat is a corrupt/coerced official unilaterally altering records, removing any single party's unilateral edit capability -- including the operating government's own officials -- is a real property a trusted-government-operated database structurally cannot provide, since that operator IS who the threat model distrusts.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d9",
+      "module": "T22-enterprise-blockchain",
+      "q": "Does putting a land registry on a public blockchain fully solve the corruption problem, or just part of it?",
+      "a": "Only part. It prevents unilateral, undetected retroactive alteration of already-recorded entries, but does nothing to prevent corrupt INITIAL recording -- a bribed official can still record a fraudulent transfer accurately and immutably, and the blockchain preserves that fraud forever. It addresses one specific failure mode (retroactive tampering), not corruption broadly.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d10",
+      "module": "T22-enterprise-blockchain",
+      "q": "How would you evaluate whether a specific CBDC proposal is a genuine distributed-ledger design or 'blockchain' used as branding on an otherwise-centralized system?",
+      "a": "Ask whether a single operator (the central bank) unilaterally controls issuance, settlement finality, and reversal/freeze ability. If so -- true of most actual CBDC designs, since central banks don't typically propose giving up unilateral monetary control -- the system lacks the distributed-trust property that would justify calling it meaningfully different from a conventional centralized digital payment system, regardless of internal use of blockchain-derived data structures.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d11",
+      "module": "T22-enterprise-blockchain",
+      "q": "If a CBDC doesn't remove central bank control, is using blockchain-derived data structures (hash chains, Merkle trees) for it pointless?",
+      "a": "Not pointless -- these techniques can provide real engineering benefits (tamper-evidence, auditability, resilience against single-node corruption) independent of achieving blockchain's full distributed-trust property. The mistake is marketing such a system as 'blockchain-based' in a way that implies distributed-trust properties the actual governance design doesn't deliver.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d12",
+      "module": "T22-enterprise-blockchain",
+      "q": "Could a public-chain approach have saved TradeLens's actual use case -- shipping documentation?",
+      "a": "Potentially reframed, worth considering: building smart contracts on a public chain rather than a Maersk/IBM-operated consortium would have structurally changed the 'who controls the infrastructure' objection (no single competitor controls a public chain). But other real barriers -- data privacy for commercially sensitive details on a fully transparent ledger, regulatory questions, adoption incentives -- would still need solving. This is genuinely uncertain counterfactual territory, not a confident conclusion.",
+      "difficulty": "staff"
+    }
+  ]
+}

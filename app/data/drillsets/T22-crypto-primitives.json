@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T22-crypto-primitives-d1",
+      "module": "T22-crypto-primitives",
+      "q": "What are the three properties a cryptographic hash function needs, and why is collision resistance the hardest to achieve?",
+      "a": "Preimage resistance (can't invert), second-preimage resistance (can't find a different input matching a given one's hash), and collision resistance (can't find any two colliding inputs at all). Collision resistance is weaker by the birthday bound: finding any collision among random hashes takes about sqrt(2^n) = 2^(n/2) attempts for an n-bit hash, not 2^n. This is why SHA-1's 160-bit output gave only ~2^80 collision resistance, broken by Google's 2017 SHAttered attack.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T22-crypto-primitives-d2",
+      "module": "T22-crypto-primitives",
+      "q": "Build a Merkle tree inclusion proof by hand for a 4-leaf tree. What does the verifier actually need?",
+      "a": "For leaves L0-L3 with H01=H(L0,L1), H23=H(L2,L3), root=H(H01,H23): to prove L0's inclusion the verifier needs L0, sibling L1 (recompute H01), and sibling H23 (recompute root) -- two sibling hashes for four leaves, matching log2(4)=2. The verifier never sees L2 or L3 directly.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T22-crypto-primitives-d3",
+      "module": "T22-crypto-primitives",
+      "q": "Why does Bitcoin use ECDSA instead of RSA?",
+      "a": "Equivalent security at dramatically smaller key/signature sizes -- a 256-bit EC key matches roughly 3072-bit RSA security, because the best attack on the elliptic-curve discrete-log problem (Pollard's rho, O(sqrt(n))) has no sub-exponential shortcut like RSA's general number field sieve. Smaller signatures matter because every node stores and replicates every transaction forever.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T22-crypto-primitives-d4",
+      "module": "T22-crypto-primitives",
+      "q": "Walk through exactly why reusing an ECDSA nonce leaks the private key. Do the algebra.",
+      "a": "s1 = k^-1(z1 + r*d) and s2 = k^-1(z2 + r*d) share the same r since r=(k*G).x depends only on k. Subtracting: s1-s2 = k^-1(z1-z2), so k = (z1-z2)/(s1-s2) mod n. Substituting back: d = (s1*k - z1)/r mod n. Two equations, two unknowns, pure modular arithmetic -- no brute force.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-crypto-primitives-d5",
+      "module": "T22-crypto-primitives",
+      "q": "Your company signs millions of ECDSA transactions daily using a 'cryptographically secure' RNG for k. A security review flags this. Are they right, given RFC 6979 exists?",
+      "a": "Yes -- RFC 6979 removes reliance on RNG correctness entirely by deriving k deterministically via HMAC from the private key and message hash. RNG failures are a real recurring incident category (Android's 2013 SecureRandom bug, VM snapshot entropy duplication). Switching costs nothing functionally and closes off the entire nonce-reuse attack class.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-crypto-primitives-d6",
+      "module": "T22-crypto-primitives",
+      "q": "Why can't you invert Q = d*G to recover d from the public key?",
+      "a": "This is the elliptic curve discrete logarithm problem (ECDLP): no known algorithm better than roughly O(sqrt(n)) (Pollard's rho) exists for a well-chosen curve. For secp256k1's ~256-bit order that's about 2^128 operations, comparable to SHA-256's collision-resistance margin and infeasible classically.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-crypto-primitives-d7",
+      "module": "T22-crypto-primitives",
+      "q": "What's the difference between the public key and the address in Bitcoin/Ethereum? Why not use the public key directly as the address?",
+      "a": "An address is a hash of the public key (Bitcoin: RIPEMD160(SHA256(pubkey)); Ethereum: last 20 bytes of Keccak256(pubkey)), not the public key itself. This shortens the address, adds an extra preimage-resistance layer, and historically kept the public key hidden until coins were spent, limiting exposure to any future signature-scheme weakness.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-crypto-primitives-d8",
+      "module": "T22-crypto-primitives",
+      "q": "A candidate says 'Merkle trees make blockchains tamper-proof.' Critique this claim precisely.",
+      "a": "Imprecise: hashing makes tampering detectable, not impossible -- anyone can edit historical data, but it changes the resulting root visibly. 'Tamper-evident' is accurate; prevention is actually enforced by the consensus mechanism making a tampered chain infeasible to get accepted by the network, not by hashing itself.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-crypto-primitives-d9",
+      "module": "T22-crypto-primitives",
+      "q": "Design a system where a client proves to a server that a specific record exists in a 10-million-record dataset, without the server storing or re-downloading the whole dataset.",
+      "a": "Build a Merkle tree over the 10M records, publish only the 32-byte root as a trusted commitment. The client sends the record plus a ~24-hash proof (log2(10M)); the server recomputes to the root and compares. This is the pattern behind Certificate Transparency logs and SPV Bitcoin clients: publish a small commitment, prove membership with a logarithmic proof.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-crypto-primitives-d10",
+      "module": "T22-crypto-primitives",
+      "q": "What's the actual difference between ECDSA and Schnorr signatures, and why does Bitcoin support both now?",
+      "a": "Both rely on the same EC discrete-log hardness, but Schnorr's linear construction supports native aggregation (MuSig2) -- multiple signers' signatures combine into one indistinguishable from a single signer's, which ECDSA can't do without complex multi-party protocols. Bitcoin added Schnorr via BIP-340 in the November 2021 Taproot upgrade without deprecating ECDSA, for backward compatibility.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-crypto-primitives-d11",
+      "module": "T22-crypto-primitives",
+      "q": "A junior engineer proposes storing private keys as environment variables and signing directly in application code 'since we control the servers.' What's your response?",
+      "a": "The primitives can be sound while key custody is the actual failure point -- an env-var key is readable by anything with process access, has no audit trail, and if leaked compromises every past and future signature permanently with no rotation equivalent. Use a signing service or HSM that performs signing internally and never exports the private key; the app only ever receives (r, s).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-crypto-primitives-d12",
+      "module": "T22-crypto-primitives",
+      "q": "Does using an HSM fully eliminate ECDSA nonce-reuse risk?",
+      "a": "No. An HSM protects key material from exfiltration, but if its internal nonce generation is buggy or non-RFC-6979-compliant, nonce reuse is still possible in principle. Verify via vendor documentation or independent audit that the HSM's ECDSA implementation uses deterministic or properly-audited random nonce generation -- don't assume 'hardware' implies immunity to this specific algebraic attack.",
+      "difficulty": "staff"
+    }
+  ]
+}

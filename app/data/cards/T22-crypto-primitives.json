@@ -1,0 +1,102 @@
+{
+  "flashcards": [
+    {
+      "id": "T22-crypto-primitives-c1",
+      "topic": "Hash Function Properties",
+      "q": "What are the three properties a cryptographic hash function must have?",
+      "a": "Preimage resistance (can't invert H(x) to find x), second-preimage resistance (can't find a different x2 matching a given x1's hash), and collision resistance (can't find any two colliding inputs at all).",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c2",
+      "topic": "Birthday Bound",
+      "q": "Why does an n-bit hash only give 2^(n/2) collision resistance instead of 2^n?",
+      "a": "The birthday paradox: finding ANY collision among random hashes only needs about sqrt(2^n) = 2^(n/2) attempts, because you're comparing every pair in a growing set, not matching one fixed target.",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c3",
+      "topic": "SHA-1 Break",
+      "q": "When and how was SHA-1 broken for collisions, and at what cost?",
+      "a": "Google's 2017 'SHAttered' attack produced two different PDFs with an identical SHA-1 hash, for a demonstrated real-world cost of about $110,000 of cloud GPU time.",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c4",
+      "topic": "Merkle Tree Domain Separation",
+      "q": "Why must Merkle tree leaves and internal nodes be hashed with different domain prefixes?",
+      "a": "Without domain separation (e.g. 0x00 for leaves, 0x01 for internal nodes), an attacker can present an internal node's hash as if it were a valid leaf -- a second-preimage attack on the tree structure.",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c5",
+      "topic": "Merkle Proof Cost",
+      "q": "What is the size of a Merkle inclusion proof for N items, and what does a 3000-transaction block need?",
+      "a": "O(log N) sibling hashes, not O(N). A 3000-transaction Bitcoin block needs about 12 hashes to prove any one transaction's inclusion.",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c6",
+      "topic": "Tamper-Evident vs Tamper-Proof",
+      "q": "Is a blockchain 'tamper-proof' or 'tamper-evident', and what's the difference?",
+      "a": "Tamper-evident, not tamper-proof. Hashing makes edits immediately detectable (anyone can still edit data), but it's the consensus mechanism that makes a tampered chain economically/computationally infeasible to get accepted.",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c7",
+      "topic": "ECDSA Curve",
+      "q": "What curve do Bitcoin and pre-account-abstraction Ethereum use for signing, and what's the equation?",
+      "a": "secp256k1: y^2 = x^3 + 7 mod P. A 256-bit key on this curve is roughly as hard to break as a 3072-bit RSA key.",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c8",
+      "topic": "ECDSA Nonce Reuse",
+      "q": "What happens if the same nonce k is used to sign two different messages with the same ECDSA private key?",
+      "a": "Total private key compromise: k = (z1-z2)/(s1-s2) mod n, then d = (s1*k - z1)/r mod n. Pure algebra, no brute force. The tell-tale sign is both signatures sharing the same r value.",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c9",
+      "topic": "RFC 6979",
+      "q": "What is RFC 6979 and why does it fix the nonce-reuse problem?",
+      "a": "It standardizes deterministic nonce generation: k is derived via HMAC from the private key and message hash instead of a random number generator, removing reliance on RNG correctness entirely.",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c10",
+      "topic": "Real Nonce-Reuse Incidents",
+      "q": "Name two real incidents caused by ECDSA nonce reuse or weak randomness.",
+      "a": "The 2010 Sony PS3 signing key leak (a fixed, hardcoded k reused for every signature) and the 2013 Android SecureRandom bug that let attackers drain Bitcoin wallets by finding two signatures sharing an r value.",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c11",
+      "topic": "Address vs Public Key",
+      "q": "What is a blockchain address, and how does it relate to the public key?",
+      "a": "An address is a hash of the public key, not the public key itself: Bitcoin uses RIPEMD160(SHA256(pubkey)); Ethereum uses the last 20 bytes of Keccak256(pubkey). The public key stays hidden until you spend from the address.",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c12",
+      "topic": "ECDLP Hardness",
+      "q": "Why can't you recover the private key d from the public key Q = d*G?",
+      "a": "This is the elliptic curve discrete logarithm problem (ECDLP): the best known attack (Pollard's rho) takes roughly O(sqrt(n)) operations, about 2^128 for secp256k1's ~256-bit order -- infeasible for classical computers.",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c13",
+      "topic": "Schnorr vs ECDSA",
+      "q": "What advantage does Schnorr signatures have over ECDSA, and when did Bitcoin add support?",
+      "a": "Schnorr signatures support native aggregation (multiple signers' signatures combine into one, via MuSig2), which ECDSA can't do without complex multi-party protocols. Added to Bitcoin via BIP-340 in the Taproot upgrade, November 2021.",
+      "module": "T22-crypto-primitives"
+    },
+    {
+      "id": "T22-crypto-primitives-c14",
+      "topic": "Production Key Custody",
+      "q": "How should private keys be handled in production instead of environment variables?",
+      "a": "Via a signing service or HSM (AWS KMS, hardware wallet, dedicated enclave) that performs signing internally and never exports the private key -- the application only ever receives back the signature (r, s).",
+      "module": "T22-crypto-primitives"
+    }
+  ]
+}

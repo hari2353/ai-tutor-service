@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T20-rust-async-c1",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "Write the `Future` trait signature from memory.",
+      "a": "`trait Future { type Output; fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>; }` with `enum Poll<T> { Ready(T), Pending }`. Stabilized in Rust 1.36.0 (July 2019); async/await syntax followed in 1.39.0 (November 2019).",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c2",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "What is the poll contract, and what happens if you break it?",
+      "a": "If poll returns Pending it MUST first register cx.waker().clone() somewhere that will call wake() when progress is possible. Break it and the task is silently lost forever: no panic, no log, it is never polled again. The subtler bug is storing the waker only on the first poll; work-stealing may migrate the task between polls, so a stale waker wakes the wrong slot and the task hangs only under load. Re-store on every Pending, or gate with Waker::will_wake.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c3",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "How does Rust's laziness differ from asyncio and Go, and what is the one exception?",
+      "a": "Calling `async fn foo()` runs zero lines of the body; it constructs an inert state machine value. asyncio's create_task and Go's `go f()` both start immediately. The exception is tokio::spawn, which hands the future to the scheduler and starts it right away. Dropping the returned JoinHandle DETACHES the task, it does not cancel it; use handle.abort() or a JoinSet.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c4",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "Why does Pin exist? Derive it from the desugaring.",
+      "a": "async fn compiles to a generated enum whose fields are exactly the locals live across .await points. If one of those locals borrows another (`let s = &buf[..]` held across an await), the enum contains a pointer into itself. Rust assumes values are freely movable via memcpy, so moving it would dangle that pointer. Pin<P> withholds &mut Target unless Target: Unpin, and the compiler-generated coroutines are precisely the !Unpin types. Since poll takes self: Pin<&mut Self>, an executor structurally cannot move a half-run state machine.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c5",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "Box::pin vs std::pin::pin! vs neither.",
+      "a": "Box::pin: one heap allocation, gives a stable heap address, and the Pin<Box<F>> handle is itself movable. pin! (std, stable 1.68.0, March 2023): zero allocation, pins to the current stack frame by shadowing the binding. Neither is needed for a plain .await, because the enclosing async block pins the future structurally. Reach for them when polling by hand, storing dyn Future, holding a future across loop iterations for select!, or breaking a recursive async fn.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c6",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "Tokio's multi-threaded scheduler: state the six defaults.",
+      "a": "Workers = CPU core count (TOKIO_WORKER_THREADS overrides). Local queue holds at most 256 tasks; overflow moves half (128) to the global queue. global_queue_interval is 31 on current_thread, dynamically computed targeting ~10ms on multi-thread. event_interval is 61 polls before parking in epoll for I/O and timers. Idle workers steal half a random peer's local queue. The LIFO slot polls a just-woken task next, is disabled after 3 consecutive uses, and is not stealable.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c7",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "What is Tokio's cooperative budget and why does it exist?",
+      "a": "128 operations per task poll (Budget(Some(128)) in tokio::task::coop). Tokio's own resource futures (channel recv, socket read, mutex lock) decrement it and, at zero, return Pending while self-waking, forcing a yield. It stops `while let Some(x) = rx.recv().await {}` on an always-ready channel from monopolizing a worker. It only works for futures that participate; pure compute loops and hand-written futures are invisible to it. Opt out with task::coop::unconstrained; yield manually with task::yield_now().await.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c8",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "Name the observable symptoms of a blocked Tokio executor.",
+      "a": "p99 rises in clean quantized steps (5ms, 250ms, 500ms) rather than a smooth curve. Load average equals worker count while CPU utilization is near zero, if the blocker is I/O. YOUR OWN timers fire late: sleep(10ms) returns after 260ms, which is the tell that separates a blocked executor from a slow downstream. /healthz times out and the orchestrator kills a healthy pod. tokio-console shows high worker_mean_poll_time. A stack dump shows tokio-runtime-worker threads inside a syscall rather than epoll_wait.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c9",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "spawn_blocking defaults and limitations.",
+      "a": "max_blocking_threads defaults to 512 (a cap, not a preallocation); thread_keep_alive is 10 seconds of idleness; the pool is separate from and excludes async worker threads; calls beyond the cap queue. Blocking tasks CANNOT be aborted once started, so abort() is a no-op and runtime shutdown waits indefinitely unless you use Runtime::shutdown_timeout. The 512 default is sized for I/O blocking, not CPU work: gate CPU work behind a Semaphore sized to core count.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c10",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "spawn_blocking vs block_in_place vs std::thread::spawn.",
+      "a": "spawn_blocking moves the closure to another thread from the blocking pool; use it for short, bounded blocking work. block_in_place runs on the current worker after handing that worker's local queue and LIFO slot to another thread; use it when the work needs borrowed or !Send data from the current task. It panics on a current_thread runtime, does not help a join! sibling in the same task, and cannot be cancelled. std::thread::spawn is correct for long-lived or infinite blocking loops, which would otherwise permanently occupy a pool slot.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c11",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "What does `Send` mean for a future, and why does a RefCell guard break it?",
+      "a": "The compiler computes Send structurally: the generated future is Send only if every field is Send, and the fields are exactly the locals held across .await points. RefMut is !Send because RefCell's borrow counter is a plain Cell<isize> with no atomics, so two threads decrementing it would be a data race rather than a panic. Since a work-stealing scheduler may migrate the task at exactly that suspension point, the compiler rejects it.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c12",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "Why is holding a std::sync::Mutex guard across an .await dangerous even though it compiles?",
+      "a": "MutexGuard<T> is Send when T: Send, so the future is Send and spawn accepts it. But a blocking mutex held across an await can deadlock the entire runtime: worker A holds the lock and suspends, workers B..H all block on the lock, and no thread is left to poll the task that would release it. Symptom is zero CPU and zero progress under load. Fixes in order: drop the guard before the await, use tokio::sync::Mutex (async lock, Send guard, ~10x slower uncontended), or restructure to an actor behind an mpsc.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c13",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "Why is an unbounded channel a memory leak waiting to happen? Give the arithmetic.",
+      "a": "unbounded_channel().send() is synchronous and cannot fail while open, so it cannot apply backpressure. At 1,000 msg/sec in and 333/sec out (3ms of work each) at 4 KiB per message, the queue grows 2.7 MiB/sec and a 4 GiB container OOMs in about 25 minutes. Worse, latency degrades first: by Little's Law a 100,000-deep queue draining at 333/sec means every emerging message is 300 seconds stale, and the OOM kill is attributed to the consumer, so the postmortem chases the wrong service.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c14",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "mpsc vs oneshot vs broadcast vs watch: one line each plus the gotcha.",
+      "a": "mpsc: many producers, one consumer, bounded for backpressure; channel(0) panics and the true high-water mark is n plus the number of senders. oneshot: a single value; send is not async and returns your value in the Err if the receiver is gone. broadcast: every receiver sees every value; capacity is rounded UP to the next power of two, so channel(3) allocates 4, and RecvError::Lagged is recoverable, not fatal. watch: latest value only; the initial value counts as SEEN so changed() waits for a subsequent send, and holding borrow() across an .await blocks all senders.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c15",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "What does cancellation mean in async Rust, and what does it mean for in-flight I/O?",
+      "a": "Cancellation is dropping the future. There is no CancelledError, no unwinding through async frames, and no async Drop (still unstable in Rust 1.97.1). A dropped read loses at most a partial buffer in the future's state; the socket is untouched. A dropped write_all that already issued 3 of 5 write syscalls has ALREADY put those bytes on the wire, so the protocol is desynchronized and the connection must be closed. A cancelled POST /charge may still have charged the card. Cancellation is not rollback.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c16",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "Define cancellation safety and list what is NOT cancel-safe in tokio::select!.",
+      "a": "A future is cancellation-safe if dropping it before completion and recreating it loses no progress. select! drops every losing branch, and in a loop the losers are rebuilt each iteration. Data-lossy (partial progress in the future's own state): read_exact, read_to_end, read_to_string, write_all. Unsafe for a different reason (they use a fair FIFO wait queue, so you lose your place): Mutex::lock, RwLock::read, RwLock::write, Semaphore::acquire, Notify::notified. Safe: mpsc/broadcast recv, watch changed, TcpListener::accept, AsyncReadExt::read, StreamExt::next.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c17",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "Two facts about tokio::select! branch behaviour beyond cancellation safety.",
+      "a": "Branch polling order is RANDOMIZED by default for fairness across always-ready branches, and the RNG has a non-zero CPU cost; `biased;` polls top to bottom, which you want when a shutdown branch must not be starved by a saturated stream, but then fairness becomes your responsibility. And select! PANICS if every branch is disabled by an `if` precondition or a non-matching pattern and there is no `else` branch.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c18",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "JoinSet vs Vec<JoinHandle>, and what CancellationToken adds.",
+      "a": "Dropping a JoinSet aborts every task in it, so you cannot leak a task by dropping the handle, which bare tokio::spawn does not guarantee (dropping a JoinHandle detaches). join_next() yields results in completion order. Both still require 'static, so this is not std::thread::scope. CancellationToken (tokio-util) inverts drop-cancellation: the task selects on token.cancelled() and runs its own cleanup before returning. Tokens form a tree via child_token(); drop_guard() propagates a supervisor's death; pair with TaskTracker and always bound the wait with timeout().",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c19",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "Status of async fn in traits as of August 2026.",
+      "a": "Stable since Rust 1.75.0 (December 2023) via RPITIT: async fn get(&self) desugars to fn get(&self) -> impl Future + '_, monomorphized per impl with zero allocation and static dispatch. Two gaps remain: it is NOT dyn-compatible (async_fn_in_dyn_trait is still an incomplete nightly feature), and you cannot bound the returned future as Send from the trait definition. Workarounds: #[async_trait] (Pin<Box<dyn Future + Send>>, one allocation per call) when you need dyn, and the trait-variant crate when you need Send across a generic boundary. Return-type notation is the long-term fix and is unstable.",
+      "module": "T20-rust-async"
+    },
+    {
+      "id": "T20-rust-async-c20",
+      "topic": "async/await, Futures, Tokio, Channels, Cancellation",
+      "q": "When should you NOT use async Rust?",
+      "a": "CPU-bound workloads: async solves waiting, not computing; use a thread pool or rayon. CLIs and batch jobs: #[tokio::main] adds ~25-30 crates and runtime startup for sequential calls that gain nothing. Below a few thousand concurrent connections: thread-per-connection is simpler, has better tail latency because the kernel preempts, and debugs with an ordinary stack trace; the empirical crossover is roughly 10k-50k connections. Also budget for the debugging cost, since an async stack trace shows executor frames, not your logical call chain.",
+      "module": "T20-rust-async"
+    }
+  ]
+}

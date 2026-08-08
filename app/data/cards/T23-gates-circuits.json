@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T23-gates-circuits-c1",
+      "topic": "Gates & Circuits",
+      "q": "What property must every quantum gate matrix satisfy, and why?",
+      "a": "Unitarity: U†U=I. Required because quantum evolution must preserve the normalization |α|²+|β|²=1 of a valid state.",
+      "module": "T23-gates-circuits"
+    },
+    {
+      "id": "T23-gates-circuits-c2",
+      "topic": "Gates & Circuits",
+      "q": "What do H|0⟩ and H|1⟩ equal?",
+      "a": "H|0⟩=|+⟩=(|0⟩+|1⟩)/√2, H|1⟩=|−⟩=(|0⟩−|1⟩)/√2. H is its own inverse (H²=I).",
+      "module": "T23-gates-circuits"
+    },
+    {
+      "id": "T23-gates-circuits-c3",
+      "topic": "Gates & Circuits",
+      "q": "What does the Z gate do, and why does it 'do nothing visible' to |+⟩'s computational-basis measurement?",
+      "a": "Z fixes |0⟩ and flips the sign of |1⟩ (phase-flip). Z|+⟩=|−⟩ — same 50/50 computational-basis probabilities as |+⟩, but a different, distinguishable relative phase (revealed by measuring in the Hadamard basis).",
+      "module": "T23-gates-circuits"
+    },
+    {
+      "id": "T23-gates-circuits-c4",
+      "topic": "Gates & Circuits",
+      "q": "How do you build a Bell state circuit from |00⟩?",
+      "a": "Apply H to qubit 0, then CNOT with qubit 0 as control and qubit 1 as target: |00⟩ -H(q0)-> (|00⟩+|10⟩)/√2 -CNOT-> (|00⟩+|11⟩)/√2.",
+      "module": "T23-gates-circuits"
+    },
+    {
+      "id": "T23-gates-circuits-c5",
+      "topic": "Gates & Circuits",
+      "q": "How does the Toffoli gate implement a reversible AND?",
+      "a": "Toffoli(a,b,c) = (a,b, c XOR (a AND b)). Setting c=0 gives (a,b,a AND b) — output includes the AND result plus the inputs preserved as garbage, making the operation invertible by applying Toffoli again.",
+      "module": "T23-gates-circuits"
+    },
+    {
+      "id": "T23-gates-circuits-c6",
+      "topic": "Gates & Circuits",
+      "q": "What is the Gottesman-Knill theorem?",
+      "a": "Any circuit built only from H, S, and CNOT (the Clifford group), with computational-basis measurement, can be simulated on a classical computer in polynomial time via the stabilizer formalism — regardless of entanglement depth.",
+      "module": "T23-gates-circuits"
+    },
+    {
+      "id": "T23-gates-circuits-c7",
+      "topic": "Gates & Circuits",
+      "q": "Why are Bell and GHZ states classically simulable despite being maximally entangled?",
+      "a": "They're built purely from H and CNOT — Clifford gates — so Gottesman-Knill applies. Entanglement alone does not imply classical simulation hardness; universality requires a non-Clifford resource like the T gate.",
+      "module": "T23-gates-circuits"
+    },
+    {
+      "id": "T23-gates-circuits-c8",
+      "topic": "Gates & Circuits",
+      "q": "Why do fault-tolerant compilers optimize T-count rather than total gate count?",
+      "a": "In surface-code fault tolerance, Clifford gates are comparatively cheap, but T gates require consuming a magic state produced via expensive magic-state distillation — T gates dominate real fault-tolerant resource cost.",
+      "module": "T23-gates-circuits"
+    },
+    {
+      "id": "T23-gates-circuits-c9",
+      "topic": "Gates & Circuits",
+      "q": "State the no-cloning theorem and sketch its proof.",
+      "a": "No unitary U can clone every state (U|ψ⟩|0⟩=|ψ⟩|ψ⟩ for all ψ). Proof: apply linearity to a superposition of two non-orthogonal states — the linearly-evolved result differs from the true clone of the superposition unless the states are orthogonal or identical, a contradiction.",
+      "module": "T23-gates-circuits"
+    },
+    {
+      "id": "T23-gates-circuits-c10",
+      "topic": "Gates & Circuits",
+      "q": "Why doesn't the no-cloning theorem block quantum error correction?",
+      "a": "Error correction entangles the logical state across multiple physical qubits (e.g. a|000⟩+b|111⟩) rather than producing independent copies of an unknown state — no step ever clones the logical qubit.",
+      "module": "T23-gates-circuits"
+    },
+    {
+      "id": "T23-gates-circuits-c11",
+      "topic": "Gates & Circuits",
+      "q": "Why can transpiled CNOT count triple on a real chip compared to the original circuit?",
+      "a": "Limited qubit connectivity forces the transpiler to insert SWAP gates (each costing ~3 CNOTs) to move logical qubit states next to each other before applying entangling gates between non-adjacent qubits.",
+      "module": "T23-gates-circuits"
+    },
+    {
+      "id": "T23-gates-circuits-c12",
+      "topic": "Gates & Circuits",
+      "q": "What is a native gate set, and why must circuits be transpiled before running on real hardware?",
+      "a": "The small set of gates a specific hardware platform physically implements (e.g. cross-resonance on IBM, Mølmer–Sørensen on trapped ions). Ideal-gate circuits (X, H, CNOT) must be recompiled into the target's native gates and connectivity before execution.",
+      "module": "T23-gates-circuits"
+    }
+  ]
+}

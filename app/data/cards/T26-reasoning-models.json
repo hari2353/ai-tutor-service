@@ -1,0 +1,81 @@
+{
+  "flashcards": [
+    {
+      "id": "T26-reasoning-models-c1",
+      "topic": "Reasoning Models",
+      "q": "What concrete result demonstrates test-time compute scaling is real, and at what cost?",
+      "a": "o3 scored 75.7% on ARC-AGI-1 at standard compute and 87.5% using roughly 172x more test-time compute, at an estimated cost of thousands of dollars per task at the high-compute setting.",
+      "module": "T26-reasoning-models"
+    },
+    {
+      "id": "T26-reasoning-models-c2",
+      "topic": "Reasoning Models",
+      "q": "How does GRPO differ from standard PPO-based RLHF?",
+      "a": "GRPO removes the separate critic/value network entirely. It samples a group of G completions per prompt, scores each with a verifier, and computes each completion's advantage by normalizing its reward against the group's own mean and standard deviation, rather than against a learned baseline.",
+      "module": "T26-reasoning-models"
+    },
+    {
+      "id": "T26-reasoning-models-c3",
+      "topic": "Reasoning Models",
+      "q": "Why do most 2025-26 production RLVR recipes use outcome-only rewards instead of process reward models?",
+      "a": "Outcome rewards (right/wrong final answer, tests pass/fail) are automatable and hard to game when the checker is genuinely objective. Process reward models are themselves learned and vulnerable to reward hacking -- the policy can learn to produce step-text that satisfies the PRM without the steps being logically load-bearing.",
+      "module": "T26-reasoning-models"
+    },
+    {
+      "id": "T26-reasoning-models-c4",
+      "topic": "Reasoning Models",
+      "q": "Mechanically, why does chain-of-thought length grow over the course of RL training?",
+      "a": "The base RLVR recipe applies no length penalty -- a long completion that lands on the correct answer gets the same reward as a short correct one. Since longer, more careful chains empirically succeed more often on hard problems, the optimizer drifts toward greater length as a side effect of reinforcing correctness, not because length itself is rewarded.",
+      "module": "T26-reasoning-models"
+    },
+    {
+      "id": "T26-reasoning-models-c5",
+      "topic": "Reasoning Models",
+      "q": "What did the NeurIPS 2025 pass@k study find about whether RLVR teaches genuinely new reasoning capability?",
+      "a": "RL-trained models beat their base model at small k (better first-try accuracy), but the base model matches or exceeds the RL-trained model at large k -- indicating RLVR mostly sharpens sampling toward correct paths the base model could already reach, rather than expanding what's reachable at all. Distillation from a stronger teacher's traces did expand capability, a different mechanism.",
+      "module": "T26-reasoning-models"
+    },
+    {
+      "id": "T26-reasoning-models-c6",
+      "topic": "Reasoning Models",
+      "q": "Give the documented numbers for the 'overthinking' failure mode in reasoning models.",
+      "a": "Reasoning models can generate 7-10x more tokens than a standard model for comparable or worse accuracy on simple tasks; one model spent 17 seconds deliberating 'what is 1+1'; a measured production case showed latency doubling (18s to 38s) and cost rising ($1.70 to $2.59 per task) for zero accuracy gain.",
+      "module": "T26-reasoning-models"
+    },
+    {
+      "id": "T26-reasoning-models-c7",
+      "topic": "Reasoning Models",
+      "q": "How are reasoning ('thinking') tokens billed, and what's the operational gotcha?",
+      "a": "They are billed at the output-token rate (often the most expensive pricing tier), whether or not they're shown to the caller. Teams that only track visible completion length in cost dashboards miss this and get blindsided by spend spikes; monitor the reasoning_tokens usage field and cap it via max_completion_tokens/budget_tokens/thinking_budget.",
+      "module": "T26-reasoning-models"
+    },
+    {
+      "id": "T26-reasoning-models-c8",
+      "topic": "Reasoning Models",
+      "q": "What structurally distinguishes RL-trained native reasoning (o1/DeepSeek-R1) from prompting-era chain-of-thought (Wei et al., self-consistency)?",
+      "a": "Prompting-era CoT elicits multi-step text from a model with no training-time link between reasoning and reward -- self-consistency's majority vote over N samples hits diminishing returns fast since all samples come from the same distribution. RL-trained reasoning has reshaped the model's actual generation distribution via a reward tied to final-answer correctness, producing emergent behaviors (backtracking, self-correction) never explicitly demonstrated in training data.",
+      "module": "T26-reasoning-models"
+    },
+    {
+      "id": "T26-reasoning-models-c9",
+      "topic": "Reasoning Models",
+      "q": "Why wasn't DeepSeek-R1-Zero (pure RL, no SFT) shipped directly as the product?",
+      "a": "R1-Zero's raw output was poorly formatted and sometimes mixed languages mid-reasoning, hard to read as a product. The shipped R1 added cold-start SFT for readable formatting, then RL, then rejection-sampling SFT, then a final RL phase -- targeting formatting/readability, not the reasoning behavior itself, which ablations show came from the RL phases.",
+      "module": "T26-reasoning-models"
+    },
+    {
+      "id": "T26-reasoning-models-c10",
+      "topic": "Reasoning Models",
+      "q": "List the task properties that make a reasoning model the right tool versus the wrong tool.",
+      "a": "Right tool: multi-step, verifiable problems where a wrong intermediate step ruins the answer (math, code with tests, multi-hop synthesis), with latency/cost headroom. Wrong tool: simple/high-volume lookups and rewrites, hard latency budgets, tasks with no clean automated verifier, cost-sensitive high-volume paths, and anything needing a fully auditable answer path.",
+      "module": "T26-reasoning-models"
+    },
+    {
+      "id": "T26-reasoning-models-c11",
+      "topic": "Reasoning Models",
+      "q": "What industry-wide compute shift is projected by 2030 regarding inference versus training?",
+      "a": "Inference compute is projected to represent roughly 75% of total AI compute by 2030, a full inversion from the training-dominated paradigm of the early 2020s.",
+      "module": "T26-reasoning-models"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "flashcards": [
+    {
+      "id": "T26-voice-models-c1",
+      "topic": "Voice Models",
+      "q": "What is the structural difference between a cascaded voice pipeline and a unified speech-to-speech model like gpt-realtime?",
+      "a": "Cascaded: VAD -> streaming ASR -> LLM -> streaming TTS, each stage independent and swappable, with a text transcript as an auditable intermediate artifact. Unified: one model consumes and emits audio tokens directly over a persistent session with no intermediate text required, cutting a serialize-to-text-and-back hop and getting gpt-realtime to roughly 800ms voice-to-voice.",
+      "module": "T26-voice-models"
+    },
+    {
+      "id": "T26-voice-models-c2",
+      "topic": "Voice Models",
+      "q": "Give the rough stage-by-stage latency budget for a cascaded voice agent at p50.",
+      "a": "Mic buffering/jitter 20-50ms, VAD endpoint wait 200-300ms, streaming ASR final-hypothesis lag 100-300ms, LLM time-to-first-token 200-500ms, TTS time-to-first-audio 90-300ms, network/jitter buffer 20-100ms, totaling roughly 800ms-1.5s.",
+      "module": "T26-voice-models"
+    },
+    {
+      "id": "T26-voice-models-c3",
+      "topic": "Voice Models",
+      "q": "Why is roughly 300ms treated as a meaningful UX threshold for voice response latency?",
+      "a": "Natural human conversational turn-taking gaps average around 200ms; response latency under ~300ms reads as attentive, beyond ~500ms reads as the system thinking, and beyond ~1s reads as broken, independent of response accuracy. It's a perceptual threshold, which is why TTS providers compete on time-to-first-audio rather than total synthesis time.",
+      "module": "T26-voice-models"
+    },
+    {
+      "id": "T26-voice-models-c4",
+      "topic": "Voice Models",
+      "q": "Why does Whisper process audio in fixed 30-second windows, and what problem does that cause for live use?",
+      "a": "Whisper's architecture chops 16kHz audio into non-overlapping 30-second chunks, each turned into an 80/128-channel log-mel spectrogram (25ms window, 10ms hop) fed to an encoder-decoder transformer -- a batch-shaped design. For live use it must be retrofitted with rolling short windows and overlap-and-stitch logic since it was not designed for streaming.",
+      "module": "T26-voice-models"
+    },
+    {
+      "id": "T26-voice-models-c5",
+      "topic": "Voice Models",
+      "q": "What architectural change does Whisper large-v3-turbo make versus large-v3, and what's the tradeoff?",
+      "a": "Turbo prunes the decoder from 32 layers to 4, dropping parameters from 1.55B to 809M, running 2-5x faster with a small accuracy cost: 7.7% WER on LibriSpeech, roughly 8-12% on real-world meeting/phone audio.",
+      "module": "T26-voice-models"
+    },
+    {
+      "id": "T26-voice-models-c6",
+      "topic": "Voice Models",
+      "q": "Why does Whisper hallucinate on silence or non-speech audio, and what fixes most of it in production?",
+      "a": "Its autoregressive decoder always emits plausible tokens even with no genuine speech signal, and a bad segment poisons the conditioning context for subsequent windows. Over 75% of hallucinations trace to three decoder self-attention heads (fixable via targeted fine-tuning, cutting hallucination rate from 99.97% to 15.51% on a non-speech benchmark). In production, gating ASR invocation behind VAD so it never runs on confirmed silence prevents most real-world instances.",
+      "module": "T26-voice-models"
+    },
+    {
+      "id": "T26-voice-models-c7",
+      "topic": "Voice Models",
+      "q": "What is a typical production Silero VAD configuration, and what does the minimum-duration guard trade off?",
+      "a": "Energy gate around -40dBFS, classifier confidence threshold ~0.75, minimum sustained-voice duration 200-300ms before committing to 'voice detected'. The guard drops false-positive (barge-in or endpoint) triggers by 60-80%, at the direct cost of adding that same delay to every legitimate trigger's reaction time.",
+      "module": "T26-voice-models"
+    },
+    {
+      "id": "T26-voice-models-c8",
+      "topic": "Voice Models",
+      "q": "What are the two distinct jobs a VAD signal is used for in a voice agent, and why can't one threshold serve both well?",
+      "a": "Endpointing ('has the user finished their turn?', fires on sustained silence) and barge-in detection ('has the user started talking while the agent is talking?', fires on sustained voice during agent playback). Tuning one threshold to be more sensitive for faster barge-in directly raises false-positive endpointing and vice versa, since both key off the same sustained-voice heuristic on the same signal.",
+      "module": "T26-voice-models"
+    },
+    {
+      "id": "T26-voice-models-c9",
+      "topic": "Voice Models",
+      "q": "List the five steps a barge-in controller must execute atomically, and the 2026 production latency targets.",
+      "a": "1) VAD fires on caller audio during agent TTS playback. 2) Flush TTS stream (target <60ms). 3) Cancel the in-flight LLM generation server-side. 4) Roll back conversation state to reflect the truncated agent utterance. 5) Re-enter listening state. Representative production numbers: TTS-flush p95 54ms, LLM-cancel p95 38ms, total barge-in handle p95 142ms, turn-taking gap p95 310ms.",
+      "module": "T26-voice-models"
+    },
+    {
+      "id": "T26-voice-models-c10",
+      "topic": "Voice Models",
+      "q": "How does Cartesia's Sonic TTS architecture differ from a standard transformer-based TTS, and what latency does it achieve?",
+      "a": "Cartesia built Sonic on state-space models (SSMs) rather than transformers specifically for consistent low latency including at p99. Sonic 3.5 reports 75-90ms time-to-first-audio over WebSocket; Sonic Turbo claims sub-40ms.",
+      "module": "T26-voice-models"
+    },
+    {
+      "id": "T26-voice-models-c11",
+      "topic": "Voice Models",
+      "q": "Why does 8kHz telephony audio hurt ASR accuracy compared to 16kHz, and can upsampling fix it?",
+      "a": "8kHz sampling gives a 4kHz Nyquist limit, losing higher-frequency consonant detail (e.g. distinguishing 's' from 'f') that 16kHz-trained ASR models rely on, raising WER. Upsampling to 16kHz changes the sample rate but cannot recreate frequency content that was never captured, so the accuracy gap remains.",
+      "module": "T26-voice-models"
+    },
+    {
+      "id": "T26-voice-models-c12",
+      "topic": "Voice Models",
+      "q": "Name four structural reasons voice agents are harder to engineer than text agents.",
+      "a": "1) Full-duplex interaction with no clean turn boundary, requiring probabilistic endpointing. 2) No undo -- once audio plays, the user already heard it. 3) Barge-in requires actively cancelling and rolling back in-flight generation and synthesis under a tight deadline. 4) Latency is perceived directly and continuously, with no 'typing indicator' buffer to absorb it.",
+      "module": "T26-voice-models"
+    },
+    {
+      "id": "T26-voice-models-c13",
+      "topic": "Voice Models",
+      "q": "Why might a compliance-sensitive voice flow stay on a cascaded pipeline instead of migrating to a unified speech-to-speech model?",
+      "a": "Unified models remove the intermediate text transcript as an auditable, injectable checkpoint, so you lose the ability to assert deterministic business logic (e.g. 'read this exact confirmation string verbatim') or produce a callback-verifiable record of exactly what was said -- a hard requirement for regulated flows, not just a nice-to-have.",
+      "module": "T26-voice-models"
+    }
+  ]
+}

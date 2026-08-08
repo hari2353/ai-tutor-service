@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T22-consensus-d1",
+      "module": "T22-consensus",
+      "q": "Explain probabilistic finality versus deterministic finality, precisely.",
+      "a": "Probabilistic (Nakamoto consensus): probability of reversal shrinks exponentially with confirmations but never reaches exactly zero, quantified by the whitepaper's catchup formula. Deterministic (Casper FFG, classical BFT): once a specific checkable condition is met (2/3 attestation across two epochs; a 2f+1 quorum), reverting requires provably violating an economic/safety guarantee -- a qualitatively different claim, not just a smaller probability.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T22-consensus-d2",
+      "module": "T22-consensus",
+      "q": "Compute the probability a 30%-hashpower attacker overturns a Bitcoin transaction after 10 confirmations, and explain why the formula has the shape it does.",
+      "a": "Approximately 4.2% (0.0417, verified against the whitepaper's own table). The formula combines a Poisson process (attacker's privately-mined block count follows a Poisson distribution with rate z*(q/p)) with a gambler's-ruin argument for the probability the attacker's chain ever draws level with and passes the honest chain.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-consensus-d3",
+      "module": "T22-consensus",
+      "q": "Walk through exactly how a checkpoint becomes 'finalized' under Casper FFG.",
+      "a": "Validators attest to checkpoints each epoch (32 slots, ~6.4 min). A checkpoint attested by >=2/3 of staked ETH becomes 'justified'. If two consecutive epochs are both justified, the earlier becomes 'finalized' -- revertible only if validators controlling >=1/3 of all staked ETH provably violate a slashing condition. Total time to finality ~12.8 minutes.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-consensus-d4",
+      "module": "T22-consensus",
+      "q": "What are the two conditions that trigger slashing, and why does the penalty scale with how many validators are slashed together?",
+      "a": "Equivocation (signing two blocks for the same slot) and contradictory attestations (double votes or surround votes). The correlation penalty scales because isolated slashing looks like an accident while many validators slashed simultaneously is the signature of a coordinated attack -- exactly the >=1/3-stake scenario the mechanism deters, so it's made catastrophically expensive.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-consensus-d5",
+      "module": "T22-consensus",
+      "q": "Why can't classical BFT protocols like PBFT be used directly for a permissionless network like Bitcoin's?",
+      "a": "PBFT's safety proof depends on knowing total validator count n and bounding faulty count at f<=(n-1)/3, requiring known participants. In a permissionless network, an attacker can create unlimited fake identities (Sybil attack) to exceed any assumed f bound, defeating the guarantee. Nakamoto consensus sidesteps this by weighting influence by an externally costly resource instead of identity count.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-consensus-d6",
+      "module": "T22-consensus",
+      "q": "Explain the scalability trilemma with a concrete mechanism, not just the three words.",
+      "a": "Raising throughput directly increases the compute/storage/bandwidth burden of running a full validating node. If that burden exceeds what an ordinary participant can afford, fewer better-resourced operators end up validating -- concentrating the node set and reducing decentralization, even as nominal throughput rises. It's a mechanical consequence, not a policy choice.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-consensus-d7",
+      "module": "T22-consensus",
+      "q": "A colleague argues Bitcoin's proof-of-work is 'wasteful' and should switch to proof-of-stake like Ethereum did. How do you respond as a technically informed but neutral party?",
+      "a": "Steelman both: PoS (Ethereum's 2022 transition works at scale, eliminates a real energy externality, gives deterministic finality) vs PoW ('unforgeable costliness' -- computational work is externally verifiable and can't be faked or recovered, unlike staked capital which is still ultimately acquirable capital). Both are deliberate, technically informed positions targeting different threat models -- not a settled question.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-consensus-d8",
+      "module": "T22-consensus",
+      "q": "Design a confirmation policy for an exchange accepting Bitcoin deposits from $10 to $10 million.",
+      "a": "Scale confirmations to value-at-risk using the actual catchup-probability formula against a stated assumed attacker fraction, not a flat number. Small deposits: 1-2 confirmations suffice since attack cost exceeds value stolen. Large deposits: compute confirmations needed to get catchup probability well under 0.1% at a conservative q -- likely double digits, not a flat '6'.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-consensus-d9",
+      "module": "T22-consensus",
+      "q": "What does 'weak subjectivity' mean in Ethereum's proof-of-stake design, and why doesn't pure proof-of-work have the same issue?",
+      "a": "A new node can't purely derive trust from genesis the way PoW can, because old, sold validator keys could still cheaply sign an alternate history (long-range attack risk) -- it needs a recent, socially-trusted checkpoint to bootstrap safely. Pure PoW doesn't have this because redoing historical proof-of-work stays expensive regardless of elapsed time.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-consensus-d10",
+      "module": "T22-consensus",
+      "q": "Your team is building a permissioned ledger for interbank settlement among 20 known banks. Which consensus family do you pick, and why?",
+      "a": "Classical BFT (Tendermint/CometBFT-style or PBFT variant) -- the participant set is small, known, and accountable, exactly PBFT's precondition. This buys instant deterministic finality with no energy cost, critical for settlement's regulatory/counterparty-risk needs, at the cost of needing formal validator-set governance, which the banks already have.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-consensus-d11",
+      "module": "T22-consensus",
+      "q": "What if two of the 20 settlement banks later want to let their retail customers transact directly on the ledger -- does the consensus design change?",
+      "a": "Yes in trust model terms: retail customers aren't a known, bounded, accountable validator set, so admitting them as validators would break PBFT's core assumption. Correct design: keep the 20 banks as the BFT validator set, give retail customers client access (submitting transactions the banks order/finalize), not validator status.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-consensus-d12",
+      "module": "T22-consensus",
+      "q": "If a deposit is denominated in a smaller-cap PoW altcoin instead of Bitcoin, should you use Bitcoin's confirmation policy?",
+      "a": "No. Smaller-cap chains have dramatically less total hashrate, so the same nominal 'q=0.3 attacker' is achievable at far lower absolute cost -- real, documented 51% attacks against smaller chains have used rented hashpower from public marketplaces. Confirmation policy must be set per-chain based on its actual current hashrate and rentable-hashpower cost.",
+      "difficulty": "staff"
+    }
+  ]
+}

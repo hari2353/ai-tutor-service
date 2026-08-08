@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T22-enterprise-blockchain-c1",
+      "topic": "The Core Decision Test",
+      "q": "What is the single decision test that resolves most 'should we use blockchain' questions?",
+      "a": "If there's a trusted party who can operate the system of record, you want a database, not a blockchain. Blockchain's value is removing the need to trust a single party -- if you already have one, you're paying blockchain's real costs (throughput ceiling, consensus overhead) for a trust problem you don't have.",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c2",
+      "topic": "TradeLens Failure",
+      "q": "Why did TradeLens (Maersk/IBM, shut down December 2022) actually fail?",
+      "a": "Not a technology failure -- Hyperledger Fabric generally worked as designed. It was a governance failure: competing ocean carriers were asked to share commercially sensitive data on infrastructure controlled by Maersk, their direct competitor. No ledger technology fixes that incentive misalignment.",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c3",
+      "topic": "ASX CHESS Failure",
+      "q": "Why was the ASX CHESS blockchain replacement (scrapped 2022) a questionable architecture choice from the start?",
+      "a": "The exchange already had a single, regulated, trusted operator (itself) -- criterion 1 of the decision test failed from the outset. The actual driver was modernization/efficiency, not a trust problem, so a distributed-ledger architecture was likely the wrong tool regardless of delivery execution issues.",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c4",
+      "topic": "Stablecoin Market Size",
+      "q": "What is the approximate stablecoin market size as of mid-2026, and why do stablecoins pass the decision test?",
+      "a": "Over $320 billion in circulation (projected to exceed $1 trillion by late 2026). They pass on criterion 3: natively transferable on a public chain, 24/7 settlement, composable with DeFi -- properties a traditional database-backed rail structurally can't offer without becoming a blockchain.",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c5",
+      "topic": "Tokenized RWA Market",
+      "q": "What is the approximate size of the tokenized real-world asset market (2026), and what dominates it?",
+      "a": "Roughly $28.9 billion total tokenized assets as of May 2026, with tokenized Treasuries at about $16.1 billion -- the dominant category, growing rapidly from a much smaller 2025 base.",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c6",
+      "topic": "Oracle Problem for Physical Goods",
+      "q": "What is the 'oracle problem for physical goods' and why does it limit blockchain provenance tracking?",
+      "a": "A blockchain's cryptographic integrity guarantees data hasn't been tampered with AFTER recording, but says nothing about accuracy AT recording. A farmer, shipper, or official with an incentive to misreport can do so, and the chain faithfully, tamper-evidently preserves the misreport forever.",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c7",
+      "topic": "Token vs Legal Ownership",
+      "q": "Is an on-chain token representing a real-world asset automatically legally equivalent to owning that asset?",
+      "a": "No -- the token is a representation of legal ownership, not ownership itself, absent specific enforceable legal infrastructure connecting the two. Verify the issuer's actual legal structure makes the token legally authoritative before assuming equivalence.",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c8",
+      "topic": "Decision Test Criterion 2",
+      "q": "What should you use when participants are known, small, and mutually accountable but no single trusted operator exists?",
+      "a": "A permissioned ledger with classical BFT consensus (module 3) -- deterministic finality, no energy cost, and no need for permissionless Sybil-resistance since you already know who is writing.",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c9",
+      "topic": "Land Registry Use Case",
+      "q": "Why is a national land registry a genuinely stronger candidate use case for public blockchain than TradeLens-style supply chain tracking?",
+      "a": "It can satisfy criterion 4 (real censorship-resistance need) legitimately: if a corrupt or coerced official's unilateral edit is a credible threat, removing any single party's (including the operating government's own officials') unilateral edit capability is a real property a trusted-government-operated database can't provide, since that operator is who the threat model distrusts.",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c10",
+      "topic": "Land Registry Doesn't Solve Corruption",
+      "q": "Does putting a land registry on a blockchain fully solve the corruption problem?",
+      "a": "No, only partly -- it prevents unilateral, undetected retroactive alteration of already-recorded entries, but does nothing to prevent corrupt initial recording. A bribed official can still record fraud accurately, and the chain preserves it faithfully forever (the oracle problem again).",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c11",
+      "topic": "CBDC Diagnostic",
+      "q": "How do you evaluate whether a CBDC proposal is a genuine distributed-ledger design or centralization with blockchain branding?",
+      "a": "Ask whether the central bank retains unilateral issuance/reversal/freeze control. If yes (true of most actual CBDC designs), it's a centralized digital payment system possibly using blockchain-derived data structures (hash chains, Merkle trees) for engineering benefits, without blockchain's actual distributed-trust property.",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c12",
+      "topic": "Internal Audit Log Case",
+      "q": "Should an entirely internal company audit-logging system use a private permissioned blockchain?",
+      "a": "No -- your own company is unambiguously the trusted operator of every node since no external party's distrust is the problem being solved. A tamper-evident audit log (Merkle-tree-based hash chaining applied to a conventional database) delivers the same tamper-detection property without consensus overhead.",
+      "module": "T22-enterprise-blockchain"
+    }
+  ]
+}

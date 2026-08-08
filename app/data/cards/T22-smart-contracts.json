@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T22-smart-contracts-c1",
+      "topic": "Storage Slot Packing Rule",
+      "q": "How does Solidity decide which state variables share a storage slot?",
+      "a": "The compiler processes state variables in declaration order and packs consecutive variables into the same 32-byte slot whenever they collectively fit; it starts a new slot the moment the next variable wouldn't fit in the remaining space. Dynamic types (mapping/array/string/bytes) never pack.",
+      "module": "T22-smart-contracts"
+    },
+    {
+      "id": "T22-smart-contracts-c2",
+      "topic": "call vs delegatecall",
+      "q": "What is the core difference between call and delegatecall?",
+      "a": "call executes the callee's code in the CALLEE's storage context (msg.sender becomes the caller). delegatecall executes the callee's code in the CALLER's own storage context, with msg.sender unchanged from the outer call -- this is the entire proxy-upgradeability mechanism.",
+      "module": "T22-smart-contracts"
+    },
+    {
+      "id": "T22-smart-contracts-c3",
+      "topic": "msg.sender Under Delegatecall",
+      "q": "If contract A delegatecalls to contract B and B's code reads msg.sender, what does it see?",
+      "a": "The original caller of A, not A's own address -- msg.sender is preserved from the outer call context, unchanged by the delegatecall itself. This is what makes proxies transparent to end users.",
+      "module": "T22-smart-contracts"
+    },
+    {
+      "id": "T22-smart-contracts-c4",
+      "topic": "Parity Multisig Hack",
+      "q": "What happened in the July 2017 Parity multisig wallet hack?",
+      "a": "Wallets delegatecalled into a shared library for core logic. The library was also directly callable and had an unprotected function letting an attacker claim ownership and selfdestruct it. Every dependent wallet's logic became permanently unreachable, freezing roughly $150M+ in ETH.",
+      "module": "T22-smart-contracts"
+    },
+    {
+      "id": "T22-smart-contracts-c5",
+      "topic": "Events vs Storage",
+      "q": "Why are events cheaper than storage writes, and what's the tradeoff?",
+      "a": "Event data is written to the receipts trie (referenced from the block header), not the state trie/contract storage, avoiding storage's permanent-replication cost. Tradeoff: event data is unreadable by on-chain contract logic -- only off-chain indexers and clients can access it.",
+      "module": "T22-smart-contracts"
+    },
+    {
+      "id": "T22-smart-contracts-c6",
+      "topic": "Indexed Event Parameters",
+      "q": "What does the `indexed` keyword do on an event parameter, and how many are allowed?",
+      "a": "Up to 3 indexed parameters per event become filterable 'topics' in the log, letting off-chain indexers efficiently query by that value. Non-indexed parameters go in the log's data payload -- cheaper but not directly filterable.",
+      "module": "T22-smart-contracts"
+    },
+    {
+      "id": "T22-smart-contracts-c7",
+      "topic": "EIP-1967 Storage Slots",
+      "q": "Why do proxies store their implementation address at a keccak256-derived slot instead of slot 0?",
+      "a": "Slot 0 (or any low slot number) risks colliding with the implementation's own state variables, since delegatecall executes the implementation's code against the proxy's storage. EIP-1967 uses keccak256('eip1967.proxy.implementation')-1, a slot no realistic sequential declaration would organically land on.",
+      "module": "T22-smart-contracts"
+    },
+    {
+      "id": "T22-smart-contracts-c8",
+      "topic": "Transparent Proxy vs UUPS",
+      "q": "What's the key tradeoff between Transparent Proxy and UUPS?",
+      "a": "Transparent Proxy checks admin permissions on every call (small but constant gas cost) with upgrade logic living safely in the proxy. UUPS moves upgrade logic into the implementation (cheaper per-call), but if a deployed implementation lacks or breaks that upgrade function, it becomes permanently non-upgradeable.",
+      "module": "T22-smart-contracts"
+    },
+    {
+      "id": "T22-smart-contracts-c9",
+      "topic": "Diamond Pattern Use Case",
+      "q": "When should you actually reach for the Diamond pattern (EIP-2535)?",
+      "a": "Only when hitting Ethereum's 24KB contract bytecode size limit or needing many genuinely independently-upgradeable modules. It solves a problem Transparent/UUPS don't, but its tooling and audit maturity remain less established, and it needs storage discipline across all facets sharing one storage space.",
+      "module": "T22-smart-contracts"
+    },
+    {
+      "id": "T22-smart-contracts-c10",
+      "topic": "SSTORE Cost and Packing",
+      "q": "Why does storage slot packing matter for gas cost?",
+      "a": "Writing a previously-zero storage slot costs 20,000 gas (module 4). Packing two variables that would otherwise need separate slots into one, and writing both together, can turn two expensive SSTOREs into effectively one -- a real, measurable savings.",
+      "module": "T22-smart-contracts"
+    },
+    {
+      "id": "T22-smart-contracts-c11",
+      "topic": "Upgradeability Tradeoff",
+      "q": "What real security property does an upgradeable proxy trade away versus a genuinely immutable contract?",
+      "a": "Code immutability as a user-verifiable guarantee -- with an immutable contract, users and auditors can verify exactly what code they're trusting, permanently, with no possibility of a malicious or buggy future upgrade. Many well-audited DeFi primitives deliberately ship without any upgrade mechanism for this reason.",
+      "module": "T22-smart-contracts"
+    },
+    {
+      "id": "T22-smart-contracts-c12",
+      "topic": "Storage Layout Drift",
+      "q": "What upgrade mistake causes a contract's state to read garbage after upgrading?",
+      "a": "The new implementation's storage layout doesn't match the old one -- a variable was inserted, removed, or reordered rather than only appended. Fix: only ever append new state variables after existing ones; diff storage layouts in CI before every upgrade.",
+      "module": "T22-smart-contracts"
+    }
+  ]
+}

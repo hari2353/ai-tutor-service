@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T22-blockchain-scratch-c1",
+      "topic": "Immutability Mechanism",
+      "q": "What actually makes a blockchain 'immutable'?",
+      "a": "Each block's hash covers its full contents including previous_hash. Editing a past block changes its hash, breaking the next block's previous_hash pointer, cascading invalidation through every subsequent block. It's a cost-based guarantee, not an absolute one.",
+      "module": "T22-blockchain-scratch"
+    },
+    {
+      "id": "T22-blockchain-scratch-c2",
+      "topic": "Merkle Root in Header",
+      "q": "Why does a block header store a Merkle root of transactions instead of the raw list?",
+      "a": "Keeps the header small and fixed-size (Bitcoin's is 80 bytes regardless of tx count) while still cryptographically committing to every transaction, and enables SPV clients to verify inclusion with a short proof instead of downloading the full block.",
+      "module": "T22-blockchain-scratch"
+    },
+    {
+      "id": "T22-blockchain-scratch-c3",
+      "topic": "Proof-of-Work Search",
+      "q": "What is a miner actually searching for, and what's the expected number of attempts at difficulty D?",
+      "a": "A nonce such that hash(block) falls below a target (D leading zero bits, conventionally). Expected attempts ~= 2^D (16^D in hex-nibble terms), since a good hash is unpredictable and there's no better strategy than brute force.",
+      "module": "T22-blockchain-scratch"
+    },
+    {
+      "id": "T22-blockchain-scratch-c4",
+      "topic": "Mining Asymmetry",
+      "q": "Why must proof-of-work be expensive to produce but cheap to verify?",
+      "a": "Every node verifies every new block, potentially thousands of times a day network-wide. If verification cost matched mining cost, total network verification cost would scale with total mining cost -- economically unworkable. Verification is one hash computation; mining is a 2^D-attempt search.",
+      "module": "T22-blockchain-scratch"
+    },
+    {
+      "id": "T22-blockchain-scratch-c5",
+      "topic": "Difficulty Retargeting",
+      "q": "How does Bitcoin keep block time near 10 minutes as hashrate grows?",
+      "a": "Difficulty retargets every 2016 blocks by comparing actual elapsed time to the 2-week target and scaling proportionally. The target moves, not the 10-minute goal.",
+      "module": "T22-blockchain-scratch"
+    },
+    {
+      "id": "T22-blockchain-scratch-c6",
+      "topic": "Fork Choice Rule",
+      "q": "Is the real Nakamoto consensus fork-choice rule 'longest chain' or something else?",
+      "a": "Most CUMULATIVE PROOF-OF-WORK (chainwork), not block count. They agree only when difficulty is uniform across the compared chains -- diverge the instant difficulty varies.",
+      "module": "T22-blockchain-scratch"
+    },
+    {
+      "id": "T22-blockchain-scratch-c7",
+      "topic": "Chainwork Counterexample",
+      "q": "Give a numeric example where 'longest chain' and 'heaviest chain' disagree.",
+      "a": "10 blocks at difficulty 4 = 10*16^4 = 655,360 work. 8 blocks at difficulty 6 = 8*16^6 = 134,217,728 work -- over 200x more despite fewer blocks. A literal block-count comparison picks the wrong chain.",
+      "module": "T22-blockchain-scratch"
+    },
+    {
+      "id": "T22-blockchain-scratch-c8",
+      "topic": "Block Validation Checks",
+      "q": "What four things does a node check before accepting a block?",
+      "a": "Hash integrity (recomputed hash matches claimed hash), chain linkage (previous_hash matches prior block's actual hash), proof-of-work validity (hash satisfies difficulty target), and transaction/state validity (signatures, no double-spends).",
+      "module": "T22-blockchain-scratch"
+    },
+    {
+      "id": "T22-blockchain-scratch-c9",
+      "topic": "Forks Are Routine",
+      "q": "Are blockchain forks inherently attacks?",
+      "a": "No -- forks routinely occur from ordinary network propagation latency when two miners solve a block near-simultaneously. They resolve naturally as one side accumulates more work. Deep, persistent forks are what warrant suspicion.",
+      "module": "T22-blockchain-scratch"
+    },
+    {
+      "id": "T22-blockchain-scratch-c10",
+      "topic": "Probabilistic Finality",
+      "q": "What does 'confirmations' actually mean in terms of finality guarantees?",
+      "a": "The probability of a reorg deep enough to reverse a transaction shrinks exponentially with each confirmation, but never reaches exactly zero -- Nakamoto consensus gives probabilistic finality, not mathematical certainty.",
+      "module": "T22-blockchain-scratch"
+    },
+    {
+      "id": "T22-blockchain-scratch-c11",
+      "topic": "When PoW Is the Wrong Tool",
+      "q": "When should you NOT use proof-of-work for a ledger?",
+      "a": "When participants are known, small in number, and mutually accountable (e.g. five subsidiaries of one company) -- PoW's cost buys permissionless, pseudonymous participation specifically, which isn't needed there. Use permissioned BFT consensus instead.",
+      "module": "T22-blockchain-scratch"
+    },
+    {
+      "id": "T22-blockchain-scratch-c12",
+      "topic": "Reorg",
+      "q": "What is a 'reorg' and why do exchanges require multiple confirmations?",
+      "a": "A reorg is when a short-lived fork resolves against a previously-accepted block, causing the chain to switch to a heavier competing branch. Exchanges wait for confirmations scaled to transaction value because a 'confirmed' transaction can still be reversed by a deep-enough reorg.",
+      "module": "T22-blockchain-scratch"
+    }
+  ]
+}

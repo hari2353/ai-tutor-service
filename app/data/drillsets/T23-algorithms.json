@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T23-algorithms-d1",
+      "module": "T23-algorithms",
+      "q": "What problem does Deutsch-Jozsa solve, and what's the exact classical-vs-quantum query gap?",
+      "a": "Given an oracle for f promised constant or balanced, determine which. Classical worst case: 2^(n-1)+1 queries. Quantum: exactly 1 query, with certainty — verified P(all-zero)=1.0 for constant, 0.0 for balanced.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-algorithms-d2",
+      "module": "T23-algorithms",
+      "q": "Explain Grover's algorithm geometrically. What's the rotation angle per iteration?",
+      "a": "The state lives in a 2D plane spanned by |target⟩ and the uniform superposition over non-targets, starting at angle θ=arcsin(1/√N). Each iteration rotates by 2θ toward the target; after k iterations P(target)=sin²((2k+1)θ).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-algorithms-d3",
+      "module": "T23-algorithms",
+      "q": "What happens if you run one Grover iteration too many?",
+      "a": "Probability decreases, sometimes sharply — verified for N=8: iteration 2 gives P=0.945, iteration 3 overshoots to P=0.330. The geometry rotates past 90° and back down.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-algorithms-d4",
+      "module": "T23-algorithms",
+      "q": "What is the proven lower bound on quantum unstructured search, and who proved it?",
+      "a": "Bennett, Bernstein, Brassard, Vazirani (1997) proved any quantum algorithm needs Ω(√N) queries for unstructured search with high probability — Grover is provably optimal, not just the best found so far.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-algorithms-d5",
+      "module": "T23-algorithms",
+      "q": "Derive at a high level why Grover's algorithm cannot make NP-hard problems tractable.",
+      "a": "Brute-forcing an NP-hard problem's 2^n-item solution space is unstructured search with N=2^n. Grover reduces queries to O(√N)=O(2^(n/2)) — the exponent is halved, but 2^(n/2) remains exponential in n, so the problem stays intractable at scale.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-algorithms-d6",
+      "module": "T23-algorithms",
+      "q": "What is the only quantum step in Shor's factoring algorithm — why is everything else classical?",
+      "a": "Finding the period r of f(x)=a^x mod N via the QFT. Choosing a and extracting factors via gcd(a^(r/2)±1,N) are classical number theory; classical period-finding has no known efficient general method, which is why the quantum step is needed.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-algorithms-d7",
+      "module": "T23-algorithms",
+      "q": "Walk through mechanically how the QFT extracts a period from a periodic quantum state.",
+      "a": "The input register ends in a uniform superposition over x-values spaced r apart (a comb). QFT of a period-r comb of length Q concentrates amplitude at multiples of Q/r (verified: Q=64, r=4 -> peaks at 0,16,32,48). Measuring a peak k, then applying continued fractions to k/Q, recovers r.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-algorithms-d8",
+      "module": "T23-algorithms",
+      "q": "Is factoring NP-hard? Does Shor's algorithm prove P=NP or that quantum computers solve NP-complete problems efficiently?",
+      "a": "No on both counts. Factoring is in NP∩co-NP, believed to be of intermediate difficulty, not NP-complete. Shor's algorithm shows factoring is in BQP, which says nothing about P vs NP — BQP is not believed to contain NP.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-algorithms-d9",
+      "module": "T23-algorithms",
+      "q": "A candidate says Shor's and Grover's algorithms threaten modern cryptography equally. Correct this precisely.",
+      "a": "Not equally: Shor's algorithm completely breaks RSA/Diffie-Hellman/ECC (period-finding defeats the underlying hard problem entirely). Grover's algorithm only quadratically weakens symmetric crypto/hashes (e.g. AES-256 drops to effective 128-bit security), mitigated by simply doubling key length rather than replacing the algorithm.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-algorithms-d10",
+      "module": "T23-algorithms",
+      "q": "Why doesn't Shor's algorithm generalize to break lattice-based cryptography, given that lattice problems also have algebraic structure?",
+      "a": "Shor's algorithm exploits the abelian hidden subgroup problem, which factoring/discrete-log's underlying group (integers mod N under multiplication) satisfies. Lattice problems would require solving the non-abelian hidden subgroup problem, for which no efficient quantum algorithm is known despite decades of research.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-algorithms-d11",
+      "module": "T23-algorithms",
+      "q": "Is 'no known efficient quantum algorithm against lattice problems' the same guarantee as 'provably secure against quantum computers'?",
+      "a": "No — it's an absence of a known attack, not a proof of security, the same epistemic status classical cryptography has always had (RSA was never proven hard either). Confidence comes from years of failed cryptanalysis, not a mathematical impossibility proof.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-algorithms-d12",
+      "module": "T23-algorithms",
+      "q": "A team proposes using Grover's algorithm to speed up nearest-neighbor search over a 10-million-item embedding index. Evaluate this proposal.",
+      "a": "Nearest-neighbor search isn't truly unstructured — classical ANN methods (HNSW) already exploit geometric structure to beat literal linear scan, likely outperforming Grover's √N against a genuinely unstructured comparison. Even granting the framing, √(10M)≈3,162 only beats linear scan, not the actual classical ANN baseline it would need to displace, and no current hardware sustains a coherent 10M-item quantum search circuit anyway.",
+      "difficulty": "staff"
+    }
+  ]
+}

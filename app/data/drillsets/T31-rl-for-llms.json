@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T31-rl-for-llms-d1",
+      "module": "T31-rl-for-llms",
+      "q": "What value of gamma do you use for RL fine-tuning an LLM, and why is 0.99 wrong?",
+      "a": "gamma = 1.0. Discounting asserts that a distant reward matters less, which is false inside a single response: the token at position 3000 is not worth 0.99^3000 (about 8e-14) of the token at position 0. The horizon is exactly one generation, 256 to 32,768 tokens, so there is nothing to discount. Some implementations use 0.999 out of numerical habit. A candidate quoting '0.99, the standard value' has not thought about the horizon.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T31-rl-for-llms-d2",
+      "module": "T31-rl-for-llms",
+      "q": "How many models does PPO-RLHF hold in memory, and which are trainable?",
+      "a": "Four: policy, critic/value network, reward model, frozen reference (usually the SFT model). Exactly two are trainable, the policy and the critic, at 16 bytes/param for mixed-precision Adam. The reward model and reference are inference-only at 2 bytes/param. At 7B that is 112 + 112 + 14 + 14 = 252 GB of parameter state.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T31-rl-for-llms-d3",
+      "module": "T31-rl-for-llms",
+      "q": "Write the Bradley-Terry reward model loss from memory.",
+      "a": "L_RM = -E_{(x,y_w,y_l)~D}[log sigma(r_phi(x,y_w) - r_phi(x,y_l))]. It is the negative log-likelihood of the Bradley-Terry model P(y_w > y_l | x) = sigma(r(x,y_w) - r(x,y_l)). r_phi is the SFT model with the LM head replaced by a scalar head reading the final token's hidden state.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T31-rl-for-llms-d4",
+      "module": "T31-rl-for-llms",
+      "q": "In one sentence each, what do PPO's clip and the reference-KL penalty each protect against in an RLHF run?",
+      "a": "The clip bounds how far the probability ratio moves in a SINGLE update relative to the immediately preceding policy, protecting against one destructive step. The reference KL penalty bounds CUMULATIVE drift from a fixed anchor (the SFT model) across the whole run, which the clip structurally cannot see. Neither protects against reward hacking, because both constrain how the policy MOVES, not whether the signal it chases is correct.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T31-rl-for-llms-d5",
+      "module": "T31-rl-for-llms",
+      "q": "Prove that subtracting the group mean reward in GRPO leaves the policy gradient unbiased.",
+      "a": "For any b(s) not depending on the action: E_{a~pi}[grad log pi(a|s) * b(s)] = b(s) * sum_a pi(a|s) * (grad pi(a|s) / pi(a|s)) = b(s) * grad(sum_a pi(a|s)) = b(s) * grad(1) = 0. The group mean is a function of the prompt only, so it qualifies. Caveat: the sample sits inside its own baseline, giving a small (G-1)/G-type correlation; RLOO's leave-one-out mean (1/(G-1)) sum_{j != i} R_j removes it exactly. Dividing by std(R) is a separate, genuinely biased operation.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-rl-for-llms-d6",
+      "module": "T31-rl-for-llms",
+      "q": "Derive the closed-form optimum of max_pi E_{y~pi}[r(x,y)] - beta*KL(pi || pi_ref).",
+      "a": "Flip to a minimisation and fold the reward into the log: min_pi E_{y~pi}[log(pi(y|x) / (pi_ref(y|x) e^{r(x,y)/beta}))]. Normalise the denominator with Z(x) = sum_y pi_ref(y|x) e^{r(x,y)/beta}, defining pi*(y|x) = pi_ref e^{r/beta} / Z(x), a valid distribution. Substituting gives min_pi [KL(pi || pi*) - log Z(x)]. Z is independent of pi and KL >= 0 with equality iff the arguments match, so the unique optimum is pi*(y|x) proportional to pi_ref(y|x) e^{r(x,y)/beta}.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-rl-for-llms-d7",
+      "module": "T31-rl-for-llms",
+      "q": "In the DPO derivation, exactly why does the partition function Z(x) cancel, and what does that cancellation cost you?",
+      "a": "Inverting the optimum gives r(x,y) = beta log(pi*/pi_ref) + beta log Z(x). Z depends only on x, and Bradley-Terry only ever uses the DIFFERENCE of two rewards at the same x, so the beta log Z(x) terms subtract away. The cost: Z(x) is a sum over ALL completions, so cancelling it means the loss constrains only the relative log-ratio of the two completions in your dataset and says nothing about how probability mass is allocated over completions you never sampled. That is the mechanism behind likelihood displacement and behind DPO exploiting out-of-distribution responses.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-rl-for-llms-d8",
+      "module": "T31-rl-for-llms",
+      "q": "A run's proxy reward is up 40% at step 600; human win-rate peaked at step 180 and is now 6 points below. Your colleague proposes raising the KL coefficient and rerunning. Respond.",
+      "a": "It is reward-model overoptimisation, and raising beta will not fix it. Gao et al. measured this directly: in the RL setting the KL penalty does NOT change the KL-versus-gold-reward frontier, it only changes how fast you travel along it. Every point reachable by tuning beta is reachable with beta=0 plus early stopping at the same measured KL. Roll back to step 180 (the post-peak run is not recoverable by more training), then attack the frontier itself: hold out a gold signal you never optimise and stop on it, retrain the RM on fresh on-policy comparisons, ensemble 3-5 RMs pessimistically, and scale the RM, since larger RMs push the peak later and higher.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-rl-for-llms-d9",
+      "module": "T31-rl-for-llms",
+      "q": "Your GRPO run's clip_frac is exactly 0.0 for the first several hundred steps. Bug or expected?",
+      "a": "Expected, if num_iterations == 1 (one gradient step per generation batch, TRL's default). The ratio pi_theta/pi_old is then identically 1.0 at the moment the gradient is taken, so nothing is ever clipped. The clip only starts doing work with multiple inner epochs over the same rollout, or with asynchronous/stale rollouts where the generating policy has drifted from the training policy. If you set num_iterations > 1 and clip_frac is still 0, then look for a bug in how old_logps are stored.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-rl-for-llms-d10",
+      "module": "T31-rl-for-llms",
+      "q": "Mean response length in a GRPO run is climbing, but only for incorrect answers. Derive the mechanism from the loss.",
+      "a": "GRPO divides each completion's loss by its own length: (1/G) sum_i (1/|o_i|) sum_t (...). An incorrect answer has negative advantage after group centring, so its per-token penalty is A_i/|o_i|: the LONGER the wrong answer, the smaller the penalty on each token. Gradient descent therefore has a direct incentive to lengthen wrong completions to dilute the punishment. Correct completions have positive advantage, so the same 1/|o_i| SHRINKS their per-token reward with length, giving no matching pressure. Fix: normalise by total tokens in the batch, not per sequence (Dr. GRPO; TRL's loss_type='dapo').",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-rl-for-llms-d11",
+      "module": "T31-rl-for-llms",
+      "q": "Size a cluster for PPO-RLHF on a 70B policy, then say what GRPO changes and by how much.",
+      "a": "16 bytes/param trainable (2 bf16 weights + 2 grads + 4 fp32 master + 4 m + 4 v), 2 bytes/param frozen. Policy 1120 GB + critic 1120 + RM 140 + reference 140 = 2520 GB of parameter state = 32 H100-80GB holding nothing but state, before activations, KV cache for rollouts, or sharding overhead; realistically 48-64 GPUs. GRPO removes the critic: 1400 GB, 18 GPUs of state, a 44.4% cut. With a verifiable reward and beta=0 you also drop the RM and reference: 1120 GB, 14 GPUs, 2.25x total. That is an engineering argument, not a statistical one.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-rl-for-llms-d12",
+      "module": "T31-rl-for-llms",
+      "q": "Argue both sides of 'does RL add capability to an LLM or only elicit it', then say how you would hold both.",
+      "a": "Elicitation: Yue et al. (2504.13837) show RLVR models win at pass@1 and pass@4 but base models catch up and overtake as k reaches the tens and hundreds, without exception; the RL model's reasoning paths already lie in the base's sampling distribution, and mechanistic work finds under ~3% of positions materially changed with promoted tokens already in the base's top-5. Addition: ProRL (2505.24864) trains past 2000 steps with KL control and reference resetting and beats base across the whole pass@k range including tasks base fails at any k (+14.7% math, +13.9% code pass@1 from 2000 to 3000 steps). Holding both: pass@k at large k is a COVERAGE metric and concentration lowers coverage by construction; the runs differ by an order of magnitude in length; and 'capability' is undefined. Under 'unbounded sampling with a perfect verifier' the base has most of it; under 'first sample is right', RL adds a lot, and that is the only definition a product cares about.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-rl-for-llms-d13",
+      "module": "T31-rl-for-llms",
+      "q": "Design the post-training stack for a code-generation model and name what you monitor.",
+      "a": "(1) SFT for instruction-following and parseable output format. (2) RLVR with GRPO on problems with complete test suites: G=8-16, gamma=1.0, eps_low 0.2 / eps_high 0.28, beta=0 or 0.001, loss_type='dapo', dynamic sampling to drop unanimous groups, num_iterations=1, execution in a no-network sandbox with hard per-test timeouts. (3) A preference/RM stage for what tests cannot see: readability, idiom, library choice, length. (4) Safety RLHF deliberately diversified beyond chat-shaped prompts, because Anthropic (2511.18397) showed chat-only safety training leaves agentic misalignment intact. Monitor: mean length split by correct vs incorrect, entropy and within-group reward std, KL to reference against a hard budget, pass rate on held-out tests never used in training, and a human read of 50 high-reward completions every few hundred steps.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-rl-for-llms-d14",
+      "module": "T31-rl-for-llms",
+      "q": "Cut RLHF cost 10x with minimal quality loss. Give the ordered plan and justify the ordering.",
+      "a": "(1) PPO -> GRPO or RLOO: removes the critic, 44% of parameter state, plus the whole critic-tuning failure surface. (2) Move any reward you can to a verifier: removes the RM AND the overoptimisation ceiling, so beta can go to 0 and the reference drops too, reaching 2.25x on state. (3) Attack generation, which is 60-80% of wall-clock in a synchronous critic-free run: vLLM rollouts, continuous batching, async/partially off-policy collection. (4) LoRA with a frozen base as the implicit reference in DPO, so the reference is free (disable adapters) and optimiser state shrinks. (5) Cut G and max_completion_length before cutting steps. (6) Only last, move online RL -> offline DPO. Ordering rationale: items 1-5 are pure engineering and do not change the objective; item 6 changes WHAT you optimise, since offline DPO's KL binds only on data support, and cutting cost usually shrinks that support further.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-rl-for-llms-d15",
+      "module": "T31-rl-for-llms",
+      "q": "Your GRPO reward has flatlined at step 220 and entropy is near zero. Walk through diagnosis and the fix ladder.",
+      "a": "Diagnosis: entropy collapse. Check within-group reward std, it will be near 0 because all G samples per prompt are identical, which zeroes every advantage and kills the gradient; the run will not self-recover. Mechanism: clip-high fires on low-probability 'exploration' tokens being pushed up, so they are suppressed faster than promoted, and the entropy change is dominated by a small set of tokens with high covariance between log-prob and logit change. Fix ladder: (1) clip-higher, eps_high 0.28 vs eps_low 0.2, a one-line change; (2) dynamic sampling, oversample prompts and keep only groups with non-zero reward variance; (3) small entropy bonus ~1e-3, larger degenerates into noise; (4) KL-Cov or Clip-Cov to constrain only the offending tokens; (5) ProRL-style reference resetting with optimiser restart. Distinguish premature collapse from healthy convergence: if reward was still climbing as entropy fell, that is convergence; if reward plateaued below the base model's pass@64, you collapsed early.",
+      "difficulty": "staff"
+    }
+  ]
+}

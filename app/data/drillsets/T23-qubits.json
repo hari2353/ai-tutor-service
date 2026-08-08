@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T23-qubits-d1",
+      "module": "T23-qubits",
+      "q": "Write down the general state of a single qubit and state the normalization condition.",
+      "a": "|ψ⟩ = α|0⟩ + β|1⟩, α,β ∈ ℂ, |α|²+|β|²=1. |0⟩=(1,0)ᵀ, |1⟩=(0,1)ᵀ.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-qubits-d2",
+      "module": "T23-qubits",
+      "q": "What does 'superposition' actually mean, precisely, and what's wrong with 'the qubit is 0 and 1 at the same time'?",
+      "a": "It means the state vector has more than one nonzero amplitude in a chosen basis — a single definite vector, not a dual classical value. Amplitudes are complex and interfere (cancel or reinforce); a plain probability-of-0-or-1 framing cannot represent that phase structure, and only measurement — probabilistic and destructive — yields one classical outcome.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-qubits-d3",
+      "module": "T23-qubits",
+      "q": "What is the Bloch sphere, and what does a point strictly inside the sphere (not on the surface) mean physically?",
+      "a": "The geometric picture of pure single-qubit states as points on a unit sphere via |ψ⟩=cos(θ/2)|0⟩+e^{iφ}sin(θ/2)|1⟩. A point inside the sphere (Bloch vector length <1) is a mixed state — a statistical ensemble described by a density matrix — corresponding physically to a decohered qubit.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-qubits-d4",
+      "module": "T23-qubits",
+      "q": "Prove that (|00⟩+|11⟩)/√2 cannot be written as a tensor product of two single-qubit states.",
+      "a": "Assume |Φ+⟩=(a|0⟩+b|1⟩)⊗(c|0⟩+d|1⟩)=ac|00⟩+ad|01⟩+bc|10⟩+bd|11⟩. Matching coefficients: ac=1/√2, ad=0, bc=0, bd=1/√2. From ad=0, either a=0 (forces ac=0, contradiction) or d=0 (forces bd=0, contradiction). No valid a,b,c,d exist — proof by contradiction.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-qubits-d5",
+      "module": "T23-qubits",
+      "q": "Two entangled qubits are separated by a light-year. Measuring one instantly collapses the other. Did you just transmit information faster than light?",
+      "a": "No — the no-signaling theorem: the party holding the other qubit sees locally random 50/50 outcomes regardless of what was done to your qubit; the correlation only becomes visible once both measurement records are compared via a classical (sub-light-speed) channel.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-qubits-d6",
+      "module": "T23-qubits",
+      "q": "Why does simulating n qubits classically require memory that scales as 2^n, not n?",
+      "a": "n qubits live in one joint 2^n-dimensional tensor-product space, not n independent 2D spaces, so a general n-qubit state needs 2^n complex amplitudes. n=50 already needs ~10^15 amplitudes (tens of petabytes), which is why classical statevector simulation caps out around 30-40 qubits.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-qubits-d7",
+      "module": "T23-qubits",
+      "q": "Explain why global phase doesn't matter but relative phase does, with an example.",
+      "a": "|ψ⟩ and e^{iγ}|ψ⟩ give identical outcome probabilities (|amplitude|² unchanged) — global phase is unobservable. |+⟩=(|0⟩+|1⟩)/√2 and |−⟩=(|0⟩−|1⟩)/√2 differ only by relative phase, measure identically (50/50) in the computational basis, but are physically distinguishable: applying a Hadamard sends |+⟩→|0⟩ and |−⟩→|1⟩ deterministically.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-qubits-d8",
+      "module": "T23-qubits",
+      "q": "What's the difference between a pure state and a mixed state, and why does this matter for near-term hardware?",
+      "a": "A pure state is a single vector |ψ⟩ (Bloch vector length 1). A mixed state is a statistical ensemble ρ=Σpᵢ|ψᵢ⟩⟨ψᵢ| (length <1), arising when a qubit becomes uncontrollably correlated with its environment. Every real qubit on current hardware is, to some degree, mixed — this is the physical origin of the noise covered in the error-correction module.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-qubits-d9",
+      "module": "T23-qubits",
+      "q": "A colleague says a 300-qubit computer represents more states than atoms in the observable universe, so it must be more powerful than any classical computer. Evaluate this claim.",
+      "a": "The dimension count is correct (2^300 >> ~10^80 atoms) but the inference isn't automatic: you can extract at most n classical bits from n qubits (Holevo bound), and proven quantum speedups only apply to specific problem structures (module 3) — there's no general theorem that exponential state space implies exponential advantage for arbitrary problems.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-qubits-d10",
+      "module": "T23-qubits",
+      "q": "A candidate proposes representing a neural network's weight matrix 'in superposition' for exponential storage compression on a quantum computer. What's wrong with this pitch?",
+      "a": "You can amplitude-encode 2^n classical numbers into n qubits, but you can't read them back out individually — measurement yields only n classical bits total, sampled probabilistically, and reconstructing the full amplitude vector to useful precision requires many repeated measurements scaling unfavorably with dimension. Exponential storage without efficient exponential readout is not a usable compression scheme.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-qubits-d11",
+      "module": "T23-qubits",
+      "q": "What is the Schmidt rank of a two-qubit state, and how does it generalize the determinant test for entanglement?",
+      "a": "Reshape the state's coefficients into a matrix and take its SVD; Schmidt rank is the number of nonzero singular values. Rank 1 means separable (matching det(C)=0/rank(C)=1 for the 2x2 case); rank >1 means entangled, with the value quantifying how much. For 3+ qubits there is no single such scalar — e.g. GHZ and W states are both entangled but inequivalent under local operations.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-qubits-d12",
+      "module": "T23-qubits",
+      "q": "A recruiter-facing summary claims a quantum computer 'processes information exponentially faster because qubits explore all possibilities in parallel.' Give the precise one-sentence correction.",
+      "a": "Qubits don't freely 'explore in parallel' in a readable way — the exponential state space enables interference between computational paths during unitary evolution, and only specific algorithms with problem structure amenable to interference (Grover: quadratic, Shor: superpolynomial for period-finding) turn that into a proven, bounded, problem-specific speedup — never a generic exponential one.",
+      "difficulty": "staff"
+    }
+  ]
+}

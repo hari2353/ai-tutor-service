@@ -13,7 +13,7 @@
 | 🏗️ **System Design** ✅ | 15 | 45.5 | A | — |
 | 🗄️ **Databases: SQL, NoSQL, Vector** ✅ | 18 | 40.5 | A | — |
 | 📚 **RAG** ✅ | 18 | 39.5 | A | — |
-| 🧠 **LLM Internals** (15/16) | 16 | 38.0 | A | — |
+| 🧠 **LLM Internals** ✅ | 16 | 38.0 | A | — |
 | 🧭 **AI-Assisted Architecture (Claude)** ✅ | 12 | 26.5 | A | — |
 | 🏛️ **Architecture & Design Principles** ✅ | 11 | 20.0 | A | — |
 | 🔬 **Eval & Observability** ✅ | 7 | 14.0 | A | — |
@@ -23,33 +23,33 @@
 | 🖥️ **Frontend & UI Engineering** ✅ | 14 | 37.0 | A | — |
 | 🌐 **Networking & Protocols** ✅ | 14 | 34.5 | A | — |
 | 🔐 **Auth & Application Security** ✅ | 12 | 30.0 | A | — |
-| 🧪 **Testing & Quality Engineering** (11/12) | 12 | 27.0 | A | — |
-| 🔧 **Tooling, Docker & Debugging Mastery** (9/11) | 11 | 24.0 | A | — |
+| 🧪 **Testing & Quality Engineering** ✅ | 12 | 27.0 | A | — |
+| 🔧 **Tooling, Docker & Debugging Mastery** ✅ | 11 | 24.0 | A | — |
 | 🟧 **AWS Atlas** ✅ | 10 | 22.5 | A | — |
 | ⚔️ **Interview Simulator** ✅ | 7 | 10.0 | A | — |
-| 🛡️ **DevOps, Infra & Security** (12/18) | 18 | 41.0 | B | — |
-| 🎮 **Reinforcement Learning** (8/14) | 14 | 36.5 | B | — |
-| 🌐 **Polyglot Backend** (1/13) | 13 | 32.5 | B | — |
-| 📈 **Classical ML** (5/13) | 13 | 29.0 | B | — |
-| 🐍 **Python & SWE Craft** (5/13) | 13 | 27.5 | B | — |
-| ⚙️ **Computer Systems: Transistor → Runtime** (8/13) | 13 | 27.5 | B | — |
-| ⛓️ **Blockchain & Smart Contracts** (0/8) | 8 | 20.0 | B | — |
-| 🦀 **Rust** (0/8) | 8 | 18.5 | B | — |
-| 🟨 **Google Cloud Atlas** (0/8) | 8 | 17.5 | B | — |
-| 🟦 **Azure Atlas** (0/8) | 8 | 17.0 | B | — |
-| ⚛️ **Quantum Computing** (0/7) | 7 | 16.5 | B | — |
-| 💼 **Product Thinking & Business (MBA)** (0/8) | 8 | 16.5 | B | — |
-| ✨ **SDE Craft & Vibe Coding** (0/7) | 7 | 11.0 | B | — |
+| 🛡️ **DevOps, Infra & Security** ✅ | 18 | 41.0 | B | — |
+| 🎮 **Reinforcement Learning** ✅ | 14 | 36.5 | B | — |
+| 🌐 **Polyglot Backend** ✅ | 13 | 32.5 | B | — |
+| 📈 **Classical ML** ✅ | 13 | 29.0 | B | — |
+| 🐍 **Python & SWE Craft** ✅ | 13 | 27.5 | B | — |
+| ⚙️ **Computer Systems: Transistor → Runtime** ✅ | 13 | 27.5 | B | — |
+| ⛓️ **Blockchain & Smart Contracts** ✅ | 8 | 20.0 | B | — |
+| 🦀 **Rust** ✅ | 8 | 18.5 | B | — |
+| 🟨 **Google Cloud Atlas** ✅ | 8 | 17.5 | B | — |
+| 🟦 **Azure Atlas** ✅ | 8 | 17.0 | B | — |
+| ⚛️ **Quantum Computing** ✅ | 7 | 16.5 | B | — |
+| 💼 **Product Thinking & Business (MBA)** ✅ | 8 | 16.5 | B | — |
+| ✨ **SDE Craft & Vibe Coding** ✅ | 7 | 11.0 | B | — |
 
 ## Tier 1 — unlocked after tier 0
 
 | Track | Modules | Hours | Phase | Requires |
 |---|---|---|---|---|
 | 📣 **Applied NLP & Marketing ML** ✅ | 13 | 34.5 | A | T03 |
-| 🔥 **Deep Learning** (3/13) | 13 | 33.0 | B | T03 |
-| 📊 **Financial Engineering, Time Series & Banking** (0/10) | 10 | 26.5 | B | T03 |
-| 🛸 **Frontier AI: World Models, Voice, Robotics** (1/10) | 10 | 23.5 | B | T05 |
-| 🔁 **MLOps / LLMOps** (4/11) | 11 | 23.0 | B | T08 |
+| 🔥 **Deep Learning** ✅ | 13 | 33.0 | B | T03 |
+| 📊 **Financial Engineering, Time Series & Banking** ✅ | 10 | 26.5 | B | T03 |
+| 🛸 **Frontier AI: World Models, Voice, Robotics** ✅ | 10 | 23.5 | B | T05 |
+| 🔁 **MLOps / LLMOps** ✅ | 11 | 23.0 | B | T08 |
 
 ## Module order within each track
 
@@ -159,7 +159,7 @@ internal dependencies. `sprint` modules are the interview-critical subset.
 - [x] LoRA/QLoRA/DoRA + the RAG-vs-FT-vs-Prompt Decision Tree — 3.0h  _critical_
 - [x] GPTQ/AWQ/GGUF/FP8/INT4 and Quality-vs-Cost Curves — 2.0h
 - [x] Contrastive Training, Matryoshka, Domain Adaptation, Rerankers — 2.0h
-- [ ] ViT, CLIP, Whisper, VLM Architectures — 2.0h
+- [x] ViT, CLIP, Whisper, VLM Architectures — 2.0h
 - [x] Encoder Models: BERT, Bi-Encoders vs Cross-Encoders, When an Encoder Beats an LLM — 2.0h  _critical_
 - [x] Transfer Learning & Distillation: Feature Extraction, Full FT, Teacher-Student — 2.0h  _critical_
 
@@ -313,7 +313,7 @@ internal dependencies. `sprint` modules are the interview-critical subset.
 - [x] Chaos & Fault Injection: Toxiproxy, Litmus, Game Days — 2.0h
 - [x] Testing ML: Data Tests, Model Tests, Behavioural Tests, Metamorphic — 2.5h  _critical_
 - [x] Testing LLM Systems: Non-Determinism, Golden Trajectories, Judge Drift — 2.5h  _critical_
-- [ ] Coverage Lies; Mutation Testing Tells the Truth — 1.5h
+- [x] Coverage Lies; Mutation Testing Tells the Truth — 1.5h
 
 ### 🔧 Tooling, Docker & Debugging Mastery  (T27)
 - [x] Docker Essentials: Images, Layers, Volumes, Networks — Every Command — 2.5h  _critical_
@@ -325,8 +325,8 @@ internal dependencies. `sprint` modules are the interview-critical subset.
 - [x] Reviewing AI-Written Code: Where LLMs Fail, the 10-Point Checklist — 2.0h  _critical_
 - [x] Debugging as a Discipline: Bisect the Space, Not the Code — 2.0h  _critical_
 - [x] Debuggers Everywhere: pdb, delve, jdb/IntelliJ, node --inspect, rust-gdb — 2.5h  _critical_
-- [ ] Production Debugging: Core Dumps, Thread Dumps, Heap Dumps, Live Profiling — 2.5h  _critical_
-- [ ] Debugging From Traces & Logs Alone (When You Can't Attach) — 2.0h
+- [x] Production Debugging: Core Dumps, Thread Dumps, Heap Dumps, Live Profiling — 2.5h  _critical_
+- [x] Debugging From Traces & Logs Alone (When You Can't Attach) — 2.0h
 
 ### 🟧 AWS Atlas  (C-AWS)
 - [x] IAM Deep: Policy Evaluation Logic, AssumeRole/STS, Boundaries, SCPs — 3.0h  _critical_
@@ -361,13 +361,13 @@ internal dependencies. `sprint` modules are the interview-critical subset.
 - [x] Terraform: Modules, State, Workspaces, Drift, terraform test — 3.0h  _critical_
 - [x] GitHub Actions, ArgoCD/GitOps, Progressive Delivery — 2.0h
 - [x] Jenkins From Scratch: Declarative Pipelines, Shared Libraries, Agents, Best Practices — 3.0h  _critical_
-- [ ] ECR vs Artifactory vs Nexus vs GHCR: Promotion, Retention, Signing, SBOM — 1.5h
+- [x] ECR vs Artifactory vs Nexus vs GHCR: Promotion, Retention, Signing, SBOM — 1.5h
 - [x] EKS vs ECS vs Fargate vs ECR — the Decision Matrix — 2.0h  _critical_
-- [ ] SSM Parameter Store vs Secrets Manager vs AppConfig; Config Hierarchies — 1.5h  _critical_
-- [ ] Local ↔ Cloud Parity: LocalStack, Testcontainers, devcontainers, Ollama — 2.0h  _critical_
-- [ ] Secret Management & Rotation, JWT TTL Caching — 1.5h
-- [ ] OWASP Top 10 + OWASP LLM Top 10, SQL Injection Deep — 2.5h  _critical_
-- [ ] RBAC/ABAC/ReBAC, Multi-Tenant Isolation, Zero Trust — 2.0h
+- [x] SSM Parameter Store vs Secrets Manager vs AppConfig; Config Hierarchies — 1.5h  _critical_
+- [x] Local ↔ Cloud Parity: LocalStack, Testcontainers, devcontainers, Ollama — 2.0h  _critical_
+- [x] Secret Management & Rotation, JWT TTL Caching — 1.5h
+- [x] OWASP Top 10 + OWASP LLM Top 10, SQL Injection Deep — 2.5h  _critical_
+- [x] RBAC/ABAC/ReBAC, Multi-Tenant Isolation, Zero Trust — 2.0h
 
 ### 🎮 Reinforcement Learning  (T31)
 - [x] The RL Problem: Agent, Environment, Reward, and Why It Isn't Supervised Learning — 2.0h  _critical_
@@ -378,37 +378,37 @@ internal dependencies. `sprint` modules are the interview-critical subset.
 - [x] Exploration vs Exploitation: ε-Greedy, UCB, Thompson, Intrinsic Motivation — 2.0h  _critical_
 - [x] Deep Q-Networks: Replay Buffers, Target Nets, Double/Dueling/Rainbow — Built From Scratch — 3.0h  _critical_
 - [x] Policy Gradients: REINFORCE Derived, Baselines, Variance Reduction, Actor-Critic — 3.0h  _critical_
-- [ ] PPO & TRPO: Trust Regions, Clipped Objectives, GAE — the Workhorse of RLHF — 3.0h  _critical_
-- [ ] Continuous Actions: DDPG, TD3, SAC, and Where Each Breaks — 2.5h
-- [ ] Model-Based RL, Dyna, MCTS, AlphaZero-Style Planning — 2.5h
-- [ ] Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL — 2.5h
-- [ ] RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different — 3.0h  _critical_
-- [ ] RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail — 2.5h  _critical_
+- [x] PPO & TRPO: Trust Regions, Clipped Objectives, GAE — the Workhorse of RLHF — 3.0h  _critical_
+- [x] Continuous Actions: DDPG, TD3, SAC, and Where Each Breaks — 2.5h
+- [x] Model-Based RL, Dyna, MCTS, AlphaZero-Style Planning — 2.5h
+- [x] Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL — 2.5h
+- [x] RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different — 3.0h  _critical_
+- [x] RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail — 2.5h  _critical_
 
 ### 🌐 Polyglot Backend  (T11)
-- [ ] Java 21/25: Records, Sealed, Pattern Matching, Virtual Threads — 2.5h
-- [ ] JVM Memory Model, G1/ZGC, JIT Tiers, async-profiler/JFR — 2.5h  _critical_
-- [ ] Spring Boot 3: DI Internals, WebFlux, Data, Security, Spring AI — 3.0h
-- [ ] Resilience4j: Circuit Breaker, Bulkhead, Retry in Practice — 1.5h
-- [ ] Quarkus: Build-Time DI, GraalVM Native, Panache, Mutiny — 2.0h
-- [ ] Go: Goroutines, Channels, Context, Generics, Memory Model, pprof — 3.0h
-- [ ] Go: Worker Pools, gRPC, a Fast Vector-Search Microservice — 2.5h
-- [ ] Porting FastAPI → Go: The Rewrite, Benchmarked, and When It's Wrong — 3.0h  _critical_
-- [ ] Monolith vs Modular Monolith vs Microservices vs Monorepo — 2.5h  _critical_
-- [ ] Node/TS: Event Loop, Streams, NestJS/Fastify, Vercel AI SDK — 2.5h
-- [ ] React: Hooks Deep, RSC/Next.js, Perf, Streaming Agent UIs — 3.0h
-- [ ] REST/gRPC/GraphQL, Versioning, OpenAPI-First, SSE/WebSocket — 2.0h  _critical_
+- [x] Java 21/25: Records, Sealed, Pattern Matching, Virtual Threads — 2.5h
+- [x] JVM Memory Model, G1/ZGC, JIT Tiers, async-profiler/JFR — 2.5h  _critical_
+- [x] Spring Boot 3: DI Internals, WebFlux, Data, Security, Spring AI — 3.0h
+- [x] Resilience4j: Circuit Breaker, Bulkhead, Retry in Practice — 1.5h
+- [x] Quarkus: Build-Time DI, GraalVM Native, Panache, Mutiny — 2.0h
+- [x] Go: Goroutines, Channels, Context, Generics, Memory Model, pprof — 3.0h
+- [x] Go: Worker Pools, gRPC, a Fast Vector-Search Microservice — 2.5h
+- [x] Porting FastAPI → Go: The Rewrite, Benchmarked, and When It's Wrong — 3.0h  _critical_
+- [x] Monolith vs Modular Monolith vs Microservices vs Monorepo — 2.5h  _critical_
+- [x] Node/TS: Event Loop, Streams, NestJS/Fastify, Vercel AI SDK — 2.5h
+- [x] React: Hooks Deep, RSC/Next.js, Perf, Streaming Agent UIs — 3.0h
+- [x] REST/gRPC/GraphQL, Versioning, OpenAPI-First, SSE/WebSocket — 2.0h  _critical_
 - [x] FastAPI Deep: Pydantic Validation, DI, Exception Handlers, BackgroundTasks — 2.5h  _critical_
 
 ### 📈 Classical ML  (T03)
-- [ ] Linear/Logistic From Scratch, GD Variants Derived — 2.0h
-- [ ] Regularization, Bias-Variance, Learning Curves — 1.5h
-- [ ] Trees → RF → XGBoost/LightGBM/CatBoost Internals — 3.0h  _critical_
-- [ ] SVM/Kernels, kNN, Naive Bayes, Clustering, PCA/SVD/UMAP — 2.5h
-- [ ] Calibration, Imbalance, Metric Selection, Why AUC Lies — 2.0h  _critical_
-- [ ] Feature Engineering, Leakage, CV Strategies — 2.0h
-- [ ] CF, MF/ALS, Two-Tower, LTR, Cold Start, Ranking Funnel — 3.0h  _critical_
-- [ ] ε-Greedy, UCB, Thompson, LinUCB, CMAB (your PySpark bullet) — 2.0h  _critical_
+- [x] Linear/Logistic From Scratch, GD Variants Derived — 2.0h
+- [x] Regularization, Bias-Variance, Learning Curves — 1.5h
+- [x] Trees → RF → XGBoost/LightGBM/CatBoost Internals — 3.0h  _critical_
+- [x] SVM/Kernels, kNN, Naive Bayes, Clustering, PCA/SVD/UMAP — 2.5h
+- [x] Calibration, Imbalance, Metric Selection, Why AUC Lies — 2.0h  _critical_
+- [x] Feature Engineering, Leakage, CV Strategies — 2.0h
+- [x] CF, MF/ALS, Two-Tower, LTR, Cold Start, Ranking Funnel — 3.0h  _critical_
+- [x] ε-Greedy, UCB, Thompson, LinUCB, CMAB (your PySpark bullet) — 2.0h  _critical_
 - [x] Feature Selection: Filter, Wrapper, Embedded, SHAP-Based, Why More Features Hurt — 2.0h  _critical_
 - [x] Missing & Corrupt Data: MCAR/MAR/MNAR, Imputation Strategies, When to Drop — 2.0h  _critical_
 - [x] EDA: Distributions, Correlation Heatmaps, Outliers, the Questions to Ask First — 2.0h  _critical_
@@ -431,29 +431,29 @@ internal dependencies. `sprint` modules are the interview-critical subset.
 - [x] Presenting ML to Executives: Translating Model Metrics into Business Value — 2.0h  _critical_
 
 ### 🔥 Deep Learning  (T04)
-- [ ] The Neuron → Forward Propagation → Loss → Backpropagation, By Hand — 3.0h  _critical_
-- [ ] Backprop Derived: Chain Rule, Jacobians, Vanishing/Exploding Gradients — 2.5h  _critical_
-- [ ] Autograd From Scratch: micrograd → Tensor Engine — 3.0h  _critical_
-- [ ] MLP/CNN/RNN/LSTM Raw → PyTorch → Keras 3 — 3.0h
-- [ ] Init, Norms, Adam/AdamW/Lion/Muon, LR Schedules — 2.5h
-- [ ] AMP, Grad Accum/Clipping, Checkpointing, NaN Debugging — 2.5h  _critical_
-- [ ] DDP, FSDP, DeepSpeed ZeRO, Tensor/Pipeline Parallel — 3.0h  _critical_
-- [ ] torch.compile, Dynamo/Inductor, CUDA Model, Triton Intro — 2.5h
-- [ ] ONNX, TensorRT, PTQ/QAT, Pruning, Distillation — 2.5h
-- [ ] TF/Keras 3 Parity + TF Serving — 2.0h
+- [x] The Neuron → Forward Propagation → Loss → Backpropagation, By Hand — 3.0h  _critical_
+- [x] Backprop Derived: Chain Rule, Jacobians, Vanishing/Exploding Gradients — 2.5h  _critical_
+- [x] Autograd From Scratch: micrograd → Tensor Engine — 3.0h  _critical_
+- [x] MLP/CNN/RNN/LSTM Raw → PyTorch → Keras 3 — 3.0h
+- [x] Init, Norms, Adam/AdamW/Lion/Muon, LR Schedules — 2.5h
+- [x] AMP, Grad Accum/Clipping, Checkpointing, NaN Debugging — 2.5h  _critical_
+- [x] DDP, FSDP, DeepSpeed ZeRO, Tensor/Pipeline Parallel — 3.0h  _critical_
+- [x] torch.compile, Dynamo/Inductor, CUDA Model, Triton Intro — 2.5h
+- [x] ONNX, TensorRT, PTQ/QAT, Pruning, Distillation — 2.5h
+- [x] TF/Keras 3 Parity + TF Serving — 2.0h
 - [x] Activations: Sigmoid, Tanh, ReLU vs Leaky/GELU/SwiGLU, and Sigmoid vs Softmax — 2.0h  _critical_
 - [x] Computer Vision: CNN → ResNet → ViT, Detection, Segmentation — 2.5h  _critical_
 - [x] CNN vs RNN vs LSTM vs Transformer: What Each Is Actually For — 2.0h  _critical_
 
 ### 🐍 Python & SWE Craft  (T01)
-- [ ] CPython Data Model, Dunder, Descriptors, Metaclasses, MRO — 2.5h
-- [ ] Typing, Protocols, Generics, Pydantic v2 — 2.0h
-- [ ] Asyncio Deep: Event Loop, TaskGroups, Cancellation, Backpressure — 3.5h  _critical_
-- [ ] GIL, Free-Threaded 3.13/3.14, Multiprocessing — 2.0h
-- [ ] Memory & OOM Forensics: GC, tracemalloc, memray, Fragmentation — 3.0h  _critical_
-- [ ] uv, ruff, mypy strict, pre-commit, Packaging — 1.5h
-- [ ] pytest, Hypothesis Property Tests, Mutation Testing — 2.0h
-- [ ] py-spy, cProfile, Flamegraphs, Performance Method — 1.5h
+- [x] CPython Data Model, Dunder, Descriptors, Metaclasses, MRO — 2.5h
+- [x] Typing, Protocols, Generics, Pydantic v2 — 2.0h
+- [x] Asyncio Deep: Event Loop, TaskGroups, Cancellation, Backpressure — 3.5h  _critical_
+- [x] GIL, Free-Threaded 3.13/3.14, Multiprocessing — 2.0h
+- [x] Memory & OOM Forensics: GC, tracemalloc, memray, Fragmentation — 3.0h  _critical_
+- [x] uv, ruff, mypy strict, pre-commit, Packaging — 1.5h
+- [x] pytest, Hypothesis Property Tests, Mutation Testing — 2.0h
+- [x] py-spy, cProfile, Flamegraphs, Performance Method — 1.5h
 - [x] Iterators vs Generators, yield, Lazy Pipelines, itertools — 2.0h  _critical_
 - [x] Decorators: Function, Class, functools.wraps, Parametrised, Real Uses — 2.0h  _critical_
 - [x] LEGB Scoping, Closures, Late Binding, global/nonlocal — 1.5h
@@ -469,113 +469,113 @@ internal dependencies. `sprint` modules are the interview-critical subset.
 - [x] JVM: Class Loading, C1/C2 JIT, Escape Analysis, GC Algorithms — 2.0h
 - [x] Go G-M-P Scheduler, Stack Growth; V8 Ignition/TurboFan — 1.5h
 - [x] Processes/Threads, Context Switch Cost, Virtual Memory, Syscalls — 2.5h
-- [ ] epoll, io_uring, mmap, Zero-Copy, File Descriptors — 2.0h  _critical_
-- [ ] cgroups + namespaces: What Docker Actually Is — 1.5h
-- [ ] NIC→Kernel→Socket, TCP, TLS, HTTP/1.1 vs 2 vs 3/QUIC, DNS — 2.5h
-- [ ] IEEE-754, Float Pitfalls, bf16/fp16/fp8 in ML — 1.5h
-- [ ] SMs, Warps, Occupancy, Kernel Launch Overhead, Why Batching Wins — 2.0h
+- [x] epoll, io_uring, mmap, Zero-Copy, File Descriptors — 2.0h  _critical_
+- [x] cgroups + namespaces: What Docker Actually Is — 1.5h
+- [x] NIC→Kernel→Socket, TCP, TLS, HTTP/1.1 vs 2 vs 3/QUIC, DNS — 2.5h
+- [x] IEEE-754, Float Pitfalls, bf16/fp16/fp8 in ML — 1.5h
+- [x] SMs, Warps, Occupancy, Kernel Launch Overhead, Why Batching Wins — 2.0h
 
 ### 📊 Financial Engineering, Time Series & Banking  (T24)
-- [ ] Stationarity, ACF/PACF, ARIMA/SARIMA, Decomposition — From Scratch — 3.0h  _critical_
-- [ ] Prophet, GARCH, State Space, and Deep Forecasters (N-BEATS, TFT, TimesFM) — 3.0h  _critical_
-- [ ] Backtesting Without Lying to Yourself: Walk-Forward, Purging, Embargo — 2.5h  _critical_
-- [ ] Order Books, Liquidity, Slippage, Execution — How Markets Actually Work — 2.5h
-- [ ] Options, Black-Scholes Derived, the Greeks, Monte Carlo Pricing — 3.0h  _critical_
-- [ ] Modern Portfolio Theory, CAPM, Factor Models, Risk Parity — 2.5h
-- [ ] VaR, CVaR/Expected Shortfall, Stress Testing, Backtesting Risk Models — 2.5h  _critical_
-- [ ] Basel I → II → III → IV: Capital, RWA, LCR/NSFR, What Each Fixed — 2.5h  _critical_
-- [ ] Model Risk Management: SR 11-7, Validation, Governance, the MRM Role — 2.5h  _critical_
-- [ ] AI in Finance: Fraud, Credit, AML, Explainability & Fair-Lending Constraints — 2.5h  _critical_
+- [x] Stationarity, ACF/PACF, ARIMA/SARIMA, Decomposition — From Scratch — 3.0h  _critical_
+- [x] Prophet, GARCH, State Space, and Deep Forecasters (N-BEATS, TFT, TimesFM) — 3.0h  _critical_
+- [x] Backtesting Without Lying to Yourself: Walk-Forward, Purging, Embargo — 2.5h  _critical_
+- [x] Order Books, Liquidity, Slippage, Execution — How Markets Actually Work — 2.5h
+- [x] Options, Black-Scholes Derived, the Greeks, Monte Carlo Pricing — 3.0h  _critical_
+- [x] Modern Portfolio Theory, CAPM, Factor Models, Risk Parity — 2.5h
+- [x] VaR, CVaR/Expected Shortfall, Stress Testing, Backtesting Risk Models — 2.5h  _critical_
+- [x] Basel I → II → III → IV: Capital, RWA, LCR/NSFR, What Each Fixed — 2.5h  _critical_
+- [x] Model Risk Management: SR 11-7, Validation, Governance, the MRM Role — 2.5h  _critical_
+- [x] AI in Finance: Fraud, Credit, AML, Explainability & Fair-Lending Constraints — 2.5h  _critical_
 
 ### 🛸 Frontier AI: World Models, Voice, Robotics  (T26)
-- [ ] World Models: What They Are, Why They Matter, the Core Idea — 2.5h  _critical_
-- [ ] LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels — 2.5h  _critical_
-- [ ] NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim — 2.5h  _critical_
-- [ ] Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents — 2.5h
-- [ ] ImageBind & Joint Embedding Spaces Across 6 Modalities — 2.0h
-- [ ] Voice: Whisper, TTS, Realtime Speech-to-Speech, Latency Budgets, VAD — 2.5h  _critical_
+- [x] World Models: What They Are, Why They Matter, the Core Idea — 2.5h  _critical_
+- [x] LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels — 2.5h  _critical_
+- [x] NVIDIA Cosmos & Physical AI: World Foundation Models, Isaac Sim — 2.5h  _critical_
+- [x] Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents — 2.5h
+- [x] ImageBind & Joint Embedding Spaces Across 6 Modalities — 2.0h
+- [x] Voice: Whisper, TTS, Realtime Speech-to-Speech, Latency Budgets, VAD — 2.5h  _critical_
 - [x] Speech Processing: MFCC → Kaldi → Wav2Vec2 → Whisper, ASR Pipelines, Diarization — 2.5h  _critical_
-- [ ] Video & Diffusion: DiT, Flow Matching, Consistency Models — 2.5h
-- [ ] Reasoning Models: Test-Time Compute, RL on Chains, What Actually Changed — 2.5h  _critical_
-- [ ] The Frontier Landscape: Labs, Model Families, and Reading a Model Card — 1.5h
+- [x] Video & Diffusion: DiT, Flow Matching, Consistency Models — 2.5h
+- [x] Reasoning Models: Test-Time Compute, RL on Chains, What Actually Changed — 2.5h  _critical_
+- [x] The Frontier Landscape: Labs, Model Families, and Reading a Model Card — 1.5h
 
 ### 🔁 MLOps / LLMOps  (T09)
-- [ ] MLflow/W&B, Model + Prompt Registries, DVC/LakeFS — 2.0h
-- [ ] CI/CD for Models & Prompts, Shadow/Canary, Rollback — 2.0h  _critical_
-- [ ] Feature Stores, Training-Serving Skew — 1.5h
-- [ ] Airflow / Dagster / Prefect — 1.5h
-- [ ] Spark/PySpark Tuning: Shuffle, Skew, AQE, Broadcast, EMR Packaging — 3.0h  _critical_
-- [ ] SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML — 2.0h
-- [ ] GPU Capacity & Cost Engineering, Autoscaling, Spot — 2.0h
+- [x] MLflow/W&B, Model + Prompt Registries, DVC/LakeFS — 2.0h
+- [x] CI/CD for Models & Prompts, Shadow/Canary, Rollback — 2.0h  _critical_
+- [x] Feature Stores, Training-Serving Skew — 1.5h
+- [x] Airflow / Dagster / Prefect — 1.5h
+- [x] Spark/PySpark Tuning: Shuffle, Skew, AQE, Broadcast, EMR Packaging — 3.0h  _critical_
+- [x] SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML — 2.0h
+- [x] GPU Capacity & Cost Engineering, Autoscaling, Spot — 2.0h
 - [x] Model Monitoring in Production: What to Log, Alert Thresholds, Dashboards — 2.5h  _critical_
 - [x] Data & Concept Drift: PSI/KS/KL Detection, Shift Types, Retraining Triggers — 2.5h  _critical_
 - [x] Hugging Face + LangChain: transformers, datasets, PEFT, and Where Each Belongs — 2.0h
 - [x] Bedrock vs SageMaker vs Self-Hosted: The Honest Selection Matrix — 2.0h  _critical_
 
 ### ⛓️ Blockchain & Smart Contracts  (T22)
-- [ ] Hashes, Merkle Trees, Digital Signatures, ECDSA — Build Them — 2.5h  _critical_
-- [ ] Build a Blockchain From Scratch: Blocks, Chain, Validation, Forks — 3.0h  _critical_
-- [ ] PoW → PoS → BFT: Nakamoto, Finality, Slashing, the Trilemma — 2.5h  _critical_
-- [ ] Bitcoin UTXO vs Ethereum Accounts, EVM, Gas, State Trie — 2.5h
-- [ ] Solidity From Scratch: Storage, Calls, Events, Upgradeability — 3.0h  _critical_
-- [ ] Reentrancy, Overflow, Oracle Manipulation, Front-Running, Audits — 2.5h  _critical_
-- [ ] Rollups (Optimistic vs ZK), Data Availability, Bridges and Their Failures — 2.5h
-- [ ] When Blockchain Is the Wrong Answer (Usually) — and When It Isn't — 1.5h  _critical_
+- [x] Hashes, Merkle Trees, Digital Signatures, ECDSA — Build Them — 2.5h  _critical_
+- [x] Build a Blockchain From Scratch: Blocks, Chain, Validation, Forks — 3.0h  _critical_
+- [x] PoW → PoS → BFT: Nakamoto, Finality, Slashing, the Trilemma — 2.5h  _critical_
+- [x] Bitcoin UTXO vs Ethereum Accounts, EVM, Gas, State Trie — 2.5h
+- [x] Solidity From Scratch: Storage, Calls, Events, Upgradeability — 3.0h  _critical_
+- [x] Reentrancy, Overflow, Oracle Manipulation, Front-Running, Audits — 2.5h  _critical_
+- [x] Rollups (Optimistic vs ZK), Data Availability, Bridges and Their Failures — 2.5h
+- [x] When Blockchain Is the Wrong Answer (Usually) — and When It Isn't — 1.5h  _critical_
 
 ### 🦀 Rust  (T20)
-- [ ] Ownership, Borrowing, Lifetimes — the Mental Model That Unlocks Rust — 3.0h  _critical_
-- [ ] Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?) — 2.5h
-- [ ] Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe — 2.5h  _critical_
-- [ ] async/await, Futures, Tokio, Channels, Cancellation — 2.5h
-- [ ] Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling — 2.0h
-- [ ] Building a Service: axum, sqlx, tracing, Docker, and Deploying It — 2.5h
-- [ ] Rust in the AI Stack: tokenizers, candle, PyO3 Bindings, Why It's Everywhere — 2.0h  _critical_
-- [ ] Rust vs Go vs Python: The Honest Selection Criteria — 1.5h  _critical_
+- [x] Ownership, Borrowing, Lifetimes — the Mental Model That Unlocks Rust — 3.0h  _critical_
+- [x] Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?) — 2.5h
+- [x] Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe — 2.5h  _critical_
+- [x] async/await, Futures, Tokio, Channels, Cancellation — 2.5h
+- [x] Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling — 2.0h
+- [x] Building a Service: axum, sqlx, tracing, Docker, and Deploying It — 2.5h
+- [x] Rust in the AI Stack: tokenizers, candle, PyO3 Bindings, Why It's Everywhere — 2.0h  _critical_
+- [x] Rust vs Go vs Python: The Honest Selection Criteria — 1.5h  _critical_
 
 ### 🟨 Google Cloud Atlas  (C-GCP)
-- [ ] GCP IAM: Roles, Service Accounts, Workload Identity Federation, Org Policy — 2.5h  _critical_
-- [ ] Cloud Run, Cloud Functions, App Engine, Eventarc — 2.0h
-- [ ] Compute Engine, GKE, Autopilot, Batch — 2.0h
-- [ ] GCS, Cloud SQL, Spanner, Bigtable, Firestore, AlloyDB — 2.5h  _critical_
-- [ ] VPC, Shared VPC, Cloud Load Balancing, Cloud Armor, Interconnect — 2.0h
-- [ ] BigQuery, Dataflow, Dataproc, Pub/Sub, Looker — 2.5h  _critical_
-- [ ] Vertex AI, Agent Builder/ADK, Gemini API, Vector Search — 2.5h  _critical_
-- [ ] Cloud Logging/Monitoring/Trace, FinOps — 1.5h
+- [x] GCP IAM: Roles, Service Accounts, Workload Identity Federation, Org Policy — 2.5h  _critical_
+- [x] Cloud Run, Cloud Functions, App Engine, Eventarc — 2.0h
+- [x] Compute Engine, GKE, Autopilot, Batch — 2.0h
+- [x] GCS, Cloud SQL, Spanner, Bigtable, Firestore, AlloyDB — 2.5h  _critical_
+- [x] VPC, Shared VPC, Cloud Load Balancing, Cloud Armor, Interconnect — 2.0h
+- [x] BigQuery, Dataflow, Dataproc, Pub/Sub, Looker — 2.5h  _critical_
+- [x] Vertex AI, Agent Builder/ADK, Gemini API, Vector Search — 2.5h  _critical_
+- [x] Cloud Logging/Monitoring/Trace, FinOps — 1.5h
 
 ### 🟦 Azure Atlas  (C-AZ)
-- [ ] Entra ID, RBAC, Managed Identities, Conditional Access — 2.5h  _critical_
-- [ ] Azure Functions: Plans, Durable Functions, Bindings, Cold Starts — 2.0h
-- [ ] Compute: VMs, VMSS, App Service, Container Apps, AKS — 2.0h
-- [ ] Blob/Files/Queues, Cosmos DB, Azure SQL, PostgreSQL Flexible — 2.5h
-- [ ] VNet, NSG, App Gateway, Front Door, Private Link — 2.0h
-- [ ] Synapse, Data Factory, Databricks, Event Hubs, Fabric — 2.0h
-- [ ] Azure AI Foundry, Azure OpenAI, AI Search, ML Studio — 2.5h  _critical_
-- [ ] Monitor, Log Analytics, App Insights, Cost Management — 1.5h
+- [x] Entra ID, RBAC, Managed Identities, Conditional Access — 2.5h  _critical_
+- [x] Azure Functions: Plans, Durable Functions, Bindings, Cold Starts — 2.0h
+- [x] Compute: VMs, VMSS, App Service, Container Apps, AKS — 2.0h
+- [x] Blob/Files/Queues, Cosmos DB, Azure SQL, PostgreSQL Flexible — 2.5h
+- [x] VNet, NSG, App Gateway, Front Door, Private Link — 2.0h
+- [x] Synapse, Data Factory, Databricks, Event Hubs, Fabric — 2.0h
+- [x] Azure AI Foundry, Azure OpenAI, AI Search, ML Studio — 2.5h  _critical_
+- [x] Monitor, Log Analytics, App Insights, Cost Management — 1.5h
 
 ### ⚛️ Quantum Computing  (T23)
-- [ ] Qubits, Superposition, Entanglement, the Bloch Sphere — With the Linear Algebra — 2.5h  _critical_
-- [ ] Gates & Circuits: X/H/CNOT/Toffoli, Universality, Reading a Circuit Diagram — 2.5h
-- [ ] Deutsch-Jozsa → Grover → Shor: What the Speedup Actually Is — 3.0h  _critical_
-- [ ] Hands-On: Qiskit/Cirq Simulators, Running a Circuit, Reading Results — 2.5h
-- [ ] Noise, Decoherence, NISQ, Surface Codes, Logical vs Physical Qubits — 2.0h  _critical_
-- [ ] Quantum ML, VQE, QAOA — Genuine Promise vs Hype — 2.0h
-- [ ] Post-Quantum Cryptography: What Breaks, When, and Migration Plans — 2.0h  _critical_
+- [x] Qubits, Superposition, Entanglement, the Bloch Sphere — With the Linear Algebra — 2.5h  _critical_
+- [x] Gates & Circuits: X/H/CNOT/Toffoli, Universality, Reading a Circuit Diagram — 2.5h
+- [x] Deutsch-Jozsa → Grover → Shor: What the Speedup Actually Is — 3.0h  _critical_
+- [x] Hands-On: Qiskit/Cirq Simulators, Running a Circuit, Reading Results — 2.5h
+- [x] Noise, Decoherence, NISQ, Surface Codes, Logical vs Physical Qubits — 2.0h  _critical_
+- [x] Quantum ML, VQE, QAOA — Genuine Promise vs Hype — 2.0h
+- [x] Post-Quantum Cryptography: What Breaks, When, and Migration Plans — 2.0h  _critical_
 
 ### 💼 Product Thinking & Business (MBA)  (T25)
-- [ ] Product Thinking for Engineers: Problem → Outcome → Solution — 2.0h  _critical_
-- [ ] Discovery: JTBD, User Interviews, Opportunity Trees, Killing Your Idea Early — 2.0h
-- [ ] North Star, AARRR, Leading vs Lagging, Guardrail Metrics, Goodhart's Law — 2.0h  _critical_
-- [ ] A/B Testing: Power, MDE, Sequential Testing, Novelty, Common Traps — 2.5h  _critical_
-- [ ] Strategy: Porter, Moats, Build-vs-Buy, Platform vs Product, Wardley Maps — 2.0h
-- [ ] Unit Economics, CAC/LTV, Margins, and the Cost of an AI Feature — 2.0h  _critical_
-- [ ] Pricing & Positioning AI Products; Why Most AI Features Don't Ship — 2.0h  _critical_
-- [ ] Writing the One-Pager, the Business Case, and Getting Funded — 2.0h  _critical_
+- [x] Product Thinking for Engineers: Problem → Outcome → Solution — 2.0h  _critical_
+- [x] Discovery: JTBD, User Interviews, Opportunity Trees, Killing Your Idea Early — 2.0h
+- [x] North Star, AARRR, Leading vs Lagging, Guardrail Metrics, Goodhart's Law — 2.0h  _critical_
+- [x] A/B Testing: Power, MDE, Sequential Testing, Novelty, Common Traps — 2.5h  _critical_
+- [x] Strategy: Porter, Moats, Build-vs-Buy, Platform vs Product, Wardley Maps — 2.0h
+- [x] Unit Economics, CAC/LTV, Margins, and the Cost of an AI Feature — 2.0h  _critical_
+- [x] Pricing & Positioning AI Products; Why Most AI Features Don't Ship — 2.0h  _critical_
+- [x] Writing the One-Pager, the Business Case, and Getting Funded — 2.0h  _critical_
 
 ### ✨ SDE Craft & Vibe Coding  (T13)
-- [ ] Git: Rebase, Bisect, Worktrees, Trunk-Based Dev — 1.0h
-- [ ] Principal-Level Code Review, Giving and Receiving — 1.0h
-- [ ] TDD, Testing Pyramid, Contract Tests, Testcontainers, Chaos — 2.0h
-- [ ] Refactoring Catalogue, Strangler Fig, Legacy Migration — 2.0h  _critical_
-- [ ] ADRs, RFCs, Design Docs — 1.5h
-- [ ] Incident Response, Blameless Postmortems, On-Call — 1.0h
-- [ ] AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev — 2.5h  _critical_
+- [x] Git: Rebase, Bisect, Worktrees, Trunk-Based Dev — 1.0h
+- [x] Principal-Level Code Review, Giving and Receiving — 1.0h
+- [x] TDD, Testing Pyramid, Contract Tests, Testcontainers, Chaos — 2.0h
+- [x] Refactoring Catalogue, Strangler Fig, Legacy Migration — 2.0h  _critical_
+- [x] ADRs, RFCs, Design Docs — 1.5h
+- [x] Incident Response, Blameless Postmortems, On-Call — 1.0h
+- [x] AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev — 2.5h  _critical_

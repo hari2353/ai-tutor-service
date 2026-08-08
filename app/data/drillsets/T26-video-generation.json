@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T26-video-generation-d1",
+      "module": "T26-video-generation",
+      "q": "What backbone did DiT replace, and what was the key scaling claim?",
+      "a": "Replaced the U-Net with a ViT-style transformer on patchified latent tokens; FID scales predictably with transformer Gflops, mirroring LLM scaling laws.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-video-generation-d2",
+      "module": "T26-video-generation",
+      "q": "Why is the AdaLN-Zero gate initialized to zero?",
+      "a": "So every DiT block starts training as an identity function, giving stable training from step one without careful warmup.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-video-generation-d3",
+      "module": "T26-video-generation",
+      "q": "What are spacetime patches, and why does doubling video duration roughly quadruple attention cost?",
+      "a": "Spacetime patches are tokens extracted from a spatially-and-temporally compressed video latent. Attention is quadratic in total token count, which scales with frames x spatial patches, so doubling duration alone roughly doubles tokens and quadruples attention cost.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-video-generation-d4",
+      "module": "T26-video-generation",
+      "q": "How does flow matching's training objective differ from diffusion's score prediction?",
+      "a": "Flow matching regresses a velocity field along an explicitly chosen probability path (e.g. a straight line) via simulation-free L2 loss, instead of predicting the score of an implicit reverse-time SDE.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-video-generation-d5",
+      "module": "T26-video-generation",
+      "q": "Why does a rectified (straight-line) flow path allow fewer sampling steps than a typical diffusion path?",
+      "a": "The straight path has low curvature and a constant target velocity, so a coarse integrator (even one Euler step in the limit) tracks it accurately, unlike a curved path which needs many small steps to avoid discretization error.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-video-generation-d6",
+      "module": "T26-video-generation",
+      "q": "Why did SD3.5, FLUX, Veo, and Movie Gen all adopt flow matching by 2024-25?",
+      "a": "Fewer required sampling steps translate directly into serving cost/latency cuts at scale -- roughly a 10x reduction in steps is most of the unit-economics case for serving millions of generations a day.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-video-generation-d7",
+      "module": "T26-video-generation",
+      "q": "How does a consistency model differ from simply truncating a diffusion model's sampling steps?",
+      "a": "A consistency model is explicitly trained so any point on a trajectory maps to the same clean output, enabling accurate 1-4 step generation. Truncating an ordinary diffusion/flow model's steps produces a blurry, degraded sample since it was never trained for that coarse a step size.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-video-generation-d8",
+      "module": "T26-video-generation",
+      "q": "Give the LCM distillation cost/speed/quality numbers for a 768x768 2-4 step model.",
+      "a": "~32 A100-GPU-hours to distill from a pretrained SD checkpoint, 10-100x inference speedup, matches 25-50-step DDIM on FID/alignment at 2-4 steps, with quality degrading sharply as step count approaches 1.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-video-generation-d9",
+      "module": "T26-video-generation",
+      "q": "What does VBench2's physics-and-commonsense dimension reveal about the state of video generation in 2026?",
+      "a": "Every current model, including frontier ones like Veo 3, still shows a real measured gap between visual plausibility and actual physical consistency.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-video-generation-d10",
+      "module": "T26-video-generation",
+      "q": "A colleague proposes using a video diffusion model to generate physics-accurate robot training data. What's the correct pushback?",
+      "a": "Video diffusion optimizes for visual plausibility under the training distribution, not physical constraint satisfaction -- nothing in the DiT/flow-matching stack enforces physics. An actual simulator (Isaac Sim, MuJoCo) is the correct source for physically-grounded training signal; video-gen output should be reference/pre-visualization at most.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-video-generation-d11",
+      "module": "T26-video-generation",
+      "q": "Staff-level: how do you decide between a full multi-step flow-matching model and an aggressively-distilled few-step consistency model for a production feature?",
+      "a": "Benchmark the exact step count you intend to ship at (not a more conservative one) against the full teacher on your own content distribution. High-volume, lower-stakes use cases favor the 10-100x cost cut from few-step distillation; final client-facing deliverables usually require the quality of a full or moderate-step model instead.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-video-generation-d12",
+      "module": "T26-video-generation",
+      "q": "What is the single biggest open problem in video generation as of August 2026, and what's the structural cause?",
+      "a": "Temporal consistency and physical plausibility past roughly 10-20 seconds, caused structurally by quadratic attention cost over spacetime tokens -- duration and resolution multiply their cost impact together, capping practical native generation length across the whole DiT-based industry, not just weaker vendors.",
+      "difficulty": "staff"
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "flashcards": [
+    {
+      "id": "T26-imagebind-multimodal-c1",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "Write CLIP's training objective and say what the labels are.",
+      "a": "Symmetric InfoNCE. L2-normalise both encoder outputs, compute the B x B cosine matrix S, scale by 1/tau, apply cross-entropy in both directions with labels = arange(B). It is a B-way classification problem where the correct class for row i is column i. There is NO target similarity value: ranks are trained, magnitudes are not calibrated.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c2",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "CLIP's key training numbers: data, batch, temperature, headline result.",
+      "a": "400M web image-text pairs; global batch 32,768; tau initialised to 0.07 (logit_scale = log(1/tau) = 14.29 at init), learned, clamped so 1/tau <= 100 i.e. tau >= 0.01; 76.2% zero-shot ImageNet top-1 with ViT-L/14@336px; largest run RN50x64 took 18 days on 592 V100s.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c3",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "Why is contrastive batch size a capability parameter rather than a memory knob?",
+      "a": "Negatives come exclusively from the batch: B-1 per example. Chance-level top-1 is 1/B (0.39% at B=256, 0.003% at B=32,768), so the task literally gets harder with B. And InfoNCE is a variational lower bound on mutual information capped at log B nats: 5.55 nats (8.0 bits) at B=256, 10.40 nats (15.0 bits) at B=32,768. A small-batch run is bound-limited, not optimisation-limited.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c4",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "Does gradient accumulation give you a larger contrastive batch?",
+      "a": "No. Accumulation gives you 128 separate 256-way softmaxes summed, not one 32,768-way softmax; the negatives never meet in the same denominator. The only real options are a gradient-propagating all-gather across devices, a memory bank / MoCo-style queue, or a loss that avoids the global softmax entirely (SigLIP's pairwise sigmoid loss, strong at batch 4,096-8,192 and saturating around 32k).",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c5",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "What does temperature do to the InfoNCE gradient, and why is it clipped?",
+      "a": "dL/dS_ij = (1/tau) * p_ij for negatives, where p_ij is that negative's softmax weight. As tau -> 0 the softmax concentrates on the single hardest negative, so the update becomes hard-negative mining with an effective batch near 2; as tau grows the gradient spreads uniformly and learns nothing discriminative. CLIP clamps 1/tau <= 100 because gradient magnitude scales as 1/tau, so the model reduces loss faster by shrinking tau than by improving alignment, until fp16 logits overflow. The learned logit_scale saturates AT the clamp.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c6",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "ImageBind's contribution in one sentence, and the combinatorial argument for it.",
+      "a": "You do not need N(N-1)/2 modality pairs, because images are the natural hub of the world's already-paired data, so binding all N modalities to images gets you every other pair for free. Six modalities would need 15 pair-specific models and about 13 of those pairs (audio-thermal, IMU-depth) have essentially no naturally-paired data at any price, whereas image pairing falls out of the sensor stack for free.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c7",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "ImageBind's six modalities, joint dimensionality, and the hub design decision.",
+      "a": "Image/video, text, audio, depth, thermal, IMU. Joint space d = 1024. The image and text encoders are a FROZEN pretrained OpenCLIP ViT-H/14 (roughly 630M vision, roughly 302M text). Each spoke is trained independently against the frozen hub with symmetric InfoNCE; the spokes never see each other. There is no joint training run.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c8",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "Why must the ImageBind hub be frozen?",
+      "a": "Data asymmetry of three to four orders of magnitude. The hub was pretrained on hundreds of millions of image-text pairs; the thermal spoke sees roughly 15k LLVIP pairs and the depth spoke roughly 10k SUN RGB-D images. Fine-tuning a 630M-parameter ViT-H against 15k examples destroys it. The signature of getting this wrong is catastrophic forgetting: previously-good text-image retrieval regresses while the new pair improves.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c9",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "Derive emergent cross-modal alignment in three lines.",
+      "a": "Train (I,A): f_A(a) ~ f_I(i) for paired (i,a). Train (I,T): f_T(t) ~ f_I(i) for paired (i,t). Therefore f_A(a) ~ f_T(t) whenever both describe the same image. The hub is a shared basis and each spoke was fitted to express itself in that basis, so any two spokes already share a coordinate system. Nothing about audio-text was ever in a loss, which is why it is emergent and also why it is weaker than a directly-trained pair.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c10",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "How strong is emergent alignment versus a directly-trained or supervised model? Give numbers.",
+      "a": "ESC-50 audio classification: ImageBind emergent roughly 66.9% top-1, AudioCLIP (text-audio supervised) roughly 68.6%, fully supervised audio specialist 95%+. Harder spokes are worse: NYU-v2 depth roughly 54.0%, SUN RGB-D roughly 35.1%, LLVIP thermal roughly 63.4%, Ego4D IMU roughly 25.0%; AudioCaps text-to-audio R@1 roughly 9.3, Clotho roughly 6.0. Rule of thumb: 60-70% of the way to a specialist on easy modalities, 25-35% on hard ones.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c11",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "What bounds emergent alignment quality besides the two-hop path?",
+      "a": "The hub's coverage of your domain. Emergent performance tracks image-encoder strength: moving the frozen hub from ViT-B to ViT-H lifted emergent audio classification by roughly 12 points. If the hub never saw your domain (medical imaging, factory-floor audio), the spokes are projected into coordinates that do not describe your data and the emergent pair can be near-useless while a directly-trained pair is fine.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c12",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "What does LanguageBind show about the choice of hub?",
+      "a": "That images are not uniquely correct, only conveniently paired. LanguageBind (ICLR 2024) froze a VL-pretrained language encoder, trained spokes against it on VIDAL-10M (10M five-modality tuples), and beat ImageBind by roughly 5.8 R@1 on MSR-VTT zero-shot video-text with roughly 15% of the parameters. Pick the hub with the densest semantics AND adequate natural pairing; for anything ending in a text query that is usually language. The tradeoff is that language pairing for infrared and depth had to be built, whereas image pairing was free.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c13",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "What is the modality gap and what causes it?",
+      "a": "Embeddings from different modalities occupy separate narrow cones rather than interleaving. Cause chain: the cone effect means a deep net's outputs occupy a narrow cone at random initialisation, so two independently initialised encoders occupy two different cones; contrastive loss only constrains relative ordering within a row, which is preserved under any rigid separation, so it has no incentive to merge them; and a low learned temperature actively rewards separation because separating cones is a cheap way to make the softmax confident. The gap survives training all the way into your production index.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c14",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "Measured modality gap numbers on two untrained encoders, and what they prove.",
+      "a": "Two independently initialised 4-layer 512-d ReLU MLPs fed the same 512 inputs, outputs L2-normalised, zero training: within-A mean cos 0.6794, within-B 0.6863, cross-modality 0.3091, matched pair 0.3095, centroid distance 0.8653, gap 0.3738, median rank of the true match 257 of 512 (chance). Proves the gap is an initialisation artefact, not something contrastive training creates, and that geometry and semantics are independent.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c15",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "Does per-modality mean-centring fix the modality gap?",
+      "a": "It erases the gap and buys nothing for retrieval. Measured: centring drove cross-modal mean cosine from 0.3091 to 0.0000 and the matched pair to 0.0015, while the median rank of the true match stayed at 260 of 512, i.e. unchanged. Centring changes score DISTRIBUTIONS, not RANKINGS. Use it for threshold hygiene (making score ranges comparable), never as a quality fix.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c16",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "Why does a single HNSW index over mixed modalities return only same-modality results?",
+      "a": "Modality gap meeting greedy graph traversal. With within-modality cosine around 0.68 and cross-modality around 0.31, a text node's M = 32 neighbours are with high probability all text nodes, so the graph is effectively two components joined by a few low-quality bridge edges. Greedy descent from a text entry point never crosses. The tell: within-modality recall@10 stays at 0.95 while cross-modal hit rate is under 5%, and raising ef from 64 to 512 changes nothing because the problem is topology, not search effort. Diagnostic: if brute-force search finds the matches and HNSW does not, the diagnosis is confirmed.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c17",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "What is the 'separation' metric and what is a healthy value?",
+      "a": "separation = mean(cosine of matched cross-modal pairs) - mean(cosine of all cross-modal pairs). It is the only quantity that predicts cross-modal retrieval quality, because it is invariant to the gap. A healthy trained CLIP-family model on in-domain data shows roughly 0.05 to 0.15. Below 0.02 the model is not aligned on your data regardless of what the raw cosines or the gap look like. Report it alongside gap and centroid distance, which predict threshold and index misbehaviour rather than quality.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c18",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "Production recommendation for multimodal RAG: joint space or separate indices?",
+      "a": "Never one joint index over mixed modalities. Default to captioning/OCR/ASR into ONE TEXT INDEX with BM25 hybrid and your existing reranker; that handles most queries and gives one calibrated score space. Add per-modality native indices with RRF fusion at k = 60 only when the query modality genuinely differs from the corpus modality or captioning is provably lossy. Add ColPali-style late interaction for layout-sensitive documents under a few million pages. Always rerank the top 50, because a good second stage absorbs first-stage geometry problems.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c19",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "Why fuse by rank (RRF) rather than by score across modalities?",
+      "a": "Score distributions are per (query_modality, corpus_modality) pair: text-to-text scores live around 0.7-0.9, text-to-image around 0.25-0.35. Any score-weighted fusion across those compares incommensurable quantities, and any single global threshold measures the gap rather than relevance. RRF (score = sum_i 1/(60 + rank_i), k = 60) needs no calibration and is the same tool you already use for BM25-plus-dense hybrid. If you insist on scores, you must calibrate one threshold per modality pair on a held-out labelled set.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c20",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "Storage cost per asset for each multimodal retrieval option at 10M assets.",
+      "a": "1024-d fp32 single vector = 4 KB, so 10M = 40 GB (fits in RAM on one r6i.4xlarge, plus roughly 2.5 GB of HNSW neighbour lists at M = 32). int8 = 1 KB (10 GB). Binary = 128 B (1.28 GB) with fp32 rescoring over the top 200. ColPali-style late interaction = roughly 1,030 patches x 128 dims x 2 bytes = roughly 264 KB per page, so 10M pages is roughly 2.6 TB, a 130x multiplier that changes the class of system you build. Query: roughly 2-5 ms per HNSW index at ef = 128, roughly 6-10 ms p50 for a 4-way concurrent fan-out plus RRF.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c21",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "A contrastive run plateaus at loss 4.85 with a reported global batch of 32,768. Diagnosis?",
+      "a": "log(128) = 4.85 and 128 is the per-device batch, so the loss is sitting at the uniform-softmax floor for the LOCAL batch. Cause: dist.all_gather used without a gradient-propagating autograd wrapper, so the forward pass sees 32,768 embeddings but the backward pass drops everything outside the local shard. Fix: a custom autograd.Function that all-reduces the incoming gradient and slices out this rank's shard. Prevention: assert at step 0 that loss is approximately log(global_batch), i.e. 10.40 for 32,768.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c22",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "When should you NOT use a joint embedding space?",
+      "a": "Four cases. (1) Query and corpus are the same modality, which is most retrieval: a specialist text embedder beats a multimodal joint model on text-text because the joint model spent capacity on an alignment you are not using. (2) A caption is lossless enough, which is true for most documents, charts and product photos. (3) The asset carries more information than one vector can hold (a 40-page PDF, a 30-minute recording); the signature is good recall on 'what is this about' and zero recall on 'which page has the Q3 EMEA number'. (4) A directly-trained pair is affordable, since 10k-100k real pairs is usually enough and beats the emergent path substantially.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c23",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "In 2026, would you build a new multimodal retrieval system on ImageBind?",
+      "a": "For text-image, no: ImageBind's hub is a frozen 2023 OpenCLIP ViT-H, and current MMEB / MMEB-V2 / MIEB leaders are VLM-derived embedders (VLM2Vec-V2) plus commercial models from Cohere Embed v4, Voyage Multimodal 3.5, Gemini Embed and Jina CLIP v2. For layout-sensitive documents, late-interaction ColPali/ColQwen models lead. Use ImageBind for exactly one thing: binding an exotic modality with no paired text data into an existing space, fast. And never pick from a leaderboard: build a 300-500 query eval set from your own traffic and measure nDCG@10 and recall@50 against the boring caption-to-text baseline.",
+      "module": "T26-imagebind-multimodal"
+    },
+    {
+      "id": "T26-imagebind-multimodal-c24",
+      "topic": "ImageBind & Joint Embedding Spaces Across 6 Modalities",
+      "q": "How is audio encoded in ImageBind, and why does an image-pretrained ViT transfer to it?",
+      "a": "2-second clips at 16 kHz converted to a log-mel spectrogram with 128 mel bins, giving roughly a 128 x 204 single-channel image, patched with 16 x 16 patches at stride 10 (overlapping) and fed to a ViT-B. The trick is that a spectrogram is literally an image with time on one axis and frequency on the other, so the ViT's local patch statistics and 2D inductive bias apply. IMU by contrast is 6 channels (3-axis accelerometer plus 3-axis gyro) over a 5-second window, projected with a kernel-8 1D convolution into a 6-layer transformer.",
+      "module": "T26-imagebind-multimodal"
+    }
+  ]
+}

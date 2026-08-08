@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T26-frontier-landscape-c1",
+      "topic": "Frontier Landscape",
+      "q": "What are the three layers of trust when evaluating a new model release, in order of increasing reliability?",
+      "a": "Layer 1: lab self-report (selected, incentive-biased). Layer 2: independent aggregator like Artificial Analysis or LM Arena (comparable, but still someone's methodology/weighting). Layer 3: your own eval on your task distribution (slow but the only one that answers your actual question).",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c2",
+      "topic": "Frontier Landscape",
+      "q": "What is the single fastest tell that a launch benchmark comparison table is misleading?",
+      "a": "Count the blank/unpublished competitor cells. If a large fraction of a model's claimed 'wins' are against rows where the competitor's score was never published, the comparison is a marketing artifact, not an evaluation.",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c3",
+      "topic": "Frontier Landscape",
+      "q": "In the Gemini 3.1 Pro 'won 13 of 16 benchmarks' launch claim (Feb 2026), what three things did the headline table not show?",
+      "a": "GPT-5.3-Codex's score was published for only 2 of 16 rows (most 'wins' were against blank cells); GDPval-AA showed Claude leading by roughly 300 Elo points, omitted from the table; and Humanity's Last Exam ranking flipped depending on tool-use condition, which wasn't surfaced in the summary.",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c4",
+      "topic": "Frontier Landscape",
+      "q": "Why is MMLU no longer useful for discriminating among frontier models in 2026?",
+      "a": "Saturation (every serious frontier model scores in the low-to-mid 90s, compressing real differences below measurement noise) plus contamination (MMLU questions circulate publicly and leak into pretraining corpora, inflating scores independent of actual capability).",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c5",
+      "topic": "Frontier Landscape",
+      "q": "How does date-stamped benchmarking (e.g. LiveCodeBench) defend against contamination?",
+      "a": "New problems are continuously harvested (from LeetCode, AtCoder, Codeforces) and annotated with a release date, so evaluation can be restricted to problems released strictly after a model's training cutoff, making contamination structurally impossible for that slice.",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c6",
+      "topic": "Frontier Landscape",
+      "q": "What does the Artificial Analysis Intelligence Index v4.1 (June 2026) weight, by category?",
+      "a": "Agents 34% (incl. GDPval-AA v2, tau3-Banking), Coding 24% (incl. Terminal-Bench v2.1, SciCode), Scientific Reasoning 24% (incl. GPQA Diamond, CritPt), General 18% (incl. Humanity's Last Exam, AA-Omniscience hallucination benchmark).",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c7",
+      "topic": "Frontier Landscape",
+      "q": "What does LM Arena Elo actually measure, and what is its documented manipulation vulnerability?",
+      "a": "Blind pairwise human preference converted to Elo via a Bradley-Terry fit -- a preference/popularity signal, not a correctness signal. Research (arXiv 2501.17858) showed coordinated voting with as few as a few hundred rigged votes, using output fingerprinting to identify a target model, can shift its ranking.",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c8",
+      "topic": "Frontier Landscape",
+      "q": "What does METR's 'time horizon' metric measure, and how has its doubling rate changed?",
+      "a": "The length of task (measured in time a skilled human professional would take) a model can complete autonomously with 50% reliability. The doubling period compressed from roughly every 7 months (2019-2024) to roughly every 4 months (2024-2025). Measurements above ~16 hours are currently unreliable with METR's task suite.",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c9",
+      "topic": "Frontier Landscape",
+      "q": "Compare Anthropic's RSP, OpenAI's Preparedness Framework, and Google DeepMind's FSF in one line each.",
+      "a": "Anthropic RSP: most prescriptive, ASL-1 through ASL-4+ with specific RAND weight-security-tier precommitments. OpenAI Preparedness: collapsed from four tiers to two qualitative bars (High/Critical), read by analysts as a weakening. Google FSF: most process-focused, specifies what will be measured/reviewed more than what action automatically follows.",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c10",
+      "topic": "Frontier Landscape",
+      "q": "What regulatory milestone happened on 2 August 2026, and why does it matter?",
+      "a": "The EU AI Act's General-Purpose AI Code of Practice obligations began enforcement -- the first external enforcement mechanism on frontier model documentation and safety disclosure, as opposed to the three labs' voluntary, self-authored safety frameworks.",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c11",
+      "topic": "Frontier Landscape",
+      "q": "What is the concrete licensing gotcha in Llama's license that a summary blog post typically undersells?",
+      "a": "A 700-million monthly-active-user cap measured at the parent corporate entity level, frozen at terms from a specific point in time rather than rolling forward, plus a separate exclusion of multimodal capabilities from the license grant specifically within the EU.",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c12",
+      "topic": "Frontier Landscape",
+      "q": "Which open-weight model families use permissive MIT/Apache 2.0 licenses versus Llama's restrictive custom license?",
+      "a": "DeepSeek's V4 line (MIT), Qwen and Gemma (Apache 2.0) grant unrestricted commercial use, redistribution, and modification with no usage cap. Llama's custom license carries the 700M MAU cap and EU multimodal exclusion.",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c13",
+      "topic": "Frontier Landscape",
+      "q": "What size of benchmark delta should be treated as noise rather than a real capability difference?",
+      "a": "Single-run accuracy deltas under roughly 2-3 points, and LM Arena Elo gaps under roughly 10 points, should be treated as ties until corroborated by repeated runs or a much larger sustained gap.",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c14",
+      "topic": "Frontier Landscape",
+      "q": "What is the production-safe policy for adopting a new frontier model, versus 'always route to whatever tops the leaderboard'?",
+      "a": "Pin to a specific, immutable model version; migrate only after your own regression eval (on your task distribution, repeated runs) clears a stated bar, on a fixed review cadence -- never migrate the same day as a launch, since leaderboard rank reshuffles weekly and self-report/aggregator/Arena rankings frequently disagree.",
+      "module": "T26-frontier-landscape"
+    },
+    {
+      "id": "T26-frontier-landscape-c15",
+      "topic": "Frontier Landscape",
+      "q": "What's the structural difference between a model card and a system card?",
+      "a": "A model card documents the artifact (architecture, training data summary, context window, self-reported benchmarks). A system card documents the deployment (what tools/actions the model is wired to, what safeguards surround it, and the lab's own red-team findings, organized around risk categories like cyber, bio/chem uplift, persuasion, and model autonomy).",
+      "module": "T26-frontier-landscape"
+    }
+  ]
+}

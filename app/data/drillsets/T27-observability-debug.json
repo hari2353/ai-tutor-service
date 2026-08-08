@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T27-observability-debug-d1",
+      "module": "T27-observability-debug",
+      "q": "Write the traceparent header format, naming the length of each field.",
+      "a": "00-<32 hex chars trace id>-<16 hex chars span id>-<2 hex chars flags>. Example: 00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01. The low bit of the flags byte is the sampled flag, which is how a head-based sampling decision made at the root propagates to every downstream service so they all agree.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T27-observability-debug-d2",
+      "module": "T27-observability-debug",
+      "q": "Given a root span of 4200ms whose children are 1000ms, 960ms and 2100ms and which are strictly serial, compute the root's self time. Then say what you do with the number.",
+      "a": "self_time = 4200 - union(children) = 4200 - 4060 = 140ms, or 3.3%. Below 10% self time means this service is a pure router: it is not the culprit, and the next move is to descend into whichever child finishes last (the critical-path child), not to profile this service. Note the union, not the sum: if those three children had overlapped, summing would have produced a negative self time.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T27-observability-debug-d3",
+      "module": "T27-observability-debug",
+      "q": "You see three sibling spans to the same peer with durations 2001ms, 1998ms and 2000ms. Name the failure and the single feature of that data that identifies it.",
+      "a": "Retry storm. The identifying feature is the UNIFORMITY of the durations, not their magnitude: real work has variable duration, so three calls landing within 0.2% of each other means they were all terminated by the same client timeout at 2000ms. Confirm with the error status on all but the last, and the growing jittered gaps between them. Parent duration is about 3 x timeout + backoff.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T27-observability-debug-d4",
+      "module": "T27-observability-debug",
+      "q": "Write the LogQL query that finds every log line for trace id 4bf92f3577b34da6a3ce929d0e0e4736 in the prod checkout service, and explain why the trace id is not in the stream selector.",
+      "a": "{service=\"checkout\", env=\"prod\"} | json | trace_id = \"4bf92f3577b34da6a3ce929d0e0e4736\". Three low-cardinality labels select the streams; the high-cardinality join key is filtered from the parsed body. {trace_id=\"...\"} would create one stream per request, one tiny chunk flushed per request, and an unbounded index. Loki enforces this with defaults of 15 index labels, 10,000 streams per tenant and 50,000 global.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T27-observability-debug-d5",
+      "module": "T27-observability-debug",
+      "q": "A dashboard reads fleet p99 as avg(p99) over 20 pods and shows 480ms while users report multi-second latency. Explain the error and write the correct query.",
+      "a": "Percentiles do not average; there is no operation on twenty p99 values that yields the fleet p99. One pod at 8s among nineteen at 100ms averages to 495ms and the incident disappears. Correct: sum the bucket counters across pods first, then compute the quantile from the summed histogram. histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T27-observability-debug-d6",
+      "module": "T27-observability-debug",
+      "q": "You enable exemplars in the OTel SDK, redeploy, and Grafana still shows no metric-to-trace jump link. List the checks in order.",
+      "a": "Three independent requirements, all of which must hold. (1) SDK: exemplar filter is TraceBased AND the measurement is recorded inside an active span; measurements taken outside a span get no exemplar. (2) Scrape format: the Prometheus exporter must emit OpenMetrics; the classic Prometheus text format cannot carry exemplars and drops them silently. (3) Server: prometheus must run with --enable-feature=exemplar-storage, which is off by default. Most deployments fail on (2) or (3).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T27-observability-debug-d7",
+      "module": "T27-observability-debug",
+      "q": "A trace shows a 900ms gap before the first database span; the query itself takes 4ms. Give the diagnosis, the confirming metric, and the instrumentation change that makes this a one-trace answer next time.",
+      "a": "Connection-pool exhaustion, not a slow database. The asymmetry is the diagnosis: pool exhaustion leaves query duration FLAT while checkout wait climbs, whereas a slow database grows the query span itself. Confirming metric: pool used at max, idle at zero, pending requests non-zero. Instrumentation fix: stamp pool state (used/idle/pending) as attributes on every DB span, so one trace answers it without a second query. Terminal case: gap followed by no DB span at all means the checkout timed out and the query never ran.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T27-observability-debug-d8",
+      "module": "T27-observability-debug",
+      "q": "p99 doubled, p50 is flat. Give three ranked hypotheses and the cheapest discriminating check for each.",
+      "a": "(1) One bad host: group p99 by pod. If one pod diverges and all its routes are equally affected, it is host-local (GC, noisy neighbour, degraded disk). (2) A minority code path got slower: group by route, tenant and shard; a cache hit-rate drop is the classic instance, since the 2% missing now pay a degraded downstream. (3) A queued resource: check saturation and queue depth, since a pool or scheduler produces exactly this shape (most requests find capacity, a minority wait). In all three the confirming artifact is an exemplar trace from the TOP histogram bucket, not a randomly opened trace.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T27-observability-debug-d9",
+      "module": "T27-observability-debug",
+      "q": "A customer supplies a trace id and your backend returns nothing. Enumerate the drop points in likelihood order before you suspect a bug.",
+      "a": "(1) Never sampled: the head-based decision at the root said no. (2) Ingested but not retained: in Datadog, ingestion controls and retention filters are separate knobs, and spans are indexed and searchable for 15 days only if a retention filter matched. 100% sampling with a restrictive retention filter still leaves you nothing. (3) Outside the retention window entirely. (4) The id is a home-grown correlation id, not a W3C trace id. Only then suspect a pipeline failure.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T27-observability-debug-d10",
+      "module": "T27-observability-debug",
+      "q": "Half of your log lines carry a null trace_id. Explain the cause, why the missing half is the worse half, and the fix.",
+      "a": "Context loss at a concurrency boundary: thread-pool handoff, an asyncio task created without copying context, a callback, Spring @Async, a background queue consumer. It is not a logging-config bug. The missing half is the async half, which is where retries, background writes, and cleanup live, so the correlation gap is concentrated in exactly the code with the hard bugs. It also biases your mental model: the well-correlated parts look good because they are the simple parts. Fix: propagate context explicitly across the handoff (copy contextvars, capture Context.current() before submit, use an instrumented executor).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T27-observability-debug-d11",
+      "module": "T27-observability-debug",
+      "q": "Your team turned on tail sampling and trace quality got WORSE. Diagnose without seeing the config, and say why this is worse than head sampling.",
+      "a": "The Collector is almost certainly running as multiple replicas behind a plain round-robin service, so each replica sees only a fraction of each trace and evaluates its policies against a partial trace. Fix: a two-tier deployment with loadbalancingexporter and routing_key: traceID in front of the sampling tier. This is worse than head sampling because head sampling yields COMPLETE traces of a subset, whereas broken tail sampling yields INCOMPLETE traces of the subset you care about, and the incompleteness is silent: nothing errors, spans just quietly are not there.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T27-observability-debug-d12",
+      "module": "T27-observability-debug",
+      "q": "Design a tail-sampling policy set for a payments platform and justify each clause, including the one people omit.",
+      "a": "Head-based probabilistic pre-filter to cut raw volume; then tail policies: status_code=ERROR at 100%, latency above the SLO threshold at 100%, always_sample on the named critical payment routes, plus a small probabilistic slice (1-5%) of everything else. That last clause is the one people omit and it is not optional: if you keep only errors and slow traces you have no healthy trace to diff against, and 'what does a normal one look like' becomes unanswerable at the exact moment you need it. Size decision_wait against your longest normal trace (default 30s truncates batch jobs and long agent runs), budget memory as in-flight traces x spans x window, and generate span metrics with the spanmetrics connector UPSTREAM of the sampler so aggregate rates are not off by 1/p.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T27-observability-debug-d13",
+      "module": "T27-observability-debug",
+      "q": "A downstream dependency has degraded but a 98% cache hit rate hides it. Explain why 1% head sampling misses it, what you change, and what that change breaks.",
+      "a": "The culprit span only exists in the 2% of requests that miss cache, so at 1% head sampling it appears in 0.02% of stored traces and browsing for one is hopeless. The fix is not more sampling but outcome-aware selection: a tail latency policy keeping 100% above a duration threshold, or an exemplar pulled from the top histogram bucket, which by construction points at a slow request. What it breaks: if you now keep only errors and slow traces you have destroyed your baseline, so you must retain a small probabilistic slice of healthy traffic to diff against.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T27-observability-debug-d14",
+      "module": "T27-observability-debug",
+      "q": "The incident is over, the pod is gone, and you have no repro. Name the minimum set of things that had to be instrumented six months ago for this to be debuggable, then name the two you would keep under a budget cut.",
+      "a": "Six, in cost order: (1) W3C context propagation across every hop INCLUDING async handoffs; (2) structured logs with trace_id/span_id injected from active context, high-cardinality ids in the body not in index labels; (3) latency histograms with buckets straddling the SLO plus exemplars enabled end to end; (4) tail sampling keeping 100% of errors and 100% over a latency threshold plus a probabilistic baseline, with trace-id-aware Collector routing; (5) spans at boundaries carrying the business attributes that partition your traffic (tenant_id, shard, model_version, cache_hit); (6) always-on continuous profiling. Under a cut, keep (1) and (2): they are the substrate everything else assumes, since exemplars point at traces that must exist and profiles need a window you get from a trace. Sampling policy changes in an afternoon; retrofitting context propagation through an async codebase does not.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T27-observability-debug-d15",
+      "module": "T27-observability-debug",
+      "q": "A service's latency is 3s at p99 and its always-on CPU flame graph for that window is completely flat and unremarkable. Explain what that combination proves, and how you narrow the profile to the slow requests.",
+      "a": "It is positive evidence that the service was WAITING, not computing. A CPU profile samples on-CPU stacks only, so a thread blocked on a socket read, a lock, a pool acquire, or disk consumes zero samples and is structurally invisible. 'The flame graph looks fine' is the EXPECTED result for a wait-bound problem, not a clean bill of health. Switch to wall-clock or off-CPU profiling (py-spy --idle, async-profiler wall mode, off-CPU eBPF), or return to the trace where a wait appears as a gap. To narrow the window, use span profiles: Grafana's traces-to-profiles integration scopes the flame graph to one span's time range and service and embeds it in the span detail pane, so you profile that request rather than 30 seconds of all requests. It requires a per-language span-profiling bridge package; without it, traces and profiles stay unlinked.",
+      "difficulty": "staff"
+    }
+  ]
+}

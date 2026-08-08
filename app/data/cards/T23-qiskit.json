@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T23-qiskit-c1",
+      "topic": "Qiskit",
+      "q": "What are the three distinct things transpile() does?",
+      "a": "Basis translation (rewrite gates into the target's native gate set), routing (insert SWAP gates for limited qubit connectivity), and optimization (optimization_level=0-3, reducing gate count/depth).",
+      "module": "T23-qiskit"
+    },
+    {
+      "id": "T23-qiskit-c2",
+      "topic": "Qiskit",
+      "q": "What is the difference between Statevector simulation and shot-based (Sampler) simulation?",
+      "a": "Statevector gives the exact amplitude vector with no sampling noise, simulation-only. Sampler returns a counts dictionary from repeated executions with statistical noise shrinking as 1/√shots — this is what real hardware actually returns.",
+      "module": "T23-qiskit"
+    },
+    {
+      "id": "T23-qiskit-c3",
+      "topic": "Qiskit",
+      "q": "Why can real quantum hardware never return a Statevector object?",
+      "a": "Measurement is destructive and collapses the state (Born rule) — real devices only ever produce classical bitstrings from repeated executions, never the underlying amplitude vector directly.",
+      "module": "T23-qiskit"
+    },
+    {
+      "id": "T23-qiskit-c4",
+      "topic": "Qiskit",
+      "q": "How does statistical shot noise scale with the number of shots?",
+      "a": "Standard error ~ √(p(1-p)/shots), i.e. 1/√shots. 10x more shots buys ~√10≈3.16x tighter precision, not 10x. Verified: deviation from p=0.5 fell from 0.10 at 10 shots to 0.0009 at 100,000 shots.",
+      "module": "T23-qiskit"
+    },
+    {
+      "id": "T23-qiskit-c5",
+      "topic": "Qiskit",
+      "q": "How do you distinguish statistical shot noise from systematic hardware noise in a histogram?",
+      "a": "Statistical noise shrinks predictably as 1/√shots with more shots. Systematic noise (decoherence, gate error, readout error) persists regardless of shot count — a deviation that doesn't shrink with more shots points to real hardware noise, not sampling.",
+      "module": "T23-qiskit"
+    },
+    {
+      "id": "T23-qiskit-c6",
+      "topic": "Qiskit",
+      "q": "What replaced Qiskit's execute() function, and when?",
+      "a": "The primitives model — Sampler (measurement-outcome distributions) and Estimator (expectation values) — replaced execute() starting with Qiskit 1.0 (February 2024). They work identically on local simulators and real IBM hardware.",
+      "module": "T23-qiskit"
+    },
+    {
+      "id": "T23-qiskit-c7",
+      "topic": "Qiskit",
+      "q": "What is a 'fake backend' noise model in AerSimulator and why use it?",
+      "a": "It loads real calibration data (gate error rates, T1/T2, readout error) from an actual IBM device snapshot, letting you estimate realistic circuit performance locally with no queue wait or cost before submitting to real hardware.",
+      "module": "T23-qiskit"
+    },
+    {
+      "id": "T23-qiskit-c8",
+      "topic": "Qiskit",
+      "q": "Why should a Clifford-only circuit (H, S, CNOT) use a stabilizer simulator instead of a general statevector simulator?",
+      "a": "Gottesman-Knill (module 2) means Clifford-only circuits are classically efficiently simulable; a dedicated stabilizer simulator handles thousands of qubits in polynomial time by tracking stabilizer generators, whereas a general simulator still does full O(2^n) linear algebra.",
+      "module": "T23-qiskit"
+    },
+    {
+      "id": "T23-qiskit-c9",
+      "topic": "Qiskit",
+      "q": "What breaks a stabilizer simulator's polynomial-time advantage?",
+      "a": "Introducing even one non-Clifford gate (e.g. T) — stabilizer simulators are built specifically for Clifford operations and fail or require a fundamentally more expensive technique the moment T gates appear.",
+      "module": "T23-qiskit"
+    },
+    {
+      "id": "T23-qiskit-c10",
+      "topic": "Qiskit",
+      "q": "What does a mismatch between a counts dictionary's total and the requested shot count usually indicate?",
+      "a": "Missing measure() calls on some qubits, or measuring into fewer classical bits than qubits, silently dropping outcomes.",
+      "module": "T23-qiskit"
+    },
+    {
+      "id": "T23-qiskit-c11",
+      "topic": "Qiskit",
+      "q": "What is the recommended debugging order when a circuit's real-hardware results don't match expectations?",
+      "a": "Verify circuit logic against noiseless Statevector simulation first (zero noise, exact amplitudes visible). Only after confirming logical correctness there, move to shot-based simulation, then real hardware, to isolate whether a discrepancy is a logic bug versus a hardware/transpilation issue.",
+      "module": "T23-qiskit"
+    },
+    {
+      "id": "T23-qiskit-c12",
+      "topic": "Qiskit",
+      "q": "What is the maintenance status of qiskit-aer as of 2026?",
+      "a": "Under reduced maintenance — critical bug fixes only, feature requests backlogged — reflecting IBM's shifted investment toward cloud Runtime primitives and hardware-facing tooling, though it remains fully usable for local simulation.",
+      "module": "T23-qiskit"
+    }
+  ]
+}

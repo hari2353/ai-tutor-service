@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T22-contract-security-d1",
+      "module": "T22-contract-security",
+      "q": "Walk through the reentrancy attack mechanism precisely, and explain exactly why checks-effects-interactions fixes it.",
+      "a": "A vulnerable function sends funds via external call before updating its balance record. The external call transfers control to the receiver's code, which re-enters the same function while the balance still shows unwithdrawn, passing the check repeatedly. CEI fixes it by validating (checks), updating state to reflect completion (effects), and only then calling externally (interactions) -- any reentrant call now sees already-updated state.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T22-contract-security-d2",
+      "module": "T22-contract-security",
+      "q": "In a tested simulation, a vulnerable vault paid out 50 units against a single 10-unit deposit. Where did the other 40 units come from?",
+      "a": "From the shared pool -- the balances mapping tracks accounting per-address, but actual funds held by the contract are one shared pot. The attacker's reentrant withdrawals kept passing the balance check (never updated) while draining real funds from that shared pot, meaning the excess came directly out of other depositors' funds even though their records were never touched.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-contract-security-d3",
+      "module": "T22-contract-security",
+      "q": "What changed in Solidity 0.8.0 regarding arithmetic, and why doesn't this fully close the integer-overflow risk category?",
+      "a": "Checked arithmetic became default: +, -, * revert automatically on overflow, replacing silent wraparound. This relocates rather than eliminates the risk -- into unchecked{} blocks (deliberate gas opt-outs) and non-EVM-native numeric code paths, as Cetus Protocol's 2025 ~$223M Move-ecosystem u256 overflow demonstrated.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-contract-security-d4",
+      "module": "T22-contract-security",
+      "q": "If you see an unchecked block in a code review, is that automatically a red flag?",
+      "a": "No. unchecked is a legitimate gas optimization when surrounding logic provably bounds the value well under the overflow threshold. The actual audit question is whether that boundedness is truly guaranteed by the code as written, not whether unchecked appears at all.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-contract-security-d5",
+      "module": "T22-contract-security",
+      "q": "Explain a flash-loan-facilitated oracle manipulation attack end to end, and why it doesn't require any bug in the victim contract's code.",
+      "a": "Attacker borrows a large uncollateralized sum via flash loan (repayable same-transaction or it reverts). Uses it to violently move a thinly-traded DEX pool's spot price. A victim protocol reading that pool's reserves directly as 'the price' executes an action against the attacker at the distorted price. Attacker repays the loan, keeps the profit. Every individual step is legitimate -- the exploit is entirely in the victim's trust assumption about spot price, not in vulnerable code.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-contract-security-d6",
+      "module": "T22-contract-security",
+      "q": "If a victim protocol in an oracle manipulation attack has no code bugs, whose responsibility is the fix, and what is it?",
+      "a": "An architectural/design responsibility -- the choice of price oracle. The fix is switching to a TWAP (requires sustained multi-block manipulation, far more expensive/visible) or a decentralized oracle network aggregating many sources, neither of which a single flash-loan-funded transaction can unilaterally distort.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-contract-security-d7",
+      "module": "T22-contract-security",
+      "q": "What is MEV, and why is 'fix the smart contract' not a complete answer to front-running?",
+      "a": "MEV is value obtainable by controlling transaction ordering/inclusion within a block. Front-running/sandwiching exploits the fact pending transactions are visible in the public mempool before confirmation -- a structural property of public tx ordering, not a bug in any contract. Meaningful mitigation needs infrastructure-layer changes (private relays, encrypted mempools) or protocol-design changes (commit-reveal, batch auctions).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-contract-security-d8",
+      "module": "T22-contract-security",
+      "q": "Design an audit process for a new DeFi lending protocol before mainnet launch. Why is any single technique insufficient alone?",
+      "a": "Static analysis (Slither/Aderyn) for fast known-shape bugs. Fuzz testing (Foundry invariants, Echidna) defining protocol-specific invariants at scale manual review can't match. Formal verification (Certora/Halmos) for highest-risk logic, proving correctness for ALL inputs. Manual review throughout for intent/economic-design issues (oracle trust, admin powers) no automated tool has a pattern for -- each catches a different class, none is sufficient alone.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-contract-security-d9",
+      "module": "T22-contract-security",
+      "q": "If budget only allows one audit technique, which do you pick and why?",
+      "a": "Manual review. Automated tools catch known-shape bugs efficiently, but a protocol's actual novel economic vulnerabilities (a specific oracle trust assumption, an incentive misalignment) are exactly the class only a human reasoning about intent tends to find. Automated tools are a force multiplier on manual review, not a substitute for it.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-contract-security-d10",
+      "module": "T22-contract-security",
+      "q": "An audit flags an 'unchecked block overflow risk, low severity, requires an unrealistic input' and the team ships. A month later it's exploited via flash loan providing exactly that input. What went wrong in the risk assessment?",
+      "a": "'Requires an unrealistic input' assumes the input is hard/expensive to produce, but flash loans make enormous temporary capital trivially, permissionlessly available for one transaction -- turning an 'unlikely $50M position' into 'costs a flash-loan fee, achievable by anyone.' Any flash-loan-reachable exploit path should be assessed as realistically achievable by default.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-contract-security-d11",
+      "module": "T22-contract-security",
+      "q": "Is every audit finding involving a large input number automatically high severity?",
+      "a": "No -- overcorrecting to 'any large number is dangerous' is its own mistake. The actual test is whether the large input is achievable within a single transaction without collateral or special access. A flash loan satisfies that trivially; an input requiring genuine sustained capital or privileged access does not. Severity should track that distinction, not input magnitude alone.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-contract-security-d12",
+      "module": "T22-contract-security",
+      "q": "Compare integer overflow, reentrancy, and oracle manipulation by root-cause layer: which is language-level, code-pattern-level, and architecture-level?",
+      "a": "Integer overflow: language/compiler-level -- Solidity 0.8's checked-arithmetic default fixed the common case. Reentrancy: code-pattern-level -- the language provides everything needed to write it safely; the fix is developer discipline (CEI) plus tooling (ReentrancyGuard). Oracle manipulation: architecture-level -- no code pattern or compiler default fixes a design decision to trust a manipulable price source; only a different architectural choice (TWAP, decentralized oracle) fixes it.",
+      "difficulty": "staff"
+    }
+  ]
+}

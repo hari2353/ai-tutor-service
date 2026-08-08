@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T23-qiskit-d1",
+      "module": "T23-qiskit",
+      "q": "What's the difference between Statevector simulation and shot-based (Sampler) simulation, and which one can real hardware actually give you?",
+      "a": "Statevector gives the exact amplitude vector with no sampling noise, simulation-only. Sampler returns a counts dictionary with statistical noise shrinking as 1/√shots — this is what real hardware actually returns since measurement is destructive.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-qiskit-d2",
+      "module": "T23-qiskit",
+      "q": "A Bell-state circuit run with shots=1000 gives {'00': 507, '11': 493}. Is this consistent with the ideal circuit, or evidence of a bug?",
+      "a": "Consistent — theoretical standard error at 1000 shots for a fair 50/50 split is √(0.5·0.5/1000)≈0.0158 (~16 shots), and the observed split is well within one standard error.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-qiskit-d3",
+      "module": "T23-qiskit",
+      "q": "Why can't a real quantum computer ever return a Statevector object the way a simulator can?",
+      "a": "Measuring a qubit collapses its state to a classical outcome (Born rule) — real devices only produce classical bitstrings from repeated executions, never the underlying amplitude vector directly.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-qiskit-d4",
+      "module": "T23-qiskit",
+      "q": "What are the three distinct things transpile() does, and why does conflating them cause confusion?",
+      "a": "Basis translation (native gate rewriting), routing (SWAP insertion for connectivity), and optimization (optimization_level 0-3). Each has different failure symptoms — an unsupported-gate error vs. unexpected gate-count inflation vs. a compile-time/quality tradeoff — so treating them as one black box misdiagnoses problems.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-qiskit-d5",
+      "module": "T23-qiskit",
+      "q": "You increase shots from 1,000 to 100,000 on real hardware and the deviation from the ideal 50/50 Bell-state distribution barely changes. What does this tell you?",
+      "a": "The deviation is dominated by systematic hardware noise (decoherence, gate/readout error), not statistical shot noise. Statistical noise shrinks predictably as 1/√shots; a deviation that doesn't shrink at that rate indicates a noise floor more shots can't buy past.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-qiskit-d6",
+      "module": "T23-qiskit",
+      "q": "A teammate proposes debugging a suspected circuit-logic bug by submitting increasingly large shot counts to real IBM hardware. What's wrong with this approach?",
+      "a": "Real hardware runs cost money/queue time and are always contaminated by systematic noise on top of ideal behavior. A suspected logic bug is cheaper and clearer to debug against noiseless Statevector simulation first; only after confirming logical correctness does it make sense to move to shot-based simulation, then real hardware.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-qiskit-d7",
+      "module": "T23-qiskit",
+      "q": "What replaced Qiskit's execute() function, and why does this matter beyond an API rename?",
+      "a": "The primitives model (Sampler for counts, Estimator for expectation values) replaced execute() starting Qiskit 1.0 (Feb 2024). It matters because primitives work identically on local simulators and cloud hardware, and Estimator directly returns expectation values needed for VQE/QAOA without manual counts post-processing.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-qiskit-d8",
+      "module": "T23-qiskit",
+      "q": "Why would you deliberately use a 'fake backend' noise model instead of just submitting to real hardware?",
+      "a": "Fake backends load real calibration snapshots (gate error, T1/T2, readout error) from an actual device, letting you estimate realistic performance locally with no queue wait or cost before spending real hardware time — though it's a snapshot that can drift from live device state.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-qiskit-d9",
+      "module": "T23-qiskit",
+      "q": "A circuit built entirely from H, S, and CNOT runs noticeably slower than expected on a general-purpose simulator. What's the fix?",
+      "a": "Use a dedicated stabilizer-formalism simulator (Clifford/StabilizerState classes) — Gottesman-Knill means Clifford-only circuits are classically efficient, and a stabilizer simulator handles thousands of qubits in polynomial time by tracking stabilizer generators instead of the full O(2^n) amplitude vector.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-qiskit-d10",
+      "module": "T23-qiskit",
+      "q": "If a Clifford-only circuit has even one T gate mixed in, does the stabilizer simulator still work?",
+      "a": "No — stabilizer simulators are built specifically for Clifford operations and fail (or require a fundamentally more expensive technique like stabilizer-rank decomposition) the moment non-Clifford resources like T gates appear, mirroring the universality boundary from module 2.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-qiskit-d11",
+      "module": "T23-qiskit",
+      "q": "What failed when trying to pip install qiskit in a network-isolated sandbox, and why disclose that in a hands-on module rather than hide it?",
+      "a": "The install failed with a proxy/network connectivity error. Disclosing it and using a genuinely-run, cross-checked numpy statevector simulator instead of silently presenting untested Qiskit code as verified is the honest practice — labeling unrun code '# untested sketch' preserves trust in what actually was verified.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-qiskit-d12",
+      "module": "T23-qiskit",
+      "q": "A circuit works on a noiseless local simulator but transpiling it for real hardware inflates the gate count dramatically. What's the likely cause and fix?",
+      "a": "The real backend's coupling map doesn't support required two-qubit gates directly between the chosen qubits, forcing the router to insert SWAP gates (each ~3 CNOTs). Fix by checking backend.coupling_map before submission and choosing a logical-to-physical layout that keeps interacting qubits adjacent.",
+      "difficulty": "staff"
+    }
+  ]
+}

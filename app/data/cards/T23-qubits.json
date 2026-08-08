@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T23-qubits-c1",
+      "topic": "Qubits",
+      "q": "What is the general state of a single qubit and what constraint do the amplitudes obey?",
+      "a": "|ψ⟩ = α|0⟩ + β|1⟩, with α,β ∈ ℂ and |α|² + |β|² = 1 (unit vector in ℂ²).",
+      "module": "T23-qubits"
+    },
+    {
+      "id": "T23-qubits-c2",
+      "topic": "Qubits",
+      "q": "State the Born rule.",
+      "a": "Measuring |ψ⟩=α|0⟩+β|1⟩ in the computational basis gives outcome 0 with probability |α|² and outcome 1 with probability |β|², collapsing the state to the observed basis vector.",
+      "module": "T23-qubits"
+    },
+    {
+      "id": "T23-qubits-c3",
+      "topic": "Qubits",
+      "q": "Why is global phase unobservable but relative phase observable?",
+      "a": "Multiplying the whole state vector by e^{iγ} leaves every |amplitude|² unchanged, so global phase can't affect measurement probabilities. A phase difference between amplitudes (e.g. |+⟩ vs |−⟩) changes the state in a way a different measurement basis (e.g. after a Hadamard) can detect.",
+      "module": "T23-qubits"
+    },
+    {
+      "id": "T23-qubits-c4",
+      "topic": "Qubits",
+      "q": "Give the Bloch sphere parametrization of a pure single-qubit state.",
+      "a": "|ψ⟩ = cos(θ/2)|0⟩ + e^{iφ}sin(θ/2)|1⟩, θ∈[0,π], φ∈[0,2π), with |0⟩ at the north pole and |1⟩ at the south pole (global phase dropped).",
+      "module": "T23-qubits"
+    },
+    {
+      "id": "T23-qubits-c5",
+      "topic": "Qubits",
+      "q": "What does a Bloch vector of length less than 1 indicate?",
+      "a": "The qubit is in a mixed state (statistical ensemble, described by a density matrix), not a pure state — the geometric signature of decoherence/noise, not superposition.",
+      "module": "T23-qubits"
+    },
+    {
+      "id": "T23-qubits-c6",
+      "topic": "Qubits",
+      "q": "Why does simulating n qubits classically require O(2^n) memory?",
+      "a": "n qubits live in one joint tensor-product space ℂ²⊗...⊗ℂ² of dimension 2^n, not n separate 2D spaces, so a general n-qubit state needs 2^n complex amplitudes to specify.",
+      "module": "T23-qubits"
+    },
+    {
+      "id": "T23-qubits-c7",
+      "topic": "Qubits",
+      "q": "Define separable vs entangled for a two-qubit state.",
+      "a": "Separable: |ψ⟩ can be written as |a⟩⊗|b⟩ for some single-qubit states |a⟩,|b⟩. Entangled: no such factorization exists.",
+      "module": "T23-qubits"
+    },
+    {
+      "id": "T23-qubits-c8",
+      "topic": "Qubits",
+      "q": "What is the fast test for whether a two-qubit state is entangled?",
+      "a": "Reshape its 4 coefficients into a 2x2 matrix C[i,j] = coefficient of |i⟩|j⟩. The state is separable iff det(C)=0 (rank 1). For the Bell state (|00⟩+|11⟩)/√2, det(C)=0.5≠0, proving entanglement.",
+      "module": "T23-qubits"
+    },
+    {
+      "id": "T23-qubits-c9",
+      "topic": "Qubits",
+      "q": "State the Holevo bound.",
+      "a": "Measuring n qubits yields at most n classical bits of information, no matter how large or complex the underlying 2^n-dimensional state space is.",
+      "module": "T23-qubits"
+    },
+    {
+      "id": "T23-qubits-c10",
+      "topic": "Qubits",
+      "q": "State the no-signaling theorem and why entanglement can't send information faster than light.",
+      "a": "Local operations on one half of an entangled pair cannot change the marginal measurement statistics observed on the other half — the correlation is real but only becomes visible once both measurement records are compared classically (sub-light-speed).",
+      "module": "T23-qubits"
+    },
+    {
+      "id": "T23-qubits-c11",
+      "topic": "Qubits",
+      "q": "What is Schmidt rank and how does it generalize the det(C) entanglement test?",
+      "a": "The number of nonzero singular values of the reshaped bipartite coefficient matrix. Rank 1 = separable, rank >1 = entangled; for 2x2 matrices this coincides with the det(C)=0 test.",
+      "module": "T23-qubits"
+    },
+    {
+      "id": "T23-qubits-c12",
+      "topic": "Qubits",
+      "q": "Are GHZ and W states (3-qubit entangled states) equivalent forms of entanglement?",
+      "a": "No — they are inequivalent under local operations and classical communication (LOCC); no sequence of single-qubit operations converts one into the other, showing multipartite entanglement has no single scalar measure like Schmidt rank for bipartite states.",
+      "module": "T23-qubits"
+    }
+  ]
+}

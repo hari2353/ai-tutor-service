@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T26-reasoning-models-d1",
+      "module": "T26-reasoning-models",
+      "q": "What number demonstrates o3's test-time compute scaling on ARC-AGI-1, and at roughly what compute multiplier?",
+      "a": "75.7% at standard compute to 87.5% using roughly 172x more test-time compute, costing thousands of dollars per task at the high end.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-reasoning-models-d2",
+      "module": "T26-reasoning-models",
+      "q": "What is the core mechanical difference between GRPO and PPO?",
+      "a": "GRPO removes the separate critic/value network, instead normalizing each sampled completion's reward against its own group's mean and standard deviation to get the advantage.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-reasoning-models-d3",
+      "module": "T26-reasoning-models",
+      "q": "Why does chain-of-thought length grow during RL training even with no explicit length reward?",
+      "a": "No length penalty exists in the base recipe; longer chains succeed more often on hard problems, so the optimizer drifts toward greater length as a side effect of reinforcing correctness.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-reasoning-models-d4",
+      "module": "T26-reasoning-models",
+      "q": "What did the NeurIPS 2025 pass@k study find that complicates the 'RL teaches new reasoning' narrative?",
+      "a": "RL-trained models win at pass@1, but base models match or beat RL-trained models at large k, suggesting RL mostly sharpens sampling toward already-latent correct paths rather than expanding capability. Distillation from a stronger teacher did expand capability, a different mechanism.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-reasoning-models-d5",
+      "module": "T26-reasoning-models",
+      "q": "Give the documented 'overthinking' numbers for reasoning models on simple tasks.",
+      "a": "7-10x more tokens than a standard model for comparable or worse accuracy; one model spent 17 seconds on 'what is 1+1'; a measured case showed latency 18s->38s and cost $1.70->$2.59 for zero accuracy gain.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-reasoning-models-d6",
+      "module": "T26-reasoning-models",
+      "q": "How are reasoning tokens billed, and what operational mistake does this cause?",
+      "a": "Billed at the output-token rate (often the priciest tier) even when hidden from the visible response. Teams tracking only visible completion length in cost dashboards miss this and get blindsided by spend spikes.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-reasoning-models-d7",
+      "module": "T26-reasoning-models",
+      "q": "Why do most production RLVR recipes favor outcome-only rewards over process reward models?",
+      "a": "Outcome rewards are hard to game when the checker is genuinely objective. Process reward models are themselves learned and vulnerable to reward hacking, where the policy satisfies the PRM's notion of a good step without the step being logically necessary.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-reasoning-models-d8",
+      "module": "T26-reasoning-models",
+      "q": "What structurally distinguishes self-consistency (prompting-era CoT) from RL-trained native reasoning?",
+      "a": "Self-consistency samples multiple chains from a distribution untouched by any reasoning-linked training signal and votes over them, hitting diminishing returns fast. RL-trained reasoning reshapes the model's actual generation distribution via a correctness-tied reward, producing emergent behaviors like backtracking never explicitly demonstrated in training data.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-reasoning-models-d9",
+      "module": "T26-reasoning-models",
+      "q": "Why wasn't DeepSeek-R1-Zero shipped directly instead of the full multi-stage DeepSeek-R1 pipeline?",
+      "a": "R1-Zero's raw RL-only output was poorly formatted and sometimes mixed languages, unusable as a product. The shipped R1 added SFT stages specifically for readability, not for the reasoning behavior itself, which came from the RL phases.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-reasoning-models-d10",
+      "module": "T26-reasoning-models",
+      "q": "Staff-level: a team wants reasoning_effort set to high as the default for every agent call. What's the evidence-based pushback?",
+      "a": "The overthinking data shows reasoning mode can burn 7-10x tokens and score worse on simple tasks -- 'can only help' is empirically false for typical high-volume, mostly-simple production traffic. Push for measuring the accuracy/latency/cost delta per task class on real traffic and setting effort per class, not globally.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-reasoning-models-d11",
+      "module": "T26-reasoning-models",
+      "q": "Why is an unbounded reasoning-effort call structurally incompatible with a voice agent's latency budget?",
+      "a": "Reasoning tokens add tens of seconds of sequential generation before any output is available, which cannot fit inside a sub-second-to-few-second conversational latency budget regardless of the accuracy benefit; the reasoning step must be moved off the synchronous critical path.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-reasoning-models-d12",
+      "module": "T26-reasoning-models",
+      "q": "What industry-wide compute shift is projected by 2030 for inference versus training compute?",
+      "a": "Inference compute is projected to reach roughly 75% of total AI compute by 2030, inverting the training-dominated paradigm of the early 2020s.",
+      "difficulty": "warmup"
+    }
+  ]
+}

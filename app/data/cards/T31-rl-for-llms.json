@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T31-rl-for-llms-c1",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "In the token-level LLM MDP, what are the state, action, transition, reward and gamma?",
+      "a": "State = prompt + tokens emitted so far. Action = the vocabulary (Llama 3: 128,256; Qwen2.5: 151,936; DeepSeek-V3: 129,280). Transition = string concatenation, deterministic and known, so P(s'|s,a) is a delta and there is nothing to model. Reward = 0 for t<T, R(x,y) at the final token only. gamma ~ 1.0, NOT 0.99, because a token at position 3000 is not worth 0.99^3000 (about 8e-14) of a token at position 0.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c2",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "Why is the critic in LLM RL only a baseline, not a credit-assignment device?",
+      "a": "With gamma=1 and terminal-only reward, Q(s_t,a_t) = R(x,y) for every token t, so A(s_t,a_t) = R(x,y) - V(s_t). Transitions are deterministic, so V carries no environment stochasticity; all its variance comes from the policy's own future sampling. V is therefore a pure variance-reduction baseline. This is exactly why GRPO can replace it with the mean reward of G samples.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c3",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "Write the Bradley-Terry reward-model loss and name three properties that fall out of it.",
+      "a": "L_RM = -E[log sigma(r_phi(x,y_w) - r_phi(x,y_l))]. (1) r is identified only up to an additive per-prompt constant c(x), since sigma sees only the difference; DPO exploits exactly this. (2) It cannot express ties or intransitive preferences; it forces a total order. (3) Scalar collapse: helpfulness, harmlessness, verbosity and format are crushed into one number the policy can trade between. Typical held-out accuracy is 65-75%.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c4",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "State Gao et al. (2022) reward-model overoptimisation scaling laws, and the counterintuitive result about the KL coefficient.",
+      "a": "With d = sqrt(KL(pi || pi_init)): RL gives R_gold(d) = d(alpha_RL - beta_RL log d); best-of-n gives R_gold(d) = d(alpha_bon - beta_bon d). Both rise, peak, then fall while proxy reward climbs monotonically. The counterintuitive result: the KL PENALTY COEFFICIENT does not change the KL-versus-gold-reward frontier at all. It only changes how fast you move along it, so every point reachable by tuning beta is reachable with beta=0 plus early stopping at the same measured KL.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c5",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "What does scaling the reward model buy, and does policy size change how fast you overoptimise?",
+      "a": "A larger proxy RM shrinks the beta term that governs the decline, so the gold-reward peak arrives later and higher; alpha_RL is roughly constant across RM sizes, so RM scale buys durability under optimisation, not a better initial slope. Policy size does NOT change the rate of overoptimisation per nat of KL. Larger policies get less absolute gold-reward gain (they start better) but do not Goodhart faster.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c6",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "Derive the closed-form optimum of the KL-regularised RLHF objective.",
+      "a": "max_pi E[r] - beta*KL(pi||pi_ref) rewrites as min_pi E[log(pi / (pi_ref * e^{r/beta}))]. Define Z(x) = sum_y pi_ref e^{r/beta} and pi* = pi_ref e^{r/beta} / Z(x). Then the objective is min_pi [KL(pi||pi*) - log Z(x)]. Z is independent of pi and KL is uniquely minimised at 0, so the optimum is pi*(y|x) proportional to pi_ref(y|x) e^{r(x,y)/beta}: a Gibbs distribution with the reference as base measure and beta as temperature.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c7",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "Give the four steps of the DPO derivation and the final loss.",
+      "a": "(1) Solve the KL-regularised objective: pi* proportional to pi_ref e^{r/beta} / Z(x). (2) Invert: r(x,y) = beta log(pi*/pi_ref) + beta log Z(x). (3) Substitute into Bradley-Terry; since Z depends only on x, the beta log Z(x) terms cancel in the reward difference. (4) Maximum likelihood: L_DPO = -E[log sigma(beta log(pi_theta(y_w|x)/pi_ref(y_w|x)) - beta log(pi_theta(y_l|x)/pi_ref(y_l|x)))]. No reward model, no sampling, four forward passes per example, two no-grad.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c8",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "Name five ways DPO genuinely diverges from RLHF in practice.",
+      "a": "(1) DPO is offline: the KL term binds only where the fixed dataset has support, and is unconstrained elsewhere. (2) A reward model is evaluated on fresh on-policy samples so it can penalise novel failures; a preference dataset cannot. (3) Likelihood displacement: a step can raise the margin while lowering log pi(y_w) itself. (4) beta is a static coefficient with no measured KL to early-stop on. (5) Reward hacking relocates from the RM to the dataset (e.g. chosen responses being 40% longer teaches 'longer is better').",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c9",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "What did Xu et al. (2404.10719) find about DPO versus PPO, and why is it surprising?",
+      "a": "Tuned PPO beat DPO on dialogue (HH-RLHF, SafeRLHF) and on code generation (APPS, CodeContests). It is surprising because academic leaderboards usually favour DPO. Their explanation is that DPO is susceptible to distribution shift between the model's outputs and the preference dataset, and can find solutions that exploit out-of-distribution responses, deviating from the reference far more than beta suggests. The catch: their PPO required serious tuning most teams will not do.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c10",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "Why is GRPO's group-mean baseline legitimate, and which part of GRPO's advantage is NOT unbiased?",
+      "a": "Any action-independent b(s) leaves the gradient unbiased: E[grad log pi(a|s) * b(s)] = b(s) * grad(sum_a pi) = b(s) * grad(1) = 0. Centring by the group mean is essentially unbiased (a small (G-1)/G correlation because the sample sits inside its own baseline; RLOO's leave-one-out mean removes it exactly). Dividing by std(R) is NOT unbiased: it is a nonlinear group-dependent rescaling that reweights prompts by difficulty.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c11",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "Do the PPO-RLHF memory arithmetic for a 7B and a 70B policy.",
+      "a": "Mixed-precision Adam is 16 bytes/param trainable (2 bf16 weights + 2 grads + 4 fp32 master + 4 m + 4 v); frozen inference models are 2 bytes/param. At 7B: policy 112 GB + critic 112 GB + RM 14 GB + reference 14 GB = 252 GB. At 70B: 1120 + 1120 + 140 + 140 = 2520 GB, i.e. 32 H100-80GB of state alone. GRPO drops the critic: 1400 GB (18 GPUs), a 44.4% cut. GRPO + verifier + beta=0 drops RM and reference too: 1120 GB (14 GPUs), 2.25x total.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c12",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "What are Dr. GRPO's two objections to GRPO's normalisers, with numbers?",
+      "a": "(1) Dividing by |o_i| gives a long wrong answer a SMALLER per-token penalty than a short wrong answer, so the optimiser lengthens incorrect completions to dilute the punishment. Symptom: mean length of incorrect completions rises while correct ones stay flat. (2) Dividing by std(R) reweights by difficulty: with binary rewards std = sqrt(p(1-p)), so a 15/16-correct group (std 0.242) is scaled 1/0.242 = 4.13 while a maximally informative 50/50 group (std 0.5) gets 2.0, a 2.07x over-weighting of the least informative prompts.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c13",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "Why does RLVR work in math and code, and what is the actual attack surface?",
+      "a": "Not because the reward is cheap, but because a verifier has no parameters and no training set, so there is no generalisation gap for the policy to exploit. The gold curve does not bend down, so beta can be 0.001 or 0 and you can run thousands of steps. The attack surface moves to the checker's COMPLETENESS: over-permissive answer-extraction regexes, code that special-cases visible tests, editing or stubbing tests, exiting early. Defenses: symbolic equivalence (math-verify), held-out tests, a no-network sandbox with hard timeouts.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c14",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "Name five observed, documented reward-hacking cases.",
+      "a": "(1) CoastRunners (OpenAI, 2016): the boat circles a lagoon collecting respawning targets instead of racing, catching fire, and still outscores humans. (2) Robot hand (OpenAI, 2017) positions itself between camera and ball so evaluators believe it grasped. (3) Length bias: RMs score longer responses higher, so PPO inflates length 2-3x with no quality gain. (4) Sycophancy: agreeing with the user's stated belief beats being correct. (5) Test subversion in coding RL (OpenAI, Mar 2025): stubbing functions, editing tests, exiting early, with 'Let's hack' stated in the CoT.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c15",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "Why should you not train against a chain-of-thought monitor?",
+      "a": "OpenAI's March 2025 result: frontier reasoning models state their intent to cheat in plain language in the CoT, so it is a good detector. But applying optimisation pressure DIRECTLY to the CoT to suppress those statements reduced visible misbehaviour without eliminating the underlying behaviour; it taught the model to conceal intent. Rule: monitor the CoT, do not train on the monitor. Keep at least one channel unoptimised.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c16",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "Diagnose entropy collapse in a GRPO run: mechanism, symptom, and the fixes in order.",
+      "a": "Symptom: entropy falls to near 0 by step 100-300, all G samples in a group become identical, within-group reward std goes to 0, every advantage is 0, the gradient vanishes and the run flatlines. Mechanism: the clip is asymmetric in effect (clip-high blocks low-probability 'exploration' tokens being pushed up), and entropy change is driven by covariance between token log-prob and logit change, concentrated on a few high-covariance tokens. Fixes: clip-higher (eps_high 0.28 vs eps_low 0.2), dynamic sampling to drop unanimous groups, a small entropy bonus (~1e-3), KL-Cov/Clip-Cov, ProRL-style reference resetting, higher temperature.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c17",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "State both sides of the 'does RL add capability or only elicit it' disagreement with the evidence each cites.",
+      "a": "Elicitation (Yue et al., 2504.13837): RLVR models beat base at pass@1 and pass@4, but as k reaches the tens and hundreds base catches up and OVERTAKES, without exception; RL's reasoning paths already lie in the base's sampling distribution. Supported by mechanistic work finding under ~3% of token positions materially changed, promoted tokens already in the base's top-5. Addition (ProRL, 2505.24864): that is an artefact of short runs; past 2000 steps with KL control and reference resetting, RL beats base across the WHOLE pass@k range including tasks base fails at any k; ProRLv2 reports +14.7% pass@1 on math, +13.9% on code from 2000 to 3000 steps.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c18",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "What are the two ways to apply the KL penalty, and what is the k3 estimator?",
+      "a": "Form A (InstructGPT): put it in the per-token reward, r_t = R(x,y)*1[t=T] - beta*log(pi_theta/pi_ref). This makes KL a dense reward, gives the critic a target at every position, and routes credit through GAE, but single samples can be negative. Form B (GRPO): add -beta*KL to the loss using k3 = rho - log rho - 1 with rho = pi_ref/pi_theta. k3 is non-negative for every sample (rho - 1 >= log rho) and unbiased, because E_pi_theta[rho - 1] = 0 makes it a zero-mean control variate on k1 = -log rho.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c19",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "Recite the headline hyperparameters: InstructGPT, DeepSeekMath, DeepSeek-R1, DAPO, and TRL's current GRPO defaults.",
+      "a": "InstructGPT: ~13k SFT prompts, ~33k comparison prompts, K=4-9 completions ranked (all C(K,2) pairs in ONE batch element), 6B RM (175B was unstable), PPO-ptx for the alignment tax. DeepSeekMath GRPO: G=64, beta=0.04, batch 1024, max len 1024. DeepSeek-R1: G=16, beta=0.001, 32 questions x 16 samples = 512/step, max 32,768 tokens. DAPO: clip-higher eps_low 0.2 / eps_high 0.28. TRL GRPOConfig on main (2026-08-05): G=8, beta=0.0, eps=0.2, num_iterations=1, temperature=1.0, loss_type='dapo', scale_rewards='group'.",
+      "module": "T31-rl-for-llms"
+    },
+    {
+      "id": "T31-rl-for-llms-c20",
+      "topic": "RL for LLMs: RLHF → DPO → GRPO, Reward Hacking, and Why It's Different",
+      "q": "What is the alignment tax, and why doesn't the KL penalty already fix it?",
+      "a": "RLHF degrades public NLP benchmarks relative to the base model; InstructGPT reported regressions on SQuAD, DROP, HellaSwag and WMT. The fix is PPO-ptx: add gamma * E_{x~pretrain}[log pi_theta(x)] to the objective, mixing pretraining gradients into the PPO update. The KL penalty does not fix it because KL constrains the policy's distribution ON THE RL PROMPT DISTRIBUTION (instruction-following prompts) and says nothing about behaviour on the pretraining distribution, where SQuAD and WMT live. Two regularisers that look similar and bound different things.",
+      "module": "T31-rl-for-llms"
+    }
+  ]
+}

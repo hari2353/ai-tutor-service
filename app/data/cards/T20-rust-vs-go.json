@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T20-rust-vs-go-c1",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "Where does each of Rust, Go and Python make you pay its cost?",
+      "a": "Rust pays at authoring and build time (55% of devs wait >10s per incremental rebuild; 45% of people who quit Rust cited compile times). Go pays at runtime in GC (25% CPU budget, ~2x live heap, mark assist in the request path) and at scale in expressiveness. Python pays at runtime (GIL, ~40 MB/s json.loads, 10-100x slower on pure-Python CPU work) and in operational risk from dynamic typing. Total cost is roughly constant; you choose which column your org can absorb.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c2",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "What is Go's stop-the-world pause history and its stated SLO?",
+      "a": "300-400 ms pre-1.5, 30-40 ms in 1.5 (Aug 2015), 4-5 ms in 1.6, sub-millisecond in 1.8 (Mar 2017, after removing STW stack re-scanning), with a 'whisper number' of 100-200 microseconds by 1.9. Go's stated 2018 SLO: 500 microseconds STW per GC cycle, heap at 2x live, GC CPU capped at 25% of GOMAXPROCS. Source: Rick Hudson's ISMM 2018 keynote.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c3",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "If Go's STW pauses are sub-millisecond, why did Discord's Read States service spike every 2 minutes?",
+      "a": "The cost is proportional to the LIVE heap scanned, not the garbage freed. Their LRU cache held tens of millions of Read States, so every cycle traced the whole cache. Go's runtime forces a GC at least every 2 minutes regardless of allocation rate (forcegcperiod). SetGCPercent tuning did nothing because they were not allocating fast enough. The cost lands as mark assist charged to allocating goroutines, so it shows up as a p99.9 regression, not a pause in the trace.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c4",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "What is the 'tyranny of the nines' and why does it kill a p99 GC argument?",
+      "a": "From Go's own ISMM keynote: if 99% of GC cycles are under 10 ms and a user session makes 100 server requests, only 0.99^100 = 37% of users get a consistently sub-10ms session. To get 99% of USERS under the bar you need the 99.99th percentile, not the 99th. Any latency argument that stops at p99 has not engaged with the problem.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c5",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "Measured: what happens when you run two CPU-bound Python threads on two cores?",
+      "a": "It gets SLOWER. Two loops of 6,000,000 iterations: 898 ms serial in one thread, 1,062 ms across two threading.Thread. That is 0.85x, an 18% regression, purely from GIL handoff and eval-breaker overhead. Threads help in Python only when the work releases the GIL (I/O or a C extension).",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c6",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "What is the current status of free-threaded Python, precisely?",
+      "a": "PEP 703 designed it; PEP 779 made the free-threaded build officially supported in Python 3.14, shipping as a separate 3.14t binary. Single-thread overhead is ~1% on macOS aarch64 and ~8% on x86-64 Linux (down from ~40% in 3.13). Memory is higher: None is 32 B vs 16 B, interned strings are immortal, mimalloc replaces pymalloc, QSBR defers frees. Importing a C extension not marked free-threading-compatible silently RE-ENABLES the GIL. GIL default-off is not planned before the 2028-2030 window.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c7",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "Compare the three concurrency units: goroutine, Rust future, asyncio task.",
+      "a": "Goroutine: 2 KB initial stack grown by copying, GMP work-stealing scheduler with 256-slot local run queues, GOMAXPROCS OS threads, signal-based async preemption since Go 1.14 (~10 ms), no function colouring. Rust future: a compile-time state machine, inert until polled, size equals the largest live state across await points, NO preemption at all. Asyncio task: measured 2,185 bytes per task (100k tasks), 161 ns per await of a ready coroutine, no preemption, and no parallelism on the GIL build.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c8",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "What happens when you make a blocking call inside a handler, in each language?",
+      "a": "Go: the runtime parks the goroutine and other goroutines keep running, so a blocking syscall is fine (a tight CPU loop was a hang before 1.14's async preemption). Rust: it stalls one Tokio worker thread for the whole duration, because nothing preempts poll. Python asyncio: it stalls the ENTIRE event loop and therefore every concurrent request. Tools: tokio-console, asyncio debug mode with loop.slow_callback_duration, and Go's runtime/trace plus the new 1.26 /sched/goroutines metrics.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c9",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "What did the Rust project's own 2025 compiler performance survey find?",
+      "a": "3,700+ responses. Average build satisfaction 6/10. 55% wait more than 10 seconds for an incremental rebuild. ~45% of respondents who had STOPPED using Rust cited compile times. ~20% blocked by clean builds; ~25% of the 1,495 CI users blocked by CI build time, and ~36% of those use no CI cache at all. ~33% blocked by IDE annotation latency; >35% by Rust Analyzer and Cargo fighting over the build lock. ~42% have tried no mitigation whatsoever.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c10",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "Why is Rust slow to compile, and what actually helps?",
+      "a": "Monomorphisation plus LLVM plus linking, not the borrow checker (which is single-digit percent of build time). Measured: 200 instantiations of one 8-line generic function produce 10,847 lines of LLVM IR and a 536 ms rebuild versus 5,690 lines and 169 ms for the single dyn version, a 3.17x difference. Fixes: LLD (default on x86_64-unknown-linux-gnu since Rust 1.90) or mold, sccache, debug = 'line-tables-only' (2-30% cycles), cargo llvm-lines then the thin-generic-wrapper refactor, splitting the workspace, cutting default features.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c11",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "What are the PostHog Django-to-Rust numbers, and what is the honest reading?",
+      "a": "p50 21.7 -> 11.8 ms (1.8x), p90 160 -> 31.2 ms (5.1x), p95 381 -> 42.9 ms (8.9x), p99 904 -> 85.4 ms (10.6x). Same ~500k req/min went from ~300 pods at ~$8.8k/month to ~90 pods at ~$2.8k/month, a 68% cost cut. Their synthetic benchmark was 21x (axum ~32k rps vs Django ~1.5k) and did not materialise. Honest reading: the median barely moved while the tail collapsed, and in the same change they moved evaluation out of SQL, added cohort caching, and deleted PgBouncer. Much of the win is architectural.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c12",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "Name five specific cases where Rust is the wrong choice.",
+      "a": "1) I/O-dominated services: 20x faster on 15% of latency buys 3%. 2) Requirements still moving: Rust's cost is front-loaded onto getting ownership right and is repaid only when the code stops changing. 3) Fewer than ~40% of the team can review it, so the review queue becomes one person. 4) Anything Kubernetes-adjacent, because the ecosystem gravity is Go and you will reimplement client-go badly. 5) ML training and the model layer of inference, because the kernels are CUDA with Python bindings.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c13",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "What did Google's Rust productivity study actually say, including the clause people omit?",
+      "a": "Lars Bergstrom at Rust Nation UK 2024: rewriting C++ services in Rust cut effort to build and maintain by more than 2x in every measured case, and retraining C++ to Rust took time comparable to Java to Kotlin. The omitted clause: Go and Rust teams finished the same rewrite task at the SAME speed, while the C++ team took twice as long. The study supports Rust over C++, not Rust over Go.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c14",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "What are the hiring-pool numbers, and why do they cut both ways?",
+      "a": "Stack Overflow 2025 (89k+ respondents), used in the past year: Python 57.9%, Java 29.4%, Go 16.4%, Rust 14.8%, JavaScript 66%+. Rust has been most admired for ten consecutive years (72% in 2025). Admiration measures desire, not supply: many want to write Rust, roughly one in seven has written any, and far fewer have shipped and operated a production Rust service. Time to first useful PR is roughly day one for Python, 3-7 days for Go, 4-8 weeks for Rust.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c15",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "Why is Python's memory footprint structurally worse, and by how much?",
+      "a": "Not per-object overhead, but process multiplication: a GIL-bound service that needs 8 cores runs 8 processes, each paying the full interpreter plus every preloaded artefact. Measured: a bare Python 3.10 interpreter is 17.3 MB RSS, +10.7 MB after a modest stdlib import set. If each worker also holds a 400 MB model, that is 3.2 GB for one pod to use 8 cores. For comparison, a Rust axum service is ~10-30 MB and a Go net/http service ~20-60 MB, with Go typically 2-4x Rust because the collector keeps roughly 2x live heap resident.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c16",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "What are GOGC and GOMEMLIMIT, and what is the trap with GOMEMLIMIT?",
+      "a": "GOGC defaults to 100: collect when the heap reaches (1 + GOGC/100) x live, i.e. 2x. Raising it to 200-400 is a cheap win for allocation-heavy services with RAM to spare. GOMEMLIMIT (Go 1.19+) is a SOFT limit that makes the collector work harder as you approach it; the idiomatic container config is GOGC=off plus GOMEMLIMIT at ~90% of the container limit. The trap: soft means that if live heap genuinely exceeds it you get a GC death spiral (100% GC CPU, no forward progress) instead of a clean OOM. Keep a real container limit too, and alert on GC cycle rate, not RSS.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c17",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "What is the polyglot boundary rule, and why is Rust uniquely good at FFI?",
+      "a": "Cross language over a NETWORK boundary (gRPC/HTTP) by default; cross via FFI only when the call is hot enough that a network hop dominates, and then make the boundary COARSE (once per request over 10k rows, never 10k calls). Rust is uniquely good at FFI because it has no runtime to initialise: no GC to start, no interpreter to embed, no scheduler assuming it owns the process. PyO3 with py.allow_threads() releases the GIL, which is how pydantic-core, tokenizers, polars, orjson, ruff and uv give Python real parallelism. Go is the weak one: cgo crosses goroutine to system stack (Go 1.26 cut that overhead ~30%) and c-shared drags the whole Go runtime into the host.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c18",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "What changed in Go 1.26's garbage collector?",
+      "a": "The Green Tea collector, an experiment in 1.25, became the default. Its design improves marking and scanning of small objects through better locality and CPU scalability. Expected 10-40% reduction in GC overhead on programs that use the GC heavily, plus a further ~10% on Intel Ice Lake / AMD Zen 4 and newer where it uses vector instructions for small-object scanning. Opt out with GOEXPERIMENT=nogreenteagc, which is expected to be removed in Go 1.27. It narrows the Rust gap; it does not close it, because the mechanism (scan the live heap) is unchanged.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c19",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "State the seven-step language decision procedure.",
+      "a": "1) Write the constraint as a number, or admit there is none. 2) Check hard disqualifiers (no GC allowed -> Rust/C; native extension -> Rust; p99.9 <5 ms with GB live heap -> Rust; model training -> Python; k8s operator -> Go). 3) Estimate the runtime gap, then multiply by the fraction of wall time actually spent in your code. 4) Price the team cost: below 40% fluent, add a quarter of ramp and name it. 5) Price the iteration cost: above ~60 s edit-compile-test, engineers stop running tests locally. 6) If nothing fires, use what the team already runs. 7) Write down the falsification condition.",
+      "module": "T20-rust-vs-go"
+    },
+    {
+      "id": "T20-rust-vs-go-c20",
+      "topic": "Rust vs Go vs Python: The Honest Selection Criteria",
+      "q": "What is the correct language stack for a multi-tenant LLM inference product?",
+      "a": "Python for the model tier, because vLLM, TGI and TensorRT-LLM are where continuous batching and paged attention live. Rust for the tier AROUND the model: router, admission control, KV-cache-aware load balancing, tokenisation (tokenizers is already Rust), request/response streaming. That tier is CPU-bound, latency-sensitive, memory-per-pod sensitive and has a stable spec, which is exactly Rust's profile. Go for the control plane and anything talking to Kubernetes. Cross over gRPC, not FFI, except where PyO3 already does it. Do NOT propose replacing the CUDA kernels with candle or burn.",
+      "module": "T20-rust-vs-go"
+    }
+  ]
+}

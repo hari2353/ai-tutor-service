@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T22-scaling-c1",
+      "topic": "Fraud Proof vs Validity Proof",
+      "q": "What's the mechanical difference between a fraud proof and a validity proof?",
+      "a": "Fraud proof is REACTIVE: the system assumes correctness by default, relying on someone actively detecting and proving a claim wrong within a challenge window. Validity proof is PROACTIVE: a cryptographic proof mathematically demonstrates correctness before acceptance -- no challenge window, no assumption anyone is watching.",
+      "module": "T22-scaling"
+    },
+    {
+      "id": "T22-scaling-c2",
+      "topic": "Optimistic Rollup Withdrawal Delay",
+      "q": "Why do optimistic rollup withdrawals to L1 take about a week, and how is this made invisible to users?",
+      "a": "The L1 contract can't treat L2 state as final until the challenge window (~7 days historically) passes with no successful fraud proof -- shortening it would weaken security. Production systems use third-party liquidity providers who front users funds immediately for a fee, then collect the real withdrawal once the window elapses.",
+      "module": "T22-scaling"
+    },
+    {
+      "id": "T22-scaling-c3",
+      "topic": "Single Honest Watcher",
+      "q": "Why does fraud-proof security only require one honest watcher, not a majority?",
+      "a": "The sequencer posts a bond; a successful fraud proof from ANY single party slashes it and rewards the challenger. This makes fraud a strictly losing bet given any nonzero probability that at least one economically-motivated party is watching during the entire challenge window.",
+      "module": "T22-scaling"
+    },
+    {
+      "id": "T22-scaling-c4",
+      "topic": "Data Availability as Bottleneck",
+      "q": "Why is data availability, not raw computation, described as the real rollup scaling bottleneck?",
+      "a": "Rollup security (fraud-proof challengeability, independent state reconstruction) depends entirely on transaction data being retrievable, not just a claimed state root. Plasma's fatal flaw: posting only a state root let operators withhold data, breaking the exit/challenge mechanism regardless of correctness.",
+      "module": "T22-scaling"
+    },
+    {
+      "id": "T22-scaling-c5",
+      "topic": "EIP-4844 Blobs",
+      "q": "What did EIP-4844 (Dencun, March 2024) introduce, and how long is blob data retained?",
+      "a": "A separate, much cheaper data-storage lane ('blobs') specifically for rollup data, priced separately from regular calldata. Blobs are pruned after roughly 18 days -- enough for fraud-proof challenges and reconstruction, but not permanent storage.",
+      "module": "T22-scaling"
+    },
+    {
+      "id": "T22-scaling-c6",
+      "topic": "Fusaka PeerDAS",
+      "q": "What did Fusaka's PeerDAS (December 2025) change about data availability?",
+      "a": "Distributes blob data across the network so each node stores only about 1/8 of the total, delivering roughly a 10x increase in data-availability capacity without proportionally increasing what any single node must handle.",
+      "module": "T22-scaling"
+    },
+    {
+      "id": "T22-scaling-c7",
+      "topic": "ZK-Rollup Finality Speed",
+      "q": "Why can ZK-rollup withdrawals finalize in minutes rather than days?",
+      "a": "A validity proof attached to each batch mathematically proves correctness before it's accepted -- there's nothing left to challenge, so finality doesn't depend on waiting to see if anyone objects, unlike optimistic rollups' challenge-window model.",
+      "module": "T22-scaling"
+    },
+    {
+      "id": "T22-scaling-c8",
+      "topic": "Bridge Structural Risk",
+      "q": "Why do bridges concentrate risk differently than either connected chain's own consensus?",
+      "a": "A bridge locks funds on one chain behind a smaller, often less battle-tested attestation mechanism (a contract, validator set, or multisig) that authorizes minting/release on another chain. Compromising that mechanism requires no exploit of either chain's actual consensus -- it's a separate, usually weaker trust boundary.",
+      "module": "T22-scaling"
+    },
+    {
+      "id": "T22-scaling-c9",
+      "topic": "Major Bridge Hacks",
+      "q": "Name three major bridge hacks, their losses, and mechanism.",
+      "a": "Ronin (Mar 2022, ~$625M): 5-of-9 validator key compromise. Wormhole (Feb 2022, ~$320M): signature-verification bug minted 120K wETH from nothing. Nomad (Aug 2022, ~$190M): trusted-root set to zero address, letting anyone spoof withdrawals.",
+      "module": "T22-scaling"
+    },
+    {
+      "id": "T22-scaling-c10",
+      "topic": "Bridges Are Not a Solved Problem",
+      "q": "Is bridge hacking a solved, historical (2021-2022) problem?",
+      "a": "No -- it's an ongoing, currently-recurring category. 2026 alone saw $340M+ in bridge-specific losses in H1, with Q2 2026 bridge vulnerabilities accounting for close to half of that quarter's ~$755M total DeFi losses.",
+      "module": "T22-scaling"
+    },
+    {
+      "id": "T22-scaling-c11",
+      "topic": "Higher Bridge Threshold Doesn't Solve Risk",
+      "q": "Does a higher m-of-n validator signing threshold on a bridge eliminate concentrated-trust risk?",
+      "a": "No, it only raises the cost of compromise. Ronin's 5-of-9 threshold, in hindsight, wasn't high enough against a sufficiently resourced attacker. Any m-of-n scheme remains a meaningfully smaller, more concentrated trust surface than either connected chain's full consensus.",
+      "module": "T22-scaling"
+    },
+    {
+      "id": "T22-scaling-c12",
+      "topic": "Rollup Security Not Automatically L1-Equal",
+      "q": "Is a rollup automatically 'as secure as L1'?",
+      "a": "No -- security is bounded by both the fraud-proof/validity-proof mechanism's correctness AND the data-availability guarantee. A rollup anchoring DA to something other than Ethereum L1 itself has a meaningfully different, generally weaker security model, even if marketed as 'L2'.",
+      "module": "T22-scaling"
+    }
+  ]
+}

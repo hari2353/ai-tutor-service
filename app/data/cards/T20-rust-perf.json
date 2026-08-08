@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T20-rust-perf-c1",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "What does \"zero-cost abstraction\" actually claim, and how do you verify it?",
+      "a": "It claims the abstraction costs nothing beyond what the hand-written equivalent with the same semantics costs, and that you don't pay for what you don't use. Verify by reading generated assembly in a --release build: `cargo asm --lib 'crate::f' --rust`, Compiler Explorer, or `objdump -d` on the rlib. Measured on rustc 1.97.1: `v.iter().copied().fold(0, wrapping_add)` = 35 instructions vs the index loop's 34, identical SSE2 `paddq` core (2x unrolled, 4 u64/iter); the only diff was label names and the order of two register-zeroing `xor`s.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c2",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "Name the four places the zero-cost claim reliably breaks.",
+      "a": "1) `dyn Trait`: an inlining barrier. A fold over `&[Add1]` compiled to 2 instructions (`lea (%rsi,%rdx,1),%rax; ret`); the same fold over `&[Box<dyn Op>]` was 24 instructions with `call *0x18(%rcx)` per element. 2) FP reductions: IEEE non-associativity blocks reassociation, so `sum::<f32>()` stayed scalar `addss` even with `-C target-cpu=native` on AVX2+FMA. 3) Data-dependent indexing `out[i] = src[idx[i]]`: 2 live bounds checks/iteration, zero vectorisation. 4) Large cross-crate functions without `#[inline]` and without LTO (weaker than folklore now, see MIR inliner).",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c3",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "What is the measured cost of monomorphisation?",
+      "a": "One small generic function instantiated over 200 concrete types vs the same function taking `&[&dyn Shape]` once: clean release rebuild 536 ms vs 169 ms (3.17x), .rlib 494,904 vs 387,256 bytes (+107,648 B, 1.28x), LLVM IR 10,847 vs 5,690 lines (1.91x). Find offenders with `cargo llvm-lines --release | head -30`. Fix with a thin generic wrapper: `fn load<P: AsRef<Path>>(p: P) { load_inner(p.as_ref()) }` duplicates one line per P instead of the whole body.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c4",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "Do bounds checks cost a fixed percentage?",
+      "a": "No, the outcome is bimodal. `v[i]` with `i` from `0..v.len()`: check not emitted. `v[i]` with an unrelated `n`: LLVM HOISTED it to a single `cmp; jbe` before the loop, then vectorised the body (which is why `assert!(n <= v.len())` often measures as no change). Data-dependent `src[idx[i]]`: two checks survive per iteration and vectorisation is blocked entirely. Measured over 1M elements: random indirect 1.896 ms, sequential indirect 0.714 ms, iterator zip 0.179 ms (10.6x and 4.0x faster respectively).",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c5",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "How do you help LLVM eliminate bounds checks, in order of preference?",
+      "a": "1) Use iterators (`zip`, `chunks_exact`, `windows`) so the length is a loop invariant the compiler owns. Measured: `out.iter_mut().zip(a).zip(b)` = 37 instructions with 0 panic edges vs the hand-written index loop's 63 instructions with 2 panic call sites. 2) Slice once up front: `let (a, b) = (&a[..n], &b[..n]);` collapses three length facts into one. 3) `chunks_exact(8)` gives a compile-time-known inner trip count, the strongest safe vectorisation hint. 4) `assert!` before the loop (often a no-op, the hoist already happened). 5) `get_unchecked`, unsafe, only after the profile shows `panic_bounds_check` executing, with a `// SAFETY:` proof.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c6",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "Why does `v.iter().sum::<f32>()` not vectorise when `sum::<i32>()` does?",
+      "a": "IEEE-754 addition is not associative: `(a+b)+c` can differ from `a+(b+c)`. Vectorising a reduction means splitting one serial sum into 4/8 partial sums, which is a reassociation, so LLVM refuses rather than change your output. Integer wrapping addition IS associative, so `sum_i32` vectorised to 8 `ymm` registers in the same build. `sum_f32` was 39 instructions of 8x-unrolled scalar `addss` all into `%xmm0`, so the unroll bought nothing (every add depends on the previous, ~4 cycles latency each). Stable Rust has no `-ffast-math` equivalent.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c7",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "How do you get the speedup on an f32 reduction anyway, and what does it cost?",
+      "a": "Split the accumulator yourself into 8 independent partial sums in a `[f32; 8]`, combined at the end. Measured on 4096-element f32 dot product with Criterion 0.8.2: scalar 1.9323 us vs 8-way unroll 289.69 ns = 6.67x (471.7 ps vs 70.7 ps per element). The cost is a CORRECTNESS change: you are choosing to reassociate, so last-bit results differ. Unacceptable if the output feeds a financial aggregate or must be bit-reproducible across machines or lane counts. Say that out loud.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c8",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "What do `#[inline]`, `#[inline(always)]` and `#[inline(never)]` actually do?",
+      "a": "`#[inline]` is a hint PLUS a guarantee the function's MIR is exported so downstream crates can inline it. `#[inline(always)]` overrides LLVM's cost model and is almost always wrong: it inflates code size and evicts other code from the ~32 KB L1 instruction cache. Its two legitimate uses are `#[target_feature]` wrappers and functions smaller than their call sequence. `#[inline(never)]` is a PROFILING tool: add it temporarily so a function appears as its own flamegraph frame instead of being smeared into callers. Generic functions are implicitly inlinable cross-crate (their MIR must be exported to monomorphise at all).",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c9",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "What does LTO actually buy in 2026, and what is the old folklore that is now wrong?",
+      "a": "The folklore \"cross-crate inlining requires #[inline] or LTO\" is now only partly true: rustc's MIR inliner does cross-crate inlining of small-to-medium functions on stable without either. Tested with a two-crate workspace, no `#[inline]`, `lto = false`: zero `call` instructions to the dependency's function, and it still inlined when made bulky. What LTO reliably bought: binary 4,426,416 -> 2,221,304 bytes (49.8% reduction) at 0.14 s -> 2.48 s build (17.7x), with a 3.6% runtime delta that was noise. LTO is primarily a SIZE and devirtualisation tool. `lto = \"thin\"` is the sane default.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c10",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "Is `Vec::with_capacity` always worth it?",
+      "a": "No. 1M `u64` pushes: `Vec::new()` 0.677 ms vs `with_capacity` 0.674 ms, no win (amortised doubling means ~20 reallocs, and glibc `realloc` often extends large mappings in place). 200k `String` pushes: 10.491 vs 6.619 ms = 1.58x, a real win, because each realloc must memcpy 24-byte String headers and the heap is already fragmented. Beating both: `(0..1M).collect::<Vec<u64>>()` at 0.203 ms = 3.33x, using `size_hint` to allocate exactly once and write through a raw pointer with no per-push capacity check. For `HashMap`, growth means rehashing every key, so `with_capacity` matters more there.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c11",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "What is the measured cost of `String` where `&str` would do, and what is the allocation toolkit?",
+      "a": "Over 200k words: `w.clone() + \"!\"` took 3.899 ms; `w.len() + 1` took 0.068 ms. 57x. In order of how often it is right: take `&str`/`&[T]` in signatures and own only at storage boundaries; `Cow<'a, str>` when you usually borrow and occasionally modify; `with_capacity` at boundaries; `SmallVec<[T; N]>` with N from the measured p95 (check `size_of` first, a 512-byte SmallVec is a pessimisation); arena/bumpalo (alloc = pointer increment, ~2-3 instructions vs ~100+ for malloc); swap in `mimalloc`/`jemallocator` as `#[global_allocator]` for 10-30% on threaded allocation-heavy workloads; reuse buffers with `clear()`.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c12",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "Array-of-structs vs struct-of-arrays: give the number and the counter-case.",
+      "a": "1M particles, `size_of::<Particle>() == 32` bytes (8 x f32), summing just `p.x`: AoS touches 32,000,000 bytes at 1.394 ms; SoA (`Vec<f32>` of just x) touches 4,000,000 bytes at 0.456 ms. 3.06x, sublinear in the 8x traffic reduction because at 32 MB you are DRAM-bandwidth-bound. SoA is WRONG when the hot loop touches all fields of one object at a time: you get 8 independent memory streams competing for prefetcher slots and TLB entries, plus harder-to-read code. Hot/cold splitting (3 hot fields in one struct, the other 20 boxed) is usually the better cost/benefit point.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c13",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "What is false sharing, what does it cost, and how do you diagnose it?",
+      "a": "Cache coherence operates on 64-byte lines, not variables, so 4 logically-independent `AtomicU64` counters (8 B each) share one line and every core's write invalidates it in the other three cores' L1. Measured: 4 threads x 50,000,000 relaxed `fetch_add` took 1768.298 ms packed vs 481.023 ms with `#[repr(align(64))]`. 3.68x from one attribute. Symptom: throughput DROPS as you add threads, high CPU, huge cache-miss count on a tiny working set. Diagnose with `perf c2c record`/`report` (HITM events name the line and the two contending instructions). Use `crossbeam_utils::CachePadded`, which pads to 128 B on aarch64/Apple silicon where hand-rolled `align(64)` is subtly wrong.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c14",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "What is the status of `std::simd`, and what ships on stable?",
+      "a": "As of rustc 1.97.1 (2026-07-14) `std::simd` is STILL nightly-only, gated behind `#![feature(portable_simd)]`, tracking issue rust-lang/rust#86656. It provides `Simd<T, N>` for lane counts 1 through 64, `Mask<T, N>`, `simd_swizzle!`, and now `f16xN` types; it degrades to scalar code on targets without SIMD rather than failing to compile. On stable: make autovectorisation fire first (`chunks_exact(8)`, iterators, split FP accumulators), then the `wide` crate for portable vector types, then hand-written `std::arch` intrinsics. Never claim it is stable in an interview.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c15",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "How do you ship AVX2 code to a fleet where some hosts lack AVX2?",
+      "a": "Not with `-C target-cpu=native`, which produces a binary that SIGILLs on any host missing an instruction it used, silently until it isn't. Set a floor in `.cargo/config.toml`: `x86-64-v2` (SSE4.2, POPCNT, ~2009+) or `x86-64-v3` (AVX2, FMA, BMI2, Haswell 2013+ / Zen 1+), verified against your actual instance families. Above the floor use `#[target_feature(enable = \"avx2\")] unsafe fn` guarded by `is_x86_feature_detected!(\"avx2\")`, resolved ONCE into a fn pointer in a `OnceLock` rather than checked inside the hot loop. Calling a `#[target_feature]` fn from a non-AVX2 context blocks inlining across that boundary, so the idiom is one big `#[inline(always)] #[target_feature]` region. The `multiversion` crate generates this.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c16",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "Criterion: current status, what it does that a timing loop doesn't, and the forgotten config line.",
+      "a": "Criterion moved to the `criterion-rs` GitHub org (the original `bheisler` repo is unmaintained); latest is 0.8.2 released 2026-02-04, MSRV is the last three stable minors = Rust 1.88+. It gives 3 s warmup, ~100 samples over ~5 s, bootstrap resampling for a median with 95% CI, Tukey outlier classification, and automatic comparison against the previous run in `target/criterion/` with a change estimate and p-value. `#[bench]` from libtest is now a hard error on stable. THE FORGOTTEN LINE is `harness = false` under `[[bench]]`; without it libtest eats the CLI args and Criterion never runs. `black_box` is `std::hint::black_box`, stable since 1.66.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c17",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "How do you spot a benchmark that is measuring nothing?",
+      "a": "Measured case: `(0..n).fold(0u64, wrapping_add)` with n = 10,000,000 benchmarked at 975.34 ps, and STILL 958.84 ps with `black_box` on the input, because LLVM recognised the triangular sum and used the closed form. Criterion's own line gave it away: \"Collecting 100 samples in estimated 5.0000 s (5.2B iterations)\". Checks in order of speed: (1) sanity-check against physics, a loop over N elements can't beat ~N/8 cycles; (2) run at N and 2N and confirm the time roughly doubles for an O(n) function, the single most reliable 30-second test; (3) read the bench binary's assembly with `cargo asm --bench`; (4) a CI narrower than 1% on a sub-ns measurement means you're measuring harness overhead (~1-2 ns/iter).",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c18",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "How do you use `black_box` correctly, and what is its actual guarantee?",
+      "a": "Block the optimiser on BOTH ends: `b.iter(|| black_box(my_fn(black_box(&input))))`. The inner call stops constant propagation into the function; the outer stops dead-code elimination of the result. But if the body is analytically foldable (as `(0..n).fold(+)` was), no amount of call-site `black_box` helps and you must make the body opaque or benchmark something the compiler can't solve in closed form. Its documented guarantee is best-effort with no formal promise, which is worth stating precisely because interviewers value the honesty.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c19",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "What is the correct profiling order for a Rust service pinned at 100% CPU?",
+      "a": "1) `perf stat -e cycles,instructions,cache-misses,branch-misses` for 30 s. IPC below ~1.0 with high cache misses = memory-bound, stop micro-optimising instructions. IPC above ~2.5 with high branch-misses = branch-bound. That one number decides the next hour. 2) `samply record -p <pid>` for a flamegraph PLUS a time axis (an aggregate flamegraph hides a 200 ms stall inside a 20 s run). 3) Aggregate `__rust_alloc`/`__rust_dealloc`/`malloc`/`free`/`memcpy`: over ~15% means allocation-bound and everything else is premature. 4) Look for wide `drop_in_place` (bulk destruction on the request path) and any `panic_bounds_check` at all. Requires `debug = 1` in `[profile.release]`.",
+      "module": "T20-rust-perf"
+    },
+    {
+      "id": "T20-rust-perf-c20",
+      "topic": "Zero-Cost Abstractions, SIMD, Benchmarking with Criterion, Profiling",
+      "q": "Why is a Rust flamegraph often one giant frame, and why are async flamegraphs useless?",
+      "a": "Inlining destroys frames: an inlined function doesn't appear, its samples are attributed to the caller, so you get a fat `main` or `poll`. Two fixes: `debug = 1` in the release profile for line tables (nearly free at runtime), and temporarily add `#[inline(never)]` to the specific functions you want as distinct frames, rebuilt just for the profiling run. Never profile a debug build, it is a different program (no inlining, no vectorisation, all checks live). For async, a stack sampler is the wrong tool entirely: every sample lands under `tokio::runtime::...::poll` and the logical call chain is lost across `.await` points because each poll is a separate stack. Use `tokio-console` for task state and `tracing` spans with `tracing-flame` for the logical picture.",
+      "module": "T20-rust-perf"
+    }
+  ]
+}

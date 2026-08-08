@@ -1,0 +1,158 @@
+{
+  "flashcards": [
+    {
+      "id": "T09-serving-c1",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "What are the three layers of any model-serving stack, and which one owns your throughput numbers?",
+      "a": "Layer 3 packaging (BentoML, Dockerfile), layer 2 control plane (SageMaker endpoint, KServe InferenceService, Ray Serve deployment), layer 1 engine (vLLM, SGLang, TensorRT-LLM). Layer 1 owns essentially every throughput and latency number. Swapping layer 2 does not change your p50.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c2",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "What is the SageMaker Real-Time endpoint markup over equivalent EC2, on-demand and versus spot?",
+      "a": "About 1.25x over EC2 on-demand: ml.g5.24xlarge $10.18/hr vs g5.24xlarge $8.144/hr; ml.g5.2xlarge $1.52 vs g5.2xlarge $1.212 (us-east-1). SageMaker Real-Time offers no spot for inference, so against a spot-tolerant fleet ($3.955 for g5.24xlarge) it is roughly 2.6x.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c3",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "What CloudWatch metric triggers SageMaker scale-out from zero, and why is that a problem?",
+      "a": "NoCapacityInvocationFailures in the AWS/SageMaker namespace, typically alarmed at period=60, threshold=1. The trigger is a counter of requests that already failed: there is no activator buffering the request, so calls error for the several minutes AWS takes to provision. Requires inference components plus ManagedInstanceScaling.MinInstanceCount=0.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c4",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "Why can SageMaker Serverless Inference never serve an LLM, and what is its envelope?",
+      "a": "GPUs are an explicit documented feature exclusion. Envelope: RAM 1024-6144 MB in 1024 MB steps, 10 GB max container image, 5 GB ephemeral storage, max 200 concurrency per endpoint. Also excluded: multi-model endpoints, VPC configuration, network isolation, data capture, Model Monitor, multiple production variants, inference pipelines.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c5",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "At what utilization does SageMaker Serverless Provisioned Concurrency break even against on-demand?",
+      "a": "About 59%. PC costs $0.000010/sec standing plus $0.000023/sec duration; on-demand is $0.000040/sec duration. Break-even: 0.000010 = (0.000040 - 0.000023)u, so u = 0.000010/0.000017 = 0.588.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c6",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "In KServe, which CRD should serve an LLM, and since when?",
+      "a": "LLMInferenceService (v1alpha2), production-ready since KServe v0.17. It exposes parallelism (tensor/data), a worker spec for multi-node replicas, a router block wiring a managed Gateway plus InferencePool scheduler, and scaling via KEDA or the Workload Variant Autoscaler. InferenceService v1beta1 with a predictor block is the classical-ML path.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c7",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "What is KServe's default minReplicas, and how do scaleTarget and containerConcurrency differ?",
+      "a": "minReplicas defaults to 1, so you never get scale-to-zero unless you set it to 0. scaleTarget (autoscaling.knative.dev/target) is a soft, advisory limit that bursts can exceed; containerConcurrency is a hard limit and surplus requests buffer rather than dispatch.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c8",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "Which KServe autoscalers work in which deployment mode, and what does the choice cost you?",
+      "a": "KPA works only in Knative deployment mode (scales on concurrency or QPS, and gives you the activator that buffers cold-start requests). KEDA works only in Raw/Standard mode but can scale on any Prometheus or OTel metric, including vllm:num_requests_waiting. Choosing Raw forfeits the activator, so cold start becomes a hard failure.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c9",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "State the Knative Pod Autoscaler's control-loop constants.",
+      "a": "60-second stable window for average concurrency, 6-second panic window, panic mode entered when the panic window reaches 2x target concurrency, and exit from panic mode after 60 seconds of the panic condition not holding.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c10",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "What is the current status of ModelMesh?",
+      "a": "Dead. Both kserve/modelmesh and kserve/modelmesh-serving were archived on 2026-04-14, the last release was v0.12.0 in July 2024, and the admin-guide/modelmesh docs page exists for KServe docs 0.16 and 0.17 but 404s on 0.18 and 0.19. The KServe landing page still advertises it, which is stale copy.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c11",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "How much does prefix-cache-aware routing buy over round-robin, with the measured configuration?",
+      "a": "3x output tokens/s and 2x lower TTFT, reported by Tesla and Red Hat serving Llama 3.1 70B on 4x MI300X with tensor-parallel-size=4, gpu-memory-utilization=0.90, --max-model-len=65536, using KServe's InferencePool plus the Gateway API Inference Extension endpoint picker.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c12",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "How is model composition expressed in current Ray Serve, and what API is gone?",
+      "a": ".bind() deployments into each other's constructors; Ray converts the arguments into DeploymentHandle objects, you call methods with .remote() and await the DeploymentResponse. DAGDriver, InputNode, and serve.build are gone. Describing the old DAG DSL dates you to roughly Ray 2.5.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c13",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "Which two Ray Serve defaults changed in Ray 2.32.0 and what breaks on upgrade?",
+      "a": "max_ongoing_requests dropped from 100 to 5 (a 20x cut in per-replica admission) and target_ongoing_requests moved from 1.0 to 2.0. The symptom on upgrade is BackPressureError on handles or HTTP 503 on the proxy with GPUs at low utilization, because the bottleneck is admission control rather than compute.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c14",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "List the key Ray Serve autoscaling defaults.",
+      "a": "num_replicas 1; target_ongoing_requests 2; max_ongoing_requests 5; min_replicas 1 and max_replicas 1; upscale_delay_s 30; downscale_delay_s 600 (also governs 1 to 0); metrics_interval_s 10; look_back_period_s 30; max_queued_requests -1 (unbounded); health check 10s period / 30s timeout; graceful shutdown 2s wait / 20s timeout.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c15",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "When is Ray Serve the right choice, and when is it a mistake?",
+      "a": "Right when one logical request fans out across models on different hardware with different scaling curves (CPU retriever, GPU reranker, GPU generator) as independently scaled deployments in one app. A mistake for a single model behind a single endpoint: you inherit a Ray head node as a new coordination failure domain and a second scheduler that disagrees with Kubernetes, for nothing a Deployment plus vLLM's OpenAI server does not give you.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c16",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "What layer does BentoML occupy, and what is its 2026 governance status?",
+      "a": "Layer 3, packaging: @bentoml.service / @bentoml.api(batchable=True), bentoml build produces a Bento, bentoml containerize produces an OCI image, serves on port 3000. It competes with your Dockerfile, not with KServe, and still needs a scheduler. It was acquired by Modular (forum.modular.com hosts an acquisition roundup thread dated 2026-03-01) and the last OSS release is v1.4.39 from 2026-05-07.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c17",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "Why is GPU utilization the wrong autoscaling signal for a vLLM replica, and what is right?",
+      "a": "A replica at 95% GPU with an empty waiting queue is healthy and must not scale; one at 40% GPU with 200 requests waiting is saturated on KV cache and must. Request count is also bad because output lengths vary by two orders of magnitude. Scale on vllm:num_requests_waiting or KV-cache pool occupancy (vllm:gpu_cache_usage_perc), which requires the KEDA/Prometheus path.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c18",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "Break down the cold-start chain for a scaled-to-zero GPU endpoint and name the biggest lever.",
+      "a": "Detect, schedule a GPU node (90-180s if the autoscaler must launch one), pull an 8-15 GB CUDA image (60-200s cold), fetch weights (16 GB for an 8B is ~20s, 140 GB for a 70B is ~140s at 1 GB/s), then CUDA graph capture and KV pool allocation (20-90s). Roughly 30-60s for an 8B on a warm node, 8-15 minutes for a 70B cold. Biggest lever is weight pre-staging on node-local NVMe (KServe LocalModelCache / LocalModelNamespaceCache) plus image pre-pull.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c19",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "Why do multi-model endpoints work for small models but not LLMs, and what replaces them?",
+      "a": "MME assumes a model load is cheap relative to a request: a 50 MB tree ensemble loads in ~100ms against a ~5ms invocation. An 8B fp16 model is 16 GB and loads in tens of seconds, and density packing fights the KV cache for the same VRAM (vLLM claims gpu_memory_utilization=0.90 deliberately). For LLMs you keep one base model resident and vary the LoRA adapter per request.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c20",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "What changed in KServe v0.18 regarding multi-node inference and Ray?",
+      "a": "Multi-node inference no longer requires a Ray head node: vLLM's mp (multiprocessing) distributed executor backend can be selected via a multinode/executor-backend annotation on the ServingRuntime, with node count derived from pipeline parallelism and GPUs-per-node from tensor parallelism. v0.18 also added LeaderWorkerSet as an autoscaling target so a multi-node replica scales as one unit.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c21",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "What is the status of TorchServe?",
+      "a": "Archived. The pytorch/serve README states the project is no longer actively maintained, with no planned updates, bug fixes, new features, or security patches, and warns that vulnerabilities may not be addressed. Last push was 2025-08-06. Proposing it for new work in 2026 is disqualifying.",
+      "module": "T09-serving"
+    },
+    {
+      "id": "T09-serving-c22",
+      "topic": "SageMaker, Bedrock, Vertex, KServe, Ray Serve, BentoML",
+      "q": "Why is round-robin routing in front of vLLM actively harmful?",
+      "a": "It splits the prefix cache. With a shared system prompt, one replica holds the prefilled prefix and the others do not, so a fraction of requests pay full prefill, which is the compute-bound half of inference. The observable symptom is p99 doubling when you add a replica while p50 stays flat. Check vllm:prefix_cache_hit_rate.",
+      "module": "T09-serving"
+    }
+  ]
+}

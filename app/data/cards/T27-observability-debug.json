@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T27-observability-debug-c1",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "How do you find the critical path in a trace waterfall?",
+      "a": "Start at the root and at every level descend into the child that FINISHES LAST. That chain, and only that chain, determines total duration. A span running in parallel with a longer sibling owns none of the latency: optimising it saves exactly 0ms. The widest bar and the responsible bar are frequently different bars.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c2",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "Define span self time and give the three readings of it.",
+      "a": "self_time = span.duration - UNION of child intervals (union, not sum, so parallel children count once). ~100% with no children = leaf work. >50% WITH children = uninstrumented in-process time, go to a span-scoped profile. <10% = the service is a pure router, keep descending the critical path.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c3",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "Self time sits BEFORE the first child vs AFTER the last child. What does each mean?",
+      "a": "Before the first child = a wait: connection-pool acquire, queue, scheduler, stop-the-world GC pause, or framework middleware. After the last child = response construction: serializing a large payload, compression, signing. A waterfall UI will not distinguish these; the arithmetic will.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c4",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "What does a retry storm look like in a waterfall, precisely?",
+      "a": "2-4 sibling spans, identical operation name and identical peer, durations UNIFORM to within a few percent and pinned at a round number (2000ms, 5000ms, 30000ms), all but the last errored, with growing jittered gaps between them. Uniformity is the tell: real work varies in duration, a timeout does not. Parent duration is about n x timeout + sum of backoffs. Seeing 3 attempts at two layers means 9 attempts for one logical call.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c5",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "From trace data alone, how do you distinguish connection-pool exhaustion from a slow database?",
+      "a": "Pool exhaustion: the QUERY DURATION STAYS FLAT (4ms) while a gap of 200-900ms opens between the parent span's start and the first query span (the checkout wait). Slow database: the query span's own duration grows. Confirm with pool metrics (used at max, idle at zero, pending non-zero). A pool gap followed by NO DB span at all means the checkout timed out and the query never ran.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c6",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "There is no span for a GC pause. What is its telemetry signature?",
+      "a": "Every span in flight on ONE POD lengthens by the SAME ABSOLUTE amount at the same instant, regardless of what it was doing (a 4ms cache read becomes 204ms; a 300ms DB call becomes 500ms). The affected endpoint differs every time and there is never a downstream span to blame. Group latency by pod, not by route; confirm with jvm.gc.duration or go_gc_pause_seconds.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c7",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "Why is an N+1 across a service boundary invisible to every tool except distributed tracing?",
+      "a": "Each downstream call is genuinely fast (8ms) so the downstream service's p99, error rate, and CPU profile all look perfect. The 1.6 seconds exists only in the CALLER's round-trip accounting. Signature: a staircase of 50-500 serial near-identical short spans to the same peer. Fix: batch endpoint or DataLoader-style coalescing at the caller.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c8",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "Head-based sampling: where is the decision made, and exactly what do you lose?",
+      "a": "At trace start, before anything interesting has happened; the decision rides the sampled flag of the traceparent header (00-<32hex traceid>-<16hex spanid>-<2hex flags>) so every service agrees. Stateless, constant memory, no infrastructure. You lose every RARE event: a failure affecting 1 in 10,000 requests at 1% sampling yields one stored trace per million requests. It also keeps only 1% of errors.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c9",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "OTel Collector tail sampling: key defaults and the four costs.",
+      "a": "decision_wait default 30s; num_traces default 50,000. Costs: (1) all spans of a trace must reach the SAME Collector instance, requiring a two-tier deployment with loadbalancingexporter routing_key: traceID; (2) memory scales with in-flight traces x spans x window; (3) traces longer than decision_wait are truncated or split; (4) aggregates from sampled traces need a 1/p adjusted count, so generate span metrics BEFORE the sampler.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c10",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "What is the number-one tail-sampling deployment error and its symptom?",
+      "a": "Running multiple Collector replicas behind a plain round-robin service. Each replica sees only a fraction of each trace and makes its sampling decision on a partial trace. Symptom: traces that exist but are silently and inconsistently missing their most interesting spans. Fix: a two-tier Collector with loadbalancingexporter and routing_key: traceID.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c11",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "Why can't you put trace_id in a Prometheus label, and what is the purpose-built alternative?",
+      "a": "Every metric-name-plus-labelset is one time series, so a per-request label creates unbounded series and OOMs the server. Exemplars are the escape hatch: an out-of-band trace_id/span_id attached to an individual sample, stored PER BUCKET, contributing zero additional series. The exemplar on the TOP latency bucket is by construction a slow request, so you land in a guaranteed-interesting trace instead of a random one.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c12",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "Three things that must ALL be true for Prometheus exemplars to work.",
+      "a": "(1) The SDK exemplar filter is TraceBased and the measurement is recorded inside an active span. (2) The scrape uses OpenMetrics exposition format; the classic Prometheus text format silently drops exemplars. (3) The Prometheus server runs with --enable-feature=exemplar-storage, which is off by default. Missing any one produces 'exemplars enabled but no jump link in Grafana'.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c13",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "State the log cardinality rule and Loki's enforcing defaults.",
+      "a": "High-cardinality values go in the log BODY or structured attributes; only low-cardinality values go in index labels. Loki defaults: 15 index labels max, 10,000 streams per tenant and 50,000 global, label name 1024 chars, label value 2048. NEVER trace_id or order_id as a label. Query instead: {service=\"x\",env=\"prod\"} | json | trace_id=\"4bf92f35...\"",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c14",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "Half your log lines have a null trace_id. What is the cause, and why is it disproportionately damaging?",
+      "a": "Context loss at a concurrency boundary: thread-pool handoff, asyncio task created without copying context, callback, Spring @Async, background queue consumer. Not a logging-config bug. Damaging because the uncorrelated half is the ASYNC half (retries, background writes, cleanup), which is exactly where the hard bugs live. Fix: propagate context explicitly (contextvars copy, capture Context.current() before submit, instrumented executor).",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c15",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "Why is avg(p99) across pods wrong, and what is the correct PromQL?",
+      "a": "Percentiles do not average. One pod at 8s among nineteen at 100ms averages under 500ms and the incident vanishes. Correct: sum the histogram buckets first, then take the quantile. histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c16",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "Map the four p50/p99/p99.9 divergence shapes to their causes.",
+      "a": "p50 flat + p99 up = a minority path got slower (cache miss, cold shard, one bad host, GC, one tenant). p50 up + p99 up proportionally = everything got slower (capacity, shared dependency, hot-path change). p99 up + p99.9 FLAT = a BOUNDED slow set, so group by tenant/shard/region. p50 up + p99 flat = almost always a measurement or traffic-mix change, not a system change.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c17",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "Why is 'only 1% of requests are slow' a weaker statement than it sounds? Give the arithmetic.",
+      "a": "A user whose page load fires 100 backend requests has a 1 - 0.99^100 = 63.4% chance of hitting at least one p99-latency request. At 10 requests it is 9.6%. A percentile describes a sample of requests, not a population of users, and fan-out converts a rare request-level event into a common user-level one.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c18",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "What is coordinated omission and what number illustrates it?",
+      "a": "A closed-loop load generator waits for each response before sending the next, so when the server stalls it stops issuing requests and the slow requests are never measured. The distortion is concentrated in p99 and beyond. One reported case: load test p99 = 47ms against production p99 = 1.8s for the same build, a 38x miss. Fix: an open-loop constant-arrival-rate workload that records intended send time, not actual send time.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c19",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "Your continuous CPU flame graph for the incident window looks completely normal. What does that actually tell you?",
+      "a": "That the service was WAITING, not computing. A CPU profile is structurally blind to off-CPU time: blocked threads (socket read, lock, pool acquire, disk) consume zero CPU samples. A flat CPU profile alongside high latency is positive evidence for a wait-bound problem, not evidence of health. Switch to wall-clock/off-CPU profiling (py-spy --idle, async-profiler wall mode) or go back to the trace, where a wait shows as a gap.",
+      "module": "T27-observability-debug"
+    },
+    {
+      "id": "T27-observability-debug-c20",
+      "topic": "Debugging From Traces & Logs Alone (When You Can't Attach)",
+      "q": "How do you read a flame graph correctly, and what does the x-axis mean?",
+      "a": "Width = samples = time. The x-axis is NOT time: identical stacks are merged and sorted alphabetically, so chronology cannot be read off it. Look for PLATEAUS (wide flat frames near the top) rather than depth; a deep narrow tower is recursion or a framework call chain and usually costs nothing. During a regression the useful mode is the DIFFERENTIAL flame graph (baseline window vs incident window, coloured by delta), which answers what CHANGED rather than where time goes.",
+      "module": "T27-observability-debug"
+    }
+  ]
+}

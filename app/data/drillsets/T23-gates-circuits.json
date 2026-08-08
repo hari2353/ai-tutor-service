@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T23-gates-circuits-d1",
+      "module": "T23-gates-circuits",
+      "q": "What property must every valid quantum gate matrix satisfy, and why?",
+      "a": "Unitarity: U†U=I, required to preserve the normalization |α|²+|β|²=1 of a valid quantum state.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-gates-circuits-d2",
+      "module": "T23-gates-circuits",
+      "q": "Multiply out H|0⟩ and H|1⟩ explicitly. What does H do geometrically on the Bloch sphere?",
+      "a": "H|0⟩=1/√2[1,1]ᵀ=|+⟩, H|1⟩=1/√2[1,-1]ᵀ=|−⟩. Geometrically a 180° rotation about the axis halfway between the Bloch sphere's x and z axes, swapping the computational and X-eigenbasis.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-gates-circuits-d3",
+      "module": "T23-gates-circuits",
+      "q": "What does Z do to |+⟩=(|0⟩+|1⟩)/√2?",
+      "a": "Z|+⟩=(|0⟩−|1⟩)/√2=|−⟩. Z leaves |0⟩ fixed and flips the sign on |1⟩'s amplitude — this changes relative phase without changing computational-basis measurement probabilities.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-gates-circuits-d4",
+      "module": "T23-gates-circuits",
+      "q": "Build a Bell state circuit from scratch: which gates, in what order, on which qubits?",
+      "a": "From |00⟩: apply H to qubit 0 giving (|00⟩+|10⟩)/√2, then CNOT with qubit 0 as control and qubit 1 as target, giving (|00⟩+|11⟩)/√2.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-gates-circuits-d5",
+      "module": "T23-gates-circuits",
+      "q": "Show that the Toffoli gate implements a reversible AND, and explain why reversibility matters for a quantum gate specifically.",
+      "a": "Toffoli(a,b,c)=(a,b,c⊕(a AND b)); setting c=0 gives (a,b,a AND b) with inputs preserved as garbage, making it invertible. Reversibility is forced because quantum evolution is unitary and unitary matrices are always invertible — a quantum computer physically cannot implement an irreversible operation like bare AND.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-gates-circuits-d6",
+      "module": "T23-gates-circuits",
+      "q": "What is the Gottesman-Knill theorem, and why is it surprising given that Clifford circuits can be maximally entangled?",
+      "a": "Circuits built only from H, S, CNOT (Clifford group) with computational-basis measurement are classically simulable in polynomial time via the stabilizer formalism, regardless of entanglement. Surprising because Bell/GHZ states — maximally entangled — are Clifford circuits, proving entanglement alone doesn't grant quantum advantage.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-gates-circuits-d7",
+      "module": "T23-gates-circuits",
+      "q": "State and prove the no-cloning theorem.",
+      "a": "No unitary U satisfies U|ψ⟩|0⟩=|ψ⟩|ψ⟩ for all ψ. Proof: for |χ⟩=(|ψ⟩+|φ⟩)/√2 with non-orthogonal ψ,φ, linearity gives U|χ⟩|0⟩=(|ψψ⟩+|φφ⟩)/√2, but true cloning requires |χχ⟩=(|ψψ⟩+|ψφ⟩+|φψ⟩+|φφ⟩)/2 — these differ unless ⟨ψ|φ⟩∈{0,1}, a contradiction.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-gates-circuits-d8",
+      "module": "T23-gates-circuits",
+      "q": "Why is T-count, not total gate count, the metric fault-tolerant compilers actually optimize?",
+      "a": "In the surface code, Clifford gates are comparatively cheap to implement fault-tolerantly, but T gates require consuming a magic state from expensive magic-state distillation — T gates dominate real fault-tolerant cost, so a circuit with few T gates and many Clifford gates is far cheaper than the reverse.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-gates-circuits-d9",
+      "module": "T23-gates-circuits",
+      "q": "A circuit transpiled for a 5-qubit chip comes back with triple the CNOT count. What happened, and is it a bug?",
+      "a": "Not necessarily a bug — the chip has limited qubit connectivity, and the transpiler inserted SWAP gates (each ~3 CNOTs) to move logical qubits adjacent for entangling gates the original circuit required between non-adjacent qubits. Fix by choosing a better logical-to-physical layout or restructuring the circuit for locality.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-gates-circuits-d10",
+      "module": "T23-gates-circuits",
+      "q": "Someone proposes a custom gate matrix that's 'almost unitary' (within 1e-3 of U†U=I) to save calibration time. What's your response as reviewer?",
+      "a": "'Almost unitary' isn't a valid gate — it breaks state normalization. If it reflects a real physical process, it should be modeled as an ideal unitary composed with a characterized noise channel (Kraus operators), not accepted as a slightly-wrong unitary — this preserves the ability to reason about fidelity and error-correction thresholds downstream.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-gates-circuits-d11",
+      "module": "T23-gates-circuits",
+      "q": "Does no-cloning mean quantum error correction is impossible, since classical error correction relies on redundant copies?",
+      "a": "No — error correction entangles the logical state across physical qubits (e.g. a|000⟩+b|111⟩ built via CNOTs) rather than producing independent copies of an unknown superposition. No step ever clones the state, so no-cloning is never violated.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-gates-circuits-d12",
+      "module": "T23-gates-circuits",
+      "q": "Does Toffoli alone (without H) give universal quantum computation?",
+      "a": "No — Toffoli plus H is universal, but Toffoli alone only gives universal classical reversible computation since it never creates superposition. Full quantum universality outside the classically-simulable Clifford+Toffoli regime also typically requires T.",
+      "difficulty": "staff"
+    }
+  ]
+}

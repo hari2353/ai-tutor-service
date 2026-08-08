@@ -1,0 +1,116 @@
+{
+  "drills": [
+    {
+      "id": "T09-serving-d1",
+      "module": "T09-serving",
+      "q": "Name the three layers of a serving stack and say which one your latency numbers come from.",
+      "a": "Packaging (BentoML, Dockerfile), control plane (SageMaker endpoint, KServe InferenceService, Ray Serve deployment), engine (vLLM, SGLang, TensorRT-LLM). The engine owns the numbers. Migrating control planes typically moves p50 by single-digit percent because it is the same vLLM underneath.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T09-serving-d2",
+      "module": "T09-serving",
+      "q": "What is KServe's default minReplicas, and what does that mean for scale-to-zero?",
+      "a": "1. You do not get scale-to-zero unless you explicitly set minReplicas: 0. This is the opposite of what most people assume from the 'serverless inference' framing on the KServe homepage.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T09-serving-d3",
+      "module": "T09-serving",
+      "q": "Can SageMaker Serverless Inference serve a GPU model?",
+      "a": "No. GPUs are an explicit documented feature exclusion, along with multi-model endpoints, VPC configuration, network isolation, data capture, Model Monitor, multiple production variants, and inference pipelines. Max RAM is 6144 MB. It is for small CPU models with bursty traffic.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T09-serving-d4",
+      "module": "T09-serving",
+      "q": "Quote the SageMaker Real-Time markup over EC2 with a concrete instance pair.",
+      "a": "About 1.25x: ml.g5.24xlarge at $10.18/hr versus g5.24xlarge at $8.144/hr in us-east-1 (the small pair, ml.g5.2xlarge $1.52 vs g5.2xlarge $1.212, reproduces the same ratio). Against spot at $3.955 it is roughly 2.6x, and SageMaker Real-Time does not offer spot for inference.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T09-serving-d5",
+      "module": "T09-serving",
+      "q": "A request hits a SageMaker endpoint scaled to zero. Trace exactly what happens.",
+      "a": "It fails. The failure increments NoCapacityInvocationFailures in AWS/SageMaker. A CloudWatch alarm on that metric (period 60, threshold 1, 1 evaluation period) fires a step scaling policy against the inference component's DesiredCopyCount. SageMaker then provisions instances, documented as taking several minutes, and every request in that window errors. There is no activator buffering the request the way Knative has.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-serving-d6",
+      "module": "T09-serving",
+      "q": "Derive the utilization at which SageMaker Serverless Provisioned Concurrency beats on-demand.",
+      "a": "PC costs 0.000010 + 0.000023u per second; on-demand costs 0.000040u. Setting them equal: 0.000010 = 0.000017u, so u = 0.588. PC pays for itself above roughly 59% utilization of the provisioned concurrency and is a pure loss below it.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-serving-d7",
+      "module": "T09-serving",
+      "q": "p99 doubled when you scaled from one replica to two; p50 is flat. Diagnose and fix.",
+      "a": "Prefix cache fragmentation from round-robin. With one replica the shared system prompt is prefilled once; with two, roughly half of requests land on the replica that lacks the prefix and pay full prefill. p50 is flat because the median request was cheap. Fix with prefix-cache-aware routing: KServe InferencePool plus the Gateway API Inference Extension endpoint picker, or Ray Serve's ConsistentHashRouter. Verify with vllm:prefix_cache_hit_rate. Reported gain: 3x output tokens/s, 2x lower TTFT.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-serving-d8",
+      "module": "T09-serving",
+      "q": "Which KServe autoscaler works in which deployment mode, and what do you give up either way?",
+      "a": "KPA only in Knative mode: scales on concurrency or QPS, and you keep the activator that buffers cold-start requests. KEDA only in Raw/Standard mode: scales on any Prometheus or OTel metric including vllm:num_requests_waiting, but you lose the activator so a cold start is a hard failure. HPA also works in Raw. They are mutually exclusive, and people pick Raw to avoid the Knative dependency without realising they forfeited the buffering.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-serving-d9",
+      "module": "T09-serving",
+      "q": "State the Knative Pod Autoscaler constants and explain the panic mechanism.",
+      "a": "60-second stable window for average concurrency, 6-second panic window, panic entered when the panic window reaches 2x target concurrency, and exited after 60 seconds of the condition not holding. Panic mode exists so a burst does not have to wait a full minute of averaging before scaling, at the cost of oscillation risk against slow-starting pods.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-serving-d10",
+      "module": "T09-serving",
+      "q": "A Ray Serve service starts returning 503s after an upgrade. Traffic unchanged, GPUs at 30%. What is it?",
+      "a": "max_ongoing_requests default dropped from 100 to 5 in Ray 2.32.0, a 20x cut in per-replica admission. Each replica now admits 5, the router queue backs up, and callers get BackPressureError on handles or HTTP 503 on the proxy. GPUs sit low because the bottleneck is admission control, not compute. target_ongoing_requests also moved from 1.0 to 2.0 in the same release. Fix: set both explicitly, max about 20-50% above target for heavyweight deployments.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-serving-d11",
+      "module": "T09-serving",
+      "q": "Why is GPU utilization the wrong scaling signal for LLM serving? Give the two states it cannot distinguish.",
+      "a": "95% GPU with an empty waiting queue (healthy, do not scale) and 40% GPU with 200 requests waiting because the KV pool is full (saturated, must scale). Decode is memory-bandwidth-bound, so SM occupancy does not reflect headroom. Request count is also bad because output lengths vary by two orders of magnitude. Scale on vllm:num_requests_waiting or vllm:gpu_cache_usage_perc.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-serving-d12",
+      "module": "T09-serving",
+      "q": "Design serving for 400 per-tenant fine-tuned LLMs sharing one base model.",
+      "a": "One resident base model per GPU plus per-tenant LoRA adapters swapped per request, not 400 endpoints and not a multi-model endpoint. Adapters are tens to hundreds of MB against a 16 GB base, so the tail is tractable. vLLM serves multi-LoRA natively; KServe auto-enables a lora-affinity-scorer in its router when adapters are present. MME fails here because density packing competes with the KV cache for VRAM and two 8B fp16 models are 32 GB of weights before any cache.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T09-serving-d13",
+      "module": "T09-serving",
+      "q": "Budget the cold start for a 70B on a scaled-to-zero Kubernetes endpoint and say what you optimize first.",
+      "a": "Detect (ms on Knative, tens of seconds polling), schedule a GPU node 90-180s if the autoscaler must launch one, pull an 8-15 GB CUDA image 60-200s cold, fetch 140 GB of fp16 weights at ~1 GB/s for ~140s, then CUDA graph capture and KV pool allocation 20-90s. Roughly 8-15 minutes cold. Optimize weight pre-staging (LocalModelCache / LocalModelNamespaceCache on node-local NVMe) and image pre-pull via DaemonSet first; autoscaler tuning is noise against a 140-second weight fetch.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T09-serving-d14",
+      "module": "T09-serving",
+      "q": "Size and place a RAG chat product: 5,000 req/hr peak, 300/hr overnight, heavy shared system prompt, p95 TTFT 800ms, one 8B open-weight model.",
+      "a": "Peak-to-average is ~16:1, which drives everything. 8B fp16 is 16 GB so a g5.2xlarge (24 GB A10G, $1.212/hr) holds it with a modest KV pool; g5.12xlarge at $5.672 covers peak. The 800ms TTFT target rules out scale-to-zero on the user path, so minReplicas=1 sized to overnight. Enable vLLM prefix caching and prefix-aware routing because the shared prompt makes round-robin the p99 killer. Scale on vllm:num_requests_waiting via KEDA. Burst on spot at $0.595 with on-demand baseline and a managed endpoint as overflow. Platform: KServe LLMInferenceService if the org already runs Kubernetes, otherwise a SageMaker endpoint with an LMI/vLLM container and app-layer session-sticky routing, since the 25% markup here is a few hundred dollars a month.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T09-serving-d15",
+      "module": "T09-serving",
+      "q": "Two teams want KServe, one wants to stay on SageMaker, across 30 models. Make the call and justify it with numbers.",
+      "a": "Do not force uniformity for its own sake. Decide on GPU footprint: above roughly ten GPU nodes the SageMaker markup is $25,000+/month against EC2 on-demand and more against spot, which pays for the platform work; at three nodes it does not and the KServe request is résumé-driven. The likely right answer splits by workload rather than team: LLMs on KServe where prefix-aware routing and node-local weight caching produce measurable wins, classical models on SageMaker where operational simplicity is worth 25%. Insist on a common contract regardless: OpenAI-compatible HTTP surface, one Prometheus, one model registry, so the platform under a model can change without callers noticing.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T09-serving-d16",
+      "module": "T09-serving",
+      "q": "Someone recommends ModelMesh for high-density multi-model serving. Respond, and say what replaced it.",
+      "a": "It is dead: both kserve/modelmesh and kserve/modelmesh-serving were archived 2026-04-14, last release v0.12.0 in July 2024, docs 404 on KServe 0.18 and 0.19 (the landing page still advertises it, which is stale copy). Nothing replaced it as a general density layer, and that is the honest answer: the problem bifurcated into MME-style managed density for small classical models and multi-LoRA for LLMs, while KServe's investment went entirely into LLMInferenceService, InferencePool routing, and llm-d.",
+      "difficulty": "staff"
+    }
+  ]
+}

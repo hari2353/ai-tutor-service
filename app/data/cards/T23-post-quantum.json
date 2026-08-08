@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T23-post-quantum-c1",
+      "topic": "Post-Quantum Crypto",
+      "q": "Which cryptographic primitives does Shor's algorithm break, and which does it leave essentially untouched?",
+      "a": "Breaks completely: RSA, Diffie-Hellman, ECC/ECDSA (all rest on the abelian hidden subgroup structure). Untouched directly: AES, SHA-256 — only affected by Grover's much weaker quadratic threat.",
+      "module": "T23-post-quantum"
+    },
+    {
+      "id": "T23-post-quantum-c2",
+      "topic": "Post-Quantum Crypto",
+      "q": "Why is AES-256 adequate against quantum attack but AES-128 is not?",
+      "a": "Grover's algorithm halves effective key-length security. AES-256 drops to effective 128-bit (comfortably adequate). AES-128 drops to effective 64-bit (inadequate for new long-lived-sensitivity data).",
+      "module": "T23-post-quantum"
+    },
+    {
+      "id": "T23-post-quantum-c3",
+      "topic": "Post-Quantum Crypto",
+      "q": "What are the three NIST PQC standards finalized in August 2024, and their hardness assumptions?",
+      "a": "ML-KEM (FIPS 203) and ML-DSA (FIPS 204): lattice-based, Module-LWE/Module-SIS. SLH-DSA (FIPS 205): hash-based, security rests only on hash-function collision resistance — the conservative fallback.",
+      "module": "T23-post-quantum"
+    },
+    {
+      "id": "T23-post-quantum-c4",
+      "topic": "Post-Quantum Crypto",
+      "q": "Why was HQC added as an additional NIST standard in 2025?",
+      "a": "ML-KEM and ML-DSA both rest on lattice-family assumptions; HQC (code-based, a mathematically distinct hardness assumption) hedges against a future breakthrough that could compromise both simultaneously — cryptographic diversification.",
+      "module": "T23-post-quantum"
+    },
+    {
+      "id": "T23-post-quantum-c5",
+      "topic": "Post-Quantum Crypto",
+      "q": "Why do lattice problems (LWE) resist Shor's algorithm specifically?",
+      "a": "LWE is not known to reduce to the abelian hidden subgroup problem that Shor's QFT-based period-finding exploits, so there's no known foothold for a Shor-style quantum attack — a distinct argument from LWE's classical hardness (noise defeating Gaussian elimination).",
+      "module": "T23-post-quantum"
+    },
+    {
+      "id": "T23-post-quantum-c6",
+      "topic": "Post-Quantum Crypto",
+      "q": "What is harvest-now-decrypt-later, and why does the migration clock start at record time?",
+      "a": "An adversary records encrypted traffic today and decrypts it retroactively once a cryptographically relevant quantum computer exists. Data captured today is already exposed for its full confidentiality lifetime regardless of when the hardware threat materializes — migrating later doesn't protect already-recorded data.",
+      "module": "T23-post-quantum"
+    },
+    {
+      "id": "T23-post-quantum-c7",
+      "topic": "Post-Quantum Crypto",
+      "q": "Why does NSA's CNSA 2.0 guidance recommend hybrid key exchange rather than PQC-only through 2030?",
+      "a": "ML-KEM/ML-DSA, despite rigorous NIST standardization, have had far less real-world cryptanalytic scrutiny than decades-old RSA/ECC. Hybrid (classical+PQC combined) requires an attacker to break both simultaneously, hedging against an undiscovered flaw without sacrificing quantum-resistance benefit.",
+      "module": "T23-post-quantum"
+    },
+    {
+      "id": "T23-post-quantum-c8",
+      "topic": "Post-Quantum Crypto",
+      "q": "What real production issue occurred during Chrome's 2024 hybrid TLS rollout?",
+      "a": "Enterprise TLS-inspecting middleboxes/proxies choked on the larger ClientHello messages hybrid key exchange (X25519MLKEM768) produces, forcing a rollback before a fixed version was redeployed.",
+      "module": "T23-post-quantum"
+    },
+    {
+      "id": "T23-post-quantum-c9",
+      "topic": "Post-Quantum Crypto",
+      "q": "How much larger are ML-DSA and SLH-DSA signatures compared to ECDSA?",
+      "a": "ECDSA signatures are ~64-72 bytes. ML-DSA signatures run 2,420-4,595 bytes (30-70x larger). SLH-DSA signatures run 7,856-49,856 bytes (even larger) — the explicit price of its conservative hash-only security assumption.",
+      "module": "T23-post-quantum"
+    },
+    {
+      "id": "T23-post-quantum-c10",
+      "topic": "Post-Quantum Crypto",
+      "q": "What is the CNSA 2.0 migration timeline?",
+      "a": "2027: new acquisitions must support quantum-resistant crypto. 2030: legacy/networking equipment transition complete. 2031: mandatory across covered categories. 2033: OS/apps/cloud services exclusive use. 2035: full quantum resistance across national security systems.",
+      "module": "T23-post-quantum"
+    },
+    {
+      "id": "T23-post-quantum-c11",
+      "topic": "Post-Quantum Crypto",
+      "q": "What is the state of hybrid PQC TLS adoption as of early 2026?",
+      "a": "Roughly 30% of TLS 1.3 handshakes globally use hybrid key exchange (X25519MLKEM768) per Cloudflare Radar telemetry, while roughly half of domains measured in a 2026 internet-wide study remain fully classical with zero PQC readiness.",
+      "module": "T23-post-quantum"
+    },
+    {
+      "id": "T23-post-quantum-c12",
+      "topic": "Post-Quantum Crypto",
+      "q": "What is the recommended order of steps for a real post-quantum migration?",
+      "a": "1) Cryptographic inventory (hardest, most underestimated step). 2) Prioritize by harvest-now-decrypt-later exposure (data sensitivity duration x current exposure). 3) Hybrid deployment. 4) Build crypto-agility so algorithms can be swapped without a full rearchitecture.",
+      "module": "T23-post-quantum"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T09-gpu-cost-d1",
+      "module": "T09-gpu-cost",
+      "q": "Write the KV cache formula from memory, then apply it: Llama 3.1 8B has num_hidden_layers=32, num_attention_heads=32, num_key_value_heads=8, head_dim=128, bfloat16. Bytes per token?",
+      "a": "kv_bytes_per_token = 2 (K and V) x n_layers x n_key_value_heads x head_dim x dtype_bytes = 2 x 32 x 8 x 128 x 2 = 131,072 bytes = 128 KiB per token. Use num_key_value_heads (8), not num_attention_heads (32); GQA is a 4x saving on this model and using 32 would give a wrong 512 KiB.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T09-gpu-cost-d2",
+      "module": "T09-gpu-cost",
+      "q": "Compute this: how much VRAM does a single 128k-context request cost against Llama 3.1 8B in BF16, and how does that compare to the weights?",
+      "a": "131,072 tokens x 131,072 bytes/token = 1.718e10 bytes = 16.0 GiB of KV for one request. Weights are 8.03e9 x 2 = 1.606e10 bytes = 14.96 GiB. One max-context request costs MORE than the entire model. Past a certain context you are not serving a model, you are serving a cache.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T09-gpu-cost-d3",
+      "module": "T09-gpu-cost",
+      "q": "Compute this: on an H100 80GB (nvidia-smi reports 79.6 GiB) running Llama 3.1 8B BF16 with vLLM defaults, how many concurrent sequences fit at 8k average context?",
+      "a": "usable = 79.6 x 0.92 (gpu_memory_utilization default) = 73.2 GiB. Minus 14.96 GiB weights minus ~3 GiB profiled activations/CUDA graphs = 55.2 GiB KV pool. 55.2 x 1024 MiB / 0.125 MiB-per-token = ~452,800 tokens. At 8,192 tokens per sequence: 55 concurrent sequences. (221 at 2k, 13 at 32k, 3 at 128k.) Note max_num_seqs defaults to 1024 on this device, so the sequence limit is not what binds you; the KV pool is.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-gpu-cost-d4",
+      "module": "T09-gpu-cost",
+      "q": "Compute this: derive Llama 3.1 8B decode throughput on an H100 SXM (3.35 TB/s) at batch 256 with 1,800 tokens average live context. Show both terms.",
+      "a": "Per decode step you read all weights plus the entire live KV cache. Weights: 1.606e10 bytes. KV: 256 x 1800 x 131,072 = 6.04e10 bytes. Total 7.65e10 bytes. Step time = 7.65e10 / 3.35e12 = 22.8 ms. Throughput = 256 tokens / 0.0228 s = ~11,200 output tok/s. Note the KV term is 79% of the bandwidth work at this batch; the weight-only floor would be 4.79 ms and 209 steps/s.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-gpu-cost-d5",
+      "module": "T09-gpu-cost",
+      "q": "Compute this: p5.48xlarge is $98.32/hr on-demand for 8x H100. What is the cost per 1M output tokens at full batch, and at 35% utilisation?",
+      "a": "$98.32 / 8 = $12.29 per H100-hour. At 11,200 tok/s a GPU produces 11,200 x 3600 = 40.32M tokens/hour. $12.29 / 40.32 = $0.305 per 1M output tokens at 100% utilisation. At 35% utilisation, divide by 0.35: $0.87 per 1M. Utilisation is a pure division and it dominates any instance-class choice.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-gpu-cost-d6",
+      "module": "T09-gpu-cost",
+      "q": "Compute this: compare $/1M output tokens for g5.2xlarge (1x A10G 24GB, $1.212/hr, 600 GB/s) and p5.48xlarge per-GPU (H100, $12.29/GPU-hr, 3.35 TB/s) serving Llama 3.1 8B. Which is cheaper and why is that counter-intuitive?",
+      "a": "A10G: KV pool is only 20.7 - 15.0 - 1.5 = 4.2 GiB = ~34,700 tokens, so batch caps at 8 at 4k context. Weight-read step = 1.606e10 / 6.0e11 = 26.8 ms, 37 steps/s, so ~300 tok/s. 300 x 3600 = 1.08M tokens/hr, $1.212 / 1.08 = $1.12 per 1M. H100: $0.305 per 1M. The $12.29/hr GPU is 3.7x cheaper per token than the $1.21/hr one, because the small card loses on both factors simultaneously: less bandwidth (slower steps) AND less VRAM (smaller batch), and throughput is their product.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-gpu-cost-d7",
+      "module": "T09-gpu-cost",
+      "q": "Compute this: what is the 1-year and 3-year reserved breakeven utilisation for g5.2xlarge (on-demand $1.212, 1yr std RI $0.7636, 3yr std RI $0.5236)? What does that mean in hours?",
+      "a": "breakeven = reserved_rate / on_demand_rate. 1yr: 0.7636 / 1.212 = 63.0%, i.e. you must run the instance more than ~5,520 of the year's 8,760 hours. 3yr: 0.5236 / 1.212 = 43.2%. Same ratio applies across the g5 family (g5.12xlarge is also 63.0% / 43.2%). p5.48xlarge 3yr: 43.157 / 98.32 = 43.9%.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-gpu-cost-d8",
+      "module": "T09-gpu-cost",
+      "q": "Given us-east-1 rates on 2026-08-05 (p5.48xlarge: on-demand $98.32, spot $57.762, 3yr RI $43.157), price three strategies for ten node-equivalents of steady demand and pick one.",
+      "a": "All on-demand: 10 x 98.32 = $983.20/hr. All spot: 10 x 57.762 = $577.62/hr (-41.2%). 60% reserved + 40% spot: 6 x 43.157 + 4 x 57.762 = 258.94 + 231.05 = $489.99/hr (-50.1%). The blend beats all-spot on price AND carries less risk, because the reserved floor is non-interruptible. Note the underlying surprise: 3yr RI ($43.157) is cheaper than spot ($57.762) on this SKU, so spot is only worth using above your confident baseline.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T09-gpu-cost-d9",
+      "module": "T09-gpu-cost",
+      "q": "Compute this: your cold GPU replica takes 300 seconds end to end and traffic can double over 5 minutes. What steady-state utilisation ceiling does that force, and what does cutting the cold start to 90 seconds buy?",
+      "a": "required_headroom >= growth_rate x scale_out_latency = (100% / 300 s) x 300 s = 100%. So you must hold as much idle capacity as you are using: utilisation ceiling = 1/(1+1.00) = 50%. At L = 90 s: headroom >= (100%/300) x 90 = 30%, ceiling = 1/1.30 = 76.9%. That is a 1.54x cost reduction with no hardware change, which is why cold-start reduction beats autoscaler tuning as a cost lever.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T09-gpu-cost-d10",
+      "module": "T09-gpu-cost",
+      "q": "Size the fleet: 500,000 requests/day, 1,200 input tokens, 400 output tokens, 3:1 peak-to-average, Llama 3.1 8B on H100. Show the arithmetic and the honest recommendation.",
+      "a": "Average 500,000/86,400 = 5.8 rps; peak 17.4 rps. Peak decode load = 17.4 x 400 = 6,960 output tok/s, against ~11,200 tok/s per H100 = 0.62 GPU. Peak prefill = 17.4 x 1,200 = 20,880 prompt tok/s against a derived ~24,900 tok/s at 40% MFU, so prefill alone nearly saturates one card and the phases contend: call it 2 H100s of real work. Add 100% headroom for a 4-minute cold start: 4 H100s, half a p5.48xlarge. Cost check: 500,000 x 400 = 200M output tokens/day, at $0.305/1M = $61/day of useful work against a $2,360/day on-demand p5 bill. Recommendation: this workload belongs on 2-3 L40S (g6e.2xlarge) or a hosted API, not a p5.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T09-gpu-cost-d11",
+      "module": "T09-gpu-cost",
+      "q": "You are handed a dashboard: vllm:num_requests_waiting is 180, vllm:kv_cache_usage_perc is 0.24, nvidia-smi shows 20% GPU utilisation, and one CPU core is pinned at 100%. Diagnose and fix.",
+      "a": "The GPU is starved by the front end, not saturated. HTTP parsing, tokenization, or detokenization is bottlenecked on a single process. vLLM V1 already splits the API server from the engine core, but one API server process still caps request rate: use --api-server-count=N. Also verify the fast Rust tokenizer is loaded rather than the Python fallback, that nothing constructs a tokenizer per request, and that request logging is not doing per-token string work. Adding GPUs would make the ratio worse and double the bill for zero throughput. General rule: num_requests_waiting > 0 is necessary but not sufficient for scaling out; always pair it with a saturation signal.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T09-gpu-cost-d12",
+      "module": "T09-gpu-cost",
+      "q": "Rank these autoscaling signals for a vLLM endpoint and justify the ranking: CPU utilisation, GPU utilisation, requests per second, vllm:num_requests_waiting, vllm:time_to_first_token_seconds p95.",
+      "a": "Best: vllm:num_requests_waiting (directly measures unserved demand) with vllm:time_to_first_token_seconds p95 as the SLO-facing co-trigger. Then vllm:kv_cache_usage_perc as early warning only. Unusable: GPU utilisation, because nvidia-smi measures kernel residency and reads near 100% at batch 1 and batch 256 alike during memory-stalled decode. Worse: requests per second, because decode length varies 100x so request count is a terrible load proxy. Worst: CPU utilisation, which tells you about your tokenizer and nothing about the engine.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-gpu-cost-d13",
+      "module": "T09-gpu-cost",
+      "q": "State the interruption notice window for AWS EC2 Spot, GCP Spot VM, GCP Preemptible VM, and Azure Spot, then say what each implies for draining an inference replica.",
+      "a": "AWS: 2 minutes (plus a rebalance recommendation typically 10-20 min earlier, not guaranteed to precede it). GCP Spot VM and Preemptible VM: 30 seconds, best effort; Preemptible additionally has a hard 24-hour lifetime. Azure: minimum 30 seconds via Scheduled Events Preempt, and immediate eviction with no notice is documented as possible. Implication: AWS's 120 s is enough to fail readiness, wait ~15-30 s for load-balancer deregistration, and drain in-flight generations. GCP/Azure's 30 s is less than readiness propagation alone, so you must proactively deregister and cap max_tokens so p99 generation fits, or accept that in-flight requests die and the client retries.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T09-gpu-cost-d14",
+      "module": "T09-gpu-cost",
+      "q": "A vLLM fleet moved to spot shows unchanged per-replica throughput but 40% lower aggregate throughput. Name the failure mode and give the quantitative test for whether spot is defensible.",
+      "a": "Preemption thrash: replicas are drained and replaced faster than they warm, so a growing fraction of the fleet is in cold start rather than serving. With a 4-minute warm-up and a 20-minute mean replica lifetime, 20% of the fleet is permanently useless. The test: require mean_replica_lifetime > 10 x warmup_time before spot is defensible. Fixes: diversify instance types and AZs, keep a reserved/on-demand floor at minimum viable capacity, and cut warm-up with pre-pulled images and node-local weight staging. Also check whether 3-year RI is simply cheaper than spot on your SKU, which it currently is on g5.2xlarge, p4d.24xlarge and p5.48xlarge.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T09-gpu-cost-d15",
+      "module": "T09-gpu-cost",
+      "q": "Leadership wants 40% off a $180k/month, 40-GPU bill in one quarter. Order your actions by (savings x confidence) / effort and name the rollback trigger for the two that can backfire.",
+      "a": "1) Measure $/1M tokens per workload and endpoint first (one week; the only way to tell a utilisation problem from a workload problem). 2) Kill or consolidate the low-utilisation tail, typically 15-30% of spend at near-zero risk. 3) Separate batch from interactive and move batch to spot with its own policy, 10-15%. 4) FP8 weights plus FP8 KV cache, typically 1.5-2x throughput. 5) Reserve the p50 baseline once you have a utilisation history, 43-57% off that portion. 6) Cold-start reduction, which raises the utilisation ceiling. Instance-class changes last. Backfire risks: quantisation degrades quality silently, so gate on a task-level eval canary comparing refusal rate, structured-output validity and task success against BF16; raising utilisation eats SLO headroom, so gate on p95 TTFT and shed rate, not the cost graph. State both rollback triggers before starting.",
+      "difficulty": "staff"
+    }
+  ]
+}

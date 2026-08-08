@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T31-offline-rl-c1",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "Off-policy (DQN) vs offline RL: what is the one structural difference?",
+      "a": "DQN's replay buffer is continuously refilled by policies close to the current one, and when Q overestimates an action the agent EXECUTES it and reality contradicts the estimate, so overestimation is self-limiting. Offline RL freezes pi_beta while pi drifts unboundedly over 1e6 gradient steps, and no observation ever arrives to contradict an overestimate. Same algorithm, missing correction channel.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c2",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "Derive the size of the extrapolation-error blowup in an offline Bellman backup.",
+      "a": "Write Qhat = Q* + eps. At OOD actions eps is unconstrained extrapolation. For |A| roughly-independent mean-zero errors of scale sigma, E[max eps] ~ sigma*sqrt(2 ln|A|) (|A|=18 -> 2.4 sigma) because max SELECTS the upper tail rather than averaging. The recursion e_{k+1} <= gamma*e_k + b has fixed point b/(1-gamma) = 100b at gamma=0.99, 1000b at gamma=0.999 -- on a value range of only +/-100 when |r|<=1.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c3",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "What does a diverging offline Q-function look like in the training logs?",
+      "a": "mean(Q) over the training batch climbs monotonically past 1e5, 1e7, 1e9 while the TD loss stays FLAT AND SMALL, because prediction and target inflate in lockstep and the residual stays tiny. Watching only the loss shows nothing. Log mean(Q), max(Q), and mean(Q)*(1-gamma)/R_max (should sit near 1) and kill the run when it trips.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c4",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "Restate the deadly triad for the offline setting, and say which leg you can actually remove.",
+      "a": "Function approximation + bootstrapping + off-policy. Offline is the extreme corner: off-policy-ness is unbounded and GROWING rather than mild and shrinking. The removable leg is bootstrapping -- which is why BC, filtered BC and Decision Transformer cannot diverge. Removing only the ITERATION (one-step RL) gets you b instead of b/(1-gamma). Bootstrapping's payoff is stitching.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c5",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "Why is coverage, not sample size, the binding constraint offline?",
+      "a": "Error bounds scale as 2*gamma*C*eps/(1-gamma)^2 with C = max d^pi(s,a)/d^pi_beta(s,a). C is infinite if pi acts anywhere pi_beta had zero probability, making the bound vacuous no matter how small the measured Bellman error is. C depends on the SUPPORT of the logger, so more rows from one narrow policy leave it unchanged. Fujimoto 2018 proved it: training on a successful DDPG's complete replay buffer still fails.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c6",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "BCQ: what does it constrain, with what hyperparameters, and at what cost?",
+      "a": "Constrains the ACTION SET fed to the max. A conditional VAE trained on the dataset generates n=10 candidate actions per state, a perturbation network shifts each by at most Phi=0.05, and the max is taken over those 10 only; targets use a soft-min of twin critics with lambda=0.75. Cost: a mode-collapsed VAE silently restricts the policy class, and Phi has no offline tuning signal.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c7",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "State CQL's objective and the exact failure at each end of the alpha range.",
+      "a": "min_Q alpha*(E_{a~mu}[Q] - E_{(s,a)~D}[Q]) + 0.5*E_D[(Q - B^pi Qhat)^2]; choosing mu adversarially makes the first term logsumexp_a Q, giving a provable lower bound on Q^pi. Alpha typically 0.5-10 (5.0 D4RL locomotion, 10.0 AntMaze). Too large: Qhat flattens, argmax collapses back to pi_beta -- you paid for CQL and got behaviour cloning. Too small: divergence returns. 2-4x slower per step than TD3+BC from the extra sampled actions.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c8",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "TD3+BC: the objective, and why lambda is divided by mean|Q|.",
+      "a": "Actor maximises lambda*Q(s, pi(s)) - (pi(s) - a)^2 with lambda = alpha / (batch mean |Q|), alpha = 2.5, plus per-dimension state normalisation. Q has an arbitrary scale that differs by orders of magnitude across tasks and drifts during training, so dividing by mean|Q| makes the trade-off scale-free and lets a single alpha=2.5 transfer across all of D4RL. Cost: a distribution match, not a support match, and it averages multimodal behaviour into the middle.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c9",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "IQL: the three losses, the published defaults, and the known flaw.",
+      "a": "V <- expectile regression L2^tau(Q_target(s,a) - V(s)) on DATASET actions; Q <- MSE to r + gamma*V(s'); pi <- advantage-weighted BC with weights exp(beta*(Q-V)) clipped at 100. No max and no sampled action anywhere, so no OOD query ever happens. Defaults: tau=0.7/beta=3.0 locomotion, tau=0.9/beta=10.0 AntMaze, 2x256 MLPs, Adam 3e-4, batch 256, gamma 0.99, Polyak 0.005, 1e6 steps. Flaw: the expectile is over action AND dynamics, so a high tau is optimistic about lucky transitions too.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c10",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "Why does a high expectile tau approximate a maximum?",
+      "a": "L2^tau(u) = |tau - 1(u<0)| * u^2 weights positive residuals tau and negative ones (1-tau). At tau=0.5 the weights are equal and the minimiser is the mean; at tau=0.9 undershooting is punished 9:1, dragging the minimiser toward the top of the distribution; tau -> 1 converges to the max. Applied to Q(s,a) over dataset actions, it yields the IN-SAMPLE max without ever evaluating an unseen action.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c11",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "Four reasons behaviour cloning is a serious offline baseline rather than a strawman.",
+      "a": "1) No bootstrapping, so the deadly triad is structurally absent and it cannot diverge. 2) It is the only method here whose hyperparameters tune honestly offline -- held-out NLL is a real validation metric, while alpha/Phi/tau/beta all need a return signal offline data cannot supply. 3) On near-expert data no algorithm can beat it. 4) 10%BC (clone the top decile of trajectories by return) is a one-line upgrade that beats CQL on several D4RL locomotion datasets.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c12",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "When does offline RL actually beat behaviour cloning?",
+      "a": "Kumar et al. 2022: highly suboptimal or noisy data, sparse reward requiring the stitching of sub-trajectories, and long horizons with high initial-state variability even from expert data (BC's O(T^2 eps) compounding bites there). Canonical demonstration: D4RL AntMaze total, BC ~0 vs IQL 378.0, because no single logged trajectory solves the maze. On locomotion the whole BC-to-best spread is only 5-14 normalised points, the same order as seed and reproduction variance.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c13",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "Quantify importance-sampling OPE's horizon blowup, and say why bandits are exempt.",
+      "a": "Binary actions, uniform logger, deterministic target: rho_t in {0,2}, so a trajectory survives with probability 2^-H and carries weight 2^H. H=10 -> weight 1024, ~10 survivors in 1e4. H=20 -> 1.05e6, one survivor in 1e6. H=100 -> 1.27e30, no dataset exists. Variance ~ 2^H/n, and Jiang & Li give matching information-theoretic lower bounds. At H=1 the weight is just 1/pi_beta(a|x), bounded by 100 for a logger with a 1% floor -- which is why bandit off-policy evaluation ships in production and full-horizon OPE does not.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c14",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "Effective sample size: formula, why it is the OPE gate, and your thresholds.",
+      "a": "ESS = (sum_i w_i)^2 / sum_i w_i^2 -- how many trajectories the weighted estimate is really averaging. With n=50,000 and ESS=3 the estimate is a weighted average of three episodes and its bootstrap interval is fiction, because the bootstrap resamples the same three dominant trajectories. Gates: refuse to act below ESS=100; treat ESS/n < 0.01 as 'target policy is outside the log's support'; block if any single trajectory holds more than 10% of total weight.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c15",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "Ordinary IS vs per-decision IS vs weighted IS -- what each fixes.",
+      "a": "Ordinary IS: unbiased, variance up to 2^H, useless in practice. Per-decision IS (Precup 2000): reward at t only needs the ratio product up to t, so the exponent becomes the EFFECTIVE horizon ~1/(1-gamma)=100 at gamma=0.99; still unbiased, strictly lower variance. Weighted IS: self-normalise by sum of weights, making the estimate a convex combination of observed returns and therefore BOUNDED by [min G_i, max G_i]; biased with bias O(1/n). WIS is the correct default -- an unbiased estimator with variance 1e30 is actively misleading.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c16",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "Doubly robust OPE: the recursion, the guarantee, and when it is worse than WIS.",
+      "a": "V_DR^(t) = Vhat(s_t) + rho_t*(r_t + gamma*V_DR^(t+1) - Qhat(s_t,a_t)). Unbiased if EITHER the model is correct OR the behaviour probabilities are correct -- two chances. The large weight now multiplies a residual rather than a raw return, giving 10-100x variance reduction when the model is decent. When the model is BAD, DR is worse than WIS: unbounded weights times a large residual with no self-normalisation to bound the result. MAGIC blends the j-step partial-DR estimators to minimise estimated MSE.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c17",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "What is the irony of using FQE to evaluate an offline policy?",
+      "a": "FQE iterates Q_{k+1} = argmin E_D[(Q(s,a) - (r + gamma*Q_k(s', pi(s'))))^2], which bootstraps off the TARGET POLICY'S actions at s' -- exactly the out-of-distribution actions the whole field says are untrustworthy. FQE inherits the extrapolation error it is meant to measure, and the errors are CORRELATED with the learner's because they share data distribution and architecture: your evaluator is optimistic about the same phantom actions your policy learned to prefer. DOPE (2021) found no estimator dominates and rank correlation with true return is well short of perfect.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c18",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "Derive BC's O(T^2 eps) regret and state what DAgger changes.",
+      "a": "BC trains on the expert's state distribution and deploys on its own. At each of T steps there is probability up to eps of a wrong action; a wrong action lands you off-distribution where you have no guarantee and can forfeit the remaining up-to-T steps. T chances * eps * T remaining cost = O(T^2 eps). At eps=0.01, T=1000 that is 1e4 versus 1e2 for the linear ideal. DAgger rolls out the LEARNER, labels those states with the EXPERT, aggregates and retrains on everything -- a reduction to no-regret online learning giving O(T eps). It needs an interactive expert, which is exactly what offline settings lack.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c19",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "Name the four distinct sources of non-identifiability in inverse RL.",
+      "a": "1) Degenerate rewards: R = 0 (or any constant) makes every policy optimal (Ng & Russell 2000). 2) Potential-based shaping: R + gamma*Phi(s') - Phi(s) preserves the optimal policy for EVERY Phi (Ng, Harada & Russell 1999), so R is recoverable only up to an infinite-dimensional class plus positive affine scaling. 3) Support: demonstrations constrain R only where the demonstrator went. 4) Reward-dynamics entanglement: R fitted in M can encode M's dynamics and fail to transfer (AIRL's target). MaxEnt IRL removes (1) by assuming Boltzmann rationality -- a modelling choice, not a fact.",
+      "module": "T31-offline-rl"
+    },
+    {
+      "id": "T31-offline-rl-c20",
+      "topic": "Offline RL, Distribution Shift, Conservative Q-Learning, Imitation & Inverse RL",
+      "q": "How are RLHF reward hacking and offline RL's Q-divergence the same failure?",
+      "a": "Both are a policy exploiting the region where a learned function was never constrained by data. Offline RL: max_a' Qhat(s',a') at an action pi_beta never took. RLHF: the policy finds outputs where the reward model had no preference data. Same mechanism, different noun -- and the same fix: RLHF's explicit KL penalty to the reference policy is a policy constraint, structurally identical to TD3+BC's behaviour-cloning term.",
+      "module": "T31-offline-rl"
+    }
+  ]
+}

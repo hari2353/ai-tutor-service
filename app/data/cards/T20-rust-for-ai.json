@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T20-rust-for-ai-c1",
+      "topic": "Rust in the AI Stack",
+      "q": "What is the one repeating pattern that makes a component get rewritten in Rust in the AI stack?",
+      "a": "A hot loop that is NOT a matmul, called millions of times, with small per-item work, that cannot be batched onto a GPU and cannot be handed to BLAS/cuBLAS. In that shape CPython bytecode dispatch IS the runtime and the GIL caps you at one core. Rust owns the band where the unit of work is a byte/token/AST-node; Python keeps the band where it is a tensor, because a tensor op already spends ~99.9% of its time in someone else's C.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c2",
+      "topic": "Rust in the AI Stack",
+      "q": "What does an empty PyO3 function call cost, and what is the practical break-even for writing a binding?",
+      "a": "Measured on PyO3 0.29.2 / CPython 3.10.12: an empty #[pyfunction] costs 54.56 ns/call against 50.71 ns for an empty Python def, with a floor of 34.31 ns for the attribute lookup alone. So crossing the boundary costs roughly one Python call. Practical break-even is about 1 microsecond of Rust work per call; below that the crossing is a double-digit percentage of the call.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c3",
+      "topic": "Rust in the AI Stack",
+      "q": "Is a Rust `add(a: i64, b: i64) -> i64` faster than Python's `a + b` across a PyO3 binding?",
+      "a": "No, it is measurably SLOWER: 79.16 ns vs 70.85 ns, a 12% regression. Two PyLong_AsLongLong conversions plus boxing the i64 result back into a PyLong cost more than an add instruction saves, and CPython's small-int cache makes the Python-side allocation free. If a Rust function does less work than its own argument conversion, the binding is a pessimisation.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c4",
+      "topic": "Rust in the AI Stack",
+      "q": "Why does binding a function that takes `Vec<i64>` (a Python list) fail to beat the builtin `sum()`?",
+      "a": "Because a Python container argument makes the boundary O(n), not O(1). Extracting Vec<i64> is a per-element PyLong_AsLongLong plus a Vec push, measured at 7.6-12.3 ns/element, which is exactly the work sum()'s C loop was already doing. Measured 0.40x-0.68x of sum() at EVERY size from N=1 to N=1,048,576. There is no crossover point.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c5",
+      "topic": "Rust in the AI Stack",
+      "q": "What does zero-copy via the buffer protocol buy, and where does it stop winning?",
+      "a": "PyBuffer::get is O(1) regardless of array size: it fills a Py_buffer with a pointer/length/itemsize/format and takes a reference on the exporter. No bytes move. Measured vs np.sum on f64: 12.41x at N=1, 6.53x at N=256, 1.08x at N=4,096, then 0.42x at N=65,536. Rust wins on numpy's ~3 microsecond per-call DISPATCH, not on the loop, and loses at large N because iter().sum() on f64 does not autovectorise (IEEE non-associativity) while numpy uses pairwise SIMD.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c6",
+      "topic": "Rust in the AI Stack",
+      "q": "What is `py.detach()` in PyO3 0.29, what does it cost, and when should you use it?",
+      "a": "It is the renamed `Python::allow_threads`: it releases the GIL for the duration of a closure (Python::with_gil was likewise renamed to Python::attach). Safety is enforced by the type system since Python<'py> is not Send, so no Python object can be dereferenced inside. Measured cost of a detach/attach round trip: ~30-40 ns (48.5% overhead at zero work, 5.1% at 100 iterations, 0.9% at 10,000). Rule: detach when the closure does more than roughly 1 microsecond of work.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c7",
+      "topic": "Rust in the AI Stack",
+      "q": "Why is BPE tokenization the canonical example of the Rust-in-AI pattern?",
+      "a": "GPT-2's table is 50,000 merges over a 50,257-token vocabulary. Encoding is a regex pre-tokenization (my corpus: 166,702 pre-tokens, mean length 4.37 chars, p99 12, max 70) followed by a data-dependent merge loop per pre-token. That loop is O(L^2) Python operations, has no vectorisable inner kernel, no GPU path, and is called on every document in a pretraining corpus and every request in a serving path. Under the GIL it also cannot use a second core.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c8",
+      "topic": "Rust in the AI Stack",
+      "q": "How much faster is a Rust BPE tokenizer than pure Python, measured on byte-identical output?",
+      "a": "Range, not a single number. On a 101,723-byte slice (30,697 tokens, verified id-identical): pure Python cold cache 103.7 ms (0.98 MB/s), pure Python WARM cache 33.8 ms (3.01 MB/s), HuggingFace tokenizers 0.23.1 43.2 ms (2.36 MB/s), tiktoken 7.2 ms (14.08 MB/s). So tiktoken is 14.4x over cold Python, but HF tokenizers is only 2.4x over cold and actually LOSES to warm pure Python. Never quote a single multiplier.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c9",
+      "topic": "Rust in the AI Stack",
+      "q": "Why does a warm-cache pure-Python BPE beat HuggingFace `tokenizers`?",
+      "a": "Two reasons. (1) Natural text is Zipf-distributed and both implementations memoise per pre-token: 30,697 tokens produced only 3,682 distinct cache entries, so the expensive merge loop mostly does not run. The hot loop everyone rewrites is largely memoised away. (2) HF's encode() returns an Encoding with eight parallel vectors (ids, type_ids, tokens, offsets, attention_mask, special_tokens_mask, word_ids, overflowing), including a heap String PER TOKEN. That construction costs more than the merge loop it saved.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c10",
+      "topic": "Rust in the AI Stack",
+      "q": "tiktoken is 7.8x faster than HuggingFace `tokenizers` on identical output. Both are Rust. Why?",
+      "a": "The return type, not the language. On 738,046 bytes producing an identical 191,673 ids: hf.encode() 400.1 ms (1.84 MB/s) vs tiktoken.encode_ordinary() 51.5 ms (14.33 MB/s). HF materialises 8 parallel vectors plus a String per token plus char-to-byte offset bookkeeping; tiktoken returns a Vec<u32>. Proof of mechanism: encode_batch_fast, which skips offsets, recovers 1.19x (132.9 -> 111.8 ms), so offsets alone were ~16% and the per-token String is the rest.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c11",
+      "topic": "Rust in the AI Stack",
+      "q": "What does `TOKENIZERS_PARALLELISM` control, and what is it worth?",
+      "a": "It enables the rayon thread pool inside encode_batch, which releases the GIL and fans out across cores. Measured on 2,511 documents on 2 vCPUs: true = 142.7 ms (5.17 MB/s), false = 324.6 ms (2.27 MB/s), a 2.27x that is essentially linear. This is the categorical win Rust bindings give that pure Python cannot reach in one process. People set it to false to silence the fork-safety warning and silently halve their throughput.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c12",
+      "topic": "Rust in the AI Stack",
+      "q": "Why does wrapping `tokenizers.encode_batch` in a ThreadPoolExecutor give no speedup?",
+      "a": "Because encode_batch already releases the GIL and saturates the cores via its internal rayon pool. Measured over 2,511 docs: 1 thread 147.0 ms, 2 threads 147.3 ms, 4 threads 152.3 ms. Flat, then slightly worse from oversubscription. Fix: delete the pool and control parallelism where it actually lives, with RAYON_NUM_THREADS.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c13",
+      "topic": "Rust in the AI Stack",
+      "q": "What does the GIL cost on a CPU-bound Rust loop across Python threads, and what is Rust's raw constant factor?",
+      "a": "On a 30,000,000-iteration hash loop: GIL held gave 0.049 s at 1 thread and 0.507 s at 8, which is 10.3x, worse than perfectly serial because of GIL handoff contention (default sys.setswitchinterval is 5 ms). With py.detach() the same work went 0.065 s to 0.198 s, saturating at 2.19x on 2 vCPUs. The separate constant-factor term: 104.00 ns per interpreted iteration vs 1.81 ns in Rust, a 57.5x gap that no GIL change touches.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c14",
+      "topic": "Rust in the AI Stack",
+      "q": "What is the status of free-threaded Python as of 2026, and what does it do to the case for Rust?",
+      "a": "PEP 779 was accepted for Python 3.14, moving free-threading to phase two: officially supported, no longer experimental, but still opt-in as the separate 3.14t binary. Single-threaded overhead is down to ~5-10% from ~40% in the 3.13 experimental build; phase three (default) has criteria but no committed version. It kills the PARALLELISM argument for Rust on a multi-year horizon, kills none of the 57.5x CONSTANT-FACTOR argument, and strengthens the thread-safety argument because latent races the GIL was accidentally serialising now surface.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c15",
+      "topic": "Rust in the AI Stack",
+      "q": "What silently breaks when a PyO3 extension is imported under free-threaded Python 3.14t?",
+      "a": "If the module has not declared `gil_used = false` in its #[pymodule], CPython re-enables the GIL at import. You get no parallelism, no error, and only a RuntimeWarning most people have filtered. PyO3 has supported the free-threaded build since 0.23; from 0.23 through 0.27 the default was gil_used = true so opting in was explicit. Separately, shared mutable #[pyclass] state that was implicitly GIL-protected becomes genuinely concurrent, so PyRefMut borrow panics appear under load, and GILOnceCell (deprecated in 0.29 for PyOnceLock) or static mut become bugs.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c16",
+      "topic": "Rust in the AI Stack",
+      "q": "What is abi3 and why does it dominate PyO3 packaging decisions?",
+      "a": "Building with `pyo3 = { features = [\"abi3-py310\"] }` links only against CPython's stable ABI, so ONE wheel per platform serves 3.10 and every later version. Without it the wheel is tagged cp310-cp310 and the CI matrix is versions x platforms (5x5 = 25 jobs vs 5). tokenizers ships tokenizers-0.23.1-cp310-abi3-manylinux_2_17_x86_64...whl (3,346,235 bytes). Cost: no access to non-stable C-API functions, some PyO3 struct-internals optimisations disabled, and slightly slower calls through function pointers rather than macros.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c17",
+      "topic": "Rust in the AI Stack",
+      "q": "Why must you NOT set `panic = \"abort\"` in a PyO3 extension's release profile?",
+      "a": "Unwinding a Rust panic across the FFI boundary is undefined behaviour, so PyO3 catches panics at the #[pyfunction] boundary and converts them into a Python PanicException that kills only that request. `panic = \"abort\"` disables that catch, so any panic (out-of-bounds index, unwrap on None, PyRefMut borrow violation) becomes an immediate SIGABRT that kills the interpreter and every concurrent in-flight request, with no Python traceback. The 5-10% binary-size saving is not worth an availability incident.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c18",
+      "topic": "Rust in the AI Stack",
+      "q": "When are candle and burn genuinely the right choice over PyTorch, and when are they not?",
+      "a": "Right when the deployment ARTIFACT is the constraint, not throughput: no-Python deployment (a static binary vs a 4+ GB PyTorch container), edge/embedded/WASM (burn compiles to wasm32 on WebGPU via CubeCL, which also targets CUDA/ROCm/Metal/Vulkan/SIMD CPU), small CPU models like MiniLM embedding endpoints, and embedding a model in an existing Rust service to remove a 1-3 ms sidecar hop. Wrong on a GPU fleet at scale: reported results range from 35-47% faster than PyTorch to 8.5x SLOWER (candle issue #2877: all-MiniLM-L6-v2 at 122.30 ms/batch vs ~14.34 ms), depending entirely on whether your ops have tuned kernels.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c19",
+      "topic": "Rust in the AI Stack",
+      "q": "Name the production systems where Rust won in the AI stack, and what is conspicuously NOT Rust.",
+      "a": "Won: tokenizers and tiktoken (BPE), safetensors (mmap-able, and pickle is arbitrary code execution), ruff and uv (uv measured 8.7x over pip cold cache, 145x warm: 14.54 s -> 1.68 s -> 0.10 s), Polars, Qdrant and LanceDB, and SGLang's sgl-router plus vLLM's router (a fork of it) which run Rust tokenizers/reasoning-parsers/tool-parsers for cache-aware routing. NOT Rust, on both sides: PyTorch/JAX/vLLM/SGLang above (the loop body is a cuBLAS call), and CUDA/Triton/CUTLASS/cuDNN below (Rust has no story there). Rust took the band defined by the absence of a tensor.",
+      "module": "T20-rust-for-ai"
+    },
+    {
+      "id": "T20-rust-for-ai-c20",
+      "topic": "Rust in the AI Stack",
+      "q": "An interviewer says 'our LLM serving p99 is 4 seconds, let's rewrite it in Rust.' What is the numerate answer?",
+      "a": "Ask what fraction of the 4,000 ms is CPU-bound Python bytecode; on a generation request it is under 2% because the GPU is doing prefill and decode. Measured tokenization of a real 30-char prompt was 11.02 microseconds = 0.00028% of a 4-second request. So the ceiling on a full rewrite is single-digit ms out of 4,000, at a cost of two quarters plus losing ML-engineer iteration. The real levers are continuous-batching config, KV-cache hit rate and eviction, prefill/decode interference, queueing, speculative decoding and cold model loads. Threshold rule: >40% CPU-bound Python bind it, 10-40% profile first, <10% no.",
+      "module": "T20-rust-for-ai"
+    }
+  ]
+}

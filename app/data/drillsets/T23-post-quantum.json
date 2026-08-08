@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T23-post-quantum-d1",
+      "module": "T23-post-quantum",
+      "q": "Which cryptographic primitives does Shor's algorithm break, and which does it leave essentially untouched?",
+      "a": "Completely breaks RSA, Diffie-Hellman, ECC/ECDSA (all rest on the abelian hidden subgroup structure). Leaves AES and SHA-256 untouched directly — those are only affected by Grover's much weaker quadratic threat.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-post-quantum-d2",
+      "module": "T23-post-quantum",
+      "q": "Walk through why AES-256 is adequate against quantum attack but AES-128 is not.",
+      "a": "Grover's algorithm halves effective key-length security (n-bit -> n/2-bit). AES-256 drops to effective 128-bit, remaining infeasible to brute-force. AES-128 drops to effective 64-bit, within reach of sufficiently resourced attack and unsuitable for new long-lived-sensitivity data.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-post-quantum-d3",
+      "module": "T23-post-quantum",
+      "q": "What are the three NIST PQC standards finalized in August 2024, and what mathematical problem does each rest on?",
+      "a": "ML-KEM (FIPS 203, KEM) and ML-DSA (FIPS 204, signatures) rest on Module-LWE/Module-SIS (lattice-based). SLH-DSA (FIPS 205, signatures) rests only on hash-function collision resistance — a deliberately conservative fallback with an older, more analyzed assumption.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-post-quantum-d4",
+      "module": "T23-post-quantum",
+      "q": "Why was HQC added as an additional standard in 2025 given ML-KEM was already finalized?",
+      "a": "ML-KEM and ML-DSA both rest on lattice-family assumptions; a future cryptanalytic breakthrough against lattices could compromise both simultaneously. HQC's code-based, mathematically distinct hardness assumption hedges against exactly that correlated-failure scenario.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-post-quantum-d5",
+      "module": "T23-post-quantum",
+      "q": "Derive mechanically why a noisy linear system (LWE) resists the Gaussian-elimination attack that would trivially break a noiseless one.",
+      "a": "Without noise, b=As is directly solvable (s=A⁻¹b). With noise (b=As+e mod q), naive linear solving ignoring the noise and modular structure returns values wildly different from the true secret — verified: true secret components like 2701,285,597... bear no resemblance to a naive real-valued solve's output (2.527,-2.293,-0.695...). The noise defeats the exactness Gaussian elimination depends on.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-post-quantum-d6",
+      "module": "T23-post-quantum",
+      "q": "Why does NSA's CNSA 2.0 guidance recommend hybrid deployment through 2030 rather than PQC-only?",
+      "a": "ML-KEM/ML-DSA, despite rigorous NIST standardization, have had far less real-world cryptanalytic scrutiny than decades-old RSA/ECC. Hybrid requires an attacker to break both the classical and PQC halves simultaneously, hedging against an undiscovered weakness without sacrificing quantum-resistance benefit.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-post-quantum-d7",
+      "module": "T23-post-quantum",
+      "q": "What's the practical significance of ML-DSA signatures being 30-70x larger than ECDSA signatures?",
+      "a": "Directly inflates TLS handshake size (the exact cause of 2024's middlebox breakage), certificate chain size, bandwidth for high-signing-volume protocols, and storage/memory on constrained embedded/IoT devices — a concrete engineering constraint, not an abstract inconvenience.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-post-quantum-d8",
+      "module": "T23-post-quantum",
+      "q": "A CISO asks: 'Should we replace our RSA-2048 root CA today, given quantum computers don't exist yet that can break it?' What's your answer?",
+      "a": "Not an emergency rip-and-replace, but start now regardless: root CA rotation is itself multi-year, CNSA 2.0's timeline has gates starting 2027, and root CAs are exactly the long-lived, high-consequence asset harvest-now-decrypt-later logic argues for prioritizing early. Hybrid/dual-signed certificates allow starting the transition without disrupting current trust relationships.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-post-quantum-d9",
+      "module": "T23-post-quantum",
+      "q": "Your team stores health records with a 25-year confidentiality requirement, encrypted in transit with RSA-2048 key exchange and at rest with AES-256. Rank priority and explain why.",
+      "a": "RSA-2048 key exchange is far higher priority: harvest-now-decrypt-later means recorded traffic today remains exposed for the full 25-year window once a CRQC exists, and RSA-2048 offers zero protection then. AES-256 at rest is already adequate (Grover-adjusted 128-bit security comfortably covers 25 years) and needs no urgent action.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-post-quantum-d10",
+      "module": "T23-post-quantum",
+      "q": "Does migrating to PQC key exchange today retroactively protect already-recorded traffic from harvest-now-decrypt-later risk?",
+      "a": "No — migrating protects future transmissions going forward, but already-harvested historical traffic remains at risk once a CRQC exists. The migration clock started at record time, not decrypt time, so earlier migration reduces the total window of exposed historical data but doesn't erase exposure that already occurred.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-post-quantum-d11",
+      "module": "T23-post-quantum",
+      "q": "A startup engineering lead proposes deploying ML-KEM-only (no hybrid) for a new product's TLS, arguing the overhead of hybrid isn't worth it since ML-KEM is already NIST-standardized. Evaluate this.",
+      "a": "Recommend against PQC-only even for a new product: NIST standardization isn't equivalent to decades of real-world adversarial scrutiny RSA/ECC have had, and NSA's own CNSA 2.0 guidance recommends hybrid through 2030 for this reason. The overhead (larger handshakes, middlebox risk) is modest relative to the downside of an unhedged dependency on a newer, less-scrutinized algorithm.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-post-quantum-d12",
+      "module": "T23-post-quantum",
+      "q": "How should leadership pushback that post-quantum migration is 'premature given hardware timeline uncertainty' be addressed?",
+      "a": "Separate the two questions: hardware timeline uncertainty (genuinely wide, 5-30 years per expert estimates) affects messaging urgency, but not the recommended action — the migration itself takes years regardless of exactly when the threat materializes, so waiting for certainty guarantees starting later than optimal under any actual timeline. This is a decision-under-uncertainty argument, not a specific-date prediction.",
+      "difficulty": "staff"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "drills": [
+    {
+      "id": "T26-voice-models-d1",
+      "module": "T26-voice-models",
+      "q": "Name the six stages of a cascaded voice pipeline's latency budget, roughly in order.",
+      "a": "Mic buffering/jitter, VAD endpoint wait, streaming ASR lag, LLM time-to-first-token, TTS time-to-first-audio, network/jitter buffer -- summing to roughly 800ms-1.5s at p50.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-voice-models-d2",
+      "module": "T26-voice-models",
+      "q": "What sample-window constraint does Whisper's architecture impose, and why does that matter for live use?",
+      "a": "Whisper processes fixed non-overlapping 30-second windows, a batch-shaped design that must be retrofitted with rolling short windows and stitching logic for streaming, since it was not built for live use.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-voice-models-d3",
+      "module": "T26-voice-models",
+      "q": "What does Whisper large-v3-turbo change architecturally versus large-v3?",
+      "a": "Prunes the decoder from 32 layers to 4, cutting parameters from 1.55B to 809M, running 2-5x faster with a small WER cost.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-voice-models-d4",
+      "module": "T26-voice-models",
+      "q": "Why does Whisper hallucinate on silence?",
+      "a": "Its autoregressive decoder always emits plausible tokens even absent genuine speech, and a bad segment poisons the conditioning context for later windows, producing invented or looping text.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-voice-models-d5",
+      "module": "T26-voice-models",
+      "q": "What are the two distinct questions a VAD signal answers in a voice agent, and why is tuning for both at once a genuine tradeoff?",
+      "a": "Endpointing ('has the user finished?') and barge-in detection ('has the user started talking while the agent speaks?'). Both key off the same sustained-voice heuristic on the same audio, so making one more sensitive worsens false positives on the other.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-voice-models-d6",
+      "module": "T26-voice-models",
+      "q": "A caller says the agent keeps talking over them. What per-call metrics do you pull first, and what does each isolate?",
+      "a": "TTS-flush p95 (is audio output actually stopping fast enough), LLM-cancel p95 (is generation actually cancelled server-side), total barge-in-handle p95, and false-barge-in rate -- together isolating whether the problem is flush latency, cancellation, or overly-aggressive endpointing.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-voice-models-d7",
+      "module": "T26-voice-models",
+      "q": "Why can't you just set the VAD's minimum-duration guard to zero for instant barge-in?",
+      "a": "Single-frame voice detections are dominated by non-speech transients (coughs, clicks, TTS echo leaking into the mic); removing the guard raises false-barge-in rate sharply -- the guard is what drops false positives by roughly 60-80%.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-voice-models-d8",
+      "module": "T26-voice-models",
+      "q": "Why does 8kHz telephony audio hurt ASR accuracy versus 16kHz, and does upsampling fix it?",
+      "a": "8kHz gives a 4kHz Nyquist limit, losing high-frequency consonant detail that 16kHz-trained models rely on. Upsampling cannot recreate frequency content that was never captured, so the WER gap persists.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-voice-models-d9",
+      "module": "T26-voice-models",
+      "q": "Compare a unified speech-to-speech model with a cascaded pipeline on the auditability dimension.",
+      "a": "Unified models (gpt-realtime, Gemini Live native audio) skip the intermediate text transcript, buying latency and naturalness but losing a deterministic, injectable, auditable checkpoint. Cascaded pipelines keep the transcript as a first-class artifact, which regulated or business-logic-heavy flows usually require.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-voice-models-d10",
+      "module": "T26-voice-models",
+      "q": "Why is p50 latency an insufficient health signal for a voice pipeline?",
+      "a": "Voice UX complaints live in the tail -- a caller experiencing a bad interaction is very likely in the p95/p99, not the median, so per-stage tail metrics (not just average) are needed to catch real problems.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-voice-models-d11",
+      "module": "T26-voice-models",
+      "q": "Staff-level: what's the key evaluation you must run before migrating a mature cascaded voice product to a unified speech-to-speech model?",
+      "a": "Audit whether any current business logic depends on inspecting or modifying the transcript before the agent speaks (compliance checks, confirmation strings); if so, the unified model needs an equivalent hook or the migration is blocked regardless of latency gains. Shadow-mode compare p50/p95/p99 latency and barge-in metrics on real traffic before deciding.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-voice-models-d12",
+      "module": "T26-voice-models",
+      "q": "Name four structural reasons voice agents are a harder engineering problem than text agents.",
+      "a": "Full-duplex interaction with no clean turn boundary; no undo once audio has played; barge-in requiring cross-stack cancellation and rollback under a tight deadline; latency perceived directly and continuously with no typing-indicator buffer to absorb it.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-voice-models-d13",
+      "module": "T26-voice-models",
+      "q": "Explain the architectural bet Cartesia made with Sonic's state-space-model TTS versus a transformer-based competitor, and why it matters for p99.",
+      "a": "SSMs process sequences more efficiently than transformer attention, giving Sonic consistently low latency including at the tail (p99), not just a good median -- Sonic 3.5 reports 75-90ms time-to-first-audio, which matters because p99 determines the worst-case caller experience, not the average one.",
+      "difficulty": "staff"
+    }
+  ]
+}

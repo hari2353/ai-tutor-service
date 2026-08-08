@@ -191,6 +191,11 @@ Mature data science organizations formalize this translation as a required artif
 **Answer:** Don't force a falsely confident point estimate — the honest headline in this case is that the expected value is genuinely uncertain in sign, stated plainly, followed immediately by what specific piece of evidence or additional data would resolve the ambiguity and how long/costly that would be to get. This is still a one-slide, answer-first structure; the "answer" is just "we don't know yet, and here's exactly what would tell us," which is a legitimate and often more valuable answer than a confident number that doesn't reflect the actual state of knowledge.
 **Follow-up trap:** *"Won't executives be frustrated by 'we don't know'?"* — less frustrated by an honest "we don't know, here's how we'd find out" than by a confident number that later turns out wrong — the frustration risk from false precision is larger and comes later, when trust is on the line, not just attention.
 
+### Q10 — Staff-level: you're presenting to a room with two executives who disagree with each other about the right decision before you've even finished your headline number. How do you handle the room dynamic without abandoning the one-slide structure?
+**Testing:** whether the candidate can hold the communication discipline under real interpersonal pressure, not just in a friction-free hypothetical presentation.
+**Answer:** Finish stating the headline number and its range before engaging the disagreement directly — cutting the structure short to referee a debate mid-slide teaches the room that interrupting works and buries the answer the rest of the room still needs to hear. Once the headline and range are stated, name the disagreement in terms of the model: "it sounds like you two differ on [the FN cost assumption / the timeline / the risk tolerance] — that's exactly the kind of input the cost table needs, and I can show you how the recommendation changes under each of your assumptions" — this reframes a personal disagreement into a concrete, answerable modeling question, which is usually more resolvable than the underlying interpersonal disagreement was.
+**Follow-up trap:** *"What if the disagreement is really about something your model can't quantify at all — office politics, a prior bad experience with a similar project, risk appetite that isn't really about this decision?"* — say so plainly rather than forcing every disagreement into the cost-table frame: "that sounds like it's about [X], which is outside what this analysis can settle — happy to come back to the numbers once that's resolved" — pretending a model can adjudicate a non-modeling disagreement is a subtler version of the false-precision failure mode this module already warns against, just applied to room dynamics instead of statistics.
+
 ---
 
 ## Red flags that fail you
@@ -237,6 +242,9 @@ COST TABLE    TP/FP/FN/TN dollar values are BUSINESS judgments, not model output
 
 - Barbara Minto, *The Pyramid Principle: Logic in Writing and Thinking* (McKinsey, developed 1970s) — standard reference for answer-first structured business communication
 - Cole Nussbaumer Knaflic, *Storytelling with Data* (2015) — standard reference for stripping quantitative communication to the decision-relevant comparison
+- [Barbara Minto — "MECE: I invented it, so I get to say how to pronounce it" — McKinsey Alumni](https://www.mckinsey.com/alumni/news-and-events/global-news/alumni-news/barbara-minto-mece-i-invented-it-so-i-get-to-say-how-to-pronounce-it) — accessed 2026-08-08
+- [storytellingwithdata.com — Cole Nussbaumer Knaflic, founder & CEO](https://www.storytellingwithdata.com/meet-the-team-cole) — accessed 2026-08-08
+- [Barbara Minto — Wikipedia](https://en.wikipedia.org/wiki/Barbara_Minto) — accessed 2026-08-08
 
 ## Changelog
 - 2026-08-02 — created

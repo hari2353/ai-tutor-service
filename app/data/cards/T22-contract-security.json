@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T22-contract-security-c1",
+      "topic": "Reentrancy Mechanism",
+      "q": "What exact ordering bug causes reentrancy?",
+      "a": "A function sends funds via an external call BEFORE updating its own internal balance. The external call transfers control to the receiver's code, which can call back into the same function while the balance still shows the pre-withdrawal value, passing the check repeatedly.",
+      "module": "T22-contract-security"
+    },
+    {
+      "id": "T22-contract-security-c2",
+      "topic": "Checks-Effects-Interactions",
+      "q": "What is the checks-effects-interactions pattern, and why does it fix reentrancy?",
+      "a": "Order operations as: validate the request (checks), update your own state to reflect completion (effects), then make external calls last (interactions). By the time control transfers to outside code, any reentrant call sees already-updated state and has nothing to exploit.",
+      "module": "T22-contract-security"
+    },
+    {
+      "id": "T22-contract-security-c3",
+      "topic": "Reentrancy Simulation Result",
+      "q": "In a tested Python simulation, how many times did a vulnerable vault pay out against one 10-unit deposit, versus the CEI-fixed version?",
+      "a": "Vulnerable vault paid out 5 times (50 units total) against a single 10-unit deposit -- draining other depositors' shared pool. The CEI-fixed vault paid out exactly once (10 units), since the reentrant call saw balance=0.",
+      "module": "T22-contract-security"
+    },
+    {
+      "id": "T22-contract-security-c4",
+      "topic": "The DAO Hack",
+      "q": "What was the DAO hack (June 2016) and why does it matter historically?",
+      "a": "A reentrancy exploit draining ~$60M worth of ETH via a recursive-call vulnerability in a withdrawal function -- the origin story for reentrancy as the first vulnerability class every Solidity developer learns. Led to Ethereum's controversial hard fork and the ETH/ETC split.",
+      "module": "T22-contract-security"
+    },
+    {
+      "id": "T22-contract-security-c5",
+      "topic": "Solidity 0.8 Overflow Default",
+      "q": "What changed about integer arithmetic in Solidity 0.8.0 (Dec 2020)?",
+      "a": "Checked arithmetic became the default: +, -, * now revert automatically on overflow/underflow, replacing the prior silent-wraparound behavior. Risk was relocated, not eliminated -- into explicit unchecked{} blocks and non-EVM-native numeric code paths.",
+      "module": "T22-contract-security"
+    },
+    {
+      "id": "T22-contract-security-c6",
+      "topic": "BatchOverflow and Cetus",
+      "q": "Name two real integer-overflow exploits and their era.",
+      "a": "BatchOverflow (April 2018): pre-0.8 ERC-20 batch-transfer multiplication overflow minted tokens from nothing. Cetus Protocol (May 2025, ~$223M): u256 overflow made profitable by flash-borrowed liquidity, in the Move/Sui ecosystem -- showing overflow risk isn't Solidity-specific or fully closed.",
+      "module": "T22-contract-security"
+    },
+    {
+      "id": "T22-contract-security-c7",
+      "topic": "Flash Loan Mechanics",
+      "q": "What is a flash loan, and why does the lender bear zero default risk?",
+      "a": "An uncollateralized loan that must be repaid (plus a small fee) within the same transaction, or the entire transaction -- including the loan itself -- atomically reverts. This guarantees repayment or nothing happened, regardless of loan size.",
+      "module": "T22-contract-security"
+    },
+    {
+      "id": "T22-contract-security-c8",
+      "topic": "Oracle Manipulation Composition",
+      "q": "Why don't flash-loan oracle manipulation attacks require any bug in the victim contract's code?",
+      "a": "Every individual step is legitimate: borrowing a flash loan, swapping in a DEX, reading a pool's reserves. The exploit is entirely in the victim's trust assumption -- reading a manipulable spot price directly as 'the price' -- not in any specific vulnerable line of code.",
+      "module": "T22-contract-security"
+    },
+    {
+      "id": "T22-contract-security-c9",
+      "topic": "Oracle Manipulation Fix",
+      "q": "What is the fix for spot-price oracle manipulation?",
+      "a": "Switch to a time-weighted average price (TWAP), requiring sustained multi-block manipulation (far more expensive and visible), or a decentralized oracle network aggregating many independent sources -- never trust a single pool's instantaneous reserves as 'the price'.",
+      "module": "T22-contract-security"
+    },
+    {
+      "id": "T22-contract-security-c10",
+      "topic": "MEV and Sandwich Attacks",
+      "q": "What is a sandwich attack, and why isn't it fixable purely at the smart-contract level?",
+      "a": "Front-running a visible pending trade (buying before it moves the price up) plus back-running it (selling after). It's a structural property of public mempool transaction ordering, not a bug in any contract -- mitigation needs infrastructure changes (private relays, encrypted mempools) or protocol design (commit-reveal, batch auctions).",
+      "module": "T22-contract-security"
+    },
+    {
+      "id": "T22-contract-security-c11",
+      "topic": "Four Audit Techniques",
+      "q": "What are the four distinct techniques a real smart contract audit combines?",
+      "a": "Static analysis (Slither/Aderyn, fast, catches known-shape bugs), fuzz testing (Foundry/Echidna/Medusa, random inputs vs invariants), formal verification (Certora/Halmos, proves invariants for ALL inputs), and manual review (the only step reasoning about intent/economic design).",
+      "module": "T22-contract-security"
+    },
+    {
+      "id": "T22-contract-security-c12",
+      "topic": "Flash Loan Underweighting Mistake",
+      "q": "Why is 'requires an unrealistic input' a dangerous audit risk-assessment mistake?",
+      "a": "It implicitly assumes the input is hard/expensive to produce, but flash loans make $50-500M+ trivially, permissionlessly available for exactly one transaction -- routinely turning an 'unrealistic' large-capital finding into something achievable by anyone at the cost of a loan fee.",
+      "module": "T22-contract-security"
+    }
+  ]
+}

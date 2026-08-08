@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T22-smart-contracts-d1",
+      "module": "T22-smart-contracts",
+      "q": "Explain exactly how Solidity packs state variables into storage slots, and why declaration order matters.",
+      "a": "Storage is a mapping from 256-bit slot numbers to 256-bit values. The compiler processes variables in declaration order, packing consecutive ones into the same slot whenever they collectively fit within 32 bytes, starting a new slot only when the next variable wouldn't fit. Interleaving a uint256 between two uint128s forces both into separate slots since uint256 can't share.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T22-smart-contracts-d2",
+      "module": "T22-smart-contracts",
+      "q": "Walk through exactly what changes and what stays the same between call and delegatecall.",
+      "a": "Both invoke another contract's bytecode with forwarded calldata/gas. call executes in the callee's own storage/identity context (msg.sender becomes the calling contract). delegatecall executes the same bytecode in the caller's storage/identity context -- the callee's logic runs as if it were the caller's own code, and msg.sender/msg.value remain unchanged from the outer call.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-smart-contracts-d3",
+      "module": "T22-smart-contracts",
+      "q": "If contract A delegatecalls to contract B, and B's code calls msg.sender, what value does it see?",
+      "a": "The original caller of A, not A's own address -- msg.sender is preserved from the outer call context entirely. This is what makes delegatecall-based proxies transparent to end users: msg.sender behaves as if they'd called the implementation directly.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-smart-contracts-d4",
+      "module": "T22-smart-contracts",
+      "q": "Explain the Parity multisig wallet hack (2017) precisely, and what design mistake it exposes about delegatecall usage.",
+      "a": "Wallets delegatecalled into a shared library for core logic. The library was also directly, independently callable and had an unprotected function letting an attacker claim ownership and trigger selfdestruct on it. Every dependent wallet's delegatecall target vanished, permanently bricking all of them and freezing ~$150M+ in ETH. Lesson: never delegatecall to a contract not fully audited and access-controlled.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-smart-contracts-d5",
+      "module": "T22-smart-contracts",
+      "q": "Why does UUPS place the upgrade function in the implementation contract, and what specific new risk does that introduce compared to Transparent Proxy?",
+      "a": "It avoids the per-call admin-check branch Transparent Proxy pays on every invocation, saving gas since the check only runs when upgradeTo is called. New risk: if an implementation is deployed without a correctly-working upgrade function, there's no other path to fix it -- the mechanism that would repair the mistake lives inside the broken contract itself, making it permanently stuck.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-smart-contracts-d6",
+      "module": "T22-smart-contracts",
+      "q": "What is EIP-1967 solving, and why can't a proxy just store its implementation address in slot 0?",
+      "a": "Storing it in slot 0 risks colliding with the implementation's own state variables, since delegatecall executes the implementation's code against the proxy's storage -- both would be assigned low slot numbers in normal declaration order. EIP-1967 computes the slot as keccak256(label)-1, a location no realistic sequential declaration would organically reach, sidestepping collision.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-smart-contracts-d7",
+      "module": "T22-smart-contracts",
+      "q": "Why are events cheaper than storage writes, and what's the actual tradeoff for that cheapness?",
+      "a": "Event data is written to the receipts trie (referenced from the block header), not contract storage/the state trie, avoiding storage's permanent-replication-and-persistence cost. Tradeoff: event data is not readable on-chain by other contracts at all -- only off-chain indexers/clients can access it, so anything a contract needs to read back later must still live in actual storage.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-smart-contracts-d8",
+      "module": "T22-smart-contracts",
+      "q": "A team is choosing between Transparent Proxy, UUPS, and Diamond for an upgradeable contract. How do you advise them?",
+      "a": "First ask if they need upgradeability at all, given it trades away code-immutability as a verifiable guarantee. If under the 24KB size limit: UUPS if the team has strong deployment-testing discipline and per-call gas matters; Transparent Proxy for the simpler, harder-to-permanently-break safety margin. Diamond only if actually hitting the size limit or needing many independently-upgradeable modules.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-smart-contracts-d9",
+      "module": "T22-smart-contracts",
+      "q": "Could you save gas by storing data only in events and never in storage, if a contract needs to reference that data later?",
+      "a": "No -- a contract's own functions cannot read event/log data at all, from any block. If contract logic needs to check or reference a value, it must be in storage (or reconstructible from calldata at call time). Events are a one-way channel to off-chain observers only, never a substitute for state the contract's own logic depends on.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-smart-contracts-d10",
+      "module": "T22-smart-contracts",
+      "q": "Design a CI check that would have caught the Parity-style delegatecall vulnerability, or a storage-layout-drift bug, before deployment.",
+      "a": "Storage-layout drift: run solc --storage-layout against current and proposed implementations, fail CI if any existing variable's slot/offset/type changed (only appends allowed). Delegatecall-target auditing: enumerate every address a contract might delegatecall to, explicitly review whether it's independently directly-callable and whether its access control/destructibility is verified.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-smart-contracts-d11",
+      "module": "T22-smart-contracts",
+      "q": "What if a delegatecall target is only knowable at runtime, e.g., a beacon proxy pattern where the implementation address is fetched from another contract -- does that change the audit surface?",
+      "a": "The audit surface explicitly includes the beacon contract's own access control (who can change what it points to) as part of the same trust boundary. A beacon whose update function has weak access control is exactly as exploitable as a hardcoded delegatecall to an unaudited contract, just with an extra layer of indirection obscuring it.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-smart-contracts-d12",
+      "module": "T22-smart-contracts",
+      "q": "Why is 'smart contracts are immutable' not universally true in production, and when should a team deliberately choose NOT to make a contract upgradeable?",
+      "a": "Upgradeable proxies are the mainstream production pattern for most significant DeFi protocols, but immutability is a real, valuable security property -- users and auditors can verify exactly what code they're trusting, permanently. Well-audited protocols deliberately ship without upgrade mechanisms specifically to make that guarantee credible; upgradeability should be a deliberate tradeoff, not a reflexive default.",
+      "difficulty": "staff"
+    }
+  ]
+}

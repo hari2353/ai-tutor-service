@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T23-error-correction-d1",
+      "module": "T23-error-correction",
+      "q": "Define T1 and T2, and state the relationship between them.",
+      "a": "T1 is energy relaxation time (|1⟩→|0⟩ decay, P(relaxed by t)=1−e^(-t/T1)). T2 is dephasing time (coherence remaining = e^(-t/T2)). Always T2 ≤ 2T1 — a fundamental bound.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-error-correction-d2",
+      "module": "T23-error-correction",
+      "q": "What does NISQ stand for, and what does it actually bound?",
+      "a": "Noisy Intermediate-Scale Quantum (Preskill, 2018) — tens to low-thousands of physical qubits, no error correction, performance bounded jointly by gate error accumulation and the T1/T2 coherence budget. More physical qubits alone doesn't leave NISQ.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T23-error-correction-d3",
+      "module": "T23-error-correction",
+      "q": "Why was quantum error correction believed by some to be fundamentally impossible before 1995?",
+      "a": "Classical error correction relies on redundant copies and majority voting, but no-cloning forbids copying an unknown quantum state, and directly measuring a qubit to check for errors collapses any superposition it was in.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-error-correction-d4",
+      "module": "T23-error-correction",
+      "q": "Encode 0.6|0⟩+0.8|1⟩ in the 3-qubit bit-flip code, inject an X error on the middle qubit, and show how the syndrome identifies it.",
+      "a": "Encoded: 0.6|000⟩+0.8|111⟩. After X on qubit 1: 0.6|010⟩+0.8|101⟩. Parity checks Z0Z1 and Z1Z2 both give (1,1) on the errored basis states, uniquely identifying 'qubit 1 flipped'. Applying X again restores the original exactly, with 0.6 and 0.8 never measured.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-error-correction-d5",
+      "module": "T23-error-correction",
+      "q": "Does the 3-qubit bit-flip code protect against a Z error on any qubit?",
+      "a": "No — its syndrome is entirely insensitive to phase-flip (Z) errors, which pass through undetected. Full protection requires a separate phase-flip code (same construction in the Hadamard-rotated basis) combined with the bit-flip code, as in Shor's 9-qubit code.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-error-correction-d6",
+      "module": "T23-error-correction",
+      "q": "What is a code distance, and why does increasing it only help below a certain physical error rate?",
+      "a": "Code distance d is roughly the minimum physical errors needed to cause an undetected logical error, using more physical qubits as d grows. Below the threshold (~1% for surface codes), larger d exponentially decreases logical error rate; above threshold, more qubits make the logical error rate worse, not better.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T23-error-correction-d7",
+      "module": "T23-error-correction",
+      "q": "A vendor announces a '4,000-qubit quantum computer.' What's the single most important follow-up question?",
+      "a": "How many are logical, error-corrected qubits, and at what logical error rate? Physical and logical qubit counts commonly differ by 2-3 orders of magnitude given current physical-to-logical ratios (hundreds to low thousands per logical qubit).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-error-correction-d8",
+      "module": "T23-error-correction",
+      "q": "What's the practical difference between error mitigation and error correction, and why can't mitigation substitute for correction indefinitely?",
+      "a": "Mitigation (ZNE, readout correction, dynamical decoupling, probabilistic error cancellation) statistically compensates for noise on uncorrected hardware, with overhead that grows — sometimes exponentially — with circuit size. Error correction structurally protects encoded information and scales per the fault-tolerance threshold theorem, without that scaling wall.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-error-correction-d9",
+      "module": "T23-error-correction",
+      "q": "Explain precisely why correcting only the discrete errors X, Y, Z is sufficient to correct arbitrary continuous single-qubit errors.",
+      "a": "Any single-qubit error operator decomposes as a linear combination of I, X, Y, Z. Measurement's discreteness means a syndrome measurement projects any continuous perturbation onto one of the discrete Pauli-type outcomes, so correcting {I,X,Y,Z} corrects the entire continuum of possible perturbations, not just those four operators.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-error-correction-d10",
+      "module": "T23-error-correction",
+      "q": "Why do surface codes dominate current practical implementations over codes with theoretically better overhead, like quantum LDPC codes?",
+      "a": "Surface codes need only 2D nearest-neighbor connectivity matching real chip layouts and have a comparatively high, well-characterized threshold. LDPC codes promise better ratios in theory but typically need longer-range/higher connectivity current hardware doesn't natively support well — an open, unresolved architecture competition.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-error-correction-d11",
+      "module": "T23-error-correction",
+      "q": "A team wants to plan a 5-year roadmap assuming fault-tolerant computers capable of breaking RSA-2048 will exist by year 3, citing 2026's below-threshold demonstration. Evaluate this assumption.",
+      "a": "The premise is accurate but the inference isn't supported — 2026's demonstrations involve small logical qubit counts (12) for short computations, while RSA-2048 needs an estimated hundreds of thousands to ~1M physical qubits sustained through a deep circuit, several more orders of magnitude beyond what's shown. Treat 'year 3' as one scenario among a wide expert range (roughly 5-30 years), not a committed timeline.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-error-correction-d12",
+      "module": "T23-error-correction",
+      "q": "Given hardware timeline uncertainty, should post-quantum cryptography migration planning wait for more clarity?",
+      "a": "No — migration timelines are driven by data sensitivity duration and how long real migrations take (often years), not by pinning the exact year a quantum computer arrives. The harvest-now-decrypt-later threat model means data encrypted today with vulnerable algorithms is already at risk regardless of when decryption capability arrives.",
+      "difficulty": "staff"
+    }
+  ]
+}

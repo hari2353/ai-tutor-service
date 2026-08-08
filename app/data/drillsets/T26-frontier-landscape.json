@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T26-frontier-landscape-d1",
+      "module": "T26-frontier-landscape",
+      "q": "Name the three trust layers for evaluating a new model release.",
+      "a": "Lab self-report, independent aggregator (Artificial Analysis / LM Arena / METR), your own eval on your task distribution.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-frontier-landscape-d2",
+      "module": "T26-frontier-landscape",
+      "q": "What is the fastest single check to catch a misleading benchmark comparison table?",
+      "a": "Count how many competitor cells are unpublished ('—'). A 'win' against a blank cell isn't a measured win.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-frontier-landscape-d3",
+      "module": "T26-frontier-landscape",
+      "q": "Why is MMLU no longer a useful discriminator among frontier models?",
+      "a": "Saturation (scores compressed into the low-to-mid 90s) plus contamination (questions leak into pretraining data from public circulation).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-frontier-landscape-d4",
+      "module": "T26-frontier-landscape",
+      "q": "What benchmark deltas should be treated as noise rather than real signal?",
+      "a": "Single-run accuracy deltas under ~2-3 points, and LM Arena Elo gaps under ~10 points.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-frontier-landscape-d5",
+      "module": "T26-frontier-landscape",
+      "q": "What does LM Arena Elo measure, mechanically?",
+      "a": "Blind pairwise human preference votes fit to a Bradley-Terry model to produce an Elo-style score with confidence intervals -- a preference signal, not a correctness signal.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-frontier-landscape-d6",
+      "module": "T26-frontier-landscape",
+      "q": "What did arXiv 2501.17858 demonstrate about LM Arena's vulnerability to manipulation?",
+      "a": "A coordinated voting strategy -- fingerprinting a target model's outputs and exclusively voting for it -- can shift its ranking with as few as a few hundred rigged votes.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-frontier-landscape-d7",
+      "module": "T26-frontier-landscape",
+      "q": "What four categories make up the Artificial Analysis Intelligence Index v4.1, and their weights?",
+      "a": "Agents 34%, Coding 24%, Scientific Reasoning 24%, General 18%.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-frontier-landscape-d8",
+      "module": "T26-frontier-landscape",
+      "q": "What does METR's time-horizon metric measure, and how has its doubling rate changed recently?",
+      "a": "The length of task (in human-professional time) a model can complete autonomously at 50% reliability. Doubling period compressed from ~7 months (2019-2024) to ~4 months (2024-2025).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-frontier-landscape-d9",
+      "module": "T26-frontier-landscape",
+      "q": "What is the concrete gotcha in Llama's license that catches companies off guard?",
+      "a": "A 700M monthly-active-user cap measured at the parent corporate entity, frozen rather than rolling, plus an EU-specific exclusion of multimodal capabilities from the license grant.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-frontier-landscape-d10",
+      "module": "T26-frontier-landscape",
+      "q": "Which open-weight model families use MIT or Apache 2.0 licenses (fully permissive)?",
+      "a": "DeepSeek's V4 line (MIT); Qwen and Gemma (Apache 2.0).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-frontier-landscape-d11",
+      "module": "T26-frontier-landscape",
+      "q": "What regulatory event on 2 August 2026 changed the enforcement landscape for frontier AI documentation?",
+      "a": "The EU AI Act's General-Purpose AI Code of Practice obligations began enforcement -- the first external enforcement mechanism, versus labs' voluntary self-authored safety frameworks.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-frontier-landscape-d12",
+      "module": "T26-frontier-landscape",
+      "q": "Distinguish Anthropic's RSP from OpenAI's Preparedness Framework in terms of specificity.",
+      "a": "RSP is the most prescriptive: ASL-1 through ASL-4+ with specific precommitted weight-security tiers (RAND-based). Preparedness collapsed from four risk tiers to two qualitative bars (High/Critical), seen by analysts as weaker precommitment.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-frontier-landscape-d13",
+      "module": "T26-frontier-landscape",
+      "q": "In the Gemini 3.1 Pro '13 of 16 wins' launch (Feb 2026), what was omitted from the headline comparison table despite being in the underlying model card data?",
+      "a": "GDPval-AA enterprise-task Elo, where Claude models led by roughly 300 points -- present in the underlying data but absent from the headline comparison.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-frontier-landscape-d14",
+      "module": "T26-frontier-landscape",
+      "q": "Why can a benchmark ranking flip entirely between 'with tools' and 'without tools' conditions on the same benchmark (e.g. Humanity's Last Exam)?",
+      "a": "Tool access changes what the model can do to verify or compute an answer rather than reason it purely internally, so relative strengths (e.g. raw reasoning vs. tool-orchestration skill) can favor different models under each condition -- meaning a single headline number without the condition stated is incomplete.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-frontier-landscape-d15",
+      "module": "T26-frontier-landscape",
+      "q": "Design the four-stage process for choosing which frontier model powers a new agentic product.",
+      "a": "1) Fast triage (hours): blank-cell/harness/tool-condition check, wait for one independent number. 2) Shortlist eval (days): held-out set from real production tasks, rubric tied to real outcomes, repeated runs. 3) Cost/license/ops gate: pricing at real volume, full license text, latency, availability track record. 4) Staged rollout: pinned version, small traffic percentage, continuous regression suite, widen only after real-traffic metrics confirm the offline signal.",
+      "difficulty": "staff"
+    }
+  ]
+}

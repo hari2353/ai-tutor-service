@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T23-algorithms-c1",
+      "topic": "Quantum Algorithms",
+      "q": "What problem does Deutsch-Jozsa solve, and what is the exact query gap?",
+      "a": "Distinguishes a constant vs balanced oracle function. Classical worst case: 2^(n-1)+1 queries. Quantum: exactly 1 query, with certainty — verified P=1.0 for constant, P=0.0 for balanced.",
+      "module": "T23-algorithms"
+    },
+    {
+      "id": "T23-algorithms-c2",
+      "topic": "Quantum Algorithms",
+      "q": "What is the speedup class of Grover's algorithm, and is it optimal?",
+      "a": "Quadratic (O(√N) vs classical O(N)), not exponential. Bennett-Bernstein-Brassard-Vazirani (1997) proved Θ(√N) is provably optimal for any quantum algorithm against an unstructured black-box oracle.",
+      "module": "T23-algorithms"
+    },
+    {
+      "id": "T23-algorithms-c3",
+      "topic": "Quantum Algorithms",
+      "q": "Describe Grover's algorithm geometrically.",
+      "a": "The state rotates by angle 2θ per iteration (θ=arcsin(1/√N)) in a 2D plane spanned by |target⟩ and the uniform superposition over everything else. Optimal iterations k*≈(π/4)√N; overshooting past this rotates probability back down, not further up.",
+      "module": "T23-algorithms"
+    },
+    {
+      "id": "T23-algorithms-c4",
+      "topic": "Quantum Algorithms",
+      "q": "Does Grover's algorithm make NP-hard problems tractable?",
+      "a": "No. It halves the exponent for brute-force search (2^n queries becomes O(2^(n/2))), but 2^(n/2) is still exponential in n — NP-hard problems remain intractable in general.",
+      "module": "T23-algorithms"
+    },
+    {
+      "id": "T23-algorithms-c5",
+      "topic": "Quantum Algorithms",
+      "q": "What is the only quantum step in Shor's factoring algorithm?",
+      "a": "Finding the period r of f(x)=a^x mod N. Choosing a and extracting factors via gcd(a^(r/2)±1, N) afterward are both classical.",
+      "module": "T23-algorithms"
+    },
+    {
+      "id": "T23-algorithms-c6",
+      "topic": "Quantum Algorithms",
+      "q": "How does the QFT extract a period from a periodic quantum state?",
+      "a": "The QFT of a period-r comb of length Q concentrates amplitude at multiples of Q/r. Measuring a peak k and computing k/Q gives a fraction close to (integer)/r, which the classical continued-fractions algorithm converts into r.",
+      "module": "T23-algorithms"
+    },
+    {
+      "id": "T23-algorithms-c7",
+      "topic": "Quantum Algorithms",
+      "q": "Is factoring NP-hard, and does Shor's algorithm prove P=NP?",
+      "a": "No to both. Factoring is in NP∩co-NP and believed to be of intermediate difficulty, not NP-complete. Shor's algorithm shows factoring is in BQP but says nothing about P vs NP; BQP is not believed to contain NP.",
+      "module": "T23-algorithms"
+    },
+    {
+      "id": "T23-algorithms-c8",
+      "topic": "Quantum Algorithms",
+      "q": "Why doesn't Shor's algorithm threaten AES/symmetric cryptography the same way it threatens RSA?",
+      "a": "Shor's algorithm exploits period-finding for the abelian hidden subgroup problem underlying factoring/discrete log, completely breaking RSA/ECC. AES has no such structure; only Grover's quadratic speedup applies, halving effective security bits (AES-256 -> effective 128-bit) — mitigated by longer keys, not a total break.",
+      "module": "T23-algorithms"
+    },
+    {
+      "id": "T23-algorithms-c9",
+      "topic": "Quantum Algorithms",
+      "q": "Why doesn't Shor's algorithm generalize to break lattice-based cryptography?",
+      "a": "Shor's algorithm exploits the abelian hidden subgroup problem specifically. Lattice problems don't reduce to an abelian hidden subgroup problem in any known way; no efficient quantum algorithm for the non-abelian hidden subgroup problem is known despite decades of research.",
+      "module": "T23-algorithms"
+    },
+    {
+      "id": "T23-algorithms-c10",
+      "topic": "Quantum Algorithms",
+      "q": "What complexity class relationships are relevant to 'can quantum computers solve NP-hard problems'?",
+      "a": "P ⊆ BQP. Factoring is in BQP but not known to be in P nor believed NP-complete. BQP is not believed to contain NP — no known quantum algorithm solves general NP-complete problems in polynomial time.",
+      "module": "T23-algorithms"
+    },
+    {
+      "id": "T23-algorithms-c11",
+      "topic": "Quantum Algorithms",
+      "q": "What happened to Shor's-algorithm resource estimates for RSA-2048 between 2024 and 2026?",
+      "a": "Estimated physical qubit requirements fell roughly an order of magnitude, from tens of millions toward under one million, driven mainly by algorithmic and circuit-level (T-count) optimization rather than hardware improvements — the resource bar is falling faster than raw qubit counts are rising.",
+      "module": "T23-algorithms"
+    },
+    {
+      "id": "T23-algorithms-c12",
+      "topic": "Quantum Algorithms",
+      "q": "What is the largest number actually factored by Shor's algorithm on real quantum hardware as of 2026?",
+      "a": "Still trivially small (historically numbers like 15, 21, 35) — nowhere near RSA-2048 scale; all demonstrated Shor's-algorithm advantage today is toy-scale, not a real cryptographic break.",
+      "module": "T23-algorithms"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T22-blockchain-scratch-d1",
+      "module": "T22-blockchain-scratch",
+      "q": "What exactly makes a blockchain 'immutable'? Be precise.",
+      "a": "Each block's hash covers its full contents including previous_hash, which points to the prior block's hash. Editing any past block changes its hash, invalidating the next block's previous_hash pointer, cascading through every subsequent block. It's a cost-based guarantee (redoing PoW for every block after the edit, faster than the honest network), not an absolute impossibility.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T22-blockchain-scratch-d2",
+      "module": "T22-blockchain-scratch",
+      "q": "Why does a block header commit to a Merkle root of transactions rather than the raw transaction list?",
+      "a": "Keeps the header small and fixed-size (Bitcoin: 80 bytes regardless of tx count) while cryptographically committing to every transaction -- changing any transaction changes the root, which changes the header hash. Also enables SPV/light clients to verify inclusion with a short Merkle proof instead of downloading the full block.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T22-blockchain-scratch-d3",
+      "module": "T22-blockchain-scratch",
+      "q": "Walk through proof-of-work mining mechanically. What's actually being searched for?",
+      "a": "A miner varies the nonce and recomputes the block hash, looking for a hash below a numeric target (D leading zero bits). Since hash output is unpredictable, brute-force trial is the only strategy; expected attempts are 2^D. Tested at difficulty 4 (16^4=65,536 expected), actual nonces found were 113,928 and 28,134 -- right order of magnitude.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-blockchain-scratch-d4",
+      "module": "T22-blockchain-scratch",
+      "q": "What's the difference between 'longest chain wins' and the actual Nakamoto consensus fork-choice rule?",
+      "a": "The real rule is most cumulative proof-of-work (chainwork), which equals 'longest' only under uniform difficulty. Example: 10 blocks at difficulty 4 = 655,360 work; 8 blocks at difficulty 6 = 134,217,728 work -- over 200x more despite fewer blocks. Literal block-count comparison picks the wrong chain.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-blockchain-scratch-d5",
+      "module": "T22-blockchain-scratch",
+      "q": "Your is_valid() check recomputes every block's hash from genesis. What's the cost at Bitcoin's real chain length, and how do production nodes handle it?",
+      "a": "Bitcoin's chain is 900,000+ blocks deep (2026); full validation from genesis is hours-to-days for a new node. Production nodes use checkpointed historical block hashes to fast-sync old history while still fully validating recent, actively-contested blocks. Pruned nodes discard old block data after validating once, keeping only the UTXO set.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-blockchain-scratch-d6",
+      "module": "T22-blockchain-scratch",
+      "q": "Two miners solve block 500 within two seconds of each other on opposite sides of the world. What happens next?",
+      "a": "Nodes near each miner extend their local block first, forming a temporary fork -- no global vote. Mining continues on both branches until one side finds the next block first, at which point the losing branch's transactions return to the mempool and nodes on the lighter chain reorg to the heavier one.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-blockchain-scratch-d7",
+      "module": "T22-blockchain-scratch",
+      "q": "Why must proof-of-work be expensive to produce but cheap to verify, specifically?",
+      "a": "Every node verifies every new block it receives, potentially thousands of times a day network-wide. If verification cost scaled with mining cost, total network verification cost would be economically unworkable. Verification is one hash computation (microseconds); mining is a 2^D-attempt search.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-blockchain-scratch-d8",
+      "module": "T22-blockchain-scratch",
+      "q": "A company wants an internal ledger among five known, mutually-trusted subsidiaries, tamper-evident and auditable. Would you recommend proof-of-work?",
+      "a": "No. PoW's cost buys permissionless participation among mutually distrusting, potentially anonymous parties -- none of which applies here. A permissioned ledger with classical BFT consensus (or a signed hash-chained log) gives the same tamper-evidence and auditability with deterministic finality and no energy cost.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-blockchain-scratch-d9",
+      "module": "T22-blockchain-scratch",
+      "q": "What specifically would you need to add to a from-scratch blockchain implementation before it could handle a real, adversarial network of untrusted peers?",
+      "a": "P2P networking/gossip with DoS resistance (rate-limiting, peer scoring, banning), mempool policy (fee-based prioritization, replace-by-fee), full transaction validation (signatures, double-spend checks), orphan-block and competing-chain handling, and a real difficulty-adjustment algorithm instead of a fixed constant.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-blockchain-scratch-d10",
+      "module": "T22-blockchain-scratch",
+      "q": "Which layer of a real blockchain client is most likely to be the actual attack surface in practice -- the core hashing/chaining logic, or something else?",
+      "a": "The P2P and mempool layers historically. Most real-world client vulnerabilities have been network-layer DoS handling and mempool-acceptance logic (transaction flooding, malformed-message parsing bugs), not the comparatively simple core hashing/chaining mechanism, which has had far fewer implementation bugs.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-blockchain-scratch-d11",
+      "module": "T22-blockchain-scratch",
+      "q": "Design a test suite for a from-scratch blockchain implementation. What cases actually matter?",
+      "a": "Positive: valid N-block chain validates true. Negative: mutating any historical field without recomputing must be caught; a block failing the PoW target must be rejected even if internally consistent; broken index/previous_hash sequencing must be rejected. Fork-specific: equal block count but different cumulative work must resolve to the heavier chain, never the merely-longer one.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-blockchain-scratch-d12",
+      "module": "T22-blockchain-scratch",
+      "q": "What's the easiest way to subtly get block validation wrong when implementing proof-of-work checking?",
+      "a": "Conflating mining (searching for a valid nonce) with validation (checking a claimed nonce is valid) -- re-running the PoW search during validation instead of simply re-hashing once and comparing against the target. This defeats the entire cheap-verification property the mining/verification asymmetry depends on.",
+      "difficulty": "staff"
+    }
+  ]
+}

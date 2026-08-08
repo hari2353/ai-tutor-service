@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T31-offline-rl-d1",
+      "module": "T31-offline-rl",
+      "q": "In one sentence: why can't you run stock DQN on a logged dataset even though DQN is off-policy?",
+      "a": "Because DQN's off-policy-ness is mild and self-correcting -- the buffer is refilled by nearby policies and reality contradicts overestimated actions when they get executed -- whereas offline the behaviour policy is frozen, the mismatch grows unboundedly over 1e6 steps, and nothing ever contradicts an overestimate.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T31-offline-rl-d2",
+      "module": "T31-offline-rl",
+      "q": "Your offline SAC run has mean(Q) = 4.7e6 at step 200k with gamma=0.99 and |r| <= 1. Is the run salvageable, and what single assertion would have caught it at step 20k?",
+      "a": "No. True values are bounded by 1/(1-gamma) = 100, so the estimate is ~5e4 times the entire legal value range -- the extrapolation-error recursion has run away. The assertion: abs(mean(Q)) * (1 - gamma) < 5 * R_max, checked every 1000 steps. Note the TD loss was probably fine the whole time, since prediction and target inflate together.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T31-offline-rl-d3",
+      "module": "T31-offline-rl",
+      "q": "Name the two distribution shifts in offline RL and say which one destroys training.",
+      "a": "(1) State shift at deployment -- the learned policy visits states pi_beta never visited; this hurts after you ship. (2) Action shift inside the Bellman target during training -- max_a' Qhat(s',a') evaluates actions with zero support under pi_beta. Number 2 destroys training, on data you already have, without ever touching the environment. Conflating the two is the most common interview error on this topic.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T31-offline-rl-d4",
+      "module": "T31-offline-rl",
+      "q": "Give the one-line summary of what BCQ, CQL, TD3+BC and IQL each constrain.",
+      "a": "BCQ: the action set fed to the max (VAE generates 10 candidates, perturbed by <= Phi=0.05). CQL: the Q-values themselves (alpha * logsumexp penalty pushing OOD Q down, giving a lower bound on Q^pi). TD3+BC: the policy (squared-error BC term with lambda = alpha/mean|Q|, alpha=2.5). IQL: nothing -- it never queries an OOD action, fitting an in-sample expectile instead.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T31-offline-rl-d5",
+      "module": "T31-offline-rl",
+      "q": "Compute the per-backup overestimation bias for an Atari-scale action set with per-action error scale sigma = 1, and propagate it to the fixed point at gamma = 0.99.",
+      "a": "E[max of |A| mean-zero errors] ~ sigma*sqrt(2 ln|A|). With |A| = 18: sqrt(2 * ln 18) = sqrt(2 * 2.89) = 2.40, so b = 2.4 per backup. The recursion e_{k+1} <= gamma*e_k + b has fixed point b/(1-gamma) = 2.4 * 100 = 240 -- on a value function whose entire legal range with |r| <= 1 is +/-100. The error is 2.4x the whole range.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-offline-rl-d6",
+      "module": "T31-offline-rl",
+      "q": "A stakeholder says 'we have 4 billion rows of ranker logs, surely that's enough for offline RL.' Rebut it with the specific quantity and the specific experiment.",
+      "a": "The binding quantity is the concentrability coefficient C = max d^pi(s,a)/d^pi_beta(s,a), which depends on the SUPPORT of the logging policy, not on row count. A near-deterministic ranker has essentially no action diversity per context, so C is effectively infinite and 4 billion rows have roughly the coverage of 4 million. The experiment: Fujimoto et al. 2018 trained DDPG online, saved its ENTIRE replay buffer, and trained a fresh DDPG on exactly that data -- coverage as good as a successful agent's own experience -- and it still failed.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-offline-rl-d7",
+      "module": "T31-offline-rl",
+      "q": "Write the expectile loss and explain in one line why tau = 0.9 approximates an in-sample max.",
+      "a": "L2^tau(u) = |tau - 1(u < 0)| * u^2. At tau = 0.9 negative residuals are penalised 9:1 versus positive ones, so the minimiser is dragged toward the top of the residual distribution; applied to Q(s,a) over actions actually present in the dataset at s, the minimiser approximates max over the support of pi_beta -- the maximisation policy improvement needs, with no unseen action ever evaluated.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-offline-rl-d8",
+      "module": "T31-offline-rl",
+      "q": "You have 50,000 logged trajectories. WIS says the candidate policy is 30% better than the incumbent. What three numbers do you compute before believing it, and what are your thresholds?",
+      "a": "ESS = (sum w)^2 / sum w^2 (gate: >= 100); ESS/n (gate: >= 0.01); max single-trajectory weight share (gate: < 10%). If ESS = 3 out of 50,000, the estimate averages three episodes and the bootstrap interval is fiction because the bootstrap resamples the same three. Also require WIS, DR and FQE to agree -- disagreement between estimators with different failure modes is a hard block.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-offline-rl-d9",
+      "module": "T31-offline-rl",
+      "q": "A colleague prefers ordinary IS over WIS because it is unbiased. Rebut in two sentences.",
+      "a": "Unbiasedness is a property of an estimator averaged over datasets you will never collect, and ordinary IS's variance can be 2^H -- 1.27e30 at H=100 -- so any finite sample is confidently wrong in an unpredictable direction. WIS self-normalises, making the estimate a convex combination of observed returns and therefore bounded by [min G_i, max G_i], with bias vanishing at O(1/n); on one dataset that is strictly the better trade.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-offline-rl-d10",
+      "module": "T31-offline-rl",
+      "q": "You get D4RL AntMaze total: BC ~0, IQL 378.0. On halfcheetah-medium: BC 42.6, IQL 47.4. What single property of the data explains the difference in gap size?",
+      "a": "Whether the solution requires stitching. In AntMaze no single logged trajectory solves the maze, so the answer must be composed from sub-trajectories across episodes -- which only multi-step bootstrapping can do, and BC structurally cannot, hence ~0. On locomotion, decent whole trajectories already exist, so imitating them gets most of the value and the 5-point gap is within the range of seed and reproduction variance (CORL moved published numbers several normalised points in both directions).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-offline-rl-d11",
+      "module": "T31-offline-rl",
+      "q": "Explain why FQE is not a trustworthy referee for a policy trained by CQL, in mechanistic terms.",
+      "a": "FQE's target is r + gamma*Q_k(s', pi(s')), which evaluates the network at the TARGET policy's actions at s' -- exactly the out-of-distribution actions that caused the problem in the first place. So FQE inherits the extrapolation error it is meant to measure, and because evaluator and learner share the data distribution and usually the architecture, the errors are correlated in the same direction: the referee is optimistic about the same phantom actions the policy learned to prefer.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-offline-rl-d12",
+      "module": "T31-offline-rl",
+      "q": "Design the decision architecture for shipping an offline-trained policy when a limited online test is available. Where exactly does OPE sit?",
+      "a": "Offline RL produces a shortlist of 3-5 candidates. OPE (WIS + DR + FQE, each reported with ESS) acts purely as a FILTER that eliminates obviously broken candidates -- never as the decision. A guarded online test on 1-5% of traffic with hard safety constraints and automatic rollback on a guardrail metric makes the actual choice. Runtime, an out-of-support detector (VAE reconstruction error or ensemble disagreement on s) falls back to the incumbent policy. Gottesman et al. 2019 reach the same conclusion clinically: OPE is for rejecting policies, not certifying them.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-offline-rl-d13",
+      "module": "T31-offline-rl",
+      "q": "Your CQL policy's actions are statistically indistinguishable from the logging policy's, and returns match the logger exactly. Diagnose and give the next two actions.",
+      "a": "Alpha is too large: the pessimism penalty has flattened Qhat so much that argmax_a Qhat(s,a) is just the dataset action -- you paid CQL's 2-4x compute and received behaviour cloning. Next: (1) reduce alpha into the 0.5-5 range or switch to the Lagrange variant with a target action gap; (2) run plain 10%BC and compare, because if it matches, CQL is not earning its complexity and you should ship the BC policy and redirect the effort to acquiring exploration coverage.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-offline-rl-d14",
+      "module": "T31-offline-rl",
+      "q": "Argue that RLHF reward hacking and offline RL Q-divergence are the same failure, and name the shared fix.",
+      "a": "Both are a policy exploiting a region where a learned function was never constrained by data: max_a' Qhat(s',a') at an action pi_beta never took, versus a generation where the reward model saw no preference comparisons. Neither the critic nor the reward model has any pin there, and in both cases the optimiser is an argmax that actively HUNTS that region. The shared fix is a policy constraint keeping the optimiser inside the trained region -- RLHF's KL penalty to the reference policy is structurally the same object as TD3+BC's squared-error BC term.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-offline-rl-d15",
+      "module": "T31-offline-rl",
+      "q": "Give five situations where you would decline to use offline RL, each with the substitute you would build instead.",
+      "a": "1) Horizon is 1 -> contextual bandits; the weight is 1/pi_beta not a product of 100 of them, so evaluation actually works. 2) Data is near-expert -> BC or 10%BC; nothing beats BC on expert data. 3) Logger is narrow and near-deterministic -> nothing works; buy a 1-5% randomised traffic slice, since C is a support property. 4) No online test possible and the decision is consequential -> a constrained policy with a worst case bounded by construction; the OPE evidence standard cannot be met. 5) Gain over 10%BC is within seed variance -> ship 10%BC; the offline RL stack (critic, OPE, propensity logging, support detector, untunable hyperparameters) needs a large win to justify its surface area.",
+      "difficulty": "staff"
+    }
+  ]
+}
