@@ -316,3 +316,4 @@ COST TOOLS   Cost Explorer (historical/forecast, tag-filterable) +
 
 ## Changelog
 - 2026-08-01 — created
+- 2026-08-09 — Amazon CloudWatch adds managed Prometheus collectors — agentless scraping for EKS, EC2, ECS, MSK, and OpenSearch Service, removing the need to run and maintain your own Prometheus scrape infrastructure ([src](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-price-reduction-of-gpt-models-in-bedrock-cloudwatch-managed-collectors-for-prometheus-metrics-and-more-august-3-2026/))

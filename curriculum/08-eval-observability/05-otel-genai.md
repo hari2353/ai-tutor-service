@@ -301,3 +301,4 @@ DEBUG PATTERN  trace_id = join key to eval result + cost figure.
 
 ## Changelog
 - 2026-08-01 — created
+- 2026-08-09 — Confirmed still true as of this pass: no `gen_ai.*` span/event/metric/attribute in the OpenTelemetry semantic conventions is Stable — all moved (v1.42.0, 2026-06-12) out of the main semconv repo into a dedicated GenAI-conventions repo, but that was an organizational split, not a graduation; conventions remain in Development status with no committed stabilization timeline as of 2026-07-17 ([src](https://john-hodge.com/blog/opentelemetry-genai-semantic-conventions/)) — accessed 2026-08-09. Keep telling candidates: don't hard-couple production dashboards to `gen_ai.*` attribute names yet — they can still change.

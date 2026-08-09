@@ -695,3 +695,4 @@ WHEN NOT TO USE IT
 
 ## Changelog
 - 2026-07-26 — created
+- 2026-08-09 — LangGraph 1.0 reached general availability: the first stable major release after a year-plus of production use (Uber, LinkedIn, Klarna cited). Only breaking change is deprecation of `langgraph.prebuilt` — prebuilt agent helpers move to `langchain.agents`. Everything else is backward compatible ([src](https://changelog.langchain.com/announcements/langgraph-1-0-is-now-generally-available))

@@ -328,3 +328,6 @@ VOLATILITY WARNING: every $ figure here is a 2026 snapshot -- re-verify
 
 ## Changelog
 - 2026-08-01 — created
+- 2026-08-09 — Claude Opus 5 added to Amazon Bedrock, positioned for stronger agentic-coding and cybersecurity workloads ([src](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-july-27-2026/))
+- 2026-08-09 — Amazon Bedrock ships Web Search as a built-in server-side tool for OpenAI models (GPT-5.4/5.5/5.6), grounding responses with zero data egress from the customer's AWS environment — no external search API or vendor review needed ([src](https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-bedrock-web/))
+- 2026-08-09 — Amazon Bedrock cuts on-demand GPT-5.6 pricing effective July 30: Luna down 80% (to $0.20/M input, $1.20/M output tokens), Terra down 20% — reshapes the cost-comparison math in any Bedrock-vs-self-host answer ([src](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-price-reduction-of-gpt-models-in-bedrock-cloudwatch-managed-collectors-for-prometheus-metrics-and-more-august-3-2026/))

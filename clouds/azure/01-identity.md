@@ -317,3 +317,5 @@ CROSS-CLOUD: Entra ID+RBAC ~= IAM. Managed Identity ~= IAM role for EC2 (IRSA-li
 
 ## Changelog
 - 2026-08-08 — created
+- 2026-08-09 — Trusted Launch as Default (TLaD) reaches GA for new Gen2 VMs and VMSS — Secure Boot and vTPM are now enabled automatically on supported deployments instead of opt-in, raising the default security baseline for new compute ([src](https://www.microsoft.com/releasecommunications/api/v2/azure/rss))
+- 2026-08-09 — Symmetric keys on Azure Key Vault Premium reach public preview (oct-HSM key type, AES) — first native symmetric-key support in Key Vault Premium ([src](https://www.microsoft.com/releasecommunications/api/v2/azure/rss))

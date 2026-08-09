@@ -345,3 +345,6 @@ CROSS-CLOUD: GCS~S3. Cloud SQL~RDS. AlloyDB~Aurora (+columnar, unique).
 
 ## Changelog
 - 2026-08-08 — created
+- 2026-08-09 — AlloyDB for PostgreSQL adds BigQuery sync (one-time or scheduled table sync, preview) and lakehouse-style federated access to BigQuery data — narrows the operational/analytical data gap without a separate ETL pipeline ([src](https://docs.cloud.google.com/release-notes))
+- 2026-08-09 — Cloud SQL for MySQL/PostgreSQL/SQL Server DNS automation reaches GA for Private-Service-Connect-enabled instances, including an optional global write-endpoint DNS that follows the current primary ([src](https://docs.cloud.google.com/release-notes))
+- 2026-08-09 — AlloyDB adds BM25 full-text-search indexes (preview, via `pg_textsearch`, PostgreSQL 17/18) — probabilistic ranking alongside existing vector search ([src](https://docs.cloud.google.com/release-notes))

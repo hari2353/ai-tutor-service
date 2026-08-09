@@ -1,1 +1,1 @@
-{"provider":"gcp","last_updated":"2026-07-26","last_item_guid":"","runs":0,"note":"seeded at build; first /tutor-update will pull the delta from this date"}
+{"provider":"gcp","last_updated":"2026-08-09","last_item_guid":"","runs":1,"note":"cloud.google.com/release-notes fetch covered 2026-08-03 to 2026-08-08 before hitting the tool's size cap; 2026-07-26 to 2026-08-02 gap filled via WebSearch"}

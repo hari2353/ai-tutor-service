@@ -289,3 +289,5 @@ CROSS-CLOUD: GCP bills per-second w/ automatic SUD; AWS needs Savings
 
 ## Changelog
 - 2026-08-08 — created
+- 2026-08-09 — GKE TPU Subslicing (dynamic sub-/super-slicing for Ironwood TPU7x) reaches GA — incrementally provision node pools into smaller topologies instead of committing to a full cube/litepod ([src](https://docs.cloud.google.com/release-notes))
+- 2026-08-09 — GKE Autopilot adds general-purpose Arm ComputeClasses (`autopilot-arm`, `autopilot-arm-spot`) for Standard and Autopilot clusters ([src](https://docs.cloud.google.com/release-notes))

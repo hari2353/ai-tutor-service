@@ -335,3 +335,4 @@ DEBUG ORDER  route table -> SG -> NACL (both dirs, both subnets) -> DNS ->
 
 ## Changelog
 - 2026-08-01 — created
+- 2026-08-09 — AWS Interconnect (multicloud private connectivity, first GA for Oracle Cloud Infrastructure) reaches general availability — private AWS↔other-cloud networking without traversing the public internet ([src](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-price-reduction-of-gpt-models-in-bedrock-cloudwatch-managed-collectors-for-prometheus-metrics-and-more-august-3-2026/))

@@ -288,3 +288,6 @@ CROSS-CLOUD: VM~=EC2/Compute Engine. VMSS~=ASG/MIG. App Service~=Beanstalk/App E
 
 ## Changelog
 - 2026-08-08 — created
+- 2026-08-09 — Application Routing with Gateway API reaches GA on AKS, bringing the Kubernetes Gateway API standard to AKS ingress as an alternative to the older Ingress API ([src](https://www.microsoft.com/releasecommunications/api/v2/azure/rss))
+- 2026-08-09 — AKS Prepared Image Specification reaches public preview — pre-stages container images/init work on nodes to cut startup latency for large AI/GPU/Windows node pools ([src](https://www.microsoft.com/releasecommunications/api/v2/azure/rss))
+- 2026-08-09 — Deprecation: Nested confidential (cc_v5) VM series retires September 1, 2026 — unresized affected VMs are deallocated on that date ([src](https://www.microsoft.com/releasecommunications/api/v2/azure/rss))

@@ -287,3 +287,5 @@ CROSS-CLOUD: Monitor+Log Analytics~=CloudWatch. KQL has NO direct AWS/GCP
 
 ## Changelog
 - 2026-08-08 — created
+- 2026-08-09 — Deprecation: reservation exchanges for savings-plan-covered Azure services (incl. Virtual Machines) end February 1, 2027 — plan commitment strategy around this cutoff instead of exchanges ([src](https://www.microsoft.com/releasecommunications/api/v2/azure/rss))
+- 2026-08-09 — Azure Monitor Logs mirroring into Microsoft Fabric reaches public preview — Log Analytics telemetry becomes available in OneLake as open-format Delta Parquet near-real-time, without duplication ([src](https://www.microsoft.com/releasecommunications/api/v2/azure/rss))

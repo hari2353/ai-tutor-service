@@ -328,3 +328,6 @@ PRODUCTION RULE  pin model version; migrate only after YOUR regression eval
 
 ## Changelog
 - 2026-08-08 — created
+- 2026-08-09 — Claude Opus 5 released (Anthropic), positioned for agentic coding and cybersecurity work; now GA on both Amazon Bedrock and Azure Databricks AI Model Serving — first Opus-tier model simultaneously GA across both major non-native clouds within days of release ([src](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-july-27-2026/))
+- 2026-08-09 — OpenAI GPT-5.6 pricing cut on Amazon Bedrock effective July 30: Luna variant -80% (to $0.20/M input, $1.20/M output), Terra variant -20% — reshapes cost-driven model-selection answers for the GPT-5.6 family ([src](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-price-reduction-of-gpt-models-in-bedrock-cloudwatch-managed-collectors-for-prometheus-metrics-and-more-august-3-2026/))
+- 2026-08-09 — Gemini 3 Flash and Gemini 3.1 Flash Image reach public preview on Google's Gemini Enterprise Agent Platform (the post-rebrand name for Vertex AI generative AI services) — improved price/latency image generation ([src](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/release-notes)) — accessed 2026-08-09

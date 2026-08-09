@@ -756,3 +756,4 @@ WHEN NOT TO USE  stateless single-shot call · synchronous confirmation (no dura
 
 ## Changelog
 - 2026-07-26 — created
+- 2026-08-09 — LangGraph 1.0 GA reaffirms the three durability modes (`exit`, `async`, `sync`, least→most durable) as the stable public API; durable execution/checkpointing is now a GA-supported guarantee, not a preview feature — the only breaking change on the 1.0 bump is `langgraph.prebuilt` moving to `langchain.agents` ([src](https://changelog.langchain.com/announcements/langgraph-1-0-is-now-generally-available))

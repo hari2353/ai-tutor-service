@@ -311,3 +311,4 @@ CROSS-CLOUD: Blob~=S3 (S3 now strong read-after-write). Cosmos~=DynamoDB (Dynamo
 
 ## Changelog
 - 2026-08-08 — created
+- 2026-08-09 — Azure SQL Database and Azure SQL Managed Instance now apply immutability to the most recent 7 days of backups by default (GA), a compliance/ransomware-protection posture change enabled for all databases regardless of configured point-in-time retention ([src](https://www.microsoft.com/releasecommunications/api/v2/azure/rss))

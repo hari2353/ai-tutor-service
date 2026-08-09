@@ -330,3 +330,4 @@ CROSS-CLOUD: Cloud Logging~CloudWatch Logs (both ~$0.50/GB, but GCP free
 
 ## Changelog
 - 2026-08-08 — created
+- 2026-08-09 — Cloud Monitoring Telemetry API for OTLP metric ingestion reaches GA — ingest OTLP metrics via an OpenTelemetry Collector/OTLP exporter directly into Cloud Monitoring ([src](https://docs.cloud.google.com/release-notes))

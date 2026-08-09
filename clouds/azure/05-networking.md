@@ -297,3 +297,5 @@ CROSS-CLOUD: VNet~=VPC (regional, both AWS+Azure; GCP VPC is GLOBAL).
 
 ## Changelog
 - 2026-08-08 — created
+- 2026-08-09 — Azure Virtual Network routing appliance reaches GA — a managed, specialized-hardware alternative to NVAs for private cross-VNet connectivity with lower latency and higher throughput ([src](https://www.microsoft.com/releasecommunications/api/v2/azure/rss))
+- 2026-08-09 — Azure Enclave reaches public preview across commercial and Government clouds — a new confidential-computing product for streamlined isolated-environment deployment for sensitive workloads ([src](https://www.microsoft.com/releasecommunications/api/v2/azure/rss))

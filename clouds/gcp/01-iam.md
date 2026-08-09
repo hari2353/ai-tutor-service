@@ -313,3 +313,5 @@ CROSS-CLOUD: AWS = identity policy + resource policy, explicit Deny wins,
 
 ## Changelog
 - 2026-08-08 — created
+- 2026-08-09 — Policy Troubleshooter MCP server reaches GA — remote MCP server that lets agents troubleshoot IAM allow/deny decisions programmatically ([src](https://docs.cloud.google.com/release-notes))
+- 2026-08-09 — VPC Service Controls service patterns reach GA — explicit per-API allow-listing (supported and unsupported APIs) for the private VIP and Private Service Connect `all-apis` bundle inside a service perimeter ([src](https://docs.cloud.google.com/release-notes))

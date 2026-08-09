@@ -369,6 +369,7 @@ Access Analyzer: finds external-access grants + unused-access heuristic. NOT a r
 
 ## Changelog
 - 2026-08-01 — created
+- 2026-08-09 — IAM Identity Center now replicates the Identity Center directory (not just external-IdP-backed instances) to secondary Regions, so users keep provisioned entitlements if the primary Region has a disruption ([src](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-price-reduction-of-gpt-models-in-bedrock-cloudwatch-managed-collectors-for-prometheus-metrics-and-more-august-3-2026/))
 
 ## The 30-second version
 
