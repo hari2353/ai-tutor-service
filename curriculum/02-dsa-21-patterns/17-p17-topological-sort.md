@@ -2,7 +2,7 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.0h · **Prereqs:** T02-p07-bfs, T02-p08-dfs, graphs
 > **Module id:** `T02-p17-topological-sort` · **Tags:** pattern, graph
-> **Lab:** `labs/py/17-topological-sort/`
+> **Practice:** the Problems tab in the app — this pattern has curated LeetCode problems rather than a lab
 
 ## The 30-second version
 

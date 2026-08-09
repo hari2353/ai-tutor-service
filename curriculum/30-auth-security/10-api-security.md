@@ -3,7 +3,7 @@
 > **Track:** T30 Auth & Application Security · **Time:** 2.5h · **Prereqs:** `T30-authn-vs-authz`, `T30-web-attacks`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-api-security` · **Tags:** appsec, critical
-> **Lab:** `labs/py/10-api-security-lab/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

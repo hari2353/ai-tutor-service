@@ -2,7 +2,7 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2h · **Prereqs:** `T07-langgraph-durable`, `T07-trust-calibration`, `T07-hallucination` · **Updated:** 2026-07-26
 > **Module id:** `T07-human-oversight` · **Tags:** trust, critical
-> **Lab:** `labs/py/26-human-oversight/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

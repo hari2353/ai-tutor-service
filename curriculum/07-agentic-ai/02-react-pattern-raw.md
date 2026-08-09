@@ -2,7 +2,7 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2.5h · **Prereqs:** `T07-agent-loop-from-scratch` · **Updated:** 2026-07-26
 > **Module id:** `T07-react-pattern-raw` · **Tags:** sprint, core, reasoning
-> **Lab:** `labs/py/03-reasoning-patterns/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

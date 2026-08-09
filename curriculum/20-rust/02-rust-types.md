@@ -2,7 +2,7 @@
 
 > **Track:** T20 Rust · **Time:** 2.5h · **Prereqs:** `T20-rust-ownership` (ownership, borrowing, lifetimes assumed known) · **Updated:** 2026-08-05
 > **Module id:** `T20-rust-types` · **Tags:** core, critical, type-system
-> **Lab:** `labs/rust/02-rust-types/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

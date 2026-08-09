@@ -2,7 +2,7 @@
 
 > **Track:** T20 Rust · **Time:** 2.5h · **Prereqs:** `T20-rust-ownership` (ownership, borrowing, lifetimes assumed known), `T01-python-asyncio` (Python's event loop as the contrast case) · **Updated:** 2026-08-05
 > **Module id:** `T20-rust-async` · **Tags:** core, critical, concurrency
-> **Lab:** `labs/rust/04-rust-async/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

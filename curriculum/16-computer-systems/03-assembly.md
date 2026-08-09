@@ -2,7 +2,7 @@
 
 > **Track:** T16 Computer Systems: Transistor → Runtime · **Time:** 2.5h · **Prereqs:** T16-cpu-microarch · **Updated:** 2026-08-03
 > **Module id:** `T16-assembly` · **Tags:** assembly
-> **Lab:** `labs/c/03-reading-asm/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

@@ -2,7 +2,7 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 2h · **Prereqs:** T12-docker, T12-k8s-core
 > **Module id:** `T12-eks-ecs-ecr` · **Tags:** k8s, critical
-> **Lab:** `labs/aws/13-eks-ecs-fargate/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

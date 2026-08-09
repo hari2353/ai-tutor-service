@@ -2,7 +2,7 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 1h · **Prereqs:** arrays, binary representation, T02-p11-binary-search
 > **Module id:** `T02-p12-bitwise-xor` · **Tags:** pattern, bit-manipulation
-> **Lab:** `labs/py/12-bitwise-xor/`
+> **Practice:** the Problems tab in the app — this pattern has curated LeetCode problems rather than a lab
 
 ## The 30-second version
 

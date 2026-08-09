@@ -2,7 +2,7 @@
 
 > **Track:** T04 Deep Learning · **Time:** 2h · **Prereqs:** T04-architectures, T04-compile-cuda · **Updated:** 2026-08-03
 > **Module id:** `T04-tensorflow` · **Tags:** frameworks
-> **Lab:** `labs/python/10-tensorflow/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

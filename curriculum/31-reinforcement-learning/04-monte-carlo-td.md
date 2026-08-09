@@ -2,7 +2,7 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 2.5h · **Prereqs:** T31-mdp, T31-dynamic-programming · **Updated:** 2026-08-03
 > **Module id:** `T31-monte-carlo-td` · **Tags:** tabular
-> **Lab:** `labs/py/31-04-monte-carlo-td/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

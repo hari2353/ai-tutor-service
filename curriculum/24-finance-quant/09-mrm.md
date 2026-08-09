@@ -2,7 +2,7 @@
 
 > **Track:** T24 Financial Engineering, Time Series & Banking · **Time:** 2.5h · **Prereqs:** T24-risk-metrics (VaR/PD models are the classic validated-model example), T24-basel (regulatory context)
 > **Module id:** `T24-mrm` · **Tags:** banking, critical
-> **Lab:** `labs/python/09-mrm/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

@@ -2,7 +2,7 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 3h · **Prereqs:** `T31-ppo`, `T31-policy-gradient`, `T31-mdp` · **Updated:** 2026-08-05
 > **Module id:** `T31-rl-for-llms` · **Tags:** rlhf, dpo, grpo, rlvr, reward-hacking, llm, critical
-> **Lab:** `labs/py/31-13-rl-for-llms/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

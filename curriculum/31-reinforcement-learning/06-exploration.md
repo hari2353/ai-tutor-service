@@ -2,7 +2,7 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 2h · **Prereqs:** T31-q-learning-sarsa · **Updated:** 2026-08-03
 > **Module id:** `T31-exploration` · **Tags:** fundamentals, critical
-> **Lab:** `labs/py/31-06-exploration/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

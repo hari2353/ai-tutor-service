@@ -2,7 +2,7 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 3h · **Prereqs:** T31-mdp, T31-dynamic-programming, T31-dqn · **Updated:** 2026-08-03
 > **Module id:** `T31-model-based` · **Tags:** deep-rl, planning, critical
-> **Lab:** `labs/py/31-11-model-based/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

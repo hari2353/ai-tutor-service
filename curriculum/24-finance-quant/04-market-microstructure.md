@@ -2,7 +2,7 @@
 
 > **Track:** T24 Financial Engineering, Time Series & Banking · **Time:** 2.5h · **Prereqs:** none beyond general quantitative fluency
 > **Module id:** `T24-market-microstructure` · **Tags:** markets
-> **Lab:** `labs/python/04-market-microstructure/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

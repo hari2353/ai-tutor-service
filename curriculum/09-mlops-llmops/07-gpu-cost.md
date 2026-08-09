@@ -2,7 +2,7 @@
 
 > **Track:** T09 MLOps / LLMOps · **Time:** 2.0h · **Prereqs:** T05-inference-serving, T09-serving, T09-bedrock-vs-sagemaker · **Updated:** 2026-08-05
 > **Module id:** `T09-gpu-cost` · **Tags:** cost,gpu,autoscaling,spot,capacity,critical
-> **Lab:** `labs/python/07-gpu-cost/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

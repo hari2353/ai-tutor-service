@@ -2,7 +2,7 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 2h · **Prereqs:** T12-docker, T12-k8s-objects
 > **Module id:** `T12-cicd` · **Tags:** cicd
-> **Lab:** `labs/k8s/10-cicd-gitops/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

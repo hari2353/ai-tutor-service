@@ -2,7 +2,7 @@
 
 > **Track:** T24 Financial Engineering, Time Series & Banking · **Time:** 2.5h · **Prereqs:** T24-time-series-core, T24-time-series-modern
 > **Module id:** `T24-ts-validation` · **Tags:** timeseries, critical
-> **Lab:** `labs/python/03-ts-validation/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

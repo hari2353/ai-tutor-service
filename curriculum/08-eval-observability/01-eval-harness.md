@@ -2,6 +2,7 @@
 
 > **Track:** T08 Eval & Observability · **Time:** 2.0h · **Prereqs:** none · **Updated:** 2026-08-01
 > **Module id:** `T08-eval-harness` · **Tags:** eval
+> **Lab:** `labs/py/10-eval-harness/`
 
 ## The 30-second version
 

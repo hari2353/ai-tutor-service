@@ -2,7 +2,7 @@
 
 > **Track:** T04 Deep Learning · **Time:** 3h · **Prereqs:** T04-backprop-derivation · **Updated:** 2026-08-03
 > **Module id:** `T04-autograd` · **Tags:** fundamentals, critical
-> **Lab:** `labs/python/03-autograd/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

@@ -3,7 +3,7 @@
 > **Track:** T22 Blockchain & Smart Contracts · **Time:** 2.5h · **Prereqs:** `T22-smart-contracts`
 > **Updated:** 2026-08-08
 > **Module id:** `T22-contract-security` · **Tags:** security, critical
-> **Lab:** `labs/sol/22-contract-security/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

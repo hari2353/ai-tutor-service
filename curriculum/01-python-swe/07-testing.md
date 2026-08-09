@@ -2,7 +2,7 @@
 
 > **Track:** T01 Python & SWE Craft · **Time:** 2h · **Prereqs:** T01-typing · **Updated:** 2026-08-03
 > **Module id:** `T01-testing` · **Tags:** testing
-> **Lab:** `labs/python/07-testing/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

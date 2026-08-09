@@ -2,7 +2,7 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 3h · **Prereqs:** T31-q-learning-sarsa, T31-exploration · **Updated:** 2026-08-03
 > **Module id:** `T31-dqn` · **Tags:** deep-rl, critical
-> **Lab:** `labs/py/31-07-dqn/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

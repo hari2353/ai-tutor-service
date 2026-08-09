@@ -2,7 +2,7 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2.5h · **Prereqs:** `T07-attribution`, `T07-trust-calibration` · **Updated:** 2026-07-26
 > **Module id:** `T07-hallucination` · **Tags:** trust, critical
-> **Lab:** `labs/py/25-hallucination/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

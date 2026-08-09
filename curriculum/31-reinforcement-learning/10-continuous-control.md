@@ -2,7 +2,7 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 3h · **Prereqs:** T31-policy-gradient, T31-dqn, T31-ppo · **Updated:** 2026-08-03
 > **Module id:** `T31-continuous-control` · **Tags:** deep-rl, critical, continuous-control
-> **Lab:** `labs/py/31-10-continuous-control/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

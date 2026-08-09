@@ -2,7 +2,7 @@
 
 > **Track:** T03 Classical ML · **Time:** 3h · **Prereqs:** T03-linear-models, T03-regularization · **Updated:** 2026-08-03
 > **Module id:** `T03-trees-boosting` · **Tags:** models, critical
-> **Lab:** `labs/python/03-trees-boosting/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

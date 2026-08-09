@@ -2,7 +2,7 @@
 
 > **Track:** T28 AI-Assisted Architecture · **Time:** 2.5h · **Prereqs:** `T28-claude-code-model`, `T28-context-files` · **Updated:** 2026-07-26
 > **Module id:** `T28-skills-design` · **Tags:** skills, critical
-> **Lab:** `labs/py/28-skill-trigger-eval/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

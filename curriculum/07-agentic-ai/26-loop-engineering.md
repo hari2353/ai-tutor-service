@@ -2,7 +2,7 @@
 
 > **Track:** T07 Agentic AI · **Time:** 3h · **Prereqs:** `T07-agent-loop-from-scratch`, `T07-harness-engineering`, `T07-context-engineering` · **Updated:** 2026-07-26
 > **Module id:** `T07-loop-engineering` · **Tags:** sprint, harness, critical
-> **Lab:** `labs/py/22-loop-engineering/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

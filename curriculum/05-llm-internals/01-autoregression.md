@@ -2,7 +2,7 @@
 
 > **Track:** T05 LLM Internals · **Time:** 2h · **Prereqs:** none
 > **Module id:** `T05-autoregression` · **Tags:** internals, critical
-> **Lab:** `labs/py/01-autoregression/` (create if not present — not yet in this repo)
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one (create if not present — not yet in this repo)
 
 ## The 30-second version
 

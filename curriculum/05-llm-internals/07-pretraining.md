@@ -2,7 +2,7 @@
 
 > **Track:** T05 LLM Internals · **Time:** 2h · **Prereqs:** T05-autoregression, T05-tokenization, T05-build-nanogpt · **Updated:** 2026-07-28
 > **Module id:** `T05-pretraining` · **Tags:** training
-> **Lab:** `labs/py/06-build-nanogpt/` (data pipeline extensions)
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one (data pipeline extensions)
 
 ## The 30-second version
 

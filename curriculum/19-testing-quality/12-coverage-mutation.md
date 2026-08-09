@@ -2,7 +2,7 @@
 
 > **Track:** T19 Testing Quality · **Time:** 2.5h · **Prereqs:** T19-02-unit-testing, T19-05-regression-testing
 > **Module id:** `T19-coverage-mutation` · **Tags:** testing, mutation-testing, coverage, ci
-> **Lab:** `labs/python/12-coverage-mutation/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

@@ -2,7 +2,7 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 3h · **Prereqs:** none
 > **Module id:** `T12-terraform` · **Tags:** iac, critical
-> **Lab:** `labs/terraform/09-terraform-module/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

@@ -2,7 +2,7 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.5h · **Prereqs:** arrays, recursion, T02-p10-subsets
 > **Module id:** `T02-p15-knapsack-01` · **Tags:** pattern, dp
-> **Lab:** `labs/py/15-knapsack-01/`
+> **Practice:** the Problems tab in the app — this pattern has curated LeetCode problems rather than a lab
 
 ## The 30-second version
 

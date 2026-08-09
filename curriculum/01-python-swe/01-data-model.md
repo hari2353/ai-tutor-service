@@ -2,7 +2,7 @@
 
 > **Track:** T01 Python & SWE Craft · **Time:** 2.5h · **Prereqs:** none · **Updated:** 2026-08-03
 > **Module id:** `T01-data-model` · **Tags:** language
-> **Lab:** `labs/python/01-data-model/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

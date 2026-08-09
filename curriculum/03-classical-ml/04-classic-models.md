@@ -2,7 +2,7 @@
 
 > **Track:** T03 Classical ML · **Time:** 2.5h · **Prereqs:** T03-linear-models · **Updated:** 2026-08-03
 > **Module id:** `T03-classic-models` · **Tags:** models
-> **Lab:** `labs/python/04-classic-models/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

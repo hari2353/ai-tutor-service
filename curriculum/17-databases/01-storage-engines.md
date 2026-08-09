@@ -2,7 +2,7 @@
 
 > **Track:** T17 Databases: SQL, NoSQL, Vector · **Time:** 2.5h · **Prereqs:** none · **Updated:** 2026-07-26
 > **Module id:** `T17-storage-engines` · **Tags:** internals, critical
-> **Lab:** `labs/py/01-storage-engine-toy/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

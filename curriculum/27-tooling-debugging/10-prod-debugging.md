@@ -2,7 +2,7 @@
 
 > **Track:** T27 Tooling & Debugging · **Time:** 3h · **Prereqs:** T27-08-debug-methodology, T27-09-debug-any-language
 > **Module id:** `T27-prod-debugging` · **Tags:** debugging, jvm, python, profiling, observability
-> **Lab:** `labs/python/10-prod-debugging/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

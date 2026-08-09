@@ -2,7 +2,7 @@
 
 > **Track:** T26 Frontier AI · **Time:** 2.5h · **Prereqs:** `T26-world-models`, `T26-video-generation`, T05 · **Updated:** 2026-08-05
 > **Module id:** `T26-nvidia-cosmos` · **Tags:** cosmos, world-foundation-models, isaac-sim, sim-to-real, synthetic-data, vendor-analysis, critical
-> **Lab:** `labs/py/26-03-nvidia-cosmos/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

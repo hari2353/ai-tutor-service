@@ -2,7 +2,7 @@
 
 > **Track:** T24 Financial Engineering, Time Series & Banking · **Time:** 2.5h · **Prereqs:** T24-risk-metrics (VaR/ES feed directly into market-risk RWA)
 > **Module id:** `T24-basel` · **Tags:** banking, critical
-> **Lab:** `labs/python/08-basel/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

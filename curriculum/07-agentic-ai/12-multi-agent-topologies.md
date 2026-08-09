@@ -2,7 +2,7 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2.5h · **Prereqs:** `T07-agent-loop-from-scratch`, `T07-context-engineering` · **Updated:** 2026-07-26
 > **Module id:** `T07-multi-agent-topologies` · **Tags:** sprint (W4), architecture
-> **Lab:** `labs/py/12-multi-agent/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

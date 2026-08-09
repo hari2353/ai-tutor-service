@@ -3,7 +3,7 @@
 > **Track:** T30 Auth & Application Security · **Time:** 1.5h · **Prereqs:** none
 > **Updated:** 2026-07-26
 > **Module id:** `T30-authn-vs-authz` · **Tags:** fundamentals, critical
-> **Lab:** `labs/py/01-authn-authz-middleware/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

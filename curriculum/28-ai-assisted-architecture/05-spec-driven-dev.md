@@ -2,7 +2,7 @@
 
 > **Track:** T28 AI-Assisted Architecture · **Time:** 2h · **Prereqs:** `T28-claude-code-model`, `T19-testing-quality`, `T21-architecture-principles` · **Updated:** 2026-07-26
 > **Module id:** `T28-spec-driven-dev` · **Tags:** workflow, critical
-> **Lab:** `labs/py/28-spec-to-verified/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

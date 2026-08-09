@@ -2,7 +2,7 @@
 
 > **Track:** T26 Frontier AI · **Time:** 2.5h · **Prereqs:** `T26-world-models`, T05 (representation learning), T31 (model-based RL) · **Updated:** 2026-08-05
 > **Module id:** `T26-jepa` · **Tags:** jepa, i-jepa, v-jepa, ssl, world-models, energy-based, collapse, critical
-> **Lab:** `labs/py/26-02-jepa/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

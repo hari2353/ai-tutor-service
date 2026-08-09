@@ -2,7 +2,7 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 2.5h · **Prereqs:** T12-docker · **Updated:** 2026-08-02
 > **Module id:** `T12-k8s-objects` · **Tags:** k8s, critical
-> **Lab:** `labs/k8s/02-k8s-objects/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

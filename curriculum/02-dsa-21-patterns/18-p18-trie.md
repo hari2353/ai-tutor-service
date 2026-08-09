@@ -2,7 +2,7 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.0h · **Prereqs:** trees, T02-p08-dfs, hashmaps
 > **Module id:** `T02-p18-trie` · **Tags:** pattern, tree, strings
-> **Lab:** `labs/py/18-trie/`
+> **Practice:** the Problems tab in the app — this pattern has curated LeetCode problems rather than a lab
 
 ## The 30-second version
 

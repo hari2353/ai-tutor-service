@@ -2,7 +2,7 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 3h · **Prereqs:** T12-cicd
 > **Module id:** `T12-jenkins` · **Tags:** cicd, critical
-> **Lab:** `labs/jenkins/11-jenkins-pipeline/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

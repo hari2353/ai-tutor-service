@@ -2,7 +2,7 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 2.5h · **Prereqs:** T12-secrets · **Updated:** 2026-08-05
 > **Module id:** `T12-owasp` · **Tags:** security, owasp, sqli, llm-security, critical
-> **Lab:** `labs/py/17-sqli-harness/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

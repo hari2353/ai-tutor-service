@@ -2,7 +2,7 @@
 
 > **Track:** T20 Rust · **Time:** 2h · **Prereqs:** `T20-rust-ownership`, `T20-rust-async`, `T20-rust-perf`, `T01-gil-parallelism` · **Updated:** 2026-08-06
 > **Module id:** `T20-rust-for-ai` · **Tags:** rust, python-interop, pyo3, tokenizers, inference, infrastructure, critical
-> **Lab:** `labs/rust/07-rust-for-ai/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

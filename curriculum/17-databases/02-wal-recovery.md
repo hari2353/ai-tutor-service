@@ -2,7 +2,7 @@
 
 > **Track:** T17 Databases: SQL, NoSQL, Vector · **Time:** 1.5h · **Prereqs:** `T17-storage-engines` · **Updated:** 2026-07-26
 > **Module id:** `T17-wal-recovery` · **Tags:** internals
-> **Lab:** `labs/py/02-wal-toy/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

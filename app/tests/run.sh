@@ -19,6 +19,9 @@ echo "using $PY ($("$PY" --version 2>&1))"
 echo; echo "── rebuilding data ──"; "$PY" "$ROOT/app/build_data.py" || fail=1
 echo; echo "── app: DOM render + state ──"; node "$ROOT/app/tests/dom.test.js" "$ROOT" || fail=1
 echo; echo "── app: SM-2 scheduler ──";     node "$ROOT/app/tests/sm2.test.js"  "$ROOT" || fail=1
+echo; echo "── lab pointers ──"
+"$PY" "$ROOT/app/tests/link_check.py" | sed 's/^/  /' || fail=1
+
 echo; echo "── labs ──"
 if ! "$PY" -m pytest --version >/dev/null 2>&1; then
   # do NOT let a missing dependency read as a pass. This step used to swallow

@@ -2,7 +2,7 @@
 
 > **Track:** T28 AI-Assisted Architecture · **Time:** 2h · **Prereqs:** `T07-harness-engineering`, `T07-context-engineering` · **Updated:** 2026-07-26
 > **Module id:** `T28-claude-code-model` · **Tags:** foundations, critical
-> **Lab:** `labs/py/28-agent-loop-anatomy/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

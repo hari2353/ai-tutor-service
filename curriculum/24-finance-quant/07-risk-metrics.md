@@ -2,7 +2,7 @@
 
 > **Track:** T24 Financial Engineering, Time Series & Banking · **Time:** 2.5h · **Prereqs:** T24-portfolio (covariance estimation), T24-ts-validation (backtesting discipline)
 > **Module id:** `T24-risk-metrics` · **Tags:** risk, critical
-> **Lab:** `labs/python/07-risk-metrics/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

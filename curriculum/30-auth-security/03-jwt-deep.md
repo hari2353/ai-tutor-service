@@ -3,7 +3,7 @@
 > **Track:** T30 Auth & Application Security · **Time:** 3h · **Prereqs:** `T30-sessions-vs-tokens`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-jwt-deep` · **Tags:** jwt, critical
-> **Lab:** `labs/py/03-jwt-from-scratch/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

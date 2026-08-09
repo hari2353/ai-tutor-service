@@ -2,7 +2,7 @@
 
 > **Track:** T28 AI-Assisted Architecture · **Time:** 3h · **Prereqs:** `T07-harness-engineering`, `T21-architecture-principles` · **Updated:** 2026-07-26
 > **Module id:** `T28-claude-architect` · **Tags:** sprint, architecture, critical
-> **Lab:** `labs/py/28-agent-review-gauntlet/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

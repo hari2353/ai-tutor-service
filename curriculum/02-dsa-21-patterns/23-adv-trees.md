@@ -2,7 +2,7 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.0h · **Prereqs:** T02-p04-merge-intervals, arrays, binary representation
 > **Module id:** `T02-adv-trees` · **Tags:** advanced, range-query, data-structures
-> **Lab:** `labs/py/23-adv-trees/`
+> **Practice:** the Problems tab in the app — this pattern has curated LeetCode problems rather than a lab
 
 ## The 30-second version
 

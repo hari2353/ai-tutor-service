@@ -2,7 +2,7 @@
 
 > **Track:** T05 LLM Internals · **Time:** 4h · **Prereqs:** T05-autoregression, T05-tokenization, T05-attention, T05-positional, T05-architecture-blocks · **Updated:** 2026-07-28
 > **Module id:** `T05-build-nanogpt` · **Tags:** lab, critical
-> **Lab:** `labs/py/06-build-nanogpt/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

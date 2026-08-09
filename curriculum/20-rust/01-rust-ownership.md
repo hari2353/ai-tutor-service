@@ -2,7 +2,7 @@
 
 > **Track:** T20 Rust · **Time:** 3h · **Prereqs:** none
 > **Module id:** `T20-rust-ownership` · **Tags:** core, critical
-> **Lab:** `labs/rust/01-rust-ownership/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

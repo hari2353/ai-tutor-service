@@ -2,7 +2,7 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.5h · **Prereqs:** recursion, T02-p10-subsets, arrays
 > **Module id:** `T02-p21-backtracking` · **Tags:** pattern, recursion
-> **Lab:** `labs/py/21-backtracking/`
+> **Practice:** the Problems tab in the app — this pattern has curated LeetCode problems rather than a lab
 
 ## The 30-second version
 

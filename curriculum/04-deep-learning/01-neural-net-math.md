@@ -2,7 +2,7 @@
 
 > **Track:** T04 Deep Learning · **Time:** 3h · **Prereqs:** T03 (gradient descent, logistic regression, MLE-as-loss) · **Updated:** 2026-08-03
 > **Module id:** `T04-neural-net-math` · **Tags:** fundamentals, critical
-> **Lab:** `labs/python/01-neural-net-math/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

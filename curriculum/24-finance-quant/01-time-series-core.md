@@ -2,7 +2,7 @@
 
 > **Track:** T24 Financial Engineering, Time Series & Banking · **Time:** 3h · **Prereqs:** OLS regression, basic probability (T03)
 > **Module id:** `T24-time-series-core` · **Tags:** timeseries, critical
-> **Lab:** `labs/python/01-time-series-core/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

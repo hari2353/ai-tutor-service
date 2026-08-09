@@ -2,7 +2,7 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 2.5h · **Prereqs:** T31-dqn, T31-continuous-control, T31-model-based, T31-exploration · **Updated:** 2026-08-05
 > **Module id:** `T31-offline-rl` · **Tags:** deep-rl, offline-rl, ope, imitation-learning, critical
-> **Lab:** `labs/py/31-12-offline-rl/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

@@ -2,7 +2,7 @@
 
 > **Track:** T20 Rust · **Time:** 2h · **Prereqs:** `T20-rust-ownership`, `T20-rust-memory` · **Updated:** 2026-08-05
 > **Module id:** `T20-rust-perf` · **Tags:** performance, systems, benchmarking, critical
-> **Lab:** `labs/rust/05-rust-perf/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

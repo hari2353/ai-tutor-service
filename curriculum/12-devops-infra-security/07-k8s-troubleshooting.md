@@ -2,7 +2,7 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 3h · **Prereqs:** T12-k8s-core, T12-k8s-networking, T12-k8s-storage-config
 > **Module id:** `T12-k8s-troubleshooting` · **Tags:** k8s, critical
-> **Lab:** `labs/k8s/07-k8s-troubleshooting/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

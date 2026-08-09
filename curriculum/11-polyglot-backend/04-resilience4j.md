@@ -2,7 +2,7 @@
 
 > **Track:** T11 Polyglot Backend · **Time:** 1.5h · **Prereqs:** T21-resilience-catalogue, T11-spring-boot · **Updated:** 2026-08-03
 > **Module id:** `T11-resilience4j` · **Tags:** java, resilience
-> **Lab:** `labs/java/04-resilience4j/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

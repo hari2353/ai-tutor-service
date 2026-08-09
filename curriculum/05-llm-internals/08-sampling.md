@@ -2,7 +2,7 @@
 
 > **Track:** T05 LLM Internals · **Time:** 2h · **Prereqs:** T05-autoregression, T05-attention · **Updated:** 2026-07-28
 > **Module id:** `T05-sampling` · **Tags:** inference
-> **Lab:** `labs/py/08-sampling/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

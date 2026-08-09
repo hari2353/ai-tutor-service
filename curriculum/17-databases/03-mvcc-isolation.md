@@ -2,7 +2,7 @@
 
 > **Track:** T17 Databases: SQL, NoSQL, Vector · **Time:** 3h · **Prereqs:** none
 > **Module id:** `T17-mvcc-isolation` · **Tags:** sprint, internals, critical
-> **Lab:** `labs/py/03-mvcc-toy/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

@@ -2,7 +2,7 @@
 
 > **Track:** T04 Deep Learning · **Time:** 3h · **Prereqs:** T04-training-engineering · **Updated:** 2026-08-03
 > **Module id:** `T04-distributed-training` · **Tags:** scaling, critical
-> **Lab:** `labs/python/07-distributed-training/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

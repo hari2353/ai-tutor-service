@@ -2,7 +2,7 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 2h · **Prereqs:** T12-k8s-objects, T12-k8s-core · **Updated:** 2026-08-02
 > **Module id:** `T12-k8s-storage-config` · **Tags:** k8s
-> **Lab:** `labs/k8s/05-k8s-storage-config/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

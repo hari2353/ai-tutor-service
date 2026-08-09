@@ -2,7 +2,7 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 2h · **Prereqs:** T12-owasp, T12-secrets · **Updated:** 2026-08-05
 > **Module id:** `T12-authz` · **Tags:** security, authz, multi-tenancy, zero-trust, critical
-> **Lab:** `labs/py/18-tenant-isolation/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

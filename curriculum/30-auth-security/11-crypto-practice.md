@@ -3,7 +3,7 @@
 > **Track:** T30 Auth & Application Security · **Time:** 2.5h · **Prereqs:** `T30-jwt-deep`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-crypto-practice` · **Tags:** crypto, critical
-> **Lab:** `labs/py/11-crypto-primitives/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

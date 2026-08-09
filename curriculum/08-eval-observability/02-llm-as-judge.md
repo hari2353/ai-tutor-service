@@ -2,7 +2,7 @@
 
 > **Track:** T08 Eval & Observability · **Time:** 2h · **Prereqs:** none
 > **Module id:** `T08-llm-as-judge` · **Tags:** sprint, eval, critical
-> **Lab:** `labs/py/02-judge-calibration/`
+> **Lab:** `labs/py/10-eval-harness/`
 
 ## The 30-second version
 

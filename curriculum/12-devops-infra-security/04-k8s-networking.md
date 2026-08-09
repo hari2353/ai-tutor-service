@@ -2,7 +2,7 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 3h · **Prereqs:** T12-k8s-objects, T29-tcp-deep · **Updated:** 2026-08-02
 > **Module id:** `T12-k8s-networking` · **Tags:** k8s, critical
-> **Lab:** `labs/k8s/04-k8s-networking/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

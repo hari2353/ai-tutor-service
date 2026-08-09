@@ -2,7 +2,7 @@
 
 > **Track:** T24 Financial Engineering, Time Series & Banking · **Time:** 2.5h · **Prereqs:** T24-derivatives (mean-variance intuition helpful)
 > **Module id:** `T24-portfolio` · **Tags:** quant
-> **Lab:** `labs/python/06-portfolio/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

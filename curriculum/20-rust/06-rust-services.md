@@ -2,7 +2,7 @@
 
 > **Track:** T20 Rust · **Time:** 2.5h · **Prereqs:** `T20-rust-ownership`, `T20-rust-async` (Tokio, futures, `spawn`/`spawn_blocking`, cancellation-by-drop assumed known), `T21-architecture-principles` · **Updated:** 2026-08-05
 > **Module id:** `T20-rust-services` · **Tags:** core, critical, backend, production
-> **Lab:** `labs/rust/06-rust-services/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

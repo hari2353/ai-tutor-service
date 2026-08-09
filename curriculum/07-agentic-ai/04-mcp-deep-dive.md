@@ -2,6 +2,7 @@
 
 > **Track:** T07 Agentic AI · **Time:** 3.0h · **Prereqs:** none · **Updated:** 2026-08-01
 > **Module id:** `T07-mcp-deep-dive` · **Tags:** protocol, mcp
+> **Lab:** `labs/py/07-mcp-server/`
 
 ## The 30-second version
 

@@ -2,7 +2,7 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.5h · **Prereqs:** T02-p19-union-find, T02-graph-core
 > **Module id:** `T02-graph-mst-flow` · **Tags:** graphs, mst, flow, matching
-> **Lab:** `labs/py/28-graph-mst-flow/`
+> **Practice:** the Problems tab in the app — this pattern has curated LeetCode problems rather than a lab
 
 ## The 30-second version
 

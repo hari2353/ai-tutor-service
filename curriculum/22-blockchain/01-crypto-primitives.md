@@ -3,7 +3,7 @@
 > **Track:** T22 Blockchain & Smart Contracts · **Time:** 2.5h · **Prereqs:** none
 > **Updated:** 2026-08-08
 > **Module id:** `T22-crypto-primitives` · **Tags:** fundamentals, critical
-> **Lab:** `labs/py/22-crypto-primitives/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

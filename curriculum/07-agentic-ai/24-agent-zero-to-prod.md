@@ -2,7 +2,7 @@
 
 > **Track:** T07 Agentic AI · **Time:** 4h · **Prereqs:** `T07-agent-loop-from-scratch`, `T07-tool-engineering`, `T07-langgraph-durable`, `T07-context-engineering`, `T07-multi-agent-topologies`, `T07-harness-engineering` · **Updated:** 2026-07-26
 > **Module id:** `T07-agent-zero-to-prod` · **Tags:** sprint, capstone, critical
-> **Lab:** `labs/py/24-zero-to-prod/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

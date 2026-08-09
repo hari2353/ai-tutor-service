@@ -2,7 +2,7 @@
 
 > **Track:** T17 Databases: SQL, NoSQL, Vector · **Time:** 2.5h · **Prereqs:** `T17-mvcc-isolation`
 > **Module id:** `T17-query-planner` · **Tags:** sprint, internals, critical
-> **Lab:** `labs/py/04-planner-toy/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

@@ -2,7 +2,7 @@
 
 > **Track:** T04 Deep Learning · **Time:** 2.5h · **Prereqs:** T04-compile-cuda · **Updated:** 2026-08-03
 > **Module id:** `T04-export-optimize` · **Tags:** deployment
-> **Lab:** `labs/python/09-export-optimize/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

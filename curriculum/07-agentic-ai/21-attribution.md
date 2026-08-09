@@ -2,7 +2,7 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2.5h · **Prereqs:** `T07-explainability`, `T06-hybrid-search`, `T06-chunking` · **Updated:** 2026-07-26
 > **Module id:** `T07-attribution` · **Tags:** trust, critical
-> **Lab:** `labs/py/24-attribution/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

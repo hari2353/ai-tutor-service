@@ -2,7 +2,7 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 1.5h · **Prereqs:** none · **Updated:** 2026-08-02
 > **Module id:** `T12-docker` · **Tags:** containers
-> **Lab:** `labs/docker/01-docker-multistage/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

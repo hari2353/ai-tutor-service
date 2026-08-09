@@ -2,7 +2,7 @@
 
 > **Track:** T24 Financial Engineering, Time Series & Banking · **Time:** 3h · **Prereqs:** T24-time-series-modern (GBM/Ito intuition helpful)
 > **Module id:** `T24-derivatives` · **Tags:** quant, critical
-> **Lab:** `labs/python/05-derivatives/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

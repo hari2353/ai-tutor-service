@@ -2,7 +2,7 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.0h · **Prereqs:** T02-graph-core, T02-p17-topological-sort
 > **Module id:** `T02-graph-scc` · **Tags:** graphs, connectivity, advanced
-> **Lab:** `labs/py/29-graph-scc/`
+> **Practice:** the Problems tab in the app — this pattern has curated LeetCode problems rather than a lab
 
 ## The 30-second version
 

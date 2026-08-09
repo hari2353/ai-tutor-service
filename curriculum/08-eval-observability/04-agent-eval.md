@@ -2,7 +2,7 @@
 
 > **Track:** T08 Eval & Observability · **Time:** 2h · **Prereqs:** `T08-llm-as-judge`
 > **Module id:** `T08-agent-eval` · **Tags:** sprint, eval, agents
-> **Lab:** `labs/py/04-agent-eval-harness/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

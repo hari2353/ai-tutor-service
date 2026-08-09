@@ -2,7 +2,7 @@
 
 > **Track:** T05 LLM Internals · **Time:** 3h · **Prereqs:** T05-03-attention, T05-04-positional, T05-09-inference-serving
 > **Module id:** `T05-multimodal` · **Tags:** vision, multimodal, vlm, clip, whisper, vit
-> **Lab:** `labs/python/14-multimodal/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

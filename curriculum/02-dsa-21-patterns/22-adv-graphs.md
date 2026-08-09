@@ -2,7 +2,7 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.5h · **Prereqs:** T02-p07-bfs, T02-p17-topological-sort
 > **Module id:** `T02-adv-graphs` · **Tags:** advanced, graphs, shortest-path
-> **Lab:** `labs/py/22-adv-graphs/`
+> **Practice:** the Problems tab in the app — this pattern has curated LeetCode problems rather than a lab
 
 ## The 30-second version
 

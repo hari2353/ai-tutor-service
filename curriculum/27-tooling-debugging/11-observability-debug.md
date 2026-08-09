@@ -2,7 +2,7 @@
 
 > **Track:** T27 Tooling & Debugging · **Time:** 2.0h · **Prereqs:** T27-prod-debugging, T08-classic-obs · **Updated:** 2026-08-05
 > **Module id:** `T27-observability-debug` · **Tags:** debugging, observability, tracing, sampling, profiling
-> **Lab:** `labs/python/11-observability-debug/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 

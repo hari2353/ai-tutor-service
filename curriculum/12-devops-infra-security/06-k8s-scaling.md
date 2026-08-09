@@ -2,7 +2,7 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 2.5h · **Prereqs:** T12-k8s-core, T12-k8s-networking · **Updated:** 2026-08-02
 > **Module id:** `T12-k8s-scaling` · **Tags:** k8s
-> **Lab:** `labs/k8s/06-k8s-scaling/`
+> **Lab:** none yet — see `labs/py/02-agent-loop/` for the pattern if you want to build one
 
 ## The 30-second version
 
