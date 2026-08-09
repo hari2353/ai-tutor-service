@@ -2,6 +2,7 @@
 
 > **Track:** T01 Python & SWE Craft · **Time:** 2.5h · **Prereqs:** none · **Updated:** 2026-08-01
 > **Module id:** `T01-pandas-mastery` · **Tags:** data,critical
+> **Practice:** the Problems tab in the app — 30 curated LeetCode Pandas problems (creation/inspection, filtering, missing data, dedup, reshape, groupby, merge, apply)
 
 ## The 30-second version
 

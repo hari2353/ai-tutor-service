@@ -2,6 +2,7 @@
 
 > **Track:** T17 Databases: SQL, NoSQL, Vector · **Time:** 3h · **Prereqs:** `T17-query-planner`, `T17-index-design` · **Updated:** 2026-08-02
 > **Module id:** `T17-sql-mastery` · **Tags:** sql
+> **Practice:** the Problems tab in the app — 30 curated LeetCode SQL problems (joins, aggregation, subqueries, window functions, gaps-and-islands, Nth-highest, recursive/hierarchy queries)
 
 ## The 30-second version
 
