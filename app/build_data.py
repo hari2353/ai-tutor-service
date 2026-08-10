@@ -50,6 +50,7 @@ TRACKS = [
         "loop-engineering | Loop Engineering: The Canonical Loop, Budgets, Compaction Triggers, Stop Conditions | 3 | harness,critical",
         "risk-taxonomy | Risk Taxonomy & Permission Resolution: read_only → financial → destructive | 2.5 | harness,critical",
         "harness-evals | Evaluating the Harness Itself: Injection Resistance, Timeouts, Over-Tooling | 2.5 | harness,critical",
+        "ambient-agents | Ambient Agents: Unattended, Long-Running, Resumable — the Half Nobody Demos | 3 | harness,critical",
         "agent-zero-to-prod | Zero → Production: The Complete Multi-Agent System, End to End | 4 | capstone,critical",
     ]),
     dict(id="T21", dir="21-architecture-principles", title="Architecture & Design Principles", icon="🏛️", phase="A", prereqs=[], modules=[

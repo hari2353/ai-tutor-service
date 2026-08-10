@@ -333,7 +333,7 @@
       "icon": "\ud83e\udd16",
       "phase": "A",
       "prereqs": [],
-      "hours": 76.0,
+      "hours": 79.0,
       "modules": [
         {
           "id": "T07-agent-loop-from-scratch",
@@ -709,6 +709,18 @@
           "status": "todo"
         },
         {
+          "id": "T07-ambient-agents",
+          "slug": "ambient-agents",
+          "title": "Ambient Agents: Unattended, Long-Running, Resumable \u2014 the Half Nobody Demos",
+          "hours": 3.0,
+          "tags": [
+            "harness",
+            "critical"
+          ],
+          "order": 29,
+          "status": "todo"
+        },
+        {
           "id": "T07-agent-zero-to-prod",
           "slug": "agent-zero-to-prod",
           "title": "Zero \u2192 Production: The Complete Multi-Agent System, End to End",
@@ -718,7 +730,7 @@
             "capstone",
             "critical"
           ],
-          "order": 29,
+          "order": 30,
           "status": "todo",
           "sprint_order": 27,
           "sprint_week": 9
@@ -6085,7 +6097,7 @@
   ],
   "totals": {
     "tracks": 36,
-    "modules": 452,
-    "hours": 1043.0
+    "modules": 453,
+    "hours": 1046.0
   }
 }

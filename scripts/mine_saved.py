@@ -56,8 +56,14 @@ STUDY_TERMS = {
     1: ["interview", "engineer", "developer", "tech", "career", "resume",
         "job", "hiring", "salary", "data", "cloud", "ai"],
 }
+# Engagement-bait and listicles. "Comment X and I'll DM you the PDF" is the
+# dominant format on tech Instagram and carries no content -- the post IS the
+# ask. Weighted -6 so a single hit sinks a post even if it name-drops Python.
 NOISE = ["giveaway", "follow for", "link in bio", "dm me", "course fee",
-         "enroll now", "limited seats", "discount"]
+         "enroll now", "limited seats", "discount", "comment ", "in your dm",
+         "send you", "i'll send", "will send", "premium prompts", "free pdf",
+         "repositories are replacing", "apps you", "tools you need"]
+NOISE_WEIGHT = 6
 
 
 def load_export(path: pathlib.Path) -> list[dict]:
@@ -146,7 +152,9 @@ def classify(caption: str, creator: str) -> tuple[int, list[str]]:
                 hits.append(t)
     for n in NOISE:
         if n in text:
-            score -= 2
+            score -= NOISE_WEIGHT
+    if not hits:
+        score -= 4      # no technical term anywhere -- e.g. a bare location string
     return score, sorted(set(hits))
 
 
