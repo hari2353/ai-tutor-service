@@ -16,3 +16,8 @@ Thumbs.db
 # app/data/*.js and *.json ARE tracked on purpose: the app loads them from
 # file:// with no build step, so a fresh clone must open by double-click
 # without anyone running Python first.
+
+# Instagram mining output: your saved-post URLs, captions and creators.
+# Personal browsing data, not curriculum. The scripts are tracked; their
+# output is not.
+mining/
