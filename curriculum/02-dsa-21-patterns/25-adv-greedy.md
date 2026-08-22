@@ -2,7 +2,6 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 1.5h · **Prereqs:** T02-p04-merge-intervals, T02-p15-knapsack-01
 > **Module id:** `T02-adv-greedy` · **Tags:** advanced, greedy, proofs
-> **Lab:** `labs/py/25-adv-greedy/`
 
 ## The 30-second version
 

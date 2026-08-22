@@ -163,7 +163,7 @@ RETURN DISTINCT reached.id, min(length((u)-[:FOLLOWS*1..2]->(reached))) AS short
 
 Both return the same result set for this depth. The practical difference shows up as depth grows unbounded (`FOLLOWS*1..2` becomes `FOLLOWS*` with no cap) and as fan-out increases — the Postgres version's recursive CTE re-scans and re-joins at every level, while Cypher's variable-length path expression is native to the engine's traversal machinery. Below roughly 2-3 hops on a moderately-indexed schema, the performance difference is rarely the deciding factor; above that, or with high fan-out per hop, it usually is.
 
-For a from-scratch entity-resolution exercise (fuzzy-matching and merging duplicate nodes from two mock source systems) and a GraphRAG mini-pipeline (extract entities from a small corpus, build a graph, cluster into communities, summarize), no lab exists yet for this module — a reasonable ask is `labs/py/14-knowledge-graphs/`.
+For a from-scratch entity-resolution exercise (fuzzy-matching and merging duplicate nodes from two mock source systems) and a GraphRAG mini-pipeline (extract entities from a small corpus, build a graph, cluster into communities, summarize), no lab exists yet for this module — a reasonable ask is `(lab pending)`.
 
 ---
 

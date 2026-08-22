@@ -2,7 +2,6 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 2.5h · **Prereqs:** T31-dqn, T31-continuous-control, T31-model-based, T31-exploration · **Updated:** 2026-08-05
 > **Module id:** `T31-offline-rl` · **Tags:** deep-rl, offline-rl, ope, imitation-learning, critical
-> **Lab:** `labs/py/31-12-offline-rl/`
 
 ## The 30-second version
 
@@ -312,7 +311,7 @@ IRL inverts the usual direction: given demonstrations, infer the reward `R` that
 
 ## Build it from scratch
 
-Two pieces, both small enough to hold in your head. First, the core of IQL — chosen over CQL because the entire mechanism is three loss functions and no sampled actions, which makes it the thing to write on a whiteboard. Lab: `labs/py/31-12-offline-rl/`.
+Two pieces, both small enough to hold in your head. First, the core of IQL — chosen over CQL because the entire mechanism is three loss functions and no sampled actions, which makes it the thing to write on a whiteboard. Lab: `(lab pending)`.
 
 ```python
 # untested sketch -- IQL core: expectile V, in-sample Q backup, AWR policy.

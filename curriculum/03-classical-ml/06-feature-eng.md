@@ -2,7 +2,6 @@
 
 > **Track:** T03 Classical ML · **Time:** 2h · **Prereqs:** T03-regularization, T03-metrics-calibration · **Updated:** 2026-08-03
 > **Module id:** `T03-feature-eng` · **Tags:** practice
-> **Lab:** `labs/python/06-feature-eng/`
 
 ## The 30-second version
 

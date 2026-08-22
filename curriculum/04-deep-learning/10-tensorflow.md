@@ -2,7 +2,6 @@
 
 > **Track:** T04 Deep Learning · **Time:** 2h · **Prereqs:** T04-architectures, T04-compile-cuda · **Updated:** 2026-08-03
 > **Module id:** `T04-tensorflow` · **Tags:** frameworks
-> **Lab:** `labs/python/10-tensorflow/`
 
 ## The 30-second version
 
@@ -106,7 +105,7 @@ def train_step(x, y, model, optimizer, loss_fn):
 def train_step_fixed_signature(x, y):
     ...
 ```
-`tf.GradientTape` is TensorFlow's explicit-scope equivalent of PyTorch's implicit, always-on autograd tape (`T04-autograd`) — operations inside the `with tf.GradientTape() as tape:` block are recorded for differentiation, and `tape.gradient(loss, variables)` performs the reverse-mode traversal, conceptually identical to calling `.backward()` and reading `.grad` in PyTorch, just requiring an explicit context manager rather than tracking every operation by default. The lab exercise in `labs/python/10-tensorflow/`: implement the exact 2-layer sigmoid network and worked forward/backward numbers from `T04-neural-net-math`/`T04-backprop-derivation` using `tf.GradientTape` directly, confirming the gradients match the hand-derived values from those modules to `1e-6`, exactly the same cross-framework verification discipline applied throughout this track.
+`tf.GradientTape` is TensorFlow's explicit-scope equivalent of PyTorch's implicit, always-on autograd tape (`T04-autograd`) — operations inside the `with tf.GradientTape() as tape:` block are recorded for differentiation, and `tape.gradient(loss, variables)` performs the reverse-mode traversal, conceptually identical to calling `.backward()` and reading `.grad` in PyTorch, just requiring an explicit context manager rather than tracking every operation by default. The lab exercise in `(lab pending)`: implement the exact 2-layer sigmoid network and worked forward/backward numbers from `T04-neural-net-math`/`T04-backprop-derivation` using `tf.GradientTape` directly, confirming the gradients match the hand-derived values from those modules to `1e-6`, exactly the same cross-framework verification discipline applied throughout this track.
 
 ---
 

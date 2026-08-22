@@ -2,7 +2,6 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.5h · **Prereqs:** T02-p19-union-find, T02-graph-core
 > **Module id:** `T02-graph-mst-flow` · **Tags:** graphs, mst, flow, matching
-> **Lab:** `labs/py/28-graph-mst-flow/`
 
 ## The 30-second version
 

@@ -234,7 +234,7 @@ Keying by `toolCallId` and updating the existing entry (rather than appending a 
 
 ## Build it from scratch
 
-The runnable core is the server SSE handler plus the client `streamChat` function above — those two, wired together, are a complete token-streaming chat loop with no framework. A minimal lab would: (1) stand up the Node handler streaming from a stub generator (`function* fakeTokens() { yield "Hello"; yield " world"; }` with an artificial `setTimeout` between yields to simulate token latency), (2) build the client reader loop, (3) add the `requestAnimationFrame` buffer, (4) wire an abort button, (5) deliberately break the connection mid-stream (kill the server process) and confirm the client shows a recoverable error rather than hanging silently. Reference: `labs/js/08-streaming-ai-ui/`.
+The runnable core is the server SSE handler plus the client `streamChat` function above — those two, wired together, are a complete token-streaming chat loop with no framework. A minimal lab would: (1) stand up the Node handler streaming from a stub generator (`function* fakeTokens() { yield "Hello"; yield " world"; }` with an artificial `setTimeout` between yields to simulate token latency), (2) build the client reader loop, (3) add the `requestAnimationFrame` buffer, (4) wire an abort button, (5) deliberately break the connection mid-stream (kill the server process) and confirm the client shows a recoverable error rather than hanging silently. Reference: `(lab pending)`.
 
 ---
 

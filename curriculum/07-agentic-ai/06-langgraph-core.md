@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 3h · **Prereqs:** `T07-agent-loop-from-scratch` · **Updated:** 2026-07-26
 > **Module id:** `T07-langgraph-core` · **Tags:** sprint, framework, langgraph
-> **Lab:** `labs/py/06-langgraph-core/`
 
 ## The 30-second version
 
@@ -358,7 +357,7 @@ class MiniGraph:
         raise RecursionError("recursion limit reached without a stop condition")
 ```
 
-Everything real LangGraph adds on top of this is worth having, and none of it is conceptually deep: durable checkpoints instead of `checkpoint(state)`, per-node retry and timeout policies, seven stream modes, subgraph namespacing, `interrupt()`, and a Pydantic/TypedDict-aware serialiser. The lab at `labs/py/06-langgraph-core/` builds this up in six steps and then ports the same agent to real LangGraph so you can diff them.
+Everything real LangGraph adds on top of this is worth having, and none of it is conceptually deep: durable checkpoints instead of `checkpoint(state)`, per-node retry and timeout policies, seven stream modes, subgraph namespacing, `interrupt()`, and a Pydantic/TypedDict-aware serialiser. The lab at `(lab pending)` builds this up in six steps and then ports the same agent to real LangGraph so you can diff them.
 
 ---
 

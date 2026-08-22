@@ -146,7 +146,7 @@ def transformer_block(x, attn_fn, ffn_W1, ffn_W3, ffn_W2, norm1_gain, norm2_gain
     return x
 ```
 
-Full from-scratch Pre-Norm-vs-Post-Norm training-stability comparison (loss curves at increasing depth, with and without warmup) plus a toy 4-expert MoE layer with visualized routing collapse: **`labs/py/05-architecture-blocks/`** (create if not present).
+Full from-scratch Pre-Norm-vs-Post-Norm training-stability comparison (loss curves at increasing depth, with and without warmup) plus a toy 4-expert MoE layer with visualized routing collapse: **`(lab pending)`** (create if not present).
 
 ---
 

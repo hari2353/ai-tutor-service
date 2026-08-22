@@ -170,7 +170,7 @@ WCAG 2.2 (October 2023) organizes success criteria into three levels, each build
 
 ## Build it from scratch
 
-A concrete, checkable exercise: take an existing custom dropdown or modal component in a codebase and audit it against the ARIA Authoring Practices Guide's reference pattern for that widget type, then fix any gap found by (1) turning off the mouse entirely and operating it keyboard-only, and (2) turning on a real screen reader (VoiceOver on macOS with Cmd+F5, NVDA on Windows, free) and confirming what's actually announced matches what's visually shown. This exercise reliably surfaces real bugs — a missing focus trap, a dropdown that opens but can't be closed with Escape, a toast that's invisible to the screen reader — that a purely visual review never catches. Reference: `labs/js/10-accessibility/`.
+A concrete, checkable exercise: take an existing custom dropdown or modal component in a codebase and audit it against the ARIA Authoring Practices Guide's reference pattern for that widget type, then fix any gap found by (1) turning off the mouse entirely and operating it keyboard-only, and (2) turning on a real screen reader (VoiceOver on macOS with Cmd+F5, NVDA on Windows, free) and confirming what's actually announced matches what's visually shown. This exercise reliably surfaces real bugs — a missing focus trap, a dropdown that opens but can't be closed with Escape, a toast that's invisible to the screen reader — that a purely visual review never catches. Reference: `(lab pending)`.
 
 ---
 
@@ -245,6 +245,11 @@ Production accessibility work leans heavily on unstyled, behavior-correct compon
 **Testing:** staff-level: connecting accessibility to the design-token/theming pipeline rather than treating it as a one-off manual check.
 **Answer:** Contrast ratio is a function of the specific foreground/background color pair, and a token or component often gets manually verified against only the default (usually light) theme; a dark-mode variant introduces a new color pair that was never independently checked and can easily fall under the 4.5:1 (normal text) or 3:1 (large text/UI components) AA thresholds even if the light-mode pairing was fine.
 **Follow-up trap:** *"How would you catch this automatically before it ships, across every theme, without manually checking every combination by hand?"* — bake contrast validation into the design-token pipeline itself — a build-time or CI check that computes contrast ratios for every semantic color-pair combination across every defined theme and fails if any combination is below threshold, rather than relying on a human to remember to manually re-check contrast every time a new theme or token value is added.
+
+### Q10 — Beyond automated scans, describe exactly how you'd verify with a real screen reader that an SPA route change is perceivable to a blind user.
+**Testing:** whether the candidate has actually operated NVDA/VoiceOver versus treating axe scans as the complete accessibility story.
+**Answer:** Load the app with NVDA (Windows, free) or VoiceOver (macOS, Cmd+F5), trigger a client-side navigation, and confirm three audible events: the updated page title gets announced, focus lands on the new page's `<h1>` and is read aloud, and subsequent arrowing/Tab-ing reads content in visual order. Then run the same flow keyboard-only including back navigation, confirming focus restores to a predictable place instead of silently dropping to `<body>`.
+**Follow-up trap:** *"Chrome DevTools' Accessibility Tree inspector already shows correct roles, labels, and the focus target — isn't that equivalent coverage?"* — no; the inspector is a computed snapshot of semantics, not a record of what gets announced, when, or in which browsing mode — announcement timing, live-region behavior, and focus-mode quirks vary per screen reader/browser pairing, which is precisely the slice of issues automation misses (~57% detection leaves ~43% uncaught) that requires listening to real assistive technology.
 
 ---
 

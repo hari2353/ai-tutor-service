@@ -134,7 +134,7 @@ def top_k(query_vec: np.ndarray, passage_vecs: np.ndarray, k: int = 5) -> list[i
     return list(np.argsort(-scores)[:k])
 ```
 
-For a from-zero Matryoshka evaluation harness comparing recall@10 across truncation levels on your own corpus, see `labs/python/02-embeddings-choice/`.
+For a from-zero Matryoshka evaluation harness comparing recall@10 across truncation levels on your own corpus, see `(lab pending)`.
 
 ---
 

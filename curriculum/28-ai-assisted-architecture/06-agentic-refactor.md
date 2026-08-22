@@ -2,7 +2,6 @@
 
 > **Track:** T28 AI-Assisted Architecture · **Time:** 2.5h · **Prereqs:** `T28-spec-driven-dev`, `T28-subagent-architecture`, `T19-testing-quality` · **Updated:** 2026-07-26
 > **Module id:** `T28-agentic-refactor` · **Tags:** workflow
-> **Lab:** `labs/py/28-refactor-sequencing/`
 
 ## The 30-second version
 
@@ -257,7 +256,7 @@ And know the number that makes this urgent rather than aesthetic: a 200-line PR 
 
 ## Build it from scratch
 
-`labs/py/28-refactor-sequencing/` ships a 40-file service with a cross-cutting change to make: replace a positional-args config lookup with a typed config object, 312 call sites, 47 of them not mechanical.
+`(lab pending)` ships a 40-file service with a cross-cutting change to make: replace a positional-args config lookup with a typed config object, 312 call sites, 47 of them not mechanical.
 
 **Part 1 (30 min): inventory and classify.** Write the `ast-grep` query, produce `raw.tsv`, split mechanical from judgment. Graded on how many of the 47 you find; the seeded exceptions include a site passing `None`, one inside a `try/except` that swallows the error, two in a hot loop where the object allocation matters, one in a test that asserts the *old* signature, and one behind a feature flag that is off in production. Miss the last one and the "refactor" silently enables a dormant code path.
 

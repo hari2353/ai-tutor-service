@@ -200,7 +200,7 @@ def permutation_test(a: np.ndarray, b: np.ndarray, n_permutations: int = 10_000,
     return count_as_extreme / n_permutations
 ```
 
-The permutation test is worth building once because it makes the p-value definition unavoidable and concrete: it is *literally* "the fraction of relabelings of the data at least as extreme as what we observed, under the assumption that the labels don't matter (H0)." Reference lab: `labs/py/12-statistics-inference/` (build if not present) — includes a test asserting the from-scratch Welch's t-test matches `scipy.stats.ttest_ind(equal_var=False)` and that the permutation test converges to the same p-value as the closed-form test on normally-distributed data as `n_permutations` grows.
+The permutation test is worth building once because it makes the p-value definition unavoidable and concrete: it is *literally* "the fraction of relabelings of the data at least as extreme as what we observed, under the assumption that the labels don't matter (H0)." Reference lab: `(lab pending)` (build if not present) — includes a test asserting the from-scratch Welch's t-test matches `scipy.stats.ttest_ind(equal_var=False)` and that the permutation test converges to the same p-value as the closed-form test on normally-distributed data as `n_permutations` grows.
 
 ---
 

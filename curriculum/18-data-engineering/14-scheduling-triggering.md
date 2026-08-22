@@ -140,7 +140,7 @@ def compare_with_cron_polling(bucket: str, expected_prefix: str, s3_client) -> b
     return response.get("KeyCount", 0) > 0
 ```
 
-The comparison worth making explicit to an interviewer: `handle_s3_event` reacts the moment the file lands, with no guessed schedule and no polling cost, but it must defend against redelivery itself; `compare_with_cron_polling` represents the pattern being replaced — either a blind cron job with zero readiness check, or a polling sensor that costs resources for the entire wait. Full version wired to a real EventBridge rule and Step Functions state machine: `labs/py/18-scheduling-lab/`.
+The comparison worth making explicit to an interviewer: `handle_s3_event` reacts the moment the file lands, with no guessed schedule and no polling cost, but it must defend against redelivery itself; `compare_with_cron_polling` represents the pattern being replaced — either a blind cron job with zero readiness check, or a polling sensor that costs resources for the entire wait. Full version wired to a real EventBridge rule and Step Functions state machine: `(lab pending)`.
 
 ---
 

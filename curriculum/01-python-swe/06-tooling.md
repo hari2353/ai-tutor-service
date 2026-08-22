@@ -2,7 +2,6 @@
 
 > **Track:** T01 Python & SWE Craft · **Time:** 1.5h · **Prereqs:** T01-typing · **Updated:** 2026-08-03
 > **Module id:** `T01-tooling` · **Tags:** tooling
-> **Lab:** `labs/python/06-tooling/`
 
 ## The 30-second version
 

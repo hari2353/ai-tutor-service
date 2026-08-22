@@ -3,7 +3,6 @@
 > **Track:** T30 Auth & Application Security · **Time:** 2h · **Prereqs:** `T30-authn-vs-authz`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-sessions-vs-tokens` · **Tags:** fundamentals, critical
-> **Lab:** `labs/py/02-session-vs-jwt/`
 
 ## The 30-second version
 
@@ -172,7 +171,7 @@ def revoke_refresh_token(refresh_token: str) -> None:
         # work until THEIR OWN exp — this is the bounded worst case.
 ```
 
-Full version with Redis-backed sessions, RS256 JWTs, and refresh-token rotation with reuse detection: **`labs/py/02-session-vs-jwt/`**.
+Full version with Redis-backed sessions, RS256 JWTs, and refresh-token rotation with reuse detection: **`(lab pending)`**.
 
 ---
 

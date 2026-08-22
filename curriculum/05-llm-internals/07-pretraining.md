@@ -2,7 +2,6 @@
 
 > **Track:** T05 LLM Internals · **Time:** 2h · **Prereqs:** T05-autoregression, T05-tokenization, T05-build-nanogpt · **Updated:** 2026-07-28
 > **Module id:** `T05-pretraining` · **Tags:** training
-> **Lab:** `labs/py/06-build-nanogpt/` (data pipeline extensions)
 
 ## The 30-second version
 
@@ -125,7 +124,7 @@ dupes = lsh_buckets(sigs)
 
 This is deliberately small-scale (MD5 per shingle per hash seed is far too slow for billions of documents — production pipelines use vectorized hashing and distributed bucketing, e.g., `datatrove`'s implementation). It is enough to show *why* LSH avoids the O(n²) pairwise comparison problem: documents only get compared directly if they land in the same band-bucket, and choosing `bands × rows` controls the precision/recall tradeoff between catching true near-duplicates and false-positive collisions.
 
-Full deduplication + quality-classifier + domain-mixture pipeline on a real corpus subset (FineWeb sample): **`labs/py/06-build-nanogpt/data/`**.
+Full deduplication + quality-classifier + domain-mixture pipeline on a real corpus subset (FineWeb sample): **`(lab pending)data/`**.
 
 ---
 

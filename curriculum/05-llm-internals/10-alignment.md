@@ -170,7 +170,7 @@ rewards = [1.0, 0.0, 0.0, 1.0]
 print(grpo_advantages(rewards))  # correct completions get positive advantage, wrong ones negative
 ```
 
-A from-scratch PPO loop (rollout generation, GAE, clipped surrogate objective, value loss) is materially more code than either of the above and is the natural next lab — `labs/py/10-alignment/` (create if not present).
+A from-scratch PPO loop (rollout generation, GAE, clipped surrogate objective, value loss) is materially more code than either of the above and is the natural next lab — `(lab pending)` (create if not present).
 
 ---
 

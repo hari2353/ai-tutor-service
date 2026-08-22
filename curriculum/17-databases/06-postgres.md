@@ -212,7 +212,7 @@ heap.vacuum(oldest_active_xid=100)
 print(f"Total index writes: {heap.index_writes}")
 ```
 
-This makes the HOT/full-update distinction and the resulting index-write multiplier tangible, along with the basic shape of dead-tuple accumulation and vacuum's reclaim logic. Full version modeling autovacuum's threshold-triggered scheduling and a simplified XID-wraparound freeze mechanism: **`labs/py/06-postgres-internals/`**.
+This makes the HOT/full-update distinction and the resulting index-write multiplier tangible, along with the basic shape of dead-tuple accumulation and vacuum's reclaim logic. Full version modeling autovacuum's threshold-triggered scheduling and a simplified XID-wraparound freeze mechanism: **`(lab pending)`**.
 
 ---
 

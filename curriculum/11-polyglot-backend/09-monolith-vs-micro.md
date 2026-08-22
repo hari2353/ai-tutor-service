@@ -171,7 +171,7 @@ import-linter --config setup.cfg   # fails the build on a forbidden import,
                                      # a language with real module privacy
 ```
 
-A fuller lab building a small modular monolith (orders/billing/inventory modules with enforced boundaries and per-module database schemas within one Postgres instance), then a version of the same functionality split into three services with a saga-pattern-based cross-service transaction, measuring the actual added latency/complexity of the split directly, belongs in `labs/architecture/09-monolith-vs-micro/`.
+A fuller lab building a small modular monolith (orders/billing/inventory modules with enforced boundaries and per-module database schemas within one Postgres instance), then a version of the same functionality split into three services with a saga-pattern-based cross-service transaction, measuring the actual added latency/complexity of the split directly, belongs in `(lab pending)`.
 
 ---
 

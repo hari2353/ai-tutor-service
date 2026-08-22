@@ -2,7 +2,6 @@
 
 > **Track:** T19 Testing Quality · **Time:** 2.5h · **Prereqs:** T19-02-unit-testing, T19-05-regression-testing
 > **Module id:** `T19-coverage-mutation` · **Tags:** testing, mutation-testing, coverage, ci
-> **Lab:** `labs/python/12-coverage-mutation/`
 
 ## The 30-second version
 
@@ -215,7 +214,7 @@ if __name__ == "__main__":
     print("strong suite score:", run_mutation_test(classify, strong_suite))
 ```
 
-Running this shows the concrete mechanism: the weak suite (missing the boundary case at exactly 18) reports the mutant as **survived**, while the strong suite kills it — this is the entire epistemic content of mutation testing compressed into one runnable example, and it's worth being able to reproduce this exact demonstration cold in an interview. A fuller lab wiring this up against mutmut's real CLI on a small real module, comparing its coverage-vs-mutation-score report side by side, belongs in `labs/python/12-coverage-mutation/`.
+Running this shows the concrete mechanism: the weak suite (missing the boundary case at exactly 18) reports the mutant as **survived**, while the strong suite kills it — this is the entire epistemic content of mutation testing compressed into one runnable example, and it's worth being able to reproduce this exact demonstration cold in an interview. A fuller lab wiring this up against mutmut's real CLI on a small real module, comparing its coverage-vs-mutation-score report side by side, belongs in `(lab pending)`.
 
 ---
 

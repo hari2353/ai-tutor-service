@@ -3,7 +3,6 @@
 > **Track:** T30 Auth & Application Security · **Time:** 3h · **Prereqs:** `T30-token-lifecycle`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-oauth-oidc` · **Tags:** oauth, critical
-> **Lab:** `labs/py/06-oauth-pkce-flow/`
 
 ## The 30-second version
 
@@ -220,7 +219,7 @@ tokens = exchange_code_for_tokens(code="...", code_verifier=verifier,
 # tokens now contains access_token AND id_token (because scope included "openid")
 ```
 
-Full lab with a working local authorization server, the Device Flow polling loop, and Client Credentials for service-to-service calls: **`labs/py/06-oauth-pkce-flow/`**.
+Full lab with a working local authorization server, the Device Flow polling loop, and Client Credentials for service-to-service calls: **`(lab pending)`**.
 
 ---
 

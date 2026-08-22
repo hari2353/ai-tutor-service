@@ -2,7 +2,6 @@
 
 > **Track:** T20 Rust · **Time:** 2.5h · **Prereqs:** `T20-rust-ownership` (ownership, borrowing, lifetimes assumed known), `T01-python-asyncio` (Python's event loop as the contrast case) · **Updated:** 2026-08-05
 > **Module id:** `T20-rust-async` · **Tags:** core, critical, concurrency
-> **Lab:** `labs/rust/04-rust-async/`
 
 ## The 30-second version
 
@@ -383,7 +382,7 @@ The exercise that makes the model click is writing an executor in about 80 lines
 
 ```rust
 // untested sketch (no rustc in this session). Deps: futures = "0.3" for
-// ArcWake only; everything else is std. Lab: labs/rust/04-rust-async/
+// ArcWake only; everything else is std. Lab: (lab pending)
 use std::future::Future;
 use std::pin::Pin;
 use std::sync::mpsc::{sync_channel, Receiver, SyncSender};

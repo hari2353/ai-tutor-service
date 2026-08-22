@@ -7,7 +7,7 @@ description: Give an honest read on where the user actually stands in the AI Tut
 
 The honest version. Optimism here costs interviews, so the bar is: **would this read the same if an interviewer wrote it?**
 
-**Repo root** (`$ROOT`): `C:\Users\medic\OneDrive\Documents\ai-tutor-service`
+**Repo root** (`$ROOT`): the directory containing `CONTENT-STATUS.md`. Find it by walking up from your current working directory until that file appears; if you never find it, ask the user where the repo lives — do not guess a path.
 
 ## 1. Gather
 

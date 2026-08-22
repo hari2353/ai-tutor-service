@@ -2,7 +2,6 @@
 
 > **Track:** T04 Deep Learning · **Time:** 3h · **Prereqs:** T04-training-engineering · **Updated:** 2026-08-03
 > **Module id:** `T04-distributed-training` · **Tags:** scaling, critical
-> **Lab:** `labs/python/07-distributed-training/`
 
 ## The 30-second version
 
@@ -93,7 +92,7 @@ None of DDP/ZeRO/FSDP/tensor-parallel/pipeline-parallel is mutually exclusive wi
 
 ## Build it from scratch
 
-A from-scratch ring all-reduce simulation (in plain Python, simulating `N` "GPUs" as separate arrays and implementing the reduce-scatter-then-all-gather steps explicitly to reproduce the `2·(N-1)/N·S` communication-volume arithmetic) and a from-scratch pipeline-parallel bubble-fraction simulator (schedule `M` micro-batches through `P` sequential "stages," each with a fixed processing time, and measure actual idle GPU-time as a fraction of total wall-clock time to confirm it matches `(P-1)/M`) are the lab exercises in `labs/python/07-distributed-training/`; the ZeRO memory-arithmetic table above is directly reproducible by writing a small calculator function taking `Ψ` and `Nd` as inputs and returning all four memory figures, then confirming it against the paper's own reported `120/31.4/16.6/1.9 GB` figures at `Ψ=7.5e9, Nd=64`.
+A from-scratch ring all-reduce simulation (in plain Python, simulating `N` "GPUs" as separate arrays and implementing the reduce-scatter-then-all-gather steps explicitly to reproduce the `2·(N-1)/N·S` communication-volume arithmetic) and a from-scratch pipeline-parallel bubble-fraction simulator (schedule `M` micro-batches through `P` sequential "stages," each with a fixed processing time, and measure actual idle GPU-time as a fraction of total wall-clock time to confirm it matches `(P-1)/M`) are the lab exercises in `(lab pending)`; the ZeRO memory-arithmetic table above is directly reproducible by writing a small calculator function taking `Ψ` and `Nd` as inputs and returning all four memory figures, then confirming it against the paper's own reported `120/31.4/16.6/1.9 GB` figures at `Ψ=7.5e9, Nd=64`.
 
 ---
 

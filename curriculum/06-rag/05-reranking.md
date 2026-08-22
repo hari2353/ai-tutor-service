@@ -111,7 +111,7 @@ def rerank(query: str, candidates: list[str], top_k: int = 8) -> list[tuple[str,
     return ranked[:top_k]
 ```
 
-The parts a production system adds that this sketch skips: batching pairs to saturate GPU throughput rather than scoring one at a time, truncating documents to the model's max sequence length *before* concatenation (silent truncation mid-document is a common accuracy bug), and a fallback path if the reranker service is slow or down (serve the first-stage ranking unranked rather than blocking the whole request). See `labs/python/05-reranking/` for a runnable cascade with latency instrumentation.
+The parts a production system adds that this sketch skips: batching pairs to saturate GPU throughput rather than scoring one at a time, truncating documents to the model's max sequence length *before* concatenation (silent truncation mid-document is a common accuracy bug), and a fallback path if the reranker service is slow or down (serve the first-stage ranking unranked rather than blocking the whole request). See `(lab pending)` for a runnable cascade with latency instrumentation.
 
 ---
 

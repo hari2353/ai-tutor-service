@@ -2,7 +2,6 @@
 
 > **Track:** T05 LLM Internals · **Time:** 4h · **Prereqs:** T05-autoregression, T05-tokenization, T05-attention, T05-positional, T05-architecture-blocks · **Updated:** 2026-07-28
 > **Module id:** `T05-build-nanogpt` · **Tags:** lab, critical
-> **Lab:** `labs/py/06-build-nanogpt/`
 
 ## The 30-second version
 
@@ -104,7 +103,7 @@ class Block(nn.Module):
 ### The training loop, with real numbers
 
 ```python
-# untested sketch -- illustrates the real loop; see labs/py/06-build-nanogpt/train.py for a runnable version
+# untested sketch -- illustrates the real loop; see (lab pending)train.py for a runnable version
 import torch, time
 
 model = GPT(config).to(device)
@@ -189,7 +188,7 @@ def get_batch(split, block_size=256, batch_size=64):
 
 **Tier 2 — single A100/H100 or Colab Pro, a few hours: GPT-2 (124M)-class on a FineWeb subset.** This is where the numbers above (6e-4 peak LR, bf16 autocast, `torch.compile`, gradient clipping) matter and where you actually reproduce something comparable to a real released checkpoint. Realistic budget: **10B tokens, batch size ~0.5M tokens via gradient accumulation, ~19,000 optimizer steps** — Karpathy's original reproduction took about 4 days on an 8xA100 node in the pre-`torch.compile`/pre-bf16-default era; with modern kernels and `torch.compile`, a single 8xH100 node reproduces it in **under 2 hours**, and a single consumer GPU (RTX 4090) can get a smaller (e.g., 6-layer, ~30M param) model to a sensible loss on a few hundred million tokens overnight.
 
-Full training script, data loader (FineWeb shard downloader), and evaluation harness (HellaSwag accuracy as a sanity check beyond loss): **`labs/py/06-build-nanogpt/`**.
+Full training script, data loader (FineWeb shard downloader), and evaluation harness (HellaSwag accuracy as a sanity check beyond loss): **`(lab pending)`**.
 
 ---
 

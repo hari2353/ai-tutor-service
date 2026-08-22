@@ -149,7 +149,7 @@ def log_to_digest(result: CheckResult) -> None:
     ...
 ```
 
-The design choice worth defending out loud: `Severity` is attached per-check, not globally, because a freshness miss on a revenue table and a freshness miss on a nice-to-have internal metrics table deserve different responses, and hardcoding "every failure pages" is exactly the alert-fatigue anti-pattern. Full version wired to a real GX Checkpoint and a Soda scan: `labs/py/18-data-quality-lab/`.
+The design choice worth defending out loud: `Severity` is attached per-check, not globally, because a freshness miss on a revenue table and a freshness miss on a nice-to-have internal metrics table deserve different responses, and hardcoding "every failure pages" is exactly the alert-fatigue anti-pattern. Full version wired to a real GX Checkpoint and a Soda scan: `(lab pending)`.
 
 ---
 

@@ -2,7 +2,6 @@
 
 > **Track:** T08 Eval & Observability · **Time:** 2h · **Prereqs:** `T08-llm-as-judge`
 > **Module id:** `T08-agent-eval` · **Tags:** sprint, eval, agents
-> **Lab:** `labs/py/04-agent-eval-harness/`
 
 ## The 30-second version
 
@@ -224,7 +223,7 @@ def eval_suite(tasks: list[Task], run_agent_fn, k: int = 4) -> dict:
     }
 ```
 
-Full version with fuzzy trajectory matching, an LLM-judge trajectory scorer with the six-dimension decomposition, and a CI gate that quarantines flaky tasks: **`labs/py/04-agent-eval-harness/`**.
+Full version with fuzzy trajectory matching, an LLM-judge trajectory scorer with the six-dimension decomposition, and a CI gate that quarantines flaky tasks: **`(lab pending)`**.
 
 ---
 

@@ -2,7 +2,6 @@
 
 > **Track:** T20 Rust · **Time:** 3h · **Prereqs:** none
 > **Module id:** `T20-rust-ownership` · **Tags:** core, critical
-> **Lab:** `labs/rust/01-rust-ownership/`
 
 ## The 30-second version
 
@@ -182,7 +181,7 @@ struct Node {
 //    check, which is exactly what `unsafe` is for (see T20-rust-memory).
 ```
 
-A companion "safe" exercise worth writing by hand end-to-end: a small `struct Library { books: Vec<Book> }` with methods that borrow (`fn find(&self, title: &str) -> Option<&Book>`) versus mutate (`fn add(&mut self, book: Book)`), then deliberately writing a call site that tries to hold a `find()` result across an `add()` call and watching the compiler reject it — that's the exact shape of bug the rule exists to prevent, made concrete in five lines instead of an abstract rule. The matching lab in `labs/rust/01-rust-ownership/` should include this plus a version with NLL-sensitive last-use timing to make the non-lexical behavior visible.
+A companion "safe" exercise worth writing by hand end-to-end: a small `struct Library { books: Vec<Book> }` with methods that borrow (`fn find(&self, title: &str) -> Option<&Book>`) versus mutate (`fn add(&mut self, book: Book)`), then deliberately writing a call site that tries to hold a `find()` result across an `add()` call and watching the compiler reject it — that's the exact shape of bug the rule exists to prevent, made concrete in five lines instead of an abstract rule. The matching lab in `(lab pending)` should include this plus a version with NLL-sensitive last-use timing to make the non-lexical behavior visible.
 
 ---
 

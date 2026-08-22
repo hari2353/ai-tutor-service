@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2.5h · **Prereqs:** `T07-agent-loop-from-scratch` · **Updated:** 2026-07-26
 > **Module id:** `T07-tool-engineering` · **Tags:** sprint, core, tools
-> **Lab:** `labs/py/03-tool-engineering/`
 
 ## The 30-second version
 
@@ -464,7 +463,7 @@ class Registry:
                 f"query or use pagination/filter parameters rather than re-requesting.]")
 ```
 
-`labs/py/03-tool-engineering/` builds this incrementally against a fake backend: the registry and contract checks, truncation with a steering assertion, error taxonomy, the idempotency property test, the risk-tier gate raising `ApprovalRequired`, and finally a small eval harness that measures selection accuracy at 5, 12, and 25 tools so you can watch the wall arrive on your own data.
+`(lab pending)` builds this incrementally against a fake backend: the registry and contract checks, truncation with a steering assertion, error taxonomy, the idempotency property test, the risk-tier gate raising `ApprovalRequired`, and finally a small eval harness that measures selection accuracy at 5, 12, and 25 tools so you can watch the wall arrive on your own data.
 
 ---
 

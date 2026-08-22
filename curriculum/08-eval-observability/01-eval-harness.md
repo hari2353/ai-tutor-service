@@ -122,7 +122,7 @@ An eval score is meaningless without the triple that produced it: dataset versio
 
 ## Build it from scratch
 
-Minimal harness: dataset loader, runner, pluggable scorer interface, and a report that diffs against the previous run. Full version with stratified sampling, CI integration, and a golden-set refresh script: reference implementation pattern used across `labs/py/` eval labs (see `T08-agent-eval`'s `labs/py/04-agent-eval-harness/` for the agent-trajectory variant of this same shape).
+Minimal harness: dataset loader, runner, pluggable scorer interface, and a report that diffs against the previous run. Full version with stratified sampling, CI integration, and a golden-set refresh script: reference implementation pattern used across `labs/py/` eval labs (see `T08-agent-eval`'s `(lab pending)` for the agent-trajectory variant of this same shape).
 
 ```python
 # untested sketch

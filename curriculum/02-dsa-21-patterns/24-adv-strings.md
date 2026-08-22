@@ -2,7 +2,6 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.0h · **Prereqs:** T02-p02-sliding-window, arrays
 > **Module id:** `T02-adv-strings` · **Tags:** advanced, string-matching, hashing
-> **Lab:** `labs/py/24-adv-strings/`
 
 ## The 30-second version
 

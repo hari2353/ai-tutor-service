@@ -193,7 +193,7 @@ class CoalescingCache:
             return value
 ```
 
-This omits the distributed case entirely (a real deployment needs the Redis Lua atomic check-increment for rate limiting, and a distributed lock or Redis-based single-flight for coalescing across multiple application instances, not just threads in one process). A full lab covering both the Redis Lua rate limiter and a distributed request-coalescing cache belongs at `labs/py/10-caching-ratelimiting/` (not yet in this repo).
+This omits the distributed case entirely (a real deployment needs the Redis Lua atomic check-increment for rate limiting, and a distributed lock or Redis-based single-flight for coalescing across multiple application instances, not just threads in one process). A full lab covering both the Redis Lua rate limiter and a distributed request-coalescing cache belongs at `(lab pending)` (not yet in this repo).
 
 ---
 

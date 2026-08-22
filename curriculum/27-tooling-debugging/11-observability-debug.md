@@ -2,7 +2,6 @@
 
 > **Track:** T27 Tooling & Debugging · **Time:** 2.0h · **Prereqs:** T27-prod-debugging, T08-classic-obs · **Updated:** 2026-08-05
 > **Module id:** `T27-observability-debug` · **Tags:** debugging, observability, tracing, sampling, profiling
-> **Lab:** `labs/python/11-observability-debug/`
 
 ## The 30-second version
 
@@ -318,7 +317,7 @@ GAP          810ms dead time inside 'orders.reserve' before its first child (81%
 SELFTIME     986ms unaccounted inside 'orders.reserve' (99%). Not in any child: go to the profile.
 ```
 
-Note what the critical path marker says: only the *last* retry attempt is on it, because the first two finished earlier. And note the honest limit of the tool — it flags `orders.reserve` twice, as both GAP and SELFTIME, because they are the same 810ms seen two ways. Real detectors need to dedupe. Full version with OTLP JSON ingestion, span links, and clock-skew guards: **`labs/python/11-observability-debug/`**.
+Note what the critical path marker says: only the *last* retry attempt is on it, because the first two finished earlier. And note the honest limit of the tool — it flags `orders.reserve` twice, as both GAP and SELFTIME, because they are the same 810ms seen two ways. Real detectors need to dedupe. Full version with OTLP JSON ingestion, span links, and clock-skew guards: **`(lab pending)`**.
 
 ---
 

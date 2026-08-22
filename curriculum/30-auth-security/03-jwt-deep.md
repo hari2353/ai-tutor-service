@@ -3,7 +3,6 @@
 > **Track:** T30 Auth & Application Security · **Time:** 3h · **Prereqs:** `T30-sessions-vs-tokens`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-jwt-deep` · **Tags:** jwt, critical
-> **Lab:** `labs/py/03-jwt-from-scratch/`
 
 ## The 30-second version
 
@@ -188,7 +187,7 @@ print(token)
 print(verify_jwt_hs256(token, secret, audience="api.example.com", issuer="https://auth.example.com"))
 ```
 
-This demystifies the two most misunderstood things in one pass: header/payload are plain JSON round-tripped through an encoding, not a cipher, and verification is "recompute the signature yourself and compare, then separately check each claim" — never "ask the token what algorithm to use" (that's the vulnerability the next module is entirely about). RS256/ES256 versions using `cryptography`'s RSA/EC primitives, plus a working JWKS endpoint and `kid`-based rotation: **`labs/py/03-jwt-from-scratch/`**.
+This demystifies the two most misunderstood things in one pass: header/payload are plain JSON round-tripped through an encoding, not a cipher, and verification is "recompute the signature yourself and compare, then separately check each claim" — never "ask the token what algorithm to use" (that's the vulnerability the next module is entirely about). RS256/ES256 versions using `cryptography`'s RSA/EC primitives, plus a working JWKS endpoint and `kid`-based rotation: **`(lab pending)`**.
 
 ---
 

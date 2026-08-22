@@ -249,7 +249,7 @@ async def problem_detail_handler(request, exc: ProblemDetail):
     )
 ```
 
-A fuller lab building this endpoint against a real, indexed table with 1M+ rows, measuring offset-vs-cursor query latency at increasing depth directly, plus an SSE endpoint with correct `Last-Event-ID` resumption, belongs in `labs/api/12-api-design/`.
+A fuller lab building this endpoint against a real, indexed table with 1M+ rows, measuring offset-vs-cursor query latency at increasing depth directly, plus an SSE endpoint with correct `Last-Event-ID` resumption, belongs in `(lab pending)`.
 
 ---
 

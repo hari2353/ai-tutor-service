@@ -2,7 +2,6 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 2h · **Prereqs:** T31-q-learning-sarsa · **Updated:** 2026-08-03
 > **Module id:** `T31-exploration` · **Tags:** fundamentals, critical
-> **Lab:** `labs/py/31-06-exploration/`
 
 ## The 30-second version
 

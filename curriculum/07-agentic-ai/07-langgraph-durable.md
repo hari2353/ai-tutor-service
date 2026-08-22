@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 3h · **Prereqs:** `T07-langgraph-core`, `T07-agent-loop-from-scratch` · **Updated:** 2026-07-26
 > **Module id:** `T07-langgraph-durable` · **Tags:** sprint, framework, langgraph
-> **Lab:** `labs/py/07-langgraph-durable/`
 
 ## The 30-second version
 
@@ -385,7 +384,7 @@ class TinySaver:
             yield Snapshot(d["values"], tuple(d["next"]), cid, parent, step)
 ```
 
-The lab at `labs/py/07-langgraph-durable/` builds this against the mini-Pregel from `T07-langgraph-core`, then adds: resume after an injected crash, `interrupt()` via a sentinel exception, replay from an arbitrary snapshot, fork with `as_node`, and a test that proves a non-idempotent pre-interrupt side effect fires twice. Writing that last test is the point of the lab.
+The lab at `(lab pending)` builds this against the mini-Pregel from `T07-langgraph-core`, then adds: resume after an injected crash, `interrupt()` via a sentinel exception, replay from an arbitrary snapshot, fork with `as_node`, and a test that proves a non-idempotent pre-interrupt side effect fires twice. Writing that last test is the point of the lab.
 
 ---
 

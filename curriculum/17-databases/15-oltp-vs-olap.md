@@ -153,7 +153,7 @@ print(f"row-store-shaped: {t_row:.4f}s   columnar-shaped: {t_col:.4f}s")
 # this further with compression and SIMD vectorised batch processing.
 ```
 
-This toy makes the "columns not touched are never read" idea concrete even without real compression or SIMD. Full version comparing an actual row-oriented SQLite table against a Parquet/DuckDB columnar equivalent on the same dataset, with real I/O and compression measurements: **`labs/py/15-columnar-lab/`**.
+This toy makes the "columns not touched are never read" idea concrete even without real compression or SIMD. Full version comparing an actual row-oriented SQLite table against a Parquet/DuckDB columnar equivalent on the same dataset, with real I/O and compression measurements: **`(lab pending)`**.
 
 ---
 

@@ -184,7 +184,7 @@ def simulate():
 simulate()
 ```
 
-This omits the randomized-timeout-driven trigger (a real implementation needs a timer per node and a network layer with realistic delay/loss injection), log replication, and the joint-consensus membership-change protocol. A full lab with a simulated network (dropped/delayed messages, partition injection, and log replication through to commit index) belongs at `labs/py/10-consensus-ordering/` (not yet in this repo).
+This omits the randomized-timeout-driven trigger (a real implementation needs a timer per node and a network layer with realistic delay/loss injection), log replication, and the joint-consensus membership-change protocol. A full lab with a simulated network (dropped/delayed messages, partition injection, and log replication through to commit index) belongs at `(lab pending)` (not yet in this repo).
 
 ---
 

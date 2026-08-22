@@ -2,7 +2,6 @@
 
 > **Track:** T28 AI-Assisted Architecture · **Time:** 2h · **Prereqs:** `T07-harness-engineering`, `T07-context-engineering` · **Updated:** 2026-07-26
 > **Module id:** `T28-claude-code-model` · **Tags:** foundations, critical
-> **Lab:** `labs/py/28-agent-loop-anatomy/`
 
 ## The 30-second version
 
@@ -193,7 +192,7 @@ Separately, checkpoints: before an edit, the file is snapshotted, and `Esc Esc` 
 
 ## Build it from scratch
 
-`labs/py/28-agent-loop-anatomy/` builds the harness in three passes, each one revealing a failure the previous pass hides.
+`(lab pending)` builds the harness in three passes, each one revealing a failure the previous pass hides.
 
 **Pass 1: the loop (about 70 lines).** Three tools (`read_file`, `grep`, `run`), a `while` loop, and an explicit `messages` list you print the token count of on every turn.
 

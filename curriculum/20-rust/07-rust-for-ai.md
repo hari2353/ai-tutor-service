@@ -2,7 +2,6 @@
 
 > **Track:** T20 Rust · **Time:** 2h · **Prereqs:** `T20-rust-ownership`, `T20-rust-async`, `T20-rust-perf`, `T01-gil-parallelism` · **Updated:** 2026-08-06
 > **Module id:** `T20-rust-for-ai` · **Tags:** rust, python-interop, pyo3, tokenizers, inference, infrastructure, critical
-> **Lab:** `labs/rust/07-rust-for-ai/`
 
 ## The 30-second version
 
@@ -475,7 +474,7 @@ The two most instructive rows are `uv` and the routers. `uv` is not doing anythi
 
 ## Build it from scratch
 
-The lab in `labs/rust/07-rust-for-ai/` is one crate plus one Python script, and it reproduces every measurement in this module in about 30 minutes. Everything below was actually built and run.
+The lab in `(lab pending)` is one crate plus one Python script, and it reproduces every measurement in this module in about 30 minutes. Everything below was actually built and run.
 
 **Step 1. Scaffold and build.**
 

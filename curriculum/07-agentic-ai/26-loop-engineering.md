@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 3h · **Prereqs:** `T07-agent-loop-from-scratch`, `T07-harness-engineering`, `T07-context-engineering` · **Updated:** 2026-07-26
 > **Module id:** `T07-loop-engineering` · **Tags:** sprint, harness, critical
-> **Lab:** `labs/py/22-loop-engineering/`
 
 ## The 30-second version
 
@@ -420,7 +419,7 @@ Typed events give you replay, audit, compaction, evals, and debugging from one s
 
 ## Build it from scratch
 
-`labs/py/22-loop-engineering/` builds the controls against a scripted fake model and a fake clock, so every test is deterministic and free. The order matters:
+`(lab pending)` builds the controls against a scripted fake model and a fake clock, so every test is deterministic and free. The order matters:
 
 1. **Fake clock and fake model first.** Everything after depends on being able to advance time and script responses.
 2. **Nine stop conditions.** One test per condition asserting the exact `stop_reason`. Include the pair that people conflate: `local_step_budget` versus `tree_step_budget`.

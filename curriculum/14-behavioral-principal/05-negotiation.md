@@ -201,6 +201,31 @@ The `private_equity_discount` parameter is the single most-often-skipped step in
 **Answer:** Use market data as the anchor instead of a competing number (levels.fyi/Blind comparables for the specific level and company tier), lean on any credible walk-away (financial runway, a stable current role, other processes in progress even if not yet at offer stage), and negotiate the lower-friction levers (sign-on, equity refresh, start date) that don't require the company to believe you have a hard alternative — these are often grantable regardless of your leverage level because they're low-cost to the company either way.
 **Follow-up trap:** *"Doesn't lack of a competing offer mean you have basically no leverage?"* — less leverage, not none — companies still incur real cost re-running a search if you walk away (time, recruiting spend, opportunity cost of an open role), and a well-researched, specific, professionally-delivered ask often succeeds even without a literal second offer in hand, because most first offers have real room built in regardless of your visible alternatives.
 
+### Q6 — What's your BATNA in a negotiation, concretely — how do you articulate it with numbers before you ever talk comp?
+**Testing:** whether the walk-away alternative is quantified and credible, or a vague feeling of "having options."
+**Answer:** A BATNA is a number, priced before the first recruiter call: e.g., "my current role pays $310K with a known refresh schedule, and I have another process at offer stage" sets a reservation value near max(alternatives), adjusted for role-fit differences — say $330K risk-adjusted minimum. Every ask is then framed relative to that researched floor rather than to whatever number appears in front of you; an unpriced BATNA is a mood, not leverage.
+**Follow-up trap:** *"Doesn't holding a high walk-away line risk losing the offer?"* — the reservation point stays internal; what gets said out loud is market data and competing structure, not your floor. Candidates lose offers by negotiating without knowing their own number (and folding out of fear) far more often than by politely holding a researched one.
+
+### Q7 — How do competing offers actually move a company's number, and why does bluffing one fail?
+**Testing:** the mechanics of competing-offer leverage and the concrete verification risk.
+**Answer:** A real competing offer converts you from a cost decision into an auction: the hiring manager must now justify losing a fully-looped candidate over a bounded gap (tens of thousands of dollars against roughly 3-6 months and $50K+ of re-run-a-senior-search cost), which is why counters cluster around real deadlines. Bluffing fails mechanically: recruiters see genuine offer letters weekly and can ask for company, level, or verifiable details; getting caught poisons trust with a team you may join, and word travels within an industry.
+**Follow-up trap:** *"If I just say 'another offer' without specifics, isn't that enough?"* — vagueness reads as bluff precisely because real candidates always have shape ("higher total comp, mostly equity, deadline Friday"); an unshaped claim invites exactly the verification question you can't answer.
+
+### Q8 — A startup offers "0.05% worth $400K." What numbers do you actually need before that figure means anything?
+**Testing:** option-grant literacy — strike price, dilution, liquidation preference, liquidity — not taking the headline at face value.
+**Answer:** Four: strike price (200,000 options at a $4 strike means $800K cash to exercise, so the spread, not the grant, is yours); fully-diluted share count (future rounds dilute your 0.05% toward ~0.04%); liquidation preference (a 1x-2x preference stack can zero common shareholders at a modest exit); and liquidity timeline (tender offers or secondaries may be the only exit for years). Ask for option count, strike, latest 409A valuation, fully-diluted shares outstanding, and preference multiple — any recruiter can produce these.
+**Follow-up trap:** *"The letter says it's worth $400K — why isn't that the number?"* — because that's last-round preferred price times grant size assuming zero dilution, no preference haircut, and same-day liquidity, three assumptions that historically fail more often than they hold; the honest value is a probability-weighted range, commonly discounted 30-60% for comparison.
+
+### Q9 — Two offers both headline "$400K total comp." Walk me through how you'd actually model them against each other.
+**Testing:** year-by-year total-comp normalization instead of averaging a 4-year headline.
+**Answer:** Build each offer per year: base + (target bonus × base) + annualized equity with the cliff applied (year 1 under a 12-month cliff may include $0 equity) + sign-on in year 1 only, stating refresh assumptions explicitly; discount private equity 30-60% and public RSUs less (10-20% for concentration). Then compare Y1, Y3, and 4-year cumulative — not the average: a flat $400K public offer (say 240 base / 40 bonus / 120 RSU) beats a "$430K" startup whose discounted year 1 lands nearer $280K after cliff and haircut.
+**Follow-up trap:** *"Why does year-by-year matter if the 4-year totals are equal?"* — because cliffs, back-loaded vesting, and refresher policies redistribute the same total unevenly across time, and median tenure in a role is roughly two years — early years carry most of the realized value, so equal totals are almost never equal offers.
+
+### Q10 — When is the wrong time to negotiate, even when you're sure you deserve more?
+**Testing:** timing-leverage judgment — knowing when the lever physically isn't connected.
+**Answer:** Wrong moments: before an offer exists (leveling is the pre-offer lever, money isn't negotiable yet); immediately after accepting (leverage spent); raise conversations outside budget season at a current employer (merit pools are sized during planning, typically a quarter or more earlier); right after layoffs or a missed earnings report (bands frozen); and iteratively after the package is agreed. The right moment: written offer in hand, response window open, a parallel process still alive — that combination exists rarely and should be waited for deliberately.
+**Follow-up trap:** *"Can't you negotiate a raise whenever performance justifies it?"* — merit increases draw from a pool fixed months earlier, so an off-cycle conversation yields praise and a promise, not money; the lever moves at calibration/budget time, and asking then — with documented impact — is what actually pays.
+
 ---
 
 ## Red flags that fail you
@@ -254,6 +279,9 @@ DON'T                  bluff an unverifiable competing offer · disclose exact c
 - levels.fyi — verified tech compensation by company and level (reference standard for comp data)
 - Blind — anonymous, verified-employee discussion of compensation and negotiation
 - California SB 1162 and related U.S. state pay-transparency legislation (salary range disclosure requirements)
+- [Program on Negotiation (PON) — Harvard Law School](https://www.pon.harvard.edu/) — research, daily blog, and teaching materials from the Harvard Negotiation Project consortium — accessed 2026-08-23
+- Fisher, Roger, William Ury, and Bruce Patton. *Getting to Yes: Negotiating Agreement Without Giving In*, 3rd ed. New York: Penguin Books, 2011. Print.
+- Voss, Chris, with Tahl Raz. *Never Split the Difference: Negotiating As If Your Life Depended On It*. New York: HarperBusiness, 2016. Print.
 
 Note: live web search was unavailable during this module's research pass. Content is grounded in established, structurally stable negotiation mechanics (vesting mechanics, leverage sources, standard tactics) rather than time-sensitive market-condition claims; current hiring-market temperature (competing-offer frequency, comp trends for senior/staff/principal AI roles specifically) should be verified against levels.fyi/Blind at the time of an actual negotiation rather than assumed from this module.
 

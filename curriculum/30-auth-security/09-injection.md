@@ -3,7 +3,6 @@
 > **Track:** T30 Auth & Application Security · **Time:** 2.5h · **Prereqs:** `T30-web-attacks`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-injection` · **Tags:** appsec, critical
-> **Lab:** `labs/py/09-injection-lab/`
 
 ## The 30-second version
 
@@ -349,7 +348,7 @@ def extract_value(session, table: str, column: str, where: str, max_len: int = 3
 # ~7 requests per character via binary search over the 95-value printable range
 ```
 
-Full lab covering union-based, boolean-blind, time-blind, second-order, a working NoSQL operator-injection bypass, an SSTI RCE demo, and an indirect-prompt-injection scenario against a sandboxed toy agent: **`labs/py/09-injection-lab/`**.
+Full lab covering union-based, boolean-blind, time-blind, second-order, a working NoSQL operator-injection bypass, an SSTI RCE demo, and an indirect-prompt-injection scenario against a sandboxed toy agent: **`(lab pending)`**.
 
 ---
 

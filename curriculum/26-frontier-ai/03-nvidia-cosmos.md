@@ -2,7 +2,6 @@
 
 > **Track:** T26 Frontier AI · **Time:** 2.5h · **Prereqs:** `T26-world-models`, `T26-video-generation`, T05 · **Updated:** 2026-08-05
 > **Module id:** `T26-nvidia-cosmos` · **Tags:** cosmos, world-foundation-models, isaac-sim, sim-to-real, synthetic-data, vendor-analysis, critical
-> **Lab:** `labs/py/26-03-nvidia-cosmos/`
 
 ## The 30-second version
 
@@ -205,7 +204,7 @@ Nobody has published that. The DreamGen ablations are the closest and they hold 
 
 ## Build it from scratch
 
-Not a 14B diffusion transformer. The smallest artefact that answers the question the module is about: **does synthetic data help, and how would I know?** That artefact is a mixing-and-evaluation harness, and it is what you would actually own as a Principal engineer on such a programme. Matching lab folder: `labs/py/26-03-nvidia-cosmos/`.
+Not a 14B diffusion transformer. The smallest artefact that answers the question the module is about: **does synthetic data help, and how would I know?** That artefact is a mixing-and-evaluation harness, and it is what you would actually own as a Principal engineer on such a programme. Matching lab folder: `(lab pending)`.
 
 ### Part 1: a synthetic-data mixer that cannot lie to you
 

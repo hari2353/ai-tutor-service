@@ -191,6 +191,11 @@ Mature data science organizations formalize this translation as a required artif
 **Answer:** Don't force a falsely confident point estimate — the honest headline in this case is that the expected value is genuinely uncertain in sign, stated plainly, followed immediately by what specific piece of evidence or additional data would resolve the ambiguity and how long/costly that would be to get. This is still a one-slide, answer-first structure; the "answer" is just "we don't know yet, and here's exactly what would tell us," which is a legitimate and often more valuable answer than a confident number that doesn't reflect the actual state of knowledge.
 **Follow-up trap:** *"Won't executives be frustrated by 'we don't know'?"* — less frustrated by an honest "we don't know, here's how we'd find out" than by a confident number that later turns out wrong — the frustration risk from false precision is larger and comes later, when trust is on the line, not just attention.
 
+### Q10 — A VP challenges your range as too wide and demands a single number for the board deck. What do you do?
+**Testing:** whether the candidate can flex presentation format under pressure without compressing away the uncertainty the decision actually depends on.
+**Answer:** Give them the single number — the point estimate — but attach it to the decision it implies and keep one line of context: the range, the dominant assumption driving it, and what evidence would tighten it. What you don't do is silently narrow the range to make the slide cleaner; if the width changes the decision (breakeven inside the interval, sign uncertainty), that fact is the headline. Offer scenario framing (best/expected/worst case) as a board-friendly format that preserves the spread without showing a statistics interval.
+**Follow-up trap:** *"Isn't the customer always right about format?"* — format flexibility is right, epistemic compression is not; adapting shape (one number plus a range footnote, scenarios) while keeping the information the decision depends on is the calibrated middle, and conflating the two is exactly how overpromise credibility failures start.
+
 ---
 
 ## Red flags that fail you
@@ -235,8 +240,9 @@ COST TABLE    TP/FP/FN/TN dollar values are BUSINESS judgments, not model output
 
 ## Sources
 
-- Barbara Minto, *The Pyramid Principle: Logic in Writing and Thinking* (McKinsey, developed 1970s) — standard reference for answer-first structured business communication
+- Barbara Minto, *The Pyramid Principle: Logic in Writing and Thinking*, 1st ed. (London: Pitman Publishing, 1987); later eds. (Harlow: Prentice Hall / Financial Times Prentice Hall, 2002) — print; standard reference for answer-first structured business communication
 - Cole Nussbaumer Knaflic, *Storytelling with Data* (2015) — standard reference for stripping quantitative communication to the decision-relevant comparison
+- [StaffEng Guides — Will Larson](https://staffeng.com/guides) — practitioner essays on senior-engineer influence, including "Present to executives"; accessed 2026-08-23
 
 ## Changelog
 - 2026-08-02 — created

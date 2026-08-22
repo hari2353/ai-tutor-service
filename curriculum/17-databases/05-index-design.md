@@ -170,7 +170,7 @@ explain("SELECT * FROM orders WHERE customer_id = ? AND created_at > ?", (5, "20
 explain("SELECT * FROM orders WHERE status = ?", ("pending",))
 ```
 
-Running this and reading the `EXPLAIN QUERY PLAN` output for each case is the fastest way to build real intuition for prefix usability — the third query in particular usually falls back to a full index or table scan, visibly confirming the "leading column must be constrained" rule. Full version comparing Postgres `EXPLAIN ANALYZE` output (with buffer/timing) across B-tree, GIN, GiST, and BRIN on the same dataset: **`labs/py/05-index-lab/`**.
+Running this and reading the `EXPLAIN QUERY PLAN` output for each case is the fastest way to build real intuition for prefix usability — the third query in particular usually falls back to a full index or table scan, visibly confirming the "leading column must be constrained" rule. Full version comparing Postgres `EXPLAIN ANALYZE` output (with buffer/timing) across B-tree, GIN, GiST, and BRIN on the same dataset: **`(lab pending)`**.
 
 ---
 

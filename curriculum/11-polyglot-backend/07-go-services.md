@@ -222,7 +222,7 @@ func fetchPrices(ctx context.Context, skus []string, client pb.PricingClient) ([
 }
 ```
 
-A fuller lab building the vector-search server end to end — HNSW index construction with configurable `M`/`efConstruction`, a gRPC unary `Search` endpoint exposing `efSearch` as a request parameter, and a benchmark script measuring recall@k versus p99 latency across a sweep of `efSearch` values — belongs in `labs/go/07-go-services/`.
+A fuller lab building the vector-search server end to end — HNSW index construction with configurable `M`/`efConstruction`, a gRPC unary `Search` endpoint exposing `efSearch` as a request parameter, and a benchmark script measuring recall@k versus p99 latency across a sweep of `efSearch` values — belongs in `(lab pending)`.
 
 ---
 

@@ -106,7 +106,23 @@ Each weekend ≈ 9h: **3h AI depth · 2h design/principles · 2h DSA · 1.5h dat
 
 ---
 
-## PHASE B — MASTERY (weekends 9–26)
+### Weekends 9–10 — Sprint close-out
+
+The quest generator follows `SPRINT_WEEKENDS` in `app/build_data.py`, which now runs
+ten weekends; these two were added after this file was first written and land last
+on purpose — harness engineering names the parts you'll have built across W1–W9.
+
+| WE | Block | Work |
+|---|---|---|
+| 9 | Capstone | `T07 agent-zero-to-prod` — the complete multi-agent system, end to end · `T10 genai-designs` (20 GenAI/agent designs) |
+| 10 | Harness | `T07 harness-engineering` · `T07 loop-engineering` · `T28 claude-architect` |
+
+---
+
+## PHASE B — MASTERY
+
+Starts once the sprint closes. The table below keeps its original numbering;
+the app sequences everything by sprint order first.
 
 Sequenced so each weekend still lands one thing you could be asked about, while building the foundation that makes the sprint knowledge permanent rather than crammed.
 

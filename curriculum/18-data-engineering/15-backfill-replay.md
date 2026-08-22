@@ -183,7 +183,7 @@ def run_backfill(
     return results
 ```
 
-The three details that separate this from a naive `for date in dates: run(date)` loop: partition overwrite (not append) inside `process_partition_idempotent`, an audit log recording both the attempt and the terminal state of every partition (making a partial failure resumable and diagnosable), and bounded concurrency rather than firing every date at once. Full version with cumulative-metric dependency detection and a real time-travel diff: `labs/py/18-backfill-lab/`.
+The three details that separate this from a naive `for date in dates: run(date)` loop: partition overwrite (not append) inside `process_partition_idempotent`, an audit log recording both the attempt and the terminal state of every partition (making a partial failure resumable and diagnosable), and bounded concurrency rather than firing every date at once. Full version with cumulative-metric dependency detection and a real time-travel diff: `(lab pending)`.
 
 ---
 

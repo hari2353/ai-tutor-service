@@ -2,7 +2,6 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 3h · **Prereqs:** T31-dqn, T31-monte-carlo-td · **Updated:** 2026-08-03
 > **Module id:** `T31-policy-gradient` · **Tags:** deep-rl, critical
-> **Lab:** `labs/py/31-08-policy-gradient/`
 
 ## The 30-second version
 

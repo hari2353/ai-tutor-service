@@ -2,7 +2,6 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 2h · **Prereqs:** T12-docker, T12-k8s-core
 > **Module id:** `T12-eks-ecs-ecr` · **Tags:** k8s, critical
-> **Lab:** `labs/aws/13-eks-ecs-fargate/`
 
 ## The 30-second version
 
@@ -194,6 +193,16 @@ Real AWS-native production setups near-universally attach an ECR **lifecycle pol
 **Testing:** the senior judgment call this module is built to test.
 **Answer:** Start with ECS + Fargate — simplest operational model, zero control-plane fee, adequate for the large majority of container workloads, and a materially smaller IAM/operational learning curve than EKS's RBAC + IRSA/Pod Identity model. Recommend EKS instead only if a real, named requirement is already present: genuine multi-cloud portability plans, dependency on a specific Kubernetes-only tool/operator, or a deliberate organizational bet on Kubernetes for hiring/ecosystem reasons.
 **Follow-up trap:** *"The startup says they might need multi-cloud 'eventually.' Does that justify EKS now?"* — generally no — "might need it eventually" is a weak signal compared to "we have a concrete, funded plan to run on a second cloud within N months"; over-engineering for hypothetical future portability by taking on EKS's real, current operational complexity is the same class of mistake as the Terraform module's over-abstraction trap — build for the requirement you actually have, migrate when the hypothetical becomes concrete.
+
+### Q9 — Be honest: at what team size and operational maturity does ECS beat EKS, full stop?
+**Testing:** whether the recommendation follows the team's actual reality or Kubernetes defaultism.
+**Answer:** Roughly under 10-20 engineers with no dedicated platform person, an AWS-only footprint, no multi-cloud requirement, and no dependency on a Kubernetes-only operator: ECS wins, because it deletes the entire operational surface EKS adds — RBAC, IRSA/Pod Identity federation, CNI/CoreDNS/add-on management, and an annual minor-version upgrade treadmill — and the task-role IAM model removes the ServiceAccount-to-IAM federation layer entirely. At this scale the $73/month control-plane fee is noise compared to the human cost of operating EKS badly; the honest flip side is that an org standardizing dozens of teams on Kubernetes amortizes platform investment across them and flips the call.
+**Follow-up trap:** *"But Kubernetes skills are more transferable for hiring — doesn't ECS hurt recruiting?"* — that cost is real but routinely overweighted: backend engineers learn task definitions in days, whereas a small team running EKS poorly burns months of senior capacity on upgrades and IAM debugging; transferability arguments justify EKS at organizational scale, not for one team's handful of services.
+
+### Q10 — How do you promote an image across accounts from dev to prod, and where does signing fit in?
+**Testing:** one-build-one-artifact promotion discipline plus supply-chain signing mechanics.
+**Answer:** Build once in CI, push to the dev account's ECR under an immutable tag (the git SHA), grant the prod account pull via repository policy (or ECR cross-account replication), and deploy prod by digest (`@sha256:...`) so the running bytes are provably the tested bytes — never rebuild per environment. Signing enters immediately after the initial push: cosign signs the digest in CI (keyless, via OIDC workload identity), and an admission policy (Kyverno or Sigstore policy-controller) rejects any prod workload whose image lacks a valid signature from the pipeline's identity.
+**Follow-up trap:** *"Why not just retag and push from the prod pipeline — it's the same image?"* — a rebuild or re-push breaks provenance: prod now runs an artifact that passed none of the tests/scans the original did, and mutable tags can change content silently under an unchanged name; digest pinning plus signature verification is precisely the mechanism that closes both holes.
 
 ---
 

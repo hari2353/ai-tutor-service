@@ -2,7 +2,6 @@
 
 > **Track:** T04 Deep Learning · **Time:** 2.5h · **Prereqs:** T04-distributed-training, T16-gpu-arch · **Updated:** 2026-08-03
 > **Module id:** `T04-compile-cuda` · **Tags:** performance
-> **Lab:** `labs/python/08-compile-cuda/`
 
 ## The 30-second version
 
@@ -115,7 +114,7 @@ def add(x: torch.Tensor, y: torch.Tensor):
 
 ## Build it from scratch
 
-The vector-add kernel above **is** the from-scratch exercise for this module's Triton component; the lab (`labs/python/08-compile-cuda/`) extends it two ways: (1) benchmark it against `torch.add` (eager) and `torch.compile(torch.add)` across several tensor sizes, confirming correctness (`torch.allclose`) and comparing throughput; (2) write a slightly more involved fused kernel (e.g., a fused multiply-add, or a simple fused elementwise activation) and inspect the Triton/generated code `torch.compile` itself produces for an equivalent small PyTorch function (via `TORCH_LOGS="output_code"` or the equivalent current debugging environment variable) to directly compare a hand-written kernel against what Inductor generates automatically for the same computation.
+The vector-add kernel above **is** the from-scratch exercise for this module's Triton component; the lab (`(lab pending)`) extends it two ways: (1) benchmark it against `torch.add` (eager) and `torch.compile(torch.add)` across several tensor sizes, confirming correctness (`torch.allclose`) and comparing throughput; (2) write a slightly more involved fused kernel (e.g., a fused multiply-add, or a simple fused elementwise activation) and inspect the Triton/generated code `torch.compile` itself produces for an equivalent small PyTorch function (via `TORCH_LOGS="output_code"` or the equivalent current debugging environment variable) to directly compare a hand-written kernel against what Inductor generates automatically for the same computation.
 
 ---
 

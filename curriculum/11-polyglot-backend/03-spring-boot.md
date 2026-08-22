@@ -246,7 +246,7 @@ public class AccountTransferService {
 }
 ```
 
-A fuller runnable lab pairing a WebFlux vs MVC-with-virtual-threads throughput comparison (fan-out to 3 simulated downstreams under `wrk`), plus the N+1 query demo with a query-count assertion, belongs in `labs/java/03-spring-boot/`.
+A fuller runnable lab pairing a WebFlux vs MVC-with-virtual-threads throughput comparison (fan-out to 3 simulated downstreams under `wrk`), plus the N+1 query demo with a query-count assertion, belongs in `(lab pending)`.
 
 ---
 

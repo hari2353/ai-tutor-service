@@ -7,7 +7,7 @@ description: Generate a from-scratch, test-driven lab for the AI Tutor Service â
 
 Reading a module teaches you the vocabulary. The lab is what makes you able to answer *"walk me through your implementation"* without hedging.
 
-**Repo root** (`$ROOT`): `C:\Users\medic\OneDrive\Documents\ai-tutor-service`
+**Repo root** (`$ROOT`): the directory containing `CONTENT-STATUS.md`. Find it by walking up from your current working directory until that file appears; if you never find it, ask the user where the repo lives â€” do not guess a path.
 
 ## 1. Read the exemplar
 

@@ -246,7 +246,7 @@ class ManualRange:
 assert list(ManualRange(5)) == list(x for x in range(5))
 ```
 
-The generator version is exactly this, minus the boilerplate: the compiler stores `self.i`-equivalent state as local variables inside a saved frame, and `StopIteration` is raised automatically when the function returns. Lab: `labs/py/09-iterators-generators/`.
+The generator version is exactly this, minus the boilerplate: the compiler stores `self.i`-equivalent state as local variables inside a saved frame, and `StopIteration` is raised automatically when the function returns. Lab: `(lab pending)`.
 
 ---
 

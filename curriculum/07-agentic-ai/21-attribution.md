@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2.5h · **Prereqs:** `T07-explainability`, `T06-hybrid-search`, `T06-chunking` · **Updated:** 2026-07-26
 > **Module id:** `T07-attribution` · **Tags:** trust, critical
-> **Lab:** `labs/py/24-attribution/`
 
 ## The 30-second version
 
@@ -377,7 +376,7 @@ What the run demonstrates, and what to describe in an interview: the last senten
 
 One more thing the run shows, deliberately: the *second* sentence ("Invoice INV-8841 was issued on 2026-07-11") is genuinely supported and the lexical stub still flags it, because token overlap is not entailment and the sentence's surface form differs from the source's ("Issued 2026-07-11"). That is the **false-unsupported** failure mode, and it is what a real checker plus decontextualisation buys you. If you demo this, say so before someone asks.
 
-Lab **`labs/py/24-attribution/`** swaps in MiniCheck with batched GPU inference, adds citation-constrained decoding over an id grammar, the attribute-first two-pass generator, and a golden-set regression gate on citation recall.
+Lab **`(lab pending)`** swaps in MiniCheck with batched GPU inference, adds citation-constrained decoding over an id grammar, the attribute-first two-pass generator, and a golden-set regression gate on citation recall.
 
 ---
 

@@ -2,7 +2,6 @@
 
 > **Track:** T09 MLOps / LLMOps · **Time:** 2.0h · **Prereqs:** T05-inference-serving, T09-serving, T09-bedrock-vs-sagemaker · **Updated:** 2026-08-05
 > **Module id:** `T09-gpu-cost` · **Tags:** cost,gpu,autoscaling,spot,capacity,critical
-> **Lab:** `labs/python/07-gpu-cost/`
 
 ## The 30-second version
 
@@ -404,7 +403,7 @@ Two caveats to state so you do not sound like you are reading marketing copy. Fi
 
 ## Build it from scratch
 
-The point of building this is that the entire capacity model is about 60 lines, it runs from a `config.json`, and being able to produce it live is the difference between a candidate who has *heard about* KV cache and one who has sized a fleet. Reference lab: `labs/python/07-gpu-cost/`.
+The point of building this is that the entire capacity model is about 60 lines, it runs from a `config.json`, and being able to produce it live is the difference between a candidate who has *heard about* KV cache and one who has sized a fleet. Reference lab: `(lab pending)`.
 
 ### A GPU sizing calculator that runs
 

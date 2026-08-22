@@ -2,7 +2,6 @@
 
 > **Track:** T04 Deep Learning · **Time:** 3h · **Prereqs:** T04-autograd · **Updated:** 2026-08-03
 > **Module id:** `T04-architectures` · **Tags:** fundamentals
-> **Lab:** `labs/python/04-architectures/`
 
 ## The 30-second version
 
@@ -150,7 +149,7 @@ The functional/mechanical content is identical to the PyTorch version (same conv
 
 ## Build it from scratch
 
-A from-scratch (`numpy`-only) 2D convolution — nested loops over output position and kernel offset, computing the dot product directly — and a from-scratch vanilla-RNN-cell forward/backward pass (reusing the `Value`-engine style from `T04-autograd`, or plain `numpy` with manually-derived gradients following `T04-backprop-derivation`'s pattern) are the lab exercises in `labs/python/04-architectures/`; both are deliberately small enough (a `5×5` toy image, a 3-timestep toy sequence) to hand-verify against `torch`'s equivalent `nn.Conv2d`/`nn.RNNCell` outputs to `1e-6`, exactly the verification discipline established in the previous two modules. The from-scratch LSTM cell (four gates, the additive cell-state update) is the natural extension once the vanilla RNN cell works, and directly reproduces the worked numeric example above.
+A from-scratch (`numpy`-only) 2D convolution — nested loops over output position and kernel offset, computing the dot product directly — and a from-scratch vanilla-RNN-cell forward/backward pass (reusing the `Value`-engine style from `T04-autograd`, or plain `numpy` with manually-derived gradients following `T04-backprop-derivation`'s pattern) are the lab exercises in `(lab pending)`; both are deliberately small enough (a `5×5` toy image, a 3-timestep toy sequence) to hand-verify against `torch`'s equivalent `nn.Conv2d`/`nn.RNNCell` outputs to `1e-6`, exactly the verification discipline established in the previous two modules. The from-scratch LSTM cell (four gates, the additive cell-state update) is the natural extension once the vanilla RNN cell works, and directly reproduces the worked numeric example above.
 
 ---
 

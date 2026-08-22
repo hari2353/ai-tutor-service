@@ -2,7 +2,6 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.0h · **Prereqs:** arrays, stacks
 > **Module id:** `T02-p20-monotonic-stack` · **Tags:** pattern, stack
-> **Lab:** `labs/py/20-monotonic-stack/`
 
 ## The 30-second version
 

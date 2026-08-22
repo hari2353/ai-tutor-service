@@ -2,7 +2,6 @@
 
 > **Track:** T04 Deep Learning · **Time:** 2.5h · **Prereqs:** T04-compile-cuda · **Updated:** 2026-08-03
 > **Module id:** `T04-export-optimize` · **Tags:** deployment
-> **Lab:** `labs/python/09-export-optimize/`
 
 ## The 30-second version
 
@@ -126,7 +125,7 @@ class FakeQuantizeSTE(torch.autograd.Function):
         mask = (w / ctx.scale >= ctx.q_min) & (w / ctx.scale <= ctx.q_max)
         return grad_output * mask, None, None, None
 ```
-Reproducing the INT8-vs-INT4 quantization error table above for a range of weight values, and training a tiny STE-based fake-quantized layer on a toy task to confirm it actually learns (versus a naive quantization-in-forward-with-no-STE version, which should fail to learn at all due to zero gradient) is the lab exercise in `labs/python/09-export-optimize/`.
+Reproducing the INT8-vs-INT4 quantization error table above for a range of weight values, and training a tiny STE-based fake-quantized layer on a toy task to confirm it actually learns (versus a naive quantization-in-forward-with-no-STE version, which should fail to learn at all due to zero gradient) is the lab exercise in `(lab pending)`.
 
 ---
 

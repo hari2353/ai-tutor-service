@@ -159,7 +159,7 @@ def yarn_ramp(dim, base, orig_len, scale, alpha=1, beta=32):
 
 A quick sanity check that RoPE gives relative position (run this, don't just believe it): compute `rope_attention_scores` for `Q, K` at positions `[5, 6, 7]` versus the same `Q, K` at positions `[105, 106, 107]` — the resulting score matrices are numerically identical, because only the pairwise differences `(m-n)` ever appear in the final angle.
 
-Full sinusoidal / RoPE / ALiBi comparison harness with perplexity-vs-length extrapolation curves: **`labs/py/04-positional/`** (create if not present).
+Full sinusoidal / RoPE / ALiBi comparison harness with perplexity-vs-length extrapolation curves: **`(lab pending)`** (create if not present).
 
 ---
 

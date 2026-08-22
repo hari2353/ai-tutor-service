@@ -3,7 +3,6 @@
 > **Track:** T30 Auth & Application Security · **Time:** 2.5h · **Prereqs:** `T30-authn-vs-authz`, `T30-web-attacks`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-api-security` · **Tags:** appsec, critical
-> **Lab:** `labs/py/10-api-security-lab/`
 
 ## The 30-second version
 
@@ -242,7 +241,7 @@ for template in endpoints_to_check:
     assert not vulnerable, f"BOLA detected on {template}"
 ```
 
-Full lab covering BOLA, mass assignment, broken function-level authorization, and a rate-limiting bypass scenario against a deliberately vulnerable sample API: **`labs/py/10-api-security-lab/`**.
+Full lab covering BOLA, mass assignment, broken function-level authorization, and a rate-limiting bypass scenario against a deliberately vulnerable sample API: **`(lab pending)`**.
 
 ---
 

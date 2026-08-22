@@ -2,7 +2,6 @@
 
 > **Track:** T11 Polyglot Backend · **Time:** 1.5h · **Prereqs:** T21-resilience-catalogue, T11-spring-boot · **Updated:** 2026-08-03
 > **Module id:** `T11-resilience4j` · **Tags:** java, resilience
-> **Lab:** `labs/java/04-resilience4j/`
 
 ## The 30-second version
 
@@ -228,7 +227,7 @@ class InventoryClient {
 }
 ```
 
-A fuller lab with a fake flaky downstream (WireMock, configurable failure/latency injection), assertions on breaker state transitions via `CircuitBreaker.EventPublisher`, and a load test proving the fixed-window `RateLimiter`'s boundary-burst behavior directly belongs in `labs/java/04-resilience4j/`.
+A fuller lab with a fake flaky downstream (WireMock, configurable failure/latency injection), assertions on breaker state transitions via `CircuitBreaker.EventPublisher`, and a load test proving the fixed-window `RateLimiter`'s boundary-burst behavior directly belongs in `(lab pending)`.
 
 ---
 

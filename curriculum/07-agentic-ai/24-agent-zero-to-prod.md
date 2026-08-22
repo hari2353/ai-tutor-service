@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 4h · **Prereqs:** `T07-agent-loop-from-scratch`, `T07-tool-engineering`, `T07-langgraph-durable`, `T07-context-engineering`, `T07-multi-agent-topologies`, `T07-harness-engineering` · **Updated:** 2026-07-26
 > **Module id:** `T07-agent-zero-to-prod` · **Tags:** sprint, capstone, critical
-> **Lab:** `labs/py/24-zero-to-prod/`
 
 ## The 30-second version
 
@@ -448,7 +447,7 @@ SLOs Atlas publishes: availability 99.5% monthly on `POST /sessions`; p95 time-t
 
 ## Build it from scratch
 
-`labs/py/24-zero-to-prod/` builds Atlas in the order above against fakes, so the whole thing is deterministic and free until the last step. The actual repository layout, because "show me your file tree" is a real interview question and it exposes whether your boundaries are real:
+`(lab pending)` builds Atlas in the order above against fakes, so the whole thing is deterministic and free until the last step. The actual repository layout, because "show me your file tree" is a real interview question and it exposes whether your boundaries are real:
 
 ```
 atlas/

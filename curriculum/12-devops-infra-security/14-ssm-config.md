@@ -183,7 +183,7 @@ def load_config(prefix: str) -> dict:
 config = load_config("/myapp/prod/api")   # one call at startup, cached for process lifetime
 ```
 
-A fuller lab exercising an AppConfig canary deployment with a deliberately broken config version (triggering the CloudWatch-alarm-driven auto-rollback) belongs in `labs/aws/14-ssm-config/`.
+A fuller lab exercising an AppConfig canary deployment with a deliberately broken config version (triggering the CloudWatch-alarm-driven auto-rollback) belongs in `(lab pending)`.
 
 ---
 

@@ -193,7 +193,7 @@ def eda_report(df: pd.DataFrame, target: str, key_columns: list[str] | None = No
     return report
 ```
 
-This is a real, runnable starting point, not a replacement for looking at plots — it surfaces *where* to look (which pairs, which columns) so the human time goes to the handful of scatterplots and domain questions that actually matter instead of scrolling through fifty auto-generated charts. Reference lab: `labs/py/11-eda/` (build if not present) — includes a synthetic dataset with a deliberately planted leakage feature and a deliberately skewed column, with assertions that the report above catches both.
+This is a real, runnable starting point, not a replacement for looking at plots — it surfaces *where* to look (which pairs, which columns) so the human time goes to the handful of scatterplots and domain questions that actually matter instead of scrolling through fifty auto-generated charts. Reference lab: `(lab pending)` (build if not present) — includes a synthetic dataset with a deliberately planted leakage feature and a deliberately skewed column, with assertions that the report above catches both.
 
 ---
 

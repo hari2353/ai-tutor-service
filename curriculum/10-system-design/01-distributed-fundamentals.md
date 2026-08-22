@@ -169,7 +169,7 @@ class QuorumStore:
         return True
 ```
 
-This deliberately does *not* model concurrent writes racing each other, network partitions triggering sloppy quorums, or vector-clock-based sibling detection — those are exactly the parts that make real leaderless systems (Dynamo, Cassandra, Riak) much more involved than the arithmetic alone suggests. Full lab with simulated partition injection and read-repair: **`labs/py/10-distributed-fundamentals/`** (create if not present — not yet in this repo).
+This deliberately does *not* model concurrent writes racing each other, network partitions triggering sloppy quorums, or vector-clock-based sibling detection — those are exactly the parts that make real leaderless systems (Dynamo, Cassandra, Riak) much more involved than the arithmetic alone suggests. Full lab with simulated partition injection and read-repair: **`(lab pending)`** (create if not present — not yet in this repo).
 
 ---
 

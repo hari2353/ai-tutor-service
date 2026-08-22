@@ -2,7 +2,6 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 3h · **Prereqs:** T12-k8s-objects · **Updated:** 2026-08-02
 > **Module id:** `T12-k8s-core` · **Tags:** k8s, critical
-> **Lab:** `labs/go/03-k8s-core-operator/`
 
 ## The 30-second version
 

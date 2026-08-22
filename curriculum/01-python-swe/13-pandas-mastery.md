@@ -281,7 +281,7 @@ df = pd.DataFrame({"team": ["A","A","B"], "score": [10, 20, 5]})
 assert (manual_group_mean_transform(df, "team", "score")
         == df.groupby("team")["score"].transform("mean")).all()
 ```
-This is exactly what `transform` does under the hood conceptually: compute the reduced value per group, then re-align it back to the original row index via the grouping key. Lab: `labs/py/13-pandas-mastery/`.
+This is exactly what `transform` does under the hood conceptually: compute the reduced value per group, then re-align it back to the original row index via the grouping key. Lab: `(lab pending)`.
 
 ---
 

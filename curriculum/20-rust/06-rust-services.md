@@ -2,7 +2,6 @@
 
 > **Track:** T20 Rust · **Time:** 2.5h · **Prereqs:** `T20-rust-ownership`, `T20-rust-async` (Tokio, futures, `spawn`/`spawn_blocking`, cancellation-by-drop assumed known), `T21-architecture-principles` · **Updated:** 2026-08-05
 > **Module id:** `T20-rust-services` · **Tags:** core, critical, backend, production
-> **Lab:** `labs/rust/06-rust-services/`
 
 ## The 30-second version
 
@@ -717,7 +716,7 @@ The rules that are actually contested and worth having an opinion about:
 
 ## Build it from scratch
 
-The point of building it once by hand is to see that there is no framework underneath. `labs/rust/06-rust-services/` has the full version; this is the spine.
+The point of building it once by hand is to see that there is no framework underneath. `(lab pending)` has the full version; this is the spine.
 
 ```bash
 cargo new svc && cd svc

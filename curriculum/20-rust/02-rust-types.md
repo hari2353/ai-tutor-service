@@ -2,7 +2,6 @@
 
 > **Track:** T20 Rust · **Time:** 2.5h · **Prereqs:** `T20-rust-ownership` (ownership, borrowing, lifetimes assumed known) · **Updated:** 2026-08-05
 > **Module id:** `T20-rust-types` · **Tags:** core, critical, type-system
-> **Lab:** `labs/rust/02-rust-types/`
 
 ## The 30-second version
 
@@ -559,7 +558,7 @@ Practical enforcement, which is what a staff interview wants:
 
 ## Build it from scratch
 
-The exercise that teaches all five topics at once is a tiny plugin registry: a trait, both dispatch strategies side by side, an error enum with a source chain, and a measurement step. Target 60 minutes. The matching lab lives in `labs/rust/02-rust-types/`.
+The exercise that teaches all five topics at once is a tiny plugin registry: a trait, both dispatch strategies side by side, an error enum with a source chain, and a measurement step. Target 60 minutes. The matching lab lives in `(lab pending)`.
 
 **Step 1. Define the trait twice, once dyn compatible and once not, and feel the difference.**
 

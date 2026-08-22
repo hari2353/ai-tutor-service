@@ -2,7 +2,6 @@
 
 > **Track:** T04 Deep Learning · **Time:** 2.5h · **Prereqs:** T04-architectures · **Updated:** 2026-08-03
 > **Module id:** `T04-optimization` · **Tags:** training
-> **Lab:** `labs/python/05-optimization/`
 
 ## The 30-second version
 
@@ -136,7 +135,7 @@ def lion_step(theta, g, m, t, lr=1e-4, beta1=0.9, beta2=0.99, wd=0.01):
     m = beta2 * m + (1 - beta2) * g
     return theta, m
 ```
-A from-scratch Newton-Schulz orthogonalization step (the core of Muon) and a from-scratch cosine-with-warmup learning rate schedule are the lab exercises in `labs/python/05-optimization/`, alongside reproducing the bias-correction table above and confirming it against a from-scratch implementation run with a genuinely noisy (not constant) gradient sequence, to see the same warm-up-rate mismatch play out with realistic, non-degenerate data.
+A from-scratch Newton-Schulz orthogonalization step (the core of Muon) and a from-scratch cosine-with-warmup learning rate schedule are the lab exercises in `(lab pending)`, alongside reproducing the bias-correction table above and confirming it against a from-scratch implementation run with a genuinely noisy (not constant) gradient sequence, to see the same warm-up-rate mismatch play out with realistic, non-degenerate data.
 
 ---
 

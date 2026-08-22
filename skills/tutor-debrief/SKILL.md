@@ -9,7 +9,7 @@ This is the skill that makes the curriculum learn. Prep → interview → debrie
 
 Run it the same day. Recall of the exact questions decays within hours, and the exact wording is the signal.
 
-**Repo root** (`$ROOT`): `C:\Users\medic\OneDrive\Documents\ai-tutor-service`
+**Repo root** (`$ROOT`): the directory containing `CONTENT-STATUS.md`. Find it by walking up from your current working directory until that file appears; if you never find it, ask the user where the repo lives — do not guess a path.
 
 ## 1. Extract, before analysing anything
 

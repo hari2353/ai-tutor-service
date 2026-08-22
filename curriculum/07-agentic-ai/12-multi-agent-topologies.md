@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2.5h · **Prereqs:** `T07-agent-loop-from-scratch`, `T07-context-engineering` · **Updated:** 2026-07-26
 > **Module id:** `T07-multi-agent-topologies` · **Tags:** sprint (W4), architecture
-> **Lab:** `labs/py/12-multi-agent/`
 
 ## The 30-second version
 
@@ -312,7 +311,7 @@ The last line is the whole discipline. **If you cannot show an eval where the mu
 
 ## Build it from scratch
 
-`labs/py/12-multi-agent/` builds all five against a scripted fake model so costs and outcomes are deterministic:
+`(lab pending)` builds all five against a scripted fake model so costs and outcomes are deterministic:
 
 1. **Baseline single agent** with the union of all tools. Record success rate, tokens, latency, and cost on a 20-task golden set. **Every later step is compared to this number.** This is the point of the lab.
 2. **Supervisor** with structured routing (`Route` pydantic model), a hop budget, and route logging. Measure routing accuracy against hand-labelled correct routes. Inject a deliberately ambiguous task set and watch accuracy fall.

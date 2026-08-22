@@ -2,7 +2,6 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.5h · **Prereqs:** T02-adv-graphs, T02-graph-core
 > **Module id:** `T02-graph-shortest` · **Tags:** graphs, critical, shortest-path
-> **Lab:** `labs/py/27-graph-shortest/`
 
 ## The 30-second version
 

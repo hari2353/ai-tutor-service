@@ -2,7 +2,6 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.0h · **Prereqs:** T02-p04-merge-intervals, arrays, binary representation
 > **Module id:** `T02-adv-trees` · **Tags:** advanced, range-query, data-structures
-> **Lab:** `labs/py/23-adv-trees/`
 
 ## The 30-second version
 

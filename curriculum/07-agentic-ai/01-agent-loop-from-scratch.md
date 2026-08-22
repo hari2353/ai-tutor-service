@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 3h · **Prereqs:** none · **Updated:** 2026-07-26
 > **Module id:** `T07-agent-loop-from-scratch` · **Tags:** sprint (W1), core, loop
-> **Lab:** `labs/py/02-agent-loop/`
 
 ## The 30-second version
 
@@ -183,7 +182,7 @@ The counter-consideration: don't swallow *your own* bugs. Distinguish "the tool'
 
 ## Build it from scratch
 
-The lab at `labs/py/02-agent-loop/` builds this incrementally against a fake model, so the tests are deterministic and free:
+The lab at `(lab pending)` builds this incrementally against a fake model, so the tests are deterministic and free:
 
 1. Bare loop with a scripted model — proves the message-passing shape.
 2. Add tool dispatch, schema validation, and error-as-observation.

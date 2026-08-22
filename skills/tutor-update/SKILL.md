@@ -7,7 +7,7 @@ description: Pull only what changed since the last run from AWS/Azure/GCP releas
 
 **Delta only.** Nothing is re-fetched and nothing already written is rewritten wholesale. The watermark is what makes this cheap enough to run weekly.
 
-**Repo root** (`$ROOT`): `C:\Users\medic\OneDrive\Documents\ai-tutor-service`
+**Repo root** (`$ROOT`): the directory containing `CONTENT-STATUS.md`. Find it by walking up from your current working directory until that file appears; if you never find it, ask the user where the repo lives — do not guess a path.
 
 ## 1. Read the watermarks
 

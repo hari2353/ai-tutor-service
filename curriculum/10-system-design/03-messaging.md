@@ -199,7 +199,7 @@ print(group.poll("c0"))
 print(group.poll("c1"))
 ```
 
-This omits replication, leader election per partition, the actual rebalance protocol (eager vs. cooperative), transactions, and compaction entirely, those are exactly the parts that make a real broker a large distributed system rather than a hash map. A full lab covering the outbox pattern end-to-end (Postgres + Debezium + Kafka Connect + a consumer with an idempotent upsert) belongs at `labs/py/10-messaging/` (not yet in this repo).
+This omits replication, leader election per partition, the actual rebalance protocol (eager vs. cooperative), transactions, and compaction entirely, those are exactly the parts that make a real broker a large distributed system rather than a hash map. A full lab covering the outbox pattern end-to-end (Postgres + Debezium + Kafka Connect + a consumer with an idempotent upsert) belongs at `(lab pending)` (not yet in this repo).
 
 ---
 

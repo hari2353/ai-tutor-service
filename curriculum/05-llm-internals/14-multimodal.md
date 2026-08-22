@@ -2,7 +2,6 @@
 
 > **Track:** T05 LLM Internals · **Time:** 3h · **Prereqs:** T05-03-attention, T05-04-positional, T05-09-inference-serving
 > **Module id:** `T05-multimodal` · **Tags:** vision, multimodal, vlm, clip, whisper, vit
-> **Lab:** `labs/python/14-multimodal/`
 
 ## The 30-second version
 
@@ -153,7 +152,7 @@ def clip_loss(image_embeds, text_embeds, logit_scale):
     return (loss_i2t + loss_t2i) / 2
 ```
 
-A fuller lab implementing the LLaVA-style bridge — take this `ViTEncoder`'s 197-token output, project it with a 2-layer MLP into a toy LLM's embedding space, and concatenate it with real text-token embeddings before a forward pass — belongs in `labs/python/14-multimodal/`, since walking through the actual concatenation and verifying attention runs over both token types identically is the exercise that makes the "vision tokens are just embeddings in the same sequence" claim concrete rather than asserted.
+A fuller lab implementing the LLaVA-style bridge — take this `ViTEncoder`'s 197-token output, project it with a 2-layer MLP into a toy LLM's embedding space, and concatenate it with real text-token embeddings before a forward pass — belongs in `(lab pending)`, since walking through the actual concatenation and verifying attention runs over both token types identically is the exercise that makes the "vision tokens are just embeddings in the same sequence" claim concrete rather than asserted.
 
 ---
 

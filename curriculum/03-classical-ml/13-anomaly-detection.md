@@ -243,7 +243,7 @@ class IsolationForestFromScratch:
         return 2 ** (-avg_path_lengths / c_n)
 ```
 
-This matches the score formula from the original paper and, on well-separated synthetic data, produces the same rank ordering as `sklearn.ensemble.IsolationForest`. Reference lab: `labs/py/13-anomaly-detection/` (build if not present) — includes a test comparing this from-scratch implementation's AUC against sklearn's on a synthetic dataset with injected anomalies, plus the autoencoder threshold-selection exercise comparing the three threshold methods above on the same data.
+This matches the score formula from the original paper and, on well-separated synthetic data, produces the same rank ordering as `sklearn.ensemble.IsolationForest`. Reference lab: `(lab pending)` (build if not present) — includes a test comparing this from-scratch implementation's AUC against sklearn's on a synthetic dataset with injected anomalies, plus the autoencoder threshold-selection exercise comparing the three threshold methods above on the same data.
 
 ---
 

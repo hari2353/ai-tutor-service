@@ -307,7 +307,7 @@ If an interviewer asks whether a model "understands physics," the winning move i
 
 ## Build it from scratch
 
-The smallest thing that is genuinely a world model, and not a video predictor: an encoder, a latent transition model, a reward head, and a policy trained purely on imagined rollouts. This is a deliberately stripped RSSM (deterministic path only, Gaussian stochastic state omitted) so the moving parts stay visible. The matching lab folder should be `labs/py/26-01-world-models/`.
+The smallest thing that is genuinely a world model, and not a video predictor: an encoder, a latent transition model, a reward head, and a policy trained purely on imagined rollouts. This is a deliberately stripped RSSM (deterministic path only, Gaussian stochastic state omitted) so the moving parts stay visible. The matching lab folder should be `(lab pending)`.
 
 ```python
 # untested sketch -- minimal latent world model + imagination-trained actor.

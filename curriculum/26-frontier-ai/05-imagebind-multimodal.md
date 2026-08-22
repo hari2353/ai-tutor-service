@@ -216,7 +216,7 @@ The temperature connection closes the loop. From "Mind the Gap": the contrastive
 
 ## Build it from scratch
 
-Lab folder: `labs/python/05-imagebind-multimodal/`.
+Lab folder: `(lab pending)`.
 
 Three pieces are worth writing yourself, because writing them kills the three most common misconceptions.
 

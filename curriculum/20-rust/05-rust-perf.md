@@ -2,7 +2,6 @@
 
 > **Track:** T20 Rust · **Time:** 2h · **Prereqs:** `T20-rust-ownership`, `T20-rust-memory` · **Updated:** 2026-08-05
 > **Module id:** `T20-rust-perf` · **Tags:** performance, systems, benchmarking, critical
-> **Lab:** `labs/rust/05-rust-perf/`
 
 ## The 30-second version
 
@@ -530,10 +529,10 @@ Do **not** profile a debug build. It is a different program: no inlining, no vec
 
 ## Build it from scratch
 
-The lab in `labs/rust/05-rust-perf/` should be one crate you can run end to end in about 20 minutes. Everything below was actually compiled and run to produce the numbers in this module, so it is not a sketch unless marked.
+The lab in `(lab pending)` should be one crate you can run end to end in about 20 minutes. Everything below was actually compiled and run to produce the numbers in this module, so it is not a sketch unless marked.
 
 ```rust
-// labs/rust/05-rust-perf/src/lib.rs
+// (lab pending)src/lib.rs
 // Step A: two functions that SHOULD compile identically. Verify, don't assume.
 #[no_mangle] pub fn sum_loop(v: &[u64]) -> u64 {
     let mut t = 0u64; for i in 0..v.len() { t = t.wrapping_add(v[i]); } t

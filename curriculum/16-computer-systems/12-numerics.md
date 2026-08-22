@@ -140,7 +140,7 @@ print(naive_sum(values))    # likely 0.0 -- the 1.0s were below representable pr
 print(kahan_sum(values))    # closer to the mathematically correct 10000.0
 ```
 
-The `values = [1e16] + [1.0]*10000 + [-1e16]` case is the clearest possible demonstration: mathematically the answer is exactly 10000.0, but naive summation adds each `1.0` to a running total of `1e16`, where `1.0` is far below the precision fp64 can represent at that magnitude (fp64 has ~15-17 significant decimal digits, and `1e16` already consumes all of them), so every single `+1.0` is silently absorbed with zero effect — Kahan's compensation term recovers what naive summation loses. A fuller lab implementing bf16/fp16/fp8 simulation (truncating a fp32 value's bits to model reduced-precision rounding) belongs in `labs/python/12-numerics/`.
+The `values = [1e16] + [1.0]*10000 + [-1e16]` case is the clearest possible demonstration: mathematically the answer is exactly 10000.0, but naive summation adds each `1.0` to a running total of `1e16`, where `1.0` is far below the precision fp64 can represent at that magnitude (fp64 has ~15-17 significant decimal digits, and `1e16` already consumes all of them), so every single `+1.0` is silently absorbed with zero effect — Kahan's compensation term recovers what naive summation loses. A fuller lab implementing bf16/fp16/fp8 simulation (truncating a fp32 value's bits to model reduced-precision rounding) belongs in `(lab pending)`.
 
 ---
 

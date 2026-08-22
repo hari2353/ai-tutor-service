@@ -2,7 +2,6 @@
 
 > **Track:** T01 Python & SWE Craft · **Time:** 3h · **Prereqs:** T01-data-model, T01-gil-parallelism · **Updated:** 2026-08-03
 > **Module id:** `T01-memory-oom` · **Tags:** performance, critical
-> **Lab:** `labs/python/05-memory-oom/`
 
 ## The 30-second version
 

@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2.5h · **Prereqs:** `T07-explainability`, `T06-latency-accuracy` · **Updated:** 2026-07-26
 > **Module id:** `T07-trust-calibration` · **Tags:** trust, critical
-> **Lab:** `labs/py/23-trust-calibration/`
 
 ## The 30-second version
 
@@ -344,7 +343,7 @@ if __name__ == "__main__":
 
 Running it: the informative signal yields a downward-sloping risk-coverage curve and a feasible threshold at a real coverage number; the verbalised signal yields an **AURC close to the base error rate and no feasible threshold**, because abstaining removes right and wrong answers in the same proportion. That contrast is the whole module in one output, and it is the demo to describe in an interview.
 
-Lab **`labs/py/23-trust-calibration/`** adds the semantic-entropy implementation with bidirectional-entailment clustering, `p(true)` elicitation, a split-conformal wrapper for MCQ, and a regression test asserting AURC does not degrade across prompt versions.
+Lab **`(lab pending)`** adds the semantic-entropy implementation with bidirectional-entailment clustering, `p(true)` elicitation, a split-conformal wrapper for MCQ, and a regression test asserting AURC does not degrade across prompt versions.
 
 ---
 

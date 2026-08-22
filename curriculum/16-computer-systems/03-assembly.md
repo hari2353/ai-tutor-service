@@ -2,7 +2,6 @@
 
 > **Track:** T16 Computer Systems: Transistor → Runtime · **Time:** 2.5h · **Prereqs:** T16-cpu-microarch · **Updated:** 2026-08-03
 > **Module id:** `T16-assembly` · **Tags:** assembly
-> **Lab:** `labs/c/03-reading-asm/`
 
 ## The 30-second version
 
@@ -133,7 +132,7 @@ gcc -O2 -S -o sum_O2.s sum.c
 diff sum_O0.s sum_O2.s
 ```
 
-At `-O0`, expect a literal translation of the loop with a real branch back to the top each iteration and `total`/`i` living in stack slots (`[rbp-8]`, `[rbp-16]`), reloaded and stored every iteration. At `-O2`, expect the compiler to either recognize the closed form (`n*(n-1)/2`) and eliminate the loop entirely, or vectorize it with SIMD instructions summing multiple values per iteration — either way, a dramatically different instruction sequence for logically identical source, which is exactly the "derive rather than assert" exercise this section of the house format calls for: don't just claim `-O2` is faster, read the actual diff and explain *why* each changed instruction exists. Full walkthrough with expected output and an ARM64 (`gcc -target aarch64` or a Compiler Explorer link) comparison lives in `labs/c/03-reading-asm/`.
+At `-O0`, expect a literal translation of the loop with a real branch back to the top each iteration and `total`/`i` living in stack slots (`[rbp-8]`, `[rbp-16]`), reloaded and stored every iteration. At `-O2`, expect the compiler to either recognize the closed form (`n*(n-1)/2`) and eliminate the loop entirely, or vectorize it with SIMD instructions summing multiple values per iteration — either way, a dramatically different instruction sequence for logically identical source, which is exactly the "derive rather than assert" exercise this section of the house format calls for: don't just claim `-O2` is faster, read the actual diff and explain *why* each changed instruction exists. Full walkthrough with expected output and an ARM64 (`gcc -target aarch64` or a Compiler Explorer link) comparison lives in `(lab pending)`.
 
 ---
 

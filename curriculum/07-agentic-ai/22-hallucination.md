@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2.5h · **Prereqs:** `T07-attribution`, `T07-trust-calibration` · **Updated:** 2026-07-26
 > **Module id:** `T07-hallucination` · **Tags:** trust, critical
-> **Lab:** `labs/py/25-hallucination/`
 
 ## The 30-second version
 
@@ -334,7 +333,7 @@ Two design decisions to defend: the router returns an **action**, so a weak dete
 
 Running it, the third sentence ("processing takes two business days and a 3 USD fee applies") is unsupported by anything in context, `unsupported_frac` goes to 2/3, and the router returns `verify_harder` rather than silently suppressing the answer. The `fit_threshold` call is the piece to point at in an interview: on the synthetic signal it returns a threshold with **~26% coverage at 10% risk**, and at a 5% risk target it returns `{"feasible": False}` — which is the correct and useful answer, because a signal that cannot meet the target should say so rather than hand you a threshold that quietly misses the SLO.
 
-Lab **`labs/py/25-hallucination/`** wires in MiniCheck batched on GPU, real semantic entropy, an independent-retrieval verifier for atomic claims, and a CI gate that fails the build if unsupported-sentence rate regresses on the golden set.
+Lab **`(lab pending)`** wires in MiniCheck batched on GPU, real semantic entropy, an independent-retrieval verifier for atomic claims, and a CI gate that fails the build if unsupported-sentence rate regresses on the golden set.
 
 ---
 

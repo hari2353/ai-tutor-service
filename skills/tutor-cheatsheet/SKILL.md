@@ -7,7 +7,7 @@ description: Produce a one-page revision sheet for the morning of an interview â
 
 This gets read on a phone, twenty minutes before a call. Optimise for **recall under stress**, not comprehension. Anything that needs to be read twice does not belong.
 
-**Repo root** (`$ROOT`): `C:\Users\medic\OneDrive\Documents\ai-tutor-service`
+**Repo root** (`$ROOT`): the directory containing `CONTENT-STATUS.md`. Find it by walking up from your current working directory until that file appears; if you never find it, ask the user where the repo lives â€” do not guess a path.
 
 ## 1. Source it from what is written
 

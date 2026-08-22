@@ -7,7 +7,7 @@ description: Write one interview-grade curriculum module for the AI Tutor Servic
 
 Writes **one module**, properly. Thin files are worse than missing files: a green tracker full of filler is how you walk into a loop overconfident.
 
-**Repo root** (`$ROOT`): `C:\Users\medic\OneDrive\Documents\ai-tutor-service`
+**Repo root** (`$ROOT`): the directory containing `CONTENT-STATUS.md`. Find it by walking up from your current working directory until that file appears; if you never find it, ask the user where the repo lives — do not guess a path.
 
 ## 1. Read the spec first — do not skip this
 

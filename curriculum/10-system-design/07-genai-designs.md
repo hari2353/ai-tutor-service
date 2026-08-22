@@ -883,7 +883,7 @@ SELF-HOST BREAKEVEN  an 8B model on 2xA10G ≈ $1.5k/month, serving ~600 tok/s s
 
 ## Build it from scratch
 
-The lab at `labs/py/07-genai-design-drills/` is a practice harness, not a build. Three modes:
+The lab at `(lab pending)` is a practice harness, not a build. Three modes:
 
 1. **Timed drill.** Pick one of the twelve, set a 45-minute timer, and produce all six slots in a text file: clarifying questions, ASCII architecture, 3-5 decisions in "X over Y because Z at the cost of W" form, a cost model with the arithmetic shown, a failure table with observable symptoms, and the three follow-ups. Then diff against the module. The gap is almost never the architecture; it is the cost arithmetic and the observable symptoms.
 2. **Cost-model reps.** Given only a scale statement, produce cost per request and cost per month in under five minutes, from memory of the token prices. Do this until it is reflexive, because the moment in the interview where you write `40M x ($0.0135 + $0.0045) = $720k/month` on the board without hesitating is worth more than any diagram.

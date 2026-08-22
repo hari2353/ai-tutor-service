@@ -2,7 +2,6 @@
 
 > **Track:** T26 Frontier AI · **Time:** 2.5h · **Prereqs:** `T26-world-models`, T05 (representation learning), T31 (model-based RL) · **Updated:** 2026-08-05
 > **Module id:** `T26-jepa` · **Tags:** jepa, i-jepa, v-jepa, ssl, world-models, energy-based, collapse, critical
-> **Lab:** `labs/py/26-02-jepa/`
 
 ## The 30-second version
 
@@ -270,7 +269,7 @@ Read the table out loud like this: **MAE buys an inspectable, collapse-proof obj
 
 ## Build it from scratch
 
-The smallest thing that is genuinely a JEPA and not a masked autoencoder: two encoders where one is an EMA copy with a stop-gradient, a narrow predictor, multi-block masking with overlap removal, and collapse instrumentation wired in from step zero. The instrumentation is not optional garnish here; it is the only thing that tells you the run is real. Matching lab folder: `labs/py/26-02-jepa/`.
+The smallest thing that is genuinely a JEPA and not a masked autoencoder: two encoders where one is an EMA copy with a stop-gradient, a narrow predictor, multi-block masking with overlap removal, and collapse instrumentation wired in from step zero. The instrumentation is not optional garnish here; it is the only thing that tells you the run is real. Matching lab folder: `(lab pending)`.
 
 ```python
 # untested sketch -- minimal I-JEPA. Deliberately omits: mixed precision,

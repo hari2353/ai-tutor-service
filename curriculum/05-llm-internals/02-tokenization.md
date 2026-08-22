@@ -2,7 +2,6 @@
 
 > **Track:** T05 LLM Internals · **Time:** 2h · **Prereqs:** T05-autoregression
 > **Module id:** `T05-tokenization` · **Tags:** internals
-> **Lab:** `labs/py/02-tokenization/` (create if not present — not yet in this repo)
 
 ## The 30-second version
 
@@ -164,7 +163,7 @@ A token is whatever chunk earned enough merges in the training corpus — nothin
 
 ## Build it from scratch
 
-The trainer and encoder above (`train_bpe`, `encode`) is the complete from-scratch version; extending it to production quality means: (1) switching the base alphabet from characters to raw UTF-8 bytes, (2) adding a regex pre-tokenizer (GPT-2's splits on whitespace-prefixed word boundaries plus punctuation/number handling) so merges never cross an obvious word boundary, (3) replacing the linear pair-count scan with a priority queue keyed by pair frequency plus a doubly-linked-list representation of each word so a merge updates counts in `O(word length)` instead of rescanning the whole corpus per merge, and (4) adding a special-token table (`<bos>`, `<eos>`, `<pad>`, tool-call/chat-template markers) that bypass BPE merging entirely and are matched as literal strings before the BPE pass runs. A byte-level implementation with the regex pre-tokenizer, a priority-queue trainer, and a side-by-side token-count comparison across five languages on the same sentence lives in **`labs/py/02-tokenization/`**.
+The trainer and encoder above (`train_bpe`, `encode`) is the complete from-scratch version; extending it to production quality means: (1) switching the base alphabet from characters to raw UTF-8 bytes, (2) adding a regex pre-tokenizer (GPT-2's splits on whitespace-prefixed word boundaries plus punctuation/number handling) so merges never cross an obvious word boundary, (3) replacing the linear pair-count scan with a priority queue keyed by pair frequency plus a doubly-linked-list representation of each word so a merge updates counts in `O(word length)` instead of rescanning the whole corpus per merge, and (4) adding a special-token table (`<bos>`, `<eos>`, `<pad>`, tool-call/chat-template markers) that bypass BPE merging entirely and are matched as literal strings before the BPE pass runs. A byte-level implementation with the regex pre-tokenizer, a priority-queue trainer, and a side-by-side token-count comparison across five languages on the same sentence lives in **`(lab pending)`**.
 
 ---
 

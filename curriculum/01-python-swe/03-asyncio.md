@@ -2,7 +2,6 @@
 
 > **Track:** T01 Python & SWE Craft · **Time:** 3.5h · **Prereqs:** T01-data-model · **Updated:** 2026-08-03
 > **Module id:** `T01-asyncio` · **Tags:** concurrency, critical
-> **Lab:** `labs/python/03-asyncio/`
 
 ## The 30-second version
 

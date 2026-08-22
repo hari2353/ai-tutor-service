@@ -112,7 +112,7 @@ for bs in [1, 8, 32, 128]:
 # demonstration of crossing from memory-bandwidth-bound to compute-bound.
 ```
 
-Running this and plotting throughput-per-row against batch size directly reproduces, at small scale, exactly the effect that makes continuous batching the dominant lever in production LLM serving: the marginal cost of serving one more request in the same batch is far smaller than the fixed cost of loading the weights at all. A fuller lab comparing static vs. simulated continuous batching against variable-length synthetic generation workloads belongs in `labs/python/13-gpu-arch/`.
+Running this and plotting throughput-per-row against batch size directly reproduces, at small scale, exactly the effect that makes continuous batching the dominant lever in production LLM serving: the marginal cost of serving one more request in the same batch is far smaller than the fixed cost of loading the weights at all. A fuller lab comparing static vs. simulated continuous batching against variable-length synthetic generation workloads belongs in `(lab pending)`.
 
 ---
 

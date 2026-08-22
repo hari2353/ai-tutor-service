@@ -2,7 +2,6 @@
 
 > **Track:** T03 Classical ML · **Time:** 3h · **Prereqs:** T03-classic-models, T03-metrics-calibration · **Updated:** 2026-08-03
 > **Module id:** `T03-recsys` · **Tags:** recsys, critical
-> **Lab:** `labs/python/07-recsys/`
 
 ## The 30-second version
 

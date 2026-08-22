@@ -2,7 +2,6 @@
 
 > **Track:** T01 Python & SWE Craft · **Time:** 2h · **Prereqs:** T01-data-model · **Updated:** 2026-08-03
 > **Module id:** `T01-typing` · **Tags:** language
-> **Lab:** `labs/python/02-typing/`
 
 ## The 30-second version
 

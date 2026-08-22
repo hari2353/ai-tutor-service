@@ -2,7 +2,6 @@
 
 > **Track:** T27 Tooling & Debugging · **Time:** 3h · **Prereqs:** T27-08-debug-methodology, T27-09-debug-any-language
 > **Module id:** `T27-prod-debugging` · **Tags:** debugging, jvm, python, profiling, observability
-> **Lab:** `labs/python/10-prod-debugging/`
 
 ## The 30-second version
 
@@ -186,7 +185,7 @@ jstack <pid> > dump.txt      # or: jcmd <pid> Thread.print > dump.txt
 grep -A 20 "Found one Java-level deadlock" dump.txt
 ```
 
-The equivalent Python illustration — two threads acquiring two `threading.Lock` objects in opposite order, then `py-spy dump --pid <pid>` showing both stacks parked on `acquire()` at the exact conflicting lines (Python's own tooling, unlike jstack, does **not** auto-detect the deadlock cycle for you — you have to read both stacks and reason about the lock order yourself, a real, checkable difference between the two ecosystems' tooling maturity) — belongs in `labs/python/10-prod-debugging/` alongside a from-scratch heap-growth demo (a Python list appended to inside a long-lived object, dumped and inspected) for the memory-leak side of this module.
+The equivalent Python illustration — two threads acquiring two `threading.Lock` objects in opposite order, then `py-spy dump --pid <pid>` showing both stacks parked on `acquire()` at the exact conflicting lines (Python's own tooling, unlike jstack, does **not** auto-detect the deadlock cycle for you — you have to read both stacks and reason about the lock order yourself, a real, checkable difference between the two ecosystems' tooling maturity) — belongs in `(lab pending)` alongside a from-scratch heap-growth demo (a Python list appended to inside a long-lived object, dumped and inspected) for the memory-leak side of this module.
 
 ---
 

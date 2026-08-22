@@ -3,7 +3,6 @@
 > **Track:** T30 Auth & Application Security · **Time:** 1.5h · **Prereqs:** none
 > **Updated:** 2026-07-26
 > **Module id:** `T30-authn-vs-authz` · **Tags:** fundamentals, critical
-> **Lab:** `labs/py/01-authn-authz-middleware/`
 
 ## The 30-second version
 
@@ -173,7 +172,7 @@ def handle_request(token, action, resource, authn: Authenticator, authz: Authori
     return resource
 ```
 
-The point of this shape is testability and blast-radius containment: you can unit-test `Authorizer.check` with zero HTTP or JWT machinery, you can swap policy engines (hand-rolled → OPA → Cedar) without touching authentication code, and a bug in the audit sink cannot silently change an authorization decision because `AuditLog.record` has no return value the caller depends on. Full version with an OPA sidecar and a Postgres audit table: **`labs/py/01-authn-authz-middleware/`**.
+The point of this shape is testability and blast-radius containment: you can unit-test `Authorizer.check` with zero HTTP or JWT machinery, you can swap policy engines (hand-rolled → OPA → Cedar) without touching authentication code, and a bug in the audit sink cannot silently change an authorization decision because `AuditLog.record` has no return value the caller depends on. Full version with an OPA sidecar and a Postgres audit table: **`(lab pending)`**.
 
 ---
 

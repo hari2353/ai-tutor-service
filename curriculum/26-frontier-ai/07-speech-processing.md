@@ -242,7 +242,7 @@ def ctc_forward_prob(log_probs: np.ndarray, target: list[int], blank: int = 0) -
     return logsumexp(alpha[T - 1, S - 1], alpha[T - 1, S - 2])
 ```
 
-For a runnable end-to-end lab (load `faster-whisper`, transcribe sample audio, measure WER against a reference, run `pyannote` diarization and align speaker labels to transcript segments), no lab exists yet for this module — a reasonable ask is `labs/py/07-speech-processing/`.
+For a runnable end-to-end lab (load `faster-whisper`, transcribe sample audio, measure WER against a reference, run `pyannote` diarization and align speaker labels to transcript segments), no lab exists yet for this module — a reasonable ask is `(lab pending)`.
 
 ---
 

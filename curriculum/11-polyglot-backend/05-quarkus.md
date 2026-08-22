@@ -196,7 +196,7 @@ time curl localhost:8080/inventory/sku-1
 ps -o rss= -p $!
 ```
 
-A fuller lab comparing JVM-mode and native-mode startup time, RSS memory, and steady-state throughput under sustained load (to observe the JIT-vs-AOT tradeoff directly rather than just the startup numbers) belongs in `labs/java/05-quarkus/`.
+A fuller lab comparing JVM-mode and native-mode startup time, RSS memory, and steady-state throughput under sustained load (to observe the JIT-vs-AOT tradeoff directly rather than just the startup numbers) belongs in `(lab pending)`.
 
 ---
 

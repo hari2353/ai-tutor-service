@@ -2,7 +2,6 @@
 
 > **Track:** T17 Databases: SQL, NoSQL, Vector · **Time:** 3h · **Prereqs:** none
 > **Module id:** `T17-mvcc-isolation` · **Tags:** sprint, internals, critical
-> **Lab:** `labs/py/03-mvcc-toy/`
 
 ## The 30-second version
 
@@ -191,7 +190,7 @@ class MVCCStore:
 class SerializationFailure(Exception): ...
 ```
 
-This deliberately omits SSI's rw-antidependency cycle tracking (that requires graph bookkeeping across all concurrently-serializable transactions, not just per-key state) — it demonstrates ordinary snapshot isolation's write-write conflict detection only, which is enough to show *why* write skew (a conflict between disjoint keys) sails through undetected. Full version with an SSI-style rw-antidependency tracker that catches the doctors-on-call cycle: **`labs/py/03-mvcc-toy/`**.
+This deliberately omits SSI's rw-antidependency cycle tracking (that requires graph bookkeeping across all concurrently-serializable transactions, not just per-key state) — it demonstrates ordinary snapshot isolation's write-write conflict detection only, which is enough to show *why* write skew (a conflict between disjoint keys) sails through undetected. Full version with an SSI-style rw-antidependency tracker that catches the doctors-on-call cycle: **`(lab pending)`**.
 
 ---
 

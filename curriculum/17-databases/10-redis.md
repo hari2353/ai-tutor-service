@@ -148,7 +148,7 @@ def is_allowed(redis_client, key: str, limit: int, window_seconds: int) -> bool:
     return count <= limit
 ```
 
-This isn't fully atomic (the pipeline batches commands but doesn't make the whole read-then-decide atomic against a concurrent request from the same key) — the production-correct version wraps the same four operations in a Lua script so no other client's request can interleave between the count and the decision. Full lock/rate-limiter lab with the fencing-token discussion worked out: `labs/py/10-redis-patterns/`.
+This isn't fully atomic (the pipeline batches commands but doesn't make the whole read-then-decide atomic against a concurrent request from the same key) — the production-correct version wraps the same four operations in a Lua script so no other client's request can interleave between the count and the decision. Full lock/rate-limiter lab with the fencing-token discussion worked out: `(lab pending)`.
 
 ---
 

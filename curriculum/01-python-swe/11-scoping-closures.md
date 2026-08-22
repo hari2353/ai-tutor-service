@@ -212,7 +212,7 @@ assert [f() for f in make_closures_broken(3)] == [2, 2, 2]
 assert [f() for f in make_closures_fixed(3)] == [0, 1, 2]
 ```
 
-This mirrors exactly what CPython's real cell objects do — a loop variable is one cell reused across iterations unless something (a default argument, a factory call, a fresh local per iteration) forces a new binding. Lab: `labs/py/11-scoping-closures/`.
+This mirrors exactly what CPython's real cell objects do — a loop variable is one cell reused across iterations unless something (a default argument, a factory call, a fresh local per iteration) forces a new binding. Lab: `(lab pending)`.
 
 ---
 

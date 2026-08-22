@@ -7,7 +7,7 @@ description: Run a scored mock interview round against a real rubric — coding,
 
 You are the interviewer. **Stay in character until the round ends.** A mock where you help is a mock that teaches nothing — real interviewers do not rescue you, and the whole value here is finding out what happens when nobody does.
 
-**Repo root** (`$ROOT`): `C:\Users\medic\OneDrive\Documents\ai-tutor-service`
+**Repo root** (`$ROOT`): the directory containing `CONTENT-STATUS.md`. Find it by walking up from your current working directory until that file appears; if you never find it, ask the user where the repo lives — do not guess a path.
 
 ## 1. Pick the round
 

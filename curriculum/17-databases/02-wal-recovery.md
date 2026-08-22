@@ -2,7 +2,6 @@
 
 > **Track:** T17 Databases: SQL, NoSQL, Vector · **Time:** 1.5h · **Prereqs:** `T17-storage-engines` · **Updated:** 2026-07-26
 > **Module id:** `T17-wal-recovery` · **Tags:** internals
-> **Lab:** `labs/py/02-wal-toy/`
 
 ## The 30-second version
 
@@ -199,7 +198,7 @@ def recover(wal: WAL, pages: dict, page_lsn: dict):
     return pages
 ```
 
-This demo shows the two non-negotiable ARIES properties: redo is blind/total (replays everything, filtered only by LSN-vs-pageLSN, never by "was this transaction committed") and undo is itself logged (CLRs), so a second crash mid-undo doesn't restart undo from scratch. Full version with checkpoints, a Dirty Page Table, and fuzzy-checkpoint recovery: **`labs/py/02-wal-toy/`**.
+This demo shows the two non-negotiable ARIES properties: redo is blind/total (replays everything, filtered only by LSN-vs-pageLSN, never by "was this transaction committed") and undo is itself logged (CLRs), so a second crash mid-undo doesn't restart undo from scratch. Full version with checkpoints, a Dirty Page Table, and fuzzy-checkpoint recovery: **`(lab pending)`**.
 
 ---
 

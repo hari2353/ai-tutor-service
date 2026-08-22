@@ -19,7 +19,7 @@ Write for someone at that level. Do not explain what an API is.
 
 ## File layout
 
-All paths below are relative to the repo root, `C:\Users\medic\OneDrive\Documents\ai-tutor-service`.
+All paths below are relative to the repo root (the directory containing `CONTENT-STATUS.md`).
 
 Write to `curriculum/<track-dir>/<NN>-<slug>.md` where `NN` is the module's order+1 zero-padded to 2 digits.
 

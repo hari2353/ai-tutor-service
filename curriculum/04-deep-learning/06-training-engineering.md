@@ -2,7 +2,6 @@
 
 > **Track:** T04 Deep Learning · **Time:** 2.5h · **Prereqs:** T04-optimization · **Updated:** 2026-08-03
 > **Module id:** `T04-training-engineering` · **Tags:** training, critical
-> **Lab:** `labs/python/06-training-engineering/`
 
 ## The 30-second version
 
@@ -123,7 +122,7 @@ def manual_clip_by_norm(grads, max_norm=1.0):
         grads = [g * scale for g in grads]        # SAME scale applied to every gradient
     return grads
 ```
-Reproducing dynamic loss scaling's increase-on-success/halve-on-overflow logic from scratch, and instrumenting a deliberately-broken training loop (a hand-rolled unstabilized softmax, or a forgotten `/N` in accumulation) to observe exactly how and where it produces `nan`, using `torch.autograd.set_detect_anomaly(True)` to localize it, is the lab exercise in `labs/python/06-training-engineering/`.
+Reproducing dynamic loss scaling's increase-on-success/halve-on-overflow logic from scratch, and instrumenting a deliberately-broken training loop (a hand-rolled unstabilized softmax, or a forgotten `/N` in accumulation) to observe exactly how and where it produces `nan`, using `torch.autograd.set_detect_anomaly(True)` to localize it, is the lab exercise in `(lab pending)`.
 
 ---
 

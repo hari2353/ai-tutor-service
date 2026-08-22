@@ -2,7 +2,6 @@
 
 > **Track:** T03 Classical ML · **Time:** 2h · **Prereqs:** T03-linear-models, T03-classic-models · **Updated:** 2026-08-03
 > **Module id:** `T03-metrics-calibration` · **Tags:** evaluation, critical
-> **Lab:** `labs/python/05-metrics-calibration/`
 
 ## The 30-second version
 

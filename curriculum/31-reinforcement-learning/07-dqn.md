@@ -2,7 +2,6 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 3h · **Prereqs:** T31-q-learning-sarsa, T31-exploration · **Updated:** 2026-08-03
 > **Module id:** `T31-dqn` · **Tags:** deep-rl, critical
-> **Lab:** `labs/py/31-07-dqn/`
 
 ## The 30-second version
 

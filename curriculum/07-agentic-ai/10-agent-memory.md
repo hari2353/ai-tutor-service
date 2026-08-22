@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 3h · **Prereqs:** `T07-agent-loop-from-scratch` · **Updated:** 2026-07-26
 > **Module id:** `T07-agent-memory` · **Tags:** sprint (W4), memory
-> **Lab:** `labs/py/10-agent-memory/`
 
 ## The 30-second version
 
@@ -346,7 +345,7 @@ The failure modes, in order of how often they happen:
 
 ## Build it from scratch
 
-The lab at `labs/py/10-agent-memory/` builds all four stores against SQLite plus a local embedding model, with a scripted fake LLM so the tests are deterministic:
+The lab at `(lab pending)` builds all four stores against SQLite plus a local embedding model, with a scripted fake LLM so the tests are deterministic:
 
 1. **Working memory** — buffer, window, summary, hybrid. Assert the pinned `<state>` block survives 50 turns of summarisation while a naive summariser loses the order id. This single test is the module's thesis.
 2. **Episodic store** — the schema above, the informativeness gate, and recall by task signature. Assert that a past *failure* is retrieved and labelled as an anti-example.

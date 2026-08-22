@@ -186,7 +186,7 @@ A production system runs many loops concurrently against a rate-limited upstream
 
 ## Build it from scratch
 
-There is no separate lab for this module — it composes the loop from `labs/py/02-agent-loop/`, the budget and checkpoint machinery from `T07-loop-engineering` and `T07-langgraph-durable`, and adds exactly two new pieces on top: a kill-switch check at the tool boundary (shown above) and an event-stream wrapper that tags each chunk of the raw model stream with step metadata before forwarding it to the client. Building those two on top of an already-working checkpointed loop is a half-day exercise, not a from-scratch build — which is itself the point: production-readiness is additive layers on the same forty-line core, not a different architecture.
+There is no separate lab for this module — it composes the loop from `(lab pending)`, the budget and checkpoint machinery from `T07-loop-engineering` and `T07-langgraph-durable`, and adds exactly two new pieces on top: a kill-switch check at the tool boundary (shown above) and an event-stream wrapper that tags each chunk of the raw model stream with step metadata before forwarding it to the client. Building those two on top of an already-working checkpointed loop is a half-day exercise, not a from-scratch build — which is itself the point: production-readiness is additive layers on the same forty-line core, not a different architecture.
 
 ---
 

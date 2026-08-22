@@ -148,7 +148,7 @@ def matryoshka_info_nce(anchors, positives, dims=(64, 128, 256, 768), temperatur
     return total / len(dims)
 ```
 
-Full pipeline with BM25/ANN hard-negative mining, false-negative filtering via a cross-encoder, and a cross-encoder reranker training loop: **`labs/py/13-embeddings-training/`** (create if not present — not yet in this repo).
+Full pipeline with BM25/ANN hard-negative mining, false-negative filtering via a cross-encoder, and a cross-encoder reranker training loop: **`(lab pending)`** (create if not present — not yet in this repo).
 
 ---
 

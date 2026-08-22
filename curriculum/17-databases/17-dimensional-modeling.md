@@ -177,7 +177,7 @@ for r in dim.rows:
 #                valid_from=2026-03-15, valid_to=9999-12-31, is_current=True)
 ```
 
-This is the exact mechanic `dbt snapshot` automates in production (comparing incoming source rows against the current snapshot state, closing out changed rows, inserting new versions) — understanding this loop by hand is what makes reading a `dbt snapshot` config or debugging its output tractable. Full version with a fact table joining against point-in-time-correct dimension versions, plus a worked semi-additive-measure query: **`labs/py/17-dimensional-lab/`**.
+This is the exact mechanic `dbt snapshot` automates in production (comparing incoming source rows against the current snapshot state, closing out changed rows, inserting new versions) — understanding this loop by hand is what makes reading a `dbt snapshot` config or debugging its output tractable. Full version with a fact table joining against point-in-time-correct dimension versions, plus a worked semi-additive-measure query: **`(lab pending)`**.
 
 ---
 

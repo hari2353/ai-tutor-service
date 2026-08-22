@@ -2,7 +2,6 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 3h · **Prereqs:** none
 > **Module id:** `T12-terraform` · **Tags:** iac, critical
-> **Lab:** `labs/terraform/09-terraform-module/`
 
 ## The 30-second version
 

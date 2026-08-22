@@ -3,7 +3,6 @@
 > **Track:** T30 Auth & Application Security · **Time:** 2.5h · **Prereqs:** `T30-jwt-security`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-token-lifecycle` · **Tags:** jwt, critical
-> **Lab:** `labs/py/05-refresh-rotation/`
 
 ## The 30-second version
 
@@ -191,7 +190,7 @@ def refresh_tokens_with_grace(presented_refresh: str) -> tuple[str, str] | None:
     return new_access, new_refresh
 ```
 
-Full lab with Redis-backed refresh-token families, a working grace window, and a simulated theft scenario that triggers family revocation: **`labs/py/05-refresh-rotation/`**.
+Full lab with Redis-backed refresh-token families, a working grace window, and a simulated theft scenario that triggers family revocation: **`(lab pending)`**.
 
 ---
 

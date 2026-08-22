@@ -338,7 +338,7 @@ Two consequences that matter for an interview answer:
 
 ## Build it from scratch
 
-The point of building it is to see that a "serving platform" is a scale decision plus a routing decision, and that both are about 60 lines. Reference lab: `labs/python/06-serving/`.
+The point of building it is to see that a "serving platform" is a scale decision plus a routing decision, and that both are about 60 lines. Reference lab: `(lab pending)`.
 
 ### A prefix-aware router in 40 lines
 

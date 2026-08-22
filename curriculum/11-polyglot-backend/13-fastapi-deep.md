@@ -387,7 +387,7 @@ async def create_order(order: OrderIn, background_tasks: BackgroundTasks, db: di
 
 Send a body missing `email` and observe the `422` with a Pydantic-shaped error list, not a `400`. Send `{"item": "widget", "quantity": 500, "email": "a@b.com"}` and observe the `409` from the custom handler rather than a generic 500. Neither `email` nor internal error text appears in any successful response body.
 
-For a fuller runnable version with tests exercising dependency overrides and the threadpool-blocking failure mode directly, pair this module with a lab — none exists yet for this module; a reasonable ask is `labs/py/13-fastapi-deep/` covering the DI-override test pattern and a load-test script demonstrating the blocking-call throughput collapse.
+For a fuller runnable version with tests exercising dependency overrides and the threadpool-blocking failure mode directly, pair this module with a lab — none exists yet for this module; a reasonable ask is `(lab pending)` covering the DI-override test pattern and a load-test script demonstrating the blocking-call throughput collapse.
 
 ---
 

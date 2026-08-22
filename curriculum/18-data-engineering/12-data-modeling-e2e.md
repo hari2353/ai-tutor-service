@@ -151,7 +151,7 @@ def build_fact_order_lines(silver_order_items: list[dict], silver_customers: lis
     return rows
 ```
 
-The line worth defending in an interview: `resolve_surrogate_key_as_of(..., as_of=item["order_date"])` — this is what makes a historical fact join to the dimension version that was true *at the time*, not the dimension's current state, and it's the single most common thing a naive gold-layer join gets wrong (joining on the natural key directly against a Type 2 table without an as-of filter returns every historical version, silently fanning out the fact table). Full runnable version with dbt models per layer: `labs/py/18-medallion-lab/`.
+The line worth defending in an interview: `resolve_surrogate_key_as_of(..., as_of=item["order_date"])` — this is what makes a historical fact join to the dimension version that was true *at the time*, not the dimension's current state, and it's the single most common thing a naive gold-layer join gets wrong (joining on the natural key directly against a Type 2 table without an as-of filter returns every historical version, silently fanning out the fact table). Full runnable version with dbt models per layer: `(lab pending)`.
 
 ---
 

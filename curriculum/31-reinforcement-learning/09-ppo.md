@@ -2,7 +2,6 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 3h · **Prereqs:** T31-policy-gradient, T31-mdp · **Updated:** 2026-08-03
 > **Module id:** `T31-ppo` · **Tags:** deep-rl, critical, rlhf
-> **Lab:** `labs/py/31-09-ppo/`
 
 ## The 30-second version
 

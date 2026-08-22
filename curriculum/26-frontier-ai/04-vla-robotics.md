@@ -2,7 +2,6 @@
 
 > **Track:** T26 Frontier AI · **Time:** 2.5h · **Prereqs:** `T26-world-models`, T05 transformers, T10 LLM serving · **Updated:** 2026-08-05
 > **Module id:** `T26-vla-robotics` · **Tags:** vla, robotics, action-tokenisation, action-chunking, flow-matching, control-frequency, open-x-embodiment
-> **Lab:** `labs/py/26-04-vla-robotics/`
 
 ## The 30-second version
 
@@ -348,7 +347,7 @@ At 30 seconds per trial plus 30 seconds of reset, 300 trials is **5 hours of con
 
 ## Build it from scratch
 
-The smallest thing that is genuinely a VLA and not a toy: a frozen vision-language backbone, a flow-matching action expert, action chunking, and an async two-rate control loop. Everything here is deliberately stripped so the moving parts are visible. Matching lab folder: `labs/py/26-04-vla-robotics/`.
+The smallest thing that is genuinely a VLA and not a toy: a frozen vision-language backbone, a flow-matching action expert, action chunking, and an async two-rate control loop. Everything here is deliberately stripped so the moving parts are visible. Matching lab folder: `(lab pending)`.
 
 ```python
 # untested sketch -- minimal flow-matching VLA with action chunking.

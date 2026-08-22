@@ -214,7 +214,7 @@ for t in threads: t.join()
 print("Atomic result (guaranteed 0, never negative):", inv2.docs["sku1"]["qty"])
 ```
 
-Run this enough times with the racy version and, especially under real thread scheduling variance, you can observe `qty` go negative — the atomic version structurally cannot, because the check and the mutation are never separated by a scheduling gap. Full version against a real MongoDB instance (via `pymongo`/`motor`), including a job-queue-claiming scenario and a version-field optimistic-concurrency example: **`labs/py/08-mongo-race-lab/`**.
+Run this enough times with the racy version and, especially under real thread scheduling variance, you can observe `qty` go negative — the atomic version structurally cannot, because the check and the mutation are never separated by a scheduling gap. Full version against a real MongoDB instance (via `pymongo`/`motor`), including a job-queue-claiming scenario and a version-field optimistic-concurrency example: **`(lab pending)`**.
 
 ---
 

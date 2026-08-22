@@ -178,7 +178,7 @@ class ContinuousBatchScheduler:
         return self.running
 ```
 
-The three things a real engine adds on top of this sketch: prefix-hash lookup before allocating new blocks (prefix caching), splitting a too-long prompt's prefill across multiple `step()` calls (chunked prefill), and a real CUDA kernel that reads the block table to gather scattered physical blocks for attention (PagedAttention itself). Reference implementation for a from-scratch paged KV cache with prefix hashing: **`labs/py/09-inference-serving/`** (create if not present — not yet in this repo).
+The three things a real engine adds on top of this sketch: prefix-hash lookup before allocating new blocks (prefix caching), splitting a too-long prompt's prefill across multiple `step()` calls (chunked prefill), and a real CUDA kernel that reads the block table to gather scattered physical blocks for attention (PagedAttention itself). Reference implementation for a from-scratch paged KV cache with prefix hashing: **`(lab pending)`** (create if not present — not yet in this repo).
 
 ---
 

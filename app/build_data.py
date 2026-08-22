@@ -780,6 +780,27 @@ def write_status(data: dict) -> None:
 # aggregate each fragment directory folds into.
 FRAGMENTS = {"flashcards": "cards", "drills": "drillsets", "problems": "problemsets"}
 
+# A fragment row missing these fields would render broken UI downstream (an
+# empty flashcard face, an unanswerable drill, an ungroupable problem). Fail at
+# merge time with the exact file and row, not silently in the browser.
+REQUIRED_FIELDS = {
+    "flashcards": ("id", "q", "a"),
+    "drills":     ("id", "q", "a"),
+    "problems":   ("id", "title", "pattern"),
+}
+
+
+def validate_fragment(name: str, rows: list, src: str) -> None:
+    req = REQUIRED_FIELDS[name]
+    for i, row in enumerate(rows):
+        if not isinstance(row, dict):
+            raise SystemExit(f"{src}: row {i} is {type(row).__name__}, expected object")
+        miss = [f for f in req if not row.get(f)]
+        if miss:
+            raise SystemExit(
+                f"{src}: row {i} (id={row.get('id', '?')!r}) missing "
+                f"{', '.join(miss)} — every {name[:-1]} needs {', '.join(req)}")
+
 
 def merge_fragments(name: str, payload: dict) -> tuple[int, int]:
     """Fold app/data/<subdir>/*.json into the aggregate, keyed by item id.
@@ -800,6 +821,7 @@ def merge_fragments(name: str, payload: dict) -> tuple[int, int]:
             rows = json.loads(frag.read_text(encoding="utf-8")).get(name, [])
         except json.JSONDecodeError as e:
             raise SystemExit(f"bad JSON in {frag}: {e}")
+        validate_fragment(name, rows, str(frag))
         for row in rows:
             rid = row.get("id")
             if not rid:

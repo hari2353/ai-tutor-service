@@ -189,7 +189,7 @@ for tenant, request_count in tenant_weights.items():
 print("Bad key distribution:", bad_key_load)  # one node gets 80% of ALL traffic
 ```
 
-Running this shows the good-key case spreading load within a few percent across all 5 nodes, and the bad-key case dumping 80% of simulated request volume onto whichever single node happens to own `tenant_1`'s token — the exact shape of the production hot-partition failure, just without the paging alert. Full version with R+W>N quorum simulation and salted-key sharding as the fix: **`labs/py/09-wide-column-lab/`**.
+Running this shows the good-key case spreading load within a few percent across all 5 nodes, and the bad-key case dumping 80% of simulated request volume onto whichever single node happens to own `tenant_1`'s token — the exact shape of the production hot-partition failure, just without the paging alert. Full version with R+W>N quorum simulation and salted-key sharding as the fix: **`(lab pending)`**.
 
 ---
 

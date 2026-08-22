@@ -179,7 +179,7 @@ def smoothquant_rescale(activations, weights, alpha=0.5):
     return smoothed_activations, smoothed_weights
 ```
 
-Full GPTQ-style Hessian error-correction loop and an AWQ salient-channel search: **`labs/py/12-quantization/`** (create if not present — not yet in this repo).
+Full GPTQ-style Hessian error-correction loop and an AWQ salient-channel search: **`(lab pending)`** (create if not present — not yet in this repo).
 
 ---
 

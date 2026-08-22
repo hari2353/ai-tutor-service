@@ -315,7 +315,7 @@ func processAll(ctx context.Context, items []Item, workers int) ([]Result, error
 }
 ```
 
-Every goroutine here has an explicit exit path — the closed-channel `ok` check, or `ctx.Done()` — which is the actual discipline that prevents leaks; a fuller lab with a deliberately broken version (missing the `ctx.Done()` case) demonstrated leaking under `pprof`, then fixed, belongs in `labs/go/06-go-core/`.
+Every goroutine here has an explicit exit path — the closed-channel `ok` check, or `ctx.Done()` — which is the actual discipline that prevents leaks; a fuller lab with a deliberately broken version (missing the `ctx.Done()` case) demonstrated leaking under `pprof`, then fixed, belongs in `(lab pending)`.
 
 ---
 

@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2h · **Prereqs:** `T07-langgraph-durable`, `T07-trust-calibration`, `T07-hallucination` · **Updated:** 2026-07-26
 > **Module id:** `T07-human-oversight` · **Tags:** trust, critical
-> **Lab:** `labs/py/26-human-oversight/`
 
 ## The 30-second version
 
@@ -462,7 +461,7 @@ Running it: `search_kb` auto-executes, `update_note` gets notify-and-proceed wit
 
 Three properties to defend in an interview: gate selection is a **pure function of registered action properties**, so it is unit-testable and diffable in code review rather than being a judgment call at runtime; **separation of duties is enforced in the broker**, so an agent cannot approve itself even if a prompt injection convinces it to try; and the audit record stores a **digest of the evidence bundle plus the decision latency**, which together are the only mechanism that can distinguish informed approval from a rubber stamp after the fact.
 
-Lab **`labs/py/26-human-oversight/`** wires this to LangGraph `interrupt()` with a Postgres checkpointer, adds the error-injection harness that measures reviewer catch rate, and implements the autonomy ratchet with automatic demotion on incident.
+Lab **`(lab pending)`** wires this to LangGraph `interrupt()` with a Postgres checkpointer, adds the error-injection harness that measures reviewer catch rate, and implements the autonomy ratchet with automatic demotion on incident.
 
 ---
 

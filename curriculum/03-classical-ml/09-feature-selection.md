@@ -203,7 +203,7 @@ def permutation_importance_from_scratch(model, X_test, y_test, n_repeats=10, see
 
 This is a complete, runnable implementation — the only thing sklearn's version adds is parallelism and multi-metric support. Running it makes the correlated-feature caveat concrete: duplicate a column in `X_test`, rerun, and watch both copies' importance roughly halve versus the single-column version, even though together they still carry all the original signal.
 
-Reference lab for the full filter → wrapper → embedded → SHAP pipeline with a leakage test: `labs/py/09-feature-selection/` (build if not present).
+Reference lab for the full filter → wrapper → embedded → SHAP pipeline with a leakage test: `(lab pending)` (build if not present).
 
 ---
 

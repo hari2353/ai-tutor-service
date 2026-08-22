@@ -2,7 +2,6 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.0h · **Prereqs:** arrays, T02-p15-knapsack-01
 > **Module id:** `T02-p16-knapsack-unbounded` · **Tags:** pattern, dp
-> **Lab:** `labs/py/16-knapsack-unbounded/`
 
 ## The 30-second version
 

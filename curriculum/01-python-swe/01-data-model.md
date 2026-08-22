@@ -2,7 +2,6 @@
 
 > **Track:** T01 Python & SWE Craft · **Time:** 2.5h · **Prereqs:** none · **Updated:** 2026-08-03
 > **Module id:** `T01-data-model` · **Tags:** language
-> **Lab:** `labs/python/01-data-model/`
 
 ## The 30-second version
 

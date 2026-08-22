@@ -210,7 +210,7 @@ def gate_ci(report: HarnessEvalReport) -> int:
     return 0
 ```
 
-Wire this into the same CI gate that runs task-completion evals (`T07-agent-testing`), but as a **separate required check** — a harness change (new tool, changed timeout default, relaxed permission scope) should be blocked on this suite even if task accuracy is unaffected, because task accuracy literally cannot see these regressions. Full suite with mocked injection payloads, budget-kill tests, and a tool-scaling sweep: `labs/py/07-harness-evals/` (build alongside `T07-agent-testing`'s golden-trajectory harness — this reuses the same trace format).
+Wire this into the same CI gate that runs task-completion evals (`T07-agent-testing`), but as a **separate required check** — a harness change (new tool, changed timeout default, relaxed permission scope) should be blocked on this suite even if task accuracy is unaffected, because task accuracy literally cannot see these regressions. Full suite with mocked injection payloads, budget-kill tests, and a tool-scaling sweep: `(lab pending)` (build alongside `T07-agent-testing`'s golden-trajectory harness — this reuses the same trace format).
 
 ---
 

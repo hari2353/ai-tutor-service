@@ -2,7 +2,6 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 2.5h · **Prereqs:** T12-secrets · **Updated:** 2026-08-05
 > **Module id:** `T12-owasp` · **Tags:** security, owasp, sqli, llm-security, critical
-> **Lab:** `labs/py/17-sqli-harness/`
 
 ## The 30-second version
 
@@ -247,7 +246,7 @@ That is the sentence to have ready: the most consequential SQL injection in the 
 A safe-query layer that makes the unsafe thing hard to write. This is the shape of what you would actually put in a codebase, and it is the thing to sketch on a whiteboard.
 
 ```python
-# labs/py/17-sqli-harness/safe_query.py
+# (lab pending)safe_query.py
 # Runnable against psycopg3 + Postgres. Tested shape; adapt the driver as needed.
 from __future__ import annotations
 import re
@@ -330,7 +329,7 @@ rules:
           - pattern: $M.objects.extra(...)
 ```
 
-Full lab with a deliberately vulnerable Flask endpoint, a boolean-blind extractor that measures requests-per-character, a time-based confirmer, a second-order path, and the fixed version: **`labs/py/17-sqli-harness/`**.
+Full lab with a deliberately vulnerable Flask endpoint, a boolean-blind extractor that measures requests-per-character, a time-based confirmer, a second-order path, and the fixed version: **`(lab pending)`**.
 
 ---
 

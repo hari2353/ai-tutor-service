@@ -259,7 +259,7 @@ def warehouse_load():
 warehouse_load()
 ```
 
-Two details worth calling out to an interviewer reading this: `mode="reschedule"` is the cheap middle ground between a blocking `poke` sensor and a fully deferrable one (it releases the worker between pokes but still uses a worker to run each poke, rather than the triggerer's async loop), and `max_active_runs=1` is a deliberate backfill-safety choice discussed further in `T18-backfill-replay`. Full runnable version with a registered custom trigger class: `labs/py/18-airflow-lab/`.
+Two details worth calling out to an interviewer reading this: `mode="reschedule"` is the cheap middle ground between a blocking `poke` sensor and a fully deferrable one (it releases the worker between pokes but still uses a worker to run each poke, rather than the triggerer's async loop), and `max_active_runs=1` is a deliberate backfill-safety choice discussed further in `T18-backfill-replay`. Full runnable version with a registered custom trigger class: `(lab pending)`.
 
 ---
 

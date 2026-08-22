@@ -176,7 +176,7 @@ EXEC GetOrdersByCustomer @CustomerId = 1;   -- 1.9M rows through the SAME plan s
 -- compare against: EXEC GetOrdersByCustomer @CustomerId = 1 WITH RECOMPILE;
 ```
 
-Reading `SET STATISTICS IO, TIME ON` output and the graphical execution plan (particularly estimated vs. actual row counts on each operator) for these three queries is the fastest way to build real intuition. Full lab with a columnstore comparison against the same table: **`labs/sql/07-sqlserver-lab/`**.
+Reading `SET STATISTICS IO, TIME ON` output and the graphical execution plan (particularly estimated vs. actual row counts on each operator) for these three queries is the fastest way to build real intuition. Full lab with a columnstore comparison against the same table: **`(lab pending)`**.
 
 ---
 

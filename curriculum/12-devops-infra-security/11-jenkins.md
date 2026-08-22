@@ -2,7 +2,6 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 3h · **Prereqs:** T12-cicd
 > **Module id:** `T12-jenkins` · **Tags:** cicd, critical
-> **Lab:** `labs/jenkins/11-jenkins-pipeline/`
 
 ## The 30-second version
 
@@ -250,6 +249,16 @@ Production Jenkins deployments near-universally run **multibranch pipeline jobs*
 **Testing:** a nuanced, non-tribal understanding of the actual tradeoff, not "plugins are bad."
 **Answer:** The 1,800+ plugin ecosystem is what makes Jenkins deeply customizable and able to integrate with essentially anything — but plugins are community-maintained with widely varying quality and update cadence, and the large majority of real Jenkins CVEs reported over the years are plugin vulnerabilities, not Jenkins core. A real Jenkins security posture is dominated by plugin inventory discipline (removing unused plugins, tracking CVEs against installed versions, restricting who can install new ones) rather than core-server hardening alone.
 **Follow-up trap:** *"Does minimizing plugin count entirely eliminate this risk?"* — it reduces but doesn't eliminate it — even a small, carefully-chosen plugin set still needs active CVE tracking and update discipline over time, since a plugin that was safe and well-maintained at install time can develop a vulnerability or go unmaintained later; plugin minimization reduces surface area, it isn't a one-time fix that removes the need for ongoing review.
+
+### Q10 — Beyond forgetting to pin a tag, what shared-library versioning pitfalls actually bite teams at scale?
+**Testing:** lived experience with library lifecycle management, not just reciting the pinning rule.
+**Answer:** Four recurring ones: libraries loaded implicitly via global config mean pipelines never control which version they run — the admin's global setting becomes everyone's dependency; a breaking signature change to a `vars/` step breaks every consumer the moment they bump the tag, which demands deprecation windows (add the new parameter, log a warning on the old) rather than hard cuts; testing library changes against production Jenkins means every experiment mutates infrastructure unrelated teams depend on, so the library needs its own CI (unit-tested steps, release-candidate tags, a canary consumer pinned to the RC); and folder-level libraries silently shadow global `vars/` steps of the same name, producing behavior that differs between folders that look identical.
+**Follow-up trap:** *"Why not just develop library changes on master — everything goes through code review anyway?"* — because an unpinned fleet consumes master continuously: an intermediate commit that would never survive review as a whole still executes inside dozens of live pipelines the second it lands, which is exactly why tagged releases and a test harness exist.
+
+### Q11 — How do you scale agents for bursty build demand, and how do you harden the controller itself?
+**Testing:** operational scaling plus controller hardening depth beyond "don't run builds on the controller."
+**Answer:** Scaling: dynamic Kubernetes agents (a fresh pod per build, capacity following queue pressure) with per-stage pod templates sized to actual toolchain needs and executor counts tuned to node capacity, keeping warm static agents only where per-build cold-start latency genuinely hurts. Hardening: controller access locked behind SSO with limited UI exposure, CSRF/crumb enforcement left on, credentials scoped narrowly per folder/pipeline via the Credentials plugin rather than a broad global store, plugin inventory minimized and CVE-tracked, scheduled `JENKINS_HOME` backups, and agents treated as untrusted — no standing cloud credentials on them, ephemeral wherever possible.
+**Follow-up trap:** *"Agents connect in to the controller, so isn't hardening the agents what matters?"* — inverted: the controller holds every pipeline's deploy credentials and is the high-value compromise target, while a compromised dynamic agent holds only whatever that single build was injected with and disappears afterward — hardening effort follows blast radius, and the blast radius concentrates on the controller.
 
 ---
 

@@ -2,7 +2,6 @@
 
 > **Track:** T04 Deep Learning · **Time:** 3h · **Prereqs:** T03 (gradient descent, logistic regression, MLE-as-loss) · **Updated:** 2026-08-03
 > **Module id:** `T04-neural-net-math` · **Tags:** fundamentals, critical
-> **Lab:** `labs/python/01-neural-net-math/`
 
 ## The 30-second version
 
@@ -180,7 +179,7 @@ E_total = 0.5 * (target_o1 - out_o1) ** 2 + 0.5 * (target_o2 - out_o2) ** 2
 print(f"E_total={E_total:.9f}")                     # 0.298371109
 ```
 
-Running this prints exactly the numbers derived by hand above — that agreement is the whole point of the exercise: the framework isn't doing anything you can't do with `math.exp` and five lines of arithmetic. The equivalent 3-line PyTorch version (`nn.Linear(2,2)`, `torch.sigmoid`, `nn.MSELoss()`) computes the identical numbers once you load these exact weights into it; building it both ways and diffing the outputs to `1e-6` is the lab exercise in `labs/python/01-neural-net-math/`.
+Running this prints exactly the numbers derived by hand above — that agreement is the whole point of the exercise: the framework isn't doing anything you can't do with `math.exp` and five lines of arithmetic. The equivalent 3-line PyTorch version (`nn.Linear(2,2)`, `torch.sigmoid`, `nn.MSELoss()`) computes the identical numbers once you load these exact weights into it; building it both ways and diffing the outputs to `1e-6` is the lab exercise in `(lab pending)`.
 
 ---
 

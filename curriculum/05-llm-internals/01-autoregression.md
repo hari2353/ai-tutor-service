@@ -2,7 +2,6 @@
 
 > **Track:** T05 LLM Internals · **Time:** 2h · **Prereqs:** none
 > **Module id:** `T05-autoregression` · **Tags:** internals, critical
-> **Lab:** `labs/py/01-autoregression/` (create if not present — not yet in this repo)
 
 ## The 30-second version
 
@@ -123,7 +122,7 @@ def autoregressive_generate(model, prompt_ids, max_new_tokens, eos_id):
     return ids
 ```
 
-The asymmetry is entirely in what feeds the next position: `targets` in the training function come from the dataset; `next_id` fed back into `ids` in generation comes from the model itself. A from-scratch demonstration that deliberately injects errors into a teacher-forced prefix and shows perplexity blow up on the corrupted continuation, versus the same measurement on a clean prefix, lives in **`labs/py/01-autoregression/`**.
+The asymmetry is entirely in what feeds the next position: `targets` in the training function come from the dataset; `next_id` fed back into `ids` in generation comes from the model itself. A from-scratch demonstration that deliberately injects errors into a teacher-forced prefix and shows perplexity blow up on the corrupted continuation, versus the same measurement on a clean prefix, lives in **`(lab pending)`**.
 
 ---
 

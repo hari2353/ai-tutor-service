@@ -181,6 +181,31 @@ The point isn't the code — it's the checklist. If, honestly assessed, most of 
 **Answer:** Staff is usually a bounded technical domain or a single team's direction, with scope that's cross-functional but still nameable in one sentence; principal is usually cross-organizational or genuinely open-ended scope, with an expectation you can be dropped into an unnamed problem and produce the framing as well as the solution, and that your influence extends to peer staff engineers and senior leadership, not primarily downward. Answer honestly about which of your prepared stories demonstrate which level, and don't claim principal-level scope from stories that are actually strong staff-level or senior-level work — an interviewer calibrated on this distinction will find the gap.
 **Follow-up trap:** *"Give me a specific story that you think is principal-level but might actually just be strong staff-level, and tell me why."* — the strongest answer here shows real self-critique: identifying the specific dimension (often "the scope was genuinely cross-org, but I didn't have real influence without authority in that story — I had a mandate from leadership") where a story falls short of the higher bar, which itself demonstrates the calibration judgment being tested.
 
+### Q6 — "Influence without authority" sounds abstract. Describe the concrete mechanism you used, step by step, on a real cross-team decision.
+**Testing:** whether influence is a named, repeatable mechanism or charisma narrated after the fact.
+**Answer:** A real sequence: a 2-page RFC with an explicit decision deadline and a named dissent channel; a working prototype showing the proposed approach cut p99 by 40%+ on one service (evidence beats argument); private demo to the one trusted engineer — not the manager — on the resisting team, with their objection incorporated into v2; then presentation at the existing cross-team design forum where the decision was formally recorded. Each step moves persuasion outside your reporting line: artifact over argument, chosen messenger over volume.
+**Follow-up trap:** *"Couldn't you have just escalated to your director and settled it?"* — escalation spends credibility you'll need for the next decision and produces compliance rather than adoption; teams that are told instead of convinced implement the letter of the mandate and quietly revert within a quarter, which is exactly the tax the mechanism exists to avoid.
+
+### Q7 — At staff/principal scope, how do you decide what NOT to own — what did you deliberately drop?
+**Testing:** attention-as-scarce-resource discipline at staff+ scope, not just willingness to take big things on.
+**Answer:** The rule: own only what only you can do (cross-team coherence, framing genuinely ambiguous problems) and hand off anything a strong senior can execute from a clear spec — writing that spec *is* the ownership, execution isn't. Example shape: declined to personally lead a service migration, wrote the decision doc plus review checkpoints instead, freeing roughly half the quarter for a platform bet only visible from staff altitude; the drop was public — named owner, written rationale — because silent dropping reads as neglect.
+**Follow-up trap:** *"Isn't declining work just dumping it downward?"* — the difference is transfer quality: context, a written plan, and review authority handed over versus abandonment; the multiplying competency is precisely what makes dropping work safe rather than negligent.
+
+### Q8 — Tell me about a time you disagreed with a director or VP on a technical decision. How did it resolve?
+**Testing:** disagreement hygiene — holding a technical line against organizational power without organizational damage.
+**Answer:** Strong answers follow a path: private first, never ambushed in a staff meeting; restate their actual constraint honestly (they were optimizing a launch date, not being careless); bring evidence sized to the decision (a one-week spike showing the shortcut added ~3 engineer-months of remediation debt); offer a third option (cut scope, not quality); pre-commit to a decision rule ("if the spike shows X, we go my way; if Y, yours"). Resolution by agreed rule keeps it a shared problem with falsifiable terms rather than resistance.
+**Follow-up trap:** *"And if the exec still said no after all that?"* — disagree-and-commit, executed genuinely: record the risk in an ADR with explicit revisit triggers and dates, then execute their call well; continued quiet relitigation is the failure mode, and the documented trigger is what preserves the technical concern without burning the relationship.
+
+### Q9 — How do you measure your own impact across multiple quarters when most staff+ work doesn't ship as code?
+**Testing:** whether the impact narrative runs on evidence or on activity recounting.
+**Answer:** Pick leading indicators tied to decisions, not effort: adoption counts (N teams using the platform/template/standard you introduced), outcome deltas in the domain you shaped (p99 down 40%, Sev-2s halved over two quarters), decision latency (RFC-to-decision time cut from six weeks to two), and avoided-work evidence (the migration argued out of existence, priced in engineer-months). Write a quarterly one-page self-review with those numbers — promo packets and interviews both demand receipts, and unaided memory reliably inflates activity over outcomes.
+**Follow-up trap:** *"Isn't counting adoptions just vanity metrics?"* — yes, if untethered: pair adoption with its outcome metric (teams adopted the framework AND their change-failure rate fell from ~18% to ~9%); adoption without an outcome delta measures marketing, not impact.
+
+### Q10 — What's the difference between mentoring and sponsorship, and which have you actually done?
+**Testing:** whether they distinguish spending time (mentoring) from spending their own credibility (sponsorship).
+**Answer:** Mentoring transfers knowledge and judgment — reviews, pairing, frameworks; it costs time and scales through mechanisms. Sponsorship spends your political capital: nominating someone for the launch-critical project, defending their promotion in calibration, putting their name forward for a visible role and backing it in the room; it's personal, scarce, and compounds careers differently. At staff+, sponsorship is expected both downward and sideways — e.g., championing a senior engineer as migration lead and staking your judgment on them in front of the director who decides.
+**Follow-up trap:** *"Can't you sponsor someone quietly?"* — no: sponsorship only functions when the beneficiary knows and the decision-makers know your reputation is attached; anonymous advocacy is mentoring wearing sponsorship's name, and claiming it as such signals exactly the confusion this question probes.
+
 ---
 
 ## Red flags that fail you
@@ -234,6 +259,9 @@ LEVELING REALITY             most rubrics score these 5 axes SEPARATELY — one 
 - *Staff Engineer: Leadership Beyond the Management Track* — Will Larson (2021)
 - *The Staff Engineer's Path* — Tanya Reilly (2022)
 - *Good Strategy/Bad Strategy* — Richard Rumelt (2011)
+- [Staff archetypes — Will Larson, staffeng.com guide](https://staffeng.com/guides/staff-archetypes) — accessed 2026-08-23
+- Reilly, Tanya. *The Staff Engineer's Path: A Guide for Individual Contributors Navigating Growth and Change*. Sebastopol, CA: O'Reilly Media, 2022. Print.
+- [Google engineering practices — code review guidelines](https://google.github.io/eng-practices/review/) — accessed 2026-08-23
 
 Note: live web search was unavailable during this module's research pass; content is grounded in established, primary-source industry references (the books above) rather than time-sensitive web sources. No claims requiring 2026-specific verification are made without being flagged as such in the Lineage section.
 

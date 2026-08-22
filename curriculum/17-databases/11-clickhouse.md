@@ -170,7 +170,7 @@ class SparseIndex:
         return results
 ```
 
-This omits adaptive granularity, per-column mark files, and merge-time index rebuilding, but shows the core reason `ORDER BY (user_id, ts)` makes `WHERE user_id = X` cheap (binary search narrows to one or two granules) and `WHERE some_other_column = X` expensive (every granule in the part is a candidate, since the index says nothing about that column's distribution). Full lab with a toy MergeTree including parts, background merge simulation, and the too-many-parts ceiling: `labs/py/11-mergetree-toy/`.
+This omits adaptive granularity, per-column mark files, and merge-time index rebuilding, but shows the core reason `ORDER BY (user_id, ts)` makes `WHERE user_id = X` cheap (binary search narrows to one or two granules) and `WHERE some_other_column = X` expensive (every granule in the part is a candidate, since the index says nothing about that column's distribution). Full lab with a toy MergeTree including parts, background merge simulation, and the too-many-parts ceiling: `(lab pending)`.
 
 ---
 

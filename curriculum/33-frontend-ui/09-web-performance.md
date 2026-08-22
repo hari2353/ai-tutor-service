@@ -149,7 +149,7 @@ Images are roughly 45-55% of average page weight (2.5-3MB desktop, ~2MB mobile p
 
 ## Build it from scratch
 
-A minimal but real performance-diagnosis exercise: instrument a page with the `web-vitals` library's `onLCP`/`onINP`/`onCLS` callbacks, log the attribution data to the console, then deliberately introduce three specific regressions one at a time (a lazy-loaded hero image, an unyielding 300ms synchronous click handler, an image without `width`/`height`) and confirm each one is visible in the corresponding metric's attribution data before fixing it. This exercise is valuable specifically because it forces measuring the effect of each regression individually rather than reasoning about performance in the abstract. Reference: `labs/js/09-web-performance/`.
+A minimal but real performance-diagnosis exercise: instrument a page with the `web-vitals` library's `onLCP`/`onINP`/`onCLS` callbacks, log the attribution data to the console, then deliberately introduce three specific regressions one at a time (a lazy-loaded hero image, an unyielding 300ms synchronous click handler, an image without `width`/`height`) and confirm each one is visible in the corresponding metric's attribution data before fixing it. This exercise is valuable specifically because it forces measuring the effect of each regression individually rather than reasoning about performance in the abstract. Reference: `(lab pending)`.
 
 ---
 

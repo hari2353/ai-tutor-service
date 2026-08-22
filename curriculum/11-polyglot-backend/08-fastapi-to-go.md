@@ -200,7 +200,7 @@ wrk -t8 -c200 -d30s http://fastapi-host:8000/items/42
 wrk -t8 -c200 -d30s http://go-host:8080/items/42
 ```
 
-A fuller lab building both versions against a real Postgres instance with realistic data volume, profiling each under `py-spy`/`pprof` respectively to attribute time to database vs framework vs serialization, and measuring the actual gap for a *representative* (not synthetic) workload belongs in `labs/go/08-fastapi-to-go/`.
+A fuller lab building both versions against a real Postgres instance with realistic data volume, profiling each under `py-spy`/`pprof` respectively to attribute time to database vs framework vs serialization, and measuring the actual gap for a *representative* (not synthetic) workload belongs in `(lab pending)`.
 
 ---
 

@@ -7,7 +7,7 @@ description: Add new content to the AI Tutor Service and reindex the app — a n
 
 The app renders from `app/data/*.js`, which is generated. **Nothing appears in the app until `build_data.py` runs.** This skill is the only correct way to change the index.
 
-**Repo root** (`$ROOT`): `C:\Users\medic\OneDrive\Documents\ai-tutor-service`
+**Repo root** (`$ROOT`): the directory containing `CONTENT-STATUS.md`. Find it by walking up from your current working directory until that file appears; if you never find it, ask the user where the repo lives — do not guess a path.
 
 ## The source of truth
 
@@ -77,7 +77,7 @@ Expected: `OK tracks=.. modules=.. hours=.. written=..` plus a `merged fragments
 Then verify nothing broke:
 
 ```bash
-node app/tests/dom.test.js "C:\Users\medic\OneDrive\Documents\ai-tutor-service"
+node app/tests/dom.test.js "$ROOT"
 ```
 
 ## Rules

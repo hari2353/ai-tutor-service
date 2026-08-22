@@ -102,7 +102,7 @@ function stub(id) { const n = new Node("div"); n.id = id; document._byId[id] = n
  "hud-streak", "hud-due", "tabs", "app", "foot-stats"].forEach(stub);
 
 // tab buttons, as index.html declares them
-const TABS = ["dash", "tracks", "cards", "problems", "boss", "badges", "save"];
+const TABS = ["dash", "tracks", "cards", "drills", "problems", "boss", "badges", "save"];
 TABS.forEach(v => {
   const b = new Node("button"); b.dataset.view = v; document._byId.tabs.appendChild(b);
 });
@@ -233,6 +233,54 @@ T("boss battle logging validates input", () => {
   assert(s.bosses[0].score === 82, "wrong score recorded: " + s.bosses[0].score);
 });
 
+T("boss score is clamped to the 0-100 band (typed 150 records 100)", () => {
+  switchTo("boss");
+  const input = findAll(app).find(n => n.tagName === "INPUT");
+  const before = JSON.parse(localStorage.getItem("ai-tutor-state-v2")).bosses.length;
+  input.value = "150";
+  findAll(app).filter(n => n.tagName === "BUTTON" && n._onclick)[0].click();
+  const s = JSON.parse(localStorage.getItem("ai-tutor-state-v2"));
+  assert(s.bosses.length === before + 1, "clamped boss not recorded");
+  assert(s.bosses[s.bosses.length - 1].score === 100, "score not clamped: " + s.bosses[s.bosses.length - 1].score);
+});
+
+T("drills view renders and reveals an answer", () => {
+  switchTo("drills");
+  let reveal = findAll(app).filter(n => n.tagName === "BUTTON" && n._onclick && n._html === "Reveal")[0];
+  assert(reveal, "no Reveal button in drills view");
+  reveal.click();
+  const graded = findAll(app).filter(n => n.tagName === "BUTTON" && n._onclick);
+  assert(graded.some(b => b._html === "knew it") && graded.some(b => b._html === "missed"),
+    "grade buttons missing after reveal");
+});
+
+T("clearing a drill awards drill XP exactly once and persists", () => {
+  switchTo("drills");
+  const C = global.window.CURRICULUM;
+  const drillXp = C.xp_table.drill || 5;
+  const before = Number(document._byId["hud-xp"].textContent);
+  findAll(app).filter(n => n.tagName === "BUTTON" && n._onclick && n._html === "Reveal")[0].click();
+  findAll(app).filter(n => n.tagName === "BUTTON" && n._onclick && n._html === "knew it")[0].click();
+  const after = Number(document._byId["hud-xp"].textContent);
+  assert(after - before === drillXp, `xp delta ${after - before} != drill xp ${drillXp}`);
+  const s = JSON.parse(localStorage.getItem("ai-tutor-state-v2"));
+  assert(Object.keys(s.drills).length === 1, `expected 1 cleared drill, got ${Object.keys(s.drills).length}`);
+});
+
+T("missed drills stay due and cleared drills leave the queue", () => {
+  switchTo("drills");
+  // clear one more via "knew it"
+  findAll(app).filter(n => n.tagName === "BUTTON" && n._onclick && n._html === "Reveal")[0].click();
+  findAll(app).filter(n => n.tagName === "BUTTON" && n._onclick && n._html === "knew it")[0].click();
+  let s = JSON.parse(localStorage.getItem("ai-tutor-state-v2"));
+  assert(Object.keys(s.drills).length === 2, `expected 2 cleared, got ${Object.keys(s.drills).length}`);
+  // then miss one — it must NOT be recorded as cleared
+  findAll(app).filter(n => n.tagName === "BUTTON" && n._onclick && n._html === "Reveal")[0].click();
+  findAll(app).filter(n => n.tagName === "BUTTON" && n._onclick && n._html === "missed")[0].click();
+  s = JSON.parse(localStorage.getItem("ai-tutor-state-v2"));
+  assert(Object.keys(s.drills).length === 2, "a missed drill was recorded as cleared");
+});
+
 T("data-go shortcuts resolve to real views", () => {
   switchTo("dash");
   const gos = findAll(app).filter(n => n.dataset && n.dataset.go);
@@ -261,5 +309,13 @@ if (fail.length) { console.log("\n  FAILURES:"); fail.forEach(f => console.log(`
   const src = fs.readFileSync(path.join(ROOT, "app", "app.js"), "utf8");
   const ok = /isBoss/.test(src) && /view = "boss"/.test(src);
   console.log(`  ${ok ? "✓" : "✗"} boss rounds route to the Boss tab, not module completion`);
+  if (!ok) process.exit(1);
+})();
+
+// --- regression: drill XP guard must key off S.drills (no double-award path) ---
+(() => {
+  const src = fs.readFileSync(path.join(ROOT, "app", "app.js"), "utf8");
+  const ok = /if\(!S\.drills\[d\.id\]\) award/.test(src);
+  console.log(`  ${ok ? "✓" : "✗"} drill XP is guarded per-id (award only on first knew-it)`);
   if (!ok) process.exit(1);
 })();

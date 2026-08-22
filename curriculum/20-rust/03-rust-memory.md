@@ -2,7 +2,6 @@
 
 > **Track:** T20 Rust · **Time:** 2.5h · **Prereqs:** `T20-rust-ownership` · **Updated:** 2026-08-05
 > **Module id:** `T20-rust-memory` · **Tags:** core, critical, concurrency, unsafe
-> **Lab:** `labs/rust/03-rust-memory/`
 
 ## The 30-second version
 
@@ -488,7 +487,7 @@ Adjacent tooling worth naming so you do not sound like Miri is the only option: 
 
 ## Build it from scratch
 
-The exercise that teaches this module is writing `Rc` yourself. It is about 60 lines and it forces you through the header layout, the `Weak` invariant, the `Deref`, and the `Drop` ordering. Reference implementation and tests belong in `labs/rust/03-rust-memory/`.
+The exercise that teaches this module is writing `Rc` yourself. It is about 60 lines and it forces you through the header layout, the `Weak` invariant, the `Deref`, and the `Drop` ordering. Reference implementation and tests belong in `(lab pending)`.
 
 ```rust
 // untested sketch: a single-threaded Rc, deliberately without Weak.

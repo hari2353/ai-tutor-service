@@ -2,7 +2,6 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.0h · **Prereqs:** arrays, T02-p17-topological-sort, graphs
 > **Module id:** `T02-p19-union-find` · **Tags:** pattern, graph
-> **Lab:** `labs/py/19-union-find/`
 
 ## The 30-second version
 

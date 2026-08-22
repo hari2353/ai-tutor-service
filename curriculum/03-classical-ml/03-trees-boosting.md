@@ -2,7 +2,6 @@
 
 > **Track:** T03 Classical ML · **Time:** 3h · **Prereqs:** T03-linear-models, T03-regularization · **Updated:** 2026-08-03
 > **Module id:** `T03-trees-boosting` · **Tags:** models, critical
-> **Lab:** `labs/python/03-trees-boosting/`
 
 ## The 30-second version
 

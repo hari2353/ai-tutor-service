@@ -150,7 +150,7 @@ finally:
     server.close()
 ```
 
-This single-threaded loop handles an arbitrary number of connections with one thread, one stack, and O(1) work per ready descriptor — the entire point of the model. A production comparison lab (measuring thread-per-connection memory/CPU vs. this epoll loop vs. an `io_uring`-based version under `wrk`/`ab` load) belongs in `labs/python/09-io-models/`.
+This single-threaded loop handles an arbitrary number of connections with one thread, one stack, and O(1) work per ready descriptor — the entire point of the model. A production comparison lab (measuring thread-per-connection memory/CPU vs. this epoll loop vs. an `io_uring`-based version under `wrk`/`ab` load) belongs in `(lab pending)`.
 
 ---
 

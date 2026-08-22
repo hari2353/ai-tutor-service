@@ -2,7 +2,6 @@
 
 > **Track:** T12 DevOps, Infra & Security · **Time:** 2h · **Prereqs:** T12-owasp, T12-secrets · **Updated:** 2026-08-05
 > **Module id:** `T12-authz` · **Tags:** security, authz, multi-tenancy, zero-trust, critical
-> **Lab:** `labs/py/18-tenant-isolation/`
 
 ## The 30-second version
 
@@ -232,7 +231,7 @@ CREATE INDEX ON documents (tenant_id, created_at DESC);
 **The connection-pooling trap, which is the single most common way RLS fails in production.** `SET app.tenant_id = ...` is session-scoped. With PgBouncer in transaction pooling mode (or any pool that hands the same backend connection to a different request), the value survives into the next transaction on that connection and the next tenant inherits it. The fix is `SET LOCAL` inside an explicit transaction, which is scoped to the transaction and rolled back at commit:
 
 ```python
-# labs/py/18-tenant-isolation/tenant_ctx.py
+# (lab pending)tenant_ctx.py
 from contextlib import contextmanager
 
 @contextmanager
@@ -304,7 +303,7 @@ What is actually deployed at scale in 2026: identity-aware proxies replacing VPN
 A minimal Zanzibar-style checker. This is the thing to write on a whiteboard, and getting the userset rewrite and the cycle guard right is the whole exercise.
 
 ```python
-# labs/py/18-tenant-isolation/rebac.py
+# (lab pending)rebac.py
 # Minimal ReBAC check with computed usersets and parent inheritance.
 from collections import defaultdict
 from dataclasses import dataclass, field
@@ -395,7 +394,7 @@ assert s.expand("doc:roadmap", "viewer") == {"user:alice", "user:bob"}
 
 What this deliberately does not have, and what you should say it does not have: no zookie or consistency token (so it has the new enemy problem), no caching or leopard-style denormalized index for deep group nesting, no negation, and no contextual conditions. Naming the gaps is the answer to "what would you add next."
 
-The tenant-isolation half of the lab is a Postgres instance with RLS enabled, a deliberately-owner-connected app role that demonstrates policies silently doing nothing until `FORCE ROW LEVEL SECURITY` is added, and a PgBouncer transaction-pooling reproduction of the `SET` versus `SET LOCAL` leak: **`labs/py/18-tenant-isolation/`**.
+The tenant-isolation half of the lab is a Postgres instance with RLS enabled, a deliberately-owner-connected app role that demonstrates policies silently doing nothing until `FORCE ROW LEVEL SECURITY` is added, and a PgBouncer transaction-pooling reproduction of the `SET` versus `SET LOCAL` leak: **`(lab pending)`**.
 
 ---
 

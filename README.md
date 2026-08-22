@@ -2,17 +2,22 @@
 
 Personal interview-and-mastery system for **Hari Siva Rami Dwarampudi** — Principal AI Engineer, actively interviewing.
 
-**34 tracks · 390 modules · 891 hours** — with a **29-module, 79-hour, 9-weekend sprint** on top that's what actually decides your next loop. Fully local, free tier, zero cloud spend.
+**36 tracks · 452 modules · ~1,043 hours** — with a **32-module, ~89-hour, 10-weekend sprint** on top that's what actually decides your next loop. Fully local, free tier, zero cloud spend.
+
+> Numbers drift as content lands. The live counts are always in `CONTENT-STATUS.md`
+> (regenerate with `python app/build_data.py`). Historical planning docs live in `docs/history/`.
 
 ---
 
 ## Open it
 
+Double-click:
+
 ```
-C:\Users\medic\OneDrive\Documents\ai-tutor-service\app\index.html
+app\index.html
 ```
 
-Double-click. No server, no build step, no install. State saves to your browser; export it from the **Save/Load** tab into `progress/progress.json` to version it or move machines.
+No server, no build step, no install. State saves to your browser; export it from the **Save/Load** tab into `progress/progress.json` to version it or move machines.
 
 ---
 
@@ -29,11 +34,13 @@ Double-click. No server, no build step, no install. State saves to your browser;
 | `/tutor-cheatsheet <topic>` | One-page revision sheet + flashcards |
 | `/tutor-progress` | Where you actually stand, and the one thing to do next |
 | **`/tutor-update`** | **Pulls the delta from AWS/Azure/GCP release feeds + the AI stack since the last run** |
-| `/tutor-add <thing>` | Appends new content and reindexes the app |
+| `/tutor-add` | Appends new content and reindexes the app |
 | **`/tutor-company`** | **Paste a job description → researched prep pack + role-play as that company's interviewer** |
 | **`/tutor-debrief`** | **Report back after a real interview → it logs the questions, diagnoses the failure type, and re-prioritises the curriculum automatically** |
 
-All twelve live in `skills/` and are installed to your account, so they work in any session, not just this folder. After editing one:
+All twelve skills locate the repo by walking up to the directory containing
+`CONTENT-STATUS.md` — they work from any subdirectory on any machine, no hardcoded
+paths. After editing one:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File skills\install.ps1
@@ -46,43 +53,60 @@ The last two close the loop: prep against a real JD → interview → debrief �
 ## Layout
 
 ```
-PLAN.md          the contract — tracks, roadmap, build phases
+README.md        start here — what this is, how to drive it
 ROADMAP.md       weekend-by-weekend schedule
+CONTENT-STATUS.md  auto-generated burn-down (the honest number)
+LEARNING-PATH.md   prerequisite-ordered reading path (auto-generated)
 skills/          the 12 /tutor-* skills (source of truth) + install.ps1
 app/             the gamified tutor (index.html + engine + generated data)
-curriculum/      theory — deep dives, one .md per concept, 31 tracks
+  build_data.py  TRACKS spec -> .json/.js + CONTENT-STATUS.md
+  tests/run.ps1  full suite on Windows (run.sh for bash)
+curriculum/      theory — deep dives, one .md per concept, 36 tracks incl. clouds
 clouds/          AWS · Azure · GCP service atlases + changelogs
   CROSS-CLOUD-MAP.md    the equivalence table to recite in interviews
 labs/            practice — py · java · go · rust · ts · infra, all test-driven
 cheatsheets/     one-pagers for the morning of an interview
 drills/          question banks
 mocks/           your scored transcripts
-progress/        exported state
+progress/        exported state · CONFIRM-CHECKLIST.md (facts only you can fill)
+scripts/         auditable one-time repo fixes
+docs/history/    PLAN / PIPELINE / HANDOFF as they were at each milestone
+templates/       MODULE-SPEC.md — the contract every module is written against
 ```
 
 ---
 
 ## Three tiers
 
-**SPRINT** — 29 modules, 79h, 9 weekends. Weekend-ordered and the quest generator follows that order exactly. Agent loops, LangGraph durability, RAG retrieval, context engineering, attention + inference serving, design craft (estimation/diagramming/method), eval, MVCC, your resume systems, and a zero-to-production capstone. This is the plan.
+**SPRINT** — 32 modules, ~89h, 10 weekends. Weekend-ordered and the quest generator follows that order exactly. Agent loops, LangGraph durability, RAG retrieval, context engineering, attention + inference serving, design craft (estimation/diagramming/method), eval, MVCC, your resume systems, harness engineering, and a zero-to-production capstone. This is the plan.
 
-**Phase A — core.** Everything else you'd be embarrassed not to know for these roles: DSA + graph algorithms, **networking & protocols (TCP, gRPC, HTTP semantics, curl)**, **auth & appsec (JWT, OAuth2/OIDC)**, data engineering + EMR, testing, Docker/Kubernetes/Git/debugging, AI-assisted architecture, the AWS atlas.
+**Phase A — core.** Everything else you'd be embarrassed not to know for these roles: DSA + graph algorithms, networking & protocols (TCP, gRPC, HTTP semantics, curl), auth & appsec (JWT, OAuth2/OIDC), data engineering + EMR, frontend & UI engineering, testing, Docker/Kubernetes/Git/debugging, AI-assisted architecture, applied NLP/marketing ML, the AWS atlas.
 
-**Phase B — mastery.** Computer systems from transistor to runtime, **reinforcement learning from MDPs to PPO**, Rust, classical ML and deep learning from scratch, quant finance and Basel, blockchain, quantum, frontier AI (world models, JEPA, Cosmos, robotics).
+**Phase B — mastery.** Computer systems from transistor to runtime, reinforcement learning from MDPs to PPO, Rust, classical ML and deep learning from scratch, quant finance and Basel, blockchain, quantum, frontier AI (world models, JEPA, Cosmos, robotics).
 
 The app handles the sequencing. Sprint modules bypass prerequisite gating — if it's in the sprint you need it now.
 
-**891 hours is well over two years of weekends, and that's intentional.** It's a reference library with a sprint on top, not a queue to drain. Do the sprint; pull on the rest when a topic comes up.
+**~1,043 hours is well over two years of weekends, and that's intentional.** It's a reference library with a sprint on top, not a queue to drain. Do the sprint; pull on the rest when a topic comes up.
 
 ---
 
 ## Gamification
 
-XP per activity → 10 levels (Initiate → **Principal Architect**) · weekend streaks · 42 badges · SM-2 spaced repetition · prereq-gated skill tree · boss battles every ~12 modules.
+XP per activity → 10 levels (Initiate → **Principal Architect**) · weekend streaks · 42 badges · SM-2 spaced repetition · ~4,800 flashcards · ~4,000 drills in the Drills tab · prereq-gated skill tree · boss battles every ~12 modules.
 
 The spaced repetition matters more than it sounds for a weekend-only cadence: you forget between sessions, and the scheduler is what stops that.
 
 ---
+
+## Test everything
+
+One command on Windows:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File app\tests\run.ps1
+```
+
+(bash equivalent: `bash app/tests/run.sh`) — rebuilds data, runs the DOM/state tests, the SM-2 scheduler tests, the mechanical review gate over all written modules, and every lab that has a `tests/` directory. A missing pytest shows as SKIPPED, never green.
 
 ## Adding content
 
@@ -98,7 +122,7 @@ then run:
 python app/build_data.py
 ```
 
-That regenerates both `.json` (source of truth) and `.js` (what the app loads from `file://`). **The app will not see new content until this runs.** Or just say `/tutor-add` and Claude does it.
+That regenerates both `.json` (source of truth) and `.js` (what the app loads from `file://`). Flashcards/drills/problems are written as per-module fragments under `app/data/{cards,drillsets,problemsets}/` and merged by id — fragments are validated at merge time, so a malformed row fails loudly instead of rendering blank in the app. **The app will not see new content until this runs.** Or just say `/tutor-add` and Claude does it.
 
 ---
 

@@ -2,7 +2,6 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 1.5h · **Prereqs:** heaps/priority queues, T02-p09-two-heaps
 > **Module id:** `T02-p13-top-k` · **Tags:** pattern, heap, quickselect
-> **Lab:** `labs/py/13-top-k/`
 
 ## The 30-second version
 

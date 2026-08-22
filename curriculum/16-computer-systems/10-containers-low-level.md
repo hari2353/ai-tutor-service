@@ -107,7 +107,7 @@ Because every container process runs on the **same host kernel** (no separate ke
 
 ## Build it from scratch
 
-The mechanically honest version of "build a container" is composing `unshare`, `chroot`, and a cgroup directory by hand — this is small enough to actually run and prove the model, and a fuller shell-script version belongs in `labs/shell/10-containers-low-level/`:
+The mechanically honest version of "build a container" is composing `unshare`, `chroot`, and a cgroup directory by hand — this is small enough to actually run and prove the model, and a fuller shell-script version belongs in `(lab pending)`:
 
 ```bash
 # untested sketch — a "container" in ~15 lines, Linux only, run as root

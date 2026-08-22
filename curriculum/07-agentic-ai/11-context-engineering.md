@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 3h · **Prereqs:** `T07-agent-loop-from-scratch`, `T07-agent-memory` · **Updated:** 2026-07-26
 > **Module id:** `T07-context-engineering` · **Tags:** sprint (W4), memory, context
-> **Lab:** `labs/py/11-context-engineering/`
 
 ## The 30-second version
 
@@ -154,7 +153,7 @@ This is the code to be able to write on a whiteboard. It handles token accountin
 """compaction.py — a real compactor. Provider-shaped for Anthropic Messages;
 the structure transfers directly to OpenAI/Gemini message lists.
 The tested version, with a scripted fake client, is in
-labs/py/11-context-engineering/. Read this as the reference structure."""
+(lab pending). Read this as the reference structure."""
 from __future__ import annotations
 import json, re
 from dataclasses import dataclass, field
@@ -477,7 +476,7 @@ The falsifiable version, which is what you offer if challenged: run the same gol
 
 ## Build it from scratch
 
-`labs/py/11-context-engineering/` builds the whole stack against a scripted fake client, so it is deterministic and free:
+`(lab pending)` builds the whole stack against a scripted fake client, so it is deterministic and free:
 
 1. **Token ledger.** Instrument a loop to emit per-zone token counts every turn. Reproduce the quadratic curve, then fix the tool and watch it flatten. Assert cumulative input tokens drop >60% with no change to the model or the task.
 2. **The compactor above.** Implement `should_compact`, boundary snapping, and the protected block. Test: a 60-turn run where an account id appears once at turn 3 and the task is asked about at turn 58. Naive summarisation loses it; the protected block plus the verbatim-values section does not.

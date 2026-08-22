@@ -2,7 +2,6 @@
 
 > **Track:** T28 AI-Assisted Architecture · **Time:** 3h · **Prereqs:** `T07-harness-engineering`, `T21-architecture-principles` · **Updated:** 2026-07-26
 > **Module id:** `T28-claude-architect` · **Tags:** sprint, architecture, critical
-> **Lab:** `labs/py/28-agent-review-gauntlet/`
 
 ## The 30-second version
 
@@ -257,7 +256,7 @@ The formulation to remember: **if your ability to read does not scale with the a
 
 ## Build it from scratch
 
-`labs/py/28-agent-review-gauntlet/` is a review exercise rather than an implementation lab, because review is the skill under test. It ships a repository with nine agent-authored PRs, one per failure class in the table above, each of which passes CI:
+`(lab pending)` is a review exercise rather than an implementation lab, because review is the skill under test. It ships a repository with nine agent-authored PRs, one per failure class in the table above, each of which passes CI:
 
 1. **Assumption propagation** across three PRs building on an invented module boundary. Scored on whether you catch it at the plan, and whether you notice at PR 3 that PR 1 was the error.
 2. **Green tests, broken feature.** The integration test mocks the exact dependency that is broken.

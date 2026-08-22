@@ -3,7 +3,6 @@
 > **Track:** T30 Auth & Application Security · **Time:** 2.5h · **Prereqs:** `T30-oauth-oidc`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-sso-federation` · **Tags:** enterprise
-> **Lab:** `labs/py/07-spiffe-mtls-demo/`
 
 ## The 30-second version
 
@@ -158,7 +157,7 @@ attacker_attempt = authority.attest_and_issue(selector="k8s:ns=payments,sa=total
 print(attacker_attempt)   # None — attestation failed, no identity issued
 ```
 
-Full lab with a real local SPIRE deployment, mTLS between two demo services, and a policy check against the caller's SPIFFE ID: **`labs/py/07-spiffe-mtls-demo/`**.
+Full lab with a real local SPIRE deployment, mTLS between two demo services, and a policy check against the caller's SPIFFE ID: **`(lab pending)`**.
 
 ---
 

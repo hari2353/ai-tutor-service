@@ -3,7 +3,6 @@
 > **Track:** T30 Auth & Application Security · **Time:** 2.5h · **Prereqs:** `T30-jwt-deep`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-crypto-practice` · **Tags:** crypto, critical
-> **Lab:** `labs/py/11-crypto-primitives/`
 
 ## The 30-second version
 
@@ -268,7 +267,7 @@ def verify_webhook_signature(payload: bytes, secret: bytes, provided_sig: str) -
     return hmac.compare_digest(expected, provided_sig)   # constant-time, always
 ```
 
-Full lab with envelope encryption against a local KMS emulator, a working nonce-reuse "Forbidden Attack" demonstration in a sandboxed environment, and a timing-attack proof-of-concept against a naive string comparison: **`labs/py/11-crypto-primitives/`**.
+Full lab with envelope encryption against a local KMS emulator, a working nonce-reuse "Forbidden Attack" demonstration in a sandboxed environment, and a timing-attack proof-of-concept against a naive string comparison: **`(lab pending)`**.
 
 ---
 

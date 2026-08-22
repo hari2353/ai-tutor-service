@@ -171,7 +171,7 @@ print(check_fd(bad, ["order_id"], ["customer_id"]))
 print(check_fd(order_items, ["product_id"], ["product_name"]))  # []
 ```
 
-This is exactly the mechanical check underlying "is this a partial/transitive dependency" reasoning — running it against real production data (rather than assuming a business rule holds) is also how automated FD-discovery tools work, and it's a good sanity check before decomposing a schema based on an assumed-but-unverified dependency. Full version building a small normalizer that takes a table + declared FDs and outputs the 2NF/3NF/BCNF decomposition automatically: **`labs/py/16-normalizer/`**.
+This is exactly the mechanical check underlying "is this a partial/transitive dependency" reasoning — running it against real production data (rather than assuming a business rule holds) is also how automated FD-discovery tools work, and it's a good sanity check before decomposing a schema based on an assumed-but-unverified dependency. Full version building a small normalizer that takes a table + declared FDs and outputs the 2NF/3NF/BCNF decomposition automatically: **`(lab pending)`**.
 
 ---
 

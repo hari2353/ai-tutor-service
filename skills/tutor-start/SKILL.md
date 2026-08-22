@@ -7,8 +7,7 @@ description: Start a study session against the AI Tutor Service curriculum. Show
 
 Opens a session. Answers exactly one question: **what do I do in the next N hours.**
 
-**Repo root** (`$ROOT`): `C:\Users\medic\OneDrive\Documents\ai-tutor-service`
-If that directory does not exist, say so and stop. Do not guess another path.
+**Repo root** (`$ROOT`): the directory containing `CONTENT-STATUS.md`. Find it by walking up from your current working directory until that file appears; if you never find it, ask the user where the repo lives — do not guess a path.
 
 ## 1. Read state
 

@@ -2,7 +2,6 @@
 
 > **Track:** T08 Eval & Observability · **Time:** 2h · **Prereqs:** none
 > **Module id:** `T08-llm-as-judge` · **Tags:** sprint, eval, critical
-> **Lab:** `labs/py/02-judge-calibration/`
 
 ## The 30-second version
 
@@ -173,7 +172,7 @@ def calibrate(human_labels: list[str], judge_labels: list[str]) -> float:
 # Gate: only trust this judge in CI if calibrate(...) >= 0.6 on your held-out set.
 ```
 
-Full version with Krippendorff's alpha for 3+ raters, a G-Eval-style CoT-then-score pointwise grader, and a bias-stress-test suite (position, verbosity, self-preference probes): **`labs/py/02-judge-calibration/`**.
+Full version with Krippendorff's alpha for 3+ raters, a G-Eval-style CoT-then-score pointwise grader, and a bias-stress-test suite (position, verbosity, self-preference probes): **`(lab pending)`**.
 
 ---
 

@@ -166,7 +166,7 @@ class MiniInvertedIndex:
         return sorted(scored, key=lambda x: -x[1])[:top_k]
 ```
 
-This omits phrase queries (position data in postings), field-length norms per field, and any distributed/sharding concerns — it demonstrates the actual arithmetic of BM25's saturation (`k1`) and length normalization (`b`) terms, which is the part people can describe in words but rarely have implemented. Full lab with segment-merge simulation and a toy refresh/flush pipeline: `labs/py/12-search-engine-toy/`.
+This omits phrase queries (position data in postings), field-length norms per field, and any distributed/sharding concerns — it demonstrates the actual arithmetic of BM25's saturation (`k1`) and length normalization (`b`) terms, which is the part people can describe in words but rarely have implemented. Full lab with segment-merge simulation and a toy refresh/flush pipeline: `(lab pending)`.
 
 ---
 

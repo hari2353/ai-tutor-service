@@ -2,7 +2,6 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.0h · **Prereqs:** T02-p07-bfs, T02-p08-dfs
 > **Module id:** `T02-graph-core` · **Tags:** graphs, critical, fundamentals
-> **Lab:** `labs/py/26-graph-core/`
 
 ## The 30-second version
 

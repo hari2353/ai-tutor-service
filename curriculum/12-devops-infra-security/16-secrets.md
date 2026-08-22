@@ -215,7 +215,7 @@ def logout(user_id: str, store):
     store.revoke_all_families_for_user(user_id)   # explicit revocation path
 ```
 
-A fuller lab exercising dual-secret database credential rotation against a live Postgres (via Testcontainers, `T12-local-cloud-parity`) with a deliberately-too-short grace period demonstrating the outage, then corrected, belongs in `labs/security/16-secrets/`.
+A fuller lab exercising dual-secret database credential rotation against a live Postgres (via Testcontainers, `T12-local-cloud-parity`) with a deliberately-too-short grace period demonstrating the outage, then corrected, belongs in `(lab pending)`.
 
 ---
 

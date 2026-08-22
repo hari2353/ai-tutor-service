@@ -2,7 +2,6 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 2.5h · **Prereqs:** T31-rl-framing, T31-exploration, T31-model-based, T31-offline-rl · **Updated:** 2026-08-05
 > **Module id:** `T31-rl-in-production` · **Tags:** production, safety, critical, capstone
-> **Lab:** `labs/py/31-14-rl-in-production/`
 
 ## The 30-second version
 
@@ -201,7 +200,7 @@ Two things worth building yourself, because they are what you will actually be a
 ```python
 """Propensity logging + off-policy evaluation for a contextual-bandit policy.
 Tested against a synthetic logged dataset; run directly to see the diagnostics.
-labs/py/31-14-rl-in-production/ope.py
+(lab pending)ope.py
 """
 import numpy as np
 from dataclasses import dataclass

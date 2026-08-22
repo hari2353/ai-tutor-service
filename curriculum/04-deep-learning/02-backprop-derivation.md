@@ -2,7 +2,6 @@
 
 > **Track:** T04 Deep Learning · **Time:** 2.5h · **Prereqs:** T04-neural-net-math · **Updated:** 2026-08-03
 > **Module id:** `T04-backprop-derivation` · **Tags:** fundamentals, critical
-> **Lab:** `labs/python/02-backprop-derivation/`
 
 ## The 30-second version
 
@@ -210,7 +209,7 @@ print(f"delta_h1={delta_h1:.9f} delta_h2={delta_h2:.9f}")           # 0.00877135
 print(f"dE/dw1={dE_dw1:.9f} dE/dw4={dE_dw4:.9f}")                   # 0.000438568 0.000995425
 ```
 
-Cross-checking every printed value against a `torch.autograd`-computed gradient on the identical weights (load these eight numbers into `nn.Linear` layers, call `.backward()`, compare `.grad` to the hand-derived numbers to `1e-6`) is the lab exercise in `labs/python/02-backprop-derivation/` — this is also the single best debugging habit for any from-scratch gradient implementation: never trust a hand-derived gradient until you've diffed it against autograd on a small case.
+Cross-checking every printed value against a `torch.autograd`-computed gradient on the identical weights (load these eight numbers into `nn.Linear` layers, call `.backward()`, compare `.grad` to the hand-derived numbers to `1e-6`) is the lab exercise in `(lab pending)` — this is also the single best debugging habit for any from-scratch gradient implementation: never trust a hand-derived gradient until you've diffed it against autograd on a small case.
 
 ---
 

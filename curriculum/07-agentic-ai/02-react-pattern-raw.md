@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2.5h · **Prereqs:** `T07-agent-loop-from-scratch` · **Updated:** 2026-07-26
 > **Module id:** `T07-react-pattern-raw` · **Tags:** sprint, core, reasoning
-> **Lab:** `labs/py/03-reasoning-patterns/`
 
 ## The 30-second version
 
@@ -280,7 +279,7 @@ The composition that actually ships: **Plan-Execute as the outer orchestration, 
 
 ## Build it from scratch
 
-`labs/py/03-reasoning-patterns/` builds all four on top of the loop from module 01, against a scripted fake model so tests are deterministic and free:
+`(lab pending)` builds all four on top of the loop from module 01, against a scripted fake model so tests are deterministic and free:
 
 1. **ReAct 2022** — implement `ACTION_RE`, then a property test that feeds it 30 adversarial action strings (quotes, nested brackets, fences, unicode). Measure your own parse-failure rate. This is the exercise that makes the point.
 2. **ReAct 2026** — same task, native tool calling, thinking block preserved in history. Assert the parse-failure rate is exactly 0 and the step count is ≤ the 2022 version.

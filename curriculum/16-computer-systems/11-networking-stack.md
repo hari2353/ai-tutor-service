@@ -106,7 +106,7 @@ ethtool -S eth0 | grep -i drop            # per-NIC drop counters
 curl -w "http_version:%{http_version}\n" -o /dev/null -s https://example.com
 ```
 
-`curl -w`'s per-phase timing breakdown is the single most useful diagnostic habit from this module — it directly attributes latency to DNS, TCP connect, TLS handshake, or time-to-first-byte, which is exactly the layering this module teaches you to reason about. A fuller lab (packet capture with `tcpdump`/Wireshark correlated against these timings, and a minimal HTTP/1.1 vs HTTP/2 comparison against a local server) belongs in `labs/shell/11-networking-stack/`.
+`curl -w`'s per-phase timing breakdown is the single most useful diagnostic habit from this module — it directly attributes latency to DNS, TCP connect, TLS handshake, or time-to-first-byte, which is exactly the layering this module teaches you to reason about. A fuller lab (packet capture with `tcpdump`/Wireshark correlated against these timings, and a minimal HTTP/1.1 vs HTTP/2 comparison against a local server) belongs in `(lab pending)`.
 
 ---
 

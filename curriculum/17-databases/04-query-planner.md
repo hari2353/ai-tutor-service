@@ -2,7 +2,6 @@
 
 > **Track:** T17 Databases: SQL, NoSQL, Vector · **Time:** 2.5h · **Prereqs:** `T17-mvcc-isolation`
 > **Module id:** `T17-query-planner` · **Tags:** sprint, internals, critical
-> **Lab:** `labs/py/04-planner-toy/`
 
 ## The 30-second version
 
@@ -202,7 +201,7 @@ def choose_plan(outer: TableEstimate, inner: TableEstimate, inner_indexed: bool)
 # mechanical failure as the worked walkthrough above.
 ```
 
-Full version wired to real Postgres `pg_stats`, merge-join cost modeling, and a side-by-side `EXPLAIN`-vs-actual diff tool: **`labs/py/04-planner-toy/`**.
+Full version wired to real Postgres `pg_stats`, merge-join cost modeling, and a side-by-side `EXPLAIN`-vs-actual diff tool: **`(lab pending)`**.
 
 ---
 

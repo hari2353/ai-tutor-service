@@ -2,7 +2,6 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 3h · **Prereqs:** `T31-ppo`, `T31-policy-gradient`, `T31-mdp` · **Updated:** 2026-08-05
 > **Module id:** `T31-rl-for-llms` · **Tags:** rlhf, dpo, grpo, rlvr, reward-hacking, llm, critical
-> **Lab:** `labs/py/31-13-rl-for-llms/`
 
 ## The 30-second version
 
@@ -254,7 +253,7 @@ Tulu 3's numbers are a useful sanity anchor for what RLVR buys when it is *not* 
 
 ## Build it from scratch
 
-A minimal GRPO step, using the token-level MDP facts derived above: one advantage per completion broadcast to all its tokens, no critic, `\gamma=1`, terminal reward from a verifier. The matching lab is `labs/py/31-13-rl-for-llms/`.
+A minimal GRPO step, using the token-level MDP facts derived above: one advantage per completion broadcast to all its tokens, no critic, `\gamma=1`, terminal reward from a verifier. The matching lab is `(lab pending)`.
 
 ```python
 # untested sketch -- minimal GRPO step. Illustrative; no sharding, no vLLM, no async.

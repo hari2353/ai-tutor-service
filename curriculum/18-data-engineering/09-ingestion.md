@@ -174,7 +174,7 @@ def run(conn, warehouse, table: str):
     save_watermark(Watermark(table=table, last_value=max_seen))
 ```
 
-The two details that separate this from a toy script: the watermark only advances after every batch in the run has committed (advance-then-fail is how gaps happen), and the merge carries a guard column so a retried or redelivered batch cannot regress newer data. Full version with a dead-letter sink and schema-drift detection: `labs/py/18-ingestion-lab/` (reference the pattern in `labs/py/17-dimensional-lab/` for the merge mechanics).
+The two details that separate this from a toy script: the watermark only advances after every batch in the run has committed (advance-then-fail is how gaps happen), and the merge carries a guard column so a retried or redelivered batch cannot regress newer data. Full version with a dead-letter sink and schema-drift detection: `(lab pending)` (reference the pattern in `(lab pending)` for the merge mechanics).
 
 ---
 

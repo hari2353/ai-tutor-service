@@ -2,7 +2,6 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 2.0h · **Prereqs:** T02-graph-core, T02-p17-topological-sort, T02-graph-scc
 > **Module id:** `T02-graph-applied` · **Tags:** graphs, applied, systems
-> **Lab:** `labs/py/30-graph-applied/`
 
 ## The 30-second version
 

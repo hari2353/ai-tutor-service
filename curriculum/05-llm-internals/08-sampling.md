@@ -2,7 +2,6 @@
 
 > **Track:** T05 LLM Internals · **Time:** 2h · **Prereqs:** T05-autoregression, T05-attention · **Updated:** 2026-07-28
 > **Module id:** `T05-sampling` · **Tags:** inference
-> **Lab:** `labs/py/08-sampling/`
 
 ## The 30-second version
 
@@ -160,7 +159,7 @@ def speculative_step(draft_probs, target_probs, draft_token, rng):
 
 The residual-distribution resampling step is the detail most naive implementations get wrong — resampling directly from `target_probs` on rejection would bias the overall distribution; the correction must subtract out the draft's already-considered mass first, which is exactly what makes the algorithm exact rather than approximate.
 
-Full implementation including top-k/top-p/min-p side-by-side distribution plots, a batched speculative-decoding harness, and an XGrammar-style FSM constrained-decoding toy example: **`labs/py/08-sampling/`**.
+Full implementation including top-k/top-p/min-p side-by-side distribution plots, a batched speculative-decoding harness, and an XGrammar-style FSM constrained-decoding toy example: **`(lab pending)`**.
 
 ---
 

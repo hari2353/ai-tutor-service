@@ -2,7 +2,6 @@
 
 > **Track:** T31 Reinforcement Learning · **Time:** 2.5h · **Prereqs:** T31-monte-carlo-td · **Updated:** 2026-08-03
 > **Module id:** `T31-q-learning-sarsa` · **Tags:** tabular, critical
-> **Lab:** `labs/py/31-05-q-learning-sarsa/`
 
 ## The 30-second version
 

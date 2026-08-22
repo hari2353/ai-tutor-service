@@ -216,7 +216,7 @@ copied = my_deepcopy(cyclic)
 assert copied[0] is copied             # cycle preserved correctly, no infinite recursion
 ```
 
-Note immutable types (`int`, `str`, `tuple` of immutables) are returned as-is rather than copied — there's no aliasing hazard to guard against for something that can't be mutated in place, which is exactly why `copy.deepcopy` on a tuple of ints is nearly free. Lab: `labs/py/12-copy-semantics/`.
+Note immutable types (`int`, `str`, `tuple` of immutables) are returned as-is rather than copied — there's no aliasing hazard to guard against for something that can't be mutated in place, which is exactly why `copy.deepcopy` on a tuple of ints is nearly free. Lab: `(lab pending)`.
 
 ---
 

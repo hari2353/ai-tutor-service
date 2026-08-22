@@ -257,7 +257,7 @@ app.get('/fixed', (req, res) => {
 app.listen(3000);
 ```
 
-Hitting `/broken` with two concurrent requests demonstrates the failure directly: the second request's response time includes the *first* request's entire compute time, because nothing else can run on the single event-loop thread while the loop is stuck inside that synchronous `for` loop — hitting `/fixed` twice concurrently shows both completing independently, offloaded to separate worker threads. A fuller lab building this comparison alongside a backpressure-violating custom stream (reproducing the Walmart-incident failure class in miniature) and its `pipeline()`-based fix, with a memory-growth measurement under sustained load, belongs in `labs/node/10-node-ts/`.
+Hitting `/broken` with two concurrent requests demonstrates the failure directly: the second request's response time includes the *first* request's entire compute time, because nothing else can run on the single event-loop thread while the loop is stuck inside that synchronous `for` loop — hitting `/fixed` twice concurrently shows both completing independently, offloaded to separate worker threads. A fuller lab building this comparison alongside a backpressure-violating custom stream (reproducing the Walmart-incident failure class in miniature) and its `pipeline()`-based fix, with a memory-growth measurement under sustained load, belongs in `(lab pending)`.
 
 ---
 

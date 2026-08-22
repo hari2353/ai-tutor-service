@@ -188,7 +188,7 @@ try (var vExec = Executors.newVirtualThreadPerTaskExecutor()) {
 }
 ```
 
-With 10,000 `ids` and a downstream call taking 100ms, the pooled version is capped at `200 concurrent / 100ms ≈ 2,000 req/s` regardless of how fast the downstream actually is, and every one of those 200 threads holds its stack for the pool's lifetime. The virtual-thread version can have all 10,000 in flight simultaneously (bounded only by the downstream's own capacity and the carrier pool doing the actual scheduling work), each virtual thread costing roughly a few hundred bytes to a few KB of retained state while parked, not a megabyte-class stack. A lab measuring this directly — thread count vs memory (`jcmd <pid> GC.heap_info`) vs achieved throughput under `wrk`/a load generator — belongs in `labs/java/01-java-modern/`.
+With 10,000 `ids` and a downstream call taking 100ms, the pooled version is capped at `200 concurrent / 100ms ≈ 2,000 req/s` regardless of how fast the downstream actually is, and every one of those 200 threads holds its stack for the pool's lifetime. The virtual-thread version can have all 10,000 in flight simultaneously (bounded only by the downstream's own capacity and the carrier pool doing the actual scheduling work), each virtual thread costing roughly a few hundred bytes to a few KB of retained state while parked, not a megabyte-class stack. A lab measuring this directly — thread count vs memory (`jcmd <pid> GC.heap_info`) vs achieved throughput under `wrk`/a load generator — belongs in `(lab pending)`.
 
 ---
 

@@ -7,7 +7,7 @@ description: Run a fast Socratic quiz on an AI Tutor Service topic — one quest
 
 Retrieval practice, not a lecture. The user answers first, every time. **Never show the answer before they have attempted it** — recognising an answer feels identical to knowing it and is worth nothing in an interview.
 
-**Repo root** (`$ROOT`): `C:\Users\medic\OneDrive\Documents\ai-tutor-service`
+**Repo root** (`$ROOT`): the directory containing `CONTENT-STATUS.md`. Find it by walking up from your current working directory until that file appears; if you never find it, ask the user where the repo lives — do not guess a path.
 
 ## 1. Build the question set
 

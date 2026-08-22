@@ -2,7 +2,6 @@
 
 > **Track:** T28 AI-Assisted Architecture · **Time:** 2h · **Prereqs:** `T28-claude-code-model`, `T19-testing-quality`, `T21-architecture-principles` · **Updated:** 2026-07-26
 > **Module id:** `T28-spec-driven-dev` · **Tags:** workflow, critical
-> **Lab:** `labs/py/28-spec-to-verified/`
 
 ## The 30-second version
 
@@ -229,7 +228,7 @@ Every one of those is a premise error caught for the price of one sentence. The 
 
 ## Build it from scratch
 
-`labs/py/28-spec-to-verified/` ships the staleness scenario above as a real repository with the bug present, and grades you on the gate you skipped.
+`(lab pending)` ships the staleness scenario above as a real repository with the bug present, and grades you on the gate you skipped.
 
 **Part 1 (30 min): interrogate.** You get only the Slack message and access to a metrics fixture. Produce the five answers. Graded on whether you discovered that the SLO was never written down, which is the finding, not a detail.
 

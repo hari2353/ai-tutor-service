@@ -2,7 +2,6 @@
 
 > **Track:** T03 Classical ML · **Time:** 1.5h · **Prereqs:** T03-linear-models · **Updated:** 2026-08-03
 > **Module id:** `T03-regularization` · **Tags:** fundamentals
-> **Lab:** `labs/python/02-regularization/`
 
 ## The 30-second version
 

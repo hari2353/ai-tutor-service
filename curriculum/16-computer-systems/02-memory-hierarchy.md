@@ -2,7 +2,6 @@
 
 > **Track:** T16 Computer Systems: Transistor → Runtime · **Time:** 2.5h · **Prereqs:** T16-cpu-microarch · **Updated:** 2026-08-03
 > **Module id:** `T16-memory-hierarchy` · **Tags:** hardware, critical
-> **Lab:** `labs/c/02-false-sharing/`
 
 ## The 30-second version
 
@@ -154,7 +153,7 @@ int main(void) {
 }
 ```
 
-Full instructions and a `perf c2c` capture walkthrough live in `labs/c/02-false-sharing/`. The expected result — unpadded meaningfully slower than padded despite doing identical arithmetic — is the whole point: this is a bug class invisible in code review and only visible under measurement.
+Full instructions and a `perf c2c` capture walkthrough live in `(lab pending)`. The expected result — unpadded meaningfully slower than padded despite doing identical arithmetic — is the whole point: this is a bug class invisible in code review and only visible under measurement.
 
 ---
 

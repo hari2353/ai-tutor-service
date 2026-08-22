@@ -2,7 +2,6 @@
 
 > **Track:** T01 Python & SWE Craft · **Time:** 2h · **Prereqs:** T01-asyncio · **Updated:** 2026-08-03
 > **Module id:** `T01-gil-parallelism` · **Tags:** concurrency
-> **Lab:** `labs/python/04-gil-parallelism/`
 
 ## The 30-second version
 

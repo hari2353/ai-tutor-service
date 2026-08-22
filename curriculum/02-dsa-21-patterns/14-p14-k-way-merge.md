@@ -2,7 +2,6 @@
 
 > **Track:** T02 DSA: 21 Patterns · **Time:** 1.5h · **Prereqs:** heaps/priority queues, merge sort, T02-p13-top-k
 > **Module id:** `T02-p14-k-way-merge` · **Tags:** pattern, heap, merge
-> **Lab:** `labs/py/14-k-way-merge/`
 
 ## The 30-second version
 

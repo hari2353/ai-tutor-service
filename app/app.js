@@ -16,6 +16,7 @@ const blank = () => ({
   xp: 0,
   modules: {},          // moduleId -> "doing" | "done"
   cards: {},            // cardId -> {ef, interval, due, reps, lapses}
+  drills: {},           // drillId -> {seen:date}; absence = still due
   problems: {},         // problemId -> {solved:true, firstTry:bool, date}
   bosses: [],           // {round, score, max, date, weak:[]}
   badges: [],           // badge ids
@@ -356,10 +357,61 @@ V.cards = () => {
   return wrap;
 };
 
+/* ---------------- drills ---------------- */
+/* 3,977 drills ship in the data bundle; before v0.4 they were loaded into
+   every page and rendered nowhere. Due = not yet answered correctly ("knew
+   it"). XP is awarded only on the first knew-it per drill id — re-entering
+   the view never shows an already-cleared drill, so there is nothing to farm. */
+V.drills = () => {
+  const due = DR.filter(d => !S.drills[d.id]);
+  const wrap = el("div");
+  if(!DR.length) return el("div","empty",
+    "No drills yet.<br><br>Run <code>/tutor-drill &lt;topic&gt;</code> in Claude — it writes drill fragments, then <code>python app/build_data.py</code> merges them.");
+  if(!due.length) return el("div","empty",
+    `✓ All ${DR.length} drills cleared.<br><small class="dimmer">Reset from Save/Load by importing state without <code>drills</code>.</small>`);
+
+  let i = 0, revealed = false;
+  const card = el("div","card fc");
+  const bar  = el("div","card");
+  const paint = () => {
+    const d = due[i];
+    if(!d){ wrap.innerHTML=""; wrap.appendChild(el("div","empty","✓ Session complete.")); return; }
+    card.innerHTML = `<div class="q">${esc(d.q)}</div>
+      <small class="dimmer">${esc(d.module||"")} · ${esc(d.difficulty||"")}</small>` +
+      (revealed ? `<div class="a">${esc(d.a)}</div>`
+                : `<div class="muted">— reveal when you've committed to an answer —</div>`);
+    const g = el("div","grades");
+    if(!revealed){
+      const b = el("button","btn p","Reveal");
+      b.onclick = () => { revealed = true; paint(); };
+      g.appendChild(b);
+    }else{
+      /* XP guard: award only when this id was never cleared. The queue above
+         already skips seen ids, but the guard makes double-award impossible
+         even if state is edited between renders. */
+      const ok = el("button","btn p","knew it");
+      ok.onclick = () => {
+        if(!S.drills[d.id]) award(C.xp_table.drill || 5, `drill: ${d.id}`);
+        S.drills[d.id] = {seen: today()};
+        save(); i++; revealed = false; paint();
+      };
+      const no = el("button","btn d","missed");
+      no.onclick = () => { i++; revealed = false; paint(); };
+      g.appendChild(ok); g.appendChild(no);
+    }
+    card.appendChild(g);
+    bar.innerHTML = `<div class="row"><span class="muted">${i+1} / ${due.length} due</span>
+      <span class="muted">${Object.keys(S.drills).length} / ${DR.length} cleared</span></div>
+      <div class="bar"><i style="width:${(i)/due.length*100}%"></i></div>`;
+  };
+  wrap.appendChild(bar); wrap.appendChild(card); paint();
+  return wrap;
+};
+
 V.problems = () => {
   const wrap = el("div");
   if(!PR.length) return el("div","empty",
-    "No problem set loaded yet.<br><br>Phase P3 seeds 250 pattern-tagged problems into <code>app/data/problems.json</code>.");
+    "No problem set loaded yet.<br><br>Problem fragments go in <code>app/data/problemsets/&lt;module-id&gt;.json</code>, then <code>python app/build_data.py</code> merges them.");
   const byPattern = {};
   PR.forEach(p => (byPattern[p.pattern] ||= []).push(p));
   Object.entries(byPattern).forEach(([pat, list]) => {
@@ -407,8 +459,11 @@ V.boss = () => {
       border:"1px solid var(--line)",borderRadius:"6px",padding:".25rem .4rem",fontFamily:"var(--mono)"});
     const b = el("button","btn","log result");
     b.onclick = () => {
-      const v = parseInt(sc.value, 10);
-      if(isNaN(v)) return toast("Enter the score /100 from your mock transcript");
+      const raw = parseInt(sc.value, 10);
+      if(isNaN(raw)) return toast("Enter the score /100 from your mock transcript");
+      /* the input's max=100 only constrains the spinner arrows, not typing —
+         clamp so a 150 can't corrupt the score history /tutor-progress reads */
+      const v = Math.max(0, Math.min(100, raw));
       S.bosses.push({round:r.slug, score:v, max:100, date:today(), weak:[]});
       touchStreak(); award(C.xp_table.boss || 200, `boss: ${r.title} (${v}%)`);
       save(); render();

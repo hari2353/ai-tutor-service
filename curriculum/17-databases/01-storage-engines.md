@@ -2,7 +2,6 @@
 
 > **Track:** T17 Databases: SQL, NoSQL, Vector · **Time:** 2.5h · **Prereqs:** none · **Updated:** 2026-07-26
 > **Module id:** `T17-storage-engines` · **Tags:** internals, critical
-> **Lab:** `labs/py/01-storage-engine-toy/`
 
 ## The 30-second version
 
@@ -201,7 +200,7 @@ class LSMTree:
         self._flush()
 ```
 
-This demo makes the core tradeoff visible: `put` never touches existing files (sequential-only write path); `get` in the worst case scans every SSTable (unbounded read amplification without bloom filters or leveling); `compact` is the expensive, all-at-once operation real systems break into incremental, leveled background work. Full version with a real bloom filter, leveled compaction, and a companion from-scratch B-Tree with node splits: **`labs/py/01-storage-engine-toy/`**.
+This demo makes the core tradeoff visible: `put` never touches existing files (sequential-only write path); `get` in the worst case scans every SSTable (unbounded read amplification without bloom filters or leveling); `compact` is the expensive, all-at-once operation real systems break into incremental, leveled background work. Full version with a real bloom filter, leveled compaction, and a companion from-scratch B-Tree with node splits: **`(lab pending)`**.
 
 ---
 

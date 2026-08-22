@@ -2,7 +2,6 @@
 
 > **Track:** T07 Agentic AI · **Time:** 3.5h · **Prereqs:** `T07-agent-loop-from-scratch`, `T07-tool-engineering`, `T07-context-engineering` · **Updated:** 2026-07-26
 > **Module id:** `T07-harness-engineering` · **Tags:** sprint, harness, critical
-> **Lab:** `labs/py/21-harness-skeleton/`
 
 ## The 30-second version
 
@@ -249,7 +248,7 @@ Most production agents that get called "autonomous" are level 3 or 4. Level 5 is
 
 ## Build it from scratch
 
-The lab at `labs/py/21-harness-skeleton/` builds the minimal viable harness in the order the components should actually be added. The sequence matters more than the code, and it is the answer to "how would you start":
+The lab at `(lab pending)` builds the minimal viable harness in the order the components should actually be added. The sequence matters more than the code, and it is the answer to "how would you start":
 
 ```
 manual loop → tools → permissions → structured observations → budgets

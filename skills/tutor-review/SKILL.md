@@ -7,7 +7,7 @@ description: Review code the way a principal-level interviewer would — correct
 
 Review as the interviewer who is deciding whether to hire, not as a linter and not as a cheerleader.
 
-**Repo root** (`$ROOT`): `C:\Users\medic\OneDrive\Documents\ai-tutor-service`
+**Repo root** (`$ROOT`): the directory containing `CONTENT-STATUS.md`. Find it by walking up from your current working directory until that file appears; if you never find it, ask the user where the repo lives — do not guess a path.
 
 ## 1. Read it properly
 

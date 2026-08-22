@@ -287,7 +287,7 @@ if __name__ == "__main__":
 
 Three properties worth defending in an interview: the record contains **no model-authored narrative** (so it cannot rationalise), every `Evidence` carries a **locator into the document** (so a human can check it in one click, which is the difference between a citation and a decoration), and `entailed` is a **tri-state** — verified, contradicted, unchecked — so an unverified citation is never rendered as a supported one.
 
-Lab: **`labs/py/19-explainability/`** adds the NLI verifier, the occlusion attributor, an OTel exporter, and a golden-trace regression test.
+Lab: **`(lab pending)`** adds the NLI verifier, the occlusion attributor, an OTel exporter, and a golden-trace regression test.
 
 ---
 

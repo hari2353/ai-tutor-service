@@ -3,7 +3,6 @@
 > **Track:** T30 Auth & Application Security · **Time:** 3h · **Prereqs:** `T30-token-lifecycle`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-web-attacks` · **Tags:** appsec, critical
-> **Lab:** `labs/py/08-web-attack-lab/`
 
 ## The 30-second version
 
@@ -226,7 +225,7 @@ def transfer_form():
     return resp
 ```
 
-Full lab with a working stored-XSS-to-cookie-theft chain (in a sandboxed test app), a CSRF proof-of-concept form, and an SSRF harness against a mock metadata endpoint: **`labs/py/08-web-attack-lab/`**.
+Full lab with a working stored-XSS-to-cookie-theft chain (in a sandboxed test app), a CSRF proof-of-concept form, and an SSRF harness against a mock metadata endpoint: **`(lab pending)`**.
 
 ---
 

@@ -2,7 +2,6 @@
 
 > **Track:** T28 AI-Assisted Architecture · **Time:** 2.5h · **Prereqs:** `T28-claude-code-model`, `T28-context-files` · **Updated:** 2026-07-26
 > **Module id:** `T28-skills-design` · **Tags:** skills, critical
-> **Lab:** `labs/py/28-skill-trigger-eval/`
 
 ## The 30-second version
 
@@ -228,7 +227,7 @@ The most common category error is the deterministic skill: a 300-line `SKILL.md`
 
 ## Build it from scratch
 
-`labs/py/28-skill-trigger-eval/` builds the eval harness before building the skill, because the harness is what makes the skill improvable.
+`(lab pending)` builds the eval harness before building the skill, because the harness is what makes the skill improvable.
 
 **Part 1: the confusion matrix, by hand (30 min).** Take a skill you already have. Write 10 should-trigger prompts in real user vocabulary and 10 should-not-trigger prompts from adjacent tasks. Run all 20 in fresh sessions (`claude -p "<prompt>"` in a scratch worktree), and record whether the skill loaded. Most people discover 5-7 of 10 on should-trigger and are shocked, because in their own sessions it always fires, and in their own sessions they were priming it.
 

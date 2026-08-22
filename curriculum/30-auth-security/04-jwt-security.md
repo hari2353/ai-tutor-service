@@ -3,7 +3,6 @@
 > **Track:** T30 Auth & Application Security · **Time:** 3h · **Prereqs:** `T30-jwt-deep`
 > **Updated:** 2026-07-26
 > **Module id:** `T30-jwt-security` · **Tags:** jwt, critical
-> **Lab:** `labs/py/04-jwt-attack-lab/`
 
 ## The 30-second version
 
@@ -243,7 +242,7 @@ except jwt.InvalidAlgorithmError:
     print("forged token correctly rejected")
 ```
 
-Full lab including `alg=none`, `kid` path traversal against a sandboxed filesystem, weak-secret cracking with a wordlist, and a working `jti` deny-list: **`labs/py/04-jwt-attack-lab/`**.
+Full lab including `alg=none`, `kid` path traversal against a sandboxed filesystem, weak-secret cracking with a wordlist, and a working `jti` deny-list: **`(lab pending)`**.
 
 ---
 

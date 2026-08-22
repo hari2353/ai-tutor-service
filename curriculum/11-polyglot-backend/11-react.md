@@ -202,7 +202,7 @@ export async function updateOrderStatus(orderId: string, status: OrderStatus) {
 }
 ```
 
-A fuller lab building this pattern end to end — a Server Action with authz, a deliberately-introduced missing-`revalidateTag` staleness bug reproduced and fixed, and a comparison of the same mutation implemented as a Next.js Server Action directly touching a database versus calling a separate backend service — belongs in `labs/node/11-react/`. For the deeper React rendering mechanics (reconciliation, hydration, Suspense/streaming internals) this module deliberately doesn't cover, see the labs referenced from `T33-react-core` and `T33-react-advanced`.
+A fuller lab building this pattern end to end — a Server Action with authz, a deliberately-introduced missing-`revalidateTag` staleness bug reproduced and fixed, and a comparison of the same mutation implemented as a Next.js Server Action directly touching a database versus calling a separate backend service — belongs in `(lab pending)`. For the deeper React rendering mechanics (reconciliation, hydration, Suspense/streaming internals) this module deliberately doesn't cover, see the labs referenced from `T33-react-core` and `T33-react-advanced`.
 
 ---
 

@@ -148,7 +148,7 @@ def online_softmax_attention(q_block, K, V, B):
     return acc / l   # final normalization, done once at the end
 ```
 
-Full derivation + a from-scratch GQA/MQA head-sharing implementation with KV-cache byte counting: **`labs/py/03-attention/`** (create if not present — not yet in this repo).
+Full derivation + a from-scratch GQA/MQA head-sharing implementation with KV-cache byte counting: **`(lab pending)`** (create if not present — not yet in this repo).
 
 ---
 

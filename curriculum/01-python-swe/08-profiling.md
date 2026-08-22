@@ -2,7 +2,6 @@
 
 > **Track:** T01 Python & SWE Craft · **Time:** 1.5h · **Prereqs:** T01-memory-oom · **Updated:** 2026-08-03
 > **Module id:** `T01-profiling` · **Tags:** performance
-> **Lab:** `labs/python/08-profiling/`
 
 ## The 30-second version
 

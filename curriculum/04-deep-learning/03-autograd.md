@@ -2,7 +2,6 @@
 
 > **Track:** T04 Deep Learning · **Time:** 3h · **Prereqs:** T04-backprop-derivation · **Updated:** 2026-08-03
 > **Module id:** `T04-autograd` · **Tags:** fundamentals, critical
-> **Lab:** `labs/python/03-autograd/`
 
 ## The 30-second version
 
@@ -162,7 +161,7 @@ L.backward()
 print(a.grad, b.grad, c.grad)   # -24.0 16.0 8.0  -- matches the hand derivation exactly
 ```
 
-`__radd__`/`__rmul__`, subtraction, division, and `pow` follow the same pattern (implement forward, capture a closure computing the local vjp, register it as `_backward`) and are the lab exercise in `labs/python/03-autograd/`, along with extending this exact class to `ReLU` and confirming its gradient is `1` when `data>0` and `0` otherwise (including the boundary case at exactly `0`, which frameworks conventionally treat as gradient `0`).
+`__radd__`/`__rmul__`, subtraction, division, and `pow` follow the same pattern (implement forward, capture a closure computing the local vjp, register it as `_backward`) and are the lab exercise in `(lab pending)`, along with extending this exact class to `ReLU` and confirming its gradient is `1` when `data>0` and `0` otherwise (including the boundary case at exactly `0`, which frameworks conventionally treat as gradient `0`).
 
 ### From scalar `Value` to a tensor engine: what actually changes
 
@@ -196,7 +195,7 @@ If a tensor needed for a backward computation (e.g., `x` in `MyReLU` above, cach
 
 ## Build it from scratch
 
-The scalar `Value` engine above **is** the from-scratch implementation for this module; the lab (`labs/python/03-autograd/`) extends it three ways: (1) add `pow`, `__truediv__`, and `ReLU` following the identical closure pattern; (2) build a tiny 2-layer MLP purely out of `Value` objects (no tensors at all) and train it on a toy dataset with plain SGD, confirming every gradient matches `torch.autograd` on the same weights to `1e-6`; (3) extend the engine to operate on Python lists-of-lists as a minimal "tensor" (implementing broadcasting-aware `+` and matrix multiply backward) to directly experience the two additional complications described above, rather than taking them on faith.
+The scalar `Value` engine above **is** the from-scratch implementation for this module; the lab (`(lab pending)`) extends it three ways: (1) add `pow`, `__truediv__`, and `ReLU` following the identical closure pattern; (2) build a tiny 2-layer MLP purely out of `Value` objects (no tensors at all) and train it on a toy dataset with plain SGD, confirming every gradient matches `torch.autograd` on the same weights to `1e-6`; (3) extend the engine to operate on Python lists-of-lists as a minimal "tensor" (implementing broadcasting-aware `+` and matrix multiply backward) to directly experience the two additional complications described above, rather than taking them on faith.
 
 ---
 

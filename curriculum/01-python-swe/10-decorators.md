@@ -322,7 +322,7 @@ delete_account(admin, 42)          # works
 delete_account(guest, 42)          # raises Unauthorized
 ```
 
-Lab: `labs/py/10-decorators/`.
+Lab: `(lab pending)`.
 
 ---
 

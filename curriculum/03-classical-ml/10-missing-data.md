@@ -184,7 +184,7 @@ def mice_from_scratch(X: np.ndarray, max_iter: int = 10, seed: int = 0) -> np.nd
     return X
 ```
 
-This converges to roughly the same imputed values as `IterativeImputer(estimator=BayesianRidge())` on well-behaved data — the difference is production MICE also handles multiple imputation chains (run this whole loop several times with different random seeds, pool results with Rubin's rules) to give you an honest uncertainty estimate rather than one point value. Reference lab: `labs/py/10-missing-data/` (build if not present) — includes a test asserting the from-scratch and sklearn versions agree within tolerance on a synthetic MAR dataset.
+This converges to roughly the same imputed values as `IterativeImputer(estimator=BayesianRidge())` on well-behaved data — the difference is production MICE also handles multiple imputation chains (run this whole loop several times with different random seeds, pool results with Rubin's rules) to give you an honest uncertainty estimate rather than one point value. Reference lab: `(lab pending)` (build if not present) — includes a test asserting the from-scratch and sklearn versions agree within tolerance on a synthetic MAR dataset.
 
 ---
 
