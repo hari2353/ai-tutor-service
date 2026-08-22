@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T17-clickhouse-d1",
+      "module": "T17-clickhouse",
+      "q": "A query filters on a column that is the leading prefix of ORDER BY. Why is it fast?",
+      "a": "The sparse primary index can binary-search directly to the candidate granule range for that column, so ClickHouse reads only those granules instead of the whole part.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-clickhouse-d2",
+      "module": "T17-clickhouse",
+      "q": "Is the MergeTree primary index unique per row?",
+      "a": "No -- it stores one entry per granule (default 8192 rows), so many rows share the same index entry.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-clickhouse-d3",
+      "module": "T17-clickhouse",
+      "q": "Your ingestion pipeline switches from batched inserts to one insert per event. What error should you expect and why?",
+      "a": "Too many parts -- each insert creates a new part, and per-event inserts create parts far faster than background merges can absorb, eventually hitting the protective part-count ceiling and getting rejected.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-clickhouse-d4",
+      "module": "T17-clickhouse",
+      "q": "What's the client-side fix for too-many-parts, with concrete numbers?",
+      "a": "Batch inserts to roughly 10K-500K rows per insert, at a cadence of about one insert every 1-2 seconds, instead of many small/per-row inserts.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-clickhouse-d5",
+      "module": "T17-clickhouse",
+      "q": "A GROUP BY over a billion rows with 200M distinct keys OOMs. What's actually driving the memory cost?",
+      "a": "The aggregation hash table needs roughly one entry per distinct group (200M), not per row scanned (1B) -- cardinality of the grouping key drives memory, not the rows-scanned count.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-clickhouse-d6",
+      "module": "T17-clickhouse",
+      "q": "How would you prevent that GROUP BY from crashing the whole server instead of just failing cleanly?",
+      "a": "Set a realistic max_memory_usage per query so ClickHouse's own limit throws a clean exception before the server-wide memory ratio is breached, and enable max_bytes_before_external_group_by so aggregation spills to disk instead of growing unbounded.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-clickhouse-d7",
+      "module": "T17-clickhouse",
+      "q": "After an OOM incident, how do you find which query actually caused it?",
+      "a": "Query system.query_log WHERE type = 'QueryFinish' ordered by memory_usage descending to identify the highest-memory query pattern.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-clickhouse-d8",
+      "module": "T17-clickhouse",
+      "q": "You must join a 2GB dimension table against a fact table. What goes wrong with a naive JOIN and what are two fixes?",
+      "a": "The default hash join loads the entire right-hand table into memory, so a 2GB dimension table can exceed max_memory_usage. Fixes: use a Dictionary engine for the dimension, or denormalize the dimension's attributes onto the fact table at ingestion time.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-clickhouse-d9",
+      "module": "T17-clickhouse",
+      "q": "A ReplacingMergeTree table returns duplicates in a query run seconds after insert. Is this a bug?",
+      "a": "No -- deduplication happens at merge time, not insert time, so unmerged parts still contain duplicate versions. Use FINAL for an immediate correct read at extra CPU cost.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-clickhouse-d10",
+      "module": "T17-clickhouse",
+      "q": "When would you choose a projection over a materialized view for a slow filter?",
+      "a": "When you need fast filtering on a column that isn't a prefix of the base table's ORDER BY and want the optimizer to transparently pick an alternate layout with no separate table to manage or route to -- provided the query doesn't need a cross-table join.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-clickhouse-d11",
+      "module": "T17-clickhouse",
+      "q": "A team wants to use ClickHouse as the primary store for an OLTP service with frequent single-row updates and point lookups gating purchase decisions. What do you tell them?",
+      "a": "Don't -- ClickHouse mutations are heavyweight async part rewrites, not cheap row-level updates, and it has no general ACID transaction guarantee; use a row-store OLTP database for that workload and feed ClickHouse asynchronously for the analytical side.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-clickhouse-d12",
+      "module": "T17-clickhouse",
+      "q": "Why does over-partitioning by a high-cardinality key (e.g. per-customer) make too-many-parts worse over time?",
+      "a": "ClickHouse never merges parts across partitions, so each high-cardinality partition value gets its own small independent pool of parts that individually may never accumulate enough volume to merge efficiently, multiplying the total unmerged part count.",
+      "difficulty": "staff"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-wide-column-kv-c1",
+      "topic": "Wide-Column KV",
+      "q": "Why does wide-column schema design start from queries, not entities?",
+      "a": "No cheap join and no free secondary access path by default. A query needing differently-shaped data requires a second round trip or write-time denormalization. Design order: enumerate access patterns first, build one table per pattern.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c2",
+      "topic": "Wide-Column KV",
+      "q": "What is a hot partition and what's the observable symptom?",
+      "a": "A partition key whose cardinality or traffic distribution concentrates rows/requests on one replica set, since all rows sharing a key live together forever. Symptom: one node/replica set at ~100% CPU/IO while the rest of the cluster looks idle; p99 degrades cluster-wide via coordinator overhead.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c3",
+      "topic": "Wide-Column KV",
+      "q": "Does adding nodes fix a hot partition?",
+      "a": "No, if the cause is key cardinality (not raw capacity) - the hot key still hashes to the same replica set regardless of cluster size. Fix is architectural: salt/shard the partition key and fan out reads.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c4",
+      "topic": "Wide-Column KV",
+      "q": "State the R+W>N rule and give a strong-consistency and an eventual-consistency example (RF=3).",
+      "a": "R+W>N guarantees every read/write replica set overlaps by >=1 node, so a read sees the latest write. RF=3, W=QUORUM(2), R=QUORUM(2): 2+2=4>3, strong, survives 1 node down. RF=3, W=1, R=1: 1+1=2, not >3, eventual consistency only, fastest.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c5",
+      "topic": "Wide-Column KV",
+      "q": "Compare STCS, LCS, and TWCS compaction strategies.",
+      "a": "STCS (default): merges similar-size SSTables, can need ~2x disk during large compactions, read amp grows with SSTable count. LCS: fixed-size levels, low read amp but HIGH write amp (repeated rewrites through levels). TWCS: groups SSTables by time window - best for TTL-heavy time-series, expired windows drop predictably.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c6",
+      "topic": "Wide-Column KV",
+      "q": "What is the tombstone read-latency trap?",
+      "a": "DELETE writes a tombstone, retained until gc_grace_seconds (default 10 days) for replica-repair safety, not removed immediately. A hot-read partition with heavy delete/TTL churn accumulates tombstones the read path scans past, causing timeouts / tombstone_warn/failure_threshold errors - looks like a slow query, is actually scanning graves.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c7",
+      "topic": "Wide-Column KV",
+      "q": "What is DynamoDB's per-partition physical cap, and what can adaptive capacity NOT do?",
+      "a": "3,000 RCU/s or 1,000 WCU/s per partition, hard cap. Adaptive capacity smooths moderate/temporary skew up to that cap but cannot raise the physical ceiling - severe sustained skew still throttles.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c8",
+      "topic": "Wide-Column KV",
+      "q": "LSI vs GSI - the sharpest constraint difference.",
+      "a": "LSI: shares base table partition key, must be declared at table CREATION (can't add later), item collection (base + all LSIs, per partition key) capped at 10GB - hard write failure if exceeded. GSI: own partition key, addable after creation, eventually consistent, own throughput.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c9",
+      "topic": "Wide-Column KV",
+      "q": "Why can a throttled GSI block writes to a healthy base table?",
+      "a": "DynamoDB propagates writes to GSIs synchronously as part of accepting the base table write, not fully decoupled async - if the GSI's own capacity throttles, the base table write is rejected too, even with spare base table capacity.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c10",
+      "topic": "Wide-Column KV",
+      "q": "On-demand vs provisioned DynamoDB capacity - when to choose each.",
+      "a": "On-demand: per-request billing, instant elasticity, higher cost/request - safer default for new/unpredictable workloads. Provisioned: pre-declared RCU/WCU (optional auto-scaling with lag), cheaper at steady predictable volume - move here once traffic patterns stabilize.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c11",
+      "topic": "Wide-Column KV",
+      "q": "Single-table design: what does it buy and what does it cost?",
+      "a": "Buys: fewer round trips per logical op, and under provisioned capacity, one over-provisioning buffer instead of N. Costs: unreadable overloaded generic keys, cross-team schema fragility, hard ad hoc analytics, expensive migrations for unanticipated access patterns.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c12",
+      "topic": "Wide-Column KV",
+      "q": "When should a team NOT default to single-table design?",
+      "a": "When access patterns are still evolving, when multiple uncoordinated teams share the table, or when ad hoc analytical queries are needed. It assumes fully-enumerated, stable access patterns - most teams should start with simpler per-entity tables.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c13",
+      "topic": "Wide-Column KV",
+      "q": "How do you fix a hot partition for a time-series IoT table naively keyed by device_id?",
+      "a": "Compound the partition key with a coarser time bucket and/or an entropy suffix, e.g. device_id#2026-08-01#03 (hourly bucket) or device_id#shard_N. Trades a fan-out read (query all shards, merge client-side) for spreading storage and request load across more physical partitions.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c14",
+      "topic": "Wide-Column KV",
+      "q": "Are DynamoDB and Cassandra interchangeable because both trace to the Dynamo paper?",
+      "a": "No. They have materially different consistency models (Cassandra's per-request tunable R/W consistency vs DynamoDB's simpler eventually-consistent/strongly-consistent read toggle) and different secondary index mechanics (LSI/GSI vs Cassandra secondary indexes/materialized views) and operational models.",
+      "module": "T17-wide-column-kv"
+    },
+    {
+      "id": "T17-wide-column-kv-c15",
+      "topic": "Wide-Column KV",
+      "q": "Why is denormalization the default in wide-column modeling, not an optimization applied later?",
+      "a": "Because there's no cheap join, a query needing data shaped differently from storage requires either an extra round trip or duplicating data at write time into a table shaped for that query - you accept write-time duplication and app-managed consistency in exchange for every read being a single-partition operation.",
+      "module": "T17-wide-column-kv"
+    }
+  ]
+}

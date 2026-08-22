@@ -1,0 +1,158 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-trust-calibration-c1",
+      "topic": "Trust Calibration",
+      "q": "Formal definition of calibration, and the ECE formula.",
+      "a": "Perfectly calibrated: P(Y_hat = Y | p_hat = p) = p for all p. You cannot evaluate that conditional directly, so bin: ECE = SUM_m (|B_m|/n) · |acc(B_m) − conf(B_m)|, typically M=10 or 15 bins. MCE is the worst bin. Overconfidence = points below the diagonal on a reliability diagram.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c2",
+      "topic": "Trust Calibration",
+      "q": "Four things wrong with using ECE alone.",
+      "a": "1) It is not a proper scoring rule — a constant base-rate predictor has ECE ~0 and zero resolution, so report Brier or NLL too. 2) Bin count is a free parameter with no principled default; always state M. 3) Equal-width bins are meaningless for LLM verbalised confidence because 90%+ of mass lands in the top two bins — use equal-mass/adaptive bins. 4) It is downward-biased at small n, so cross-model comparison needs equal n and equal M.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c3",
+      "topic": "Trust Calibration",
+      "q": "Three mechanisms that make LLM verbalised confidence useless.",
+      "a": "1) No training signal — the tokens '0.9' come from next-token prediction with no loss comparing them to observed outcome frequency. 2) RLHF pushes the wrong way — raters prefer decisive answers, so post-training raises stated confidence independent of correctness (GPT-4 report: near-diagonal pre-training, overconfident after). 3) The scoreboard pays for guessing — binary accuracy gives 0 for abstaining and p(correct)>0 for a guess.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c4",
+      "topic": "Trust Calibration",
+      "q": "Measured ECE range for LLM verbalised confidence, and where the mass sits.",
+      "a": "Mass concentrates in the 0.8-1.0 band almost regardless of accuracy. Task-dependent ECE spans roughly 0.05 (constrained JSON) to 0.61 (NQ-Open) in 2026 benchmark work (ConfidenceBench, arXiv:2607.20526). Diagnostic: plot the histogram — if >80% of mass is above 0.8 while eval accuracy is 60%, the field is decorative.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c5",
+      "topic": "Trust Calibration",
+      "q": "Where do logprobs work as confidence, and where do they fail?",
+      "a": "Work: multiple choice (softmax over option letters), classification/routing over a fixed label set, extraction (min-token logprob catches one fabricated digit). Fail: free-form generation, because likelihood is over SURFACE FORMS — 'Paris' / 'It's Paris' / 'The capital is Paris' split the mass three ways for a certain model, while a model torn between two facts puts 0.5 on each. Sequence entropy cannot distinguish those.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c6",
+      "topic": "Trust Calibration",
+      "q": "Semantic entropy: algorithm, cost, and citation.",
+      "a": "Farquhar et al., Nature 630:625-630 (2024). Sample n≈10 at T≈1, cluster into semantic equivalence classes by BIDIRECTIONAL entailment (a ⊨ b AND b ⊨ a), then SE = −SUM_c p(c) log p(c) over clusters. Cost: n generations plus up to O(n²) NLI pairs, reducible to O(n·|C|) by comparing each sample against one representative per cluster. NLI itself is ~10-40ms per pair.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c7",
+      "topic": "Trust Calibration",
+      "q": "The blind spot shared by every self-consistency method.",
+      "a": "Confidently wrong: if the model reliably believes something false, all samples agree, entropy is near zero, and semantic entropy / SelfCheckGPT / sampling variance are all silent. 2026 work states this directly (arXiv:2603.21172, 'Entropy Alone is Insufficient for Safe Selective Prediction'). Only grounding against an external source catches this class.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c8",
+      "topic": "Trust Calibration",
+      "q": "Honest AUROC numbers for consistency-family detectors.",
+      "a": "Strongly benchmark-dependent. SelfCheckGPT's best variant reported AUC-PR ~0.53-0.67 on its original benchmark (n=20 samples); on harder 2026 benchmarks both SelfCheckGPT and semantic entropy have been reported near 0.58-0.60 AUROC, while performing much better on the confabulation-heavy sets they were designed for. Quoting one AUROC as if it generalises is overselling.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c9",
+      "topic": "Trust Calibration",
+      "q": "Selective prediction vocabulary: coverage, selective risk, AURC, coverage@risk.",
+      "a": "Coverage phi = answered/n. Selective risk R = wrong among answered / answered. AURC = area under the risk-coverage curve (lower is better, threshold-free). coverage@risk<=r = the maximum coverage keeping R <= r, which is the number you put in a product SLO. Need >= ~200 answered items before the risk estimate means anything.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c10",
+      "topic": "Trust Calibration",
+      "q": "What does a FLAT risk-coverage curve tell you?",
+      "a": "The confidence signal has no resolution: abstaining discards correct and incorrect answers in the same proportion, so you buy nothing with the coverage you give up. This is the normal outcome when thresholding on verbalised confidence, and plotting the curve is the cheapest way to kill a bad confidence feature before it ships.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c11",
+      "topic": "Trust Calibration",
+      "q": "The abstention ladder, in order.",
+      "a": "answer → answer + flag unsupported claims → ASK ONE CLARIFYING QUESTION → escalate (stronger model / human) → decline with a reason and a next step. The clarifying-question tier recovers the most value because much low-confidence traffic is underspecified rather than unanswerable. 'I don't know' with no next step is a dead end.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c12",
+      "topic": "Trust Calibration",
+      "q": "Three inputs an abstention policy needs (most people name one).",
+      "a": "1) A confidence signal. 2) The STAKE of the query — read_only and financial do not share a threshold. 3) What abstention COSTS, i.e. what happens instead: a clarifying question, a stronger model, a retrieval retry, a human, or a documented out-of-scope. Abstention is only a good move when there is a better next step.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c13",
+      "topic": "Trust Calibration",
+      "q": "What did AbstentionBench find, and why is it uncomfortable?",
+      "a": "arXiv:2506.09038: 20 datasets, 35k+ unanswerable queries covering unknown answers, underspecification, false premises, subjective interpretation, and stale information. Abstention is unsolved, scaling models barely helps, and REASONING FINE-TUNING DEGRADES the ability to abstain — which breaks the plan of 'just use the reasoning model'.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c14",
+      "topic": "Trust Calibration",
+      "q": "Best default confidence signal in production, and why it beats semantic entropy.",
+      "a": "A small logistic regression over 4-6 features you already compute — NLI entailment coverage, retrieval top-1 score, top1−top2 score gap, min-token logprob, answer length, tool-error flag — trained on a few thousand labelled production examples. It is calibrated by construction, free at inference, and trained on YOUR distribution, which is where calibration lives. Semantic entropy is the better unsupervised signal and the worse engineering default.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c15",
+      "topic": "Trust Calibration",
+      "q": "Conformal prediction for LLMs: what it guarantees and what it does not.",
+      "a": "Split conformal: compute nonconformity scores on a calibration set, take the ceil((n+1)(1−alpha))/n quantile, and the prediction set has coverage >= 1−alpha assuming EXCHANGEABILITY. The guarantee is MARGINAL, not conditional — 90% overall can be 60% on the slice you care about — and exchangeability breaks under distribution shift. Works for MCQ/label sets; 2026 impossibility results (arXiv:2606.29054) show it degrades for free-form generation.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c16",
+      "topic": "Trust Calibration",
+      "q": "Temperature scaling: what, whose paper, and where it applies to LLMs.",
+      "a": "Guo et al., 'On Calibration of Modern Neural Networks' (ICML 2017, arXiv:1706.04599). Rescale logits z -> z/T with a single parameter T fit on a HELD-OUT split by NLL. For LLMs it applies wherever you have logits over a fixed label set: MCQ options, class tokens, p(true). One parameter, near-free, re-fit per model version.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c17",
+      "topic": "Trust Calibration",
+      "q": "p(true) — what it is and why it beats verbalised percentages.",
+      "a": "A second call presenting the question and candidate answer, asking for a single True/False token, and reading the logprob of 'True'. It beats verbalised percentages because it moves into the regime where LLM calibration is least bad: a single-token binary decision with logprob access. Still overconfident — temperature-scale it — and use a DIFFERENT model family if possible, since self-evaluation has correlated errors.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c18",
+      "topic": "Trust Calibration",
+      "q": "How do you communicate uncertainty without making the product feel broken?",
+      "a": "Change the ACTION, not the adjective — low confidence should produce a different interaction, not the same answer wrapped in hedges. Four discrete states with distinct affordances: verified / unverified+flags / needs-input (one clarifying question) / out-of-scope+route. No raw percentages for lay users. Flag ONLY what failed verification, because constant labelling becomes wallpaper. Budget abstention rate as an SLO with an owner.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c19",
+      "topic": "Trust Calibration",
+      "q": "Why must the harness own the abstention decision rather than the model?",
+      "a": "2026 work (arXiv:2601.07767, 'Are LLM Decisions Faithful to Verbal Confidence?') finds models successfully verbalise uncertainty and then fail to translate it into behaviour. So extract a signal, apply the threshold in code, and gate in the harness. Letting the model decide inside its own prose means the decision is unmeasurable and unenforceable.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c20",
+      "topic": "Trust Calibration",
+      "q": "What must you log per response to be able to calibrate at all?",
+      "a": "The confidence signal(s) and their version, the threshold and its version, the decision (answered / flagged / clarified / escalated / declined), the stake tier, and the DOWNSTREAM USER ACTION (accepted, edited, thumbs-down, escalated, abandoned). That last field is your label source; without it every threshold argument is anecdote.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c21",
+      "topic": "Trust Calibration",
+      "q": "Why does exposing a raw confidence float in a public API create a future incident?",
+      "a": "Consumers threshold on it, so you can never change its distribution: a model upgrade that improves accuracy but shifts the score silently breaks every consumer. Expose a decision plus a stable tier instead ({status, risk_tier, unsupported_claims, evidence}). If a partner insists on a number, version it (confidence_version: v3) with documented semantics and a commitment to bump on every re-fit.",
+      "module": "T07-trust-calibration"
+    },
+    {
+      "id": "T07-trust-calibration-c22",
+      "topic": "Trust Calibration",
+      "q": "Why calibration is per-model-per-prompt-per-distribution.",
+      "a": "A threshold is a property of the (model, prompt, distribution) triple, not a constant. An ECE measured on MMLU or TriviaQA says almost nothing about your domain. Re-sweep the threshold on held-out data at every model or prompt change and treat thresholds as VERSIONED artefacts — unversioned threshold constants are a latent outage.",
+      "module": "T07-trust-calibration"
+    }
+  ]
+}

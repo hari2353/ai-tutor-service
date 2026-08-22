@@ -1,0 +1,158 @@
+{
+  "flashcards": [
+    {
+      "id": "T13-vibe-coding-c1",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "Why is CLAUDE.md length a correctness issue, not a tidiness issue?",
+      "a": "The file loads in full at every session start and is paid again on every turn, competing with the task for attention. Adherence measurably degrades as it grows, so past some length adding a rule reduces compliance with every rule. Documented target: under 200 lines.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c2",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "What belongs in CLAUDE.md and what is wasted tokens?",
+      "a": "IN: non-guessable commands, conventions that differ from tool defaults, ownership boundaries, the 3-5 mistakes the agent repeats here. OUT: directory layouts and dependency lists (derivable, and stale is worse than absent), multi-step procedures (make them skills), unenforceable aspirations, anything a linter already enforces. Trigger for adding a line: the agent got it wrong twice.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c3",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "Where does a rule go if violating it would be an incident?",
+      "a": "A hook (PreToolUse), a permissions.deny rule, or CI. CLAUDE.md is context delivered as a message with no compliance guarantee; hooks run as shell commands at lifecycle events regardless of what the model decides. CLAUDE.md is advice, hooks are law.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c4",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "Do @path imports in CLAUDE.md reduce context cost?",
+      "a": "No. Imports expand and load at launch (max 4 hops deep), so they help organization and change nothing about tokens. Only paths:-scoped rules in .claude/rules/ and nested subdirectory CLAUDE.md files are genuinely lazy.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c5",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "What is the relationship between AGENTS.md and CLAUDE.md?",
+      "a": "AGENTS.md is the cross-tool convention (open spec Aug 2025, donated to the Linux Foundation's Agentic AI Foundation Dec 2025, 60k+ public repos, 30+ tools, nearest file in the tree wins). Claude Code reads CLAUDE.md and not AGENTS.md, so use a CLAUDE.md containing `@AGENTS.md` plus Claude-specific additions, or a symlink. Maintaining two drifting copies is the actual failure mode.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c6",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "What survives compaction and what is lost?",
+      "a": "Survives (re-injected from disk): system prompt, project-root CLAUDE.md, unscoped rules, auto memory. Lost until a matching file is read again: rules with paths: frontmatter and nested subdirectory CLAUDE.md. Skills are re-injected but capped at 5,000 tokens per skill and 25,000 total, oldest dropped first.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c7",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "Why put the load-bearing instructions at the TOP of a SKILL.md?",
+      "a": "Post-compaction re-injection truncates skills to fit the 5,000-token-per-skill cap and truncation keeps the start of the file. Anything in a trailing 'Notes' section is the first thing dropped in a long session.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c8",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "What is the economic argument for a skill over CLAUDE.md content?",
+      "a": "Only the description (plus when_to_use, combined and truncated at 1,536 characters in the listing) sits in context at startup; the body loads on invocation. A 3,000-word runbook costs about 30 tokens until the day you use it. The trigger to extract one: a CLAUDE.md section has grown into steps with an outcome.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c9",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "What does a non-fork subagent get at startup, and what does it never get?",
+      "a": "Gets: its own system prompt, the parent's delegation message, the full CLAUDE.md hierarchy, a git-status snapshot, and any preloaded skills. Never gets: your conversation history, your file reads, your output style, your auto memory. Built-in Explore and Plan additionally skip CLAUDE.md and git status, so rules meant for them must be restated in the delegation prompt.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c10",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "When does subagent parallelism pay, and when does it fragment?",
+      "a": "Pays for independent, high-volume-in / low-volume-out work: test runs, greps, doc fetching, unrelated module reads. Fragments on shared invariants (each agent makes a locally reasonable, mutually incompatible contract decision because only lossy summaries return), on iterative work needing steering, and when many detailed returns leave the parent fuller than inline work would. Rule: delegate reads, keep writes.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c11",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "Default subagent limits worth knowing.",
+      "a": "200 subagents per session (CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION), 20 concurrent (CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS), nesting 3 layers deep (CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH; was 5 before v2.1.217, 1 in v2.1.217-218, 3 from v2.1.219). Transcripts persist under ~/.claude/projects/{project}/{sessionId}/subagents/ for cleanupPeriodDays, default 30.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c12",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "Why is MCP tool search on by default, and what does ENABLE_TOOL_SEARCH=auto do?",
+      "a": "Tool schemas are the hidden startup cost. With tool search on, only tool names and server instructions load at startup and full schemas are fetched on demand, so adding servers is near-free. ENABLE_TOOL_SEARCH=auto switches to threshold loading: schemas upfront while they fit within 10% of the context window, overflow deferred.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c13",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "What are the MCP output limits and why do they matter for correctness?",
+      "a": "A warning fires above 10,000 tokens of MCP tool output and the default hard cap is 25,000 (MAX_MCP_OUTPUT_TOKENS; per-tool override via anthropic/maxResultSizeChars). An unpaginated query silently becomes a partial result that the agent then reasons over as if complete.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c14",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "What changed in the MCP 2026-07-28 specification?",
+      "a": "Largest revision since launch: stateless core (initialize/notifications-initialized handshake removed; protocol version and client capabilities ride in _meta per request), ttlMs and cacheScope on list and resources/read responses, list endpoints no longer varying per connection, deterministic tool ordering for prompt-cache hits, required Mcp-Method and Mcp-Name headers on Streamable HTTP, and a formal deprecation policy.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c15",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "State the core principle of spec-driven development in one sentence.",
+      "a": "Whoever writes the verification signal controls the outcome, and it cannot be the thing being verified. Tests the agent writes after seeing its own implementation describe what it built; tests written from the spec before implementation are the only ones with independent evidentiary value.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c16",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "What did SpecBench measure, and what is the headline number?",
+      "a": "arXiv 2605.21384 (May 2026): 30 systems-level tasks decomposed into spec, visible validation tests, and held-out composition tests; the pass-rate gap quantifies reward hacking. Every frontier agent saturated the visible suite, and the gap grows about 28 percentage points per tenfold increase in code size. Most memorable failure: a 2,900-line hash table that memorized test inputs.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c17",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "How do you turn 'did the agent weaken the tests' from a judgment call into a check?",
+      "a": "Commit specs/ and tests/ before the agent runs, then `git diff HEAD -- tests/` inside the single verify script (not as a review habit). Enforce with a PreToolUse hook matching Edit|Write that exits non-zero for paths under tests/. A CLAUDE.md line saying 'never modify tests' is a request, not a control.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c18",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "How should a verification gate be ordered, and why one command?",
+      "a": "One command, because a multi-command gate lets the agent report partial success as success. Inside, order by signal quality per token: types (kills fabricated APIs in seconds), then lint, then tests, then the test-tamper check. Route large test output through a subagent so a 40k-token run does not permanently occupy the main window.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c19",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "What did the METR randomized trial find, and what is its scope?",
+      "a": "arXiv 2507.09089: 16 experienced open-source developers, 246 tasks, repos they averaged 5 years on. Allowing early-2025 AI tooling increased completion time 19%, against a pre-task forecast of 24% faster and a post-task self-report of 20% faster. Scope is narrow (that population, that tooling generation; METR revised its design Feb 2026), but the perception gap is the durable finding: felt speedup is not evidence of speedup.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c20",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "Why is a 1M-token context window not a solution to context management?",
+      "a": "Capacity is not attention. NoLiMa tested 12 models claiming 128K+ support: 11 of 12 fell below 50% of their short-context performance by 32K tokens on non-literal retrieval. Chroma's context-rot work adds that irrelevant context is not neutral, since focused prompts beat full prompts containing the same relevant information plus distractors.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c21",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "Where does agentic coding structurally not work?",
+      "a": "Novel algorithms (the verification loop cannot close: your tests only cover cases you already understood). Deep concurrency debugging (the signal lies: a race that fires once per 10,000 interleavings passes every run, so the loop reports success on a broken fix). Anything where writing the spec is the hard part. Small changes you already have in your head. Coupled work split across parallel subagents.",
+      "module": "T13-vibe-coding"
+    },
+    {
+      "id": "T13-vibe-coding-c22",
+      "topic": "AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Driven Dev",
+      "q": "What is the graded axis in a 2026 AI-assisted coding interview round?",
+      "a": "Judgment under delegation, not prompt cleverness. Google's pilot scores 'AI fluency: prompt engineering, output validation, debugging' in a human-led, AI-assisted code-comprehension round; Meta's since Oct 2025 is a 60-minute three-panel CoderPad scored on problem solving, code quality, verification, and communication. Candidates get dinged for relying on the assistant without demonstrating independent understanding, and equally for conspicuously under-using it.",
+      "module": "T13-vibe-coding"
+    }
+  ]
+}

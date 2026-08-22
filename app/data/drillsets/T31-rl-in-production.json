@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T31-rl-in-production-d1",
+      "module": "T31-rl-in-production",
+      "q": "In one sentence: what question decides bandit versus full RL?",
+      "a": "Does the action change the distribution of states you will be asked to act on later? If P(s_{t+1}|s_t,a_t) does not depend on a_t, it is a contextual bandit.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T31-rl-in-production-d2",
+      "module": "T31-rl-in-production",
+      "q": "gamma = 0.99. What is the effective horizon, and what does that imply if your business metric resolves in 2 decisions?",
+      "a": "1/(1-gamma) = 100 steps. If the metric resolves in 2 decisions you are massively over-discounting the wrong problem: widen the bandit's reward attribution window instead of paying for 100-step credit assignment.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T31-rl-in-production-d3",
+      "module": "T31-rl-in-production",
+      "q": "Write the potential-based shaping term and state what it guarantees.",
+      "a": "F(s,a,s') = gamma*Phi(s') - Phi(s) for any Phi: S -> R. Guarantees the shaped MDP has the same set of optimal policies as the original, for every transition model P (Ng, Harada & Russell, ICML 1999).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T31-rl-in-production-d4",
+      "module": "T31-rl-in-production",
+      "q": "You see episode return climbing steadily while your task-success metric sits flat at zero. Name the failure and the general rule it teaches.",
+      "a": "Reward hacking / specification gaming, the CoastRunners pattern (the boat circled a lagoon hitting three respawning targets, never finished a lap, and scored 20% above a human). Rule: always instrument at least one metric the agent is not optimising, and put it in the guardrail set with automated rollback.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T31-rl-in-production-d5",
+      "module": "T31-rl-in-production",
+      "q": "Prove that potential-based shaping does not change the optimal policy.",
+      "a": "sum_{t=0}^{T-1} gamma^t (gamma*Phi(s_{t+1}) - Phi(s_t)) = sum_t (gamma^{t+1}Phi(s_{t+1}) - gamma^t Phi(s_t)), which telescopes to gamma^T*Phi(s_T) - Phi(s_0). The total shaping reward over any trajectory depends only on start and end states, not the path, so two policies from the same s_0 have shaped returns differing by the same constant and the policy ranking is preserved exactly. Set Phi(terminal)=0 and the terminal term vanishes. Equivalent to initialising V_0(s)=Phi(s).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-rl-in-production-d6",
+      "module": "T31-rl-in-production",
+      "q": "Your agent gets +1 whenever it moves closer to the goal, 0 otherwise. What policy is optimal for that reward, and what is the one-line fix?",
+      "a": "Looping forever near the start: the loop integral of the shaping term around a cycle is strictly positive (you earn on the approach and pay nothing on the retreat), so infinite looping has infinite shaped return. This is the Randlov & Alstrom 1998 bicycle agent. Fix: Phi(s) = -distance_to_goal(s) and F = gamma*Phi(s') - Phi(s), which makes the retreat cost exactly what the approach earned and zeroes the loop integral.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-rl-in-production-d7",
+      "module": "T31-rl-in-production",
+      "q": "Compute ESS for importance weights [0.5, 0.5, 0.5, 0.5, 98.0] and say what you conclude.",
+      "a": "sum w = 100.0, sum w^2 = 4*(0.25) + 9604 = 9605. ESS = 100^2/9605 = 10000/9605 ~ 1.04. With n=5 that is ~21% of n, and in absolute terms the estimate is driven by a single record. Conclusion: this is not an evaluation. Gate on ESS < ~10% of n, and inspect max_weight and the weight histogram whenever a lift looks surprisingly large.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-rl-in-production-d8",
+      "module": "T31-rl-in-production",
+      "q": "Offline OPE says +7%, the online A/B says -2%. List your ranked hypotheses with the cheapest discriminating check for each.",
+      "a": "(1) Low ESS: compute ESS, max_weight, weight histogram. (2) Wrong propensities: check mean importance weight is ~1.0 across the log; if not, a downstream filter, dedupe, business rule, or retry changed the action after the propensity was recorded (a serving bug, not a statistics bug). (3) Support violation: fraction of decisions where the target policy puts mass on actions the logging policy never took. (4) Training/serving feature skew: diff feature vectors from both paths for the same request. (5) Interference: randomised by request instead of by user when actions affect future state. (6) Non-stationarity: log predates a product or seasonal change.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-rl-in-production-d9",
+      "module": "T31-rl-in-production",
+      "q": "A colleague says 'shadow mode ran clean for two weeks, so the policy is good.' Correct them precisely.",
+      "a": "Shadow mode executed none of the actions, so it produced no reward signal at all. It tells you the policy runs, is fast enough, does not crash on real context distributions, has no training/serving feature skew, and how its action distribution compares to the incumbent. Policy quality is measured by offline OPE (with ESS and support diagnostics) and then by a guarded ramp, not by shadow mode.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-rl-in-production-d10",
+      "module": "T31-rl-in-production",
+      "q": "Real robot chatters and limit-cycles while the simulated policy is smooth. Diagnose and fix.",
+      "a": "Control-loop latency present in reality (typically 20-80 ms sensing-to-actuation) and absent in the simulator. A policy trained with zero delay learns a bang-bang control law that oscillates the moment delay is introduced. Fix: model actuation delay explicitly in the sim and randomise it over the plausible range, and add an action-jerk or action-difference penalty to the reward.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T31-rl-in-production-d11",
+      "module": "T31-rl-in-production",
+      "q": "Your cost curve sawtooths around the constraint threshold with a period of tens of policy iterations. Name the mechanism and the standard fix.",
+      "a": "Lagrangian multiplier oscillation from plain integral-only dual ascent: lambda overshoots, the policy over-corrects into extreme conservatism, lambda collapses, the constraint is violated again. Standard fix is a PID controller on the multiplier update (PID-Lagrangian) rather than pure integral, or a lower multiplier learning rate with a warm start.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-rl-in-production-d12",
+      "module": "T31-rl-in-production",
+      "q": "Design the six-week plan for 'use RL to improve our ranking system' with one engineer, and justify why weeks 1-3 are not wasted if the project is cancelled.",
+      "a": "Week 1: add propensity logging to the existing ranker plus a 1-5% epsilon-greedy floor over the top-k, so the log has action diversity. Weeks 2-3: build the OPE harness (IPS, SNIPS, DR, ESS, support overlap) and validate it by reproducing the incumbent's known online value from its own logs. Weeks 3-5: train a contextual bandit with the widest reward attribution window the join supports, evaluate offline, run shadow mode. Week 6: ramp to 1% and 5% behind guardrails. Weeks 1-3 are a strict prerequisite for ANY RL system on this surface, so nothing is wasted; without propensity logging no future policy of any kind is evaluable.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-rl-in-production-d13",
+      "module": "T31-rl-in-production",
+      "q": "A PM asks for an RL agent that optimises 'user satisfaction'. Run the reward-design conversation out loud.",
+      "a": "Satisfaction is a construct, not a reward; RL needs a scalar computable per decision from telemetry. Ask which logged events we believe correlate with it and over what attribution window, then adversarially test each candidate: session length -> agent makes things hard to find; clicks -> clickbait; thumbs-up rate -> agent solicits thumbs-up; 30-day retention -> too delayed and confounded to attribute to actions. Land on a short-horizon logged proxy as the reward, a constraint set for everything the proxy can destroy (complaint rate, unsubscribe rate, diversity floor, repeat-exposure cap), and at least one unoptimised metric on the guardrail dashboard. If the proxy and constraints cannot be agreed in one afternoon, the project is not ready.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-rl-in-production-d14",
+      "module": "T31-rl-in-production",
+      "q": "Why is a permanent 1-2% counterfactual holdout worth its cost, and what question can you not answer without it?",
+      "a": "After six policy iterations each measured only against its immediate predecessor, you have six local comparisons and no measurement of the system's total value versus baseline. Without a holdout you cannot detect slow cumulative drift, cannot detect that iterations three through five were collectively negative, and cannot answer 'what happens if we turn this off', which is the question a cost review eventually asks. The holdout costs a known fraction of a percent; not having it costs an unbounded, unmeasurable amount.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T31-rl-in-production-d15",
+      "module": "T31-rl-in-production",
+      "q": "Explain why retraining an RL or bandit policy on its own production logs is a feedback loop, name the observable symptom, and give three defences.",
+      "a": "The policy chose which actions to log, that log trains the next policy, and the two co-adapt into a narrow region of action space that looks excellent on-policy and is badly suboptimal globally. Symptom: action entropy falling and top-1 action share climbing week over week, with metrics that look fine and then plateau. Defences: a propensity floor guaranteeing every action retains minimum probability (which both bounds importance weights and keeps the log informative), a permanent counterfactual holdout arm, and an explicit exploration budget monitored as a first-class metric. Retraining cadence is not a substitute for any of them.",
+      "difficulty": "staff"
+    }
+  ]
+}

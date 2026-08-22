@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T17-index-design-d1",
+      "module": "T17-index-design",
+      "q": "Explain why composite index column order matters, using the 'usable prefix' rule.",
+      "a": "A composite B-Tree index is sorted lexicographically by its key columns. Only a left-anchored prefix, ending at (and including) the first range/inequality predicate, can be used to narrow the scan; columns after that point can only filter rows already found. Equality columns should go first, the one range column last.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-index-design-d2",
+      "module": "T17-index-design",
+      "q": "What is an index-only scan, what does it require, and how do you confirm it's actually happening in EXPLAIN ANALYZE?",
+      "a": "A scan answered entirely from the index's leaf pages with zero heap fetches, requiring every needed column present in the index and the visibility map confirming no MVCC check against the heap is needed for the relevant pages. Confirm via 'Index Only Scan' plus 'Heap Fetches: 0' in EXPLAIN ANALYZE output; a nonzero heap-fetch count means the visibility map is stale and VACUUM is needed.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-index-design-d3",
+      "module": "T17-index-design",
+      "q": "When is a partial index the right choice over a full index, and what must be true for the planner to use it?",
+      "a": "When queries consistently filter on a predicate matching a minority subset of rows, giving a much smaller index with write cost only on matching rows. The planner must be able to prove the query's WHERE clause implies the partial index's condition, which is reliable for exact or closely-matching predicates but not a general theorem prover.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-index-design-d4",
+      "module": "T17-index-design",
+      "q": "Compare GIN and GiST for indexing JSONB/full-text data, including the fastupdate tradeoff.",
+      "a": "GIN lookups are ~3x faster than GiST but ~3x slower to build with high write overhead since a row can fan out into many inverted entries; best for read-heavy static data. GiST is lossy (executor rechecks candidates) but cheaper to update, better for write-heavy dynamic data. fastupdate on GIN buffers writes into a pending list, trading read-latency variance for cheaper writes.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-index-design-d5",
+      "module": "T17-index-design",
+      "q": "What does BRIN store and what single condition makes it completely useless?",
+      "a": "BRIN stores a min/max-style summary per physical block range rather than per row, giving a tiny index. It's useless if the underlying data isn't physically correlated with the indexed column (check pg_stats.correlation) - if row order on disk doesn't track logical column order, the summary covers the whole value range per block and provides no pruning.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-index-design-d6",
+      "module": "T17-index-design",
+      "q": "An UPDATE on a table with 6 indexes is slower than expected even though it changes only one indexed column. Explain why.",
+      "a": "Updating any indexed column disables Postgres's HOT (Heap-Only Tuple) optimization for that row's update, forcing a new entry in every index on the table, not just the one on the changed column - so a single-column update pays the write cost of maintaining all 6 indexes.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-index-design-d7",
+      "module": "T17-index-design",
+      "q": "How do you decide whether an existing production index is safe to drop?",
+      "a": "Check pg_stat_user_indexes.idx_scan over a representative window long enough to capture periodic jobs (a week, not an hour) - zero scans across that window is a strong candidate. Also check redundancy: an index on (a) is often superseded by one on (a,b) via prefix usability. Use DROP INDEX CONCURRENTLY with monitoring rather than an irreversible drop.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-index-design-d8",
+      "module": "T17-index-design",
+      "q": "Why does the planner ignore a B-tree index on a low-selectivity column (e.g. a boolean or 3-value status on a 10M-row table)?",
+      "a": "Once estimated selectivity crosses roughly single-digit percent of the table, random-access index-then-heap-fetch reads for that many matching rows cost more than one sequential scan pass, so the planner correctly prefers a sequential scan - leaving the index as pure write overhead with zero read benefit.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-index-design-d9",
+      "module": "T17-index-design",
+      "q": "Design the indexing strategy for a multi-tenant SaaS table where over 99% of queries filter by tenant_id plus one other varying column, and discuss the noisy-neighbor tenant case.",
+      "a": "Put tenant_id as the leading column on several composite indexes, one per common (tenant_id, X) access pattern, rather than one giant index. If one tenant is orders of magnitude larger than others, a shared tenant_id-leading index still works correctness-wise but that tenant dominates cache residency and I/O - partitioning by tenant_id turns the skew into physically isolated data structures, which indexing alone can't solve.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-index-design-d10",
+      "module": "T17-index-design",
+      "q": "What is the single biggest performance lever on a query that already uses an index efficiently, and what's the cost of chasing it too far?",
+      "a": "Making it an index-only scan via a covering index, eliminating the per-row heap fetch (often the dominant cost as random I/O) - can be 5-10x+ faster when the heap doesn't fit in cache. Cost: every INCLUDEd column still needs write maintenance on every insert/update, so a covering index with a wide INCLUDE list can approach the write cost of a second copy of the table; only include what the specific hot query actually needs.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-index-design-d11",
+      "module": "T17-index-design",
+      "q": "A table has an index on (customer_id, status, created_at). A common query is WHERE created_at > X ORDER BY created_at with no customer_id or status filter. Does the index help, and what should you do instead?",
+      "a": "Barely, if at all - customer_id is unconstrained so the composite ordering doesn't group rows usefully for this query; scanning the whole index is generally worse than a sequential scan. A separate index on (created_at) alone would actually serve this query.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-index-design-d12",
+      "module": "T17-index-design",
+      "q": "How do you build a new index on a busy production table without blocking writes, and what's the risk?",
+      "a": "CREATE INDEX CONCURRENTLY avoids the exclusive lock a plain CREATE INDEX takes for the whole build, at the cost of requiring two full table scans instead of one and the risk of leaving behind an INVALID, unusable index if the build is interrupted - which must then be manually dropped and retried.",
+      "difficulty": "mid"
+    }
+  ]
+}

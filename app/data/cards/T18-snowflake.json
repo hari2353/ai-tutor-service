@@ -1,0 +1,95 @@
+{
+  "flashcards": [
+    {
+      "id": "T18-snowflake-c1",
+      "topic": "Snowflake",
+      "q": "What is a micro-partition and what per-column metadata does it carry?",
+      "a": "An immutable, contiguous storage unit holding 50-500MB of uncompressed data (~16MB compressed), created automatically. Each carries per-column min, max, null count, and distinct count metadata used for pruning.",
+      "module": "T18-snowflake"
+    },
+    {
+      "id": "T18-snowflake-c2",
+      "topic": "Snowflake",
+      "q": "How does pruning work and does it require an index?",
+      "a": "A query's WHERE predicate is checked against each micro-partition's min/max metadata before scanning any actual data; partitions that can't match are skipped entirely. No user-managed index is involved - pruning effectiveness depends on physical row ordering, which clustering keys control.",
+      "module": "T18-snowflake"
+    },
+    {
+      "id": "T18-snowflake-c3",
+      "topic": "Snowflake",
+      "q": "Scale up vs scale out - how do you decide which fixes a performance problem?",
+      "a": "Scale up (bigger warehouse) fixes one slow query that's spilling to disk/remote storage (memory-constrained). Scale out (multi-cluster) fixes queueing from many concurrent queries competing for one warehouse. Sizing up for a concurrency problem wastes money; multi-cluster does nothing for one slow query.",
+      "module": "T18-snowflake"
+    },
+    {
+      "id": "T18-snowflake-c4",
+      "topic": "Snowflake",
+      "q": "Warehouse T-shirt sizing and recommended auto-suspend defaults?",
+      "a": "Each size doubles credits/hour: XS=1 up to 6XL=512. Auto-suspend recommended ~60s for interactive/BI warehouses, ~30s for programmatic ETL - a suspended warehouse burns zero credits.",
+      "module": "T18-snowflake"
+    },
+    {
+      "id": "T18-snowflake-c5",
+      "topic": "Snowflake",
+      "q": "Name the three caching layers and what's lost when a warehouse suspends.",
+      "a": "Result cache (account-wide, ~24h, exact-SQL-text-keyed, zero compute on hit), local disk/warehouse cache (recently-scanned micro-partitions on SSD, LOST entirely on suspend), and remote storage (durable, always correct, slowest).",
+      "module": "T18-snowflake"
+    },
+    {
+      "id": "T18-snowflake-c6",
+      "topic": "Snowflake",
+      "q": "Time Travel retention by edition, and Fail-safe's role?",
+      "a": "Standard Edition: 1 day default/cap. Enterprise+: extendable up to 90 days. Fail-safe is a fixed, non-configurable 7-day window after Time Travel expires, recoverable only via Snowflake support - not self-service. Max total protection: up to 97 days.",
+      "module": "T18-snowflake"
+    },
+    {
+      "id": "T18-snowflake-c7",
+      "topic": "Snowflake",
+      "q": "How does zero-copy clone avoid the storage cost of copying a 50TB table?",
+      "a": "The clone points at the same underlying immutable micro-partitions as the source - nothing is physically copied. Storage cost only appears for newly-written micro-partitions once the clone or source diverges. The clone gets its own independent retention clock going forward.",
+      "module": "T18-snowflake"
+    },
+    {
+      "id": "T18-snowflake-c8",
+      "topic": "Snowflake",
+      "q": "What are the three stream types and what do they track?",
+      "a": "Standard (full CDC: inserts/updates/deletes), append-only (inserts only, cheaper, fits event/log sources), and insert-only (for external tables). A stream records an offset; querying it returns the delta since the offset was last consumed.",
+      "module": "T18-snowflake"
+    },
+    {
+      "id": "T18-snowflake-c9",
+      "topic": "Snowflake",
+      "q": "Why guard a task with SYSTEM$STREAM_HAS_DATA?",
+      "a": "Without it, a scheduled task burns a full warehouse resume/query cycle on every interval regardless of whether the stream has any new data to process - real, avoidable credit cost from a missing guard clause.",
+      "module": "T18-snowflake"
+    },
+    {
+      "id": "T18-snowflake-c10",
+      "topic": "Snowflake",
+      "q": "What does spilling to remote storage in a query profile indicate, and what fixes it?",
+      "a": "An operator (sort, hash join, aggregation) needed more memory than local disk could provide and spilled all the way to cloud storage - the slowest tier. Signal the warehouse is undersized for that query's working set; fix by scaling up, not by adding a clustering key (clustering affects scanning, not in-memory processing).",
+      "module": "T18-snowflake"
+    },
+    {
+      "id": "T18-snowflake-c11",
+      "topic": "Snowflake",
+      "q": "When is a clustering key worth the automatic-clustering cost, and when is it wasted?",
+      "a": "Worth it: large table (multi-TB+), queries consistently filter on that column, natural insertion order doesn't already serve it. Wasted: small table, unpredictable filter patterns, or natural load order already aligns with queries (most time-series tables need no explicit key).",
+      "module": "T18-snowflake"
+    },
+    {
+      "id": "T18-snowflake-c12",
+      "topic": "Snowflake",
+      "q": "Snowflake per-credit pricing by edition (AWS US East, on-demand)?",
+      "a": "Standard ~$2/credit, Enterprise ~$3/credit, Business Critical ~$4/credit. Capacity contracts reduce these rates 20-45% depending on volume/term.",
+      "module": "T18-snowflake"
+    },
+    {
+      "id": "T18-snowflake-c13",
+      "topic": "Snowflake",
+      "q": "When is Snowflake usually the wrong platform choice?",
+      "a": "Heavy ML/feature-engineering or large-scale unstructured-data pipelines (Snowpark narrows but doesn't close the gap to a real ML platform), or a single small, predictable workload that doesn't need elastic multi-cluster concurrency.",
+      "module": "T18-snowflake"
+    }
+  ]
+}

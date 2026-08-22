@@ -1,0 +1,172 @@
+{
+  "flashcards": [
+    {
+      "id": "T10-genai-designs-c1",
+      "topic": "GenAI System Designs",
+      "q": "What three properties make GenAI system design different, and what stays the same?",
+      "a": "Different: the core component is PROBABILISTIC (correctness is a measured distribution, so eval is a component not a phase), EXPENSIVE per request ($0.01-0.30 vs $0.0001, so the cost model is part of the architecture), and SLOW (1-10 s vs 50 ms, so streaming, caching and step reduction are architecture). Unchanged: capacity planning, queues and backpressure, idempotency, sharding and hot partitions, multi-tenancy and noisy neighbours, versioned schemas and migrations, SLOs. Candidates who treat GenAI as a new discipline forget backpressure, which is how the vector index falls over.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c2",
+      "topic": "GenAI System Designs",
+      "q": "State the six-slot template and the 45-minute time allocation.",
+      "a": "1) CLARIFY (6 min): what the number means, read:write, latency contract, who is the tenant, what 'correct' means, blast radius. 2) ARCHITECT (10 min): write path and read path drawn separately. 3) DECIDE (12 min): 3-5 forks each stated as 'X over Y because Z, at the cost of W'. 4) SIZE (6 min): QPS, bytes, tokens, cost/request, cost/month. 5) BREAK (6 min): failure to OBSERVABLE SYMPTOM to mitigation. 6) DEFEND (5 min): the three hardest follow-ups answered before they are asked. The GenAI-specific move: produce cost per request unprompted.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c3",
+      "topic": "GenAI System Designs",
+      "q": "Name the seven patterns that recur across every GenAI design.",
+      "a": "1) Write path and read path are asymmetric; draw them separately. 2) Two-stage retrieval is universal: cheap recall over many, expensive precision over few (binary then full precision, vector then reranker, graph then vector, cheap model then strong). 3) The enforcement boundary must be unbypassable (gateway plus network policy, permission engine, index predicates). 4) Version everything behaviour-changing and put it on the trace. 5) Cost per request out loud, then per month, then lever ordering. 6) Every failure mode needs an observable symptom. 7) Distinguish a FILTER (classifier, label, prompt) from a BOUNDARY (permissions, network policy, sandbox).",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c4",
+      "topic": "GenAI System Designs",
+      "q": "'10 million documents' for RAG. What do you convert it to, and what does that change?",
+      "a": "At ~6 pages and ~10 chunks of 400 tokens per document: ~100M chunks and ~40B tokens. That changes the architecture, not just the size. 1024-dim fp16 is 2 KB/vector so 100M vectors is 200 GB before graph overhead, which does not fit reasonable RAM; binary quantization at 1 bit/dim is 128 bytes so ~12.8 GB does, so you retrieve 1,000 candidates on binary, rescore with full-precision vectors from disk, then cross-encoder rerank 150 to 8. A 10M-vector system and a 500M-vector system are different architectures, not the same one scaled.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c5",
+      "topic": "GenAI System Designs",
+      "q": "Why must ACLs be pushed into the vector index rather than applied after retrieval?",
+      "a": "Post-filtering top-k means a user with narrow permissions gets an empty result set from a system that found 10 perfectly relevant documents they cannot see. Observable symptom: users with narrow scopes see 'no results' at 5-10x the average rate, with results_before_filter=10 and results_after_filter=0 in traces. Cost of doing it right: filtered ANN is slower and filter cardinality distribution now affects your p99.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c6",
+      "topic": "GenAI System Designs",
+      "q": "Where is the pgvector-versus-dedicated-vector-engine boundary, and what else is a premature-scale trap?",
+      "a": "Roughly 5-10 million vectors: below that pgvector on the Postgres you already operate is the right answer and a new stateful system is pure operational cost. Other premature-scale traps: a multi-tenant LLM gateway below roughly $10-20k/month of spend or a handful of consumers; an agent orchestration platform below 5-10 agents (platforms are amortisation plays); a semantic cache on low-repetition traffic; a router before you have attributed your bill; RAG at all when the corpus fits in a cached prefix (~50-100k tokens of stable content).",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c7",
+      "topic": "GenAI System Designs",
+      "q": "Design a multi-tenant LLM gateway in five sentences.",
+      "a": "It exists to be an enforcement boundary the application cannot bypass: virtual keys carrying tenant/team/env/scopes, per-tenant RPM/TPM and dollar budgets checked BEFORE the provider call, routing with a failover chain and circuit breaker, caching, and a cost ledger. Two-tier rate limiting: a local token bucket against a leased share of a global budget refreshed every ~200 ms, so Redis is not on every request and overshoot is bounded and stateable. Pre-call estimate, post-call reconcile, because only the response carries true output tokens; nightly reconciliation against provider usage with a 3% drift alarm. No worker holds a provider credential, enforced by NetworkPolicy. Budget: p99 added latency under 15 ms, and the gateway costs ~1% of the spend it governs.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c8",
+      "topic": "GenAI System Designs",
+      "q": "Agent orchestration platform: what does the platform own and what do teams own?",
+      "a": "Platform owns the BOUNDARIES: budgets, permissions, network egress, traces and the trajectory store, the eval gate, durable execution, the sandbox tier. Teams own BEHAVIOUR: prompts, tools, topology. Structure: a control plane (versioned agent manifests, policy, prompt registry, approval service, eval service, quotas) separate from a data plane (queue, CPU runner pool with checkpointer, sandbox pool, gateway). You cannot register an agent without an eval suite. This split is the answer to 'who is on call', which is the question behind the question.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c9",
+      "topic": "GenAI System Designs",
+      "q": "Agent A calls agent B across team boundaries. What are the two things that break?",
+      "a": "Identity propagation and budget accounting. Permissions: the ORIGINATING principal's permissions intersected with the callee's scopes, never unioned, or you get privilege escalation by composition (a confused deputy, which is the enterprise MCP identity-propagation gap in a different costume). Budget: hierarchical, where the child's spend counts against the parent's ceiling, or a nested call is an unbounded budget hole.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c10",
+      "topic": "GenAI System Designs",
+      "q": "Design an agent memory service. What is the dominant cost and the dominant risk?",
+      "a": "Typed facts (entity, preference, decision, task) never free-text notes, extracted asynchronously at session end, stored bi-temporally with provenance and confidence, partitioned by user, retrieved synchronously in a 60 ms budget under a hard 1.5k-token injection cap. Dominant COST is extraction, not storage: 40M sessions/month at ~$0.0007 is ~$28k/month, mitigated by gating on session length and using a small model. Dominant RISK is that a wrong persisted fact reproduces across sessions forever and is invisible in single-session tests, so ship without cross-session memory first and add it against a measured re-derivation rate.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c11",
+      "topic": "GenAI System Designs",
+      "q": "Design an eval platform: architecture and the number that justifies trajectory scoring.",
+      "a": "One versioned dataset store shared by the CI gate and production monitoring, a seeded parallel runner that replays fixtures, and three scorer tiers: deterministic first (schema, citations, tool order, cost), trajectory scoring as a first-class type, pinned LLM-as-judge with a ~40-case human calibration set last. Tiered suites to keep the gate under ~15 minutes, result caching keyed on (dataset_ver, prompt_hash, model, seed, code_sha) for a 60-70% hit rate, and continuous live sampling into the golden set. The justifying number: agents evaluated only on final output pass 20-40% MORE cases than trajectory-level evaluation reveals.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c12",
+      "topic": "GenAI System Designs",
+      "q": "Design prompt management, and state the canary detection floor.",
+      "a": "Git as source of truth, registry as distribution. Immutable content-addressed versions (prompt@1.14.0 = sha256 of the template), deployment pointers separate from versions so rollback is a pointer flip in seconds, local caching that fails closed to last known good, the same eval gate for UI-authored and git-authored changes, and the RENDERED prefix hash on every trace (not just the template hash). Detection floor arithmetic: detecting a 3 percentage-point judge-score delta needs n ~ 400 scored sessions, so a 5% canary on 8,000 sessions/day gives a ONE-DAY floor regardless of tooling. Faster means a bigger canary and more exposure.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c13",
+      "topic": "GenAI System Designs",
+      "q": "Semantic cache: what is in the key, what is the honest hit rate, and how do you set the threshold?",
+      "a": "Key = (normalized_query, tenant, corpus_version, model, prompt_hash). Keying on the query alone serves tenant A's answer to tenant B, which is the worst bug in this design and easy to ship. Honest hit rates: 20-45% for most workloads, 30-70% on FAQ-shaped traffic; 90%+ claims come from datasets built with heavy repetition. Threshold is embedding-model specific (~0.83 MPNet, ~0.78 Albert); GPTCache's suggested 0.7 is too loose, so start near 0.92, monitor false positives for 48 hours, and tune down in 0.01 steps. Do exact and prefix caching FIRST because they are correctness-preserving.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c14",
+      "topic": "GenAI System Designs",
+      "q": "Guardrail service: three design rules and the metric that actually matters.",
+      "a": "1) Parallel detectors, not a chain, because latency is additive in a chain and the checks are independent. 2) Run the input rail CONCURRENTLY with retrieval, which makes it nearly free on the wall clock. 3) Deterministic checks (secret regexes, citation resolution, schema) before classifiers. The metric that matters is the FALSE POSITIVE rate, not compute: at 900 rps a 1% false-block rate is 780k blocked legitimate requests per day, an outage that looks like a safety feature. Target under 0.2%, ship every policy change in shadow mode, and provide an appeal path. Compute is trivial (~$850/month at 900 rps, ~0.15% of LLM cost).",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c15",
+      "topic": "GenAI System Designs",
+      "q": "Document pipeline at 4M pages/day: what is the first decision and what does it save?",
+      "a": "Adaptive per-page routing, on text-layer density, scan quality and table presence. Fast text-layer path ~$0.0002/page, OCR ~$0.0015, VLM ~$0.006. At a 60/30/10 mix that is ~$4.7k/day versus $24k/day for a uniform VLM pass, a 5x saving, which is why the router is the first decision and not an optimisation. Then layout-aware chunking with tables atomic up to a 1,200-token cap and header propagation, confidence-gated human review whose corrections become routing labels, and stored originals plus versioned intermediate representation so a parser upgrade is a replay rather than a re-crawl.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c16",
+      "topic": "GenAI System Designs",
+      "q": "Support agent: the escalation design, and why deflection alone is a vanity metric.",
+      "a": "Escalate on EXPLICIT triggers, not when the model gives up: low retrieval confidence, three turns without progress, detected frustration, a hard category (legal, safety, cancellation, VIP), or any action outside the allow-list. Then a STRUCTURED handoff (summary, attempted steps, sentiment, the specific blocker, full transcript), because context loss makes an escalated ticket worse than a cold one. Deflection alone is vanity: 2026 median is 41.2% with a top quartile of 58.7%, but resets deflect >70% and nuanced complaints rarely break 25%, so the headline moves with intent MIX. Pair it with re-contact rate, CSAT delta, and hallucinated-policy rate, because deflection rises when the agent stops escalating what it should.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c17",
+      "topic": "GenAI System Designs",
+      "q": "Code assistant on a 40M-LOC monorepo: three latency tiers and the reliability story.",
+      "a": "Three request classes with three context strategies. Inline completion p95 200 ms: local buffer context only, NO index round trip, small model. Chat p95 2 s: graph-plus-vector retrieval. Agentic multi-file edit over minutes: iterative tools. Index by tree-sitter symbol graph (defs, refs, callers, tests-for-symbol) plus syntax-chunked vectors, incremental on commit with freshness as an SLO. 40M LOC is only ~1.2M chunks (~0.9 GB), so the graph is the expensive part; reported payoff is ~10x fewer tokens and ~2.1x fewer tool calls across 31 repos. The reliability story is entirely the VERIFIER: run the test suite in the sandbox and gate acceptance on exit code, and for a bug fix require a test that fails before and passes after.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c18",
+      "topic": "GenAI System Designs",
+      "q": "Cut a $720k/month LLM bill by 70%. Order the levers and give the arithmetic.",
+      "a": "Attribute the bill first (feature, model, tenant) or you are guessing. Then four levers multiplicatively, safest first: 1) prompt caching on a frozen prefix, ~22% off, correctness-preserving, to $562k. 2) rules plus a classifier router sending ~58% to a model at ~1/12 price, to $263k. 3) a cascade on structured-output paths where failure is cheaply detectable, to ~$243k. 4) a semantic cache at ~25% hit, to ~$182k. That is ~75% and it requires all four; any single lever is 20-40%. Anchors: RouteLLM 95% of GPT-4 quality at 26% strong-model calls, ~48% cheaper than random, up to 75% with judge-augmented data; production reports 40-85%, so plan for 40-50%.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c19",
+      "topic": "GenAI System Designs",
+      "q": "Why must router savings be measured per completed task rather than per token?",
+      "a": "Because a weaker model that malforms tool calls and loops three extra times costs MORE than the frontier model and is slower, so a per-token saving can be a per-task loss. Observable symptom: tool-call malformation rate 8x higher on the cheap route while the token bill looks better. Consequence: route on capability, not only on difficulty; pin tool-heavy paths to a model with a measured low malformation rate; and expect some routes to move UP.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c20",
+      "topic": "GenAI System Designs",
+      "q": "When does self-hosting a model actually save money?",
+      "a": "It is a utilisation bet, not a price bet. An 8B model on 2xA10G at roughly $1.5k/month serving ~600 tok/s sustained is ~1.5B tok/month at full utilisation, or ~$0.001/1k tok; a commercial small model at $0.25/M input is ~$0.00025/1k. So self-hosting beats a commercial small model only above roughly 40-50% SUSTAINED utilisation, and loses badly below it. Below the breakeven you are paying for idle GPUs and calling it savings. Compute the breakeven; do not assert.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c21",
+      "topic": "GenAI System Designs",
+      "q": "Give the cross-design failure modes worth memorising, with their observable symptoms.",
+      "a": "Aggregate metrics flat while specific users are furious: you are averaging over intents/tenants, so slice every quality metric and alert on slices. Cost 3x the estimate: the estimate was per model call and production is per session with multi-turn context re-send. cached_input_tokens near zero: a timestamp or non-deterministic ordering mutates the stable prefix. Regression untraceable for a week: multiple versioned things changed together and none are on the trace. Gate green but production worse: golden-set drift or a provider moving a floating alias. Retrieval returns nothing for some users: ACLs applied after retrieval. The system is up and the answers are wrong: you have SLOs on availability and latency and none on quality.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c22",
+      "topic": "GenAI System Designs",
+      "q": "What is the difference between a filter and a boundary, and why does the distinction fail candidates?",
+      "a": "Filters reduce probability and have false-negative rates: injection classifiers, authority labels, system-prompt instructions, content moderation. Boundaries bound damage regardless of what the model believes: the permission engine (a pure function that never consults the model), network egress policy, the sandbox, index-level ACL predicates. Conflating them is the fastest way to fail a GenAI design round, because a design whose security argument rests on a classifier has no security argument. CaMeL-style provenance interpreters and dual-LLM quarantine are the only patterns with a real security argument and no mainstream harness ships them as of mid-2026.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c23",
+      "topic": "GenAI System Designs",
+      "q": "Name the twelve designs and each one's single most important decision.",
+      "a": "1 RAG 10M docs: quantized first stage plus full-precision rescore, ACLs into the index. 2 Multi-tenant gateway: in-path proxy plus network egress denial. 3 Agent orchestration: control/data plane split with eval-gated registration. 4 Agent memory: typed bi-temporal facts written asynchronously. 5 Eval platform: one dataset store for CI and prod, deterministic scorers before judges. 6 Prompt management: immutable content-addressed versions with pointer-flip rollback. 7 Semantic cache: the key is (query, tenant, corpus_ver, model, prompt_hash). 8 Guardrail service: parallel detectors with the input rail concurrent with retrieval. 9 Document pipeline: adaptive per-page routing (5x saving). 10 Support agent: explicit escalation triggers with a structured handoff. 11 Code assistant: code graph plus vector, tests as the verifier. 12 Cost router: tiered L0-L4, measured per completed task.",
+      "module": "T10-genai-designs"
+    },
+    {
+      "id": "T10-genai-designs-c24",
+      "topic": "GenAI System Designs",
+      "q": "You have never seen the system being asked about. What do you do?",
+      "a": "Run the six slots anyway, and lean on the transferable structure: separate write path from read path; assume two-stage retrieval (cheap recall then expensive precision); find the enforcement boundary and put it somewhere the caller cannot bypass; version everything behaviour-changing and trace it; compute cost per request from the dominant token or compute term; give each failure mode an observable symptom. Worked example (multimodal video search): write path decodes, samples keyframes, embeds frames, transcribes audio, aligns on timecode; read path does ANN over frame and transcript embeddings then a VLM rerank on top candidates returning timecoded segments; cost is frames-per-hour times embedding on write and VLM rerank on read; failure is sampling missing a short event, with recall collapsing on brief-action queries.",
+      "module": "T10-genai-designs"
+    }
+  ]
+}

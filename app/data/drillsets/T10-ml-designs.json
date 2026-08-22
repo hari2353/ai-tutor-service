@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T10-ml-designs-d1",
+      "module": "T10-ml-designs",
+      "q": "Before naming a model architecture for any ML system design prompt, what must you establish first?",
+      "a": "The exact label definition, including its delay, its blind spots, and whether it's a direct observation or a proxy. Architecture, features, and metrics all follow from the label the way a conventional design's architecture follows from the API contract and schema.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T10-ml-designs-d2",
+      "module": "T10-ml-designs",
+      "q": "A fraud model's offline AUC is 0.97 on a problem where 0.80-0.90 is the realistic ceiling. What's your first hypothesis?",
+      "a": "Leakage, almost certainly from a non-point-in-time feature join or a random (rather than temporal) train/test split. An implausibly high offline metric is a red flag before it's good news.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T10-ml-designs-d3",
+      "module": "T10-ml-designs",
+      "q": "Why is ROC-AUC a poor primary offline metric for spam and fraud detection?",
+      "a": "Extreme class imbalance (positive rate often under 1%) means ROC-AUC is dominated by how well the model ranks the huge negative class, and stays high even for a model that's weak on the rare positive class that actually matters. Use PR-AUC and precision/recall at the operating threshold instead.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T10-ml-designs-d4",
+      "module": "T10-ml-designs",
+      "q": "A feed ranking model's offline calibration and NDCG both look great, but online engagement is flat. Name two structural reasons this can happen with zero leakage and zero bugs.",
+      "a": "(1) Off-policy bias: offline eval only has labels for items the CURRENT policy already showed, so it can't measure how unseen candidates would perform. (2) Feed effects (novelty, habituation) compound over days/weeks, invisible in a single-session offline slice.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-ml-designs-d5",
+      "module": "T10-ml-designs",
+      "q": "Design the cascade architecture pattern shared by fraud detection, spam/abuse detection, and content moderation. What's the shape and why?",
+      "a": "A fast, cheap deterministic rules layer (blocklists, velocity limits, known-bad hashes) filters obvious cases in single-digit ms, followed by a supervised model producing a calibrated risk score for everything the rules pass, with the model's uncertain-middle region routed to human review rather than auto-decided. Shape is forced by cost: running the most expensive check on 100% of high-volume traffic isn't economically viable when most of it is unambiguous.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-ml-designs-d6",
+      "module": "T10-ml-designs",
+      "q": "A churn model has excellent offline AUC and the retention campaign built on it shows a high 'success rate' among targeted users. Is that enough to prove the campaign works? Why or why not?",
+      "a": "No. A high success rate among flagged users just confirms the model found at-risk-looking accounts; it says nothing about whether the campaign caused them to stay. Without a held-out control group of flagged-but-untreated users, you cannot distinguish 'the campaign saved them' from 'the model found loyal users who were never going to churn anyway.' This is fundamentally an uplift-modeling problem hiding inside a classification framing.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-ml-designs-d7",
+      "module": "T10-ml-designs",
+      "q": "You have a feature store deployed. A model's online performance drops right after a migration. Walk through your first diagnostic step and why it's a feature-store-specific bug class.",
+      "a": "Run an online-offline value-parity check for every feature the model consumes: for a sample of entities, compare what the online store returns against what a point-in-time offline query would return for the same timestamp. A migration is exactly when transformation logic most commonly gets reimplemented in the new pipeline and silently diverges from the old one -- the feature store guarantees shared storage, not shared transformation code.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T10-ml-designs-d8",
+      "module": "T10-ml-designs",
+      "q": "An A/B test on a dynamic pricing change needs to avoid spillover contamination. What randomization unit do you choose and why, and name the tradeoff of your chosen method.",
+      "a": "Cluster-based randomization at the geographic-market level (or a switchback design alternating the whole market between treatment/control over time), because a treated rider's unfilled request changes the supply available to a control rider in the same market -- individual-level randomization is contaminated by definition. Tradeoff: switchback designs need buffer/burn-in windows between switches or carryover effects (drivers repositioned based on yesterday's price) contaminate the read.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-ml-designs-d9",
+      "module": "T10-ml-designs",
+      "q": "A spam-detection model's aggregate false-positive rate looks low and stable, but complaints from a specific user segment are rising. Diagnose the likely cause and the fix.",
+      "a": "Aggregate metrics can hide concentrated harm: a uniformly low false-positive rate is fully compatible with one segment (a language, region, or account type) experiencing a much higher rate that's diluted by a large, low-risk majority. Fix: slice every offline and online metric by relevant segments before shipping, prioritizing segments with known historical sensitivity, rather than discovering the disparity from a support-ticket spike.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-ml-designs-d10",
+      "module": "T10-ml-designs",
+      "q": "Design the retraining-cadence policy across ads CTR, spam/abuse, and churn. Should they share one cadence? Justify the driver for each.",
+      "a": "No single cadence fits all three. Ads CTR retrains near-continuously (hours) because inventory and campaigns turn over hourly. Spam/abuse cadence should be tied to the empirically measured half-life of an attack pattern (can be days), because the adversary actively probes and adapts to the deployed model. Churn retrains weekly to monthly because behavioral drift is slow and the label horizon (30-90+ days) is long. The generalizable rule: cadence follows how fast the label's underlying reality changes relative to how fast you can detect that it changed.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-ml-designs-d11",
+      "module": "T10-ml-designs",
+      "q": "An interviewer asks you to design an A/B testing platform. There's no trained model here -- what's the platform's equivalent of 'the label,' and what's the equivalent of a leaked feature?",
+      "a": "The equivalent of 'the label' is the metric definition and the statistical significance test used to decide a winner. The equivalent of a leaked feature is computing an experiment's outcome metric using data from users exposed to the surface but not actually assigned by that experiment's randomization (common when experiments overlap on the same surface), which inflates or deflates the read the same way a leaked feature inflates offline AUC -- caught by auditing that the metric's population exactly matches the randomized population.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T10-ml-designs-d12",
+      "module": "T10-ml-designs",
+      "q": "Aggregate GPU utilization on an ML training platform is reported at 70%, but teams still complain about long queue times for large distributed jobs. What's the likely cause and how do you confirm it?",
+      "a": "Fragmentation, not a capacity shortage: free capacity is scattered in small non-contiguous chunks across many nodes rather than concentrated in one allocatable block large enough for a big distributed job. Confirm by tracking allocatable-contiguous-capacity per node/rack, not just an aggregate busy/idle ratio, which hides exactly this failure mode.",
+      "difficulty": "staff"
+    }
+  ]
+}

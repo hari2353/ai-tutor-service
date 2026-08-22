@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T26-world-models-d1",
+      "module": "T26-world-models",
+      "q": "In one sentence, what is a world model, and what single property disqualifies Sora from being one?",
+      "a": "A learned p(s_{t+1} | s_t, a_t) you can roll forward without touching the real environment. Sora is not action-conditioned, so it is a prior over plausible futures rather than a conditional next-state distribution you can act inside. Genie's contribution over Sora was exactly this: an unsupervised latent action model recovering a controllable action space (a VQ-VAE codebook of 8 latent actions) from video with no action labels.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-world-models-d2",
+      "module": "T26-world-models",
+      "q": "Name the three components of Ha & Schmidhuber's 2018 architecture and the parameter count of the controller.",
+      "a": "V, a convolutional VAE (~4.35M params, z in R^32 for CarRacing). M, an MDN-RNN with a 256-unit LSTM emitting a 5-component Gaussian mixture over z_{t+1} (~422K params). C, a LINEAR controller a = W[z;h]+b at 867 parameters, trained by CMA-ES with population 64. V and M are trained on 10,000 random rollouts and never see the reward signal at all.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-world-models-d3",
+      "module": "T26-world-models",
+      "q": "State the two arguments for building a world model. Bonus for the trade being made.",
+      "a": "Sample efficiency (one real trajectory amortises into many imagined ones; PlaNet solved DMC image tasks in ~2,000 episodes where D4PG needed ~50x more, and ~500x on Cheetah Run) and off-system policy evaluation (score a policy inside the model before it touches reality). The trade: you are converting sample cost into model-error risk, always.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-world-models-d4",
+      "module": "T26-world-models",
+      "q": "At a 5% per-step model error, roughly how many steps can you roll before half your rollouts have diverged? Show the formula.",
+      "a": "H_1/2 = ln(2) / -ln(1-eps) ~= 0.693/eps for small eps, so about 14 steps at eps=5%. At 1% it is ~69 steps, at 2% ~34, at 10% ~7. This formula explains why Dreamer imagines 15 steps and MBPO branches k=1..15 off real states: those horizons sit right at the half-life of a well-trained latent dynamics model.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-world-models-d5",
+      "module": "T26-world-models",
+      "q": "Why does giving Ha & Schmidhuber's controller the RNN hidden state h_t matter, and by how much?",
+      "a": "632 +/- 251 with z_t alone, 788 +/- 141 with an added hidden layer, 906 +/- 21 with h_t included, against a 900 solve threshold. h_t is the model's compressed belief about the future, so the controller consumes predictive information without planning at decision time. 274 points from representation alone, with zero rollout risk. This is the version of world models that most often survives production.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-world-models-d6",
+      "module": "T26-world-models",
+      "q": "Why predict in latent space instead of pixel space, and what is the price?",
+      "a": "Capacity: a 1080p frame is 6.2M numbers versus a latent 10^3-10^4 times smaller, and reconstruction loss spends capacity on texture no controller reads. Noise: minimising squared error on aleatoric content converges to the conditional mean, which is blur, and is why pixel predictors go to mush in 10-20 frames. Price: no external ground truth, so encoder and predictor can collude on a constant mapping. That is representation collapse; defences are a reconstruction anchor (Dreamer), an EMA target encoder with stop-gradient (JEPA), or a variance-covariance regulariser (VICReg).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-world-models-d7",
+      "module": "T26-world-models",
+      "q": "Trace PlaNet to DreamerV3 in four sentences, naming what each fixed.",
+      "a": "PlaNet (2019) introduced RSSM (deterministic GRU path plus stochastic variable, because pure stochastic washes out long-range info and pure deterministic collapses branch points) and latent overshooting, planning with CEM every step. Dreamer (2020) replaced CEM with an actor-critic backpropagating imagined return through the differentiable dynamics at H=15 with a critic bootstrapping the tail. DreamerV2 (2021) swapped Gaussian latents for 32x32 categoricals with straight-through gradients plus KL balancing, hitting human-level on the 55-game Atari 200M benchmark inside a world model. DreamerV3 (2023, Nature 2025) added symlog, twohot over 255 buckets and percentile return normalisation, delivering one fixed configuration across 150+ tasks and the first Minecraft diamonds from scratch.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-world-models-d8",
+      "module": "T26-world-models",
+      "q": "Your agent scores 950 in imagination and 190 in the real environment against a random baseline of 210. Name the failure mode and the counter-intuitive fix.",
+      "a": "Model exploitation. The optimiser searches for the argmax of predicted return, so it is drawn toward regions where the model is optimistically wrong; the error is adversarially sought rather than averaged out, and it worsens with stronger optimisers. Nearly the exact numbers from Ha & Schmidhuber's tau=0.1 row (2086 dreamed, 193 real, below random's 210), caused by mode collapse so severe monsters never fired. The counter-intuitive fix: raise the model's sampling temperature so the dream is HARDER than reality. tau=1.15 gave 918 dreamed and 1092 real, the best transfer. Modern equivalents: uncertainty penalties (MOPO/MOReL), ensemble disagreement, domain randomisation.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-world-models-d9",
+      "module": "T26-world-models",
+      "q": "What is the representation-versus-dynamics split, and how do you test each?",
+      "a": "Representation q(z|x) does compression with sufficiency; it fails by dropping information, and the symptom is confidently wrong predictions no dynamics training can fix. Test it by linear-probing z for known ground-truth state variables. Dynamics p(z'|z,a) does accuracy over a horizon; it fails by compounding error, and the symptom is great one-step and terrible 20-step accuracy. Test it with an open-loop H-step error curve. Reconstruction loss alone measures neither. The decoder is a third object that exists only as an anti-collapse anchor and is never called during imagination.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-world-models-d10",
+      "module": "T26-world-models",
+      "q": "Someone shows you a Genie 3 clip as proof that world models can train agents. Respond.",
+      "a": "Sort the claim. Genie 3 (5 Aug 2025) is a real engineering achievement: navigable 720p worlds at 24fps, consistent for a few minutes, real-time. But there is no technical report, no benchmark table and no published closed-loop agent-training or transfer result, and its own stated limits are the load-bearing ones: navigation-only action space, roughly one minute of effective memory, non-robust multi-agent interaction. Compare with V-JEPA 2, which reports 65-80% zero-shot pick-and-place on Franka arms in two unseen labs after post-training on under 62 hours of unlabelled robot video. That is a closed-loop result on real hardware; a clip is not.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-world-models-d11",
+      "module": "T26-world-models",
+      "q": "Derive why compounding error is worse than linear, then say what that implies for horizon selection.",
+      "a": "The union bound gives H*eps, linear. The multiplicative view gives (1-eps)^H, exponential: at eps=2%, 74% at H=15, 36% at H=50, 13% at H=100, 0.6% at H=250. But eps is not constant: drift pushes the rollout off-distribution where error is larger, so with eps_h = eps_0(1+beta*h) the accumulated error picks up eps_0*beta*H^2/2, quadratic. At eps_0=1%, beta=0.05, the quadratic term dominates past H~40. Implication: never pick a horizon from theory. Plot open-loop error against h out to 4H on held-out real trajectories, find the knee, and set the planning horizon at roughly half of it.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-world-models-d12",
+      "module": "T26-world-models",
+      "q": "Give the strongest published evidence that scaling video generation does not induce physical law, and then steelman the other side.",
+      "a": "PhyWorld (ICML 2025, ByteDance Seed): textureless 2D physics simulator, DiT-S through DiT-XL, 30K to 3M samples, measuring velocity error parsed from generated video against ground truth. In-distribution error fell to 0.012 against a 0.010 ground-truth floor; out-of-distribution on the same model was 0.427, ~35x worse, and scaling did nothing (DiT-B OOD across 30K/300K/3M: 0.433, 0.328, 0.358). Mechanism: case-based retrieval with attribute priority colour > size > velocity > shape. Steelman: it tested 2D synthetic scenes at DiT-XL scale, orders of magnitude below frontier models on data with none of real video's diversity, so it constrains rather than settles the claim. And exact physics may be the wrong bar if the product is diverse synthetic training data for a policy that gets fine-tuned on real data anyway, which is exactly how Cosmos is positioned.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-world-models-d13",
+      "module": "T26-world-models",
+      "q": "Design the evaluation protocol you would gate a world-model-based production launch on. Be specific about which metrics you refuse.",
+      "a": "Refuse FVD, SSIM, PSNR, LPIPS and human preference as gates; PhyWorld's PHYRE table shows SSIM 0.943-0.951 across videos whose abnormal rate spanned 67% to 10%, so they are blind to the property that matters. Gate on: extracted-quantity prediction error rather than pixel error; conservation-law and object-permanence checks under scripted occlusion; OOD extrapolation with a contiguous held-out parameter region; counterfactual consistency (same state, different action); closed-loop task success against a no-model baseline for anything that acts; and Spearman rank correlation between dreamed and real return across 10-20 candidate policies for anything used as an evaluation harness. Plus a live shadow or A/B deployment as the actual decision gate.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-world-models-d14",
+      "module": "T26-world-models",
+      "q": "Why is DreamerV3's real contribution a systems result rather than an algorithms result?",
+      "a": "Every prior model-based paper reported strong numbers after per-domain hyperparameter tuning, which silently excluded hundreds of tuning runs from the reported sample cost. A method needing 200 tuning runs at 10^6 steps each to demonstrate a 10^5-step result is not sample-efficient in any practical sense. DreamerV3's robustness layer (symlog for scale-invariance across rewards spanning 0.01 to 100,000, twohot regression over 255 buckets for scale-invariant multimodal value prediction, percentile return normalisation for sparse-reward gradient stability) removes that hidden cost, which is what makes one fixed configuration work across 150+ tasks out of the box. Bonus finding: across 8M to 200M parameters, larger models were MORE data-efficient per environment step, not less.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-world-models-d15",
+      "module": "T26-world-models",
+      "q": "A team proposes training a warehouse-robot policy inside a learned world model. What is your recommendation and what do you demand before approving the rollout?",
+      "a": "Start representation-only: use the model's predictive features to feed a conventionally trained policy, which buys the 632 to 906 effect with zero compounding-error and zero model-exploitation exposure because nothing is imagined. Split the problem so the classical planner handles routing over the known map (write the dynamics down where you can) and the learned model covers only the short-horizon hard part: contact, other robots, humans. Before approving any imagination-trained policy I want a multi-step error curve with a knee well past the intended horizon, dreamed-versus-real rank correlation over at least 10-20 candidate policies, an OOD detector that refuses to plan outside the envelope, continuous monitoring of one-step and H-step error that automatically shortens the horizon as error rises, a validated safety layer with override authority, and a shadow deployment as the real gate. If those cannot be produced, degrade to representation-only and keep the rollout out of the decision path.",
+      "difficulty": "staff"
+    }
+  ]
+}

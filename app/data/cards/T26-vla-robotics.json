@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T26-vla-robotics-c1",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "What is a VLA in one sentence, and why does it always start from a pretrained VLM?",
+      "a": "A vision-language-action model is a VLM whose output space is robot actions instead of text. It starts from a pretrained VLM because robot data is four to five orders of magnitude smaller than language data: Open X-Embodiment is ~1M trajectories against Llama-3-class pretraining at ~15T tokens, so the semantics have to be imported rather than learned from robot demonstrations.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c2",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "How does RT-2 tokenise actions, and what is the trick with the vocabulary?",
+      "a": "Each continuous action dimension is discretised into 256 uniform bins over its training range (RT-1: 11 dims; RT-2 mobile manipulator: 8 dims = terminate flag, 6-DoF delta pose, gripper). Each bin index becomes a token, so an action is a string like \"1 128 91 241 5 101 127 217\". In PaLI-X, integers up to 1000 already have tokens so no vocab change is needed; in PaLM-E they overwrite the 256 least-frequently-used tokens. Nothing about the architecture, head, or loss changes, which is what enables co-fine-tuning on web VQA and robot data together.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c3",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "Name three concrete costs of discrete action tokens.",
+      "a": "1) Sequential decoding: 7-11 tokens per action means 7-11 forward passes, the largest latency multiplier in the stack. 2) Quantisation floor: 256 bins is ~0.4% of the range per bin, so on a ±10 cm range one bin is 0.78 mm. 3) Per-dimension independence: parallel or poorly-conditioned decoding can pick mode A's Δy with mode B's Δz, producing an action in neither mode (the 'straight into the obstacle' failure).",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c4",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "Why does an L2 regression action head fail on real demonstration data?",
+      "a": "The minimiser of expected squared error is the conditional mean. If half the demonstrations go left around an obstacle and half go right, the mean goes through the obstacle. Same pathology as blurred video prediction: an averaging loss on multimodal data returns the average, which is not a valid sample. L1 gives the conditional median, which is somewhat better; diffusion and flow matching sample a mode and fix it properly.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c5",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "Describe π0's flow-matching action expert and its measured latency.",
+      "a": "π0 is 3.3B total: a 3B PaliGemma backbone (2.291B trainable) plus a 300M (0.315B) action expert with its own transformer weights processing proprioception and noisy action tokens. Training samples τ ~ Beta(1.5, 1) biased toward the noisy end, forms A^τ = τ·noise + (1-τ)·A_true, and regresses against velocity noise - A_true. Inference integrates τ from 1 to 0 with 10 forward-Euler steps, run on the 300M expert only while the backbone's KV cache is reused. Measured: ~73 ms for a 50-action chunk with three cameras.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c6",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "Give the four independent reasons action chunking helps.",
+      "a": "1) Compounding error: BC error grows O(εT²); committing H steps per decision cuts decisions to T/H and shrinks the quadratic term by H². 2) Non-Markovian demonstrations: operator pauses map the same observation to both 'move' and 'don't move'; chunking absorbs the pause into the unit. 3) Inference amortisation: effective control rate = H / latency. 4) Temporal coherence, because the chunk is generated jointly rather than as H independent decisions.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c7",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "What is ACT's chunking ablation result, and what does temporal ensembling add?",
+      "a": "Success went from 1% at k=1 to 44% at k=100 on their simulated evaluation, averaged across settings, then tapered slightly for larger k. Temporal ensembling added about 3.3 percentage points in success plus a larger smoothness gain the metric does not capture. On real ALOHA hardware ACT reported 80-95% on tasks like battery slotting; that is a different suite from the 44% number and the two must not be plotted on the same axis.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c8",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "What is the cost of a large action chunk, quantitatively?",
+      "a": "A chunk is open loop. At 50 Hz with H=50 the final action executes 1.0 second after the observation that produced it, so anything changing in that second is invisible to the robot. H is bounded above by how fast the environment changes: static tabletop tolerates H=50, a handover with a moving human does not. GR00T N1 uses H=16 for that reason.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c9",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "What is temporal ensembling and why can't a 7B VLA use it?",
+      "a": "Run inference every timestep rather than every H timesteps, so at time t you hold H overlapping predictions for a_t from the last H chunks, combined with weights w_i ∝ exp(-m·i) over prediction age. Smaller m is smoother with more lag. It requires inference at the full control rate, which discards the entire amortisation benefit. A ~80M ACT model on 50 Hz hardware can afford it; a 7B VLA at 292 ms cannot. The substitute is asynchronous chunk overlap with a 4-10 step crossfade at the seam.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c10",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "Recite the measured control frequencies for the main VLAs.",
+      "a": "RT-1 (35M): 3 Hz. RT-2 on PaLI-X 55B: 1-3 Hz over a multi-TPU cloud endpoint. RT-2 5B variant: ~5 Hz. OpenVLA-7B: 292 ms on an A6000 (3.4 Hz), 405 ms on an L4 24GB (2.47 Hz), ~160 ms optimised (~6 Hz). π0 (3.3B): 73 ms for a 50-action chunk, giving 50 Hz effective. GR00T N1 System 1 DiT: 120 Hz.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c11",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "Why can't a 7B VLA run at 50 Hz, in hardware terms?",
+      "a": "50 Hz is a 20 ms period, leaving ~5 ms of inference budget after camera and transport overhead. A 7B model in FP16 is 14 GB of weights; on ~2 TB/s HBM one full weight read is ~7 ms, and 7 action tokens means 7 of them, so ~49 ms is the hardware floor before any inefficiency. At batch size 1 (one robot) there is no arithmetic-intensity relief. Quantisation and compilation buy 2-3x, not 15x.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c12",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "Describe the two-system split and the four rules that make it work.",
+      "a": "System 2 (VLM, 1.3B-55B) runs at 1-10 Hz and emits a latent plan; System 1 (action expert, ~0.3B) runs at 50-200 Hz consuming that latent plus full-rate proprioception. GR00T N1 ships this explicitly with System 1 at 120 Hz. Rules: (1) the fast loop never blocks on the slow one, stale latent is fine; (2) the fast loop is pinned to an isolated core with SCHED_FIFO, no GC and no malloc in the hot path; (3) the slow system emits an intent/latent, not a target pose, because a stale pose is a wrong command while a stale intent is roughly right; (4) measure period jitter (std and p99), not just mean latency.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c13",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "Give the Open X-Embodiment headline numbers and the caveat that matters.",
+      "a": "60 pooled datasets from 34 labs, 1M+ real trajectories, 22 embodiments, 527 skills, 160,266 tasks, released October 2023. RT-1-X beat the original per-dataset SOTA by ~50% on average across 5 evaluated datasets and RT-2-X showed ~3x improvement on emergent-skill evaluations. The caveat: on the datasets with the most data, RT-1-X was worse than the original single-embodiment model. Positive transfer for data-poor embodiments, negative transfer for data-rich ones.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c14",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "What did OpenVLA contribute, and what does its headline result imply about scale?",
+      "a": "OpenVLA is 7B, built on Llama-2-7B with a fused DINOv2 + SigLIP visual encoder, trained on 970k real robot episodes from Open X-Embodiment, with open weights and a LoRA fine-tuning path that fits on a single 24 GB consumer GPU. It outperformed the closed 55B RT-2-X by 16.5 percentage points absolute across 29 tasks with 7x fewer parameters, which implies that at these scales data quality, recipe, and action representation dominate parameter count, and every extra billion parameters is a direct control-frequency tax.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c15",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "Give the robot-data cost model and the scale gap against language pretraining.",
+      "a": "Every trajectory was produced by a human moving a robot in real time; there is no Common Crawl for torque. Realistic yield is 30-60 demonstrations per operator-hour for short tasks, and usable robot data lands roughly $50-200 per hour once hardware and supervision are included (order-of-magnitude estimate, not a published figure). π0's ~10,000 hours (~903M timesteps) is therefore a multi-million-dollar asset and about five person-years of teleoperation. Open X-Embodiment's ~1M trajectories is on the order of 10^8-10^9 timesteps against ~15T language tokens: a four-to-five-order-of-magnitude gap.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c16",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "What is the Wilson-interval arithmetic that invalidates most robotics success tables?",
+      "a": "A 90% observed success rate has a 95% Wilson interval of roughly [60%, 98%] at n=10, [79%, 96%] at n=50, and [85%, 94%] at n=200. Distinguishing an 80% policy from a 70% one at p<0.05 needs roughly n=300 per arm. At 30 s per trial plus 30 s of reset, 300 trials is ~5 hours of continuous robot time for one number, and a 10-task two-policy comparison is ~100 hours. Nobody runs that, so '+8 points over baseline' on n=20 is a measurement of noise.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c17",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "Policy stalls mid-trajectory: symptom, mechanism, fixes.",
+      "a": "Symptom: commanded deltas near zero for hundreds of consecutive steps while the observation is essentially static. Mechanism: operator pauses in the demonstrations mean the same observation is paired with both 'move' and 'don't move', so a regression head predicts the average, which near a pause is ~zero; it is self-reinforcing because predicting zero keeps the observation identical. Fixes in leverage order: increase the action chunk (ACT's 1% → 44%), filter or subsample near-zero-motion segments from training, switch from L2 to flow matching so you sample a mode. A consecutive-sub-threshold re-plan guard is a mitigation, not a fix.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c18",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "Policy only works from the training camera pose: mechanism and fixes.",
+      "a": "The policy learned pixels → actions in the robot frame and absorbed the camera extrinsics into its weights as a constant; nothing in BC forces a 3D-consistent representation and the data had one camera pose. Tell: predicted actions are systematically offset in one axis rather than randomly wrong. Real fix is a data-collection decision: randomise camera extrinsics at collection. Secondary: prefer a rigidly-mounted wrist camera, apply random-crop and photometric augmentation, feed proprioception. Check normalisation statistics first, since a stats mismatch produces the identical symptom and is a five-minute fix. Also lock auto-exposure and auto-white-balance.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c19",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "Control-loop jitter causing oscillation: cause and fix list.",
+      "a": "Cause: late commands. The controller either holds (velocity discontinuity) or extrapolates (overshoot), and near the arm's mechanical resonance the error reinforces each cycle. Ranked root causes: Python GC pause in the hot loop, GIL contention with the inference thread, non-isolated CPU core, chunk-boundary discontinuity with no crossfade, temporal-ensembling gain m set too high. Fixes: move the fast loop to C++/Rust or pre-allocate and gc.disable(); pin with SCHED_FIFO and isolcpus; crossfade 4-10 steps at chunk seams; add velocity/acceleration limits; export period std and p99 and alert on it. Fixed-frequency oscillation is the mechanical resonance: notch-filter it or lower gains.",
+      "module": "T26-vla-robotics"
+    },
+    {
+      "id": "T26-vla-robotics-c20",
+      "topic": "Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied Agents",
+      "q": "GR00T N1 versus π0: what is actually different?",
+      "a": "π0 is 3.3B (3B PaliGemma backbone, 2.291B trainable, plus a 300M flow-matching expert), H=50, 10 integration steps, ~73 ms/chunk, trained on ~10,000 hours mostly proprietary with ~9.1% open (OXE, Bridge, DROID). GR00T N1 is 2.2B total with a 1.34B Eagle-2 VLM as System 2 and a diffusion-transformer System 1 trained with flow matching, action horizon 16, System 1 at 120 Hz, plus an EmbodimentTag mechanism with per-embodiment encoders/decoders; N1.5 is the 3B successor. GR00T makes the two-system split architectural and is open-weights targeting humanoids; π0's data is proprietary and it targets tabletop and mobile manipulation. π0.5 adds knowledge insulation, 256-bin state tokens in the language prefix, and AdaRMSNorm timestep conditioning.",
+      "module": "T26-vla-robotics"
+    }
+  ]
+}

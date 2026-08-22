@@ -1,0 +1,74 @@
+{
+  "drills": [
+    {
+      "id": "T18-databricks-vs-snowflake-d1",
+      "module": "T18-databricks-vs-snowflake",
+      "q": "A company runs 80% BI dashboards and 20% batch ETL. Which platform would you recommend between Databricks and Snowflake, and what would change your answer?",
+      "a": "Snowflake, primarily - the workload is BI-dominant, and its near-zero-tuning warehouse elasticity and strong BI-tool concurrency handling fits better than Databricks' Spark-native strengths, which the smaller ETL slice doesn't need enough of to outweigh the BI fit. This flips if the ETL portion grows past roughly 50% or involves complex streaming/ML, where Databricks' Structured Streaming and ML maturity become the deciding factor - possibly warranting running both platforms rather than a single compromise.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-d2",
+      "module": "T18-databricks-vs-snowflake",
+      "q": "Both Databricks and Snowflake claim to support open formats now, so a vendor pitch says neither has real lock-in. Do you agree, and why or why not?",
+      "a": "Only partially. The storage format itself (Delta with UniForm, or Snowflake native plus Iceberg support) is decreasingly the lock-in point for either. The real lock-in has moved to the catalog: Unity Catalog was historically Databricks-only (now open-sourcing its core and adding Iceberg REST server support), and Snowflake's Iceberg-table feature set doesn't yet have full parity with native-table features like clustering and Time Travel. 'Not locked in on format, still somewhat locked in on catalog and native-table-only features' is the accurate position, not 'no lock-in.'",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-d3",
+      "module": "T18-databricks-vs-snowflake",
+      "q": "Explain the actual failure mode that pushes teams from BigQuery's on-demand pricing to capacity/reservations, and whether reservations alone fix the underlying issue.",
+      "a": "On-demand bills per byte scanned with no cap; unpartitioned tables and SELECT * habits can produce unpredictable, spiky bills, with a single bad query (e.g., an accidental full scan of a 10TB table) costing tens of dollars in seconds with no guardrail. The break-even is roughly 467 TiB scanned/month. Moving to capacity pricing caps and smooths cost but does not fix wasted compute from full scans - partitioning/clustering discipline is still required either way; capacity pricing changes the billing shape, not the underlying inefficiency.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-d4",
+      "module": "T18-databricks-vs-snowflake",
+      "q": "A hiring manager wants to move off Redshift because it's 'legacy.' Push back or agree, and under what conditions would the move actually be justified?",
+      "a": "Push back on 'legacy' as a blanket claim - RA3 with managed storage and Redshift Serverless have closed much of the historical elasticity gap versus Snowflake/BigQuery, and for a team deeply embedded in AWS (Glue, Lake Formation, IAM, Kinesis), the integration cost of migrating off Redshift is real and often underweighted. The move is justified if the workload has grown a genuine ML/AI component Redshift can't serve natively (its ML story is the thinnest of the four), or if multi-cloud optionality has become an actual business requirement - AWS-only is a real, deliberate constraint of Redshift, not incidental staleness.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-d5",
+      "module": "T18-databricks-vs-snowflake",
+      "q": "Explain why the same workload can be reported as cheaper on Databricks by one company and cheaper on Snowflake by another, and what that implies about trusting vendor cost comparisons.",
+      "a": "The pricing models charge for fundamentally different things - Databricks' DBU-plus-separate-VM-cost model rewards teams that move workloads to Jobs Compute and size clusters tightly; Snowflake's credit model rewards teams that right-size warehouses and avoid idle burn via auto-suspend discipline. A team with strong operational discipline on one model looks artificially cheap on that platform relative to a team with weak discipline on the other, independent of the workload's 'true' cost. This means published head-to-head cost benchmarks, including vendor-sponsored ones, should be read as comparisons of operational discipline applied to a pricing model, not pure architecture comparisons.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-d6",
+      "module": "T18-databricks-vs-snowflake",
+      "q": "Design an architecture where a company keeps its core data in Iceberg on S3 and wants both Databricks and Snowflake to query it without duplicating storage. Is this realistic in 2026, and what are the actual limits?",
+      "a": "Largely realistic for reads, via the REST Catalog protocol both platforms now implement server-side (Unity Catalog, Snowflake's Open Catalog/Polaris) - both can discover and read the same Iceberg tables through a shared catalog with no data copy. The real limit: write patterns, performance-critical features (fine-grained clustering, Time Travel depth), and governance semantics don't yet have full cross-platform parity as of 2026 - a table written by one engine and read by the other generally works, but native-table-only performance features on either platform don't fully transfer, so verify current docs rather than assume identical performance.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-d7",
+      "module": "T18-databricks-vs-snowflake",
+      "q": "When would deliberately running two platforms (e.g., Databricks for ML feeding Snowflake for BI) be the right architectural call rather than an anti-pattern, and what does it cost?",
+      "a": "It's the right call when workload segments genuinely don't share a good single-platform fit - forcing ML/feature pipelines through Snowflake, or forcing high-concurrency BI through Databricks, would waste more in compute inefficiency and tuning effort than the integration overhead of running two platforms. The cost is real: two governance models to reconcile, two cost centers to monitor separately, and a data-movement or catalog-sharing layer (Iceberg/Delta UniForm as the interoperable handoff) that itself needs ongoing engineering investment. The senior signal is running that explicit tradeoff comparison rather than defaulting to either 'always consolidate' or 'always specialize.'",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-d8",
+      "module": "T18-databricks-vs-snowflake",
+      "q": "Your CFO wants a single number: 'which platform is cheapest?' How do you respond without either caving to a bad question or refusing to answer?",
+      "a": "There isn't a single honest number - cost depends on workload shape (ETL-heavy vs BI-heavy flips which platform wins in published comparisons), the operational discipline applied to each pricing model, and which lock-in costs are acceptable. The responsible answer is a workload-weighted TCO model built from the company's actual top queries/pipelines run as a real bake-off. If pressed for an immediate estimate, give a range anchored to the dominant workload type using known cost anchors (e.g., current warehouse-hour estimates for a BI-heavy profile), explicitly flagging the real uncertainty until the bake-off runs - not a fabricated precise figure and not a flat refusal.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-d9",
+      "module": "T18-databricks-vs-snowflake",
+      "q": "What's the strongest argument against relying on a fixed platform-comparison matrix at all when making this decision, and why build the matrix anyway?",
+      "a": "These four platforms have been converging for two years and will keep converging - a decision anchored purely to today's feature/cost differences risks looking stale within 12-18 months, especially as Iceberg/REST-catalog interoperability matures further. The more durable inputs are organizational: existing cloud commitment, existing team skills, existing platform investments - those don't get out of date as fast as feature comparisons. The matrix is still worth building as a first-pass filter and for communicating tradeoffs to stakeholders; the mistake is treating its current-state comparisons as permanent facts rather than a snapshot to revisit before finalizing.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-d10",
+      "module": "T18-databricks-vs-snowflake",
+      "q": "Rank Databricks, BigQuery, Snowflake, and Redshift by their ML/AI story, and explain the mechanism behind the ranking.",
+      "a": "Databricks (strongest: MLflow for experiment tracking/lifecycle, native GPU cluster support, Mosaic AI for RAG/agents, model serving endpoints - the platform's DNA), then BigQuery (BigQuery ML for SQL-native models plus deep Vertex AI integration), then Snowflake (Snowpark ML and Cortex managed LLM functions - real but narrower than a full ML platform), then Redshift (thinnest - Redshift ML is largely a SageMaker pass-through). The ranking follows directly from workload fit: Databricks was built for ML-adjacent Spark workloads from the start, while the other three added ML capability on top of a SQL-warehouse-first architecture.",
+      "difficulty": "mid"
+    }
+  ]
+}

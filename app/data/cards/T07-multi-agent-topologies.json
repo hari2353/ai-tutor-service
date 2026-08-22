@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-multi-agent-topologies-c1",
+      "topic": "Multi-Agent Topologies",
+      "q": "What two axes generate every multi-agent topology?",
+      "a": "Who decides what happens next (central router vs distributed peers) and what context crosses the boundary (full history vs distilled summary). Central + distilled = orchestrator with subagents, which is the shape that usually wins. Central + full = supervisor. Distributed + full = swarm. Distributed + distilled = blackboard.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c2",
+      "topic": "Multi-Agent Topologies",
+      "q": "Name the five real costs of multi-agent decomposition.",
+      "a": "1) Routing errors, silent and compounding: 92% accuracy over 3 hops is 0.92^3 ~ 78%. 2) Context handoff loss, with no third option between 'everything crosses' (no isolation, N x cost) and 'a summary crosses' (undetectable loss). 3) Latency multiplication: coordination is sequential and fan-out latency is the slowest branch. 4) Cost multiplication, ~15x in Anthropic's own reported system. 5) Debugging difficulty, because the failure lives in the seam and never surfaces as an error.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c3",
+      "topic": "Multi-Agent Topologies",
+      "q": "What is MAST and what did it find?",
+      "a": "Multi-Agent System Failure Taxonomy (Cemri et al., arXiv:2503.13657). MAST-Data annotates 1,600+ traces across 7 popular MAS frameworks; the taxonomy was derived from 150 traces at inter-annotator kappa = 0.88, giving 14 failure modes in 3 categories: system design issues, inter-agent misalignment, and task verification. Headline: MAS gains on popular benchmarks are often minimal, and failures come from DESIGN rather than model capability.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c4",
+      "topic": "Multi-Agent Topologies",
+      "q": "Supervisor vs swarm: state the tradeoff precisely.",
+      "a": "The swarm is faster and cheaper (no intermediary, direct handoffs, fewer LLM calls). The supervisor is easier to reason about (one routing node, explicit control flow, every decision visible in the trace, routing accuracy measurable). Choose the swarm when latency beats observability and the handoff graph is small and linear; the supervisor when you will debug this at 3am.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c5",
+      "topic": "Multi-Agent Topologies",
+      "q": "What crosses on a handoff in the OpenAI Agents SDK, and why does it matter?",
+      "a": "The entire message history: the receiving agent sees the whole conversation as if it had been there from the start. So you get zero context isolation and pay full prompt cost at every agent. Also security-relevant: input guardrails apply only to the first agent in a handoff chain and output guardrails only to the agent producing the final output, so mid-chain agents can be unguarded.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c6",
+      "topic": "Multi-Agent Topologies",
+      "q": "How is a handoff implemented in LangGraph?",
+      "a": "A tool that returns Command(goto=target, graph=Command.PARENT, update={...}). goto names the node in the parent graph, and the update payload is what crosses, so unlike the OpenAI SDK you control isolation - at the cost of engineering a lossy summary with required fields (reason, context_summary, latest correction).",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c7",
+      "topic": "Multi-Agent Topologies",
+      "q": "Describe the blackboard pattern and its named failure mode.",
+      "a": "Agents never address each other; they read and write typed, versioned slots in a shared store, and a controller schedules whichever agent's preconditions are satisfied (from HEARSAY-II). Failure mode: LOST UPDATE - two agents read v3, both write, one silently wins, and the trace shows both succeeding. Fix: optimistic concurrency with an explicit Conflict, plus a write journal. Never use an untyped shared text scratchpad.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c8",
+      "topic": "Multi-Agent Topologies",
+      "q": "Does multi-agent debate work?",
+      "a": "Less than Du et al. (2023) suggested. Controlled follow-ups in the 7-8B instruction-tuned class find a 2.1x-3.4x token multiplier for accuracy statistically comparable to or worse than isolated self-correction, with three failure modes: sycophantic conformity (abandoning a correct answer to agree with a confident peer), contextual fragility (order/phrasing dependence), and consensus collapse (early convergence so extra rounds cost nothing but tokens). The value comes from independence and aggregation, so prefer self-consistency.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c9",
+      "topic": "Multi-Agent Topologies",
+      "q": "Which decomposition has the strongest prior in its favour?",
+      "a": "An asymmetric verifier: one separate agent with a different prompt and a checklist, run once over the primary agent's output. That is verification, not debate, and MAST's third failure category is task verification, so a dedicated verifier beats any symmetric debate scheme. Add a verifier before you add a second worker.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c10",
+      "topic": "Multi-Agent Topologies",
+      "q": "Name the six conditions that justify splitting into multiple agents.",
+      "a": "1) Parallel read-heavy subtasks where intermediate volume >> returned volume. 2) Mandatory context isolation. 3) A different permission/trust tier. 4) A different model/latency tier. 5) Independent deployment ownership across teams or organisations (what A2A is for). 6) Untrusted content quarantine behind a tool-less agent. NOT reasons: 30 tools, the org chart, a tidy diagram.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c11",
+      "topic": "Multi-Agent Topologies",
+      "q": "The agent has 30 tools and picks the wrong one. Four fixes before splitting.",
+      "a": "1) Rewrite descriptions with explicit use-this-when / do-not-use-this-when. 2) Remove overlap - if a human engineer cannot say definitively which tool applies, the model will not do better. 3) Group fine-grained tools behind fewer higher-level ones. 4) Add a tool-search step so only relevant schemas are in context. Splitting replaces a selection problem with a routing problem PLUS a handoff problem.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c12",
+      "topic": "Multi-Agent Topologies",
+      "q": "What is the single-writer principle?",
+      "a": "Only one agent mutates state; every other agent contributes information, not actions. Concurrent writers give conflicting actions with no serialisation point, no way to reason about final state, and partially-applied non-idempotent side effects. It also means there is exactly one place for an approval gate, an idempotency key, and an audit record. If parallel work must write, workers PROPOSE structured changes and the orchestrator validates and applies them in order.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c13",
+      "topic": "Multi-Agent Topologies",
+      "q": "Quote the evidence on BOTH sides of the multi-agent debate.",
+      "a": "For: Anthropic's Research feature (orchestrator + parallel subagents with isolated windows) beat single-agent Opus 4 by 90.2% on research tasks, at ~15x the tokens, with token usage alone explaining ~80% of performance variance on browsing evals. Against: Cognition's 'Don't Build Multi-Agents' (June 2025) argues single-threaded linear agents plus a compression model, because subagents have no context of each other's work. Both are right about the task shapes they built for.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c14",
+      "topic": "Multi-Agent Topologies",
+      "q": "What is the discriminating variable between one agent and many?",
+      "a": "Task shape. Parallel BREADTH with independent branches and small distilled returns favours decomposition. Sequential DEPTH with shared evolving context favours one agent. Say that sentence and you have answered the question.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c15",
+      "topic": "Multi-Agent Topologies",
+      "q": "How do orchestration and choreography map onto agent topologies, and what is the LLM-specific twist?",
+      "a": "Orchestration = supervisor; choreography = swarm. The tradeoffs transfer from microservices: explicit testable control flow with a bottleneck, vs autonomy and lower latency with emergent behaviour. The twist: the 'orchestrator' here is a probabilistic classifier that can be wrong, so the case for choreography is WEAKER than in microservices, because you lose the one place where routing accuracy was measurable.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c16",
+      "topic": "Multi-Agent Topologies",
+      "q": "What is A2A and how does it differ from MCP?",
+      "a": "Agent2Agent: Google-announced April 2025, donated to the Linux Foundation, 1.0 in April 2026 with 150+ organisations, signed Agent Cards for cryptographic identity, a defined task lifecycle, multi-tenancy, and SDKs in five languages. MCP connects an agent to tools and data; A2A connects an agent to another AGENT with its own reasoning and goals. A tool returns data you asked for; a remote agent returns what it decided to produce - hence identity, task lifecycle, and output distrust are first-class.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c17",
+      "topic": "Multi-Agent Topologies",
+      "q": "What multi-agent-specific observability do you need?",
+      "a": "One trace id spanning every agent; a span per agent invocation carrying the subtask in, the structured return out, tokens, cost, and outcome; the routing decision with the model's stated reason; the handoff payload logged verbatim. Two metrics that only exist here: route distribution / route accuracy against labels, and handoff count per run (a rising count is the earliest signal of ping-ponging).",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c18",
+      "topic": "Multi-Agent Topologies",
+      "q": "How do you prove a multi-agent design was the right call?",
+      "a": "A single-agent baseline on the same golden task set with the same tools, measuring success, tokens, p50/p99 latency, and cost per task. Then the multi-agent version. Then the comparison people skip: the single agent given the SAME budget (bigger model, more steps, self-consistency). Break results down by task shape. No single-agent baseline means you made no architecture decision, only a bigger bill.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c19",
+      "topic": "Multi-Agent Topologies",
+      "q": "How many model calls does a 4-worker supervisor task cost, minimum?",
+      "a": "Nine: 4 routing calls + 4 worker calls + 1 synthesis. Every hop costs a supervisor LLM call, which is pure coordination tax. A three-level hierarchy adds ~1.5s of routing latency per level before any work starts.",
+      "module": "T07-multi-agent-topologies"
+    },
+    {
+      "id": "T07-multi-agent-topologies-c20",
+      "topic": "Multi-Agent Topologies",
+      "q": "Two agents return contradictory facts. What should happen?",
+      "a": "By default something invisible: whichever result the synthesis step weighted wins silently. Design it: structured returns with confidence and evidence pointers so disagreement is detectable; an explicit conflict path that either sends each agent the other's evidence for ONE reconciliation round or applies a documented tiebreak (prefer primary sources); and when unresolved, surface the conflict to the user rather than silently picking.",
+      "module": "T07-multi-agent-topologies"
+    }
+  ]
+}

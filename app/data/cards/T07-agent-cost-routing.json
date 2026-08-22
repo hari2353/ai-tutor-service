@@ -1,0 +1,102 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-agent-cost-routing-c1",
+      "topic": "Agent Cost Routing",
+      "q": "Give the prompt caching write/read cost multipliers and the break-even hit count for each TTL.",
+      "a": "Write: 1.25x standard input price at the 5-minute TTL, 2x at the 1-hour TTL. Read: roughly 0.1x (90% discount). Break-even: 5-min TTL breaks even after ONE hit (1.25+0.1=1.35 vs 2x uncached for two requests); 1-hour TTL needs THREE hits (2+0.2=2.2 vs 3x uncached).",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c2",
+      "topic": "Agent Cost Routing",
+      "q": "Why does caching invalidate 'forward' from the first differing byte, and what's the practical rule this implies?",
+      "a": "The cache key is a prefix hash over the rendered request (tools -> system -> messages render order); any byte difference at position N invalidates the cache for everything at or after N, regardless of how stable the rest is. The practical rule: put stable content first, volatile content (timestamps, per-request IDs, varying questions) last, after the cache_control breakpoint.",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c3",
+      "topic": "Agent Cost Routing",
+      "q": "Name five things that silently invalidate a prompt cache.",
+      "a": "A timestamp or request UUID in the system prompt, non-deterministic JSON serialization (unsorted keys, iterating a set), per-user content injected into the system prompt, tools added/removed/reordered mid-conversation (tools render at position 0), and switching models mid-conversation (caches are model-scoped, no cross-model reuse).",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c4",
+      "topic": "Agent Cost Routing",
+      "q": "Minimum cacheable prefix length is not monotonic across model generations. What does this mean in practice, and how do you detect it silently failing?",
+      "a": "Minimums range roughly 512 to 4,096 tokens depending on model generation (e.g. 512 on the newest models, up to 4,096 on some older ones), so a prompt sized for one model's minimum can fail to cache on a different model with NO error -- just usage.cache_creation_input_tokens showing 0. Always check the usage fields rather than assuming a cache_control marker placement bug.",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c5",
+      "topic": "Agent Cost Routing",
+      "q": "How do you set the difficulty boundary for model routing, and what is the RouteLLM published result?",
+      "a": "Empirically: collect a labeled sample of real production traffic, get quality judgments for both models on that sample (LLM-as-judge or human labels), fit a classifier/threshold predicting whether the cheap model matches the expensive one, and validate on a held-out set. RouteLLM (UC Berkeley, ICLR 2025) achieved over 85% cost reduction on MT-Bench while retaining 95% of the stronger model's judged quality, routing only 14% of queries to the expensive model in its best configuration.",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c6",
+      "topic": "Agent Cost Routing",
+      "q": "Why must a routing threshold be recalibrated after either model in the pair changes?",
+      "a": "The threshold was fit against the QUALITY GAP between the two specific models, not an absolute difficulty scale. Upgrading either model shifts that gap, so a stale threshold either overspends (routing traffic to a now-unnecessarily-strong model) or underspends on quality (routing traffic that now needs the stronger model to the cheap one). There is no shortcut -- re-run the calibration process.",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c7",
+      "topic": "Agent Cost Routing",
+      "q": "Distinguish model routing from fallback chains, and explain why people conflate them.",
+      "a": "Routing decides where a request SHOULD go based on predicted difficulty, validated empirically ahead of time. Fallback decides where a request goes AFTER something went wrong (429, 5xx, safety refusal) -- reactive, not predictive. People conflate them because 'try cheap, escalate on low confidence' looks like fallback but is functionally a router with a bad calibration method, and it inherits fallback's latency cost (two sequential round trips) without the empirical validation a real router gets.",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c8",
+      "topic": "Agent Cost Routing",
+      "q": "Why are fallback chains categorized as an availability tool, not a cost-optimization tool?",
+      "a": "Every fallback firing costs the latency of the failed attempt plus the latency of the successful one on the substitute model -- a chain of three targets pays up to three sequential round trips in the worst case. This latency cost is why fallback exists to preserve availability through outages/refusals, and using it as a cost-routing mechanism ('try cheap first, escalate on any hiccup') means paying an availability mechanism's latency price to get a cost-routing outcome, which should instead be evaluated and priced as a router.",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c9",
+      "topic": "Agent Cost Routing",
+      "q": "What is the Batch API discount, its latency tradeoff, and how does it compound with caching?",
+      "a": "50% off both input and output tokens on every model, with up to 24-hour turnaround (making it unsuitable for anything latency-sensitive). It composes with prompt caching as an independent discount: a batch job over a shared, cached corpus can combine the 50% batch discount with the ~90% cache-read discount to land the cached-and-batched portion near 5% of the naive uncached, unbatched rate.",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c10",
+      "topic": "Agent Cost Routing",
+      "q": "Why is 'the tenant is within budget' an insufficient cost-governance signal, and what fixes it?",
+      "a": "A cumulative-spend-only dashboard misses trajectory: a tenant whose spend has doubled week-over-week but hasn't yet crossed the absolute cap looks fine until it suddenly doesn't. Fix: alert on RATE of spend change, not just cumulative spend against the budget -- rate-of-change is the leading indicator that catches the trend before the cap is blown.",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c11",
+      "topic": "Agent Cost Routing",
+      "q": "How should cost be attributed to a feature or tenant, and why does the timing of tagging matter?",
+      "a": "Tag every request with a feature/workflow identifier AT REQUEST TIME, not reconstructed after the fact from logs. Reconstruction-after-the-fact is exactly the exercise that fails during an actual incident when someone asks 'which feature caused the spike' and speed matters -- request-time tagging makes attribution a query, not an investigation.",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c12",
+      "topic": "Agent Cost Routing",
+      "q": "Why is 'swap to a cheaper model' often not the highest-leverage cost fix, with a worked number?",
+      "a": "Token volume, not per-token price, is frequently the dominant cost driver, and a model swap doesn't touch volume at all. Worked example: truncating a chatty tool result from 4K to 1K tokens per turn across a 40-turn run with a 6K stable prefix drops total tokens from roughly 1.16M to about 0.30M -- larger than most single-tier model downgrades, and it stacks with caching and routing rather than competing with them.",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c13",
+      "topic": "Agent Cost Routing",
+      "q": "Quota and budget are both cost-governance controls but catch different failures. What's the distinction?",
+      "a": "A budget caps DOLLARS spent. A quota caps request or token VOLUME independent of price. They catch different risks: a runaway loop making many cheap requests can blow a quota while staying under a dollar budget, and a single expensive request can blow a budget while staying well under a request-count quota. Use both.",
+      "module": "T07-agent-cost-routing"
+    },
+    {
+      "id": "T07-agent-cost-routing-c14",
+      "topic": "Agent Cost Routing",
+      "q": "When should you NOT build a learned router (RouteLLM-style) and reach for a rule-based one instead?",
+      "a": "When a rule-based router (route by explicit task type, or by a user-selected quality tier) already captures most of the achievable savings, since it's often ~80% of the win for a fraction of the engineering. A learned classifier needs labeled preference data on YOUR traffic, ongoing recalibration on every model change, and drift detection -- if that infrastructure doesn't exist yet, the marginal gain may not justify building and maintaining it.",
+      "module": "T07-agent-cost-routing"
+    }
+  ]
+}

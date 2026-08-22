@@ -1,0 +1,74 @@
+{
+  "drills": [
+    {
+      "id": "T18-lakehouse-d1",
+      "module": "T18-lakehouse",
+      "q": "What problem does a table format like Iceberg, Delta, or Hudi actually solve that raw Parquet files tracked by Hive Metastore don't, and does solving it require a new file format?",
+      "a": "Atomicity (changes become visible all-at-once, never partially), schema evolution without full rewrites, and time travel - none of which a Hive-style partition-path convention with no metadata layer can provide. No new file format is needed: all three still store data in Parquet/Avro/ORC. The entire innovation is a metadata layer added on top that tracks which files are logically part of the table, at what schema, at each point in history.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-lakehouse-d2",
+      "module": "T18-lakehouse",
+      "q": "Explain Iceberg's hidden partitioning and why it's specifically called out as Iceberg's differentiator versus Delta's default partitioning approach.",
+      "a": "Hive-style partitioning (Delta's default) bakes the partition scheme into physical directory paths, so changing it later requires rewriting the entire table. Iceberg tracks partition values as a transform function (e.g., bucket(16, user_id), month(event_ts)) applied to a source column and recorded in metadata rather than physical layout - you can change or add partition transforms going forward without rewriting historical data, and queries filtering on the source column get the transform applied automatically without needing to know the physical layout.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-lakehouse-d3",
+      "module": "T18-lakehouse",
+      "q": "Explain copy-on-write versus merge-on-read, and describe a scenario where you'd deliberately choose CoW even though MoR has cheaper writes.",
+      "a": "CoW rewrites the entire affected data file immediately on an update/delete - fast reads (no merge needed), expensive writes especially for frequent small updates. MoR appends a small delta/log file instead of rewriting the base file - cheap writes, but reads must merge base plus pending deltas until compaction runs. Choose CoW deliberately when reads vastly dominate over writes and read latency is what users actually feel - e.g., a BI dashboard queried constantly by many users, where consistently fast reads matter more than shaving milliseconds off an infrequent update.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-lakehouse-d4",
+      "module": "T18-lakehouse",
+      "q": "Why is the catalog, rather than the table format, described as the real 2026 lock-in point? Trace the evolution from Hive Metastore to Apache Polaris.",
+      "a": "All three table formats are now genuinely open, so the format itself is decreasingly a vendor-specific dependency. But the catalog is what answers 'which snapshot is current' for any engine trying to read or write - if only one vendor's catalog can serve as the source of truth, switching engines means migrating the catalog, a far bigger undertaking than switching a file-format reader. Evolution: Hive Metastore (original, no cross-engine standard) -> AWS Glue (managed, but S3-only, its own lock-in vector) -> Unity Catalog (was Databricks-only, now open-sourcing its core plus Iceberg REST server support) -> Apache Polaris/REST Catalog (vendor-neutral, ASF Top-Level Project as of February 2026, the standard every major vendor now implements server-side).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-lakehouse-d5",
+      "module": "T18-lakehouse",
+      "q": "A CDC pipeline ingesting high-frequency updates from a source database is using copy-on-write and write latency has become the bottleneck under load. What are your options and their tradeoffs?",
+      "a": "Switch that table to merge-on-read (Hudi natively, since MoR is a first-class, purpose-built feature there for exactly this workload; or Delta/Iceberg's deletion-vector mechanism as a narrower equivalent) to defer the rewrite cost from write-time to read-time until compaction runs. Alternatively, reduce the frequency of full-file rewrites by batching updates before committing, accepting slightly staler visibility in exchange for lower write amplification. The tradeoff either way: MoR moves cost to read time (query-time merge overhead until compacted); batching trades data freshness for reduced write cost.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-lakehouse-d6",
+      "module": "T18-lakehouse",
+      "q": "Explain why compaction must be budgeted as an ongoing operational cost for a streaming-fed table rather than periodic maintenance, and describe a resourcing conflict that arises from this.",
+      "a": "Streaming ingestion makes small-file accumulation continuous - every micro-batch commit can add new small files, and object storage performs badly on many small files (per-file GET/LIST overhead) while catalogs like Hive Metastore/Glue degrade with file count (slower partition listing, higher per-object cost on managed services). Treating compaction as occasional cleanup lets this become a silent, gradual latency regression. The resourcing conflict: compaction competes for compute with the ingestion job itself; either isolate compaction onto separate compute so it doesn't starve ingestion, or accept a compaction-lag SLA and monitor small-file count as a leading indicator rather than waiting for a query-latency complaint.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-lakehouse-d7",
+      "module": "T18-lakehouse",
+      "q": "An Iceberg table's query planning has become slow before any data is even scanned. What's the likely cause, and how is it different from the small-data-file problem?",
+      "a": "This usually indicates manifest bloat: many small, frequent commits have each added their own manifest entries, so query planning has to read an increasingly large manifest list/tree just to determine which data files are relevant - a bottleneck independent of the actual data volume being scanned. This is distinct from data-file small-file bloat (which affects the actual scan cost); the fix is a separate operation, Iceberg's manifest rewrite procedure (rewrite_manifests), rather than data-file compaction (rewrite_data_files), even though both stem from a similar 'many small commits' root cause.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-lakehouse-d8",
+      "module": "T18-lakehouse",
+      "q": "A team wants to change the partitioning scheme on an existing multi-year Delta table. Explain what's actually involved, and how the same scenario would have played out on an Iceberg table with hidden partitioning from the start.",
+      "a": "On Delta, changing Hive-style physical partitioning means rewriting the entire historical dataset into the new partition structure - a genuinely expensive, potentially multi-day operation on a large table with real risk during the migration window. Had the table been on Iceberg with hidden partitioning, the team could change the partition transform going forward with zero rewrite of historical data, since partition values are metadata-computed rather than physically encoded in file paths - though this doesn't mean Iceberg should always be picked purely for this reason if a team's investment in Databricks-specific tooling (Unity Catalog, Photon, liquid clustering) outweighs the one-time cost of an eventual Delta rewrite.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-lakehouse-d9",
+      "module": "T18-lakehouse",
+      "q": "Two engines both claim to read and write the 'same' Iceberg table via a shared REST catalog, but one engine's writes aren't visible to the other. Diagnose the likely architectural gap.",
+      "a": "Most likely the two engines aren't actually pointed at the same catalog implementation, or one is using a REST-standardized catalog while the other is still using a proprietary/legacy catalog connection (e.g., a direct Hive Metastore connection instead of the REST Catalog protocol) - meaning writes committed through one path never update the metadata pointer the other path reads from. Verify both engines are configured against the same REST Catalog endpoint and confirm current interoperability status for that specific engine/catalog pairing rather than assuming full parity.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-lakehouse-d10",
+      "module": "T18-lakehouse",
+      "q": "When should a team NOT adopt any table format at all, and what's wrong with adopting one 'just in case we need multi-engine access someday'?",
+      "a": "A small, rarely-updated, single-engine dataset with low query volume doesn't need the operational overhead of manifest management, catalog registration, and compaction scheduling - plain partitioned Parquet with simple discovery is a legitimate, lower-complexity choice at that scale. Adopting a table format preemptively for a hypothetical future need adds real, current operational cost (someone has to own compaction, catalog choice, and metadata hygiene) for a benefit that may never materialize - it's a legitimate choice only if the 'someday' need is reasonably near-term and specific, not a free hedge against an unspecified future.",
+      "difficulty": "mid"
+    }
+  ]
+}

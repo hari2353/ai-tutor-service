@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T13-technical-writing-c1",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "What are the five sections of a Nygard ADR?",
+      "a": "Title (short noun phrase), Context (value-neutral facts, forces in tension), Decision (\"We will...\", active voice), Status (proposed | accepted | deprecated | superseded by ADR-NNN), Consequences (all of them, positive and negative). One to two pages, kept in-repo at doc/arch/adr-NNN.md. Original post: Michael Nygard, 15 November 2011.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c2",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "ADR vs design doc: what is the actual difference?",
+      "a": "Timing and mutability. A design doc is a mutable, pre-decision proposal that argues among options to build consensus, and its reader can still change the outcome. An ADR is an immutable post-decision record whose reader is an engineer years later asking \"what were they thinking\". A large design doc typically produces two or three ADRs as output.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c3",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "Why are ADRs superseded rather than edited?",
+      "a": "The value of the archive is a faithful record of what the team believed at the time, with the information it had. Editing in place produces a corpus in which the team was always right, teaches nothing about how decisions get made, and destroys the constraint set that no longer exists. Write a new ADR, flip the old one's Status to \"superseded by ADR-NNN\", never renumber and never reuse a number.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c4",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "Where do rejected alternatives go in an ADR?",
+      "a": "Inside Context, as forces in tension. An ADR has no alternatives section because it is recording, not arguing. The rival appears as a force (\"Weaviate's HNSW is faster on our query shape: p99 45ms against 70ms\") and the Decision explains what outweighed it. If you need a comparison table, you are writing a design doc.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c5",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "What is a non-goal, and what is the classic wrong example?",
+      "a": "A non-goal is something that could reasonably have been a goal and was deliberately excluded, with the reason and ideally the condition to revisit. Malte Ubl's canonical example: ACID compliance in a database design. The classic wrong example is a negated goal such as \"the system shouldn't crash\", which is the tell that the author filled in the template without understanding it.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c6",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "Why is the non-goals section the highest-leverage part of a design doc?",
+      "a": "Mechanically: every reviewer arrives with a mental list of what a system like yours might do, and anything on their list not on your goals list becomes a comment thread costing 4 to 48 hours of round trip. Naming the six most likely items converts six threads into zero. On a doc with 12 reviewers that is converging in three days instead of three weeks.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c7",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "How do you tell an abused non-goal from a legitimate one?",
+      "a": "Would a competent reviewer accept it as a legitimate v1 boundary, or does excluding it mean the system does not actually work? \"Multi-region replication is out of scope for v1, we accept a 15-minute RPO\" is scoping. \"Correctness under concurrent writes is a non-goal\" is abdication dressed as scoping.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c8",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "What are the three rules for writing up an option you rejected?",
+      "a": "1) State it at its strongest, in its advocate's words, ideally after asking them to review that paragraph. 2) Name the deciding criterion explicitly and admit it is a weighting, not a law (\"we weighted operational surface above p99 because we have 4 on-call engineers and 8 services\"). 3) Say what would flip the decision (\"beyond ~60M vectors the answer changes\"), which makes it falsifiable and tells a future team whether it has expired.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c9",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "What is the design-doc section order that actually gets read, and why is the order load-bearing?",
+      "a": "TL;DR, context and scope, goals, non-goals, the design (one diagram), options considered, decision, consequences, rollout, open questions, cross-cutting concerns. Order matters because a reader who hits your design before your goals evaluates it against their own goals, which produces comments that look like design objections but are actually unsurfaced goal disagreements.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c10",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "What length should a design doc be, per Google's stated guidance?",
+      "a": "Sweet spot 10-20 pages for a large project; an explicitly blessed 1-3 page mini design doc for incremental work, doing all the same steps more tersely. Past ~20 pages the correct move is to split the problem, not keep writing, because the marginal page is read by nobody and every unread page hides an unreviewed mistake.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c11",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "When is a design doc the wrong tool?",
+      "a": "When the solution is not ambiguous (Google: it becomes an implementation manual, write the code instead); when prototyping, since the prototype is how you produce the doc; when the real problem is two people who have not talked, since a doc makes positions public and harder to abandon; when it is one decision with obvious consequences (that is an ADR); when the door is cheap and two-way; and when the audience is one person.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c12",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "Which sections does the Rust RFC template require that most corporate templates omit?",
+      "a": "Drawbacks (framed as what the proposal forecloses, i.e. what becomes impossible later because this exists), Rationale and alternatives (\"why is this design the best in the space of possible designs\"), Prior art, Unresolved questions, and Future possibilities. Splitting drawbacks from alternatives forces two different kinds of honesty instead of one hedged paragraph.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c13",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "What operational sections does a Kubernetes KEP require that most design docs skip?",
+      "a": "Test plan, graduation criteria (alpha/beta/stable), upgrade/downgrade strategy, version skew strategy, and a Production Readiness Review questionnaire covering feature enablement and rollback, rollout planning, monitoring requirements, dependencies and scalability. This is why a KEP reads as a plan someone will be on call for rather than an architecture exercise.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c14",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "What does the Amazon 6-pager solve that comment-thread review does not?",
+      "a": "The participation problem. Async review lets the reviewers whose objections matter most (the busiest) skim, so approvals become social rather than technical. Twenty to twenty-five minutes of enforced silent reading at the start of the meeting guarantees they actually read it. Bezos banned PowerPoint for these reviews in 2004; the memo started at 4 pages and became 6.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c15",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "A doc has 60 comments and no decision after three weeks. What is the triage?",
+      "a": "Three buckets, publicly, in the doc. Blocking (correctness, security, a cost that compounds) get addressed. Non-blocking-but-worth-fixing get fixed silently. Preference with no stated cost gets one reply (\"noted, going with the current approach because X\") and no re-litigation. Then set a comment close date, and buy 25 minutes of synchronous time for the two or three genuinely contentious items.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c16",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "What is the \"Yes, if\" review norm and what problem does it solve?",
+      "a": "Reviewers frame objections as conditions for approval rather than rejections (Squarespace's published change to their RFC process). It changes the author's job from defending to satisfying a list, and it forces the objector to name what would actually satisfy them, which reveals how many objections have no such condition. Those were preferences.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c17",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "Why does Nygard insist on prose rather than bullet fragments in an ADR?",
+      "a": "Fragments let you skip the connective reasoning. \"Latency concerns\" hides whether you mean p50, p99, ingest or query, and a reader years later cannot recover which you meant. His guidance: bullets are acceptable for visual style, not as an excuse for sentence fragments. Write each ADR as a conversation with a future developer.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c18",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "You inherit a legacy platform with no decision records. What do you do?",
+      "a": "Do not backfill the archive. Backfill selectively and pain-driven: write a retroactive ADR only when someone is about to change that decision or is blocked by not understanding it, marked clearly as reconstructed. Then enforce at review: any PR reversing an architectural decision must add an ADR and flip the old Status, like a schema change requires a migration.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c19",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "Is a half-abandoned ADR directory better or worse than none?",
+      "a": "Worse. A directory that looks authoritative and is 80% stale actively misleads new engineers, who trust it and build on something that stopped being true. If a team cannot commit to flipping Status at review time, an append-only dated DECISIONS.md of one-paragraph entries is better, because its format does not promise currency.",
+      "module": "T13-technical-writing"
+    },
+    {
+      "id": "T13-technical-writing-c20",
+      "topic": "ADRs, RFCs, Design Docs",
+      "q": "How does AI-assisted development change what you write down?",
+      "a": "High confidence: in-repo ADRs become agent context alongside AGENTS.md / CLAUDE.md, carrying the \"why\" that code cannot express, which raises the value of hygiene (stable numbering, accurate Status, superseded-not-deleted) because an agent is worse than a human at inferring staleness. MADR's YAML variant (YADR, March 2026) signals machine consumption as a design constraint. Speculative: mechanical sections draft well from a prompt while goals, non-goals and the honest rejected-option argument do not, so the median doc gets longer and less informative.",
+      "module": "T13-technical-writing"
+    }
+  ]
+}

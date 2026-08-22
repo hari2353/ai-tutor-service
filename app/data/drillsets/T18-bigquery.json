@@ -1,0 +1,81 @@
+{
+  "drills": [
+    {
+      "id": "T18-bigquery-d1",
+      "module": "T18-bigquery",
+      "q": "Explain mechanically why SELECT * costs more than selecting needed columns in BigQuery, and whether adding LIMIT 10 fixes the cost problem.",
+      "a": "BigQuery stores data in a columnar format (Capacitor); a query only reads and bills for the columns actually referenced. SELECT * forces every column to be read regardless of downstream use - on a 500GB table, full SELECT * costs about $3.13 versus $0.19 for a 3-of-20-column subset, roughly 16x more. LIMIT does not fix this: it reduces rows returned, not bytes scanned, so a SELECT * ... LIMIT 10 on a 10TB table still scans (and bills for) the full matching dataset before applying the limit.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-bigquery-d2",
+      "module": "T18-bigquery",
+      "q": "A team scans 600 TiB/month but it's all concentrated in a 2-hour nightly batch window. Would you recommend a fixed-size capacity reservation, and why or why not?",
+      "a": "Not a fixed baseline reservation sized for that peak - it would sit mostly idle 22 hours a day, wasting the capacity-pricing benefit. Autoscaling reservations that spin up only during the batch window, or a flex-slot commitment, capture the capacity-pricing benefit (versus on-demand's $6.25/TiB) without paying for idle reserved slots the rest of the day. This shows the ~467 TiB/month break-even is a rule of thumb, not a rule - workload shape (bursty vs steady) matters as much as total volume.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-bigquery-d3",
+      "module": "T18-bigquery",
+      "q": "Write the logic for deduplicating a table to keep only the most recent row per id, and name the NULL-handling bug that can silently corrupt the result.",
+      "a": "Use ROW_NUMBER() OVER (PARTITION BY id ORDER BY updated_at DESC) filtered to rn = 1, typically via QUALIFY to avoid a wrapping subquery. The bug: if updated_at can be NULL, default NULL ordering behavior in a DESC sort can place NULLs first in some cases, causing a NULL-timestamped row to incorrectly 'win' as the most recent - always specify NULLS LAST explicitly if recency logic depends on it.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-bigquery-d4",
+      "module": "T18-bigquery",
+      "q": "A window function using LAST_VALUE() over a partition is returning the current row instead of the actual last row in each partition. Diagnose and fix.",
+      "a": "The default window frame is RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW, so without explicitly extending the frame, LAST_VALUE just returns the current row at every position. Fix by specifying the frame explicitly: LAST_VALUE(col) OVER (PARTITION BY ... ORDER BY ts RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING). This is one of the most common silent bugs in window-function SQL.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-bigquery-d5",
+      "module": "T18-bigquery",
+      "q": "Explain the gaps-and-islands technique for grouping consecutive dates into ranges, and the specific data condition that breaks it.",
+      "a": "Subtract ROW_NUMBER() (partitioned by entity, ordered by date) from the date itself using DATE_SUB - this produces a constant value for every date in a consecutive run, which you then GROUP BY to collapse each island into one row with MIN/MAX date. It breaks if there are duplicate date rows per entity, since duplicates throw off the row-number-to-date alignment and produce incorrect groupings - deduplicate to distinct dates per entity first.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-bigquery-d6",
+      "module": "T18-bigquery",
+      "q": "A report joining two spine tables built with separate GENERATE_DATE_ARRAY calls for different months shows a discontinuity at the month boundary. What are the two most likely causes?",
+      "a": "Either an off-by-one at the boundary (inclusive/exclusive end-date mismatch between the two GENERATE_DATE_ARRAY calls, e.g., one ending on the last day of the month and the other starting on the first day of the next with an overlap or gap), or a timezone mismatch between the stored TIMESTAMP data and the DATE spine - always confirm whether underlying event timestamps are UTC before truncating to DATE for a date spine join.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-bigquery-d7",
+      "module": "T18-bigquery",
+      "q": "Why is NOT IN against a subquery dangerous in BigQuery SQL, and what pattern avoids the risk?",
+      "a": "If the subquery's column can contain even one NULL, NOT IN against a list containing that NULL makes the whole condition evaluate to unknown for every row under three-valued SQL logic, silently returning zero rows instead of the expected anti-join result. The safer pattern is an explicit anti-join: LEFT JOIN the second table and filter WHERE right.col IS NULL, which doesn't have this NULL-poisoning failure mode.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-bigquery-d8",
+      "module": "T18-bigquery",
+      "q": "A query's execution details show most time spent in shuffle/repartition stages. Diagnose the likely causes and describe the fix for a heavily skewed join key.",
+      "a": "A large JOIN or GROUP BY is redistributing significant data across workers, usually from high-cardinality or skewed join/group keys, or from joining a large table before any filtering. Fix by filtering/aggregating as early as possible, confirming smaller dimension tables are actually small enough to broadcast rather than shuffle, and for a specific hot key responsible for a large fraction of shuffle volume, consider salting that key (splitting it into sub-keys to spread the work) or handling that one value with a separate simpler path rather than forcing the general join to absorb the skew.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-bigquery-d9",
+      "module": "T18-bigquery",
+      "q": "Design a CI-level guardrail to prevent a SELECT * regression from reaching production, and explain a scenario where the guardrail's estimate would still mislead you.",
+      "a": "Use BigQuery's dry-run flag to get estimated bytes-to-be-processed for any new/changed query before merge, failing the build if a query's estimated cost exceeds a threshold or a SQL linter flags SELECT * against a table above a configured size. The estimate can mislead if the table grows substantially between CI time and production run, or if a query's date-range parameter defaults differently in production than in the CI test case, changing which partitions actually get touched at runtime versus what the dry-run estimated against the table's current state.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-bigquery-d10",
+      "module": "T18-bigquery",
+      "q": "A finance-facing pipeline using NUMERIC costs occasionally shows small discrepancies against a downstream finance system. A teammate suggests switching to FLOAT64 'since the difference is tiny anyway.' How do you respond, and what's the likely real cause of the discrepancy?",
+      "a": "Reject switching to FLOAT64: floating-point representation error compounds across aggregations and can produce cent-level discrepancies that fail reconciliation with a finance system expecting exact decimal arithmetic - NUMERIC/BIGNUMERIC exist specifically to avoid this class of bug, and 'tiny' errors are exactly what breaks an audit. The likely real cause of the existing discrepancy is an implicit cast to FLOAT64 somewhere upstream in the pipeline, or a currency-rounding step applied at a different granularity than the finance system expects (e.g., rounding per-line-item versus rounding only the final total) - trace both before touching the column type.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-bigquery-d11",
+      "module": "T18-bigquery",
+      "q": "Design a query-cost governance strategy for a 200-analyst organization where anyone can run ad-hoc SQL against production data, and explain why blaming individual analysts for expensive queries is often the wrong diagnosis.",
+      "a": "Set per-user/per-project custom quotas (maximum bytes billed) as a hard ceiling against runaway queries, isolate analyst workloads onto their own capacity reservation separate from production pipelines, surface dry-run cost estimates in whatever query tool analysts use, and generate scheduled cost/usage reports by user to catch outliers within days rather than at month-end billing. If an analyst's query is correctly filtered and still expensive because the underlying table is poorly modeled (unpartitioned, unclustered), that's a signal to invest in a curated gold-layer table for common access patterns - governance should make the cheap path also the easy path, not rely on every analyst writing perfectly optimized SQL against raw tables.",
+      "difficulty": "staff"
+    }
+  ]
+}

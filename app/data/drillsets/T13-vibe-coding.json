@@ -1,0 +1,123 @@
+{
+  "drills": [
+    {
+      "id": "T13-vibe-coding-d1",
+      "module": "T13-vibe-coding",
+      "q": "Name the four places a piece of agent-facing knowledge can live, and the one-line test for each.",
+      "a": "CLAUDE.md/AGENTS.md: the agent must know this in EVERY session (facts). .claude/rules/*.md with paths: frontmatter: needed whenever touching these files. SKILL.md: needed for SOME tasks (a procedure with steps). Hook: must happen regardless of what the agent decides. Only the hook is enforcement; the other three are context.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T13-vibe-coding-d2",
+      "module": "T13-vibe-coding",
+      "q": "Someone adds 'always write comprehensive tests' to CLAUDE.md. What is wrong with that line?",
+      "a": "Three things. It is unverifiable, so nothing checks compliance. It is context rather than configuration, so there is no guarantee it is followed. And it consumes attention budget in every session while displacing rules that are concrete. The enforcement version is a CI gate or hook that fails when coverage on changed lines drops.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T13-vibe-coding-d3",
+      "module": "T13-vibe-coding",
+      "q": "Your CLAUDE.md rule is being ignored. Give the first two diagnostic steps, in order.",
+      "a": "1) Run /context and check the Memory files list. If the file is not there it was never loaded, which is a path/scope problem, not an adherence problem. 2) If it did load, audit the whole hierarchy for a contradicting instruction, since ancestor files concatenate rather than override and the model picks arbitrarily between conflicts. Only then consider dilution from file length.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T13-vibe-coding-d4",
+      "module": "T13-vibe-coding",
+      "q": "A teammate splits a 700-line CLAUDE.md into six files pulled in with @ imports and reports the context problem is fixed. Is it?",
+      "a": "No. Imports expand and load at launch, up to 4 hops deep, so the token cost is unchanged; only readability improved. Real reductions come from paths:-scoped rules in .claude/rules/ (load on matching file read), skills (body loads on invoke), or deletion.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-vibe-coding-d5",
+      "module": "T13-vibe-coding",
+      "q": "You maintain a repo with an existing AGENTS.md and want Claude Code to honor it without duplicating content. What do you do?",
+      "a": "Create a CLAUDE.md whose first line is `@AGENTS.md`, then append any Claude-specific instructions below it. A symlink (ln -s AGENTS.md CLAUDE.md) works if there is nothing Claude-specific to add, though on Windows that needs Administrator or Developer Mode so the import is preferable. Verify with /context that CLAUDE.md appears under Memory files. Never maintain two hand-edited copies.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-vibe-coding-d6",
+      "module": "T13-vibe-coding",
+      "q": "A path-scoped rule stopped applying halfway through a long session. Explain the mechanism and give two fixes with their costs.",
+      "a": "Path-scoped rules load into message history when a matching file is read, so compaction summarizes them away like everything else; they reload only on the next matching read. Fix 1: drop the paths: frontmatter or move the content to the project-root CLAUDE.md, which survives compaction by re-injection, at the cost of always-loaded tokens. Fix 2: if it must never be skipped, make it a hook, which is not context at all.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-vibe-coding-d7",
+      "module": "T13-vibe-coding",
+      "q": "Design the delegation for 'find every caller of this deprecated function across a 400k-line monorepo and tell me which ones pass a null.' What goes to a subagent and what stays?",
+      "a": "The search and the reading go to a subagent: it is high-volume-in / low-volume-out and you will never reference the raw grep output again. Constrain the return format explicitly ('return file:line plus the argument expression, nothing else'), because unconstrained detailed returns are how parallelism ends up costing more context than inline work. The decision about what to do with the callers stays in the main conversation.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-vibe-coding-d8",
+      "module": "T13-vibe-coding",
+      "q": "Three subagents implement one cross-cutting change across three services and produce three incompatible contract shapes. Name the mechanism and the fix.",
+      "a": "Context fragmentation: each subagent has an isolated window and only summaries return to the parent, and summaries drop exactly the kind of detail ('I named the field userId') that a shared contract depends on. Fix: decide the contract in the main conversation first, write the interface, and pass it verbatim in each delegation prompt. Better: do not split writes that share an invariant. Delegate reads, keep writes.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-vibe-coding-d9",
+      "module": "T13-vibe-coding",
+      "q": "CI is green, the feature is broken, the agent ran for two hours. Give the fastest discriminating check and the number that explains why you check that first.",
+      "a": "`git diff <pre-implementation-commit> -- tests/`. If assertions were weakened, a test deleted, a skip added, or a sleep/retry inserted around a flaky assertion, that is the answer in ten seconds. You check it first because oversight collapses onto the test suite, and SpecBench measured the visible-versus-held-out pass-rate gap growing about 28 percentage points per tenfold increase in code size, so a two-hour run is exactly the regime where this dominates.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-vibe-coding-d10",
+      "module": "T13-vibe-coding",
+      "q": "Write the shape of the enforcement (not the advice) that prevents an agent from editing tests during implementation.",
+      "a": "A PreToolUse hook in .claude/settings.json matching Edit|Write that runs a script; the script reads the tool call as JSON on stdin, extracts tool_input.file_path, and exits non-zero for anything under tests/ or matching *_test.py / *.test.ts. Non-zero blocks the call. Pair it with a `git diff --quiet HEAD -- tests/` assertion inside the single verify script so the check also holds when the hook is not configured.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-vibe-coding-d11",
+      "module": "T13-vibe-coding",
+      "q": "Justify running the type checker before the test suite in the agent's verify gate, when the unit tests are faster in wall-clock terms.",
+      "a": "Order by signal quality per token, not wall-clock. A type error is deterministic, localized, and names the exact defect in one line, and it kills whole classes of failure (fabricated APIs, signature drift) before an expensive run. A failing test is a symptom that needs interpretation and can dump tens of thousands of tokens into the window. If the type checker genuinely takes minutes, that is a build problem to fix, not a reason to reorder.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-vibe-coding-d12",
+      "module": "T13-vibe-coding",
+      "q": "Your team wants to expose the internal deployment CLI to the coding agent as an MCP server. Argue both sides and land on a recommendation.",
+      "a": "Against: the agent already has shell access, so a bash invocation costs zero startup context while the server costs a process, a schema, and an auth surface. For: MCP gives a per-capability permission boundary and an audit trail rather than blanket shell access, and reaches clients with no shell. Recommendation: skip it unless you specifically want the permission boundary or audit trail; wrapping an existing CLI for its own sake is a step backwards.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-vibe-coding-d13",
+      "module": "T13-vibe-coding",
+      "q": "An agent produced a confident summary of a staging-database query through an MCP server, and the conclusion was wrong. Name the failure mode and the three fixes.",
+      "a": "MCP output truncation: a warning fires above 10,000 tokens of tool output and the default hard cap is 25,000, so an unpaginated result silently became partial and then became a premise. Fixes: paginate at the server, add the anthropic/maxResultSizeChars annotation for that tool, or raise MAX_MCP_OUTPUT_TOKENS. The general lesson is never to let a truncated result be treated as complete.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-vibe-coding-d14",
+      "module": "T13-vibe-coding",
+      "q": "You are asked to write a spec for 'add rate limiting' so an agent can verify against it. Show what makes a clause checkable.",
+      "a": "Each clause must map to at least one test. 'Requests over 100/min per API key return 429', 'the 429 carries an integer Retry-After in seconds', 'the counter keys on API key not client IP', 'windows are fixed 60s not sliding', 'a rejected request does not consume normal quota', 'keys with no configured limit are unlimited, not defaulted to 100'. Add explicit non-goals (no distributed coordination in v1) and invariants (no new dependency without asking) to bound scope creep.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-vibe-coding-d15",
+      "module": "T13-vibe-coding",
+      "q": "Leadership asks for a metric proving the agentic-coding rollout is working. What do you refuse to report and what do you report instead?",
+      "a": "Refuse PRs merged, lines generated, and velocity: generating more unreviewed code moves work into a queue nobody can see, and human review capacity is the binding constraint. Report change failure rate and time-to-restore on AI-assisted changes versus the baseline, plus review latency. The honest question is whether verification kept pace with generation, not whether generation went up.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-vibe-coding-d16",
+      "module": "T13-vibe-coding",
+      "q": "Defend a boundary: an engineer wants the agent to fix an intermittent deadlock in a connection pool. Talk them out of it, and say what you would delegate instead.",
+      "a": "The agent's feedback signal is 'the tests passed', and a race that manifests once per 10,000 interleavings passes every run, so the loop reports success on a broken fix and stops. The failure shape is also the characteristic weakness: correct-looking locking around the wrong critical section. Delegate the surrounding work instead: build the stress harness, add instrumentation, summarize thread dumps, generate the reproduction script. Decide the lock placement yourself.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-vibe-coding-d17",
+      "module": "T13-vibe-coding",
+      "q": "Cite the METR result correctly, including the part most people get wrong.",
+      "a": "16 experienced open-source developers, 246 tasks, mature repos they averaged 5 years on: allowing early-2025 AI tooling increased completion time by 19%. The part people get wrong is the scope and the direction of the interesting finding. It does not show AI makes everyone slower; it shows that in that setting the developers forecast 24% faster, self-reported 20% faster afterwards, and were measurably slower. The perception gap is the durable, transferable result.",
+      "difficulty": "staff"
+    }
+  ]
+}

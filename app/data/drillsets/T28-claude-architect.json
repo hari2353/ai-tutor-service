@@ -1,0 +1,228 @@
+{
+  "drills": [
+    {
+      "id": "T28-claude-architect-d1",
+      "module": "T28-claude-architect",
+      "q": "Agentic coding removed the coding bottleneck. What became the bottleneck?",
+      "a": "Verification, code review and security. Anthropic's Claude Code team states that writing code, tests and refactors rarely slows them down anymore and those three took their place.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T28-claude-architect-d2",
+      "module": "T28-claude-architect",
+      "q": "Name the three levels of control and which one is actually a constraint.",
+      "a": "Instruction (CLAUDE.md/AGENTS.md), reminder (skill), enforcement (hook, lint, CI gate, type). Only enforcement is a constraint; the first two are recommendations.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T28-claude-architect-d3",
+      "module": "T28-claude-architect",
+      "q": "Why is a style rule stated in conversation gone by turn 60?",
+      "a": "Compaction preserves the current task, recent errors and file names, and loses initial instructions, intermediate decisions and style rules. CLAUDE.md survives because it lives in the system prompt; a lint rule cannot be lost at all.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d4",
+      "module": "T28-claude-architect",
+      "q": "What stops the agent editing files in plan mode?",
+      "a": "The write tools are physically unavailable: a hard read-only sandbox enforced at the tool level, not a promise the model keeps. That is Level 3 applied to the agent's own workflow.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T28-claude-architect-d5",
+      "module": "T28-claude-architect",
+      "q": "Name the three clauses that make a spec self-contained.",
+      "a": "It names the files and interfaces involved, states what is out of scope, and ends with an end-to-end verification step that proves the feature works.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T28-claude-architect-d6",
+      "module": "T28-claude-architect",
+      "q": "Which spec clause prevents assumption propagation, and which prevents fail-plausible completion?",
+      "a": "Naming files and interfaces prevents assumption propagation (the agent inventing a plausible module boundary and building on it). The end-to-end verification step prevents fail-plausible completion (a green mocked test hiding the broken thing).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d7",
+      "module": "T28-claude-architect",
+      "q": "Recite the five checks for whether a unit of work is agent-sized.",
+      "a": "Can you name the files it should touch; is the contract fixed in advance; is there a command whose exit code decides done; does one git revert undo it; does it fit in one context window. Two or more failures means fix the decomposition, not the agent.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T28-claude-architect-d8",
+      "module": "T28-claude-architect",
+      "q": "Which of the five checks catches the most problems, and why?",
+      "a": "Machine-checkable success. If you cannot write the command whose exit code decides 'done', you have no verification, so the completion claim is unfalsifiable and you should not delegate it yet.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d9",
+      "module": "T28-claude-architect",
+      "q": "Name three categories of work an agent predictably cannot do.",
+      "a": "Under-determined design decisions with long shadows (boundaries, consistency, tenancy, data ownership). Correctness that rests on unwritten invariants. Thinly-represented APIs (internal libraries, recently-changed SDKs). Also: migrations where a minority of call sites need judgment, and work where the test suite is what's broken.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d10",
+      "module": "T28-claude-architect",
+      "q": "In what order do you review an agent PR, and why not code first?",
+      "a": "Test diff, file list, then code. Two of the three highest-cost failure classes are invisible in the code diff: assumption propagation and passing-tests-while-wrong. The test-diff question is 'would this fail if the feature were absent?'.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d11",
+      "module": "T28-claude-architect",
+      "q": "Which failure class cannot be caught at diff-review time at all, and what catches it?",
+      "a": "Assumption propagation. Catch it by reviewing the plan, requiring the spec to name interfaces, and adding architecture-fitness functions in CI (import-linter, dependency rules, boundary tests) that fail mechanically on a wrong premise.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T28-claude-architect-d12",
+      "module": "T28-claude-architect",
+      "q": "Name four failure classes that compile silently and therefore survive review.",
+      "a": "Silent bypass of language guarantees (# type: ignore, Any, casts, unsafe), swallowed errors (bare except, discarded Result, unawaited coroutine, ignored return code), dead-code accumulation, and scope leakage. Grep the diff for escape hatches rather than reading for them.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d13",
+      "module": "T28-claude-architect",
+      "q": "What is the diagnostic for abstraction bloat, and what does the response tell you?",
+      "a": "Ask 'couldn't you just...?'. The answer is always 'of course!' followed by immediate simplification, which tells you the abstraction was never necessary. Agents optimize for looking comprehensive, not for maintainability.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d14",
+      "module": "T28-claude-architect",
+      "q": "Throughput doubled and delivery did not improve. Diagnose and give the numbers.",
+      "a": "The constraint moved to review and nobody re-provisioned it. DORA 2025: +98% PRs merged, +91% review time, +154% PR size. 2026: median review time +441%, 31% of PRs merging with no review, agentic PRs waiting 5.3x longer and running 2.6x larger. Output backs up at human-judgment points and the queueing eats the speed gain.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d15",
+      "module": "T28-claude-architect",
+      "q": "Why is 'hire more reviewers' the wrong answer to a review bottleneck?",
+      "a": "Review capacity scales linearly and generation capacity does not. It also misses the second-order problem: 99% of AI-using developers reported saving 10+ hours a week with most reporting no workload decrease, because the saved time went to context switching and coordination overhead. The lever is reducing human-judgment events per unit of delivered value: smaller batches, more machine gates, and not generating changes you did not need.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T28-claude-architect-d16",
+      "module": "T28-claude-architect",
+      "q": "State the METR RCT result and the perception gap.",
+      "a": "16 experienced open-source developers, 246 tasks on repos they regularly contributed to: early-2025 AI tools made them 19% slower. They predicted +24% and still estimated +20% after experiencing the slowdown. A 39-point perception gap, which means self-report is not evidence.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T28-claude-architect-d17",
+      "module": "T28-claude-architect",
+      "q": "Present the productivity evidence both ways in three sentences.",
+      "a": "Against: METR's RCT found 19% slower in early 2025 with a 39-point perception gap; Stack Overflow found only 16% reporting great gains, with 66% frustrated by 'almost right but not quite' and 45% saying debugging AI code takes longer; 30% report little or no trust in AI code. For: METR's continuation estimates about +18% faster by early 2026, plus a caveated 1.5-13x transcript estimate on Claude Code tasks. Synthesis: DORA's finding that AI amplifies existing practice, so good processes get better and bad ones accumulate debt faster, with between-team variance exceeding the average effect.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T28-claude-architect-d18",
+      "module": "T28-claude-architect",
+      "q": "Your team claims a 40% productivity gain from AI. How do you check?",
+      "a": "Not by asking them, given the 39-point perception gap. Measure things hard to fool: end-to-end PR cycle time (not time-to-first-draft), change failure rate, time to restore, defect escape rate. Anthropic's set is onboarding ramp time, PR cycle time and AI-assisted commit share, with the warning that throughput is not success.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T28-claude-architect-d19",
+      "module": "T28-claude-architect",
+      "q": "Define comprehension debt and name the mechanism that produces it.",
+      "a": "Generation and discrimination are different capabilities, so review can silently become rubber-stamping. Mechanism: the agent never tires, the code looks plausible, tests pass or seem to, you ship under pressure, you skim and merge, and three days later you cannot explain how it works. It appears in no dashboard.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d20",
+      "module": "T28-claude-architect",
+      "q": "Rebut 'comprehension debt is just nostalgia, compilers abstracted away assembly'.",
+      "a": "A compiler is deterministic and correct by construction, so you never need to read its output. An agent's output is probabilistic and occasionally confidently wrong, so somebody must retain the ability to read and judge it. The gap is measured: 38% say reviewing AI logic takes more effort than human code, while only 48% consistently check it before committing.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T28-claude-architect-d21",
+      "module": "T28-claude-architect",
+      "q": "List four mitigations for comprehension debt.",
+      "a": "TDD so the spec stays in your head and you get the machine-checkable criterion for free; ask for justification and evaluate the reasoning; deliberately hand-write some things to keep the capability; own one subsystem end to end; and treat 'I don't understand this' as a stop signal.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d22",
+      "module": "T28-claude-architect",
+      "q": "What do you never delegate, and what is the organizing principle?",
+      "a": "Architecture and its rationale, trust and security boundaries, data model ownership, error semantics, dependency additions, legal exposure, and the ship decision. Principle: reversibility times shadow length. Implementation mistakes are cheap and local; a wrong boundary or consistency model is paid for over years by people who weren't there.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d23",
+      "module": "T28-claude-architect",
+      "q": "Can the agent write the ADR? What is your self-test?",
+      "a": "It can draft it, and enumerating alternatives is most of the work. But you own it, and the test is whether you can defend the REJECTED alternatives without re-reading the document. If not, you delegated the decision rather than the drafting.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T28-claude-architect-d24",
+      "module": "T28-claude-architect",
+      "q": "Give the subagent rule for a Principal whose bottleneck is review.",
+      "a": "One subagent per independently reviewable artifact. If two subagents produce work you can only evaluate together, you parallelized generation and serialized review, which is backwards.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d25",
+      "module": "T28-claude-architect",
+      "q": "Why does fresh-context self-review work despite feeling circular?",
+      "a": "Most agent errors are context artifacts (assumptions made 40 turns ago, dead code from a superseded approach) rather than capability limits, so a clean slate catches them. Anthropic ships it as Code Review, used by every internal team.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d26",
+      "module": "T28-claude-architect",
+      "q": "Name the first two CI gates you would add for an agent-heavy team.",
+      "a": "1 Fail the PR if it touched files the linked spec did not name (about 20 lines, catches scope leakage, dead code and opportunistic refactors). 2 A diff-size cap with a split requirement, the only real fix for the 31%-merged-unreviewed problem.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d27",
+      "module": "T28-claude-architect",
+      "q": "Would you adopt Anthropic's just-in-time planning at a company with downstream teams and a compliance calendar?",
+      "a": "No, not unconditionally. JIT planning worked because coding was the dominant cost and users were internal. Where the roadmap is a coordination artifact rather than a capacity estimate, shortening it moves the coordination failure somewhere less visible, since agentic coding reduces implementation cost and not coordination cost. Adopt the meta-practice: question why processes exist and kill obsolete ones.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T28-claude-architect-d28",
+      "module": "T28-claude-architect",
+      "q": "You get a real GitHub issue and 3 hours, AI allowed. What are you being scored on?",
+      "a": "The delta, not the diff, because the evaluator can generate the diff in ten minutes. Exploration strategy, engineering rigour, edge-case handling, documentation quality. So: reproducing test first and why it is the right oracle, hypothesis and rejected alternatives, minimal fix, then adjacent call sites with the same defect, the regression test that would have caught it, whether the bug implies a missing invariant belonging in a type or lint rule, and a note on what you did not do.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T28-claude-architect-d29",
+      "module": "T28-claude-architect",
+      "q": "The interviewer says 'you used Claude the whole time, how do we know you understand it?' Respond.",
+      "a": "Invite the verification: explain the failure mechanism without looking, name the line where the invariant broke and why the previous author's assumption was reasonable, and identify what else in the repo shares that assumption. The documented reason candidates leaning on AI do worse is that follow-ups expose they cannot explain a subtle bug the model introduced.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T28-claude-architect-d30",
+      "module": "T28-claude-architect",
+      "q": "Give an example of deciding NOT to use an agent, and say whether that hurts you at an AI-forward company.",
+      "a": "Work where the test suite was the oracle and the oracle was wrong (an agent optimizing to green makes it confidently worse), or a migration where 15% of call sites needed judgment the other 85% did not. It helps rather than hurts: there is a documented soft thumbs-down for a candidate insisting LLMs could help with a regression problem where it made no technical sense. Knowledge is free, judgment isn't.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d31",
+      "module": "T28-claude-architect",
+      "q": "Why does agentic coding land at 80% in greenfield and invert in mature codebases?",
+      "a": "Greenfield lets you control the stack, refactor aggressively and discard code without political friction, and comprehension debt stays manageable at small team size. Mature codebases have complex invariants the agent cannot intuit, and its confidence scales inversely with context understanding. Also the last 10% is not linear; the economics flip around 75-85% depending on domain complexity.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T28-claude-architect-d32",
+      "module": "T28-claude-architect",
+      "q": "State the one-line summary of the real risk.",
+      "a": "The danger isn't that the agent fails; it's that it succeeds so confidently in the wrong direction that you stop checking the compass. Corollary: if your ability to read doesn't scale with the agent's ability to output, you're not engineering, you're hoping.",
+      "difficulty": "warmup"
+    }
+  ]
+}

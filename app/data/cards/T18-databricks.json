@@ -1,0 +1,102 @@
+{
+  "flashcards": [
+    {
+      "id": "T18-databricks-c1",
+      "topic": "Databricks",
+      "q": "How does Delta Lake get ACID transactions on an object store with no cross-file transaction API?",
+      "a": "It needs only one atomic primitive: create the next-numbered _delta_log/*.json file if it doesn't already exist (S3 conditional PUT, ADLS, GCS all support this). Readers replay add/remove actions in the log to reconstruct which Parquet files are live at any version.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c2",
+      "topic": "Databricks",
+      "q": "What isolation level does Delta's optimistic concurrency actually give you?",
+      "a": "Snapshot isolation, not full serializability. Two writers touching disjoint files both succeed; two writers touching the same file conflict and one must retry or fail.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c3",
+      "topic": "Databricks",
+      "q": "What is the VACUUM retention trap and why does it break time travel?",
+      "a": "delta.logRetentionDuration defaults to 30 days (log history) but delta.deletedFileRetentionDuration defaults to 7 days (data files). Default VACUUM deletes files older than 7 days, so a VERSION AS OF query past a week can fail with file-not-found even though the log entry still exists.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c4",
+      "topic": "Databricks",
+      "q": "Z-ORDER vs liquid clustering - what's the practical difference?",
+      "a": "Z-ORDER fully rewrites every touched file on each run, so re-clustering a growing table means reprocessing already-clustered data. Liquid clustering is incremental - OPTIMIZE only touches files that need it - handles skew better, and lets you change the clustering key without a full rewrite. It's the 2026 default recommendation for new tables.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c5",
+      "topic": "Databricks",
+      "q": "What is Unity Catalog's namespace model and what does it add over the legacy Hive Metastore?",
+      "a": "Three-level namespace: catalog.schema.table (vs legacy two-level database.table). The catalog level gives a real access-control boundary above schema, plus automatic column-level lineage and unified governance across tables, volumes, functions, and ML models.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c6",
+      "topic": "Databricks",
+      "q": "What does Photon accelerate, and what doesn't it help?",
+      "a": "A native vectorized C++ engine replacing JVM-based Spark SQL execution for scans/joins/aggregations/writes, up to 12x on TPC-DS-style workloads vs naive Spark. It does not help Python/Scala UDF-heavy workloads, which still cross the JVM/Python boundary Photon can't vectorize.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c7",
+      "topic": "Databricks",
+      "q": "What's the difference between expect, expect_or_drop, and expect_or_fail in Lakeflow/DLT?",
+      "a": "expect logs violations but keeps the row; expect_or_drop silently drops violating rows; expect_or_fail halts the pipeline. All are row-scoped and can't express cross-row invariants like referential integrity or volume anomalies.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c8",
+      "topic": "Databricks",
+      "q": "Why is Delta's file format being open not enough to eliminate Databricks lock-in?",
+      "a": "For years the real dependency lived in the catalog (Unity Catalog), not the file format - governance, access control, and lineage all lived there. Databricks has since open-sourced Unity Catalog's core and added Iceberg REST Catalog server support to address this.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c9",
+      "topic": "Databricks",
+      "q": "Databricks cluster types and their relative cost?",
+      "a": "All-Purpose (interactive notebooks, highest DBU rate ~$0.55/DBU Premium), Jobs Compute (scheduled pipelines, 40-60% cheaper per DBU), SQL Warehouses (serverless option up to ~$0.70/DBU but zero idle cost), Serverless (model serving ~$0.08/DBU). DBU cost is separate from the underlying cloud VM cost.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c10",
+      "topic": "Databricks",
+      "q": "What single cost lever cuts 40-60% of a pipeline's compute cost with zero code change?",
+      "a": "Moving it from an interactive All-Purpose cluster to a scheduled Jobs Compute cluster - Jobs Compute DBU rates run 40-60% lower than All-Purpose.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c11",
+      "topic": "Databricks",
+      "q": "What did Databricks retire in October 2025 and what's the pricing floor now?",
+      "a": "The Standard pricing tier on AWS and GCP was retired; all Standard workspaces were auto-upgraded to Premium. Premium (Unity Catalog, RBAC, serverless, full Mosaic AI suite) is now the floor for new deployments.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c12",
+      "topic": "Databricks",
+      "q": "What does a timeout on a timed-out write NOT protect against in a Delta pipeline retry storm?",
+      "a": "Small-file explosion is the analogous silent failure: predictable maintenance being skipped (OPTIMIZE/predictive optimization disabled) causes read latency to degrade gradually over weeks with no hard failure, since every micro-batch write adds small files that never get compacted.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c13",
+      "topic": "Databricks",
+      "q": "What does the medallion architecture (bronze/silver/gold) actually buy you?",
+      "a": "Each layer is an independently queryable, independently recoverable, real ACID Delta table with its own lineage - if silver has a bug you rebuild from durable bronze without re-ingesting from source, and schema conformance logic stays separate from business logic.",
+      "module": "T18-databricks"
+    },
+    {
+      "id": "T18-databricks-c14",
+      "topic": "Databricks",
+      "q": "When is Databricks usually the WRONG platform choice?",
+      "a": "A pure BI/SQL shop with no ML/streaming/Spark workload - you pay for and operationally own a Spark-and-ML-oriented platform's surface area (clusters, Photon, MLflow) for a workload Snowflake or BigQuery serve more cheaply with less tuning.",
+      "module": "T18-databricks"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-agent-memory-c1",
+      "topic": "Agent Memory",
+      "q": "Name the four types of agent memory and what each stores.",
+      "a": "WORKING = the context window itself (system prompt, task, recent turns, tool output); volatile, re-sent every turn. EPISODIC = what happened on past runs (task signature, trajectory, OUTCOME, cost); append-only. SEMANTIC = durable facts as (subject, predicate, value); upserted with conflict resolution. PROCEDURAL = how to act (rules, skills, tool-ordering); files under version control.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c2",
+      "topic": "Agent Memory",
+      "q": "Why should episodic and semantic memory not share one index?",
+      "a": "Different retrieval keys (task signature vs subject-predicate), different read patterns (rare exemplar vs every-turn fact), different decay rates, different failure modes. One index means you retrieve a stale trajectory when you wanted a fact.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c3",
+      "topic": "Agent Memory",
+      "q": "Five reasons naive vector search over past conversation turns performs badly.",
+      "a": "1) Turns are not self-contained ('yes, do that one'). 2) Embeddings encode topic not truth: 'I want to cancel' ~ 'I decided not to cancel'. 3) Precision collapses at volume (8 of 50k on a weak signal). 4) No temporal reasoning. 5) Injected memories are treated as authoritative, unlike a visibly-irrelevant RAG chunk.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c4",
+      "topic": "Agent Memory",
+      "q": "Give the composite memory retrieval score.",
+      "a": "0.55*cosine + 0.20*0.5^(age_days/half_life) + 0.15*importance + 0.10*log1p(hit_count). Generative-Agents style: relevance + recency + importance + usage. Weights are tuned against a golden set; the structure is the point.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c5",
+      "topic": "Agent Memory",
+      "q": "Why must the tenant/user filter go INSIDE the ANN query rather than after it?",
+      "a": "Post-filtering is both a quality bug (another tenant's near-duplicates crowd the correct tenant's facts out of the top-50) and a cross-tenant leak waiting for one code path to omit the filter. Enforce it in a repository layer that cannot issue an unfiltered query.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c6",
+      "topic": "Agent Memory",
+      "q": "What is the default write decision for a memory extractor, and what is the write gate?",
+      "a": "Default is NOOP; an empty list is the most common correct output. Gate: 'would this change how I answer a FUTURE, UNRELATED question?' Confidence >= 0.7. Never store anything with a system of record. Target under 1 durable fact per 10 turns, with a hard per-user cap (200-500) to force eviction.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c7",
+      "topic": "Agent Memory",
+      "q": "How does a wrong memory die? Name the mechanisms.",
+      "a": "Per-class TTL (identity none, stable_pref 365d, entitlement 30d, project_state 14d, task_local 0). Contradiction supersession: close valid_to, never hard-overwrite. Continuous decay in the ranking function. Capacity eviction on lowest composite score. Hard delete only for user/GDPR requests, cascading to embeddings and derived summaries.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c8",
+      "topic": "Agent Memory",
+      "q": "What should never be stored in memory?",
+      "a": "Anything with a system of record: plan tier, balance, ticket status, quotas, feature flags. Read them from the API. Remembering them is how you tell a downgraded customer they still have premium support.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c9",
+      "topic": "Agent Memory",
+      "q": "What is bi-temporal memory and why isn't updated_at enough?",
+      "a": "Two axes: event time (when the fact became true) and ingestion time (when you learned it), plus a validity window [valid_from, valid_to). updated_at records only ingestion, so last-write-wins lets a stale-but-recently-ingested fact beat a fresh-but-earlier-ingested one, and you cannot reconstruct historical state for 'what plan was I on in March'.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c10",
+      "topic": "Agent Memory",
+      "q": "Working memory ladder: buffer vs window vs summary vs hybrid.",
+      "a": "Buffer: perfect fidelity, O(n^2) cumulative cost, degrades via lost-in-the-middle before the hard limit. Window(k): O(k), forgets turn 2. Rolling summary: O(1), drops IDs/dates/exact constraints first. Hybrid (summary + last-k verbatim + a PINNED structured state block the summariser never sees) is the defensible default, plus externalising long artefacts to files.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c11",
+      "topic": "Agent Memory",
+      "q": "Mem0's reported LOCOMO numbers.",
+      "a": "26% relative uplift in LLM-as-judge score over OpenAI's memory (66.9% vs 52.9%), p95 latency 1.44s vs 17.12s for full-context (91% lower), and ~1.8K tokens per conversation vs 26K (90% fewer). Vendor-reported; LOCOMO is ~300 turns / ~9K tokens / up to 35 sessions, which may not resemble your workload.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c12",
+      "topic": "Agent Memory",
+      "q": "Zep/Graphiti's reported numbers and what it is good at.",
+      "a": "DMR 94.8% vs MemGPT's 93.4%; up to 18.5% accuracy improvement on LongMemEval with ~90% lower latency than full-context. Model is a bi-temporal knowledge graph. Genuinely wins multi-hop and temporal reasoning over long histories; expensive to construct, with LLM extraction on every write.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c13",
+      "topic": "Agent Memory",
+      "q": "What did Anthropic report for the memory tool and context editing (Sept 29, 2025)?",
+      "a": "Memory tool + context editing = +39% over baseline on an internal agentic search eval; context editing alone = +29%. On a 100-turn web search eval, context editing cut token consumption 84% and enabled runs that previously failed on context exhaustion. Key read: most of the gain came from REMOVING content, not adding recall.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c14",
+      "topic": "Agent Memory",
+      "q": "Why is procedural memory the highest-blast-radius memory type?",
+      "a": "A wrong semantic fact affects one user; a wrong procedural rule affects every run, silently, until someone reads the prompt. That is why procedural memory lives in files under version control with a human approval gate, and why the agent may propose rules but not commit them.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c15",
+      "topic": "Agent Memory",
+      "q": "What is the anti-example trick in episodic memory?",
+      "a": "Inject ONE past failure, explicitly labelled as a failure with a one-line reason. It reduces repeat failures more than injecting two more successes, and it is the cheapest learning an agent can do without touching weights. Requires storing the outcome, not just the trajectory.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c16",
+      "topic": "Agent Memory",
+      "q": "Why is memory a precision problem rather than a recall problem?",
+      "a": "Injected memories are treated as authoritative. A missing memory produces a clarifying question; a wrong memory produces a confident error. One wrong item is worse than ten missing ones, so use a relevance floor (returning nothing is valid), per-predicate diversity, and a strict write gate rather than a bigger k.",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c17",
+      "topic": "Agent Memory",
+      "q": "How do you evaluate a memory system?",
+      "a": "A/B with memory on vs off on CROSS-SESSION golden tasks, plus an adversarial slice of superseded/retracted facts. Track task success delta, injected-memory precision (fraction of injected facts a human judges relevant and correct; alert under 0.7), tokens added per turn, and write rate (facts per 1,000 turns; a floor alert catches a silently dead background job).",
+      "module": "T07-agent-memory"
+    },
+    {
+      "id": "T07-agent-memory-c18",
+      "topic": "Agent Memory",
+      "q": "The honest production picture of agent memory.",
+      "a": "The median shipped system is a typed user-profile table, a rolling session summary, and last-N-turns. Not a temporal knowledge graph. If the facts have a schema, use columns. Vendors supply storage; you still supply the write policy, the invalidation rules, and the tenancy model, which are the actual work.",
+      "module": "T07-agent-memory"
+    }
+  ]
+}

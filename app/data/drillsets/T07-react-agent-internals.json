@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T07-react-agent-internals-d1",
+      "module": "T07-react-agent-internals",
+      "q": "Name the two mandatory nodes create_react_agent wires into a StateGraph, and what each one does.",
+      "a": "agent: calls the model with tools bound and appends the AIMessage. tools: a ToolNode that dispatches every tool_call on the last message and appends matched ToolMessages.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-react-agent-internals-d2",
+      "module": "T07-react-agent-internals",
+      "q": "Your agent's output ends with the exact string \"Sorry, need more steps to process this request.\" Did the graph crash? What actually happened?",
+      "a": "No crash. The remaining_steps graceful-degradation check fired (remaining<2 with pending tool calls, or remaining<1 with a return_direct tool), and the graph short-circuited to a synthetic final message instead of raising GraphRecursionError.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-react-agent-internals-d3",
+      "module": "T07-react-agent-internals",
+      "q": "What's the difference between should_continue and tools_condition, and which one would you actually import into your own code?",
+      "a": "should_continue is create_react_agent's internal three-way router (tools/structured-response/end), never called directly. tools_condition is the public two-way utility you'd import when building your own StateGraph and want the same tool-calls routing rule.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-react-agent-internals-d4",
+      "module": "T07-react-agent-internals",
+      "q": "A pre_model_hook you wrote is supposed to summarize old turns for this call only, without changing persisted history. It returns {\"messages\": [summary_msg]}. What's wrong, and what's the fix?",
+      "a": "Returning \"messages\" writes through add_messages into permanent state — it's a real, persisted edit. For a transient, this-call-only view, return {\"llm_input_messages\": [...]} instead.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-react-agent-internals-d5",
+      "module": "T07-react-agent-internals",
+      "q": "You add a post_model_hook that filters out messages it considers low-value before routing. Tool dispatch starts silently skipping calls that should have executed. Diagnose.",
+      "a": "post_model_hook_router determines pending tool calls by diffing tool_call ids on the last AIMessage against existing ToolMessages in state. If the hook drops or reshapes messages and breaks that id relationship, the router can conclude tool calls are already satisfied when they aren't, skipping dispatch.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-react-agent-internals-d6",
+      "module": "T07-react-agent-internals",
+      "q": "Explain the behavioral difference between version=\"v1\" and version=\"v2\" tool dispatch, specifically around retry policies.",
+      "a": "v1 dispatches all tool calls from one message inside a single ToolNode invocation as one graph step, so a retry/timeout policy on the tools node applies to the whole batch. v2 turns each tool call into its own Send targeting its own ToolNode task, so retry/timeout policies apply per individual tool call.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-react-agent-internals-d7",
+      "module": "T07-react-agent-internals",
+      "q": "A tool you registered raises an uncaught exception mid-run. What does the model actually see, and why doesn't the run crash?",
+      "a": "ToolNode catches the exception by default and returns it as a ToolMessage containing the error text rather than propagating it — the framework's version of 'errors are observations, not exceptions,' letting the loop continue.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-react-agent-internals-d8",
+      "module": "T07-react-agent-internals",
+      "q": "You pass response_format to create_react_agent. Does this change how the model reasons and calls tools during the loop?",
+      "a": "No. response_format only appends a terminal generate_structured_response node reached after the loop would otherwise exit to END. It makes one additional schema-constrained model call at the very end and writes state[\"structured_response\"]; the loop itself is unaffected.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-react-agent-internals-d9",
+      "module": "T07-react-agent-internals",
+      "q": "You want interrupt_before to gate only the delete_record tool, not every tool call. Can you do this with interrupt_before=[\"tools\"]? What's the actual fix?",
+      "a": "No — interrupt_before=[\"tools\"] pauses before ANY tool call, since there's only one tools node. For per-tool gating you need a post_model_hook that conditionally calls interrupt(), or you've outgrown the prebuilt and should hand-roll the StateGraph with per-tool routing.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-react-agent-internals-d10",
+      "module": "T07-react-agent-internals",
+      "q": "Is create_react_agent still functional in LangGraph 1.0? What replaces it, and what does the replacement add?",
+      "a": "Yes, still functional with no published removal date, but deprecated in favor of create_agent from the langchain package. The replacement runs on the same graph shape but adds a composable 6-hook AgentMiddleware system instead of the two fixed pre_model_hook/post_model_hook slots.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-react-agent-internals-d11",
+      "module": "T07-react-agent-internals",
+      "q": "Your team needs to add a validation phase between two rounds of tool execution — search, then a separate validation-tool pass, then answer. Should you configure this with hooks on create_react_agent?",
+      "a": "No. The prebuilt has exactly one tools node and no seam to add a second tool-execution phase. This is the signal to drop to a hand-rolled StateGraph with real nodes and edges for each phase.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-react-agent-internals-d12",
+      "module": "T07-react-agent-internals",
+      "q": "Why does the AgentState messages key need the add_messages reducer specifically, rather than operator.add, given create_react_agent supports checkpointer-based resume and human-in-the-loop edits?",
+      "a": "add_messages merges by message id, replacing an existing message when the incoming one shares an id. This is what makes an update_state correction to an in-flight tool call land as an edit instead of appending a near-duplicate — critical for HITL edit flows and resumed runs.",
+      "difficulty": "staff"
+    }
+  ]
+}

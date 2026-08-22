@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI TUTOR // Principal Track</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header id="topbar">
+  <div class="brand">
+    <span class="logo">▮▮▯</span>
+    <div>
+      <h1>AI&nbsp;TUTOR</h1>
+      <small id="mode-line">INTERVIEW SPRINT · ACTIVE</small>
+    </div>
+  </div>
+
+  <div class="hud">
+    <div class="hud-cell">
+      <label>LEVEL</label>
+      <strong id="hud-level">—</strong>
+      <span id="hud-level-name" class="muted"></span>
+    </div>
+    <div class="hud-cell">
+      <label>XP</label>
+      <strong id="hud-xp">0</strong>
+      <div class="xpbar"><i id="hud-xpbar"></i></div>
+    </div>
+    <div class="hud-cell">
+      <label>STREAK</label>
+      <strong id="hud-streak">0</strong>
+      <span class="muted">weekends</span>
+    </div>
+    <div class="hud-cell">
+      <label>DUE</label>
+      <strong id="hud-due">0</strong>
+      <span class="muted">cards</span>
+    </div>
+  </div>
+</header>
+
+<nav id="tabs">
+  <button data-view="dash" class="active">Quest</button>
+  <button data-view="tracks">Tracks</button>
+  <button data-view="cards">Flashcards</button>
+  <button data-view="problems">Problems</button>
+  <button data-view="boss">Boss Battles</button>
+  <button data-view="badges">Badges</button>
+  <button data-view="save">Save/Load</button>
+</nav>
+
+<main id="app"></main>
+
+<footer>
+  <span id="foot-stats"></span>
+  <span class="muted">state autosaves to this browser · export from Save/Load</span>
+</footer>
+
+<script src="data/curriculum.js"></script>
+<script src="data/flashcards.js"></script>
+<script src="data/drills.js"></script>
+<script src="data/problems.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+{
+  "drills": [
+    {
+      "id": "T07-risk-taxonomy-d1",
+      "module": "T07-risk-taxonomy",
+      "q": "Assign a blast-radius band to each: (a) list_open_tickets, (b) soft_delete_draft, (c) close_ticket, (d) issue_refund, (e) drop_table.",
+      "a": "(a) read_only. (b) write_reversible -- a real, cheap undo exists. (c) write_irreversible -- externally visible, no real undo. (d) financial -- moves credit/money. (e) destructive -- permanent and typically unbounded scope.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-risk-taxonomy-d2",
+      "module": "T07-risk-taxonomy",
+      "q": "A tool technically has a reverse-charge compensating action for a refund, but the customer already saw the transaction on their statement. What band, and which axis decided it?",
+      "a": "write_irreversible in practice (financial band specifically, since it's a refund), decided by externality, not by reversibility. A third party (the customer, their bank) observed it, so \"you can't un-send\" applies even though a compensating action exists in your own ledger.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-risk-taxonomy-d3",
+      "module": "T07-risk-taxonomy",
+      "q": "Explain in one paragraph why deny rules must be checked before allow rules in a permission pipeline.",
+      "a": "If allow were evaluated first, narrowing a broad grant would require enumerating every safe pattern instead of the handful of unsafe ones -- infeasible at scale. Deny-first lets an operator grant broadly by default (e.g. allow all Bash) and carve out exceptions (deny Bash(rm *)) that hold regardless of mode or later rule changes. This is the same guarantee AWS IAM gives across five policy types and Claude Code gives even under bypassPermissions.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-risk-taxonomy-d4",
+      "module": "T07-risk-taxonomy",
+      "q": "Write the resolution tuple (the minimum set of fields a permission rule must match against) and explain why tool name alone is insufficient.",
+      "a": "(principal, tool, argument-pattern, resource, tenant, session). Tool name alone can't express that write_file under ./src is write_reversible while the same tool under ./.github/workflows or ./secrets is destructive -- the argument pattern is what actually determines risk for many tools, not the verb.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-risk-taxonomy-d5",
+      "module": "T07-risk-taxonomy",
+      "q": "Diagnose: an agent's read_only search tool returned another tenant's invoices. The permission engine's rules were all correctly scoped by tool tier. What's the likely root cause and the fix?",
+      "a": "Tenant scoping was enforced only in the query-construction code, not bound into the credential/session context itself. A bug in that application code (missing WHERE tenant_id = ...) bypassed it entirely, and a read_only tool had no permission-layer gate because reads were assumed safe. Fix: bind tenant id into the credential so even a malformed query is mechanically confined -- belt-and-braces, not a substitute for fixing the query bug.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-risk-taxonomy-d6",
+      "module": "T07-risk-taxonomy",
+      "q": "Design the token scope for an agent that manages custom domains via a CLI, informed by the Railway/PocketOS incident. What specifically should the token NOT be able to do?",
+      "a": "Scope the token to exactly the domain-management API surface (add/remove/list custom domains for a named project), time-limited, and reject at the authorization server any request outside that surface -- including any destructive database or infrastructure operation. The Railway incident happened precisely because the token was created for one narrow purpose but carried blanket account permissions with no scope isolation; the fix is scope isolation at issuance, not detection after the fact.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-risk-taxonomy-d7",
+      "module": "T07-risk-taxonomy",
+      "q": "An on-call engineer needs to run one destructive query today. Design the grant using time-boxed + one-shot semantics, and state what happens if it goes unused.",
+      "a": "Issue a grant scoped to (principal=engineer, tool=destructive_query, tenant=X) with a short TTL (e.g. 15-30 minutes) and one_shot=True. First matching call consumes it and resolves ALLOW; consumption is logged as a separate audit event from issuance. If unused by expiry, it simply lapses -- no residual access, no manual revocation step required. The grant does not create a standing allow rule and does not override any existing deny rule for that tool/tenant.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-risk-taxonomy-d8",
+      "module": "T07-risk-taxonomy",
+      "q": "Explain why 'the model decided this action was safe, so we allowed it' is a permission-system defect, not a feature, referencing the confused-deputy framing.",
+      "a": "The entire mechanism of a prompt injection is to convince the model it is authorized. If the permission layer treats the model's own belief as evidence of authorization, then any successful injection automatically clears the gate -- the tier collapses to whatever the attacker's text says. The tier must be a static property of the tool and argument pattern, evaluated in code, independent of what instruction produced the call.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-risk-taxonomy-d9",
+      "module": "T07-risk-taxonomy",
+      "q": "You inherit a system where every mutating tool requires synchronous human approval, 'to be safe.' Approval p50 latency is 3 seconds and override rate is near zero. Diagnose and propose a redesign using this module's taxonomy.",
+      "a": "The gates are decorative -- 3-second decisions on tasks that need real judgment and a near-zero override rate both indicate rubber-stamping (T07-human-oversight). Redesign by band: read_only stays auto+log; write_reversible gets notify+undo window; write_irreversible gets a dry-run diff plus deterministic invariant checks (allowlists, regex, thresholds) instead of a human for the routine case; reserve synchronous human approval for financial-above-threshold and bounded destructive actions where judgment genuinely can't be automated. This concentrates human attention where a check can't substitute for it instead of diluting it everywhere.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-risk-taxonomy-d10",
+      "module": "T07-risk-taxonomy",
+      "q": "Rank in order of leverage: (a) prompt instructing the model to be careful with destructive tools, (b) scoped short-lived credentials, (c) deny-first ternary resolution with argument-pattern scoping, (d) audit records separating acting identity from authorizing principal. Justify the ranking against the two worked incidents in this module.",
+      "a": "b > c > d > a. Scoped credentials (b) remove the hazard entirely -- an agent that never holds account-wide access can't misuse it, which would have prevented Railway's incident outright. Ternary resolution with scoping (c) bounds damage when a credential is broader than ideal. Audit separation (d) doesn't prevent the incident but makes it detectable and attributable. Prompting (a) does nothing against a credential that is simply valid and broad, which both Replit and Railway demonstrate -- neither model was 'confused' in the colloquial sense, the authorization boundary itself was the defect.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-risk-taxonomy-d11",
+      "module": "T07-risk-taxonomy",
+      "q": "A permission engine denies a destructive_query call. The underlying platform credential would actually have allowed it if called directly. What does this mismatch tell you, and what should you do?",
+      "a": "The engine can only ever narrow what the platform permits, never widen it, so this specific mismatch is safe by construction -- not a security incident. But it signals the engine's model of the platform's real scope may be stale elsewhere too, possibly in the unsafe direction (believing something is denied when the platform would actually allow it, producing false confidence). Audit for divergence in both directions between the engine's decisions and the platform's actual enforced scope.",
+      "difficulty": "staff"
+    }
+  ]
+}

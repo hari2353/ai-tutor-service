@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T20-rust-types-d1",
+      "module": "T20-rust-types",
+      "q": "How many bytes is `&dyn Draw` on a 64-bit target, and what are the two halves?",
+      "a": "16 bytes: a data pointer to the value plus a pointer to the vtable for that (concrete type, trait) pair. A plain `&u32` is 8. Slices are also fat (`&[u32]` is 16: pointer plus length).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-types-d2",
+      "module": "T20-rust-types",
+      "q": "Write the `?` desugaring from memory.",
+      "a": "`let n = f()?;` becomes `let n = match f() { Ok(v) => v, Err(e) => return Err(From::from(e)) };`. The `From::from` is the point: one `impl From<E> for MyError` serves every `?` in the crate.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-types-d3",
+      "module": "T20-rust-types",
+      "q": "Fill in the sizes on 64-bit: `size_of::<Option<&u8>>()`, `size_of::<Option<u32>>()`, `size_of::<Option<NonZeroU32>>()`, `size_of::<Option<bool>>()`.",
+      "a": "8, 8, 4, 1. `Option<&u8>` uses null as the niche so it costs nothing over `&u8`; `u32` has no spare bit pattern so `Option<u32>` needs a real tag plus padding, doubling it; `NonZeroU32` donates 0 as the niche; `bool` has 254 spare patterns.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-types-d4",
+      "module": "T20-rust-types",
+      "q": "Name three traits from std that are NOT dyn compatible, and give the one-line reason for each.",
+      "a": "`Clone` (`fn clone(&self) -> Self` returns a type of unknown size to the caller), `PartialEq` (`fn eq(&self, other: &Self)` puts `Self` in argument position, so a shared vtable would let you compare a Circle to a String), and `From`/`Into` (`Self` in return position). `Sized` and `Copy` fail as marker/supertrait constraints.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-types-d5",
+      "module": "T20-rust-types",
+      "q": "You want `impl Display for Vec<u8>`. It won't compile. What error, and what do you do?",
+      "a": "error[E0117]: the orphan rule, because both `Display` and `Vec` are foreign. Wrap in a newtype: `struct Hex(Vec<u8>); impl Display for Hex { ... }`. A single-field tuple struct has identical layout to its field, so it is zero-cost.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-types-d6",
+      "module": "T20-rust-types",
+      "q": "Why does `Iterator` use `type Item` rather than `Iterator<Item>` as a generic parameter?",
+      "a": "So each type implements `Iterator` exactly once and `Item` is determined by that impl. If it were generic, a type could implement `Iterator<u32>` and `Iterator<String>`, making every `.next()` call ambiguous and requiring a turbofish, and every combinator signature in std would have to thread the item type through. Associated types exist to keep inference tractable.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-types-d7",
+      "module": "T20-rust-types",
+      "q": "Your crate exports `pub enum ApiError` with 12 variants. You add a 13th in a patch release and downstream builds break. What went wrong and what is the fix?",
+      "a": "Adding an enum variant is a semver-major break because every downstream exhaustive `match` now fails with error[E0004]. Fix is `#[non_exhaustive]` on the enum, which forces downstream crates to include a wildcard arm and lets you add variants in minor releases forever. Your own crate keeps full exhaustiveness checking. It is major-breaking exactly once, when you add it.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-types-d8",
+      "module": "T20-rust-types",
+      "q": "A dependency in your service calls `.unwrap()` on a parsed header. Trace what your users see under `panic = \"unwind\"` versus `panic = \"abort\"`.",
+      "a": "Under unwind, the panic unwinds to the nearest catch boundary. In Tokio that is the spawned task, surfacing as `JoinError::is_panic`, so one task dies and if nobody awaits the handle it vanishes silently; an Axum/Actix middleware converts it to a bare 500 with no structured body. Under abort, there is no unwinding at all and the entire process dies, taking every in-flight request with it. Across an `extern \"C\"` boundary it is a guaranteed abort regardless of profile.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-types-d9",
+      "module": "T20-rust-types",
+      "q": "`match &opt` where `opt: Option<String>`, arm `Some(s) =>`. What is the type of `s`, and what rule produced it?",
+      "a": "`s: &String`. Matching a reference against a non-reference pattern auto-dereferences and flips the default binding mode from `move` to `ref`, so bindings come out as references. Before match ergonomics (Rust 1.26) you wrote `&Some(ref s)`. Rust 2024 added the RFC 3627 reservations: once the DBM is not `move`, an explicit `mut`/`ref`/`ref mut` on a binding is an error.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-types-d10",
+      "module": "T20-rust-types",
+      "q": "Your alert says 'database error' and nothing else. The thiserror enum has a `#[from] sqlx::Error` variant. What is the bug in the logging?",
+      "a": "Someone logged `e.to_string()` or `error = ?e`, which renders only the top layer's `#[error(\"...\")]` string. The cause lives in `Error::source()`, which `#[from]` wired up. Fix: walk the chain when logging (`error = %chain(&e)` with a five-line loop on `source()`), or use anyhow's `{:?}`, or `tracing-error`'s SpanTrace. Corollary: do NOT duplicate the inner message into the outer `Display`, or the walked chain repeats it.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-types-d11",
+      "module": "T20-rust-types",
+      "q": "Compile time went 40s to 9 minutes after adding one generic parameter. Give the diagnostic sequence and the fix, by tool name.",
+      "a": "`cargo build --timings` to confirm codegen dominates one crate, then `cargo llvm-lines --release | head -30` for IR lines and copy count per generic function, then `cargo bloat --release --crates` for binary attribution. Fix with the inner-function trick std uses on itself: `fn read<P: AsRef<Path>>(p: P) { fn inner(p: &Path) { /* 60 lines */ } inner(p.as_ref()) }` so the wrapper monomorphises and the body compiles once. If that's not enough, move the boundary to `&dyn`.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-types-d12",
+      "module": "T20-rust-types",
+      "q": "You are designing a public API: `fn process(r: impl Read)` or `fn process(r: &mut dyn Read)`. Argue both sides and pick.",
+      "a": "`impl Read` monomorphises into the caller's crate: inlinable, no indirection, but one copy per caller type, cannot be stored in a struct field without threading the parameter through the whole type, and cannot appear in a dyn-compatible trait. `&mut dyn Read` is one copy, one indirect call per operation, and keeps trait objects possible. Switching between them post-publication is semver-major, so it is a one-way door. For a per-request I/O function, take `&mut dyn Read`: the indirect call is invisible next to a syscall. Take `impl Read` only when the body is small and hot enough that inlining matters, and have criterion numbers.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-types-d13",
+      "module": "T20-rust-types",
+      "q": "A colleague argues generics are always faster than `dyn` because they are zero-cost. Rebut it precisely.",
+      "a": "The indirect call itself is a few cycles when the target is stable in the indirect branch target buffer, and ~15-25 cycles only on a megamorphic mispredict. The real cost of dyn is lost inlining, which stops constant propagation, loop unrolling, and auto-vectorisation. But monomorphisation has its own cost: 60 copies of a 4 KB body compete for a ~32 KB L1 instruction cache, so a single resident dyn copy can win. Plus compile time and binary size grow as roughly n_types x body_size. The correct position is that it is measurable: criterion plus `perf stat -e instructions,branch-misses,L1-icache-load-misses` on both builds.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-types-d14",
+      "module": "T20-rust-types",
+      "q": "A teammate wants to add `impl<T: Serialize> Persist for T` to your published trait so users get it for free. What do you say?",
+      "a": "It is a semver-major break despite adding no method to any signature. Any downstream crate that already wrote `impl Persist for TheirType` where `TheirType: Serialize` now gets error[E0119], and there is no opt-out and no `specialization` on stable (RFC 1210, unstable since 2015, with known soundness holes around lifetime-dependent specialisation). Options: ship it as a new trait, seal the original with a private supertrait so nobody could have written a conflicting impl, or accept a major version bump.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-types-d15",
+      "module": "T20-rust-types",
+      "q": "A hot function returns `Result<u64, MyError>` where MyError is a thiserror enum with a `String` variant, and profiles show stack spills. What is happening and what do you do?",
+      "a": "`size_of::<Result<T, E>>()` is roughly `max(size_of::<T>(), size_of::<E>())` plus a tag, so an enum whose largest variant holds a `String` (24 bytes) plus other fields is easily 32-64 bytes, and that size propagates into every `Result` up the call chain, exceeding what fits in return registers. Fix: `Result<u64, Box<MyError>>`, making the Err arm 8 bytes. This is exactly what `std::io::Error` does internally, which is why it is 8 bytes on 64-bit despite carrying errno, static messages, or boxed custom errors.",
+      "difficulty": "staff"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T17-wal-recovery-d1",
+      "module": "T17-wal-recovery",
+      "q": "State the write-ahead logging protocol and explain why the ordering matters.",
+      "a": "A change's log record must be durable before its data page reaches disk, and a commit's log record must be durable before the client is told it committed. If the page reached disk first and the system crashed before logging, recovery would have nothing to explain or undo that on-disk change from.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-wal-recovery-d2",
+      "module": "T17-wal-recovery",
+      "q": "Walk through ARIES's three phases end to end.",
+      "a": "Analysis scans forward from the last checkpoint to build the Transaction Table and Dirty Page Table, finding the minimum recLSN to start redo from. Redo replays every logged change forward (committed and uncommitted alike), skipping any change already reflected in a page (LSN <= pageLSN). Undo then rolls back never-committed transactions in reverse order using Compensation Log Records, which make undo itself crash-safe.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-wal-recovery-d3",
+      "module": "T17-wal-recovery",
+      "q": "Why must redo be idempotent, and how does the pageLSN mechanism achieve that?",
+      "a": "Recovery itself can crash and need to restart against a database that already has some changes applied from a prior interrupted attempt. Each page stores the LSN of the last change it reflects (pageLSN); redo skips any log record with LSN <= that page's pageLSN, so re-running redo produces the same result as running it once.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-wal-recovery-d4",
+      "module": "T17-wal-recovery",
+      "q": "What is a checkpoint actually for, and why do production systems use 'fuzzy' checkpoints rather than stop-the-world ones?",
+      "a": "Solely to bound recovery time by giving analysis a recent starting point instead of the whole log history. Fuzzy checkpoints avoid a full consistent stop-the-world snapshot (which would hurt latency) and are safe because redo's idempotent, LSN-driven replay tolerates an inconsistent snapshot at checkpoint time.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-wal-recovery-d5",
+      "module": "T17-wal-recovery",
+      "q": "Production Postgres WAL directory is growing unboundedly toward disk-full. What's the most common cause and how do you catch it early?",
+      "a": "A disconnected or stuck replication slot (physical or logical) retaining WAL segments because nothing is consuming them, which blocks log truncation. Catch it by alerting on replication slot lag / retained WAL bytes directly, rather than waiting for total disk usage to trip an alert.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-wal-recovery-d6",
+      "module": "T17-wal-recovery",
+      "q": "Describe a real fsync failure mode that causes silent data loss, and how databases now defend against the kernel-level version of it.",
+      "a": "A volatile write-back disk cache without battery backing can ack a write before it's physically durable, losing it on power failure despite fsync returning success. Separately, a 2018-documented Linux kernel behavior cleared the dirty-page error flag after a failed fsync, so a later fsync on the same file could falsely report success. Databases now PANIC/crash on any fsync failure instead of retrying, since retrying risks reporting false success.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-wal-recovery-d7",
+      "module": "T17-wal-recovery",
+      "q": "What is group commit, why does it exist, and what's its cost?",
+      "a": "It batches multiple transactions' WAL records into one fsync call instead of fsyncing per commit, amortizing the fixed per-fsync latency across many transactions for an often order-of-magnitude throughput gain under concurrency. Cost: a small added latency for a transaction that would otherwise commit immediately alone, since it waits briefly for the batch window.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-wal-recovery-d8",
+      "module": "T17-wal-recovery",
+      "q": "Explain the difference between Postgres synchronous_commit=on and off, and when off is a legitimate production choice.",
+      "a": "on fsyncs the WAL before acking the client (full durability, higher latency). off acks before the fsync completes, risking loss of the last fraction-of-a-second of acked commits on an OS/machine crash (not a graceful shutdown). Legitimate for workloads like analytics ingestion or non-financial event logging where that bounded risk window is acceptable for higher throughput; wrong for anything resembling a financial ledger.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-wal-recovery-d9",
+      "module": "T17-wal-recovery",
+      "q": "What does full_page_writes protect against in Postgres, and why does WAL volume spike right after a checkpoint?",
+      "a": "It protects against torn pages - a crash interrupting a page write mid-flight, leaving it partly old and partly new bytes, which normal incremental WAL replay can't repair. Postgres logs the entire page content the first time it's modified after a checkpoint so recovery can restore a known-good full page, which is why WAL volume spikes right after each checkpoint.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-wal-recovery-d10",
+      "module": "T17-wal-recovery",
+      "q": "A production database takes 45 minutes to recover after a crash against a 5-minute SLA. Diagnose and fix, including the tradeoff of the fix.",
+      "a": "The checkpoint interval is almost certainly too long relative to write volume, so redo must replay a large amount of log from the last checkpoint. Tighten checkpoint_timeout/max_wal_size (or InnoDB equivalents) to force more frequent checkpoints. Tradeoff: more frequent checkpoints cost more steady-state I/O, which should be mitigated by spreading checkpoint I/O over the interval (checkpoint_completion_target) and provisioning dedicated I/O bandwidth, not just picking a smaller interval blindly.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-wal-recovery-d11",
+      "module": "T17-wal-recovery",
+      "q": "Why is kill -9 an invalid test of a database's durability guarantee, and what is a valid test?",
+      "a": "kill -9 doesn't interrupt in-flight disk writes or drop OS page cache the way a real power loss does, so it never exercises the actual failure mode durability is supposed to survive. A valid test pulls power (or uses fault injection) on the real storage medium mid-write and verifies that exactly what was acknowledged as committed survived, nothing more and nothing less.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-wal-recovery-d12",
+      "module": "T17-wal-recovery",
+      "q": "Compare shadow paging to WAL as crash recovery strategies and explain why WAL became the dominant architecture.",
+      "a": "Shadow paging never modifies a page in place - writes go to a fresh copy, and an atomic root-pointer swap commits the transaction, giving crash safety without redo replay. But it destroys physical locality over time and complicates fine-grained concurrent transactions, since the modified path effectively needs copy-on-write. WAL keeps data pages in place and relies on a separate sequential log for recovery, preserving locality and allowing independent, finer-grained concurrency control (row/page locking or MVCC).",
+      "difficulty": "staff"
+    }
+  ]
+}

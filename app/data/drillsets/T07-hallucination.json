@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T07-hallucination-d1",
+      "module": "T07-hallucination",
+      "q": "Give a testable taxonomy of hallucination in two axes.",
+      "a": "Faithfulness (vs the provided source and instruction) against factuality (vs the world); crossed with intrinsic (contradicts the source) against extrinsic (source is silent). Faithfulness is testable now with NLI; factuality needs an external knowledge source.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-hallucination-d2",
+      "module": "T07-hallucination",
+      "q": "Why is hallucination structural? Give three reasons, one of them a theorem.",
+      "a": "No null token — decoding must emit something. Lossy fact storage returns plausible neighbours, which is why hallucinations are never absurd. And Kalai & Vempala (STOC 2024): a calibrated model must hallucinate arbitrary facts at a rate bounded below by the monofact rate minus miscalibration, independent of architecture and data quality.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-hallucination-d3",
+      "module": "T07-hallucination",
+      "q": "Why do accuracy-based evaluations increase hallucination?",
+      "a": "A guess has positive expected value p(correct) and abstaining scores zero, so any selection process that optimises binary accuracy selects for guessing. One hallucination benchmark cannot outvote hundreds of accuracy benchmarks. Fix the scoreboard: reward correct, penalise wrong more heavily, treat refusal as neutral.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-hallucination-d4",
+      "module": "T07-hallucination",
+      "q": "Someone quotes '1% hallucination' at you. Respond.",
+      "a": "That is the Vectara HHEM summarisation leaderboard — short source in context, summarise, check against the source, the easiest possible grounding task. On the harder FACTS Benchmark Suite no model breaks 70% (leader 68.8%); on AA-Omniscience most frontier models score below zero; commercial legal RAG measured 17-33%; clinical vignettes with one wrong detail reached 50-82%. Rate is a function of model, task, source availability, and adversariality.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-hallucination-d5",
+      "module": "T07-hallucination",
+      "q": "Rank hallucination mitigations, top four with a number for the first.",
+      "a": "1) Grounding in retrieval — legal RAG 17-33% versus 43% closed-book GPT-4 — with a relevance filter, since irrelevant chunks make it worse. 2) Constrained decoding and structured output, which eliminate classes structurally at near-zero cost. 3) Verification passes with a small NLI checker, where Bedrock contextual grounding filters over 75%. 4) Abstention, which needs a calibrated signal and a fallback better than a guess.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-hallucination-d6",
+      "module": "T07-hallucination",
+      "q": "Why does temperature 0 not help? Give the measurement.",
+      "a": "66.5% at zero temperature versus 65.9% default in the clinical adversarial study — statistically indistinguishable. The failure is not sampling noise; the model's mode is often the plausible falsehood. Greedy decoding buys reproducibility for debugging and evals, not truth.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-hallucination-d7",
+      "module": "T07-hallucination",
+      "q": "Your model upgrade improves every benchmark and hallucination rises. Cite the precedent and give the plan.",
+      "a": "Precedent: OpenAI's o3/o4-mini system card, PersonQA 16% for o1, 33% for o3, 48% for o4-mini. Plan: gate the upgrade on your own hallucination suite, pin model versions so an alias bump cannot do this silently, re-fit every calibrated threshold, re-check abstention specifically, and if the fabrication concentrates in one query class, route that class to the old model while compensating in the harness.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-hallucination-d8",
+      "module": "T07-hallucination",
+      "q": "Which detector would you put in the request path, and what does it miss?",
+      "a": "A small NLI grounding check — decontextualised sentences against 3-sentence context windows with max-pooling, batched into one forward pass, tens of milliseconds — plus 2-3 cheap features into a calibrated classifier. It misses anything about the world the provided context does not cover, because it only tests faithfulness. Self-consistency and semantic entropy stay out of the hot path at 5-20x tokens.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-hallucination-d9",
+      "module": "T07-hallucination",
+      "q": "Semantic entropy is in Nature. Why isn't it your default detector?",
+      "a": "Wrong cost profile and a fatal blind spot for the default case: n generations of cost, and structurally silent when all samples agree on the same falsehood, which is the confidently-wrong case that hurts most. It is the best unsupervised signal when there is no source to check against; when there is a source, grounding is cheaper and catches the class entropy cannot.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-hallucination-d10",
+      "module": "T07-hallucination",
+      "q": "Give the observable symptom for intrinsic hallucination, extrinsic hallucination, and RAG distraction.",
+      "a": "Intrinsic: NLI contradiction above threshold against a chunk that was in context — the cited chunk literally says the opposite; aggregate signature is rising contradiction count in one corpus area, usually two document versions coexisting. Extrinsic: no window entails the sentence at any threshold, scores clustered near neutral, high numeric density in the flagged sentence. RAG distraction: accuracy at k=10 worse than k=3 in an eval sweep, long low-relevance tail in context.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-hallucination-d11",
+      "module": "T07-hallucination",
+      "q": "Explain gate versus router in one exchange, and how you prove the router wins.",
+      "a": "A gate suppresses below threshold and silently discards correct answers; a router chooses among answer / flag / deeper verification / clarify / escalate so a weak signal costs compute rather than coverage. Prove it with risk-coverage curves for both policies: higher coverage at equal risk, lower risk at equal coverage, and then add the cost axis, since the router spends more on the uncertain band.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-hallucination-d12",
+      "module": "T07-hallucination",
+      "q": "Where in an agent loop do you put hallucination checks, and why not on the final answer?",
+      "a": "On the observation path before a tool result enters context, and again before any side-effecting call. Checking only the final answer is too late because the fabrication has already been acted on. Prefer cheap deterministic checks where possible — an id existence lookup beats an NLI call on a tool result.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-hallucination-d13",
+      "module": "T07-hallucination",
+      "q": "Internal eval scores keep improving while complaints rise. Diagnose.",
+      "a": "Most likely the eval rewards guessing: binary accuracy gives abstention zero. Also check whether the golden set is happy-path only, with no false premises, underspecified questions, or unanswerable cases; and whether scoring is response-level, so nine right claims plus one fabrication passes. Fix: abstention-aware scoring, adversarial cases, claim-level metrics, and a golden set built from real production failures.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-hallucination-d14",
+      "module": "T07-hallucination",
+      "q": "Name four risks of over-mitigating.",
+      "a": "Over-refusal, which users respond to by routing around the product and which is harder to detect than errors; coverage collapse from too tight a grounding threshold; latency and cost from verifying trivial-stake actions; and flag fatigue where labelling everything becomes wallpaper. Plus the subtle one: applying grounding gates to surfaces where generating novel plausible content is the product.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-hallucination-d15",
+      "module": "T07-hallucination",
+      "q": "Answer in one sentence: will hallucination be fixed?",
+      "a": "No — bounded, not fixed: there is a proven statistical floor for facts recalled from weights, so the deliverable is a measured error budget plus a human gate on irreversible actions that stays regardless of the model.",
+      "difficulty": "warmup"
+    }
+  ]
+}

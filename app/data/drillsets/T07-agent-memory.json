@@ -1,0 +1,102 @@
+{
+  "drills": [
+    {
+      "id": "T07-agent-memory-d1",
+      "module": "T07-agent-memory",
+      "q": "Name the four memory types in one breath.",
+      "a": "Working, episodic, semantic, procedural.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-agent-memory-d2",
+      "module": "T07-agent-memory",
+      "q": "Which LangChain memory class is deprecated and what replaced it?",
+      "a": "ConversationBufferMemory, deprecated since v0.3.1. Replacement: LangGraph checkpointers for within-thread state and a BaseStore (optionally + LangMem) for cross-thread long-term memory.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-agent-memory-d3",
+      "module": "T07-agent-memory",
+      "q": "A rolling summary is dropping order IDs. Fix it without changing the summariser.",
+      "a": "Add a pinned, machine-generated <state> block containing IDs, entitlements, deadlines, and open obligations. It is regenerated structurally each turn and the summariser never sees it, so it cannot lose it.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-agent-memory-d4",
+      "module": "T07-agent-memory",
+      "q": "The agent retrieved a 'user wants to cancel' memory even though the user retracted it. Two root causes and two fixes.",
+      "a": "Causes: pure cosine ranking has no notion of negation or currency; the retraction never superseded the original fact. Fixes: composite score with exponential recency decay, and contradiction resolution that closes valid_to on the superseded fact.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-memory-d5",
+      "module": "T07-agent-memory",
+      "q": "Write the write-path pipeline for semantic memory, in four stages.",
+      "a": "1) Candidate extraction (cheap model, structured output, atomic claims with a source quote). 2) Gate (would this change a future unrelated answer? conf >= 0.7? not system-of-record?). 3) Dedupe/resolve against existing (subject, predicate) -> ADD/UPDATE/DELETE/NOOP. 4) Commit with provenance, validity window, and confidence.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-memory-d6",
+      "module": "T07-agent-memory",
+      "q": "Give class TTLs you would defend in a design review.",
+      "a": "identity: none (supersedable, never expiring). stable_pref: 365d. entitlement: 30d (better: don't store it, read the API). project_state: 14d. task_local: 0, never persisted. Half-lives for ranking decay: 3650 / 180 / 14 / 7 / 1 days.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-memory-d7",
+      "module": "T07-agent-memory",
+      "q": "Quality dropped after you enabled memory. Diagnose.",
+      "a": "The write policy is too loose, so noise is injected on unrelated turns. Check injected-memory precision (should be > 0.7). Fixes: relevance floor so zero memories is a valid result, per-predicate diversity, drop facts under 0.7 confidence, tighten the extraction gate. Verify with a memory-off baseline A/B, which you need to have had before shipping.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-memory-d8",
+      "module": "T07-agent-memory",
+      "q": "Extraction added 600ms to p50. Fix it and name what breaks.",
+      "a": "Move extraction and embedding off the request path: post-response background task, session-end batch, or an idle-turn consolidation pass (Letta's sleep-time compute). Breaks: memory becomes eventually consistent, so a fact stated at turn 5 may not be retrievable at turn 6. Mitigated because current-session facts are already in the recent-turns window. Add a write-rate floor alert so a silently failing job is detectable.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-memory-d9",
+      "module": "T07-agent-memory",
+      "q": "A user chats anonymously, then logs in. What do you do with the anonymous memories?",
+      "a": "Merge only on an explicit authentication event, never on a device/fingerprint heuristic (shared kiosks would import a stranger's facts). Record the merge in provenance so it is reversible, and re-run the conflict resolver over the merged set rather than blind-appending.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-agent-memory-d10",
+      "module": "T07-agent-memory",
+      "q": "Design memory for a multi-session support agent. Four tiers, one sentence each.",
+      "a": "In-session: checkpointer + hybrid summary/last-8-verbatim + pinned state block (ticket id, entitlement, open items). Semantic: (tenant_id, user_id, predicate) table with value/confidence/valid_from/valid_to/source_quote + pgvector, written by a NOOP-by-default extractor. Episodic: past resolutions keyed by task signature with outcomes, returned as one exemplar plus one anti-example. Procedural: escalation and refund rules in the repo, reviewed. Entitlement and ticket status are API reads, not memory.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-agent-memory-d11",
+      "module": "T07-agent-memory",
+      "q": "Build the adversarial retrieval test that proves your ranking beats cosine.",
+      "a": "5,000 synthetic facts including one retracted intent that is the nearest cosine neighbour to the query. Assert pure cosine retrieves the retracted fact and the composite score with recency decay plus supersession does not. Report precision@8 both ways. Being able to name this experiment is the difference between a belief and a measurement.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-agent-memory-d12",
+      "module": "T07-agent-memory",
+      "q": "Would you use a knowledge graph for memory? Give the decision rule and the hidden cost.",
+      "a": "Only when query traces show genuine multi-hop entity/relation questions or temporal reconstruction over long histories. Default: typed columns for known predicates, a flat bi-temporal facts table with pgvector for the open-vocabulary residue. Hidden cost: write amplification and non-determinism at write time. Cost scales with conversation volume rather than query volume, and a bad extraction corrupts structure rather than adding one bad row.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-agent-memory-d13",
+      "module": "T07-agent-memory",
+      "q": "An agent gave a wrong answer due to a stored memory. What three artefacts must be in the trace to debug it?",
+      "a": "The exact injected memory block for that request; each fact's source_quote, valid_from, and confidence; and the store id. Without those the incident is unfalsifiable. Then classify: wrong at write time (extraction bug -> fix the gate, replay over a sample) vs right-then-wrong-now (invalidation bug -> TTL too long or supersession failed) vs should never have been memory (system of record exists).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-agent-memory-d14",
+      "module": "T07-agent-memory",
+      "q": "Your VP wants 'memory like ChatGPT'. Ship it in a week without building a vector store.",
+      "a": "Ask which of three things they mean. If it is 'stop re-asking my name and preferences': a typed profile table with ~20 predicates plus an extraction step, days of work, no vector store. If it is 'recall specifics from three months ago': a real semantic store with ranking and invalidation, weeks, plus an ongoing eval burden. If it is 'get better at my codebase': procedural memory and progress files. Ship the first, get the memory-off baseline, then gate the second on injected-memory precision.",
+      "difficulty": "staff"
+    }
+  ]
+}

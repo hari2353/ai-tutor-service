@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T18-lakehouse-c1",
+      "topic": "Lakehouse",
+      "q": "What problem does a table format solve that raw Parquet-on-S3 doesn't, and does it require a new file format?",
+      "a": "Atomicity, schema evolution, and time travel over immutable files - none of which a Hive-style partition-path convention provides. No new file format is needed; Iceberg, Delta, and Hudi all still store data in Parquet/Avro/ORC, adding only a metadata layer on top.",
+      "module": "T18-lakehouse"
+    },
+    {
+      "id": "T18-lakehouse-c2",
+      "topic": "Lakehouse",
+      "q": "How do Iceberg, Delta, and Hudi structure their metadata layer?",
+      "a": "Iceberg: hierarchical - metadata.json -> manifest list -> manifest files with column stats. Delta: sequential JSON transaction log (_delta_log/), checkpointed periodically. Hudi: timeline directory of instants (commit/compaction/clean), organized by timestamp.",
+      "module": "T18-lakehouse"
+    },
+    {
+      "id": "T18-lakehouse-c3",
+      "topic": "Lakehouse",
+      "q": "What is Iceberg's hidden partitioning and what does it solve?",
+      "a": "Partition values are computed from a source column via a transform (e.g., bucket(16, user_id), month(ts)) and tracked in metadata rather than baked into physical paths. You can change partitioning going forward without rewriting historical data - Hive-style (Delta default) partitioning requires a full rewrite to change.",
+      "module": "T18-lakehouse"
+    },
+    {
+      "id": "T18-lakehouse-c4",
+      "topic": "Lakehouse",
+      "q": "Copy-on-write vs merge-on-read - the core tradeoff?",
+      "a": "CoW rewrites the entire affected file immediately on update - fast reads, expensive frequent writes. MoR appends a small delta/log file, deferring the rewrite - cheap writes, but reads must merge base + deltas until compaction runs. Hudi offers both natively; Iceberg/Delta added a narrower version via deletion vectors.",
+      "module": "T18-lakehouse"
+    },
+    {
+      "id": "T18-lakehouse-c5",
+      "topic": "Lakehouse",
+      "q": "Why does Hudi retain a genuine edge for CDC-heavy ingestion?",
+      "a": "It was built (Uber, 2016) specifically for upsert-heavy CDC workloads, so merge-on-read is a first-class, well-tuned feature rather than a bolted-on addition - minimizing write amplification exactly where high-frequency updates create the most pressure.",
+      "module": "T18-lakehouse"
+    },
+    {
+      "id": "T18-lakehouse-c6",
+      "topic": "Lakehouse",
+      "q": "What's the catalog evolution path, and why is the catalog the real 2026 lock-in point?",
+      "a": "Hive Metastore -> Glue (managed, S3-only) -> Unity Catalog (was Databricks-only, now open + Iceberg REST server) -> Apache Polaris/REST Catalog (ASF top-level project, Feb 2026). Even with an open file format, if only one vendor's catalog is the source of truth for the current snapshot, switching engines means migrating the catalog - a much bigger cost than switching a format reader.",
+      "module": "T18-lakehouse"
+    },
+    {
+      "id": "T18-lakehouse-c7",
+      "topic": "Lakehouse",
+      "q": "Why must compaction be budgeted as an ongoing cost for streaming-fed tables, not occasional maintenance?",
+      "a": "Streaming ingestion makes small-file accumulation continuous - every micro-batch commit can add new small files, and object storage penalizes many small files (per-file GET/LIST overhead) while metadata catalogs degrade with file count. Without scheduled compaction, read latency degrades gradually over weeks.",
+      "module": "T18-lakehouse"
+    },
+    {
+      "id": "T18-lakehouse-c8",
+      "topic": "Lakehouse",
+      "q": "What is manifest bloat in Iceberg, and how is it different from the small-data-file problem?",
+      "a": "Manifests can grow large from many small, frequent commits even if the underlying data files are reasonably sized - query planning then slows down just reading the manifest tree, before any data is scanned. Fixed via rewrite_manifests, a separate operation from data-file compaction (rewrite_data_files).",
+      "module": "T18-lakehouse"
+    },
+    {
+      "id": "T18-lakehouse-c9",
+      "topic": "Lakehouse",
+      "q": "Which engines have the broadest native support for each table format?",
+      "a": "Iceberg: broadest - Spark, Flink, Trino, Snowflake, BigQuery (BigLake), DuckDB. Delta: best inside Databricks, growing elsewhere via UniForm. Hudi: Spark, Flink, Trino, with the strongest native CDC/streaming tooling of the three.",
+      "module": "T18-lakehouse"
+    },
+    {
+      "id": "T18-lakehouse-c10",
+      "topic": "Lakehouse",
+      "q": "What is Delta UniForm and what bet does it represent?",
+      "a": "It automatically generates Iceberg (and eventually Hudi) compatible metadata from a Delta table at write time, at no extra storage cost, so any Delta table can be read by tools in the Iceberg/Hudi ecosystem. It represents the bet that the storage-format war is ending and the catalog is the remaining battleground.",
+      "module": "T18-lakehouse"
+    },
+    {
+      "id": "T18-lakehouse-c11",
+      "topic": "Lakehouse",
+      "q": "When should you NOT adopt a table format at all?",
+      "a": "For a small, static, rarely-queried, single-engine dataset with low query volume - the metadata-layer overhead (manifest management, catalog registration, compaction scheduling) is pure operational cost with no payoff. Plain partitioned Parquet is a legitimate choice at that scale.",
+      "module": "T18-lakehouse"
+    },
+    {
+      "id": "T18-lakehouse-c12",
+      "topic": "Lakehouse",
+      "q": "Is full interoperability across formats and catalogs a settled fact in 2026?",
+      "a": "No - it's real but incomplete. REST Catalog standardization (Polaris, Unity Catalog server support, Glue REST endpoint) is a practical standard for basic multi-engine access, but native-table-only features (fine-grained clustering, specific time-travel depths) commonly don't transfer cleanly across formats/catalogs. Verify current docs before promising full parity.",
+      "module": "T18-lakehouse"
+    }
+  ]
+}

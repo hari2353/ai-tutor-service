@@ -1,0 +1,116 @@
+{
+  "drills": [
+    {
+      "id": "T20-rust-async-d1",
+      "module": "T20-rust-async",
+      "q": "What happens when you call `let f = fetch_user(42);` and never await it?",
+      "a": "Nothing. Zero lines of the body run. `f` is an inert state machine value on the stack. `Future` is `#[must_use]`, so `unused_must_use` fires, and that warning is almost always a real bug. Contrast asyncio's create_task and Go's `go f()`, both of which start immediately.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-async-d2",
+      "module": "T20-rust-async",
+      "q": "How many worker threads does `#[tokio::main]` start by default, and how do you change it without touching code?",
+      "a": "One per CPU core (the multi_thread flavour is the default). Change it with the `TOKIO_WORKER_THREADS` environment variable, or `#[tokio::main(worker_threads = 4)]`, or `Builder::new_multi_thread().worker_threads(4)`.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-async-d3",
+      "module": "T20-rust-async",
+      "q": "You drop a `JoinHandle` returned by `tokio::spawn`. Is the task cancelled?",
+      "a": "No. Dropping a JoinHandle detaches the task; it keeps running to completion. To cancel you call `handle.abort()`, which drops the task at its next .await point, or you put the task in a `JoinSet`, whose drop aborts every member.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-async-d4",
+      "module": "T20-rust-async",
+      "q": "What is the default cap on Tokio's blocking thread pool, and how long does an idle blocking thread live?",
+      "a": "max_blocking_threads defaults to 512, and thread_keep_alive defaults to 10 seconds of idleness. The 512 is a cap, not a preallocation, and it excludes the async worker threads. Calls beyond the cap queue.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-async-d5",
+      "module": "T20-rust-async",
+      "q": "`broadcast::channel(3)`: how many messages must a receiver fall behind before it lags?",
+      "a": "More than 4. The capacity is rounded UP to the next power of two, so channel(3) allocates a 4-slot ring and lag detection is based on that rounded size. RecvError::Lagged(n) does not close the receiver; the cursor advances to the oldest retained value and the next recv() succeeds.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-async-d6",
+      "module": "T20-rust-async",
+      "q": "A hand-written `poll` returns `Poll::Pending` and forgets to store the waker. What is the production symptom?",
+      "a": "The task is silently lost forever: no panic, no log, no timeout from the runtime. It surfaces as a request that hangs until the client's own timeout fires. The subtler variant is storing the waker only once: work-stealing may migrate the task to another worker between polls, so the stale waker targets the wrong scheduler slot and the hang appears only under load.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-async-d7",
+      "module": "T20-rust-async",
+      "q": "Why does an `async fn` that holds a 64 KiB buffer across an `.await` matter at 100,000 concurrent tasks?",
+      "a": "Every local live across an .await becomes a field of the generated state machine, so the future is at least 64 KiB, and tokio::spawn heap-allocates it per task: 6.4 GiB before a single byte is processed. Locals NOT live across an await are ordinary stack locals inside poll and cost nothing, so shrinking the buffer's live range (or moving the allocation after the last await) is a real, measurable fix. Box::pin at the spawn site helps the move cost but not the size.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-async-d8",
+      "module": "T20-rust-async",
+      "q": "This compiles: `let g = mutex.lock().unwrap(); do_io().await; g.push(x);` using std::sync::Mutex. What can go wrong?",
+      "a": "A full-runtime deadlock. std::sync::MutexGuard is Send when T: Send, so the future is Send and spawn accepts it. But worker A holds the lock and suspends at the await; workers B through H block on the lock; now no thread is left to poll the task that would release it. Symptom is zero CPU and zero forward progress under load. Fix: drop the guard before the await, or use tokio::sync::Mutex whose lock() is async.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-async-d9",
+      "module": "T20-rust-async",
+      "q": "Rewrite this so it does not lose bytes: `loop { select! { r = sock.read_exact(&mut hdr) => f(r?), _ = shutdown.recv() => break } }`",
+      "a": "read_exact is not cancellation-safe: if shutdown fires after 3 of 8 header bytes, those bytes are consumed from the socket and absent from hdr, and the stream desynchronizes. Either hoist it out of the loop so it survives iterations (`let mut read = pin!(sock.read_exact(&mut hdr));` then `r = &mut read`), or use cancel-safe `sock.read(&mut buf)` and reassemble frames yourself, or move the connection into its own task and cancel the whole task.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-async-d10",
+      "module": "T20-rust-async",
+      "q": "p99 goes 5ms, 250ms, 500ms, 750ms as load rises, in clean steps. What does the shape tell you?",
+      "a": "Quantized steps mean a fixed-cost blocking call times queue position, not contention (which gives a smooth curve). Some synchronous ~250ms operation, bcrypt at cost 12 being the classic, is pinning a worker thread. Confirm with two checks: your own timers firing late (sleep(10ms) returning in 260ms proves the executor is starved, not the downstream), and tokio-console showing high worker_mean_poll_time.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-async-d11",
+      "module": "T20-rust-async",
+      "q": "You move the 250ms bcrypt call into `spawn_blocking` on a 16-core box. What is the remaining problem?",
+      "a": "max_blocking_threads is 512, sized for I/O blocking where threads park in syscalls, not for CPU work. 512 threads hashing on 16 cores is 32x oversubscription: context-switch storms visible in `pidstat -w`, and p99 degrading roughly linearly with the oversubscription factor. Gate it with a Semaphore sized to core count, or use rayon bridged by a oneshot. Also note spawn_blocking tasks cannot be aborted once started, so shutdown now hangs without Runtime::shutdown_timeout.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-async-d12",
+      "module": "T20-rust-async",
+      "q": "Explain the LIFO slot and why it is bounded to 3 consecutive uses.",
+      "a": "When a running task wakes another, the woken task goes into a single-slot LIFO register and is polled immediately next, which is a cache-locality win for request/response ping-pong. It is bounded so it cannot starve the worker's local queue; after 3 consecutive uses it is temporarily disabled until the worker schedules a task from elsewhere. The task in the slot is also not stealable by other workers, and the coop budget is deliberately NOT reset through it, so a ping-pong pair cannot mutually re-arm each other's 128-op budget forever.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-async-d13",
+      "module": "T20-rust-async",
+      "q": "Why is `Mutex::lock` listed as not cancellation-safe, and how is that different from `read_exact`?",
+      "a": "Different failure mode. read_exact holds partial progress in the future's own state, so dropping it loses data. Mutex::lock (and RwLock::read/write, Semaphore::acquire, Notify::notified) uses a fair FIFO wait queue, so cancelling loses your place in line. That is not data loss but it is a starvation hazard: a select! loop that repeatedly re-acquires can send a task to the back of the queue indefinitely.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-async-d14",
+      "module": "T20-rust-async",
+      "q": "You fan out to 50 providers with a 5-second budget and return after the first 5 answers. What actually happens to the other 45 requests?",
+      "a": "Their futures are dropped, which closes the connections. Two consequences. You lose the pooled keep-alive connection and pay a TLS handshake (roughly 1-3 RTTs) next time, so size the client pool accordingly. And the providers may already have executed and will still bill you: cancellation is not rollback. If the calls have side effects or cost money, let them run to completion into a oneshot you ignore, or use a CancellationToken so the adapter can finish its accounting first.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-async-d15",
+      "module": "T20-rust-async",
+      "q": "A trait has an `async fn`. Your generic function tries to `tokio::spawn(t.get(k))` and fails to compile. Why, and what are the options?",
+      "a": "AFIT desugars to `-> impl Future + '_`, which is anonymous, so the trait cannot declare it Send and a generic caller cannot write a bound for it. Options: the `trait-variant` crate (`trait_variant::make(Store: Send)`) generates a parallel Send-bounded trait; `#[async_trait]` bakes `+ Send` into a `Pin<Box<dyn Future + Send>>` at the cost of one heap allocation per call; or make the concrete type generic so the compiler sees the real future. Return-type notation (`T::get(..): Send`) is the accepted long-term fix and is still unstable as of Rust 1.97.1.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-async-d16",
+      "module": "T20-rust-async",
+      "q": "worker_mean_poll_time is low, injection_queue_depth is high, and there is no blocking call anywhere. What else could it be?",
+      "a": "Genuine saturation (need more workers), or a task that participates in nothing: one wrapped in task::coop::unconstrained, or a hand-written future that never decrements the 128-operation coop budget, monopolizing a worker without any single poll being long. The other candidate is a lock convoy on a tokio::sync::Mutex with its FIFO wait queue, where mean poll time is small but every task spends its life queued.",
+      "difficulty": "staff"
+    }
+  ]
+}

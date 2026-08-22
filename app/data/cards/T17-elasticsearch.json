@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-elasticsearch-c1",
+      "topic": "Elasticsearch",
+      "q": "What are the three distinct guarantees provided by refresh, flush, and merge?",
+      "a": "Refresh = visibility (search can see the document, default every 1s). Flush = durability (segments fsync'd to disk, translog cleared). Merge = efficiency (fewer segments to search, deleted docs reclaimed). They are three different things, not synonyms.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c2",
+      "topic": "Elasticsearch",
+      "q": "Why isn't a document searchable the instant it's indexed?",
+      "a": "It's added to an in-memory buffer and the translog, but only becomes searchable after a refresh (default interval 1s) turns the buffer into a new immutable Lucene segment. This is what 'near-real-time' means precisely.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c3",
+      "topic": "Elasticsearch",
+      "q": "A term query for the exact phrase 'Redis Cluster' against a text-mapped field returns nothing. Why?",
+      "a": "The text field is analyzed at index time into separate lowercased tokens ('redis', 'cluster'), not the raw phrase. A term query compares the raw input against those individual tokens, so a multi-token phrase never matches. Fix: use a keyword field/sub-field for exact match.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c4",
+      "topic": "Elasticsearch",
+      "q": "What's the first knob to turn under heavy bulk-indexing load, and what does it trade off?",
+      "a": "Raise (or disable, -1) refresh_interval. Fewer, larger segments get created per unit time, reducing merge pressure and indexing overhead, at the cost of increased search-visibility latency.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c5",
+      "topic": "Elasticsearch",
+      "q": "What is the default scoring function in Elasticsearch, and what two parameters define it?",
+      "a": "BM25 (default since Lucene 6 / ES 5, 2016, replacing TF-IDF). k1 (default 1.2) controls term-frequency saturation; b (default 0.75) controls document-length normalization.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c6",
+      "topic": "Elasticsearch",
+      "q": "What does BM25's term-frequency saturation (k1) fix relative to plain TF-IDF?",
+      "a": "TF-IDF scales score linearly with term frequency with no cap; BM25's k1 makes repeated occurrences of a term contribute diminishing returns instead of scaling forever.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c7",
+      "topic": "Elasticsearch",
+      "q": "What's the difference between a query clause and a filter clause?",
+      "a": "A query clause contributes to the relevance score. A filter clause (bool.filter/must_not) is a yes/no check with no scoring contribution, and is cacheable since the answer doesn't depend on scoring math -- generally cheaper to execute.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c8",
+      "topic": "Elasticsearch",
+      "q": "What causes oversharding and what's its observable symptom?",
+      "a": "Provisioning far more shards than data volume/node count justify -- each shard carries real per-shard memory and cluster-state overhead. Symptom: heap usage climbs and query/indexing latency degrades with no correlation to actual data growth, plus slow cluster-state updates.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c9",
+      "topic": "Elasticsearch",
+      "q": "What's the commonly recommended shard size range, and the fix for an already-oversharded cluster?",
+      "a": "Roughly 10-50GB per shard. Fix an oversharded cluster by reindexing into fewer, larger shards (or _shrink for read-only indices) -- you can't just reduce a live index's primary shard count in place.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c10",
+      "topic": "Elasticsearch",
+      "q": "Why does from/size pagination get slow and error past 10,000 results, and what replaces it?",
+      "a": "Each shard must compute and sort from+size results before the coordinator merges/re-sorts across shards, so cost grows with depth; index.max_result_window (default 10,000) enforces a hard ceiling. search_after uses the last document's sort values as a cursor for depth-independent sequential paging instead.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c11",
+      "topic": "Elasticsearch",
+      "q": "Why is a cardinality aggregation approximate by default?",
+      "a": "It uses HyperLogLog++ under the hood, trading exactness for bounded memory on high-cardinality fields. precision_threshold trades more memory for tighter accuracy up to a configurable cardinality.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c12",
+      "topic": "Elasticsearch",
+      "q": "What does the translog protect that flushed segments don't?",
+      "a": "The translog is a write-ahead log of raw operations fsync'd per request by default, protecting anything written after the last flush and before the next one -- on unclean shutdown it's replayed to recover unflushed operations.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c13",
+      "topic": "Elasticsearch",
+      "q": "How would you diagnose why a search result's ranking looks wrong?",
+      "a": "Run the query with explain:true (or the _explain API) to get the exact per-term BM25 breakdown (term frequency, IDF, length normalization contributions) rather than guessing at relevance tuning blind.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c14",
+      "topic": "Elasticsearch",
+      "q": "What vector search capability does modern Elasticsearch have, and its default hybrid fusion method?",
+      "a": "dense_vector fields with HNSW-based approximate kNN search (knn query clause), plus exact brute-force search when configured without HNSW. Reciprocal Rank Fusion (RRF) is the default method for combining lexical (BM25) and vector scores in a hybrid query.",
+      "module": "T17-elasticsearch"
+    },
+    {
+      "id": "T17-elasticsearch-c15",
+      "topic": "Elasticsearch",
+      "q": "When is Elasticsearch's native vector search the right call versus a dedicated vector database?",
+      "a": "Right call when you already run Elasticsearch for lexical/log search and want hybrid retrieval without new infrastructure. A dedicated vector DB wins at very large pure-vector scale with heavy filtering and multi-tenancy needs where ANN recall/latency is the primary concern.",
+      "module": "T17-elasticsearch"
+    }
+  ]
+}

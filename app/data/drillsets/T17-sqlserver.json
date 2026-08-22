@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T17-sqlserver-d1",
+      "module": "T17-sqlserver",
+      "q": "Why does a wide or volatile clustering key bloat every nonclustered index on a table, not just the clustered index?",
+      "a": "Every nonclustered index leaf entry stores the clustering key value as its row locator (not a physical pointer), so the clustering key is duplicated across every nonclustered index on the table. A wide key means every one of those indexes is correspondingly larger.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-sqlserver-d2",
+      "module": "T17-sqlserver",
+      "q": "What is a key lookup, and how do you eliminate it without changing the query text?",
+      "a": "A second seek into the clustered index to fetch columns not carried by the nonclustered index used for the seek. Eliminate it by adding those columns to the nonclustered index as INCLUDE columns, making it a covering index and enabling an index-only path.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-sqlserver-d3",
+      "module": "T17-sqlserver",
+      "q": "A stored procedure has been fast for six months and is suddenly slow for one customer, no code changes. Diagnose it.",
+      "a": "Check sys.dm_exec_query_stats for the cached plan's min/max elapsed time spread, then sys.dm_exec_query_plan for estimated vs actual row counts on the current slow execution. A large gap right after the predicate on the sniffed parameter confirms parameter sniffing; a uniform gap across all values instead points to stale statistics.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-sqlserver-d4",
+      "module": "T17-sqlserver",
+      "q": "Compare OPTION(RECOMPILE) and OPTIMIZE FOR UNKNOWN as parameter-sniffing fixes, including when each is wrong.",
+      "a": "RECOMPILE compiles a fresh, exactly-correct plan on every call - correct for infrequent expensive queries, wrong at high QPS due to per-call compile cost. OPTIMIZE FOR UNKNOWN compiles once using average density stats, cached and cheap, but is mediocre for both very sparse and very dense parameter values rather than optimal for any of them.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-sqlserver-d5",
+      "module": "T17-sqlserver",
+      "q": "What does SQL Server 2022's Parameter Sensitive Plan optimization do differently from prior fixes, and what's its limitation?",
+      "a": "It caches multiple plans per query text, bucketed by which cardinality range the sniffed equality-predicate parameter falls into, approaching per-value-optimal plans without RECOMPILE's per-call cost. It requires compatibility level 160+ and only targets equality-predicate skew, not range predicates or multi-parameter interactions.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-sqlserver-d6",
+      "module": "T17-sqlserver",
+      "q": "How is SQL Server's default READ COMMITTED different from Postgres's, and what's the operational consequence?",
+      "a": "SQL Server's default READ COMMITTED is lock-based (shared locks on reads, exclusive on writes held to commit) - readers and writers block each other. Postgres's is MVCC-based from the start with no reader-writer blocking. An engineer moving between the two is surprised the first time a SQL Server report query blocks production writes.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-sqlserver-d7",
+      "module": "T17-sqlserver",
+      "q": "What does RCSI change, and what's the hidden cost teams forget to plan for?",
+      "a": "READ_COMMITTED_SNAPSHOT ON switches reads to row versioning instead of locking, eliminating reader/writer blocking. Hidden cost: every old row version touched by an in-flight reader gets copied into the tempdb version store, so a write-heavy workload can turn tempdb into a new I/O and contention bottleneck if not pre-sized and striped.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-sqlserver-d8",
+      "module": "T17-sqlserver",
+      "q": "Why is upgrading database compatibility level a real risk on an old, heavily-tuned database?",
+      "a": "SQL Server 2014's cardinality estimator (compat level >=120) makes different cross-predicate correlation assumptions than the legacy CE (compat <=110). Flipping compat level changes row estimates feeding every plan decision at once, which can silently regress plans that were implicitly tuned around the legacy CE's specific biases even while improving others on average.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-sqlserver-d9",
+      "module": "T17-sqlserver",
+      "q": "Why does column-wise storage plus batch mode make columnstore aggregations so much faster than rowstore?",
+      "a": "Column-wise compressed storage means a query touching a subset of columns only reads those columns' segments, versus rowstore reading every column of every row. Batch mode processes ~900 rows per operator call instead of 1, amortizing per-row CPU overhead - commonly cited as another 2-4x on top of the storage and compression wins.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-sqlserver-d10",
+      "module": "T17-sqlserver",
+      "q": "What is segment elimination, and why would a columnstore index show none of it despite filtering on an indexed column?",
+      "a": "Segment elimination uses each segment's per-column min/max metadata to skip segments that can't satisfy a predicate, without decompressing them. It shows no benefit if the data isn't physically ordered relative to the filtered column - a randomly-inserted timestamp gives every segment a similar min/max range. Fix: rebuild with MAXDOP=1 for an ordered build, or REORGANIZE periodically.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-sqlserver-d11",
+      "module": "T17-sqlserver",
+      "q": "When is a clustered columnstore index the wrong choice, and what's the alternative for a mixed OLTP/analytics table?",
+      "a": "Wrong for tables needing frequent singleton point lookups or small frequent updates - the delta-store mechanism buffering small inserts before compression adds overhead there. Alternative: keep the rowstore clustered index for OLTP and add a nonclustered columnstore index (NCCI) alongside it for the analytical access pattern - the 'operational analytics' pattern.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-sqlserver-d12",
+      "module": "T17-sqlserver",
+      "q": "A columnstore-backed fact table's insert rate has degraded over time. What's the likely cause and fix?",
+      "a": "Background compression (the tuple mover) is falling behind insert volume, leaving too many uncompressed delta-store rowgroups - the SQL Server shape of ClickHouse's 'too many parts' problem. Fix: batch inserts into larger, less frequent operations, or manually run ALTER INDEX ... REORGANIZE to force the tuple mover to catch up.",
+      "difficulty": "staff"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T07-attribution-d1",
+      "module": "T07-attribution",
+      "q": "State the difference between a citation that exists and a citation that supports the claim, with one number.",
+      "a": "Existence is plausibility (resolves, right domain, on topic); support is faithfulness (the cited span entails the sentence). The 2026 deep-research audit measured link-works at 94-100% and topical relevance at 80-96% while fact-check accuracy ran 24-77%.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-attribution-d2",
+      "module": "T07-attribution",
+      "q": "Write out ALCE citation recall and precision.",
+      "a": "Recall(s) = 1 if the concatenation of s's cited docs entails s. Precision(d) = 1 if d alone entails s, or if removing d from the cited set breaks entailment. Report mean recall over sentences, mean precision over citations, and unsupported-sentence rate = 1 − mean recall.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-attribution-d3",
+      "module": "T07-attribution",
+      "q": "Why does a dense retriever hand you the chunk that states the opposite?",
+      "a": "Because it scores semantic similarity, not entailment, and negation barely moves an embedding. The chunk most similar to a claim is often the one discussing the same topic while asserting the contrary. This is the core reason relevance is not support.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-attribution-d4",
+      "module": "T07-attribution",
+      "q": "Name the architectural property that makes post-hoc citation unfixable by prompting.",
+      "a": "There is no reachable output meaning 'nothing supports this'. The answer precedes the search, so retrieval is confirmatory, and the instruction makes a citation mandatory. Abstention has to be a live branch in the pipeline, not a phrase you hope the model chooses.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-attribution-d5",
+      "module": "T07-attribution",
+      "q": "Your NLI verifier flags 40% of sentences as unsupported and the answers look fine. Debug in order.",
+      "a": "1) Decontextualisation — flagged sentences starting with pronouns give neutral verdicts. 2) Premise length — 1,200-token premises drift to neutral; split into 3-sentence windows and max-pool. 3) Threshold — 0.5 is not universal; label ~200 pairs from your corpus and fit tau. 4) Granularity — a two-claim sentence with one supported claim correctly fails; decompose. 5) Only then, it may really be 40%.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-attribution-d6",
+      "module": "T07-attribution",
+      "q": "Attribute-first versus generate-then-verify: pick one and justify the sequence.",
+      "a": "Generate-then-verify first, because it is a bolt-on that immediately gives you the measurement (unsupported rate, recall, precision) and you cannot manage what you cannot measure. Then attribute-first, because verification only detects and does not raise the ceiling. Costs are opposite: verification adds latency and can only reject; attribute-first adds a pass, lowers fluency, lowers coverage.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-attribution-d7",
+      "module": "T07-attribution",
+      "q": "Why does deep-research citation accuracy fall as search depth rises? Give the numbers.",
+      "a": "Attention dilution during synthesis. GPT-5.4 fact-check accuracy fell 79% at 2 tool calls to 17% at 150, while link validity and relevance stayed above 92%. The models producing the most citations had the lowest fact-check accuracy, so selective citation beats exhaustive citation.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-attribution-d8",
+      "module": "T07-attribution",
+      "q": "A citation entails the claim and the answer is still wrong. Give two mechanisms and their fixes.",
+      "a": "Supersession — v1.4 entails it but v2.1 overrides; fix with effective_from / superseded_by metadata filtered at retrieval and retire old docs from the index. Cherry-picking — the cited span is the exception clause; fix with a contradiction sweep across the other retrieved chunks and surface the conflict instead of picking a side.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-attribution-d9",
+      "module": "T07-attribution",
+      "q": "Design the verification stage for a 20-sentence answer over 8 retrieved chunks. Give the cost.",
+      "a": "Decontextualise per response (1 small call), split each chunk into overlapping 3-sentence windows, build all (window, sentence) pairs and score in ONE batched forward pass with MiniCheck or HHEM-2.1-open, max-pool per sentence per doc. Roughly 20-60 pairs plus union and leave-one-out pairs for precision. Batched on GPU: tens of milliseconds. Unbatched over HTTP: hundreds. Batching is not optional.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-attribution-d10",
+      "module": "T07-attribution",
+      "q": "Does RAG solve hallucination? One sentence with the study.",
+      "a": "No — Stanford RegLab measured commercial legal RAG products at 17-33% hallucination versus 43% for GPT-4, a real reduction and nowhere near the '100% hallucination-free' being marketed.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-attribution-d11",
+      "module": "T07-attribution",
+      "q": "Why is a verbatim quote check the first thing you build, despite being trivial?",
+      "a": "It is free, deterministic, and it catches paraphrased-quote fabrication which NLI passes because the paraphrase captures the gist. A fabricated quote fails a human's eyes immediately and passes entailment, so a cheap exact check covers a gap the expensive probabilistic check leaves open.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-attribution-d12",
+      "module": "T07-attribution",
+      "q": "Verify citations for a browsing agent. What are the three non-obvious requirements?",
+      "a": "1) Snapshot at fetch time with a content hash and verify against the snapshot, so verification is reproducible and a page edit cannot silently invalidate the audit. 2) Cite snapshot id + URL + timestamp, because 'the page said this on date X' is the only supportable claim. 3) Verify per section during synthesis, not once at the end, since accuracy degrades with search depth.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-attribution-d13",
+      "module": "T07-attribution",
+      "q": "When is showing citations the wrong choice?",
+      "a": "Single-source assistants (highlight the span instead), creative or synthesis-heavy output (section-level provenance plus on-demand sources), claims drawn from general knowledge with no source being asserted (mark unsourced), and anywhere you cannot verify, since an unverified citation is a false trust signal.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-attribution-d14",
+      "module": "T07-attribution",
+      "q": "Rank attribution interventions by effect per unit of effort.",
+      "a": "1) Verbatim quote check. 2) Citation-constrained decoding over in-context ids. 3) Sentence-level entailment gate with abstention. 4) Span-level locators for one-click checking. 5) Corpus supersession metadata. 6) Attribute-first generation. 7) Claim-level atomic decomposition for the high-stakes surface. Dead last: prompting the model to cite more carefully.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-attribution-d15",
+      "module": "T07-attribution",
+      "q": "Why is your internal citation-precision of 0.94 not a comparable number?",
+      "a": "Automatic attribution metrics have been shown not to transfer across datasets and constructs (arXiv:2606.23915), so the figure tracks your own regressions only. Anchor it with a human audit of ~100 sentences per release before quoting it to anyone.",
+      "difficulty": "warmup"
+    }
+  ]
+}

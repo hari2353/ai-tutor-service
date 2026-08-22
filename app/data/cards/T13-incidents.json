@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T13-incidents-c1",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "Why does the Incident Commander never touch a terminal?",
+      "a": "Coordination and diagnosis each consume full attention, and the coordinator's failure is silent. The IC tracks who is doing what, what has been ruled out, when the next comms update is due, and whether a mitigation is safe. The moment they debug, all of that halts and nobody notices for ~20 minutes. Observable symptom: the incident channel goes quiet for 6+ minutes, then resumes as a deep technical thread with no status line.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c2",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "Name the four ICS-derived incident roles and the specific failure each prevents.",
+      "a": "Incident Commander (prevents parallel uncoordinated remediation: three people changing three things, nobody knows which fixed or broke it). Operations Lead, the only person making prod changes (prevents the untracked change). Communications Lead (prevents a status page 55 minutes stale while the channel has 300 messages). Scribe (prevents an unreconstructable timeline). Scale DOWN to one person at Sev3; never double up at Sev1, because the role that silently drops is always Scribe.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c3",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "State mitigate-before-diagnose and the three cases where it is wrong.",
+      "a": "Default: stop impact, don't understand it. Menu executable without knowing the cause: roll back, flag off, fail over, shed load, scale, restart; most reversible in under 60s. Inverts when (a) the mitigation is irreversible or data-destructive (failover with unknown replication lag loses unreplicated writes), (b) you cannot state the mitigation's own blast radius, which is a diagnosis problem in disguise, (c) the suspect is a stateful in-flight operation such as a half-applied schema migration.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c4",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "What are the four parts of a status update written at minute 6 with no known cause?",
+      "a": "What users see, when it started, what we are doing, and when the next update will come. No cause until confirmed, no ETA to resolution, no speculation. The next-update-by promise is the load-bearing element: it is what stops the 'any update?' traffic that otherwise consumes the IC. Example: 'Since 14:12 UTC, a portion of requests to /v1/search are returning HTTP 500. Other endpoints are unaffected. We are investigating. Next update by 14:45 UTC.'",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c5",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "Symptom alert vs cause alert: which pages, and what is the one legitimate exception?",
+      "a": "Symptoms page; causes go to dashboards or tickets. A cause alert ('CPU on host-7 at 92%') both fires when nobody is harmed and misses breakage whose cause you never instrumented. A symptom alert ('fraction of /v1/search under 400ms dropped below SLO burn threshold') catches causes you have never seen. Exception: slow, predictable resource saturation, where you alert on the projection ('reaches 100% in under 4 hours at current rate') and route to a ticket, not the pager.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c6",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "Error budget arithmetic: what does 99.9% over 30 days give you, and what is burn rate?",
+      "a": "Error budget = 1 - SLO. 99.9% over 30 days = 0.1% of requests, about 43.2 minutes of full unavailability. Burn rate N is the multiple of nominal consumption: at burn rate 1 you exhaust the budget exactly at the window's end; at 14.4 you exhaust it in 1/14.4 of the window.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c7",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "Give the Google SRE Workbook's three multiwindow multi-burn-rate alert tiers.",
+      "a": "14.4x burn over a 1-hour long window with a 5-minute short window, 2% of budget consumed, PAGE. 6x over 6 hours with a 30-minute short window, 5% consumed, PAGE. 1x over 3 days with a 6-hour short window, 10% consumed, TICKET. Both windows must breach for the alert to fire; the short window exists so a recovered incident clears the page in minutes rather than leaving it lit for hours.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c8",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "What is the target pager load, and what is the metric almost nobody tracks?",
+      "a": "At most about 2 paging events per 8-to-12-hour shift (Google SRE Book), and the stated reason is operational: above that, incidents stop being investigated properly and postmortems stop happening. The untracked metric is actionability rate: of pages in the last 90 days, what fraction produced a corrective human action. Under ~50% the pager is training people to ignore it, and the symptom is median ack drifting from ~2 minutes to ~11 minutes.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c9",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "Why is 'human error' never a root cause, and what is the replacement question?",
+      "a": "It terminates the investigation where it should start. Three defects: not actionable (no code change corresponds to 'be more careful'), counterfactual (it describes a world where the alert was not the fortieth firing that hour), and predicts nothing, since the next person with the same tool and information makes the same choice. Replacement question (Allspaw): what made the wrong path look like the right path from where they stood, with what they actually knew?",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c10",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "How did AWS write up the February 2017 S3 outage without blaming the engineer?",
+      "a": "At 09:37 PST an authorised engineer following an established playbook mistyped an input and removed more capacity than intended, taking down the index and placement subsystems; GET/LIST/DELETE returned 13:18, PUT 13:54 (~4 hours). AWS wrote that the tool allowed too much capacity to be removed too quickly, then modified it to remove capacity more slowly, added a safeguard preventing removal below any subsystem's minimum required capacity, and audited every other operational tool for the same missing check. The finding is a property of the tool: testable, and it generalises to tools nobody has mistyped yet.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c11",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "Cloudflare, 18 November 2025: what was the causal chain and the key timeline numbers?",
+      "a": "11:05 a ClickHouse grant change made previously implicit access to the r0 database explicit. A Bot Management feature-file generator queried system.columns without filtering on database name, so it started returning r0's columns too, more than doubling rows. The file exceeded the bot module's hard limit of 200 features (normal usage ~60), hitting an unhandled Rust Result and panicking with 'thread fl2_worker_thread panicked: called Result::unwrap() on an Err value'. 11:28 impact starts, 11:31 automated detection, 11:35 incident call, 11:32-13:05 chasing the wrong hypothesis (Workers KV), 14:30 main impact resolved, 17:06 all clear.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c12",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "What is the 'saw-tooth' lesson from the Cloudflare November 2025 outage?",
+      "a": "The feature file regenerated every 5 minutes while the ClickHouse cluster was updated node by node, so the file was sometimes good and sometimes bad and the system repeatedly recovered and failed. That oscillation read as an attack, and the team believed they might be facing a hyper-scale DDoS. The generalisable rule: when a system oscillates between healthy and broken on a fixed period, look for a periodic job, not an adversary. A five-minute oscillation is a five-minute cron.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c13",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "GitHub, 21 October 2018: what is the number that carries the whole lesson?",
+      "a": "43 seconds of network partition produced 24 hours 11 minutes of degraded service. During planned optical-equipment maintenance the East Coast primary accepted writes that had not replicated West; Orchestrator promoted the West Coast cluster, creating a split write set. The overwhelming majority of the incident was not fixing a broken system but safely reconciling data, a deliberate choice of consistency over availability. The technical fault self-healed in 43 seconds; the decision cost 24 hours.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c14",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "What are the two structural problems with Five Whys, and what replaces it?",
+      "a": "It walks a single chain backwards, forcing a single-cause model onto a multi-factor event, and because each step narrows it converges reliably on either a person or a platitude. Allspaw's 2014 critique (drawing on Dekker, Conklin, Leveson) is that the danger is the confident sensation of having found THE cause. Replacement: a causal graph. Draw the failure, draw every condition that had to hold, recurse, stop at conditions you can change, then rank nodes by how many downstream paths a fix cuts. Chain is still fine for a Sev3; graph for Sev1.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c15",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "What does 'blameless' actually mean, and where does it legitimately break down?",
+      "a": "The account you give in the postmortem carries no punitive consequence. The reason is epistemic, not emotional: the person who took the triggering action is the only one who knows what their screen showed and what they believed, and if that account is dangerous to give you get a sanitised timeline and every downstream conclusion is built on corrupted data. It breaks down in security incidents with a possible insider component, regulated environments with legal reporting duties, and deliberate policy circumvention. The workable split: the technical postmortem stays blameless, any accountability process runs separately and is not fed by it, and everyone is told this up front.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c16",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "Why do postmortem action items fail to get done, and what is the fix?",
+      "a": "Four consistent causes: owned by a team rather than a named individual; living only in the postmortem doc and never entering the backlog where they compete with feature work; phrased so they cannot be completed ('improve monitoring'); and too many, since a postmortem with 14 items completes about 3. Fix: cap Sev1 at 5 ranked items, each with a named person, a real ticket, and a date, plus an explicit 'considered and not doing' list. Health metric: fraction of incidents in the last 12 months whose contributing factors recur from an earlier one; above ~20% the action items are not landing.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c17",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "Probability-of-recurrence vs cost-of-recurrence action items: which is under-prioritised and why does it matter?",
+      "a": "Probability items reduce the chance of the same bug (the validation, the test, the type change). Cost items reduce the damage next time (the alert, the runbook, the kill switch, the canary, the graceful-degradation path). Cost items are systematically under-prioritised because they feel less like fixing the bug, yet they are usually cheaper and generalise to failures nobody has imagined. Cloudflare's highest-value fix was not the query filter, it was making the bot module fall back to last-known-good instead of panicking, which converts an entire class of bad-config events from a global outage into a stale-config degradation.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c18",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "How do you size an on-call rotation, and what makes follow-the-sun fail?",
+      "a": "Primary rotation of 6-8: below 5 the shift frequency drives attrition, above 10 people lose tooling familiarity and spend the first 40 minutes of each incident relearning it. Secondary covers missed acks and escalation only; routine secondary engagement means pager load is too high. The team that owns the code carries its pager, always. Follow-the-sun needs about 3 regions with genuinely duplicated expertise; with 2 you get all the handoff cost and none of the sleep benefit, and an in-flight incident crossing a boundary with no state transfer restarts diagnosis from zero.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c19",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "What does a proper on-call handoff contain?",
+      "a": "A 10-minute overlapping synchronous conversation, not an async end-of-shift message, plus a written note covering: open incidents and the current hypothesis for each, anything degraded but not incident-worthy, alerts that fired and were dismissed along with the reason, deploys in flight or frozen, and anything expected to fire in the next shift.",
+      "module": "T13-incidents"
+    },
+    {
+      "id": "T13-incidents-c20",
+      "topic": "Incident Response, Blameless Postmortems, On-Call",
+      "q": "Why does 'tell me about your worst outage' fail most staff candidates?",
+      "a": "They narrate the debugging (the metric, the log line, the config change, the recovery) instead of the decisions. That demonstrates only that you can debug, which the interviewer already assumed, so it caps you at senior. The staff-level answer leads with quantified impact, then the decision points: when you declared and on what evidence, what you chose not to investigate, what you told customers at minute 12 while still not knowing the cause, and what system change made the failure class cheaper afterwards.",
+      "module": "T13-incidents"
+    }
+  ]
+}

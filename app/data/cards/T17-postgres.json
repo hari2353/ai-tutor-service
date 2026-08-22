@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-postgres-c1",
+      "topic": "Postgres",
+      "q": "Why does every Postgres UPDATE leave a dead tuple, and what reclaims it?",
+      "a": "Postgres never overwrites a row in place - UPDATE marks the old tuple's xmax and inserts a new version. The old version becomes a dead tuple, reclaimed only by VACUUM/autovacuum once no active transaction's snapshot needs it.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c2",
+      "topic": "Postgres",
+      "q": "Does plain VACUUM shrink the table file on disk?",
+      "a": "No - it reclaims dead-tuple space for reuse within the existing file. Only VACUUM FULL (ACCESS EXCLUSIVE lock, full rewrite) or pg_repack (online) actually shrink the file.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c3",
+      "topic": "Postgres",
+      "q": "Autovacuum trigger formula and why the default is dangerous on huge tables?",
+      "a": "dead_tuples > autovacuum_vacuum_threshold(50) + autovacuum_vacuum_scale_factor(0.2) x total_rows. On a 500M-row table, 20% = 100M dead tuples before autovacuum even runs - too late for high-churn tables, requiring per-table scale_factor overrides.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c4",
+      "topic": "Postgres",
+      "q": "What is transaction ID wraparound and why does it force a full outage?",
+      "a": "32-bit XIDs wrap every ~4B transactions with an unambiguous comparison window of ~2B either direction. Old unfrozen tuples risk appearing invisible/ambiguous post-wrap (data corruption risk), so Postgres hard-stops new writes as the oldest unfrozen XID approaches the limit - a deliberate safety valve, not a bug.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c5",
+      "topic": "Postgres",
+      "q": "What number do you alert on to prevent XID wraparound outages?",
+      "a": "age(datfrozenxid) per database via pg_database - alert well before the ~2 billion hard limit (start around 1 billion). Fully preventable; weeks of log warnings precede any real incident.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c6",
+      "topic": "Postgres",
+      "q": "What is a HOT update and what disqualifies a row from it?",
+      "a": "Heap-Only Tuple update: new version written on the SAME page with a forwarding pointer, zero index writes. Requires no indexed column changed AND the new tuple fits on the same page. Breaking either condition forces a full update touching ALL indexes on the table.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c7",
+      "topic": "Postgres",
+      "q": "What is TOAST and what's its practical performance implication?",
+      "a": "Values over ~2KB are compressed/moved out of the 8KB page into a side table (pg_toast), chunked, with a pointer left in the row. Detoast cost is paid per row per TOASTed column actually accessed - SELECT * on wide JSONB tables costs more than selecting only needed columns.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c8",
+      "topic": "Postgres",
+      "q": "Explain the FIFO lock queue trap with ALTER TABLE.",
+      "a": "A long-running SELECT holds ACCESS SHARE; a queued ALTER TABLE (ACCESS EXCLUSIVE) waits for it; every SUBSEQUENT SELECT also queues behind the ALTER TABLE, even though SELECT-SELECT would normally be compatible - because Postgres's lock queue is FIFO.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c9",
+      "topic": "Postgres",
+      "q": "Why is raising max_connections alone not the fix for connection exhaustion?",
+      "a": "Each Postgres connection is a full OS process consuming several MB plus setup cost - practical ceiling is hundreds to low thousands, not tens of thousands. PgBouncer (transaction pooling) multiplexes many clients onto fewer backend connections instead.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c10",
+      "topic": "Postgres",
+      "q": "What does PgBouncer's transaction pooling mode break in an application?",
+      "a": "Session-level state that doesn't persist across a shared physical connection: prepared statements, session-level SET variables, and advisory locks held outside an explicit transaction.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c11",
+      "topic": "Postgres",
+      "q": "What did Postgres 18 add, and why?",
+      "a": "Asynchronous I/O (AIO) subsystem (up to 3x read improvement), skip scan for multicolumn B-tree indexes, and uuidv7() - a time-ordered UUID built-in fixing the index bloat/cache-locality problem caused by random UUIDv4 primary keys.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c12",
+      "topic": "Postgres",
+      "q": "Why does a random UUIDv4 primary key cause worse index bloat than a sequential ID, and what's the uuidv7 tradeoff?",
+      "a": "Random values scatter inserts uniformly across the B-Tree's key range, causing page splits and cache misses instead of appending near the end. uuidv7() embeds a timestamp for monotonic ordering, but this leaks approximate creation time if the ID is exposed externally.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c13",
+      "topic": "Postgres",
+      "q": "pgvector: IVFFlat vs HNSW, and when do you still need a dedicated vector database?",
+      "a": "IVFFlat needs a training step, faster build, worse recall/latency. HNSW needs no training, current default recommendation. Choose a dedicated vector DB over pgvector at hundreds of millions of vectors with strict recall/latency SLAs.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c14",
+      "topic": "Postgres",
+      "q": "Why sort pg_stat_statements by total_exec_time rather than mean_exec_time?",
+      "a": "A query called 100,000 times at 5ms averages costs far more aggregate database time (500s) than one slow query called once - total_exec_time finds the most actionable target for reducing overall DB load; mean/max_exec_time is for tail-latency/SLO hunting instead.",
+      "module": "T17-postgres"
+    },
+    {
+      "id": "T17-postgres-c15",
+      "topic": "Postgres",
+      "q": "What does logical replication depend on, and what's the common production incident related to it?",
+      "a": "A replication slot, which retains WAL segments until its consumer confirms processing them. A disconnected/stuck consumer (e.g. Debezium) is one of the most common causes of WAL directory disk exhaustion in production Postgres.",
+      "module": "T17-postgres"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-query-planner-c1",
+      "topic": "Query Planner",
+      "q": "The full query pipeline, in order.",
+      "a": "Parse (SQL text -> AST, syntax only) -> Rewrite (expand views, flatten subqueries, apply rules) -> Plan enumeration (candidate access methods, join algorithms, join orders) -> Cost estimation (stats-driven, NOT real data) -> Execute (chosen lowest-estimated-cost plan runs against real data).",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c2",
+      "topic": "Query Planner",
+      "q": "Postgres default cost constants, memorize the numbers.",
+      "a": "seq_page_cost = 1.0, random_page_cost = 4.0 (random I/O modeled as 4x sequential - spinning-disk-era assumption, lower to ~1.1-2.0 on SSD), cpu_tuple_cost = 0.01 per row processed, cpu_operator_cost = 0.0025.",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c3",
+      "topic": "Query Planner",
+      "q": "What statistics does the planner maintain per column, and what do they feed?",
+      "a": "Most-common-values (MCV) list with frequencies, a histogram of the remaining distribution (equal-depth buckets), null fraction, and n_distinct estimate - refreshed by ANALYZE/autovacuum. These feed selectivity estimation for filters and joins, which drives cardinality estimates for every plan node built on top.",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c4",
+      "topic": "Query Planner",
+      "q": "The independence assumption flaw - what breaks it and how do you fix it?",
+      "a": "Cost models estimate combined selectivity of two predicates by multiplying their individual selectivities, assuming independence. Correlated columns (e.g. city and state) violate this, causing estimates too low by an order of magnitude or more. Fix: CREATE STATISTICS ... (dependencies) ON (col1, col2) FROM table - the planner never detects correlation automatically.",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c5",
+      "topic": "Query Planner",
+      "q": "Three join algorithms, complexity, and when each wins.",
+      "a": "Nested loop: O(N*M) naive, O(N log M) with an inner index - wins when one side is tiny/well-indexed. Hash join: O(N+M), builds a hash table on the smaller side - wins on large unsorted equality joins. Merge join: O(N+M) if both sides already sorted on the join key (else + sort cost) - wins when both come from index scans already in join-key order.",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c6",
+      "topic": "Query Planner",
+      "q": "The single most important number in EXPLAIN ANALYZE output.",
+      "a": "Estimated vs actual row count at each plan node. A 10x+ divergence means every plan decision made ABOVE that node in the tree was built on a false premise - the plan SHAPE itself is likely wrong, not just mis-costed.",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c7",
+      "topic": "Query Planner",
+      "q": "EXPLAIN vs EXPLAIN ANALYZE - the operational hazard.",
+      "a": "EXPLAIN shows the chosen plan and cost ESTIMATES without running the query. EXPLAIN ANALYZE actually EXECUTES the query (real side effects for DML!) and reports actual rows/timing next to the estimates. Test a DML statement's plan inside BEGIN; ... ROLLBACK; to avoid really executing it against production.",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c8",
+      "topic": "Query Planner",
+      "q": "Hash join build vs probe side, and what Batches>1 means.",
+      "a": "Build side (smaller estimated input) loaded into an in-memory hash table; probe side streamed through, looking up matches. If the build side's ACTUAL size exceeds work_mem, Postgres splits into multiple batches and spills to disk - visible as Batches>1 in EXPLAIN ANALYZE, adding I/O cost the original estimate may not have predicted.",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c9",
+      "topic": "Query Planner",
+      "q": "What is GEQO and when does Postgres switch to it?",
+      "a": "For many-table joins, exhaustive dynamic-programming plan enumeration becomes too expensive. Postgres's geqo_threshold (default 12 tables) switches to a genetic algorithm beyond that point, trading a guarantee of optimal join order for tractable planning time.",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c10",
+      "topic": "Query Planner",
+      "q": "The correct fix-order when a query is slow.",
+      "a": "1) EXPLAIN ANALYZE first, always. 2) If estimate is wrong: ANALYZE / extended stats / raise per-column STATISTICS target - fix stats BEFORE adding indexes. 3) If estimate is right but no good access path exists: THEN add the index. 4) Still slow: check query shape (function-wrapped predicate defeating index use, unnecessary correlated subquery, SELECT *).",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c11",
+      "topic": "Query Planner",
+      "q": "A filtered sequential scan estimates 48 rows, actual is 6104 - what's the mechanical consequence for the join above it?",
+      "a": "The planner chose a Hash Join believing the filtered side was tiny (cheap build side). At the real 127x-larger cardinality, the hash table is much bigger than planned - fine if it still fits in work_mem (Batches:1), but a worse misestimate pushes Batches above 1, spilling to disk with I/O the original estimate never accounted for.",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c12",
+      "topic": "Query Planner",
+      "q": "Why is 'add an index' the wrong first move on a slow query?",
+      "a": "If the root cause is a stale-statistics-driven bad plan SHAPE (wrong join algorithm/order), an index can mask the symptom temporarily or simply not get chosen at all under the current wrong cost estimate - fix statistics first, verify with a second EXPLAIN ANALYZE, then consider indexing.",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c13",
+      "topic": "Query Planner",
+      "q": "Why doesn't adaptive query execution (Spark SQL AQE, cloud warehouses) exist in traditional OLTP planners like Postgres?",
+      "a": "OLTP queries are short and latency-sensitive at the millisecond level, where runtime re-planning overhead is proportionally far more expensive relative to total query cost than for a long analytical query processing terabytes across a cluster - the cost/benefit favors adaptive execution much more for long analytical queries.",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c14",
+      "topic": "Query Planner",
+      "q": "Why can a function wrapped around a column (e.g. WHERE lower(email) = ...) defeat the planner's ability to estimate well, even with good general statistics?",
+      "a": "Normal column statistics are collected on the raw column, not on the result of an arbitrary function applied to it, so the planner can't use the MCV/histogram to estimate selectivity of the wrapped expression accurately - fix with an expression index and/or extended statistics on that exact expression.",
+      "module": "T17-query-planner"
+    },
+    {
+      "id": "T17-query-planner-c15",
+      "topic": "Query Planner",
+      "q": "Selinger et al. (1979) - what did System R's cost-based optimizer actually introduce?",
+      "a": "The idea that a query has many valid physical execution plans and the system should pick among them via an estimated cost model, rather than executing a single naive translation or requiring the programmer to hand-specify the physical access path as pre-relational systems did.",
+      "module": "T17-query-planner"
+    }
+  ]
+}

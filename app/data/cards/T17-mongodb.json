@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-mongodb-c1",
+      "topic": "MongoDB",
+      "q": "Explain the read-then-write race condition in MongoDB and why findOneAndUpdate fixes it.",
+      "a": "find() followed by a separate update() has an unprotected window where a concurrent request can read the same stale state and act on it too. findOneAndUpdate evaluates the filter condition and applies the mutation as ONE atomic server-side operation, eliminating the separate check step entirely.",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c2",
+      "topic": "MongoDB",
+      "q": "What is the trap that catches people who 'know' findOneAndUpdate exists?",
+      "a": "Performing a separate prior find() to DECIDE whether to call findOneAndUpdate, then building business logic on that separate read - this reintroduces the same race. The condition must be inside the atomic operation's filter, never evaluated in application code beforehand.",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c3",
+      "topic": "MongoDB",
+      "q": "Rank the five approaches to fixing a check-then-write race, cheapest to most expensive.",
+      "a": "1) Atomic update operator with embedded condition (updateOne with filter condition). 2) findOneAndUpdate with conditional filter (need document back). 3) Optimistic concurrency via version field. 4) Unique/partial index (invariant is uniqueness). 5) Multi-document transaction (genuine cross-document invariant only).",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c4",
+      "topic": "MongoDB",
+      "q": "How does WiredTiger's document-level concurrency differ from MMAPv1?",
+      "a": "WiredTiger uses MVCC plus intent locking down to document level - only writers to the SAME document serialize, different documents proceed with zero contention. MMAPv1 locked at the collection level, blocking unrelated concurrent writes to the same collection.",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c5",
+      "topic": "MongoDB",
+      "q": "What is the unbounded array anti-pattern and why does it hurt before hitting the 16MB limit?",
+      "a": "An array that grows indefinitely inside a document eventually forces the document to exceed its allocated disk space, causing WiredTiger to relocate the WHOLE document on append - progressively worsening write latency well before the 16MB hard limit is reached.",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c6",
+      "topic": "MongoDB",
+      "q": "What is the fix for the unbounded array anti-pattern?",
+      "a": "The bucket pattern - group array elements into bounded sub-documents (e.g. one document per user per day, internally capped) - or move the growing data into its own referenced collection entirely.",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c7",
+      "topic": "MongoDB",
+      "q": "w:1 vs w:majority write concern - what's the durability difference during a primary failover?",
+      "a": "w:1 is acknowledged by the primary alone and can be ROLLED BACK if the primary fails before replicating it and a different secondary (without that write) becomes primary. w:majority requires majority acknowledgment, guaranteeing it survives any subsequent election.",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c8",
+      "topic": "MongoDB",
+      "q": "Read concern local vs majority vs linearizable?",
+      "a": "local: may be rolled back later (not majority-replicated yet). majority: only durable, non-rollback-able data. linearizable: strongest guarantee, confirms with a majority on EVERY read (real latency cost).",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c9",
+      "topic": "MongoDB",
+      "q": "What does a causally consistent session guarantee that plain readConcern:majority doesn't?",
+      "a": "Read-your-own-writes, monotonic reads, monotonic writes, writes-follow-reads within a session - because different reads across the session could otherwise hit secondaries with different replication lag and appear to go backward in time.",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c10",
+      "topic": "MongoDB",
+      "q": "Why does a monotonically increasing shard key create a hot shard, and what's the fix?",
+      "a": "All new writes have the highest key value, landing on the single shard owning the top range - gets worse as write volume grows. Fix: hashed sharding spreads monotonic values pseudo-randomly across shards, at the cost of losing efficient range scans on that key.",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c11",
+      "topic": "MongoDB",
+      "q": "Three shard key selection criteria to check before committing to one?",
+      "a": "Cardinality (enough distinct values to split into chunks), monotonicity (increasing keys concentrate writes on one shard), skew (one dominant value creates a hot shard regardless of overall cardinality).",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c12",
+      "topic": "MongoDB",
+      "q": "Why is $lookup typically more expensive than a relational join?",
+      "a": "Fast only when the foreign collection has an index on the compared field (~nested loop with index); degrades to a full collection scan per input document without one - a much worse cost curve. Constant $lookup on a hot path signals the data should be embedded instead.",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c13",
+      "topic": "MongoDB",
+      "q": "When should you use multi-document transactions in MongoDB, and what's the schema smell if overused?",
+      "a": "Use for operations genuinely spanning multiple documents no embedding could avoid (e.g. funds transfer between two accounts). If most hot-path writes need transactions, that signals the schema should be redesigned around better embedding, not that transactions are simply 'the MongoDB way.'",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c14",
+      "topic": "MongoDB",
+      "q": "What do retryable writes solve, and how is that different from the application-level race condition problem?",
+      "a": "Retryable writes (default since 4.2) auto-retry on transient network/election failure using an idempotency token, solving 'did my write land exactly once.' This is orthogonal to the read-then-write race, which occurs even with perfect networking, purely from concurrent stale reads.",
+      "module": "T17-mongodb"
+    },
+    {
+      "id": "T17-mongodb-c15",
+      "topic": "MongoDB",
+      "q": "What does MongoDB 8.0's sh.shardAndDistributeCollection() do?",
+      "a": "Wraps sharding and an immediate resharding-to-the-same-key into one operation, avoiding the historical pain of waiting on the background balancer to slowly redistribute data after an initial shard operation.",
+      "module": "T17-mongodb"
+    }
+  ]
+}

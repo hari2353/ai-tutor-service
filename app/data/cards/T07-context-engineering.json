@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-context-engineering-c1",
+      "topic": "Context Engineering",
+      "q": "State the core claim of context engineering in one sentence.",
+      "a": "Context is a budget with diminishing marginal returns, not a buffer: adding tokens usually makes an agent worse, so the job is finding the smallest set of high-signal tokens that maximises the likelihood of the desired outcome.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c2",
+      "topic": "Context Engineering",
+      "q": "Why is attention a finite budget? Name three mechanisms.",
+      "a": "1) A transformer lets every token attend to every other, giving n^2 pairwise relationships, so attention mass per relationship thins as n grows. 2) Training corpora are dominated by short sequences, so there are fewer parameters specialised for context-wide dependencies. 3) Position-encoding interpolation extends the window at a cost to positional precision. Result: a performance gradient, not a cliff.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c3",
+      "topic": "Context Engineering",
+      "q": "What did Chroma's context rot research measure?",
+      "a": "Across 18 frontier models, accuracy drops 20-50% from 10k to 100k+ input tokens, non-uniformly. Needle-question semantic similarity and the presence of near-miss DISTRACTORS matter more than raw length, and coherent well-structured input degrades attention MORE than shuffled input.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c4",
+      "topic": "Context Engineering",
+      "q": "The four context levers, in the order you reach for them.",
+      "a": "1) Truncate tool results AT THE TOOL (free, biggest win, lossless where it matters). 2) Clear stale tool results (free, no LLM call, but breaks the prompt cache). 3) Compact older turns into a structured recap (one LLM call, lossy). 4) Isolate: subagents with fresh windows returning 1-2k distilled tokens, plus progress files that were never in the window.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c5",
+      "topic": "Context Engineering",
+      "q": "Derive the cost of a 40-turn run with a 6k prefix and 4k of growth per turn.",
+      "a": "cumulative_input = turns*base + growth*turns*(turns-1)/2 = 240,000 + 3,120,000 = 3.36M input tokens (~$10 at $3/Mtok). Cut per-turn growth to 1k and it is 240k + 780k = 1.02M (~$3). Same task, 3x cheaper, and the lever was the tool, not the model. Cost is quadratic in turns because the prefix re-sends every turn.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c6",
+      "topic": "Context Engineering",
+      "q": "List the seven things that must never be compacted.",
+      "a": "The task and success criteria; hard constraints and prohibitions; open obligations; identifiers and exact values; the user's most recent correction; any pending tool call; approval/permission state. The mechanism matters: they are regenerated from durable state into a protected block, so the summariser never sees them.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c7",
+      "topic": "Context Engineering",
+      "q": "What are the six sections of a good compaction schema?",
+      "a": "Task (request, success criteria, constraints), State (done, files changed, artefacts), Discoveries (facts, decisions with reasons, errors resolved), FAILED APPROACHES (without it the agent retries what already failed), Open items (a checklist, never silently dropped), Verbatim values (a flat list of every identifier/path/version/amount).",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c8",
+      "topic": "Context Engineering",
+      "q": "At what fraction of the window should you trigger compaction, and why not later?",
+      "a": "55-65%. The compaction call itself must fit both the region being summarised and the summary output, so triggering at 90-95% means the compaction request fails at the worst possible moment.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c9",
+      "topic": "Context Engineering",
+      "q": "How do you verify a compaction did not lose anything?",
+      "a": "Mechanically: regex every identifier-shaped token (tickets, hashes, versions, paths, amounts) out of the compacted region and assert each appears in the recap; assert every open item survived. Retry once naming the omissions; if it fails again, DO NOT COMPACT and keep more verbatim instead of shipping a lossy recap.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c10",
+      "topic": "Context Engineering",
+      "q": "Give the real Anthropic context-editing config parameters and defaults.",
+      "a": "Beta header context-management-2025-06-27. clear_tool_uses_20250919: trigger (default 100,000 input tokens), keep (default 3 tool use/result pairs), clear_at_least (cache-break floor), exclude_tools, clear_tool_inputs (default false, so the CALL stays visible and only the RESULT is cleared). clear_thinking_20251015: keep {thinking_turns: N} or 'all', and it must be listed FIRST in the edits array.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c11",
+      "topic": "Context Engineering",
+      "q": "How does context editing interact with prompt caching?",
+      "a": "Clearing tool results mutates the prefix and invalidates the cache from that point, so you pay a cache write. Cache reads run at ~0.1x base input, so a large stable prefix is nearly free and repeated small clears destroy that. clear_at_least exists for this: clear only if reclaimed * turns_until_next_clear * input_rate > prefix_tokens * cache_write_rate. Keeping thinking blocks preserves the cache; clearing them invalidates from the clear point.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c12",
+      "topic": "Context Engineering",
+      "q": "What is the subagent compression ratio and the return contract?",
+      "a": "A subagent may burn tens of thousands of tokens in a fresh window and return only 1,000-2,000 distilled tokens (~20-40x compression). Return contract: Answer (1-3 sentences), Evidence (file:line or URL plus the exact quoted span), Confidence and what would change it, and NOT FOUND / NOT CHECKED so gaps are explicit rather than silently omitted.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c13",
+      "topic": "Context Engineering",
+      "q": "What does subagent isolation cost you, and how do you mitigate it?",
+      "a": "An unauditable lossy handoff: if the 1.4k summary omitted the thing that mattered, the main agent cannot tell and cannot ask without re-running the subtask. Mitigations: require pointers (file:line, URL, stored query id) so the main agent can re-read on demand; require a 'not checked' section; and forbid subagents from acting. Keep writes single-threaded and let extra agents contribute intelligence, not actions.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c14",
+      "topic": "Context Engineering",
+      "q": "Why does a progress file beat compaction, and what are its three requirements?",
+      "a": "It was never in the context window, so compaction cannot lose it (and a human can read it mid-run). Requirements: 1) structure it with the same schema as the recap; 2) APPEND with timestamps rather than rewriting, because rewriting is a summary of a summary and reintroduces brevity bias; 3) the harness must INJECT the open-items section every turn after a compaction. 'Remember to read progress.md' is not a mechanism.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c15",
+      "topic": "Context Engineering",
+      "q": "The compaction / server-side tool token-accounting bug.",
+      "a": "With server-side tools like web search, cache_read_input_tokens accumulates across the tool's internal API calls: a response can show input_tokens 63,000 and cache_read_input_tokens 270,000. A client summing all usage fields sees 334k and compacts a conversation whose real context is 63k. Symptom: compaction firing every other turn on an obviously short conversation. Fix: the token-counting endpoint, exclude cache reads from the threshold, or use server-side compaction.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c16",
+      "topic": "Context Engineering",
+      "q": "Why is the protected constraints list a security control, not a nicety?",
+      "a": "'Governance decay': compaction silently erasing constraints like 'read-only on prod' or 'never contact the customer directly' turns a quality issue into an unauthorised action, and it fails silently since nothing errors, the agent simply stops being constrained. It needs an assertion test in CI, not a code review.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c17",
+      "topic": "Context Engineering",
+      "q": "Why is 'retrieve 20 documents to be safe' negative-value?",
+      "a": "You did not hedge, you added 17 near-miss distractors, and distractors are the highest-damage category in context rot. Use a relevance floor where returning nothing is a valid result, rather than a fixed k.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c18",
+      "topic": "Context Engineering",
+      "q": "When should you NOT compact?",
+      "a": "Tasks needing precise recall of early detail (legal review, reconciliation, forensic transcript analysis) - keep verbatim, chunk, or externalise and re-read. Short runs under ~30% of the window. Client-side compaction alongside heavy server-side tools until token accounting is fixed. And remember context editing is within-session deletion, not memory.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c19",
+      "topic": "Context Engineering",
+      "q": "How would you falsify 'more tokens makes agents worse'?",
+      "a": "Pad the same golden task set with plausible-but-irrelevant retrieved content to 8k / 30k / 100k / 200k and plot task success. If success is flat or rising, the claim is wrong for that workload. In practice it falls, steepest on tasks needing precise retrieval from the middle. Naming the experiment is the difference between a measurement and a slogan.",
+      "module": "T07-context-engineering"
+    },
+    {
+      "id": "T07-context-engineering-c20",
+      "topic": "Context Engineering",
+      "q": "Server-side or client-side compaction, and why?",
+      "a": "Server-side by default (compact_20260112): less code, correct token accounting, and context editing applies before the prompt reaches the model so your client keeps the full unmodified history and your logs stay complete. The client-side SDK compaction_control is deprecated. Go client-side only when you need domain-specific control over what survives, and accept that you then own orphaned tool pairs, premature triggers, and recursive summarisation.",
+      "module": "T07-context-engineering"
+    }
+  ]
+}

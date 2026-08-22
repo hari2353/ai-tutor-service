@@ -1,0 +1,102 @@
+{
+  "drills": [
+    {
+      "id": "T17-query-planner-d1",
+      "module": "T17-query-planner",
+      "q": "Walk through the full pipeline a SQL query goes through before it executes.",
+      "a": "Parse (syntax to AST) -> rewrite (expand views, flatten subqueries) -> plan enumeration (candidate access methods/join algorithms/join orders) -> cost estimation (using pre-collected statistics, not live data) -> execution of the chosen lowest-estimated-cost plan.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-query-planner-d2",
+      "module": "T17-query-planner",
+      "q": "Give the three join algorithms with their complexities and best-case conditions.",
+      "a": "Nested loop: O(N*M), or O(N log M) with an index on the inner side - wins when one side is small/indexed. Hash join: O(N+M) - wins on large unsorted equality joins. Merge join: O(N+M) if both sides pre-sorted on the join key (else pay a sort first) - wins when both come from index scans already in order.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-query-planner-d3",
+      "module": "T17-query-planner",
+      "q": "What is the single most important signal in EXPLAIN ANALYZE output, and why?",
+      "a": "Estimated vs actual row count at each node. A large divergence (commonly 10x+) means the plan decisions built ABOVE that node were made on a false premise - it's usually a more direct explanation for slowness than any individual cost number, since it indicates the plan shape itself is likely wrong.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-query-planner-d4",
+      "module": "T17-query-planner",
+      "q": "Your WHERE clause filters on two correlated columns (city and state) and the row estimate is way too low. Why, and how do you fix it?",
+      "a": "Classic cost models multiply each predicate's individual selectivity assuming independence; correlated columns violate that, making the combined estimate far too low. Fix with CREATE STATISTICS ... (dependencies) ON (city, state) FROM table - the planner does not detect this correlation automatically.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-query-planner-d5",
+      "module": "T17-query-planner",
+      "q": "A query's plan uses nested loop join and is extremely slow on a large table. Diagnose it step by step.",
+      "a": "Run EXPLAIN (ANALYZE, BUFFERS), check estimated vs actual rows on the outer side of the nested loop. If actual is far higher, the planner wrongly believed the outer side was small. Fix: ANALYZE the table, check for correlated-column misestimation, verify autovacuum is keeping pace. Re-run EXPLAIN ANALYZE to confirm the plan shape actually changes.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-query-planner-d6",
+      "module": "T17-query-planner",
+      "q": "Why does Postgres default random_page_cost to 4.0, and when should you change it?",
+      "a": "It models random disk access as 4x more expensive than sequential - appropriate for spinning-disk seek-time assumptions. On all-SSD storage, lower it (commonly 1.1-2.0) so the planner is more willing to choose index scans over sequential scans where appropriate - but verify improvement with EXPLAIN ANALYZE, don't assume from hardware alone.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-query-planner-d7",
+      "module": "T17-query-planner",
+      "q": "What is GEQO, and does it always mean a worse plan for wide joins?",
+      "a": "Genetic query optimization - past geqo_threshold (default 12 tables), Postgres switches from exhaustive dynamic-programming enumeration to a genetic algorithm since combinatorial join-order enumeration becomes too slow. Not always worse in absolute terms, but no longer guaranteed optimal - worth raising the threshold or restructuring the query for a frequently-run wide-join query where plan quality matters more than planning latency.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-query-planner-d8",
+      "module": "T17-query-planner",
+      "q": "Explain hash join's build/probe sides and what Batches>1 means in EXPLAIN ANALYZE output.",
+      "a": "The build side (smaller estimated input) is loaded into an in-memory hash table; the probe side streams through looking up matches. If the build side's actual size exceeds work_mem, it splits into multiple batches and spills to disk (Batches>1) - a real I/O cost the original cost estimate may not have predicted if the cardinality was underestimated.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-query-planner-d9",
+      "module": "T17-query-planner",
+      "q": "How do you decide whether a slow query needs a new index, updated statistics, or a rewritten query?",
+      "a": "Start with EXPLAIN ANALYZE. Estimated/actual diverge sharply -> fix statistics first (ANALYZE, extended stats, higher target) before adding an index. Statistics accurate but no efficient access path exists -> add the index, then re-verify with EXPLAIN ANALYZE. Both fine but still slow -> examine query shape (function-wrapped predicate, correlated subquery, SELECT *).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-query-planner-d10",
+      "module": "T17-query-planner",
+      "q": "You add the 'obviously correct' index and the planner doesn't use it. Why might that be correct behavior?",
+      "a": "If the cost estimate (correctly or not) shows the filter matching a large fraction of rows, a sequential scan can genuinely cost less than an index scan's random I/O regardless of index availability - low-selectivity predicates rarely benefit from an index. Verify the estimate justifies the index before assuming the planner is being obtuse.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-query-planner-d11",
+      "module": "T17-query-planner",
+      "q": "What's the operational hazard of running EXPLAIN ANALYZE on a DML statement, and how do you avoid it?",
+      "a": "EXPLAIN ANALYZE actually executes the query, so an UPDATE/DELETE really happens with real side effects. Wrap it in a transaction and roll back (BEGIN; EXPLAIN ANALYZE UPDATE ...; ROLLBACK;), or test against a non-production copy.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-query-planner-d12",
+      "module": "T17-query-planner",
+      "q": "Why does WHERE lower(email) = 'x' defeat normal column statistics even if the email column itself has good stats?",
+      "a": "Statistics (MCV list, histogram) are collected on the raw column values, not on the result of a function applied to them, so the planner can't use them to estimate the wrapped expression's selectivity accurately. Fix with an expression index and/or extended statistics on the exact expression.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-query-planner-d13",
+      "module": "T17-query-planner",
+      "q": "Why does adaptive query execution exist in Spark SQL / cloud warehouses but not in traditional single-node OLTP planners?",
+      "a": "OLTP queries are short and latency-sensitive at the millisecond level, so runtime re-planning overhead is proportionally far more expensive relative to total cost than in a long analytical query over terabytes - the cost/benefit strongly favors adaptive execution for long analytical workloads, not short transactional ones.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-query-planner-d14",
+      "module": "T17-query-planner",
+      "q": "State Postgres's four default planner cost constants and what each represents.",
+      "a": "seq_page_cost=1.0 (sequential disk page fetch), random_page_cost=4.0 (non-sequential fetch, 4x sequential - spinning-disk assumption), cpu_tuple_cost=0.01 (processing one row), cpu_operator_cost=0.0025 (evaluating one operator/function per row).",
+      "difficulty": "warmup"
+    }
+  ]
+}

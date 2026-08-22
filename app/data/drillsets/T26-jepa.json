@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T26-jepa-d1",
+      "module": "T26-jepa",
+      "q": "Name the four components of a JEPA and state which ones receive gradients from the loss.",
+      "a": "Context encoder (ViT, receives gradients, this is the artefact you keep), target encoder (identical architecture, EMA-updated only, stop-gradient, NO gradients ever, runs on the FULL unmasked input), narrow predictor (ViT at dim 384 vs the encoder's 1280, receives gradients), and an L2 or smooth-L1 loss on embeddings. Only the context encoder and the predictor are trained by SGD.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-jepa-d2",
+      "module": "T26-jepa",
+      "q": "Recite the I-JEPA multi-block masking parameters from memory: how many target blocks, at what scale and aspect ratio, and what happens to the context block.",
+      "a": "4 target blocks at area scale U(0.15, 0.20) and aspect ratio U(0.75, 1.5), allowed to overlap each other. 1 context block at area scale U(0.85, 1.0) and aspect ratio 1.0, from which every patch overlapping any target block is removed. Targets are sliced out of the target encoder's output over the full unmasked image.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-jepa-d3",
+      "module": "T26-jepa",
+      "q": "What is the I-JEPA EMA momentum schedule, and what averaging window does the starting value imply?",
+      "a": "Linear from 0.996 to 1.0 over the full run. At m = 0.996 the effective window is 1/(1-m) = 250 steps. The ramp to 1.0 freezes the target encoder at the end of training as a stability measure.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-jepa-d4",
+      "module": "T26-jepa",
+      "q": "Give the compute figure for pretraining I-JEPA's ViT-H/14 on ImageNet and its two published efficiency comparisons.",
+      "a": "Under 1,200 GPU-hours (16 A100s in under 72 hours wall-clock). Over 10x more compute-efficient than a ViT-H/14 pretrained with MAE, and over 2.5x faster than a far smaller ViT-S/16 pretrained with iBOT, while producing better frozen-probe representations than MAE.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-jepa-d5",
+      "module": "T26-jepa",
+      "q": "Derive, in two lines, why an embedding-space prediction objective can ignore unpredictable detail while a pixel objective cannot.",
+      "a": "H(y|x) = H(y_predictable|x) + H(y_noise|x). A pixel objective has an externally fixed target, so minimising it requires modelling both terms (squared error gives you the conditional mean, i.e. blur; a likelihood objective gives you an accurate model of noise, which is worse because you paid parameters for it). An embedding objective has a LEARNED target, so the system can reduce loss by simply not encoding the noise term. Measured consequence: roughly 10x less compute than MAE at the same ViT-H/14 architecture.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-jepa-d6",
+      "module": "T26-jepa",
+      "q": "Your JEPA training loss falls from 1.2 to 1e-4 within 300 steps and flatlines. List the checks in order, cheapest discriminating first.",
+      "a": "Treat as collapse until disproven. (1) Assert the target encoder's params have grad None after backward(), catching a missing torch.no_grad() or requires_grad=False. (2) Run collapse metrics on a held-out batch: per-dim std of L2-normalised embeddings against 1/sqrt(D) = 0.028 at D=1280, alert below 0.3/sqrt(D) ~ 0.008; RankMe against D, single digits out of 1280 means full collapse. (3) Assert set(ctx_idx) & set(tgt_idx) is empty, since overlap leakage produces exactly this too-good loss curve. (4) Verify the EMA momentum actually applied, not just configured. (5) Check LR warmup length; too-high early LR is a common trigger.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-jepa-d7",
+      "module": "T26-jepa",
+      "q": "Define RankMe, give its healthy range, and say what value indicates partial rather than full collapse.",
+      "a": "Centre a batch of at least 4xD embeddings, take singular values sigma_i, normalise p_i = sigma_i / sum(sigma), then RankMe = exp(-sum p_i log p_i), the exponentiated entropy of the normalised spectrum. Healthy vision backbones land in roughly 0.2-0.8 x D (about 250-1000 at D=1280). Full collapse reads 1. Partial or dimensional collapse reads roughly 20-60, and this is the dangerous case because the loss and the ImageNet linear probe both still look fine.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-jepa-d8",
+      "module": "T26-jepa",
+      "q": "Explain why an ImageNet linear probe within 1-2 points of the reference is not sufficient evidence that a JEPA run is healthy, and say what you would add.",
+      "a": "Coarse classification survives enormous information loss; a representation collapsed onto a few dozen well-separated semantic clusters still probes well. Add a detail-sensitive probe: monocular depth, object counting, keypoint localisation or segmentation mIoU. Add RankMe as a first-class tracked metric. Probe multiple layers, since partial collapse often shows as the final block being much worse than the second-to-last.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-jepa-d9",
+      "module": "T26-jepa",
+      "q": "State the V-JEPA 2 two-stage recipe with data scale and the exact robot deployment claim.",
+      "a": "Stage 1: 1.2B-parameter ViT-g, masked latent prediction on VideoMix22M (over 1 million hours of internet video plus images), no actions or rewards. Benchmarks: SSv2 77.3% top-1, EK100 anticipation 39.7 recall-at-5, and with an 8B LLM alignment, PerceptionTest 84.0 and TempCompass 76.9. Stage 2: freeze the encoder, train V-JEPA 2-AC to map [repr(o_t), a_t] to repr(o_{t+1}) on under 62 hours of unlabelled Droid video. Deployment: zero-shot on Franka arms in two unseen labs, image goals, latent-space rollouts scored against the goal representation, replanning every step, roughly 65-80% pick-and-place success on novel objects, with no deployment-environment data, no task-specific training and no reward.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-jepa-d10",
+      "module": "T26-jepa",
+      "q": "A colleague says V-JEPA 2 'learned to control robots from 62 hours of raw video.' Correct them precisely.",
+      "a": "Droid trajectories include robot proprioception and action logs, so actions are present and the predictor is action-conditioned. What is absent is task labels, rewards, curated demonstrations of the target task, and any data from the deployment environments. So 'unlabelled' means no task supervision, not no actions. Overstating it loses credibility; understating it to 'so it's just imitation learning' misses that there were no demonstrations of the deployment tasks at all.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-jepa-d11",
+      "module": "T26-jepa",
+      "q": "Argue both sides of 'is JEPA a fundamentally better path or an elegant SSL method?', then state what evidence would change your mind.",
+      "a": "For the narrow claim: latent prediction is roughly 10x cheaper than MAE at equal architecture, needs no augmentation design, gives the best low-level spatial and motion probes, and produced the only published zero-shot cross-lab robot planning result off under 62 hours of robot data, which is a closed-loop task-success class of evidence. Against the broad claim: H-JEPA, the hierarchical stack that is the actual load-bearing proposal of the 2022 paper, has no scaled demonstration as of August 2026; I-JEPA sits roughly 7 points below DINOv2 on ImageNet linear probe (about 79% vs 86.5%); DINO-family and CLIP-family models remain the production default; no JEPA system has displaced a scaled generative model on a general benchmark. Mind-changers: an H-JEPA at V-JEPA-2 scale showing planning horizons a flat model cannot reach, or a JEPA system beating a comparably-resourced generative model on a general suite.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-jepa-d12",
+      "module": "T26-jepa",
+      "q": "Explain, without overclaiming, why the EMA target encoder helps prevent collapse. Then name the paper that undercuts the standard story.",
+      "a": "Collapse is a GLOBAL MINIMUM of the naive objective, so the defence cannot be that the objective disfavours it; it must be that gradient descent from a reasonable init does not reach it. Three mechanisms: stop-gradient removes the gradient path that would move the target toward the prediction; the EMA lag (250-step window at m=0.996) means a shrinking context encoder is scored against a not-yet-shrunk target, producing an opposing loss; the narrow predictor (384 vs 1280) is too weak to absorb a degenerate encoder cheaply. SimSiam (CVPR 2021) showed stop-gradient alone suffices with no momentum encoder, so EMA is not the sole mechanism. LeJEPA (Balestriero and LeCun, arXiv 2511.08544, November 2025) calls the whole stack heuristics, proves the isotropic Gaussian uniquely minimises worst-case downstream risk, and replaces it with SIGReg (random 1D projections plus characteristic-function matching, linear cost, ~1 hyperparameter).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-jepa-d13",
+      "module": "T26-jepa",
+      "q": "Design the evaluation gate you would require before a JEPA-based world model touches a robot control loop. Give five levels with numbers.",
+      "a": "(1) Representation health: RankMe above 0.2xD, per-dim normalised std within 30% of 1/sqrt(D), plus a depth or keypoint probe above a stated floor, to rule out partial collapse. (2) One-step latent prediction error on held-out real transitions, reported per action type, since aggregates hide contact cases. (3) Multi-step rollout error vs horizon: encode a real state, roll H steps under recorded actions, plot error for h = 1..4H, set the planning horizon BELOW the knee. (4) Closed-loop task success on real hardware in an environment absent from training, with a stated baseline (the V-JEPA 2-AC format: 65-80% zero-shot on Franka in two unseen labs). (5) Rank correlation between in-model score and real outcome across 10-20 candidate policies, because if the model chooses actions, monotonicity is what you depend on and low prediction error does not imply it. Plus a runtime guard on the prediction residual before production hardware, because an optimising controller actively seeks regions where the model is optimistically wrong.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-jepa-d14",
+      "module": "T26-jepa",
+      "q": "Resolve: JEPA deliberately discards unpredictable detail, yet I-JEPA beats DINO on depth and object-counting probes. Why is that not a contradiction, and why can't you just add augmentations to get both?",
+      "a": "They discard along orthogonal axes. JEPA discards what is not predictable from context (grain, micro-texture, aleatoric noise) and is incentivised to KEEP spatial layout, object extent, depth ordering and motion, since those make the target predictable. Invariance methods discard what their augmentations declare irrelevant, and random resized crop plus colour jitter explicitly say position, scale and colour do not matter, which is exactly what depth and counting probes need. You cannot simply combine them: adding augmentations reintroduces the invariance pressure that destroys spatial information, and it also makes target embeddings of different views more similar, which moves the system toward the degenerate region and weakens an anti-collapse condition. If you need both, use two backbones or a multi-task head.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-jepa-d15",
+      "module": "T26-jepa",
+      "q": "You are porting the JEPA recipe to industrial sensor time series with no augmentation intuition. What is the argument for it, and what is the one design parameter you must derive from the data rather than copy from I-JEPA?",
+      "a": "Argument: the transferable property is augmentation-freedom. Contrastive SSL requires you to specify what should be invariant, and for vibration spectra, radar, seismic or plant telemetry that is a multi-month research project where a wrong choice silently destroys the information the downstream task needs. A JEPA needs only a masking scheme, a weaker and more auditable commitment. The parameter you must derive: MASK SPAN LENGTH, set relative to the signal's autocorrelation length, not by analogy to a 15-20% image area. In a smooth series a short masked span is trivially interpolable from its neighbours, which is exactly the identity-function failure (low loss, useless representation). Measure the autocorrelation, mask well beyond it, then run the context-ablation test (feed zeros for the context) and confirm the loss rises substantially.",
+      "difficulty": "staff"
+    }
+  ]
+}

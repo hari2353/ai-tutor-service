@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T07-trust-calibration-d1",
+      "module": "T07-trust-calibration",
+      "q": "Write the ECE formula and say what number you must always report alongside it.",
+      "a": "ECE = SUM_m (|B_m|/n) · |acc(B_m) − conf(B_m)|. Always report M, the bin count (conventionally 10 or 15), and whether bins are equal-width or equal-mass. An ECE without M is unfalsifiable.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-trust-calibration-d2",
+      "module": "T07-trust-calibration",
+      "q": "Why is a model that always outputs the base rate perfectly calibrated and useless?",
+      "a": "It has reliability but no resolution. ECE is not a proper scoring rule, so it cannot see this. Report Brier or NLL alongside, and read AURC off the risk-coverage curve, because resolution is what your product actually depends on.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-trust-calibration-d3",
+      "module": "T07-trust-calibration",
+      "q": "Give the three mechanisms that make verbalised confidence overconfident.",
+      "a": "No loss term ties the confidence tokens to outcome frequency; RLHF rewards decisiveness and penalises hedging, so post-training raises stated confidence independent of correctness; and binary-accuracy evaluation gives positive expected value to a guess and zero to abstention.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-trust-calibration-d4",
+      "module": "T07-trust-calibration",
+      "q": "You have logprobs. Where can you use them directly and where not?",
+      "a": "Directly: multiple choice via softmax over option letters, classification over a fixed label set, extraction via min-token logprob on the answer span. Not: free-form generation, because probability mass splits over paraphrases of the same meaning, so sequence entropy conflates linguistic and epistemic uncertainty.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-trust-calibration-d5",
+      "module": "T07-trust-calibration",
+      "q": "Describe semantic entropy in four steps and give its cost.",
+      "a": "1) Sample n≈10 at T≈1. 2) Cluster into meaning classes by bidirectional entailment. 3) SE = −SUM p(c) log p(c) over clusters. 4) High SE means the model disagrees with itself about meaning. Cost: n generations plus up to O(n²) NLI pairs, reducible to O(n·|C|) with one representative per cluster.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-trust-calibration-d6",
+      "module": "T07-trust-calibration",
+      "q": "Which failure mode is every consistency-based detector blind to, and what catches it?",
+      "a": "Confidently wrong — a systematic false belief produces agreement across samples, so entropy is near zero. Only grounding against an external source catches it: NLI entailment against retrieved evidence, a database or tool lookup, or formal verification where the domain is formalisable.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-trust-calibration-d7",
+      "module": "T07-trust-calibration",
+      "q": "Turn 'we want fewer wrong answers' into a product SLO.",
+      "a": "'<= 2% incorrect answers on answered queries at >= 88% coverage', with the threshold fit as the lowest tau meeting 2% selective risk on a held-out set with at least 200 answered items, coverage reported with a bootstrap CI, and risk reported per slice because marginal calibration is not conditional calibration.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-trust-calibration-d8",
+      "module": "T07-trust-calibration",
+      "q": "Your risk-coverage curve is flat. What do you do?",
+      "a": "Do not ship abstention on that signal — abstaining discards right and wrong answers in the same proportion. Replace the signal: build the small logistic regression over entailment coverage, retrieval top-1 and top1−top2 gap, min-token logprob, and tool-error flag, trained on labelled production data.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-trust-calibration-d9",
+      "module": "T07-trust-calibration",
+      "q": "Abstention rate jumps 6% -> 24% overnight. Diagnose in order.",
+      "a": "Do not move the threshold first. 1) Did a model alias move? Pin model@version. 2) Did retrieval change (index rebuild shifting score distributions)? 3) Did the model genuinely get worse at abstaining — AbstentionBench found reasoning fine-tuning degrades abstention. Then re-fit the threshold on fresh labelled data as a versioned artefact and add the failures to the regression gate.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-trust-calibration-d10",
+      "module": "T07-trust-calibration",
+      "q": "A partner demands a confidence float in the public API. What do you give them?",
+      "a": "Preferably a decision plus a stable tier: {status: answered | answered_unverified | needs_input | declined, risk_tier, unsupported_claims, evidence}. If a number is non-negotiable, ship it versioned — confidence_version: v3 — with documented semantics ('bucket 0.8-0.9 measured accuracy 0.8-0.9 on distribution X as of date Y'), a commitment to bump the version on any re-fit, and a published reliability diagram.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-trust-calibration-d11",
+      "module": "T07-trust-calibration",
+      "q": "Does conformal prediction give you a guarantee in production? Answer precisely.",
+      "a": "It gives distribution-free MARGINAL coverage >= 1−alpha under exchangeability, for label-set decisions. It does not give conditional coverage (90% overall can be 60% on a hard slice) and exchangeability fails under drift. Operationally: re-calibrate on a rolling window, monitor empirical vs nominal coverage as a drift alarm, and stratify calibration by slice. For free-form generation there are 2026 impossibility results.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-trust-calibration-d12",
+      "module": "T07-trust-calibration",
+      "q": "Ratings drop after you add uncertainty UI. What do you check first?",
+      "a": "Whether the abstention rate rose or only the labelling did — they need opposite fixes. Too much labelling reads as the system doubting itself, so restrict flags to failed verifications. If abstention rose, the threshold is too tight or the fallbacks are dead ends; clarifying questions convert abstentions into answers, 'I don't know' converts them into churn.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-trust-calibration-d13",
+      "module": "T07-trust-calibration",
+      "q": "How does abstention change inside an agent loop?",
+      "a": "It becomes per step and the useful action is usually 'gather more' rather than 'stop': retry retrieval with a rewritten query, try another tool, ask one question, with a budget decrement. Confidence compounds — 95% per step over 10 steps is ~60% run success — so add a run-level check before any irreversible action. And the harness, not the model, owns the gate, placed before side-effecting tools.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-trust-calibration-d14",
+      "module": "T07-trust-calibration",
+      "q": "Rank calibration interventions by yield per unit of effort, and name the lowest.",
+      "a": "1) Plot the confidence histogram and risk-coverage curve on your current signal. 2) Log the downstream user action as your label source. 3) Fit a small logistic regression over 4-6 cheap features. 4) Temperature-scale anything with a fixed label set. 5) Semantic entropy on the high-stakes tier only. 6) Conformal wrapping of label-set decisions. Lowest yield, and the first thing everyone tries: prompt-engineering better stated percentages.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-trust-calibration-d15",
+      "module": "T07-trust-calibration",
+      "q": "Why must the harness rather than the model decide to abstain?",
+      "a": "Because models verbalise uncertainty and then act anyway (arXiv:2601.07767). Extract a signal, threshold in code, and gate the action there. A decision made inside the model's prose is neither measurable nor enforceable, and it cannot be re-tuned without changing the prompt.",
+      "difficulty": "mid"
+    }
+  ]
+}

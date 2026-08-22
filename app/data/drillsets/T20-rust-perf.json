@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T20-rust-perf-d1",
+      "module": "T20-rust-perf",
+      "q": "How big is a cache line on x86-64, and name three separate Rust performance phenomena that follow directly from that one number.",
+      "a": "64 bytes (128 on aarch64/Apple silicon at some levels). It explains: (1) AoS vs SoA, because you pull a whole line and use 4 bytes of every 32; (2) false sharing, because 4 AtomicU64 = 32 B all land on one line and 4 cores fight over it; (3) why `#[repr(align(64))]` / `CachePadded` is the fix; (4) why linked lists lose to `Vec` at equal asymptotic complexity. Measured stride curve over 64 MB: 0.36 ns/touch at stride 1 B, 3.22 ns at stride 64 B, 6.63 ns at 256 B. The knee is exactly at 64.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-perf-d2",
+      "module": "T20-rust-perf",
+      "q": "Your colleague benchmarks a `--debug` build and reports iterators are 4x slower than index loops. What do you say?",
+      "a": "The measurement is meaningless: `cargo build` defaults to `opt-level=0`, where nothing is inlined, no loop is vectorised, and every bounds check is live. It is a different program. Re-run with `--release`. Measured on rustc 1.97.1 release: `sum_iter` 35 instructions vs `sum_loop` 34, with an identical SSE2 `paddq` core; the only difference was label names and the order of two `xor` register-zeroing instructions. In the zip case the iterator was strictly better: 37 instructions and 0 panic edges vs 63 instructions and 2 panic call sites.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-perf-d3",
+      "module": "T20-rust-perf",
+      "q": "Name the three tools for inspecting generated Rust assembly and when you'd pick each.",
+      "a": "(1) Compiler Explorer (godbolt.org) for a self-contained snippet with a pinned rustc version and `-C opt-level=3`; mark the fn `pub` in a `--crate-type=lib` or `#[no_mangle]` so it survives DCE. (2) `cargo-show-asm`: `cargo asm --lib 'crate::f' --rust` for code inside a real crate with real dependencies; `--rust` interleaves source with assembly, and it also emits `--llvm` and `--mir` (MIR is the right view for what rustc did before LLVM). (3) `objdump -d target/release/libfoo.rlib` for ground truth. Always `--release`.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-perf-d4",
+      "module": "T20-rust-perf",
+      "q": "A Criterion benchmark reports 900 picoseconds for a function that loops over 10 million elements. Diagnose it in one sentence, then give the 30-second proof.",
+      "a": "The optimiser deleted the work: 900 ps is under three clock cycles at 3 GHz. Proof: run at N and 2N and check the time roughly doubles for an O(n) function; if it doesn't, the loop is gone. Criterion's own output gives it away too, e.g. 'Collecting 100 samples in estimated 5.0000 s (5.2B iterations)'. Measured case: `(0..10_000_000).fold(0u64, wrapping_add)` benchmarked at 975.34 ps and STILL 958.84 ps with `black_box` on the input, because LLVM found the triangular-sum closed form. `black_box` on the argument is not sufficient when the body itself is analytically foldable.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-perf-d5",
+      "module": "T20-rust-perf",
+      "q": "Explain why `v.iter().sum::<f32>()` stays scalar on an AVX2 machine while `sum::<i32>()` vectorises, and give the fix plus its cost.",
+      "a": "IEEE-754 addition is not associative, so splitting a serial reduction into 4 or 8 lanes is a reassociation that changes the result; LLVM refuses. Integer wrapping addition IS associative, so `sum_i32` used 8 `ymm` registers under `-C target-cpu=native` while `sum_f32` was 39 instructions of 8x-unrolled scalar `addss` all into `%xmm0` (so the unroll bought nothing, every add depending on the previous at ~4 cycles latency). Fix: manually split into 8 independent accumulators, measured 6.67x on 4096 f32s (1.9323 us -> 289.69 ns). Cost: it's a correctness change, last-bit results differ, so it's unacceptable where output must be bit-reproducible.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-perf-d6",
+      "module": "T20-rust-perf",
+      "q": "Quantify the monomorphisation tax and name the tool plus the refactor that fixes it.",
+      "a": "One small generic fn over 200 concrete types vs the `&dyn` version instantiated once: rebuild 536 ms vs 169 ms (3.17x), .rlib 494,904 vs 387,256 B (+107,648 B, 1.28x), LLVM IR 10,847 vs 5,690 lines (1.91x). That is ONE small function; a real service instantiates thousands, which is why builds are slow (the borrow checker is typically single-digit percent, verify with `cargo build --timings`). Tool: `cargo llvm-lines --release | head -30`, which ranks by IR lines and correlates with both compile time and binary size. Refactor: thin generic wrapper over a non-generic inner fn, `fn load<P: AsRef<Path>>(p: P) { load_inner(p.as_ref()) }`.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-perf-d7",
+      "module": "T20-rust-perf",
+      "q": "Throughput went DOWN when you added threads and the threads share no data. Give the hypothesis, the measured cost, and the diagnostic command.",
+      "a": "False sharing. Cache coherence works on 64-byte lines, not variables, so logically independent counters that are physically adjacent live on one line and each core's write invalidates it in the other cores' L1, turning an L1 hit into a coherence transaction. Measured: 4 threads x 50,000,000 relaxed `fetch_add`, packed `AtomicU64` 1768.298 ms vs `#[repr(align(64))]` 481.023 ms = 3.68x. Diagnose with `perf c2c record` then `perf c2c report`, which reports HITM events and names the cache line and the contending instructions. Fix with `crossbeam_utils::CachePadded` (pads to 128 B on aarch64, where hand-rolled `align(64)` is subtly wrong).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-perf-d8",
+      "module": "T20-rust-perf",
+      "q": "Is `Vec::with_capacity` always worth it? Give three measurements that determine the answer.",
+      "a": "No. 1M `u64` pushes: 0.677 ms vs 0.674 ms with capacity, no win, because amortised doubling is only ~20 reallocs and glibc `realloc` extends large mappings in place. 200k `String` pushes: 10.491 vs 6.619 ms = 1.58x, a real win, because each realloc memcpys 24-byte String headers and the heap is fragmented by 200k separate allocations. Best of all: `(0..1M).collect::<Vec<u64>>()` at 0.203 ms = 3.33x over the push loop, using `size_hint` to allocate once and write through a raw pointer with no per-push capacity check. The rule: pre-allocation matters in proportion to element-move cost and existing heap fragmentation.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-perf-d9",
+      "module": "T20-rust-perf",
+      "q": "Given a hot loop over `Vec<Box<dyn Trait>>` where the implementation set is closed, what do you change and what does it cost?",
+      "a": "Enum dispatch: `enum Op { A(A), B(B), C(C) }` with a `match` in the method (the `enum_dispatch` crate generates it from a trait). That gives a jump table or a few compares instead of `call *0x18(%rcx)`, stores payloads inline so the `Vec` is contiguous with no per-element allocation, and lets LLVM inline into each arm. Costs: every element is as large as the largest variant plus a discriminant, so one 200-byte variant among five 8-byte variants wastes 192 B per element (fix: box just the fat variant); and the enum is closed, so downstream crates cannot add implementations. The often-bigger structural win is batching work by concrete type so each inner loop is monomorphic.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-perf-d10",
+      "module": "T20-rust-perf",
+      "q": "State the current cross-crate inlining rule correctly, and say what LTO actually buys with numbers.",
+      "a": "The folklore ('a non-generic cross-crate fn without `#[inline]` cannot be inlined without LTO') is now only partly true: rustc's MIR inliner does cross-crate inlining of small-to-medium functions on stable regardless. Tested with a two-crate workspace, no `#[inline]`, `lto = false`: zero `call` instructions to the dependency's function, and it still inlined after being made bulky. `lto = \"fat\"` + `codegen-units = 1` bought binary size: 4,426,416 -> 2,221,304 B (49.8%) at 0.14 s -> 2.48 s build (17.7x), for a 3.6% runtime delta that was noise. So LTO is a size and devirtualisation tool first; `lto = \"thin\"` is the sane default, and it doesn't belong on a crate the team iterates on daily.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-perf-d11",
+      "module": "T20-rust-perf",
+      "q": "Design a performance CI gate for a Rust service. What actually works and what fails?",
+      "a": "Wall-clock Criterion on a shared CI runner fails: noisy neighbours, frequency scaling and thermal throttling give 5-10% run-to-run variance, larger than the effect sizes you care about, so the false-positive rate exceeds the true-positive rate and the team learns to ignore the alert, which is worse than no alert. What works: either a dedicated pinned runner with boost disabled and the `performance` governor (still ~5% resolution), or instrumented counting for the CI signal, i.e. cachegrind instruction counts, which are deterministic with zero run-to-run variance at 50-100x slowdown (the technique CodSpeed productised). Use wall-clock for the release check, instruction counts for the gate. Store `target/criterion/` as an artifact either way.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-perf-d12",
+      "module": "T20-rust-perf",
+      "q": "Write the release profile you'd ship for a compute-bound service and justify every line, including one you'd argue against.",
+      "a": "`opt-level = 3` (default; never `\"z\"`/`\"s\"`, which disable unrolling and vectorisation). `lto = \"thin\"` (most of fat LTO's size benefit at ~1/3 the build cost). `codegen-units = 1` (better optimisation, but serialises the backend). `debug = 1` (line tables so prod flamegraphs are readable, near-free at runtime). `strip = \"debuginfo\"` (never `\"symbols\"`, which destroys the flamegraph). `incremental = false` (incremental + release is a known deoptimisation). The one to argue against: `panic = \"abort\"` saves 5-10% of binary size by removing unwind tables, but makes `catch_unwind` a no-op, so on a service where a panicking request handler must not kill the process, Tokio's task-panic isolation breaks and `unwind` is correct.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-perf-d13",
+      "module": "T20-rust-perf",
+      "q": "Someone claims rewriting a Python service in Rust will be 100x faster. Give the decision framework and the five reasons it might come out at only 3x.",
+      "a": "Framework: first ask what fraction of latency is actually CPU. If 90% is waiting on a vector store, LLM endpoint or S3, the language constant factor is rounding error and the work is batching/caching/pooling. If CPU-bound, ask whether the CPU is in Python bytecode or already in C extensions, because NumPy/PyArrow paths win maybe 1-2x, not 100x; the real 10-100x is Python-level loops over Python objects, refcounting, and GIL-serialised threading. Pragmatic middle: a PyO3 extension for the hot kernel, not a full rewrite. If it lands at 3x: the workload was I/O-bound; the Rust version allocates as much (57x measured between `String` clone and `&str` borrow); the hot loop is behind `dyn Trait` and never inlined; shipped with default opt settings and no LTO; or it is memory-bandwidth-bound. Diagnose with `perf stat` for IPC first: at 0.4 the answer was never the language.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-perf-d14",
+      "module": "T20-rust-perf",
+      "q": "You need AVX2 in production on a mixed fleet. Give the full deployment shape and the two traps.",
+      "a": "Never `-C target-cpu=native` in a shipped build; it SIGILLs on any host missing an instruction it used, silently until it doesn't. Set a floor in `.cargo/config.toml`: `x86-64-v2` (SSE4.2/POPCNT) or `x86-64-v3` (AVX2/FMA/BMI2, Haswell 2013+ / Zen 1+), verified against your actual instance families (Graviton needs `neoverse-n1`/`v1` instead). Above the floor: `#[target_feature(enable = \"avx2\")] unsafe fn` guarded by `is_x86_feature_detected!(\"avx2\")`, resolved once into a fn pointer in a `OnceLock`. Trap 1: calling a `#[target_feature]` fn from a non-AVX2 context blocks inlining across that boundary, so use one big `#[inline(always)] #[target_feature]` region, not per-operation calls. Trap 2: the win is often small because you're memory-bandwidth-bound, so check arithmetic intensity (FLOPs per byte loaded) before investing a week.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-perf-d15",
+      "module": "T20-rust-perf",
+      "q": "Bounds checks: give the three distinct outcomes with evidence, and rank the fixes.",
+      "a": "Outcome 1, eliminated: `v[i]` with `i` from `0..v.len()`, no check emitted. Outcome 2, hoisted: `v[i]` with an unrelated `n` got a single `cmp; jbe` before the loop plus a fully vectorised body, which is why adding `assert!(n <= v.len())` frequently measures as zero change. Outcome 3, survives: `out[i] = src[idx[i]]` kept two checks per iteration and blocked vectorisation entirely. Measured over 1M elements: random indirect 1.896 ms, sequential indirect 0.714 ms, iterator zip 0.179 ms (10.6x and 4.0x). Fixes ranked: iterators (`zip`/`chunks_exact`/`windows`), slice once up front to unify lengths, `chunks_exact(8)` for a compile-time trip count, `assert!` (often a no-op), and only last `get_unchecked` with a `// SAFETY:` proof after the profile shows `panic_bounds_check` executing.",
+      "difficulty": "mid"
+    }
+  ]
+}

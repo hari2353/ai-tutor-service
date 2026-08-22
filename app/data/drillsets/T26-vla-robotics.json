@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T26-vla-robotics-d1",
+      "module": "T26-vla-robotics",
+      "q": "Define a VLA in one sentence and name the three questions that determine every design decision in one.",
+      "a": "A VLA is a vision-language model whose output space is robot actions instead of text. The three questions: how is the action represented (discrete bins / continuous regression / diffusion-flow expert), how fast must it come out (control frequency in Hz), and where did the data come from (teleoperation hours times dollars per hour).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-vla-robotics-d2",
+      "module": "T26-vla-robotics",
+      "q": "How many bins per action dimension did RT-1 and RT-2 use, and how did RT-2 fit them into the vocabulary?",
+      "a": "256 uniform bins per dimension. RT-1 over 11 action dimensions (7 arm, 3 base, 1 mode switch); RT-2's mobile manipulator over 8 (terminate, 6-DoF delta pose, gripper). In PaLI-X, integers up to 1000 already have dedicated tokens so bin k is just the token for the string k; in PaLM-E they overwrite the 256 least-frequently-used tokens in the existing vocabulary.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-vla-robotics-d3",
+      "module": "T26-vla-robotics",
+      "q": "State the action-chunking effective-rate formula, and apply it to π0.",
+      "a": "Effective control rate = H / inference latency. π0 emits H=50 actions in ~73 ms, so it has ~685 actions per second of capacity, which supports 50 Hz control with roughly 13x headroom. That headroom is what makes real-time chunking (computing chunk i+1 while executing chunk i) viable and lets you hide latency entirely.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-vla-robotics-d4",
+      "module": "T26-vla-robotics",
+      "q": "Quote ACT's chunking ablation and the temporal-ensembling delta. Then state the caveat about ACT's real-hardware numbers.",
+      "a": "1% success at k=1 rising to 44% at k=100, averaged across settings, tapering slightly for larger k. Temporal ensembling adds about 3.3 percentage points. Caveat: ACT's real ALOHA numbers of 80-95% are on a different task suite from the 44% simulated ablation, so the two must not be compared or plotted together. This is a small instance of the general non-comparability problem across VLA papers.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-vla-robotics-d5",
+      "module": "T26-vla-robotics",
+      "q": "Work out the inference budget at 50 Hz and explain why a 7B model cannot meet it.",
+      "a": "50 Hz is a 20 ms period. Subtract camera exposure/readout and transport plus controller overhead, realistically ~15 ms, leaving ~5 ms of inference budget. A 7B model in FP16 is 14 GB of weights; at ~2 TB/s HBM bandwidth one full weight read is ~7 ms, and 7 sequential action tokens needs 7 of them, so ~49 ms is the hardware floor. Measured OpenVLA-7B is 292 ms on an A6000 and 405 ms on an L4, which is 5-8x above that floor. Quantisation and compilation give 2-3x, not the 15x required.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-vla-robotics-d6",
+      "module": "T26-vla-robotics",
+      "q": "Explain why 10 flow-matching integration steps in π0 is cheaper than 7 autoregressive decode steps in OpenVLA.",
+      "a": "The 10 steps run on the 300M (0.315B) action expert only; the 3B PaliGemma backbone processes images and language once and its KV cache is reused across all 10 steps. Ten passes over 300M is roughly one pass over 3B, so the total is about 2 backbone-equivalents rather than 10. OpenVLA's 7 decode steps each traverse the full 7B model. The architectural separation, not the loss function, is what buys the speed.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-vla-robotics-d7",
+      "module": "T26-vla-robotics",
+      "q": "Why is per-dimension independence in a discrete action head a correctness bug rather than a precision issue?",
+      "a": "A softmax over 256 bins can represent a bimodal marginal within one dimension. The problem is across dimensions. If mode A is (Δy=+0.05, Δz=+0.02) and mode B is (Δy=-0.05, Δz=-0.02), a head that picks each dimension's argmax independently can emit (+0.05, -0.02), which is in neither mode and is typically a collision. Autoregressive decoding over dimensions fixes it in principle if the model learned the conditional, but costs you the latency. That tension is why diffusion and flow-matching heads, which sample jointly in a fixed small number of steps, won.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-vla-robotics-d8",
+      "module": "T26-vla-robotics",
+      "q": "A colleague says Open X-Embodiment proves cross-embodiment transfer works. Correct them with numbers.",
+      "a": "Partially true. 60 datasets, 34 labs, 1M+ trajectories, 22 embodiments, 527 skills, 160,266 tasks. RT-1-X beat the original per-dataset SOTA by ~50% on average across 5 evaluated datasets and RT-2-X showed ~3x on emergent-skill evals. But on the most data-rich datasets, RT-1-X was worse than the original single-embodiment model: negative transfer. It is the multilingual-model pattern, helping low-resource and costing high-resource. And no published result shows transfer to a morphology absent from training; every cross-embodiment number is on an embodiment in the pooled set or one that received fine-tuning data.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-vla-robotics-d9",
+      "module": "T26-vla-robotics",
+      "q": "Your policy stalls halfway to the object every time. Give the diagnostic sequence.",
+      "a": "First confirm the signature in the logs: commanded deltas near zero for hundreds of consecutive steps with a static observation. That means an absorbing state, not hardware. Primary hypothesis: operator pauses in the demonstrations, so the same observation maps to both 'move' and 'don't move' and an L2 head predicts the average, which self-reinforces. Fixes by leverage: raise H (ACT's 1%→44%), filter near-zero-motion segments, swap L2 for flow matching. If chunking does not fix it and the stall is at a fixed point in the trajectory, the hypothesis is wrong and it is a visual OOD problem, most likely gripper occlusion of the target on approach; check whether the wrist view at the stall resembles anything in training.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-vla-robotics-d10",
+      "module": "T26-vla-robotics",
+      "q": "Design the async two-rate control loop. Name the four rules that make it safe.",
+      "a": "Thread A (slow, 1-10 Hz, GPU): grab frames plus instruction, run the VLM, sample the action chunk, publish it with a monotonic timestamp into a double buffer. Thread B (fast, 50-200 Hz, hard real-time): read proprioception at full rate, read the latest chunk without ever blocking, index it by wall-clock (idx = (now - t0) * hz, not by loop counter, so a skipped cycle does not accumulate drift), crossfade 4-10 steps at a new chunk's seam, send the command, and increment a late-command counter when the deadline slips. Rules: (1) B never blocks on A; (2) B is pinned, SCHED_FIFO, isolated core, no GC or malloc in the hot path; (3) A emits a latent intent, not a target pose, because a stale pose is a wrong command while a stale intent is roughly right; (4) on chunk exhaustion, hold position, never extrapolate.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-vla-robotics-d11",
+      "module": "T26-vla-robotics",
+      "q": "Design a defensible evaluation protocol for a VLA, and justify each element with the arithmetic.",
+      "a": "Pre-register task list, scene randomisation procedure, and n before running anything, otherwise the suite is selected post-hoc. Report Wilson 95% intervals always: at n=10 a 90% observation spans roughly [60%, 98%], so it is compatible with a 65% policy; separating 80% from 70% at p<0.05 needs ~n=300 per arm, which at 60 s per trial-plus-reset is ~5 robot-hours per number. Randomise object and initial robot pose from a script, not by a human's idea of 'roughly here'. Stratify into in-distribution / novel-object / novel-scene and report all three, because the held-out number is routinely 30-60 points below the headline. Report interventions per hour and MTBF, not just binary success. Version camera intrinsics and extrinsics, gripper serial, firmware, and ambient lux so you can explain a 15-point move next month. Treat sim numbers (SIMPLER, LIBERO) as regression gates only, since every VLA scores materially higher on SIMPLER than on comparable suites due to few environments, one viewpoint, and biased scenarios.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-vla-robotics-d12",
+      "module": "T26-vla-robotics",
+      "q": "Design the serving architecture for a fleet of 50 robots running a 3B VLA, including the network-failure path.",
+      "a": "Split by rate, not by machine boundary convenience. On-robot: a hard-real-time process in C++ or Rust running the action expert at 50-100 Hz against a locally cached latent, reading proprioception at full rate, enforcing joint/velocity/force limits and workspace geometry outside the model so it can veto any command, and holding on chunk exhaustion. Off-robot: a shared GPU pool serving the VLM backbone at 1-10 Hz per robot, which is 50-500 aggregate RPS of independent requests, so continuous batching is a straight win here in a way it is not for a single robot at batch size 1. Autoscale on queue depth, target p99 not mean. Network failure: the current chunk buys H·dt seconds of buffer (1.0 s at H=50, 50 Hz); beyond that transition to a safe hold, never extrapolate and never replay the last chunk. Put a watchdog on latent staleness in the fast loop that trips independently of what the network stack reports. The design rule is that every layer degrades to a safe state, not to a plausible one.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-vla-robotics-d13",
+      "module": "T26-vla-robotics",
+      "q": "Make the case for not using a VLA, then steelman the other side with the crossover argument.",
+      "a": "Against: if objects are known, poses estimable, and the task set fixed, a classical perception-plus-planning pipeline gives 99%+ reliability with a debuggable failure mode against a VLA's 60-90% and an opaque one; bin picking of known SKUs is solved classically. Also against when control needs >20 Hz genuine mid-loop reactivity (force-controlled insertion, in-hand manipulation, locomotion), because a chunk is open loop exactly when the interesting information arrives; also when the safety case needs verifiable behaviour, in which case the VLA sits inside a classically-enforced envelope; also when you have one task, because the whole economic argument is amortisation. Steelman: the classical argument collapses as task count grows and specifiability falls. At 500 loosely-specified household tasks no amount of classical engineering scales, and a 70% policy that improves with data beats a 99% pipeline covering 12 of the 500. Correct framing is the marginal cost of task N+1 in each approach, with the crossover somewhere in the tens of tasks.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-vla-robotics-d14",
+      "module": "T26-vla-robotics",
+      "q": "Cost out a data-collection plan for a new bimanual task and state what you would optimise.",
+      "a": "Post-training a pretrained VLA on a new task genuinely works at 50-200 demonstrations, which is 2-6 operator-hours at a yield of 30-60 short demos per hour. At roughly $50-200 per usable hour once hardware amortisation and a supervising engineer are included (order-of-magnitude estimate, not a published number), a 200-demo task is low hundreds to low thousands of dollars, and a 500-hour corpus is roughly 3 person-months and $25k-100k. What to optimise: variation over volume. Fifty demos across ten object instances and five lighting conditions beats 200 of the identical setup, and randomising camera extrinsics during collection is the single highest-value habit because it pre-empts the most common deployment failure. Also compute and version per-dimension normalisation statistics with the checkpoint using 1st/99th percentiles rather than min/max, so one bad demo does not squash the range.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-vla-robotics-d15",
+      "module": "T26-vla-robotics",
+      "q": "Trace the RT-1 → RT-2 → RT-X → OpenVLA → π0 → GR00T lineage, one contribution each.",
+      "a": "RT-1 (Dec 2022, 35M, EfficientNet-B3 + FiLM + TokenLearner 81→8 tokens, 6-image history, 11 dims × 256 bins, 130k episodes over 700+ tasks collected across 13 robots over 17 months, 3 Hz): control as sequence modelling works, but a 35M robot-only model has no world knowledge. RT-2 (2023, PaLI-X 55B and PaLM-E 12B): encode actions in the VLM's own vocabulary and co-fine-tune with web data, roughly doubling unseen-split generalisation (about 62% vs 32%) and ~3x on emergent skills; ran at 1-3 Hz over cloud TPUs. RT-X (Oct 2023): pool 60 datasets from 34 labs into 1M+ trajectories over 22 embodiments, +50% average over per-dataset SOTA but negative transfer on the data-rich sets. OpenVLA (2024, 7B, Llama-2 + DINOv2/SigLIP, 970k episodes): open weights and single-24GB LoRA fine-tuning, beating 55B RT-2-X by 16.5 points on 29 tasks. π0 (2024, 3.3B): flow-matching 300M action expert, H=50, 73 ms, giving genuine 50 Hz; π0.5 adds knowledge insulation and open-world home generalisation from ~400 h of mobile-manipulator data (97.6% of training from other sources). GR00T N1 (2025, 2.2B, 1.34B Eagle-2 VLM): explicit two-system architecture with a DiT System 1 at 120 Hz, open checkpoint, per-embodiment adapters; N1.5 is the 3B successor.",
+      "difficulty": "staff"
+    }
+  ]
+}

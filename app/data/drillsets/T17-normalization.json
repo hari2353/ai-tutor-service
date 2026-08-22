@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T17-normalization-d1",
+      "module": "T17-normalization",
+      "q": "Define a functional dependency and explain how every normal form is derived from it.",
+      "a": "X -> Y means every row sharing the same X must have the same Y - X determines Y. 2NF forbids partial dependencies on part of a composite key, 3NF forbids transitive dependencies through non-key attributes, BCNF forbids any determinant of a non-trivial FD that isn't itself a candidate key - all defined purely in terms of which FDs are permitted relative to the candidate keys.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-normalization-d2",
+      "module": "T17-normalization",
+      "q": "Walk through 1NF, 2NF, and 3NF using an order-line table with composite key (order_id, product_id) that also stores customer_id and customer_city.",
+      "a": "1NF: no comma-separated/multi-valued columns - one row per (order, product) line item already satisfies this. 2NF: customer_id depends only on order_id, not the full composite key - a partial dependency, fixed by extracting orders(order_id, customer_id). 3NF: customer_city depends on customer_id, not directly on order_id - transitive, fixed by extracting customers(customer_id, customer_city).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-normalization-d3",
+      "module": "T17-normalization",
+      "q": "What loophole does BCNF close that 3NF leaves open, and give a concrete example.",
+      "a": "3NF only forbids non-key attributes transitively depending on the key; it permits a determinant that's part of a candidate key but not a full candidate key itself, in a table with overlapping candidate keys. Example: course_enrollment(student_id, course_id, instructor), key (student_id, course_id), with course_id -> instructor - this is 3NF but violates BCNF since course_id doesn't determine student_id and thus isn't a candidate key, yet is a determinant.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-normalization-d4",
+      "module": "T17-normalization",
+      "q": "Why isn't BCNF decomposition always dependency-preserving, and why does that matter operationally?",
+      "a": "Decomposing to BCNF can split a functional dependency across two tables such that verifying it requires rejoining them, losing a single-table constraint check that 3NF decomposition guarantees to preserve. It matters because enforcing a business rule via a cross-table join or trigger is more operationally fragile than a simple single-table constraint.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-normalization-d5",
+      "module": "T17-normalization",
+      "q": "Define a multi-valued dependency and give a 4NF violation example, distinguishing it from a plain many-to-many relationship.",
+      "a": "X ->> Y means the set of Y values for a given X is independent of any other attribute in the table. A 4NF violation combines two INDEPENDENT multi-valued facts into one table, e.g. product_tags_warehouses(product_id, tag, warehouse_id) forcing a cross product (3 tags x 2 warehouses = 6 rows instead of 5). A single many-to-many relationship (tags alone) needs only one join table and is already fine at 3NF/BCNF - 4NF specifically concerns combining two independent multi-valued relationships into one table.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-normalization-d6",
+      "module": "T17-normalization",
+      "q": "Name the three classic anomalies and explain why a single 2NF/3NF violation usually causes all three simultaneously.",
+      "a": "Update anomaly (duplicated fact inconsistently updated), insert anomaly (can't record one fact without an unrelated one), delete anomaly (deleting one fact accidentally erases another). A single misplaced/duplicated functional dependency typically causes all three at once because the same duplicated data creates update risk, blocks independent insertion, and risks accidental deletion - fixing the underlying FD via decomposition resolves all three together.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-normalization-d7",
+      "module": "T17-normalization",
+      "q": "When is denormalization a sound engineering decision rather than a shortcut, and what's the difference between denormalization and caching?",
+      "a": "Sound when a read-heavy access pattern pays a real cost for joins/aggregation, the duplicated data changes rarely enough for the anomaly risk to be low, AND you can name the specific anomaly reintroduced plus a consistency mechanism (trigger, write-through, CDC sync, accepted staleness). Unlike a cache (a derived, disposable copy safely rebuilt from source of truth), a denormalized column in the transactional schema is itself a claimed source of truth, raising the consistency bar.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-normalization-d8",
+      "module": "T17-normalization",
+      "q": "A customers table stores both city and state, with a business rule that every city belongs to exactly one state. Is this technically a normalization violation, and does it matter in practice?",
+      "a": "Technically yes - city -> state with city not a candidate key makes state transitively reachable, a 3NF violation in the strict sense. In practice it's often accepted because city/state combinations rarely change and duplication is small; it becomes worth fixing if cities need frequent corrections or state needs its own attributes (population, tax rate) requiring a join anyway.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-normalization-d9",
+      "module": "T17-normalization",
+      "q": "How do you empirically verify whether a candidate functional dependency holds in real data, and what's the limit of that verification?",
+      "a": "Group rows by the candidate determinant and check whether every group has one consistent dependent value - a group with multiple distinct values proves the FD is violated in the sample. Finding zero violations only strongly suggests the FD holds; it doesn't logically prove it for all future data, since a business rule can be true by convention but not yet violated in the sampled data.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-normalization-d10",
+      "module": "T17-normalization",
+      "q": "Design the schema for a projects feature with multiple collaborators (with roles) and multiple tags per project, and explain which normal form issue you're avoiding.",
+      "a": "projects(project_id PK, name), project_collaborators(project_id, user_id, role, PK(project_id,user_id)), project_tags(project_id, tag, PK(project_id,tag)) - two separate join tables rather than one combined table, avoiding a 4NF violation since collaborators and tags are independent multi-valued facts; combining them would force a cross product (3 collaborators x 4 tags = 12 rows instead of 7).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-normalization-d11",
+      "module": "T17-normalization",
+      "q": "Why do star schemas and OLAP dimensional models count as the clearest legitimate default case for denormalization?",
+      "a": "Their read pattern (few large scans, infrequent updates to dimension data) makes the anomaly risk low and the join-avoidance benefit high - denormalization there is a first-class design tool by default, not an exception requiring special justification, unlike frequently-updated OLTP data where normalization is close to a hard requirement.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-normalization-d12",
+      "module": "T17-normalization",
+      "q": "What is the practical default normal form target for OLTP schemas, and when should you go further?",
+      "a": "3NF (or BCNF where they diverge) as the default - it eliminates essentially all common update/insert/delete anomalies with a manageable table count. Push to 4NF/5NF only when a genuine, identified multi-valued-dependency problem exists, not reflexively, since higher normal forms trade off against join complexity.",
+      "difficulty": "warmup"
+    }
+  ]
+}

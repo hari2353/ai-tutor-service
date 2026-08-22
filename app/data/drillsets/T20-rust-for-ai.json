@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T20-rust-for-ai-d1",
+      "module": "T20-rust-for-ai",
+      "q": "In one sentence, state the pattern that predicts whether a component in an AI stack gets rewritten in Rust.",
+      "a": "A hot loop that is not a matmul, called millions of times, with small per-item work, that cannot be batched onto a GPU or handed to BLAS. Equivalently: Rust owns the band where the unit of work is a byte or token, Python keeps the band where it is a tensor.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-for-ai-d2",
+      "module": "T20-rust-for-ai",
+      "q": "You are about to write your first PyO3 binding. What is the very first number you should measure, and why?",
+      "a": "The cost of an empty call. Measured: 54.56 ns for an empty #[pyfunction] vs 50.71 ns for an empty Python def, with a 34.31 ns floor for the attribute lookup alone. That is your floor: every function you expose must do meaningfully more work than it, or the binding makes things worse. Practical break-even is ~1 microsecond of Rust work per call.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-for-ai-d3",
+      "module": "T20-rust-for-ai",
+      "q": "A colleague benchmarks a Rust tokenizer against a pure-Python one and reports 14x. What is the first thing you check before believing it?",
+      "a": "That both produce identical output. Assert py.encode(text) == hf.encode(text).ids before timing anything; without it you are benchmarking two different algorithms and the number is meaningless. Second, ask which cache state and which API: the same comparison ranges from 2.4x to 17.5x, and in one condition (warm memo cache vs HF encode()) the pure-Python version actually wins, 33.8 ms vs 43.2 ms.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-for-ai-d4",
+      "module": "T20-rust-for-ai",
+      "q": "Your data pipeline wraps tokenizers.encode_batch in ThreadPoolExecutor(max_workers=16) and sees no speedup. Diagnose and fix.",
+      "a": "encode_batch already releases the GIL and saturates the cores via its internal rayon pool, so the Python threads have nothing to take. Measured 147.0 / 147.3 / 152.3 ms for 1 / 2 / 4 threads, flat then slightly worse from oversubscription. Fix: remove the pool and set RAYON_NUM_THREADS. Verify the internal parallelism is on with TOKENIZERS_PARALLELISM=true, which measured 142.7 ms vs 324.6 ms for false, a 2.27x on 2 vCPUs.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-for-ai-d5",
+      "module": "T20-rust-for-ai",
+      "q": "Tokenization throughput halved after a deploy with no code change. Trace it.",
+      "a": "Something set TOKENIZERS_PARALLELISM=false, almost always copy-pasted from a HuggingFace issue to silence the fork-safety warning. Measured cost: 324.6 ms vs 142.7 ms, 2.27x. The warning exists because rayon's thread pool does not survive os.fork(): the child inherits a pool whose threads do not exist and hangs. The correct fix is the fork ordering, not disabling parallelism: construct the tokenizer after forking, or use the spawn start method.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-for-ai-d6",
+      "module": "T20-rust-for-ai",
+      "q": "A teammate binds a per-item Python helper to Rust and it comes out slower. Explain the mechanism and give the fix.",
+      "a": "The ~55 ns boundary plus argument conversion exceeded the work done. Concretely, a Rust add(a: i64, b: i64) measured 79.16 ns against 70.85 ns for the Python equivalent, 12% slower, because two PyLong_AsLongLong conversions plus boxing the result cost more than an add instruction saves. Fix: move the LOOP into Rust, not the loop body. One call per batch, never one per item.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-for-ai-d7",
+      "module": "T20-rust-for-ai",
+      "q": "Someone proposes a Rust binding whose signature is `fn process(items: Vec<String>) -> Vec<String>`. What do you predict and why?",
+      "a": "No speedup, probably a regression. A Python container argument makes the boundary O(n) at roughly the per-element cost the builtin was already paying: my sum_list(Vec<i64>) measured 0.40x-0.68x of builtin sum() at every N from 1 to 1,048,576 with no crossover, at 7.6-12.3 ns/element extraction. The return side is worse: Vec<String> allocates a Python object per element. Redesign so the input is bytes/str and the output is a numpy array or bytes.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-for-ai-d8",
+      "module": "T20-rust-for-ai",
+      "q": "Your zero-copy Rust f64 reduction is 2x SLOWER than np.sum on a 1M-element array. Diagnose and fix.",
+      "a": "iter().sum() on f64 does not autovectorise, because IEEE-754 addition is non-associative and LLVM will not reorder your numerics; it compiles to a serial chain of scalar addsd. numpy uses pairwise summation with hand-written SIMD. Measured 1,206,878 ns vs 609,451 ns at N=1,048,576. Fix: split into 8 independent accumulators via chunks_exact(8) with a horizontal reduce, accepting that last-bit results change. Same failure documented in T20-rust-perf.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-for-ai-d9",
+      "module": "T20-rust-for-ai",
+      "q": "Explain why py.detach() is not free, and give the threshold for using it.",
+      "a": "A detach/attach round trip costs ~30-40 ns. Measured overhead: 48.5% at zero work (92.9 vs 62.5 ns), 45.5% at 10 iterations, 5.1% at 100, 0.9% at 10,000. So detach when the closure does more than roughly 1 microsecond of work. This is why tokenizers detaches in encode_batch (milliseconds) and not in encode() on a 7-token prompt. Note also that Python<'py> is not Send, so the compiler prevents you touching Python objects inside.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-for-ai-d10",
+      "module": "T20-rust-for-ai",
+      "q": "Your Rust extension is deployed and the whole Python process dies with SIGABRT under load, no traceback, all in-flight requests lost. Root cause?",
+      "a": "panic = \"abort\" in the extension's [profile.release]. PyO3 normally catches panics at the #[pyfunction] boundary (unwinding across FFI is UB) and converts them to a Python PanicException that kills only that request; abort disables the catch. Remove it from extension builds. Then audit what panics: slice indexing on user-controlled lengths, unwrap on parses, and PyRefMut borrow violations from two threads mutably borrowing the same #[pyclass].",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-for-ai-d11",
+      "module": "T20-rust-for-ai",
+      "q": "An interviewer asks: 'our LLM serving p99 is 4 seconds, why not rewrite it in Rust?' Give the full answer, including where you WOULD use Rust.",
+      "a": "Ask for the CPU-bound-Python fraction of p99; on a generation request it is under 2% because the GPU owns prefill and decode. Tokenizing a real 30-char prompt measured 11.02 microseconds = 0.00028% of a 4-second request, so the whole rewrite's ceiling is single-digit ms out of 4,000. The real levers are batching config, KV-cache hit rate and eviction, prefill/decode interference, queueing, and cold model loads. Where I WOULD use Rust: the router doing cache-aware prefix-match tokenization at high QPS (exactly what sgl-router and vLLM's router do), and the offline data pipeline where encode_batch's GIL release is worth ~one core per core owned.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-for-ai-d12",
+      "module": "T20-rust-for-ai",
+      "q": "Give a five-step decision procedure for whether to write a Rust binding.",
+      "a": "1) Profile: get the CPU-bound-Python fraction of p99. Under 10%, stop. 2) Exhaust the free wins first, they are usually bigger: encode_batch over encode measured 2.87x, encode_batch_fast a further 1.19x, TOKENIZERS_PARALLELISM=true 2.27x, all zero new code. 3) Estimate per-call work; under ~1 microsecond, move the loop not the loop body. 4) Check what crosses: list/dict is O(n) and expect no win, bytes or buffer-protocol array is O(1) and expect one. 5) Price the team cost: build time, who maintains it, whether the weekly changers can write Rust. Then prototype and measure the empty call before committing.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-for-ai-d13",
+      "module": "T20-rust-for-ai",
+      "q": "Two Rust tokenizers, same algorithm, byte-identical output, 7.8x apart. Explain, and say what this generalises to.",
+      "a": "hf.encode() 400.1 ms vs tiktoken.encode_ordinary() 51.5 ms on 738,046 bytes producing an identical 191,673 ids. The difference is the return type: HF's Encoding carries eight parallel vectors including a heap String per token plus char-to-byte offset bookkeeping; tiktoken returns Vec<u32>. encode_batch_fast, which skips offsets, recovers 1.19x, confirming offsets were ~16% and the per-token String is the rest. Generalises to: the shape of what you hand back across the boundary is often a larger term than the language of the hot loop.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-for-ai-d14",
+      "module": "T20-rust-for-ai",
+      "q": "Free-threaded Python is officially supported in 3.14. Argue both sides of what that does to Rust bindings.",
+      "a": "Against Rust: PEP 779 moved free-threading to phase two (supported, opt-in as 3.14t), single-threaded overhead down to ~5-10% from ~40% in 3.13, so the 'Rust to escape the GIL' argument has a multi-year expiry date and a new binding written purely for parallelism is harder to justify. For Rust: the constant factor is untouched (104.00 ns per interpreted iteration vs 1.81 ns, 57.5x), and compile-time Send/Sync checking becomes MORE valuable because a large amount of Python and C-extension code has latent races the GIL was accidentally serialising. Practical trap: an extension that has not declared gil_used = false makes CPython re-enable the GIL at import, silently.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-for-ai-d15",
+      "module": "T20-rust-for-ai",
+      "q": "You are asked to evaluate candle for a production embedding service. Design the evaluation and state what would make you say no.",
+      "a": "Benchmark YOUR model, not a blog's. Reported candle-vs-PyTorch results are bimodal because the variance is entirely which ops have tuned kernels: 35-47% faster on some BERT/ResNet paths, but candle issue #2877 documents all-MiniLM-L6-v2 at 122.30 ms/batch vs ~14.34 ms in PyTorch, 8.5x slower, and issue #942 the same for YOLOv8 vs ONNX Runtime. Say yes if the constraint is the deployment artifact: static binary vs a 4+ GB container, serverless cold start, edge/WASM, or removing a 1-3 ms sidecar hop. Say no if the constraint is GPU throughput at scale, if you need day-one support for new architectures, or if the people who change this code weekly write Python.",
+      "difficulty": "staff"
+    }
+  ]
+}

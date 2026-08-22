@@ -1,0 +1,158 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-agent-zero-to-prod-c1",
+      "topic": "Zero to Production",
+      "q": "Name the three state boundaries that own every hard problem in a production agent system.",
+      "a": "1) The MODEL boundary is stateless, so context is rebuilt every turn and cost is quadratic in turns. 2) The PROCESS boundary is unreliable, so anything that must survive a pod eviction or a 30-hour human approval lives in Postgres, not in Python. 3) The TRUST boundary is porous, so retrieved content, tool results and other tenants' data carry no authority and must be labelled and bounded by code that never consults the model.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c2",
+      "topic": "Zero to Production",
+      "q": "What six questions must be answered before writing any agent code?",
+      "a": "Unit of work (defines trace, checkpoint thread, eval case, cost unit) · verifiable success signal · blast radius of a wrong action (sets the HITL boundary) · latency contract (bounds the step count) · cost ceiling per unit (becomes an enforced budget) · principal AND tenant as two distinct axes. Then write the NON-GOALS down explicitly.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c3",
+      "topic": "Zero to Production",
+      "q": "What are the only three conditions that justify multi-agent over one agent with good tools?",
+      "a": "1) Genuine parallelism with independent subtasks that merge cleanly. 2) Context isolation, where one workstream would pollute another (subagents process ~67% fewer tokens than skills in multi-domain scenarios). 3) Different permission scopes, where isolation is a security property. Tool COUNT is not a trigger; measured tool-selection degradation is, and the first fixes are better descriptions and phase-scoped visibility inside one agent.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c4",
+      "topic": "Zero to Production",
+      "q": "Give the tool-call contract in order, and say why the order is load-bearing.",
+      "a": "resolve + phase visibility → strict SCHEMA VALIDATE → PERMISSION (allow|deny|ask) → harness-injected tenant scope → budget precheck → idempotency key if mutating → execute with timeout inside the boundary → shape (persist >50k chars, keep a 2 KB preview + pointer) → observation. Validation must precede permission because you cannot authorize arguments you have not parsed. Every rejection path returns an OBSERVATION with a remediation message, never an exception. No bare `except Exception`: a harness bug must crash loudly.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c5",
+      "topic": "Zero to Production",
+      "q": "List the LangGraph AsyncPostgresSaver production gotchas.",
+      "a": "Hand-built connections need autocommit=True and row_factory=dict_row. Run .setup() in a migration job, not on pod boot (N pods racing DDL is an outage). thread_id is the isolation boundary: make it deterministic, caller-controlled, tenant-scoped (tenant:user:session) and under 255 characters. InMemorySaver in a multi-worker deployment silently corrupts state across workers. Writes are 8-15 ms, so free on latency but not on storage: ~40 KB x 4.2 per session; partition daily and prune. interrupt() re-executes the node from its start on resume, so no side effects before the interrupt point.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c6",
+      "topic": "Zero to Production",
+      "q": "Why is an in-agent cost budget only advisory, and where is the real enforcement boundary?",
+      "a": "A bug, a retry wrapper or a subagent can bypass application-level checks. Real enforcement: the worker holds NO provider credentials, egress is restricted by NetworkPolicy to the LLM gateway, and the gateway does the pre-call per-run/per-tenant/per-day budget check and returns a terminal over_budget error the agent handles as an observation. Then reconcile nightly against the provider usage export; drift above 3% means your token accounting is wrong, because pre-call counts are estimates and only the response has true output tokens.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c7",
+      "topic": "Zero to Production",
+      "q": "Why must an agent canary be scored on quality rather than infra health?",
+      "a": "Because a bad prompt returns 200 OK, at normal latency, with a worse answer. CPU, 5xx and p95 all look fine. So the canary gate is: judge-score delta, guardrail block rate, unresolved-citation rate, escalation rate, cost per session and p95 latency, measured on live canary traffic at n >= 400 before a promote decision.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c8",
+      "topic": "Zero to Production",
+      "q": "Give the five blocking CI eval gates for an agent PR.",
+      "a": "Deterministic pass rate >= 0.95 with no regression vs main (schema validity, citation resolution, tool-order and interrupt assertions, budget adherence) · trajectory F1 vs the reference path >= 0.85 · LLM-as-judge mean >= 4.1 and within 0.15 of main, judge model pinned with a human-labelled calibration set · p95 cost per case under the ceiling · a critical-safety subset (cross-tenant, injection, unapproved write) at 100% with no exceptions. Run at temperature 0 with 3 seeds and take the median.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c9",
+      "topic": "Zero to Production",
+      "q": "Why are outcome-only evals insufficient for agents? Give the number.",
+      "a": "Agents evaluated only on final-output quality pass 20-40% more test cases than trajectory-level evaluation reveals, so outcome-only evals systematically overstate readiness. Trajectory scoring asserts the path: which tools were called, in what order, which were forbidden, whether the HITL interrupt fired, and whether the step and cost budgets held.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c10",
+      "topic": "Zero to Production",
+      "q": "What is the single highest-value OpenTelemetry attribute on an agent run, and why?",
+      "a": "The hash of the fully assembled static prompt prefix. It exposes two expensive bug classes at once: silent prompt drift (the hash changed and nobody meant it to) and prompt-cache destruction (the hash changes every turn, cached_input_tokens collapses to ~0, and you pay 5-10x). It also makes runs reproducible, which is a precondition for everything else. Caveat: gen_ai.* conventions moved to a dedicated repo at v1.42.0 on 2026-06-12 and remain Development status, so pin the instrumentation.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c11",
+      "topic": "Zero to Production",
+      "q": "Describe a HITL approval gate that survives a 30-hour human delay, plus its two failure modes.",
+      "a": "The act node raises, the graph interrupt()s, the checkpoint is written, and the worker returns and releases its slot. An approval row records run_id, tool, args digest, rule_id, requester and expires_at. On decision the run resumes from the checkpoint; rejection is appended as an observation the agent can adapt to, not an error. Failure mode 1: stale approval, fixed by revalidating preconditions in the same transaction as the write plus a 24-hour expiry. Failure mode 2: approval fatigue, detected by approve_rate above ~95% with median review time under 10 seconds, which means the gate is decoration and the rule must be narrowed.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c12",
+      "topic": "Zero to Production",
+      "q": "How do you deploy an agent service on Kubernetes, and why is there no GPU?",
+      "a": "No GPU in the agent tier: the model is an API call, so the workers are I/O-bound Python sitting at 8-15% CPU while saturated on concurrent awaits (2 vCPU / 4 GiB holding ~50 runs). Self-hosted models live in a separate vLLM deployment behind the gateway with its own node pool. Scale with KEDA on queue depth, because an HPA on CPU never fires. terminationGracePeriodSeconds 600 with a preStop drain flag, PDB minAvailable 60%, 300 s scale-down stabilisation. Readiness must NOT probe the LLM provider, or a provider blip rolls your whole fleet out of service.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c13",
+      "topic": "Zero to Production",
+      "q": "What actually stops a prompt injection in a retrieved document, and what only reduces its probability?",
+      "a": "Reduces probability: authority labelling in the context builder, with untrusted content in <untrusted source=...> envelopes and a system prompt stating those instructions are data, not policy. Actually bounds damage: the permission engine, which never consults the model, plus a session-level lethal-trifecta rule (once a run has read private data AND ingested untrusted content, any externally-communicating tool requires approval regardless of its own annotations), plus a NetworkPolicy so the worker cannot reach the internet. A classifier is a filter with a false-negative rate, not a boundary. CaMeL and dual-LLM quarantine are the only patterns with a real security argument and no mainstream harness ships them as of mid-2026.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c14",
+      "topic": "Zero to Production",
+      "q": "State the three phase gates from POC to production, and the structural change at each.",
+      "a": "POC (2 weeks): 1 agent, read-only tools, MemorySaver, 20 cases run by hand. GATE: >= 60% pass AND one real user changed behaviour. MVP (6 weeks): LangGraph + AsyncPostgresSaver, tool contract, budgets, OTel, 1 HITL write, 60 advisory goldens. GATE: p95 latency SLO met, cost/session under target, zero unapproved writes, and the eval gate flips from advisory to BLOCKING. Production (8 weeks): permission engine, provenance, compaction, memory, ledger, prompt registry + canary, 140 blocking goldens, runbooks, SLOs. GATE: two weeks at SLO + security review + signed cost forecast. Structural change: POC to MVP moves state from process to database; MVP to Prod moves enforcement from application code to boundaries the code cannot bypass.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c15",
+      "topic": "Zero to Production",
+      "q": "Two weeks instead of two months: what do you cut and what is non-negotiable?",
+      "a": "CUT: multi-agent, cross-session memory, compaction (cap the run at 8 steps instead), the permission DSL (hardcoded allow-list plus HITL on every write), the semantic cache, the prompt registry and canary, judge-based scorers, the output rail beyond schema and citation checks, autoscaling, per-tenant cost attribution, multi-provider failover. KEEP: the Postgres checkpointer, the tool contract, gateway-enforced budgets with no provider credentials in the worker, OTel traces with prompt hash and pinned model version, 20 blocking goldens including cross-tenant and unapproved-write cases, HITL on writes, harness-injected tenant scope, and one runbook for cost spikes.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c16",
+      "topic": "Zero to Production",
+      "q": "Why does a POC cost estimate typically come in 3x low, and what are the cost levers in order?",
+      "a": "Because the POC measures a single model call and production runs 4-6 turns that re-send retrieval context, a verify step adds another call, and a mutable system prompt (a timestamp, a shuffled tool list) breaks prompt caching. Levers by return: prompt caching on a FROZEN prefix (a ~34% total cost cut when 61% of input tokens hit cache) > model routing (RouteLLM: 95% of GPT-4 quality at 26% strong-model calls, ~48% cheaper than random; production teams report 40-85%) > fewer output tokens via structured output > fewer steps via better tools > semantic cache LAST, because honest production hit rates are 20-45% and a loose threshold returns the answer to a nearby question.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c17",
+      "topic": "Zero to Production",
+      "q": "Give the four agent on-call runbooks and the first move in each.",
+      "a": "Cost spike (cost/hour > 2x 7-day p95 for 10 min): lower the gateway per-run cap to 0.5x, cap the offending tenant or disable the offending intent. Loop storm (steps/run p99 > 2x baseline): reduce max_steps by config; the usual root cause is a tool returning HTTP 200 with an empty body so the model retries forever, and the tool is the bug. Checkpoint lag (write p99 > 150 ms, or approval queue age > 8 h): scale the pool, run the prune job, check partition rotation. Injection/deny spike (deny rate > 3x baseline on a tool): quarantine the source corpus or tenant, then pull the untrusted envelopes from traces. Rule: every mitigation is a config or flag change, never a deploy.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c18",
+      "topic": "Zero to Production",
+      "q": "What is the correct harness build order, and why is the order not arbitrary?",
+      "a": "model adapter → deterministic context builder → narrow tool registry → strict schema validation → runtime permission checks → structured observations → step and cost budgets → OTel traces → compaction only when a real run needs it → a golden eval set. The order is not arbitrary because each later component is undebuggable without the earlier ones: you cannot tell whether compaction hurt you without traces, and you cannot tell whether a permission rule is too tight without structured observations showing the denial.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c19",
+      "topic": "Zero to Production",
+      "q": "Three repository boundaries worth defending out loud in a design interview.",
+      "a": "1) Graph topology lives ONLY in graph/build.py, so a reviewer sees the whole state machine on one screen. 2) Every tool goes through harness/_contract.py with no exceptions, so safety properties are enforced in one place rather than N. 3) evals/run.py is the same entrypoint locally and in CI, because an eval suite that only runs in CI gets ignored and one that only runs locally never gates anything.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c20",
+      "topic": "Zero to Production",
+      "q": "When is building this whole platform the wrong call?",
+      "a": "When the steps are known in advance (write the pipeline: deterministic, 10-50x lower latency, near-zero cost, real tests). When one prompt suffices. When the blast radius does not justify it: a 40-uses-per-day internal tool needs 20 goldens, a cost cap and traces, not a gateway, a canary pipeline and 140 cases. And when nobody can articulate what 'correct' means for a run, in which case go get the success signal first, even if that costs two weeks of labelling.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c21",
+      "topic": "Zero to Production",
+      "q": "How does compaction launder authority, and what is the fix?",
+      "a": "If untrusted retrieved content and the user's instruction pass through the same summariser with no classification step, an instruction planted in a document survives compaction and emerges indistinguishable from legitimate context. Fix: feed the provenance map into the compactor and drop instruction-like spans from untrusted sources rather than summarising them. Also keep the task and the open-items list as structural state fields that are never in the summarisable region, and re-inject the last 3 read documents plus the tool list after compaction, or the agent re-reads what it just read.",
+      "module": "T07-agent-zero-to-prod"
+    },
+    {
+      "id": "T07-agent-zero-to-prod-c22",
+      "topic": "Zero to Production",
+      "q": "Which four weekly numbers tell you the agent is actually working in production?",
+      "a": "1) Task success on a live-sampled eval set (e.g. 30 sessions/week stratified by intent, deterministic scorers plus a calibrated judge). 2) Escalation rate and its trend, the honest inverse of deflection. 3) Unresolved-citation rate as the hallucination proxy, target under 2%. 4) p95 cost per session against the SLO. Plus one count that pages at 1: unapproved writes. Traces tell you what happened on one run; only a sampled eval tells you whether the system is systematically good.",
+      "module": "T07-agent-zero-to-prod"
+    }
+  ]
+}

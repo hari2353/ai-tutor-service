@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T20-rust-memory-d1",
+      "module": "T20-rust-memory",
+      "q": "Fill in the 2x2: which type do you reach for at (one owner, single thread), (many owners, single thread), (one owner, many threads), (many owners, many threads)? Then the interior-mutability version of each.",
+      "a": "One owner / single thread: Box<T>; interior mut Cell<T> or RefCell<T>. Many owners / single thread: Rc<T>; interior mut Rc<RefCell<T>>. One owner / many threads: Box<T> moved into the thread; interior mut Mutex<T>, RwLock<T>, or Atomic*. Many owners / many threads: Arc<T>; interior mut Arc<Mutex<T>> or Arc<AtomicUsize>. The compiler picks the row for you: Rc is !Send and RefCell is !Sync, so the top row cannot cross a thread boundary.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-memory-d2",
+      "module": "T20-rust-memory",
+      "q": "State the definitions of Send and Sync in one sentence each, without using the phrase 'thread safe'.",
+      "a": "Send: the value can be moved to another thread. Sync: &T can be shared with another thread, which the standard library defines formally as T: Sync if and only if &T: Send. Both are auto traits, derived structurally by the compiler from a type's fields rather than implemented by hand.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-memory-d3",
+      "module": "T20-rust-memory",
+      "q": "List the five things unsafe enables, and name three things it does NOT turn off.",
+      "a": "Enables: dereference a raw pointer; call an unsafe fn or method; access or modify a mutable static; implement an unsafe trait; access union fields. Does NOT turn off: the borrow checker (it still runs inside unsafe blocks), lifetime checking, type checking, move semantics, or Drop. The only real change is that rustc stops demanding a proof and starts assuming one, then optimizes on it.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-memory-d4",
+      "module": "T20-rust-memory",
+      "q": "Quote the two RefCell panic messages on current stable Rust and say which operation produces each.",
+      "a": "On rustc 1.97.1: borrow_mut() while a Ref is live gives `RefCell already borrowed` (error type BorrowMutError). borrow() while a RefMut is live gives `RefCell already mutably borrowed` (error type BorrowError). Older releases and most blog posts phrase these as `already borrowed: BorrowMutError` and `already mutably borrowed: BorrowError`; the type names are the stable part and are what try_borrow_mut()/try_borrow() return in the Err arm.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-memory-d5",
+      "module": "T20-rust-memory",
+      "q": "Give the measured ns/op for Rc::clone+drop, Arc::clone+drop, AtomicUsize::fetch_add, Mutex lock+unlock, and RefCell::borrow_mut, and explain how the Arc number is consistent with the atomic number.",
+      "a": "On rustc 1.97.1 -O, x86_64, i5-12450H: Rc clone+drop 1.53 ns; Arc clone+drop 14.44 ns (9.4x Rc); AtomicUsize::fetch_add(Relaxed) 6.04 ns; Mutex lock+unlock 13.19 ns; RefCell borrow_mut+drop ~0.25 ns. Arc clone+drop is two atomic RMWs (a lock xadd on clone and a lock xsub on drop) plus a branch, so 2 x 6.04 = 12.08 ns plus overhead reconciles with the measured 14.44 ns. Mutex at 13.19 ns is likewise about two atomic RMWs.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-memory-d6",
+      "module": "T20-rust-memory",
+      "q": "Explain why Arc::clone can use Relaxed ordering but Arc's Drop cannot, and what the last dropper does.",
+      "a": "Clone publishes nothing: you already held a valid Arc, so the value already exists and no other memory needs to become visible to anyone, which makes Relaxed sufficient. Drop uses fetch_sub(1, Release) because any writes made through this Arc must be visible to the thread that eventually runs the destructor. The last dropper, seeing the previous count was 1, executes atomic::fence(Acquire) before touching the data; that fence pairs with every other thread's Release decrement, establishing the happens-before that makes running T's destructor with exclusive access sound. Overflow is checked against MAX_REFCOUNT = isize::MAX as usize and calls abort() rather than panic!, since a caught panic would leave the count corrupt.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-memory-d7",
+      "module": "T20-rust-memory",
+      "q": "Here is a bug: `for l in self.listeners.borrow().iter() { l.on_event(&ev); }`. Name the failure, the exact panic, why it is rare, and the fix.",
+      "a": "Failure: re-entrant borrow. The Ref from borrow() is alive for the whole loop, so if any handler calls back in and does listeners.borrow_mut() (to unsubscribe itself, typically) you get a runtime panic reading `RefCell already borrowed`. It is rare because it requires a specific re-entrant path, often an error branch, so it may fire once in ten million requests. It is hard to debug because the panic's line number is the SECOND borrow, not the still-live first one. Fix: end the borrow before dispatch, e.g. `let snapshot: Vec<_> = self.listeners.borrow().iter().cloned().collect();` then iterate the snapshot with no guard held. Where you cannot restructure, use try_borrow_mut() and log with your own context.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-memory-d8",
+      "module": "T20-rust-memory",
+      "q": "Explain to a Java engineer, in under a minute, the one structural thing Rust's Mutex<T> does that synchronized cannot, and two ways Rust's is worse.",
+      "a": "Rust's Mutex owns the data. The only route to the T is lock(), which returns a guard that derefs to &mut T, so `forgot to take the lock` is not expressible; Java's synchronized guards a block and the lock-to-fields mapping lives in a @GuardedBy comment checked only by optional tooling. Worse in two ways: (1) Rust's std Mutex is NOT reentrant, and std documents a second lock on the same thread as unspecified behaviour that will not return, so a recursive helper that works in Java hangs, the symptom being a thread in futex_wait at 0% CPU with no logs; (2) it poisons, so a panic while holding the guard makes every later lock() return Err(PoisonError) forever. parking_lot::Mutex drops poisoning and is 1 byte instead of 8.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-memory-d9",
+      "module": "T20-rust-memory",
+      "q": "RSS grows monotonically under steady load, no crash, no errors. Give your diagnostic sequence and the structural fix.",
+      "a": "Rule out unbounded queues and caches first, then suspect an Rc/Arc cycle, because Rust's guarantee explicitly excludes leak-freedom (mem::forget and Box::leak are safe, and there is no cycle collector since that needs a tracing runtime). Sequence: assert Rc::strong_count/weak_count in unit tests around the suspect structure; run `cargo +nightly miri test`, whose leak checker reports any allocation live at exit that is not reachable from a static; use a heap profiler to find allocations with no live root. Fix: owning edges are Rc/Arc, back-edges are Weak, upgraded with .upgrade() which returns Option and yields None once the target is gone. Weak does not contribute to the strong count, so it cannot keep the value alive.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-memory-d10",
+      "module": "T20-rust-memory",
+      "q": "Why is MutexGuard Sync but not Send? Derive it, and name the async consequence.",
+      "a": "!Send because unlocking must happen on the locking thread: POSIX makes pthread_mutex_unlock from a non-owning thread undefined behaviour, and the guard's Drop is what unlocks, so allowing the guard to move to another thread would allow the unlock to happen there. Sync (when T: Sync) because &MutexGuard<T> only yields &T, and sharing a &T is exactly what T: Sync licenses; sharing a reference to the guard never moves the guard, so the unlock stays put. Async consequence: holding a std::sync::MutexGuard across an .await makes the whole future !Send, so tokio::spawn rejects it with an error naming the guard type. Fix by scoping the guard to drop before the await, or use tokio::sync::Mutex whose guard is Send and whose lock() is awaitable.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-memory-d11",
+      "module": "T20-rust-memory",
+      "q": "p99 doubled after a deploy that added a shared counter behind Arc<Mutex<u64>>. The single-threaded benchmark is unchanged. Diagnose and give three fixes in order of preference.",
+      "a": "The counter is one cache line and every core writes to it, so it ping-pongs across the interconnect; perf shows time in lock cmpxchg/lock xadd and in futex once threads actually block. The single-threaded benchmark showed nothing because uncontended the numbers are benign: Mutex lock+unlock 13.19 ns, AtomicUsize::fetch_add 6.04 ns measured. Fixes: (1) drop the mutex, use Arc<AtomicU64> with fetch_add(1, Relaxed), which halves the cost and cannot deadlock; (2) shard it, one padded counter per shard summed on read, which removes contention entirely at the cost of a non-atomic total; (3) batch it, increment a thread-local and flush every N events, which is what metrics libraries do. Also check for Arc::clone inside the loop; passing &Arc<T> or &T saves ~14 ns per iteration. RwLock is usually not the answer: I measured RwLock::read at 15.12 ns, slower than Mutex::lock, because a read lock still does an atomic RMW.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-memory-d12",
+      "module": "T20-rust-memory",
+      "q": "Define soundness for an unsafe abstraction, then explain why 'our crate passes Miri' does not establish it.",
+      "a": "Sound iff no safe caller, using any combination of the public API in any order, can cause undefined behaviour. Three teeth: any combination and order (two individually safe methods can be jointly unsound, which is why Vec::set_len is an unsafe fn), composition with any other sound crate (which is what makes unsafe impl Send so consequential), and panics (unwinding runs Drop on a temporarily invalid object; Miri has found exactly this in std, including Vec and BTreeMap leaking under panicky conditions). Miri does not establish soundness because it tests executions, not callers: it runs one interleaving by default (seed 0), -Zmiri-many-seeds explores a bounded range defaulting to 0..64, preemption is 1% per basic block, and it cannot execute networking or most FFI. Miri's own README says this. Passing Miri means these tests, on these interleavings, had no UB.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-memory-d13",
+      "module": "T20-rust-memory",
+      "q": "Miri reports a Stacked Borrows error on code you believe is correct. Walk through your decision procedure, and say what you would NOT do.",
+      "a": "Re-run with MIRIFLAGS=\"-Zmiri-tree-borrows\". If Tree Borrows also rejects it, it is a real bug: you almost certainly cached a raw pointer derived from a reference and used it after a later reborrow invalidated it, so rederive from the live reference at each use or restructure with UnsafeCell/NonNull so the provenance chain is unbroken. If only Stacked Borrows rejects it, you have hit a known over-restriction — Tree Borrows (PLDI 2025, Distinguished Paper) rejects 54% fewer test cases across the 30,000 most-downloaded crates — so document it and track the model discussion. What I would NOT do is switch CI to Tree Borrows to make the error go away: Miri's README warns that Tree Borrows is more experimental and that the eventual official model is likely STRICTER than Tree Borrows, so code TB accepts today may be declared UB later. Gate on Stacked Borrows; use Tree Borrows as a diagnostic.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-memory-d14",
+      "module": "T20-rust-memory",
+      "q": "Tests pass in debug and the release build dies with SIGILL. Explain the mechanism, give the verified minimal example, and say what you must not do about it.",
+      "a": "That is the signature of undefined behaviour. At -O0 the optimizer does almost nothing so a broken assumption often has no consequence; at -O the optimizer USES the assumption and, finding it false, can emit ud2, delete a branch it proved unreachable, or produce a value that is neither true nor false. Verified minimal case on rustc 1.97.1: reading an uninitialized bool via MaybeUninit::<bool>::uninit().assume_init() prints `saw-false` and exits 0 in debug, and dies with `Illegal instruction (core dumped)`, exit status 132, at -O, from identical source on the same machine. Diagnose with `cargo +nightly miri test`, plus -Zsanitizer=address / -Zsanitizer=thread for anything Miri cannot run. What you must NOT do is make the symptom disappear by reordering statements or inserting black_box; that hides UB and it returns on the next compiler upgrade. Note that integer overflow is not UB: it is specified to panic with debug_assertions and wrap without.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-memory-d15",
+      "module": "T20-rust-memory",
+      "q": "Someone proposes Rc<RefCell<Node>> for a large in-memory graph. Argue the alternative, and state the honest counter-argument against your own recommendation.",
+      "a": "Rc<RefCell<Node>> stacks four costs simultaneously: a refcount on every clone (1.53 ns, or 14.44 ns if it becomes Arc), an 8-byte borrow flag per node, pointer chasing with poor cache locality, plus the runtime panic risk and the cycle-leak risk. An arena (Vec<Node> plus usize or slotmap keys) removes all four: no refcount, no borrow flag, cycles are not expressible, and storage is contiguous. This is what petgraph and rustc's own data structures do. Honest counter-argument: arena indices can go logically stale when a slot is reused, producing a silently wrong-node bug rather than a crash, which is exactly why slotmap adds generation counters; and Rc<RefCell<_>> is genuinely the right call when ownership is dynamic and shared across subsystems that cannot share an arena.",
+      "difficulty": "staff"
+    }
+  ]
+}

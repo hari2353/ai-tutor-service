@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T26-nvidia-cosmos-d1",
+      "module": "T26-nvidia-cosmos",
+      "q": "Name the three Cosmos WFM roles (Predict, Transfer, Reason) and what each one is for, in one line each.",
+      "a": "Predict: video world generation from text, image or video (7B/14B diffusion and 4B/12B autoregressive in 1.0; unified 2B/14B in Predict 2.5). Transfer: spatially-controlled world-to-world translation conditioned on edge, blur, depth or segmentation, i.e. change appearance while preserving real geometry (2B in 2.5). Reason: a physical-commonsense vision-language model (7B in Reason 1; 2B/8B/32B in Reason 2), which also serves as the text encoder inside Predict 2.5.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d2",
+      "module": "T26-nvidia-cosmos",
+      "q": "What does Cosmos-1.0-Diffusion-7B-Text2World emit by default, and how long does one clip take?",
+      "a": "121 frames = 5 seconds at 24 fps at 1280x704. About 380 seconds end to end on a single H100 (14B is about 590 seconds). Aspect ratios are configurable to 960x960, 960x704, 704x960, 1280x704 or 704x1280; fps 12-40; prompt under 300 words. BF16 and Linux only.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d3",
+      "module": "T26-nvidia-cosmos",
+      "q": "Decode 'DV8x16x16' and 'CV8x8x8'.",
+      "a": "DV8x16x16: Discrete Video tokenizer, 8x temporal and 16x16 spatial compression, feeds the autoregressive WFMs. CV8x8x8: Continuous Video tokenizer, 8x temporal and 8x8 spatial, feeds the latent diffusion WFMs. Cosmos offers spatial 8x8 or 16x16 and temporal 4x or 8x, for a maximum total compression of 2048x.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d4",
+      "module": "T26-nvidia-cosmos",
+      "q": "A colleague says 'we'll run PPO inside Cosmos to train the policy'. Give the one-sentence rebuttal and the number that closes it.",
+      "a": "An RL loop needs reset(seed) to an exact state and step(dt) with deterministic replay, and a diffusion video model has neither, plus no queryable forces. The closing number: ~380 s on an H100 for 5 seconds of 7B output is about 76x slower than real time for ONE environment, against Isaac Lab running 2,048-4,096 environments each faster than real time. Use the physics engine for the loop and the WFM offline to build a dataset.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d5",
+      "module": "T26-nvidia-cosmos",
+      "q": "Show your working on why '9,000 trillion tokens' is a corpus figure rather than a training figure.",
+      "a": "20M hours = 7.2e10 s, x24 fps = ~1.73e12 frames. 9e15 / 1.73e12 = ~5,200 tokens/frame, plausible for 1280x704 at 8x8 spatial with 8x temporal pooling, so the figure is reachable only by tokenising the whole uncurated corpus. But the curated training set is ~100M clips; at ~211,200 latent tokens per 121-frame clip that is ~2.1e13, about 21 trillion. The headline is ~430x above the defensible training-token number. Add the honest caveat: video latents are far more redundant than text tokens, so cross-modality token comparisons are meaningless anyway.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d6",
+      "module": "T26-nvidia-cosmos",
+      "q": "A policy is 95% in Isaac Lab and 20% on hardware. Give your first three diagnostic moves, in order, before changing any code.",
+      "a": "1) Classify failures by episode phase: approach-phase points at perception, contact-phase at dynamics, post-contact at control. 2) Run the two-number decomposition: hold dynamics simulated and feed real imagery for the appearance drop; take vision out of the loop with a state-based policy on hardware for the dynamics drop. 3) Check the boring things: control-frequency mismatch, action-space mismatch (position targets vs torques), unit and frame errors, observation latency, and seed variance in sim, because a 95% single-seed number is often 80% +/- 12% across seeds.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d7",
+      "module": "T26-nvidia-cosmos",
+      "q": "You have confirmed a dynamics-dominated gap. Rank the fixes by expected value per unit effort, and say what is NOT on the list.",
+      "a": "1) System identification on the real actuators: days of work, often the single largest win. 2) An actuator network trained on real torque/position traces, the standard fix for the servo-model gap. 3) Randomise link mass +/- 20-30% and friction 0.5x-2.0x and retrain: costs GPU time, buys robustness at the price of asymptotic performance. 4) Add 1-3 steps of action latency: nearly free, frequently matters more than expected. Also vary solver substeps, since PhysX's effective compliance is a function of substep count rather than of any physical property. NOT on the list: generating photorealistic video. Photorealism does not fix a friction coefficient.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d8",
+      "module": "T26-nvidia-cosmos",
+      "q": "Your team wants to disable the RetinaFace face blur because the task is human-robot interaction and pixelated faces destroy the label. What do you say?",
+      "a": "You cannot. The NVIDIA Open Model License auto-terminates if you 'bypass, disable, reduce the efficacy of, or circumvent any technical limitation, safety guardrail or associated safety guardrail hyperparameter'. That is a licence termination, not a config change, and it retroactively taints every artefact derived from the weights. The legitimate routes are a custom licence via cosmos-license@nvidia.com or a different model. Note the threshold that caused the problem: RetinaFace pixelates any detection larger than 20x20 pixels, so anything with people at reasonable distance is affected by default.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d9",
+      "module": "T26-nvidia-cosmos",
+      "q": "Sort these into benchmarked / internally evaluated / asserted: Transfer 2.5's detection gains; 'physics-aware' generation; GR00T N1.5 success rates; 9,000 trillion tokens; tokenizer speed versus prior art.",
+      "a": "Benchmarked with an external-style metric: Transfer 2.5's up-to-60% improvement in 3D lane and cuboid detection versus Transfer1-7B-Sample-AV using LATR and BEVFormer; GR00T N1.5 at 38.3% versus N1 at 13.1% on the 12-task DreamGen suite. Internally evaluated: 'physics-aware' generation, which rests on NVIDIA-defined metrics over NVIDIA-chosen prompts, and the tokenizer's claimed 2x-12x speedup, which is a vendor table rather than an independent benchmark. Asserted: 9,000 trillion tokens, and the general claim that WFM-generated data improves robot policies. The distinction is comparability, not honesty.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d10",
+      "module": "T26-nvidia-cosmos",
+      "q": "Write the contamination assertions you would put in the training harness for a neural-trajectory pipeline.",
+      "a": "Three. (1) No scene_id appears in both train and eval. (2) No eval sample has origin != 'real'. (3) The subtle one: for every training sample with origin == 'neural', its seed_episode_id must not resolve to a scene present in eval, because a neural trajectory generated from a real episode inherits that episode's scene and is therefore a paraphrase of the test set. All three should raise, not warn. Also fix the interleave seed so two arms see the same real samples in the same order, otherwise you are measuring data-order noise, which is worth several success-rate points on small robot datasets.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d11",
+      "module": "T26-nvidia-cosmos",
+      "q": "Design the budget-matched experiment that would justify a seven-figure synthetic-data programme, and say why the existing DreamGen ablations do not.",
+      "a": "Fix real-data budget N and total compute C. Arm A: N real + M synthetic. Arm B: N real + the same compute C on longer training and stronger classical augmentation. Arm C: the dollar cost of generating M synthetic trajectories spent instead on collecting more real demonstrations. Evaluate on a suite chosen by a disinterested party, >=20 trials per task, confidence intervals, >=3 seeds, with the contamination assertions in place. DreamGen holds the real budget fixed and adds synthetic data for free, which answers 'does it help?' (yes, up to +8.8% even with real demos present) but not 'is it the best use of this budget?', because there is no Arm C. Conflating those two is exactly the marketing move.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d12",
+      "module": "T26-nvidia-cosmos",
+      "q": "Adding synthetic clips has stopped helping and is now hurting, while validation loss keeps dropping. Diagnose and fix without generating more data.",
+      "a": "Diversity collapse: the generator samples a narrow mode, so extra clips are near-duplicates in embedding space and model-generated data reinforces the generator's own priors. Validation loss drops because the validation set shares the collapsed distribution. Measure effective_rank(synth)/effective_rank(real) on a FROZEN third-party encoder (DINOv2 or SigLIP, not the generator's own); below ~0.6 is collapse. Measure coverage: the fraction of real samples with a synthetic neighbour inside their own k-NN radius. Fixes: prompt from a stratified scenario taxonomy rather than free text, raise sampler diversity, deduplicate at the embedding level, and cap the synthetic:real ratio at 1:1 as in the published co-training setting. Generating more is the one thing that cannot help.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d13",
+      "module": "T26-nvidia-cosmos",
+      "q": "Make the total-cost-of-ownership argument against this stack to a CFO, in numbers.",
+      "a": "Four line items. Generation: ~380 s per 5-second clip on an H100 means ~7,600 H100-hours for 100 hours of video, roughly $23k-30k at $3-4/hr, before discarding bad generations and guardrail rejections. Workstations: Isaac Sim 5.1's floor is a 16 GB RTX 4080 with 32 GB RAM, per engineer, with no AMD, Apple or CPU path, and CI requires GPU runners. Vendor lock: NIM microservices move inference spend onto NVIDIA-licensed infrastructure. Licence risk: the NVIDIA Open Model License is revocable, auto-terminates on guardrail circumvention, and propagates a 'Built on NVIDIA Cosmos' attribution obligation into every model trained on its outputs, which is a provenance-tracking requirement on the data pipeline. Counterweight: the same $30k buys ~24,000-45,000 real teleoperated demonstrations, so the synthetic path must be justified by scenarios you cannot safely stage, not by cost.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d14",
+      "module": "T26-nvidia-cosmos",
+      "q": "A scene is authored in OpenUSD so it is portable across engines. Is the policy trained against it portable? Explain the gap.",
+      "a": "No. USD with the UsdPhysics schema guarantees geometry and declared physical properties (mass, friction, joints, materials) transfer. It does not guarantee solver behaviour transfers. A policy trained against PhysX has absorbed PhysX's specific iterative contact resolution, positional penetration bias, and effective compliance at your substep count, none of which is a physical property of the scene. Swapping to Newton or OVPhysX under Isaac Lab 3.0's multi-backend abstraction is a distribution shift for the policy even when the USD file is byte-identical. Consequence: solver settings belong inside your domain-randomisation ranges, not in a config nobody varies.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-nvidia-cosmos-d15",
+      "module": "T26-nvidia-cosmos",
+      "q": "State what would change your mind about the strong 'WFM as learned simulator' claim, and pre-empt the accusation that the bar is unfair.",
+      "a": "A published result with all four properties: a policy trained predominantly or entirely inside a generative WFM; deployed on real hardware; in an environment with no data in the model's training set; beating a matched-budget baseline trained in a physics simulator, on a benchmark the authors did not design. V-JEPA 2's zero-shot Franka pick-and-place is the nearest structural analogue and it is a joint-embedding model, not a video generator. On the fairness objection: it is a high bar and it is precisely the bar the marketing claims to have cleared. Lower the bar and the claim weakens with it, at which point 'generated video is useful training data' is well supported and worth building on. Accept the weaker claim rather than arguing the bar down.",
+      "difficulty": "staff"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T26-imagebind-multimodal-d1",
+      "module": "T26-imagebind-multimodal",
+      "q": "Name ImageBind's six modalities and the dimensionality of its joint space.",
+      "a": "Image/video, text, audio, depth, thermal, and IMU. Joint space d = 1024. The image and text encoders come from a frozen pretrained OpenCLIP ViT-H/14 (roughly 630M vision parameters, roughly 302M text).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d2",
+      "module": "T26-imagebind-multimodal",
+      "q": "What is the value of a symmetric InfoNCE loss at random initialisation with batch size B, and what is it for B = 32,768 and B = 128?",
+      "a": "log(B), because all similarities are roughly equal so the softmax is uniform. log(32768) = 10.40 nats; log(128) = 4.85 nats. This is the single cheapest assertion to add to a contrastive training run: if step-0 loss equals log(per_device_batch) rather than log(global_batch), your all-gather is not propagating gradients.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d3",
+      "module": "T26-imagebind-multimodal",
+      "q": "CLIP initialises tau to 0.07 and clamps it. What is the clamp, in both parameterisations, and why does it exist?",
+      "a": "The clamp is 1/tau <= 100, i.e. tau >= 0.01 (logit_scale = log(1/tau) clamped so exp(logit_scale) <= 100). It exists because gradient magnitude scales as 1/tau, so the model can reduce loss faster by shrinking tau than by improving alignment, and it will, until fp16 logits overflow and training diverges. In practice the learned logit_scale saturates at the clamp: the model wants the sharpest temperature it is allowed.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d4",
+      "module": "T26-imagebind-multimodal",
+      "q": "How many pair-specific models would a naive 6-modality system need, and how many of those pairs have abundant naturally-paired data?",
+      "a": "N(N-1)/2 = 15 models. Only about 2 of the 15 (image-text, image-audio via video) have abundant natural pairing; audio-thermal, IMU-depth, thermal-text and the rest have essentially none at any price. That asymmetry is the entire argument for hub-and-spoke: 5 spoke models instead of 15 pair models, each trained on data that a sensor stack already produces for free.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d5",
+      "module": "T26-imagebind-multimodal",
+      "q": "A colleague proposes reaching a contrastive batch of 32,768 via gradient accumulation over 256 microbatches of 128 on one node. What do you say?",
+      "a": "It does not work. Accumulation gives you 256 separate 128-way softmaxes whose gradients are summed; the negatives never appear in the same denominator, so the task stays a 128-way problem with a mutual-information ceiling of log(128) = 4.85 nats. Real options: a gradient-propagating all-gather across devices, a MoCo-style memory bank, or SigLIP's pairwise sigmoid loss, which removes the global softmax entirely and is already strong at batch 4,096-8,192.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d6",
+      "module": "T26-imagebind-multimodal",
+      "q": "Derive emergent cross-modal alignment, then state the strongest number that shows its limit.",
+      "a": "If f_A(a) ~ f_I(i) for paired (i,a) and f_T(t) ~ f_I(i) for paired (i,t), then f_A(a) ~ f_T(t) for anything both describe: the hub is a shared basis and both spokes were fitted to express themselves in it. The limit: ImageBind's emergent ESC-50 audio classification is roughly 66.9% top-1, against roughly 68.6% for text-audio-supervised AudioCLIP and 95%+ for a fully supervised audio specialist. Quote both halves.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d7",
+      "module": "T26-imagebind-multimodal",
+      "q": "Two text embeddings from a CLIP space score 0.68 cosine and are unrelated. A correctly matching text-image pair scores 0.31. What is happening and what does it mean for thresholds?",
+      "a": "The modality gap. All text embeddings live in one narrow cone (within-modality mean cosine around 0.68) and all image embeddings in a different one, separated by roughly 0.87 in centroid distance, so 0.31 is a typical cross-modal magnitude rather than a weak match. Consequence: never use a global similarity threshold. Calibrate one per (query_modality, corpus_modality) pair on a labelled set, or drop thresholds and use top-k plus a reranker score, which is scale-free. A 0.75 threshold tuned on text returns zero image results and the latency graph looks perfectly healthy.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d8",
+      "module": "T26-imagebind-multimodal",
+      "q": "Cross-modal recall in a single HNSW index is under 5% while within-modality recall@10 is 0.95. You raised ef from 64 to 512 and nothing changed. Diagnose and fix.",
+      "a": "Modality gap plus greedy graph traversal. With within-modality cosine around 0.68 and cross around 0.31, every node's M nearest neighbours are same-modality, so the graph is two components with a few bad bridge edges and greedy descent from a text entry point never crosses. ef does not help because it is a topology problem, not a search-effort problem. Confirm by running brute-force search: if exact finds the matches, the diagnosis holds. Fix: one index per modality with RRF fusion at k = 60, or a metadata-filtered search that confines each traversal to one cone.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d9",
+      "module": "T26-imagebind-multimodal",
+      "q": "Someone claims per-modality mean-centring fixes the modality gap. Design the experiment that settles it, and state the expected result.",
+      "a": "Compute, before and after centring: cross-modal mean cosine, matched-pair cosine, and the median rank of the true match among N candidates. Measured on untrained encoders (N = 512): before, cross 0.3091 / matched 0.3095 / median rank 257; after, cross 0.0000 / matched 0.0015 / median rank 260. Centring collapses the score range and leaves ranks identical. It is threshold hygiene, not a quality fix. Any claim about gap-fixing that does not report ranks before and after is unfalsifiable.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d10",
+      "module": "T26-imagebind-multimodal",
+      "q": "Design multimodal RAG over 10M mixed documents, images and audio for a team already running Weaviate, ClickHouse HNSW, pgvector and BGE rerankers. Give the ordered plan and the cost model.",
+      "a": "(1) Caption/OCR/ASR everything into ONE text index with BM25 hybrid and the existing BGE reranker; handles most queries, one calibrated score space, roughly 0.5-3 s and a fraction of a cent per asset to build, so 10M is a multi-day five-figure batch job. (2) Add per-modality native indices with concurrent fan-out and RRF at k = 60 only for genuinely cross-modal queries or where captioning is provably lossy; roughly 2-5 ms per index at ef = 128, roughly 6-10 ms p50 for four in parallel. (3) Add ColPali-style late interaction for layout-sensitive documents under a few million pages. (4) Always rerank the top 50. Storage: 1024-d fp32 = 4 KB/asset (40 GB), int8 = 1 KB (10 GB), binary = 128 B (1.28 GB); late interaction roughly 264 KB/page (2.6 TB, a 130x multiplier). Never one joint index over mixed modalities.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d11",
+      "module": "T26-imagebind-multimodal",
+      "q": "Which of the multimodal-RAG design decisions is the one-way door, and why does that ordering matter?",
+      "a": "The 264 KB per page of late-interaction storage. A 130x storage multiplier changes the class of system (columnar store and a two-stage retrieve-then-MaxSim design rather than an in-memory ANN index), so it must be decided first. By contrast the captioning batch job is a re-runnable one-off, and the fp32-versus-int8-versus-binary quantisation choice is reversible in an afternoon. Rank decisions by reversibility, not by magnitude.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d12",
+      "module": "T26-imagebind-multimodal",
+      "q": "You want to add tactile sensor data as a seventh modality to an ImageBind space. Walk the plan, and say what you do when the emergent tactile-to-text results come back poor.",
+      "a": "Freeze the hub. Collect naturally-paired (camera frame, tactile reading) from the robot rig, which is free: 10 hours at 30 Hz is roughly 1.08M pairs with no human labelling. Build a small spoke encoder (1D conv stem plus a 4-6 layer transformer, following ImageBind's IMU treatment of 6 channels over 5 s with a kernel-8 conv) plus a linear projection to d = 1024. Train symmetric InfoNCE against the frozen image embeddings, ideally with sigmoid loss so batch 4,096-8,192 suffices. When emergent results are poor: check whether 'separation' is genuinely below 0.02 rather than the score range merely looking low; then collect 10k-100k direct (tactile, text) pairs, or swap to a language hub. Do NOT full-fine-tune the hub; LoRA r = 8-16 with an original-pair regression gate if you must.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d13",
+      "module": "T26-imagebind-multimodal",
+      "q": "Argue both sides of 'the modality gap is a bug that should be fixed', then give your position.",
+      "a": "For fixing: the original NeurIPS 2022 paper showed that deliberately shifting embeddings along the gap direction moves zero-shot accuracy and fairness metrics, so gap magnitude is not causally inert, and 2025-2026 work on Gramian alignment and pairwise-alignment regularisers takes that line. Against: the gap does not change within-pair ranking (centring moves cross cosine 0.3091 to 0.0000 with median true rank 257 to 260, unchanged), so its real costs are threshold calibration and shared-index topology, both cheap engineering fixes. My position: it is primarily a measurement problem, fix it with per-pair thresholds and per-modality indices, but do not claim it is causally inert, because a mixed ANN index genuinely loses recall to it.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d14",
+      "module": "T26-imagebind-multimodal",
+      "q": "What does LanguageBind's result imply for how you choose a hub, and what did it cost?",
+      "a": "Implies the hub is a design variable, not a property of the universe: binding to language beat ImageBind by roughly 5.8 R@1 on MSR-VTT zero-shot video-text with roughly 15% of the parameters. Choose the hub with the densest semantics AND adequate natural pairing; for anything ending in a text query that is language, because the downstream consumer is an LLM. The cost: images were chosen originally because the pairing was free (video carries audio, RGB-D emits depth), whereas LanguageBind had to construct VIDAL-10M with substantial automated annotation to get language pairing for infrared and depth. Data-acquisition cost against alignment quality.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-imagebind-multimodal-d15",
+      "module": "T26-imagebind-multimodal",
+      "q": "Write the one diagnostic function you would ship with any multimodal retrieval system, and say which line predicts quality.",
+      "a": "Given L2-normalised A and B holding the same N items in two modalities, report: within-A and within-B mean cosine, cross-modal mean and sd, matched-pair mean, separation = matched - cross mean, gap = mean(within) - mean(cross), centroid distance ||mu_A - mu_B||, and the median rank of the true match. 'separation' is the only line that predicts retrieval quality (healthy 0.05-0.15, below 0.02 means not aligned on your data). 'gap' and 'centroid distance' predict whether thresholds and a shared ANN index will misbehave, which is an operational problem rather than a quality one.",
+      "difficulty": "mid"
+    }
+  ]
+}

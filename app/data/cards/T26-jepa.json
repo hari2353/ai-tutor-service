@@ -1,0 +1,158 @@
+{
+  "flashcards": [
+    {
+      "id": "T26-jepa-c1",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "In one sentence, what is a JEPA and what makes it different from a masked autoencoder?",
+      "a": "A JEPA predicts the EMBEDDING of a masked target from the EMBEDDING of the visible context, with no decoder; MAE predicts raw PIXELS against an externally fixed ground truth. Consequence: JEPA's target is learned, so the encoder can decline to represent unpredictable detail, and a degenerate constant-encoder solution with exactly zero loss exists.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c2",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "Write the JEPA energy function and say what collapse looks like in that language.",
+      "a": "E(x,y) = D( Pred(Enc_ctx(x), z), Enc_tgt(y) ), i.e. the prediction error in representation space, with no normalisation over y (no partition function). Collapse is a FLAT energy surface: E low for all y, not just on the data manifold.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c3",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "Name the four components of a JEPA and which one is trained by SGD.",
+      "a": "Context encoder (ViT, trained by SGD, this is what you keep); target encoder (architecturally identical, updated ONLY by EMA, stop-gradient, sees the FULL unmasked input); narrow predictor (ViT at dim 384 vs the encoder's 1280); L2 or smooth-L1 loss on embeddings. Only the context encoder and predictor receive gradients.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c4",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "What is the EMA momentum schedule in I-JEPA and what is the implied averaging window at the start?",
+      "a": "Linear from 0.996 to 1.0 over training. At m = 0.996 the effective window is 1/(1-m) = 250 steps, so the context encoder optimises against a target computed by a version of itself roughly 250 steps ago. Ramping to 1.0 freezes the target completely as an endgame stability measure.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c5",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "State the I-JEPA multi-block masking parameters exactly.",
+      "a": "4 target blocks, area scale ~ U(0.15, 0.20), aspect ratio ~ U(0.75, 1.5), allowed to overlap each other. 1 context block, area scale ~ U(0.85, 1.0), aspect ratio 1.0, with every patch overlapping any target block REMOVED. Targets are sliced from the target encoder's output over the full unmasked image.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c6",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "Why must the target encoder run on the full image rather than only on the target patches?",
+      "a": "So each target embedding is computed WITH global context available, which makes it a semantically rich target rather than a patch-level appearance descriptor. Running it on target patches alone silently produces a weaker representation with no error message.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c7",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "What is the single most common I-JEPA reimplementation bug and what is its signature?",
+      "a": "Overlap leakage: failing to remove target-overlapping patches from the context block. The prediction becomes partly a copy operation. Signature: the loss curve drops FASTER than the reference run while the linear probe stays flat. No assertion fires.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c8",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "I-JEPA's compute-efficiency numbers: what does it cost to pretrain a ViT-H/14, and how does that compare to MAE and iBOT?",
+      "a": "Under 1,200 GPU-hours (16 A100s in under 72 hours wall-clock). Reported as over 10x more compute-efficient than a ViT-H/14 pretrained with MAE, and over 2.5x faster than a much smaller ViT-S/16 pretrained with iBOT, while giving better frozen-probe representations than MAE.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c9",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "How do you detect representation collapse, and why can't you use the training loss?",
+      "a": "The loss cannot detect it because collapse LOWERS the loss. Use: (1) per-dimension std of L2-normalised embeddings, healthy near 1/sqrt(D) = 0.028 at D=1280, alert below 0.3/sqrt(D); (2) RankMe (exp of the entropy of normalised singular values of the embedding covariance), healthy 0.2-0.8 x D, 1 when fully collapsed, 20-60 when partially collapsed; (3) pairwise cosine similarity distribution, healthy broad around 0.0-0.3, collapsed spikes above 0.95; (4) a detail-sensitive probe such as depth or object counting.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c10",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "Why is a linear probe on ImageNet insufficient evidence that a JEPA representation is healthy?",
+      "a": "Coarse classification survives enormous information loss: a representation that has partially collapsed onto a few dozen semantic clusters still probes well. That is dimensional collapse, and it shows up only on detail-sensitive probes (depth, object counting, keypoints, segmentation mIoU) and on RankMe, which would read ~20-60 out of 1280 while every headline metric looks fine.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c11",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "Name the three mechanisms proposed to prevent collapse, and say whether any of them is a proof.",
+      "a": "Stop-gradient on the target branch (removes the gradient path that would pull the target toward the prediction); EMA lag (the target is a low-pass-filtered copy, so shrinking is opposed step by step); narrow predictor (dim 384 vs 1280 is too under-parameterised to absorb a degenerate encoder). None is a proof. Collapse remains a global minimum of the objective throughout. SimSiam showed stop-gradient alone suffices without a momentum encoder, so EMA is not the sole mechanism.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c12",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "What is LeJEPA and why is it significant for the collapse debate?",
+      "a": "Balestriero and LeCun, arXiv 2511.08544, 11 November 2025. Proves the isotropic Gaussian is the unique embedding distribution minimising worst-case downstream prediction risk, and enforces it with SIGReg: project embeddings onto random 1D directions, match characteristic functions per projection, resample directions each iteration. Linear time and memory, roughly one trade-off hyperparameter. Significant because LeCun co-authoring a paper that calls his own prior anti-collapse stack 'heuristics' confirms that criticism was correct.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c13",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "Give the V-JEPA (2024) headline numbers with the qualifier that makes them meaningful.",
+      "a": "arXiv 2404.08471, February 2024, trained on VideoMix2M (2 million videos). ViT-H/16 with a FROZEN backbone and attentive probe: 81.9% on Kinetics-400, 72.2% on Something-Something-v2, 77.9% on ImageNet-1K. Frozen-backbone is the qualifier: the numbers measure the representation, not a fine-tuning budget.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c14",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "Describe V-JEPA 2's two-stage training with the data scales for each stage.",
+      "a": "Stage 1 action-free: 1.2B-parameter ViT-g trained with masked latent prediction on VideoMix22M, over 1 million hours of internet video plus images, no actions, no rewards, no labels. Stage 2 action-conditioned: freeze the encoder, train a NEW predictor (V-JEPA 2-AC) mapping [repr(o_t), a_t] to repr(o_{t+1}) on FEWER THAN 62 HOURS of unlabelled Droid robot video.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c15",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "What are V-JEPA 2's benchmarked results?",
+      "a": "77.3% top-1 on Something-Something-v2 (motion understanding), 39.7 recall-at-5 on Epic-Kitchens-100 action anticipation (reported SOTA, surpassing prior task-specific models). Aligned with an LLM at the 8B scale: 84.0 on PerceptionTest and 76.9 on TempCompass. arXiv 2506.09985, 11 June 2025, 48 pages.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c16",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "State the V-JEPA 2-AC robot result precisely, including what 'unlabelled' does and does not mean.",
+      "a": "Post-trained on under 62 hours of unlabelled Droid robot video, deployed ZERO-SHOT on Franka arms in TWO different labs with image goals, planning in latent space and replanning every step, at roughly 65-80% pick-and-place success on novel objects. 'Unlabelled' means no task labels, no rewards, no curated demonstrations for the target task, and no data from the deployment environments. It does NOT mean no actions: Droid trajectories carry proprioception and action logs.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c17",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "What does LeCun's 2022 position paper actually claim, and how much of it has been demonstrated?",
+      "a": "'A Path Towards Autonomous Machine Intelligence' v0.9.2, 27 June 2022, OpenReview. A position paper with NO experiments. Six modules: configurator, perception, world model, cost (intrinsic + trainable critic), short-term memory, actor. JEPA implements the world model; H-JEPA (hierarchical, multi-timescale) is the proposal for long-horizon planning. Demonstrated: single-level JEPA as a representation learner, and single-level action-conditioned JEPA with inference-time action optimisation. NOT demonstrated at scale: the hierarchy, the configurator, the intrinsic cost module.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c18",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "How does JEPA differ from contrastive/invariance methods like SimCLR and DINO, and what is the honest downside?",
+      "a": "Contrastive methods pull together two AUGMENTED VIEWS of the same image (SimCLR: batch 4096, T=0.1, RN50 linear 69.3%; DINO ViT-B/8: 80.1% linear, 77.4% k-NN); JEPA predicts one part of the signal from another part, so the objective is prediction rather than invariance and no hand-designed augmentations are needed. Downside: DINOv2 (ViT-g/14, 1.1B params, curated LVD-142M) reports about 86.5% ImageNet linear probe against I-JEPA's roughly 79%.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c19",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "Resolve the apparent paradox: JEPA discards unpredictable detail, yet beats DINO on depth and object-counting probes.",
+      "a": "They discard along orthogonal axes. JEPA discards what is NOT PREDICTABLE FROM CONTEXT (grain, micro-texture, aleatoric noise) and has every incentive to keep spatial layout, object extent, depth ordering and motion, because those make the masked region predictable. Invariance methods discard what their AUGMENTATIONS DECLARE IRRELEVANT, and random resized crop plus colour jitter explicitly say position, scale and colour do not matter, which is exactly what a depth or counting probe needs.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c20",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "State the defensible position on 'is JEPA a fundamentally better path, or an elegant SSL method?'",
+      "a": "The narrow claim is supported: latent-space prediction is roughly 10x more compute-efficient than MAE, needs no augmentation design, gives the best low-level spatial and motion representations, and produced the only published zero-shot cross-lab robot planning result off under 62 hours of robot data. The broad claim is not: H-JEPA has no scaled demonstration as of August 2026, JEPA is not the default production frozen backbone, and no JEPA system has displaced a scaled generative model on a general benchmark. Validated as a representation-and-dynamics learner, unvalidated as an architecture thesis.",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c21",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "When should you NOT use JEPA?",
+      "a": "When you need to inspect or generate output (no decoder, so no samples and no synthetic data); when a strong curated-data backbone already exists for your modality (DINOv2/v3 or CLIP for general images); when training from scratch below roughly 100k samples (the anti-collapse argument depends on a long optimisation trajectory); when the task is genuinely invariance-shaped (same product under different lighting must be identical); and you must not call an action-free encoder a world model, since without an action-conditioned predictor there is no p(s'|s,a).",
+      "module": "T26-jepa"
+    },
+    {
+      "id": "T26-jepa-c22",
+      "topic": "LeCun's JEPA & V-JEPA 2: Prediction in Latent Space, Not Pixels",
+      "q": "In video JEPA, why must the mask cover the same spatial region across all frames of the clip?",
+      "a": "Masking a random subset of patches per frame makes the task trivially solvable by copying from an adjacent frame, which is the video form of the identity-function failure: low loss, useless representation. Masking the same spatial region across all frames of the clip forces genuine motion inference.",
+      "module": "T26-jepa"
+    }
+  ]
+}

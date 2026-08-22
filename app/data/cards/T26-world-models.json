@@ -1,0 +1,172 @@
+{
+  "flashcards": [
+    {
+      "id": "T26-world-models-c1",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "Define a world model in one sentence, and say what disqualifies an unconditioned video generator from being one.",
+      "a": "A learned p(s_{t+1} | s_t, a_t) that can be rolled forward without touching the real environment. An unconditioned video generator has no action input, so it is a prior over plausible futures, not a conditional next-state distribution you can act inside. The distinguishing test is counterfactual: fix the state, vary the action, check the difference between rollouts is coherent.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c2",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "What are the only two arguments for building a world model?",
+      "a": "(1) Sample efficiency: one real trajectory amortises into many imagined ones. PlaNet solved DMC image tasks in ~2,000 episodes where D4PG needed ~50x more on average and ~500x on Cheetah Run. (2) Off-system policy evaluation: score a candidate policy inside the model before it touches a robot, fleet or customer. Everything else is downstream. The trade being made is always: sample cost converted into model-error risk.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c3",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "Ha & Schmidhuber 2018: name the three components and their parameter counts.",
+      "a": "V = convolutional VAE (4,348,547 params, z in R^32 for CarRacing; 4,446,915 and z in R^64 for VizDoom). M = MDN-RNN, LSTM of 256 hidden units (512 for Doom) emitting a 5-component Gaussian mixture over z_{t+1} (422,368 / 1,678,785 params). C = LINEAR controller a = W[z;h]+b, 867 params for CarRacing and 1,088 for Doom, trained by CMA-ES with population 64. Data: 10,000 random rollouts. V and M never see the reward.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c4",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "What is the CarRacing ablation in Ha & Schmidhuber 2018 and why is it the most useful number in the paper?",
+      "a": "Controller seeing only z_t scored 632 +/- 251; adding a hidden layer got 788 +/- 141; giving it the RNN hidden state h_t as well scored 906 +/- 21 against a solve threshold of 900. h_t is the model's compressed belief about the future, so 274 points came purely from predictive representation with no rollout at decision time. This is the cheapest, lowest-risk way to get value from a world model and usually the only version that survives production.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c5",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "What did Ha & Schmidhuber's VizDoom experiment actually demonstrate, with numbers?",
+      "a": "The controller was trained entirely inside M's hallucination (M predicts z and done, so it exposes a fake gym.Env), then deployed cold on real VizDoom Take Cover. About 900 timesteps dreamed, about 1,100 real, against a 750 solve threshold, a 2,100-step episode cap, 210 +/- 108 for a random policy and 820 +/- 58 for the best Gym leaderboard entry. This is the origin datapoint for training a policy entirely in a learned simulator.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c6",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "What does the MDN-RNN temperature table show, and what is the counter-intuitive conclusion?",
+      "a": "tau=0.10 gave 2086 +/- 140 dreamed and 193 +/- 58 real (below the 210 random baseline). tau=1.00 gave 1145 / 868. tau=1.15 gave 918 dreamed and 1092 real, the best transfer. tau=1.30 gave 732 / 753. Conclusion: dreamed-to-real correlation is NOT monotonic, and best transfer occurred where the model was pessimistic (dream harder than reality), not where it was accurate. Same principle as domain randomisation.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c7",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "Give the compounding-error arithmetic: fidelity formula, a table, and the half-life.",
+      "a": "H-step rollout fidelity = (1-eps)^H, exponential. At eps=2%: 74% at H=15, 36% at H=50, 13% at H=100, 0.6% at H=250. Half-life H_1/2 ~= 0.693/eps, so eps=1% gives 69 steps, 5% gives 14, 10% gives 7. Planning 500 steps at 50% fidelity needs eps <= 0.14%, about 7x better than any published learned dynamics model. That is why Dreamer imagines 15 steps.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c8",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "Why is compounding error worse than the constant-eps exponential analysis suggests?",
+      "a": "eps is not constant. Drift pushes the rollout off the model's training distribution where its error is larger, so error causes distribution shift causes more error. Model it as eps_h = eps_0(1 + beta*h) and accumulated error picks up an eps_0*beta*H^2/2 term, quadratic in the horizon. With eps_0=1% and beta=0.05 the quadratic term overtakes the linear one around H=40. Same covariate-shift structure as the DAgger problem, seen from the model side.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c9",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "How does chaos bound the useful rollout horizon, and why is that a hard ceiling?",
+      "a": "With a positive Lyapunov exponent lambda, an initial discrepancy delta_0 grows as delta_0 * e^(lambda*H), so H_useful = (1/lambda) * ln(1/delta_0). At lambda=0.5/step and delta_0=1e-3 that is ~13.8 steps; improving to delta_0=1e-6 gives ~27.6. The dependence on model accuracy is LOGARITHMIC: a thousand-fold accuracy improvement only doubles the horizon. No amount of scaling changes this, so it is a physical ceiling rather than an engineering gap.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c10",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "What are the three standard mitigations for compounding error, and the one diagnostic everyone skips?",
+      "a": "(1) Keep H at or below the accuracy half-life and bootstrap the tail with a learned critic (Dreamer, H=15, lambda-returns). (2) Branch short rollouts (k=1..15) off real replay-buffer states rather than rolling long from an initial state (MBPO): 1,000 states x 5 steps gives error 5*eps for the same imagined-sample count as one 5,000-step rollout at 5000*eps. (3) Replan every step against fresh observations (MPC discipline). The skipped diagnostic: plot open-loop prediction error against horizon out to 4H, find the knee, plan below it. One-step error proves nothing about H-step error.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c11",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "What is model exploitation, and why is it not just noise?",
+      "a": "Optimising a policy against a learned model means searching for the argmax of the model's PREDICTED return, so the optimiser is actively drawn to regions where the model is optimistically wrong. Model error is not zero-mean noise from the optimiser's perspective; the search seeks it out, and it gets worse as the optimiser gets stronger. Ha & Schmidhuber's agent found a policy that made monsters never fire. Same structure as reward hacking and adversarial examples. Fixes: raised sampling temperature, uncertainty penalties (MOPO/MOReL), ensemble disagreement, domain randomisation.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c12",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "Why predict in latent space rather than pixel space, and what does it cost?",
+      "a": "Capacity: 1080p RGB is 6,220,800 numbers versus a latent 10^3-10^4x smaller; reconstruction loss allocates capacity where error mass is, which in natural video is texture no controller reads. Noise: much pixel content is aleatoric, and minimising squared error on unpredictable content converges to the conditional mean, i.e. blur, which is why pixel predictors go to mush in 10-20 frames. The cost: no external ground truth, so encoder and predictor can collude on a constant mapping. That is representation collapse. Defences: reconstruction anchor (Dreamer), EMA target encoder plus stop-gradient (JEPA), variance-covariance regulariser (VICReg).",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c13",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "State the representation-versus-dynamics split, including how each is tested and what the decoder is for.",
+      "a": "Representation q(z|x): compression with sufficiency; fails by dropping information; tested by linear-probing z for known state variables. Dynamics p(z'|z,a): accuracy over a horizon; fails by compounding error; tested with an H-step open-loop error curve. Reporting only reconstruction loss measures neither. The decoder is a third object that exists solely as an anti-collapse training anchor and is NEVER called during imagination; if your rollout needs to decode to pixels, you built a video model with an action input.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c14",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "PlaNet to DreamerV3: what did each of the four papers specifically fix?",
+      "a": "PlaNet (2019): RSSM splitting the latent into a deterministic GRU path and a stochastic variable, plus latent overshooting; planned with CEM every step. Dreamer (2020): replaced CEM with an actor-critic backpropagating imagined return through the differentiable dynamics at H=15 with a critic bootstrapping the tail, so the search amortises. DreamerV2 (2021): 32x32 categorical latents with straight-through gradients plus KL balancing; first human-level on 55-game Atari at 200M frames inside a world model. DreamerV3 (2023, Nature 2025): symlog, twohot over 255 buckets, percentile return normalisation, giving one fixed configuration across 150+ tasks and the first Minecraft diamonds from scratch.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c15",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "Why is DreamerV3's 'single configuration' the actual headline, not the 150+ tasks?",
+      "a": "Every prior model-based paper reported strong numbers after per-domain hyperparameter tuning, which silently excluded hundreds of tuning runs from the reported sample cost. A method needing 200 tuning runs at 10^6 steps each to demonstrate a 10^5-step result is not sample-efficient in any practical sense. Removing that hidden cost is what makes it applicable to a new domain out of the box. Secondary finding worth knowing: across 8M to 200M parameters, larger models were not only better asymptotically but MORE data-efficient per environment step.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c16",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "What do symlog and twohot actually solve in DreamerV3?",
+      "a": "Reward scales differ by orders of magnitude across domains (DMC returns in [0,1000], Atari 10 to 100,000, Minecraft almost always 0), so no fixed loss weight or learning rate works everywhere. symlog(x) = sign(x)*ln(|x|+1) compresses large magnitudes smoothly while staying well-behaved near zero. Twohot discretises the symlog-space target into 255 equally spaced buckets and predicts a categorical with mass split between the two adjacent buckets, making the loss scale-invariant and allowing multimodal value distributions under sparse reward. Percentile return normalisation bounds actor gradients when returns are usually zero and occasionally huge.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c17",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "What is the strongest published evidence that video generation does not learn physical law, with numbers?",
+      "a": "PhyWorld (Kang, Yue et al., ICML 2025, ByteDance Seed). Textureless 2D physics simulator, DiT-S through DiT-XL, 30K to 3M samples, measuring velocity error parsed from generated video against simulator ground truth. In-distribution error fell from 0.022 to 0.012 against a ground-truth-video floor of 0.010. Out-of-distribution error on the same DiT-L/3M model was 0.427, ~35x worse, and did not improve with scale: DiT-B OOD across 30K/300K/3M was 0.433, 0.328, 0.358. Mechanism: case-based retrieval of the nearest training example, with attribute priority colour > size > velocity > shape.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c18",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "Why are FVD, SSIM, PSNR and LPIPS blind to physics, and what is the concrete evidence?",
+      "a": "The training objective only requires each frame to be in-distribution; it contains no term penalising a physically impossible transition between individually plausible frames. Physical correctness is a property of trajectories, not frames, so no per-frame loss or metric can see it. Evidence: PhyWorld's PHYRE table reports SSIM 0.943-0.951 and PSNR 25.5-27.3 across out-of-template videos whose human-judged abnormal rate ranged from 67% down to 10%. Perceptual metrics barely moved while physical correctness changed by a factor of 6.7.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c19",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "Current physical-consistency benchmark numbers for video generation models.",
+      "a": "VideoPhy: best model tested (Pika) satisfied both caption and physical law on 19.7% of instances; CogVideoX-5B at 39.6%. VideoPhy-2 hard subset: best model 22% joint semantic-plus-physical adherence. PhyWorldBench: Sora-Turbo 20.8%, Kling-1.6 18.8%. The headline is that state of the art on physical adherence is 20-40%, not 90%, which is the number to have in mind when shown a beautiful demo reel.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c20",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "Sort Genie, Genie 3 and V-JEPA 2 into benchmarked versus demonstrated-but-unevaluated.",
+      "a": "Benchmarked: Genie (Bruce et al., ICML 2024), 11B params, 30,000 hours of 2D platformer video, an unsupervised latent action model via VQ-VAE with a codebook of only 8 discrete actions, with published controllability metrics. Also benchmarked: V-JEPA 2 (2025), ViT-g >1B params, >1M hours video, action-conditioned post-training on under 62 hours of unlabelled Droid robot video, 65-80% zero-shot pick-and-place on Franka arms in two unseen labs, which is a closed-loop real-hardware result. Demonstrated but unevaluated: Genie 3 (5 Aug 2025), 720p at 24fps consistent for a few minutes, with no technical report, no benchmark table and no agent-training result; self-declared limits of navigation-only actions and ~1 minute of memory.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c21",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "Give the seven-level ladder for testing whether a model 'understands physics', and which levels gate a launch.",
+      "a": "1 in-distribution accuracy on extracted physical quantities, not pixels. 2 conservation-law adherence and object permanence. 3 OOD extrapolation holding out a contiguous parameter region. 4 counterfactual consistency: same state, different action. 5 compositional generalisation: all elements seen, no combinations seen. 6 closed-loop task success on the real system against a no-model baseline. 7 sim-to-real rank correlation over 10-20 candidate policies. Gate an acting system on level 6 and an evaluation harness on level 7; everything below is a proxy that can be excellent while the thing you care about is broken.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c22",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "When should you tell a team NOT to build a world model?",
+      "a": "When you can write the dynamics down (an explicit physics model plus MPC gives exact dynamics and analysable stability). When real samples are cheap, because the whole argument is the ratio c_real/c_sim and a 10,000-step-per-second simulator inverts it. In chaotic or adversarial domains, where useful horizon grows only logarithmically in model accuracy and the environment actively moves away from your model. When the cost of a wrong imagination is unbounded. And when two learned systems to train, version, monitor and debug are not justified by a measured win rather than an interesting architecture.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c23",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "What use of world models is actually deployed at scale today?",
+      "a": "Overwhelmingly three things, none of which is planning: representation learning (frozen RSSM or JEPA-style encoder feeding a small policy head, the 632 to 906 effect with zero rollout risk), synthetic data generation for robotics and AV (NVIDIA Cosmos, 20M hours of pretraining video, sold as a data product rather than as a simulator), and offline policy evaluation with a pessimism penalty and a live A/B as the real gate. Planning inside a learned generative model of a high-dimensional environment is a research capability with a small number of production instances, mostly in robotics, mostly at labs.",
+      "module": "T26-world-models"
+    },
+    {
+      "id": "T26-world-models-c24",
+      "topic": "World Models: What They Are, Why They Matter, the Core Idea",
+      "q": "Objects vanish under occlusion in generated rollouts. Root cause, and why more data will not fix it.",
+      "a": "There is no representation whose job is 'this object exists and has these properties'. A frame-conditioned autoregressive model carries state only in its context window and recurrent activations, so occlusion removes the pixel evidence and nothing sustains the object. This is the same limit as Genie-class models having roughly one minute of effective memory. More data does not fix it because the objective is satisfied by any plausible continuation, and a continuation without the object is plausible frame-by-frame. Fixes: scripted occlusion tests scoring object count and identity, object-centric or slot latents, retrieval over a persistent scene buffer, or an explicit 3D representation.",
+      "module": "T26-world-models"
+    }
+  ]
+}

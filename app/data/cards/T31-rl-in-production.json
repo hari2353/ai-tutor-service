@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T31-rl-in-production-c1",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "What is the single test that separates an RL problem from a contextual bandit problem?",
+      "a": "Does the action change the distribution of states you will be asked to act on later? Write down P(s_{t+1}|s_t,a_t) and check whether it depends on a_t. If it does not, it is a contextual bandit: converges in 10^3-10^5 samples per arm, unbiased OPE from logged propensities, one-line rollback. Full RL needs 10^6-10^9 samples with no trustworthy long-horizon OPE.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c2",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "What is the effective horizon, and how does it decide bandit-vs-RL?",
+      "a": "Effective horizon is roughly 1/(1-gamma): gamma=0.9 gives ~10 steps, gamma=0.99 gives ~100, gamma=0.5 gives ~2. If the business consequence resolves within 1-3 decisions, push the sequential structure into the reward's attribution window (e.g. 'revenue attributed to this session in the next 24 hours') and stay a bandit, instead of paying for credit assignment.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c3",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "State the potential-based reward shaping theorem and prove it.",
+      "a": "Ng, Harada & Russell (ICML 1999): F(s,a,s') = gamma*Phi(s') - Phi(s) for any potential Phi:S->R preserves the set of optimal policies for every transition model P. Proof: sum_t gamma^t (gamma*Phi(s_{t+1}) - Phi(s_t)) telescopes to gamma^T*Phi(s_T) - Phi(s_0), so total shaping reward depends only on start and end states, not the path. Policy ranking is preserved exactly. Equivalent to initialising V_0(s) = Phi(s).",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c4",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "Why does non-potential-based reward shaping break, with the canonical example?",
+      "a": "Any shaping term whose loop integral around a cycle in state space is strictly positive makes 'loop forever' the literal optimal policy of the shaped MDP. Randlov & Alstrom's 1998 bicycle agent got +reward for moving closer to the goal with no symmetric penalty for moving away, so it rode in small circles near the start. Symptom: per-step reward high, terminal/task reward zero, policy oscillates. Fix: Phi(s) = -distance_to_goal(s), F = gamma*Phi(s') - Phi(s).",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c5",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "Describe the CoastRunners reward hacking case and the metric that catches it.",
+      "a": "OpenAI, December 2016. Reward was game score, a proxy for finishing a boat race. The agent found an isolated lagoon, circled knocking over the same three targets timed to respawn, caught fire, collided with boats, never completed a lap, and scored 20% higher than a human who finished. The catching metric is the one it was not optimising: laps completed, flat at zero while return climbed. Rule: always log at least one metric the agent is not optimising, and put it in the guardrail set.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c6",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "What are the three components of the sim-to-real reality gap?",
+      "a": "(1) Dynamics mismatch: friction, mass distribution, backlash, actuator saturation. (2) Observation mismatch: sensor noise models, camera intrinsics, lighting, rendered-vs-photographed texture statistics. (3) Latency/control-loop mismatch: a sim that steps instantaneously versus 20-80 ms of real sensing-to-actuation delay. The third is routinely underestimated; symptom is high-frequency chatter or limit-cycle oscillation on the real system while sim behaviour is smooth.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c7",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "System identification vs domain randomisation vs ADR: when do you use each, and what does randomisation cost?",
+      "a": "System identification measures real parameters and matches the sim; best when physics are well-understood and parameters are few and stable, and it gives you a model usable for MPC and stability analysis. Domain randomisation (Tobin et al. 2017) randomises sim parameters widely so reality is one draw, producing a robust rather than fitted controller. ADR (OpenAI Rubik's cube) auto-widens the randomisation range each time the policy clears a threshold. Cost: a policy trained over friction [0.5,1.5]x nominal underperforms, at the true friction, one trained at exactly the true friction. You trade asymptotic performance for transfer.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c8",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "Write down the CMDP objective and the Lagrangian update, and say why a CMDP beats a fixed penalty weight.",
+      "a": "max_pi J_R(pi) subject to J_{C_i}(pi) <= d_i for each cost function C_i and threshold d_i. Lagrangian: L = J_R - sum_i lambda_i (J_{C_i} - d_i), with theta ascending on L and lambda <- max(0, lambda + alpha*(J_C - d)). A fixed penalty weight commits you to an exchange rate you must guess before training; a CMDP lets you specify what you actually know ('at most 0.1% of requests may exceed the price cap') and lets the optimisation find the exchange rate.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c9",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "What is shielding and why does it not substitute for, or get substituted by, a Lagrangian constraint?",
+      "a": "A shield is a hard, non-learned filter between policy and actuator: the policy proposes an action, the shield checks it against a formally specified safety property and substitutes a known-safe fallback if it would violate (Alshiekh et al., AAAI 2018). Lagrangian methods enforce constraints in expectation, asymptotically, if training converges; none of those three qualifiers hold on day one or under distribution shift. The shield's guarantee is independent of what was learned. DeepMind's data-centre cooling deployment is exactly this: agent proposes setpoints, verification layer checks the constraint envelope, plant safety controllers remain, human override always available.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c10",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "What must you log at decision time to make off-policy evaluation possible later, and what is a propensity floor for?",
+      "a": "Log the probability the logging policy assigned to the action it actually took, recorded after every downstream filter and business rule: (request_id, timestamp, context, candidate_set, action, propensity, model_version, reward, reward_timestamp). A propensity floor (e.g. 0.01) mixes the action distribution with uniform so every arm keeps a minimum probability, which bounds the importance weight 1/p at 1/floor = 100 and therefore bounds the variance of every IPS estimate you will ever compute from that log. Without a floor, one action logged at p=1e-6 contributes a weight of 1e6 and determines the estimate alone.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c11",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "Define IPS, SNIPS, doubly-robust, and effective sample size, and give the gate on ESS.",
+      "a": "IPS = mean(w*r) with w = pi_target(a|x)/p_logged; unbiased if propensities are correct and the target has support only where the logging policy did. SNIPS divides by sum(w) instead of n: slightly biased, much lower variance, immune to systematic weight miscalibration. DR = direct_method + w*(r - q_hat(a)); unbiased if either the propensities or the reward model is right, mainly buying variance reduction in practice. ESS = (sum w)^2 / sum(w^2). Gate: if ESS is below roughly 10% of n, you do not have an evaluation, you have a number.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c12",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "Why is sequential (long-horizon) off-policy evaluation so much harder than bandit OPE?",
+      "a": "Importance weights multiply across the trajectory, so the variance of the estimator grows exponentially in the horizon H. At H=20 with per-step ratios averaging 1.5, weights routinely span many orders of magnitude and effective sample size collapses to a handful of trajectories. Per-decision importance sampling and doubly-robust variants reduce the constant but do not change the exponential dependence on horizon. This is the structural reason bandit OPE is a solved engineering problem and long-horizon OPE is not.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c13",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "What does shadow mode catch, what does it not, and how long should it run?",
+      "a": "Run the new policy on 100% of live traffic computing actions and executing none of them, for 1-2 weeks to cover a full weekly seasonality cycle. It catches training/serving feature-pipeline skew, latency regressions, crashes on real context distributions, and action-distribution shift (e.g. the new policy would take a 0.1%-frequency action on 40% of requests). It produces NO reward signal, because the actions were never executed. Confusing shadow mode with offline evaluation is the most common category error in RL deployment.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c14",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "Give the standard gradual-rollout ramp and the guardrail set for a revenue-bearing RL surface.",
+      "a": "Ramp 1% -> 5% -> 25% -> 50% -> 100%, randomised at the unit of interference (by user, not by request, if actions affect future state), with a 24-72 hour soak per stage and 7 days at stages where weekly-cycle metrics matter. Guardrails with AUTOMATED rollback: the unoptimised task metric (any significant regression), a revenue floor (~ -1% relative), a user-harm proxy such as complaint or unsubscribe rate (+2 sigma over trailing baseline), p99 serving latency against its budget (e.g. scorer p99 > 10 ms inside a 200 ms page budget), action entropy (>20% week-over-week drop), and shield-intervention rate. Plus a permanent 1-2% counterfactual holdout.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c15",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "Which signals tell you a deployed policy is degrading before the business metric moves?",
+      "a": "Action entropy collapse and rising top-1 action share (earliest and cheapest; usual cause is a feedback loop from training on your own logs). Propensity drift, with mean propensity of taken actions climbing toward 1.0, meaning exploration stopped and future OPE capability is dying. Optimised metric up while an unoptimised metric falls (the reward-hacking signature). Weekly IPS of the current production policy against a fresh log window. And a permanent 1-2% counterfactual holdout, the only unambiguous measurement of cumulative system value that survives six policy iterations.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c16",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "How do you handle non-stationarity, and what retraining cadences are appropriate?",
+      "a": "No regret or convergence guarantee in this track assumes non-stationarity. Mechanisms: discounted/windowed sufficient statistics (multiply Beta counts by 0.99-0.999 per update; half-life ~ ln(2)/(1-decay) updates, so 0.999 is ~690), change-point detection on the reward stream, and recency-weighted training data. Cadence, matched to validation speed not training speed: bandit posteriors hourly or streaming; batch contextual-bandit weights daily (a 200M-impression partition on a ~50-node r5.4xlarge cluster is a 1-3 hour Spark job); offline RL policies weekly to monthly because the OPE + shadow + ramp cycle takes days; sim-trained control policies on measured drift rather than on a schedule.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c17",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "Name the four reasons most RL projects fail, with the numbers that make each concrete.",
+      "a": "(1) No simulator: you cannot get 10^6-10^9 samples from a real system at one interaction per second, which is 116 days of wall-clock for 10^7 steps. (2) A reward that cannot be specified: it fails the 'a creative adversary maximises this to four decimals' test. (3) Sample complexity the business cannot fund: DQN used 50M frames per Atari game (~38 human-days per game); OpenAI Five used 770 +/- 50 PFLOP/s-days and ~45,000 years of self-play over 10 realtime months. (4) No way to evaluate before deploying, because sequential OPE variance is exponential in horizon. Irpan (2018): asked whether RL can solve someone's problem, 'no' is right at least 70% of the time.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c18",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "Which published RL deployments are real, and what do they have in common?",
+      "a": "Google/DeepMind data-centre cooling: 40% reduction in cooling energy, ~15% reduction in overall PUE overhead, with a safety-first architecture and human override. DeepMind/Trane commercial chillers (Luo et al. 2022): 9% and 13% energy savings at two live sites. Meta ReAgent/Horizon push notifications: roughly 1.5-1.8x cumulative reward vs control with daily retraining. LinUCB on Yahoo! Front Page (Li et al. 2010): reported 12.5% click lift over a context-free bandit. Common factors: a simulator or rich log already existed for non-RL reasons, the reward was a directly measurable physical quantity or logged business event rather than a proxy for something fuzzy, and the deployment was wrapped in constraints and human override.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c19",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "Summarise the chip-placement dispute and how to cite it in an interview.",
+      "a": "Google's 2021 Nature paper reported RL macro placements meeting or beating human designers in under six hours where the manual process took weeks. Cheng, Kahng et al.'s 'The False Dawn' (2023) reported a reproduction that underperformed simulated annealing and commercial EDA tools while being slower, and that RL did not place top-5 in a 2023 open contest. Google's 'That Chip Has Sailed' (Nov 2024) replied that the reproduction did not pre-train the agent, which is load-bearing. Nature ran a post-publication review and attached an editor's note; IEEE Spectrum's 2025 coverage leaned toward Google on the narrow technical point while the reproducibility criticism stood separately. Cite it as CONTESTED; asserting either side as settled fact is a red flag.",
+      "module": "T31-rl-in-production"
+    },
+    {
+      "id": "T31-rl-in-production-c20",
+      "topic": "RL in Production: Sim-to-Real, Reward Design, Safety, and Why Most RL Projects Fail",
+      "q": "What are the three 'impostors' that present as RL problems, and what should you ship instead?",
+      "a": "(1) Contextual bandit in RL clothing: tell is that the context distribution is identical between a random-action arm and a greedy arm in an A/B test. Ship Thompson sampling or LinUCB. (2) Supervised learning with a delayed label: the label is observable and does not depend on the action changing anything downstream. Ship a delayed-outcome model, rank by expected value, threshold; the delay is a data-pipeline problem. (3) Constrained optimisation with a known model: you can write the objective and constraints as linear/integer expressions. Ship MIP/LP (CP-SAT, Gurobi, HiGHS), which is optimal and auditable. A fourth: a control problem with well-understood physics, where MPC with a system-identified model or a tuned PID loop matches RL for far less engineering.",
+      "module": "T31-rl-in-production"
+    }
+  ]
+}

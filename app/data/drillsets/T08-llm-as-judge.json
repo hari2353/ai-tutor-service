@@ -1,0 +1,102 @@
+{
+  "drills": [
+    {
+      "id": "T08-llm-as-judge-d1",
+      "module": "T08-llm-as-judge",
+      "q": "Name the three LLM-as-judge modes and give the strongest use case for each.",
+      "a": "Pointwise: absolute scoring for trend lines/quality gates. Pairwise: most reliable for ranking two systems (A/B tests, model selection). Reference-based: best when a gold answer exists (factual QA, RAG faithfulness).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T08-llm-as-judge-d2",
+      "module": "T08-llm-as-judge",
+      "q": "Give the measured magnitude of position bias and how you neutralize it in a pairwise eval.",
+      "a": "10-15 points of win-rate swing on order swap alone (Zheng et al., 2023). Run both orderings (A-then-B and B-then-A); only count a decisive winner if both orderings agree, otherwise score it a tie.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T08-llm-as-judge-d3",
+      "module": "T08-llm-as-judge",
+      "q": "Your two candidate answers differ mainly in length. What bias do you need to control for, and how?",
+      "a": "Verbosity bias - judges prefer longer answers by 15-30 points regardless of quality. Add an explicit rubric instruction against preferring length, and run length-bucketed analysis to check the preference doesn't persist when lengths are close.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-llm-as-judge-d4",
+      "module": "T08-llm-as-judge",
+      "q": "You're comparing two fine-tunes of the same base model using that same base model as judge. What's the risk and the fix?",
+      "a": "Self-preference bias (+10-25% for the judge's own family) can extend to close relatives sharing lineage/training data, not just identical models. Use a judge from a genuinely different lab/family for any comparison that drives a real decision.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-llm-as-judge-d5",
+      "module": "T08-llm-as-judge",
+      "q": "Walk through calibrating a judge against human labels, step by step, with the pass/fail thresholds.",
+      "a": "Sample 100-300 real traces, 2-3 humans label on the exact rubric, compute inter-annotator kappa/alpha. Score same traces with the judge, compute judge-vs-human kappa. <0.4 rubric ambiguous, 0.4-0.6 weak, >0.6 ship, >0.8 strong. Re-calibrate after any rubric or judge-model change.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-llm-as-judge-d6",
+      "module": "T08-llm-as-judge",
+      "q": "Cohen's kappa vs Krippendorff's alpha - when is each the right tool?",
+      "a": "Cohen's kappa: exactly two raters. Krippendorff's alpha: three or more raters, handles ordinal/interval scales and missing labels. Both correct for chance agreement, which raw percent agreement does not.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T08-llm-as-judge-d7",
+      "module": "T08-llm-as-judge",
+      "q": "Your judge-vs-human kappa comes back at 0.95. Do you ship it immediately?",
+      "a": "No - audit first. Suspiciously high agreement can mean judge and humans are both tracking a superficial correlate (e.g. length) rather than true quality. Test on an adversarial subset built to break that correlate (short-but-excellent, long-but-wrong) before trusting the number.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T08-llm-as-judge-d8",
+      "module": "T08-llm-as-judge",
+      "q": "When is a cheap judge (small/fine-tuned model) sufficient, and when do you need a frontier model?",
+      "a": "Cheap judges suffice for near-checklist criteria a human could apply in seconds without re-reading source material (valid JSON, cites a source). Frontier judges are needed when the criterion requires genuine judgment (nuanced correctness, subtle harm). Production pattern: cheap judge on 100% of traffic/CI, frontier judge for calibration and hard-case routing.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-llm-as-judge-d9",
+      "module": "T08-llm-as-judge",
+      "q": "Explain G-Eval's chain-of-thought-then-score approach and why it beats naive scoring.",
+      "a": "The judge first generates its own evaluation steps from the criterion, fills them in as a form, then takes a probability-weighted score across top logprobs rather than a single sampled token. Externalizing reasoning before committing to a score reduces anchoring; probability-weighting smooths sampling noise.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-llm-as-judge-d10",
+      "module": "T08-llm-as-judge",
+      "q": "What is the shared-blind-spot failure, and what's the only real fix?",
+      "a": "If judge and generator share a training-time blind spot, the judge certifies a fabrication as correct because it matches its own equally-wrong prior - the judge has no ground truth outside what it shares with the candidate. Fix: ground the judge in something external to both models (retrieved source, verified gold answer), not just its own recall.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T08-llm-as-judge-d11",
+      "module": "T08-llm-as-judge",
+      "q": "Design a rubric for RAG faithfulness. What's the naive mistake?",
+      "a": "Naive rubric conflates faithfulness (matches provided context) with factuality (matches the world) into one score, hiding whether retrieval or generation broke. Correct: scope the rubric to faithfulness only, give the judge the retrieved chunks as sole source of truth, ask it to flag specific unsupported sentences rather than one aggregate number.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T08-llm-as-judge-d12",
+      "module": "T08-llm-as-judge",
+      "q": "A model upgrade improves every internal LLM-judge score. Ship it?",
+      "a": "Not on judge score alone - if the new model shares a family with the judge, self-preference bias could be inflating the number. Cross-check with a judge from a different family, and validate against the human-calibrated set specifically before shipping.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T08-llm-as-judge-d13",
+      "module": "T08-llm-as-judge",
+      "q": "Build a CI gate on an LLM judge that won't flake. What are the four key design choices?",
+      "a": "Pin the judge model version explicitly. Run both orderings for pairwise checks, treat a flip as a tie. Gate on the judge's calibrated agreement threshold, not an arbitrary score cutoff. Monitor judge-vs-human kappa itself as a metric so drift is visible before it silently degrades the gate.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-llm-as-judge-d14",
+      "module": "T08-llm-as-judge",
+      "q": "A frontier judge model exceeds 50% error rate on an adversarial bias benchmark despite strong aggregate scores elsewhere. What does that tell you?",
+      "a": "A judge can look reliable on average while failing hard on the specific bias dimension a targeted eval is testing - aggregate correlation with human judgment does not guarantee robustness on every failure mode. Always run the documented bias stress-tests (position, verbosity, self-preference) as part of calibration, not just an aggregate correlation check.",
+      "difficulty": "staff"
+    }
+  ]
+}

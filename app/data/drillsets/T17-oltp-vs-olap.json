@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T17-oltp-vs-olap-d1",
+      "module": "T17-oltp-vs-olap",
+      "q": "Explain why row storage suits OLTP and columnar storage suits OLAP, in terms of physical layout.",
+      "a": "OLTP touches a few full rows (fetch/update one entity) - row storage keeps a row's fields physically adjacent so one I/O retrieves everything needed. OLAP touches a few columns across millions of rows (aggregates) - columnar storage keeps each column's values adjacent so the engine reads/skips exactly the needed columns, and each column compresses better since it's a single data type.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-oltp-vs-olap-d2",
+      "module": "T17-oltp-vs-olap",
+      "q": "Where does most of a columnar engine's 10-100x speedup over row-at-a-time execution actually come from?",
+      "a": "Both I/O savings (reading only needed columns, plus 5-20x compression from within-column redundancy) and vectorised execution (batch processing 1000s of values per operator call, SIMD-friendly and cache-friendly) rather than row-at-a-time interpretation. The CPU-efficiency piece from vectorisation is a large, often underestimated fraction of the total speedup.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-oltp-vs-olap-d3",
+      "module": "T17-oltp-vs-olap",
+      "q": "Explain dictionary encoding, run-length encoding, and delta encoding, and why they work better on columns than rows.",
+      "a": "Dictionary encoding replaces repeated values with small integer codes referencing a shared dictionary (good for low-cardinality columns). Run-length encoding stores (value, count) pairs for consecutive repeats. Delta encoding stores the difference from the previous value for monotonic columns like timestamps or IDs. All three exploit redundancy within one column's homogeneous values, which a heterogeneous row (mixing an ID, name, age, salary) doesn't have.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-oltp-vs-olap-d4",
+      "module": "T17-oltp-vs-olap",
+      "q": "State the honest limitation of HTAP systems and explain how TiDB and Snowflake Unistore each manage (not eliminate) it.",
+      "a": "The same CPU, memory, and I/O bandwidth ultimately serve both workloads - a zero-sum resource contention problem architecture can bound but not remove. TiDB runs two separate replicated engines (TiKV row store, TiFlash columnar), which can be placed on separate nodes - architecturally closer to CDC replication inside one product. Snowflake Unistore uses one unified engine, avoiding replication lag but paying for it with a hard throughput ceiling (~1,000 ops/sec at ~500GB active data), far below a dedicated OLTP engine.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-oltp-vs-olap-d5",
+      "module": "T17-oltp-vs-olap",
+      "q": "What is chunk skipping / predicate pushdown in a columnar engine, and what commonly breaks it even on a partitioned table?",
+      "a": "Columnar files are split into row-group chunks with stored min/max statistics; a predicate is checked against chunk stats before reading any actual data, letting the engine skip non-matching chunks entirely. It breaks when the filter is on a column that isn't the physical partition/cluster key, or when the filtered column is wrapped in a function (e.g. DATE(created_at)=X), preventing the engine from evaluating it against stored statistics - directly analogous to the expression-index sargability problem.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-oltp-vs-olap-d6",
+      "module": "T17-oltp-vs-olap",
+      "q": "A nightly analytics report is degrading checkout latency. What do you diagnose first, and why might a columnar engine not be the right immediate fix?",
+      "a": "First determine if the problem is resource contention (the report consuming I/O/cache the transactional workload needs) versus the report being inherently slow. If it's contention, routing to a dedicated read replica is simpler and faster than adopting a columnar engine, and directly solves the isolation problem - conflating an isolation problem with a genuine analytical-performance problem leads to over-engineering.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-oltp-vs-olap-d7",
+      "module": "T17-oltp-vs-olap",
+      "q": "Derive roughly how much less data a columnar query reads compared to a row-store query for a 50-column table where only 2 columns are needed, and explain when this advantage shrinks.",
+      "a": "Ignoring compression, roughly 25x less data (2/50 columns), and with typical 5-20x compression on top, total reduction can be 100x+. The advantage shrinks toward parity (and can reverse) as the fraction of columns needed per query approaches the whole row, since columnar storage then pays overhead reassembling many separate column files into a row with no compensating I/O savings.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-oltp-vs-olap-d8",
+      "module": "T17-oltp-vs-olap",
+      "q": "Why can't isolating compute resources alone (separate hardware for OLTP and OLAP) fully solve the OLTP-vs-OLAP problem without also choosing the right storage layout?",
+      "a": "Even on fully separate hardware, a row store answering an OLAP-shaped query still reads unnecessary columns and gets none of the compression/vectorisation benefit a columnar layout provides. Compute isolation and storage-layout choice are two separate, both-necessary levers, not substitutes for each other.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-oltp-vs-olap-d9",
+      "module": "T17-oltp-vs-olap",
+      "q": "Design the data architecture for a fraud-detection system needing both live transactional writes and near-real-time aggregate risk scores per user, and note where a stricter sub-second requirement changes the design.",
+      "a": "OLTP engine (Postgres/MySQL) handles transactional writes with full ACID guarantees. CDC off the WAL streams changes into a columnar/streaming layer (ClickHouse or a stream processor) computing per-user risk features with seconds-level freshness; the scoring service reads live transaction context from OLTP and aggregate features from the CDC-fed layer. If one specific feature genuinely needs zero staleness, compute that feature in-line in the OLTP path itself rather than making the whole pipeline real-time.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-oltp-vs-olap-d10",
+      "module": "T17-oltp-vs-olap",
+      "q": "Why did ETL-into-a-separate-warehouse emerge as the classic architecture, and what specific pain did it solve?",
+      "a": "Running heavy analytical queries directly against the row store serving live transactions caused multi-minute scans to hold locks and consume buffer pool/cache the transactional workload needed, degrading OLTP latency unpredictably. Physically separating the workloads onto separate hardware via nightly batch ETL eliminated that contention, at the cost of data being hours-to-a-day stale.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-oltp-vs-olap-d11",
+      "module": "T17-oltp-vs-olap",
+      "q": "When is CDC-into-a-columnar-store preferable to adopting a true HTAP database?",
+      "a": "When you want workload isolation without adopting a more operationally complex database product - CDC keeps the two engines fully separate (preserving the isolation that solves OLTP-starves-under-reporting) and typically achieves seconds-to-tens-of-seconds freshness, satisfying most 'near real-time' requirements without HTAP's added complexity. True HTAP earns its complexity only when sub-second consistency between transactional and analytical views is a validated, real requirement.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-oltp-vs-olap-d12",
+      "module": "T17-oltp-vs-olap",
+      "q": "State the single diagnostic question that resolves most OLTP-vs-OLAP storage placement decisions, and give the follow-up questions for the remaining cases.",
+      "a": "Does a single request touch one entity or millions of rows? One entity -> OLTP shape; millions -> OLAP shape (resolves ~80% of cases). For the rest: what staleness is acceptable for the analytical side (sub-second vs seconds-minutes vs hours), what's the write pattern (frequent small ACID writes vs bulk/streaming append), and is the actual pain reporting slowness or reporting degrading the transactional system (which a read replica alone may fix)?",
+      "difficulty": "mid"
+    }
+  ]
+}

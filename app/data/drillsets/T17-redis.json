@@ -1,0 +1,88 @@
+{
+  "drills": [
+    {
+      "id": "T17-redis-d1",
+      "module": "T17-redis",
+      "q": "Why does Redis being single-threaded make every command atomic?",
+      "a": "Only one command executes at a time with no interleaving, so no other command can observe or mutate state mid-command.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-redis-d2",
+      "module": "T17-redis",
+      "q": "What's wrong with running KEYS * against a production Redis instance with 10M keys?",
+      "a": "It walks the whole keyspace on the single command thread, blocking every other client's commands for the entire scan duration.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-redis-d3",
+      "module": "T17-redis",
+      "q": "You need to safely iterate all keys matching a pattern in production. What do you use instead of KEYS?",
+      "a": "SCAN with a cursor, doing bounded work per call so other commands can interleave; note it isn't a point-in-time-consistent snapshot.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-redis-d4",
+      "module": "T17-redis",
+      "q": "Your appendfsync is set to everysec and the server crashes. How much data can you lose?",
+      "a": "Roughly one second of writes (up to about two seconds worst case), since fsync happens on a background thread on a one-second cadence.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-redis-d5",
+      "module": "T17-redis",
+      "q": "A Cluster client issues MGET on two keys and gets CROSSSLOT. Why, and how do you prevent it going forward?",
+      "a": "The two keys hashed to different slots, which can live on different nodes, so a single-node multi-key command can't serve them. Prevent it with hash tags ({tag}:key1, {tag}:key2) so both hash to the same slot.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-redis-d6",
+      "module": "T17-redis",
+      "q": "Your cache-only Redis instance is throwing OOM errors on writes even though reads still work. What's misconfigured?",
+      "a": "maxmemory-policy is left at the default noeviction. For a pure cache, set it to allkeys-lru or allkeys-lfu so old data is evicted instead of writes failing.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-redis-d7",
+      "module": "T17-redis",
+      "q": "A worker acquires a lock with SET k v NX EX 10, then experiences a 15-second GC pause. What can go wrong?",
+      "a": "The lock's TTL expires during the pause and a second worker acquires it; when the first worker resumes it may still believe it holds the lock, so both can now act concurrently on the protected resource.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-redis-d8",
+      "module": "T17-redis",
+      "q": "What specific gap did Kleppmann identify in Redlock, and what actually closes it?",
+      "a": "No fencing token, so a paused-then-resumed holder can write after a new legitimate holder has acquired the lock. Closing it requires a monotonically increasing fencing token that the protected resource itself validates and rejects if stale.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-redis-d9",
+      "module": "T17-redis",
+      "q": "Give the one-line honest verdict on Redis distributed locks for a system moving money.",
+      "a": "Treat them as a performance optimization to avoid duplicate work, not a correctness mechanism -- for money-moving mutual exclusion, use a fencing token validated at the resource or a consensus-based lock service.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-redis-d10",
+      "module": "T17-redis",
+      "q": "You need automatic failover for a Redis dataset that comfortably fits in one node's memory. Sentinel or Cluster?",
+      "a": "Sentinel -- it solves availability/failover for a single dataset that fits on one node; Cluster is for sharding a dataset too large for one node.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-redis-d11",
+      "module": "T17-redis",
+      "q": "A Redis Stream's memory keeps growing even though every consumer group has acked every message. Why, and what's the fix?",
+      "a": "XACK only marks a message as no longer pending, it doesn't delete it -- Streams are append-only. Fix with XTRIM (MAXLEN or MINID), either as maintenance or inline on XADD.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-redis-d12",
+      "module": "T17-redis",
+      "q": "You're choosing between Redis Streams and Kafka for an event pipeline expecting 2M events/sec with multiple independent consumer systems. Which fits, and why?",
+      "a": "Kafka -- that throughput exceeds Streams' comfortable range (~200k events/sec per stream) and independent uncoordinated consumers with durable disk retention is exactly Kafka's design point.",
+      "difficulty": "staff"
+    }
+  ]
+}

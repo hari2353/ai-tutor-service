@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-framework-matrix-c1",
+      "topic": "Framework matrix",
+      "q": "What is AutoGen's status as of 2026, and what replaced it?",
+      "a": "Maintenance mode — Microsoft redirected its roadmap to Microsoft Agent Framework, which merges AutoGen's multi-agent orchestration with Semantic Kernel's enterprise features and reached GA 1.0 on 2026-04-03 for Python and .NET.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c2",
+      "topic": "Framework matrix",
+      "q": "Where is Google ADK's durability story strong, and where is it a trap?",
+      "a": "Strong in production via VertexAiSessionService backed by Vertex AI Agent Engine. Trap: InMemorySessionService (used in dev) doesn't survive a restart, and the whole durability/memory story is coupled to Google Cloud deployment.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c3",
+      "topic": "Framework matrix",
+      "q": "Does OpenAI's Agents SDK have native cross-process checkpointing?",
+      "a": "No. Sessions give persistent conversational memory within a live run, not resumability across a crash. Durable execution across restarts has to be built separately or delegated to an orchestrator like Temporal.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c4",
+      "topic": "Framework matrix",
+      "q": "What is CrewAI's core process-model limitation?",
+      "a": "Its Process is sequential or hierarchical, which can't express genuine conditional branching — a workflow needing 'if X route to A else B, then converge' doesn't map cleanly onto either process type.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c5",
+      "topic": "Framework matrix",
+      "q": "How much token overhead does CrewAI carry versus LangGraph on simple workflows?",
+      "a": "Up to 3x the token overhead, the measured cost of its higher-ceremony role/backstory-based prompting style.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c6",
+      "topic": "Framework matrix",
+      "q": "What does it mean that framework choice can move agent benchmark scores by up to 30 percentage points on the identical model?",
+      "a": "The graph design and tool set dominate the framework's brand — a bad implementation on a 'good' framework loses to a good implementation on a 'weaker' one, so benchmark leaderboard numbers don't transfer to your specific workload.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c7",
+      "topic": "Framework matrix",
+      "q": "Contrast LangGraph's and OpenAI Agents SDK's approach to multi-agent.",
+      "a": "Both treat multi-agent as composition on top of a single-agent primitive rather than a core abstraction: LangGraph via subgraphs and Send fan-out, OpenAI's SDK via handoffs (an agent calling another agent as a tool). You don't pay a multi-agent tax unless you use it.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c8",
+      "topic": "Framework matrix",
+      "q": "Which two frameworks treat multi-agent orchestration as the core abstraction from the start?",
+      "a": "Google ADK (composable agent trees: Sequential/Parallel/Loop agents) and CrewAI (named crews coordinated by a Process). AutoGen's conversational turn-taking is also multi-agent-first but the project is frozen.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c9",
+      "topic": "Framework matrix",
+      "q": "What is LangGraph's streaming churn risk?",
+      "a": "Three different wire formats in fifteen months (v1 tuples, v2 unified StreamPart, v3 typed projections). Code written against the streaming surface has already had to migrate twice; pin the version explicitly.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c10",
+      "topic": "Framework matrix",
+      "q": "What is the most composable human-in-the-loop primitive across these frameworks, and why?",
+      "a": "LangGraph's interrupt() plus a durable checkpointer, because it suspends to storage at an arbitrary point and Command(resume=...) continues — a genuinely durable, arbitrary-point pause, unlike OpenAI's guardrails (fail-fast validation, not a durable pause) or ADK's session-based pause (GCP-coupled).",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c11",
+      "topic": "Framework matrix",
+      "q": "When is hand-rolled usually the right choice among all these options?",
+      "a": "When you don't simultaneously need durable resume across a crash, a real multi-day approval gate, multi-format streaming to a UI, and branching/fan-out topology — below that bar, every framework here is negative value relative to a straightforward loop.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c12",
+      "topic": "Framework matrix",
+      "q": "Why does heavier framework structure age worse as models improve, per the Bitter Lesson framing?",
+      "a": "Every structural component encodes an assumption that the model can't do something, and those assumptions expire as models improve. A fixed multi-agent topology or heavy scaffolding built for an older model can be actively worse than a newer model given fewer tools and a shorter loop.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c13",
+      "topic": "Framework matrix",
+      "q": "What's the practical migration risk of a codebase built on AutoGen?",
+      "a": "Not vendor lock-in but time lock-in: the codebase is written against a frozen project, so debugging and community support only shrink from here. Maintenance-mode bug/security fixes still flow, but new feature investment should go toward migrating to Microsoft Agent Framework.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c14",
+      "topic": "Framework matrix",
+      "q": "Give a concrete cost/latency comparison across LangGraph, CrewAI, and AutoGen from a comparative benchmark harness.",
+      "a": "LangGraph reported roughly $0.08/task on cost and latency; CrewAI won time-to-a-working-prototype; AutoGen won open-ended reasoning quality but at 5-6x the cost of the cheaper options — a Pareto tradeoff, not a strict win for any one.",
+      "module": "T07-framework-matrix"
+    },
+    {
+      "id": "T07-framework-matrix-c15",
+      "topic": "Framework matrix",
+      "q": "What is Google ADK's native streaming differentiator versus the other frameworks?",
+      "a": "Native bidirectional (Bidi) multimodal streaming — text, audio, and video — built as a production-ready feature, which is a genuine advantage if the product is voice or live video rather than request-response chat.",
+      "module": "T07-framework-matrix"
+    }
+  ]
+}

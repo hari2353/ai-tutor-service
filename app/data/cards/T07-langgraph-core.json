@@ -1,0 +1,123 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-langgraph-core-c1",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "What execution model does LangGraph use internally, and what is a super-step?",
+      "a": "Pregel-style bulk-synchronous message passing (Google, 2010). A super-step is one tick: every scheduled node runs (possibly in parallel), all their writes are reduced into the channels, a checkpoint is written, then the next tick is scheduled from nodes with inbound messages. Halts when no node has inbound messages.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c2",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "What is the default reducer for a state key, and what happens if two nodes write it in the same super-step?",
+      "a": "The default is LAST WRITE WINS (overwrite). Two writes in ONE super-step raise `InvalidUpdateError: At key 'k': Can receive only one value per step. Use an Annotated key to handle multiple values.` Two writes on CONSECUTIVE super-steps raise nothing and silently discard the first.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c3",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "What is a reducer's signature, and why does `Annotated[list, operator.add]` exist?",
+      "a": "`(current, update) -> new`. It exists because a channel without a reducer accepts exactly one write per super-step, so any parallel fan-out or Send map-reduce writing a shared channel is broken by construction. It is the fan-in contract, not typing decoration.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c4",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "How is `add_messages` different from `operator.add`?",
+      "a": "`operator.add` concatenates blindly. `add_messages` matches on message `id` and REPLACES an existing message with the same id, and coerces `{\"role\":..,\"content\":..}` dicts into LangChain message objects. The id-matching is why HITL edits and `update_state` correct a message instead of duplicating it.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c5",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "How do you bypass a reducer and set a channel directly?",
+      "a": "`Overwrite(value)` from `langgraph.types`, e.g. `return {\"messages\": Overwrite([summary])}`. Constraint: only one node may Overwrite a given key per super-step, otherwise `InvalidUpdateError`.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c6",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "What is the default `recursion_limit` in current LangGraph, what did it used to be, and where does it go in config?",
+      "a": "1000 super-steps as of langgraph 1.0.6; it was 25 for the framework's first two years. It is a TOP-LEVEL config key: `config={\"recursion_limit\": 40}`. Nested under `configurable` it is silently ignored. Exceeding it raises `GraphRecursionError`.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c7",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "What does `Send` do, and how is it different from a conditional edge returning a list of node names?",
+      "a": "`Send(node, per_call_state)` runs the SAME node N times on N DIFFERENT states, returned as a list from a conditional edge. A conditional edge returning `[\"a\",\"b\"]` runs two DIFFERENT nodes on the SAME state. Send requires a reducer on the fan-in channel and a `max_concurrency` bound.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c8",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "Your fan-in node sees only some of the fan-out results and no error is raised. Cause and fix?",
+      "a": "Unequal branch lengths: the fan-in node's inbound edges were satisfied before the longer branch finished, so it ran on a partial channel. Fix: `add_node(\"synthesise\", fn, defer=True)`, which delays it until all pending tasks complete. Symmetric test fixtures never trigger it.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c9",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "When do you use `Command` instead of a conditional edge, and what are the two gotchas?",
+      "a": "When you need to update state AND route in one decision: `Command(update=..., goto=...)`. Gotchas: (1) you must annotate the return type `-> Command[Literal[\"a\",\"b\"]]` or the runtime can't render the graph or know destinations; (2) `goto` ADDS a dynamic edge and does not override a static `add_edge`, so both destinations run. One routing mechanism per node.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c10",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "What belongs in graph state, and where do dependencies and large blobs go instead?",
+      "a": "State is serialised into a checkpoint at every super-step, so keep it small and serialisable: ids, decisions, counters, messages. Dependencies (DB connections, model name, tenant id) go in runtime context via `context_schema` + `Runtime[Ctx]`, which is NOT checkpointed. Large blobs go in the `Store` or object storage with only the key in state.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c11",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "Name the seven LangGraph stream modes and which require a checkpointer.",
+      "a": "`values`, `updates`, `messages`, `custom`, `checkpoints`, `tasks`, `debug`. `checkpoints`, `tasks`, and `debug` require a checkpointer. `debug` = checkpoints + tasks + metadata.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c12",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "What do `version=\"v2\"` and `version=\"v3\"` change about streaming?",
+      "a": "v1 (still default) changes shape by options: raw dict, `(mode,data)` tuples, `(ns,data)` for subgraphs, triples for both. `version=\"v2\"` (needs >=1.1) makes every chunk a uniform `StreamPart` `{type, ns, data}` and makes `invoke` return a `GraphOutput` with `.value`/`.interrupts`. `version=\"v3\"` on `stream_events` (1.2, beta) gives typed per-channel projections: `.messages`, `.values`, `.interrupts`, `.output`.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c13",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "Three subgraph persistence modes via `compile(checkpointer=...)` and their tradeoffs?",
+      "a": "`None` (per-invocation, default): interrupts YES, memory across calls NO, parallel calls safe YES. `True` (per-thread): memory YES, own checkpoint history so inner time travel works, but parallel calls to the SAME subgraph conflict on the namespace. `False` (stateless): plain function call, no interrupts, no durable execution.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c14",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "What are `RetryPolicy`'s defaults, and which exceptions does it deliberately NOT retry?",
+      "a": "`max_attempts=3`, `initial_interval=0.5s`, `backoff_factor=2.0`, `max_interval=128s`, `jitter=True`. Default `retry_on` retries any exception EXCEPT ValueError, TypeError, ArithmeticError, ImportError, LookupError, NameError, SyntaxError, RuntimeError, ReferenceError, StopIteration, StopAsyncIteration, OSError. For requests/httpx it retries 5xx only.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c15",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "In what fixed order do per-node timeout, retry policy, and error handler compose?",
+      "a": "timeout raises `NodeTimeoutError` -> the retry policy decides whether to retry -> only after retries are exhausted does `error_handler` run (receiving a typed `NodeError`, and it can return a `Command` for Saga compensation). `interrupt()` bypasses both retries and the error handler. Timeouts and error handlers require langgraph>=1.2 and are async-node-only.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c16",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "Honestly, what does the graph abstraction buy you over a 40-line agent loop?",
+      "a": "Exactly three things: a checkpoint boundary at every super-step (turning restart into resume, which matters because 0.85^10 ~= 20%), declared merge semantics for parallel writes via reducers, and an inspectable/streamable topology with per-node retry, timeout, and cache policies. For a simple model->tool->model loop it buys almost none of that and costs you a framework in the stack trace plus a migration every couple of quarters.",
+      "module": "T07-langgraph-core"
+    },
+    {
+      "id": "T07-langgraph-core-c17",
+      "topic": "LangGraph I: StateGraph, Reducers, Conditional Edges, Send",
+      "q": "Which LangGraph versions introduced what, and when?",
+      "a": "1.0.0 on 2025-10-20 (GA). 1.1.0 on 2026-03-10: `version=\"v2\"` unified StreamPart streaming and typed invoke. 1.2.0 on 2026-05-12: per-node timeouts, node-level `error_handler`, graceful shutdown via `RunControl.request_drain()`, `DeltaChannel` (beta), and `version=\"v3\"` event streaming.",
+      "module": "T07-langgraph-core"
+    }
+  ]
+}

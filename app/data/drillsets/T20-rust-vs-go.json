@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T20-rust-vs-go-d1",
+      "module": "T20-rust-vs-go",
+      "q": "Fill in: Go's default GOGC is ___, which means collect when the heap reaches ___ x live. GOMEMLIMIT was added in Go ___ and is a ___ limit.",
+      "a": "100; 2x; Go 1.19; SOFT. Soft means exceeding it causes a GC death spiral (100% GC CPU, no forward progress) rather than a clean OOM, so keep a real container memory limit as well.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-vs-go-d2",
+      "module": "T20-rust-vs-go",
+      "q": "A goroutine starts with how much stack? A Rust future costs how much? An asyncio task costs how much (measured)?",
+      "a": "Goroutine: 2 KB initial stack, grown by copying and updating pointers (it was 8 KB before Go 1.4). Rust future: no stack at all; its size is the largest live state across await points, computed at compile time. Asyncio task: 2,185 bytes measured, from 100,000 tasks costing 213,372 KB of RSS.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-vs-go-d3",
+      "module": "T20-rust-vs-go",
+      "q": "True or false: Go's race detector and Rust's Send/Sync solve the same problem the same way.",
+      "a": "False. Rust's Send and Sync make data races a COMPILE error, checked on all code. Go's -race is a RUNTIME detector: it instruments memory accesses, costs roughly 5-10x CPU and 5-10x memory, and only finds races on code paths your tests actually execute. This is a correctness argument for Rust, and for most services it is stronger than the latency argument.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-vs-go-d4",
+      "module": "T20-rust-vs-go",
+      "q": "Compute: if 99% of your GC cycles complete in under 10 ms, what fraction of 100-request user sessions is consistently under 10 ms? What percentile do you actually need?",
+      "a": "0.99^100 = 0.366, so only about 37% of sessions. To get 99% of USERS under the bar you need the 99.99th percentile, not the 99th. This is Go's own 'tyranny of the nines' framing from the ISMM 2018 keynote, and it is why any tail-latency argument that stops at p99 is incomplete.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T20-rust-vs-go-d5",
+      "module": "T20-rust-vs-go",
+      "q": "Your Go service's p99.9 regressed after you added an in-memory cache. gctrace shows STW pauses of 180 microseconds. Explain the contradiction and give the first three fixes in cost order.",
+      "a": "No contradiction: the STW pause is not where the cost lives. The collector must trace the entire LIVE heap to prove reachability, and the pacer charges that work to allocating goroutines as mark assist, so it appears as your handlers running slower rather than as a pause. Go also forces a GC at least every 2 minutes regardless of allocation rate. Fixes in cost order: (1) raise GOGC to 200-400 or set GOMEMLIMIT to ~90% of the container limit with GOGC=off; (2) reduce pointer density in the cache ([]T not []*T, indices not pointers) so there is less to trace; (3) move the cache off the Go heap entirely (off-heap arena, freecache, or an external Redis/memcached). Only after all three is the language the problem.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-vs-go-d6",
+      "module": "T20-rust-vs-go",
+      "q": "A colleague proposes moving a CPU-bound Python service to threads because 'the GIL is basically gone in 3.14'. Give the two-part rebuttal with numbers.",
+      "a": "Part one, the default build: I measured two CPU-bound threads on two cores at 1,062 ms against 898 ms serial, which is 0.85x, an 18% regression, from GIL handoff and eval-breaker overhead alone. Part two, the free-threaded build: 3.14t is officially supported under PEP 779 but is a SEPARATE binary, not the default; it costs ~1% (macOS aarch64) to ~8% (x86-64 Linux) single-threaded, uses more memory (None is 32 B vs 16 B, interned strings immortal, mimalloc, QSBR-deferred frees), and any C extension not marked free-threading-compatible silently re-enables the GIL at import. PEP 779's roadmap has GIL-off-by-default no earlier than the 2028-2030 window.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-vs-go-d7",
+      "module": "T20-rust-vs-go",
+      "q": "You are asked to justify a Rust rewrite. What three numbers must you have before you walk into the room?",
+      "a": "1) The fraction of p99 (and p50) spent in your own code versus the database, TLS and the network, because Amdahl bounds the win. 2) The instance-count or cost reduction, sized against a real reference: PostHog went from ~300 pods at ~$8.8k/month to ~90 pods at ~$2.8k/month for identical ~500k req/min traffic. 3) The fraction of the team that could review the result; below ~40% you are proposing a bus factor of two. Also bring a falsification condition and propose extracting the hot component rather than rewriting the service.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-vs-go-d8",
+      "module": "T20-rust-vs-go",
+      "q": "Rank these five workloads by first-choice language and give one reason each: (a) k8s operator, (b) CLI tool shipped to users, (c) LLM inference router, (d) batch feature pipeline, (e) firmware on a microcontroller.",
+      "a": "(a) Go: the entire ecosystem is Go, and in Rust you will reimplement client-go badly. (b) Rust: single static binary, clap, and every fastest-in-category tool (ripgrep, fd, uv, ruff) is Rust; Go is a close second on the same distribution argument. (c) Rust for the router/batcher/tokenizer tier (CPU-bound, latency-sensitive, memory-per-pod sensitive, stable spec) with Python for the model tier. (d) Python: PySpark, pandas and Arrow are the whole reason, with a Rust hot transform via PyO3 if one step dominates. (e) Rust or C: no GC, no runtime, no_std; nothing else qualifies.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T20-rust-vs-go-d9",
+      "module": "T20-rust-vs-go",
+      "q": "An interviewer cites the Discord Go-to-Rust post as proof you should use Rust. Give the four caveats that the post itself contains.",
+      "a": "1) The Go version was 1.9.2, a 2017-2018 collector; they tried 1.8, 1.9 and 1.10, all before GOMEMLIMIT (1.19) and eight-plus releases before Green Tea (1.26). 2) The port was completed in May 2019 and required committing to NIGHTLY Rust for async, framed as an acceptable-risk bet by a team with a documented history of early adoption (Elixir, React Native, Scylla). 3) The service was chosen because it was 'small and self-contained', i.e. a deliberately low-risk first bet, not a wholesale migration. 4) Footnote 2 says verbatim: 'To be clear, we don't think you should rewrite everything in rust just because.'",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-vs-go-d10",
+      "module": "T20-rust-vs-go",
+      "q": "PostHog reported a 21x synthetic benchmark and a 10.6x p99 improvement but only 1.8x at p50. Explain the shape of that result and what it implies for how you should promise a rewrite.",
+      "a": "The synthetic measured the framework in isolation; production measures the database, TLS and the network, so Amdahl caps the achievable win. The p50 barely moved because the median request was already dominated by work the language does not touch. The tail collapsed because they fixed tail-specific problems: they moved flag evaluation out of SQL into parallel in-memory evaluation, added application-level cohort caching, deleted PgBouncer, and gained proper code-level timeout primitives. Implication: promise improvement only on the measured fraction of latency that is your own code, and be explicit about which part of the win is architectural rather than linguistic. Test the architecture change first, in the current language, before attributing it to the rewrite.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-vs-go-d11",
+      "module": "T20-rust-vs-go",
+      "q": "You picked Rust two quarters ago. PR cycle time has doubled, review is concentrated in two engineers, and the production win came in at half the promise. Do you revert?",
+      "a": "Usually no, and saying so is the senior answer. Reverting costs another quarter and burns the team's confidence. Contain instead: stop expanding the Rust footprint, freeze the component at its current scope, ship all new work in the language the team is fluent in, and staff a second and third reviewer onto the existing component (pairing, training, relaxing lint strictness). Separately, attack the mechanical costs, because they are often self-inflicted: ~36% of Rust teams who call CI build time a blocker use no cache at all. Fix CI caching, switch to LLD or mold, set debug = 'line-tables-only', run cargo llvm-lines and apply the thin-generic-wrapper refactor, and give Rust Analyzer its own target directory so it stops fighting Cargo for the build lock.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-vs-go-d12",
+      "module": "T20-rust-vs-go",
+      "q": "Design the FFI boundary for a Python RAG service whose reranking loop is the bottleneck. What are the rules and the failure modes?",
+      "a": "Rules: use PyO3 with maturin, expose ONE coarse-grained entry point (rerank(query, candidates) -> scores) rather than a per-document call, and wrap the compute in py.allow_threads() so the GIL is released for the duration, which is what buys you real parallelism inside a GIL-bound process. Failure modes: (1) a fine-grained boundary, where a ~100-200 ns per-call overhead plus argument conversion makes 10,000 crossings per request worse than pure Python; (2) build-matrix cost, since you now ship manylinux, macOS x86-64 and aarch64, and Windows wheels, plus a second language in CI; (3) if you later move to 3.14t, this extension must be explicitly marked free-threading-compatible or it silently re-enables the GIL, so assert sys._is_gil_enabled() is False at startup. Prefer an existing Rust-backed library (tokenizers, orjson, pydantic-core, polars) before writing your own.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-vs-go-d13",
+      "module": "T20-rust-vs-go",
+      "q": "State the strongest argument against choosing Go for a new backend service, and then the strongest argument against your own rebuttal.",
+      "a": "Against Go: expressiveness at scale. Generics arrived only in 1.18 (2022) and generic METHODS only in 1.27 (2026); there are no sum types, so 'this is either A or B' is an interface plus a type switch with no exhaustiveness checking; error handling is if err != nil at every call site; and the compiler does far less inlining and essentially no autovectorisation, so hot scalar loops run commonly 2-5x slower than Rust with no way to rescue them (simd/archsimd landed in 1.26 behind GOEXPERIMENT=simd, amd64-only and explicitly unstable). Against that rebuttal: the minimalism is the point. It is why a new hire ships in a week, why every Go codebase looks the same, why the build is ~8 seconds where a comparable Rust service is ~4 minutes, and why the operational tooling (built-in pprof, native OTel, the 1.26 goroutine-leak profile) is the best of the three. Reasonable senior engineers land on opposite sides and you should present it that way rather than picking silently.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-vs-go-d14",
+      "module": "T20-rust-vs-go",
+      "q": "Name the silent failure mode unique to each concurrency model and the tool that finds it.",
+      "a": "Go: goroutine leak. A goroutine blocked forever on a channel consumes 2 KB plus everything it retains, never logs, and keeps its retained heap alive against the collector. Tool: /debug/pprof/goroutine, or Go 1.26's experimental goroutineleak profile (GOEXPERIMENT=goroutineleakprofile, contributed by Uber, targeting default-on in 1.27). Rust: lost wakeup. If poll returns Pending without arranging waker.wake(), or fails to re-store the waker on every poll after work-stealing migrates the task, the task is never polled again with no panic and no log. Tool: tokio-console with RUSTFLAGS=--cfg tokio_unstable. Python: a synchronous call inside a coroutine stalling the single event loop for every concurrent request. Tool: asyncio debug mode with loop.slow_callback_duration set to about 0.1.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T20-rust-vs-go-d15",
+      "module": "T20-rust-vs-go",
+      "q": "An interviewer asks 'Rust, Go or Python?' with no other context. What is the highest-signal answer, and what is the trap in the follow-up?",
+      "a": "Answer: refuse to pick without a constraint, but say exactly what constraint would move you. 'Default Python unless something disqualifies it, because it ships fastest and hires easiest. To move off that I need a number: a p99.9 budget, a memory ceiling per instance, a throughput floor, or a target with no runtime. If it is Kubernetes-adjacent, Go without hesitating.' The trap in the follow-up ('assume no constraints, now pick') is that saying 'it depends' twice reads as evasion. Commit: 'Then it is whatever the team already runs, because the switching cost is real and the benefit is zero by construction.' Refusing to have a favourite is the signal; refusing to ever commit is the failure.",
+      "difficulty": "staff"
+    }
+  ]
+}

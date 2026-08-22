@@ -1,0 +1,144 @@
+{
+  "flashcards": [
+    {
+      "id": "T20-rust-types-c1",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "What is the machine-level difference between a generic parameter and a `dyn Trait` argument?",
+      "a": "Generics monomorphise: the compiler emits one specialised machine-code copy per concrete type, called directly and inlinable, with a thin 8-byte pointer. `dyn Trait` emits exactly one copy of the function; the value is a fat 16-byte pointer (data pointer + vtable pointer) and each method call loads a function pointer from the vtable and calls indirectly. Static is Rust's default; you opt into dynamic.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c2",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "What does a Rust vtable actually contain, and how many are generated?",
+      "a": "One vtable per (concrete type, trait) pair, emitted into read-only data. It holds a `drop_in_place` pointer, the value's size, its alignment, then one slot per dispatchable method. The layout is an implementation detail and is explicitly not guaranteed, so transmuting a trait object to inspect it is unspecified behaviour.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c3",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "Why is `Clone` not dyn compatible? Derive it rather than recite it.",
+      "a": "`fn clone(&self) -> Self` returns `Self`. A caller holding `&dyn Clone` has erased the concrete type, so it does not know the returned value's size or alignment and cannot allocate a slot for it; the calling convention cannot express that vtable slot. The same reason disqualifies `Copy`, `Default`, `From`, and `Into`.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c4",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "State the dyn-compatibility (formerly object-safety) rules that trigger error[E0038].",
+      "a": "Trait level: no `Self: Sized` supertrait, all supertraits dyn compatible, no associated constants, no associated types with their own generic parameters (so no GATs). Method level, to be dispatchable: no generic type parameters (lifetimes are fine), `Self` appears nowhere except as the receiver, the receiver is one of `&self`/`&mut self`/`Box<Self>`/`Rc<Self>`/`Arc<Self>`/`Pin<P>`, and no `where Self: Sized`.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c5",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "How does `Iterator` stay dyn compatible with roughly 70 methods, many of them generic?",
+      "a": "Every generic provided method (`map`, `filter`, `collect`, `fold`, ...) carries `where Self: Sized`, which excludes it from the vtable while keeping it callable on concrete types. Only `next` is required and it is dispatchable, so `Box<dyn Iterator<Item = u32>>` works. You can still call `.map()` on that `Box` because `Box<I>` itself implements `Iterator` and is `Sized`.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c6",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "Associated type or generic parameter on a trait: what is the deciding rule?",
+      "a": "A generic parameter is an input, so one type can implement the trait many times with different arguments (`String: From<&str>`, `From<char>`, `From<Box<str>>`). An associated type is an output determined by the impl, so a type implements the trait exactly once (`Iterator::Item`), which is what keeps `.next()` inferable without a turbofish. Ask: can one type sensibly implement this more than once? Yes means generic parameter.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c7",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "State the orphan rule and the standard workaround.",
+      "a": "`impl ForeignTrait<T1..Tn> for T0` is allowed only if at least one of `T0..Tn` is a local type and no uncovered type parameter precedes the first local type. Practically: your trait for anyone's type, yes; anyone's trait for your type, yes; someone else's trait for someone else's type, no (error[E0117]). Workaround is the newtype, `struct Hex(Vec<u8>)`, which is zero-cost because a single-field tuple struct has identical layout to its field. RFC 2451 loosened the rule in 2018.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c8",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "Is adding a blanket impl to an already-published trait a breaking change?",
+      "a": "Yes, in the general case, even though it adds no method to any signature. `impl<T: Display> MyTrait for T` produces error[E0119] in any downstream crate that already wrote `impl MyTrait for TheirType` where `TheirType: Display`. There is no way to opt out and no `specialization` on stable (RFC 1210 has been unstable since 2015) to break the tie.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c9",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "Write out the exact desugaring of the `?` operator.",
+      "a": "`let n = f()?;` becomes `let n = match f() { Ok(v) => v, Err(e) => return Err(From::from(e)) };`. The `From::from` is the entire design: write `impl From<E> for MyError` once and every `?` in the crate converts for free. Runtime cost is one branch: no unwinding, no stack capture, no allocation, no dynamic dispatch.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c10",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "In what sense are `Option` and `Result` not special-cased by the compiler, and what are the three honest exceptions?",
+      "a": "Both are ordinary library enums in `core::option` and `core::result`, about ten lines each, using no syntax you cannot use yourself. The exceptions: they are in the prelude so `Some`/`None`/`Ok`/`Err` are always in scope; both are `#[must_use]`, which is what makes error handling compiler-enforced rather than conventional; and `?` works via the `Try` trait, which is still unstable (`try_trait_v2`) as of Rust 1.97, so you cannot make `?` work on your own type on stable.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c11",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "Give the niche-optimisation sizes you should be able to state cold (64-bit).",
+      "a": "`size_of::<Option<&T>>() == 8` (null is the niche), `size_of::<Option<Box<T>>>() == 8`, `size_of::<Option<NonZeroU32>>() == 4` (zero is the niche), `size_of::<Option<bool>>() == 1`, but `size_of::<Option<u32>>() == 8` because `u32` has no spare bit pattern so a real tag plus padding is needed. Also `size_of::<std::io::Error>() == 8`, a tagged pointer packing errno, a static message, or a boxed custom error.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c12",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "How is match exhaustiveness a refactoring tool, and how do people throw it away?",
+      "a": "Adding an enum variant makes every `match` on that enum stop compiling with error[E0004], naming the uncovered pattern at each site, so the compiler generates the to-do list for you. Writing `_ => {}` on an enum you own permanently opts that site out of the check. Use explicit variants for enums you control, reserve `_` for genuinely open sets (integers, strings, foreign `#[non_exhaustive]` enums); `clippy::wildcard_enum_match_arm` enforces it. Match guards also defeat exhaustiveness checking, so guarded arms still need a catch-all.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c13",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "What does `#[non_exhaustive]` do, and when do you add it?",
+      "a": "On a public enum it forces downstream crates to include a wildcard arm, so you can add variants in a minor release without breaking them; your own crate keeps full exhaustiveness checking. On a struct it blocks downstream literal construction and functional update. Add it to public error and event enums from day one: it is semver-major exactly once and buys unlimited future variants.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c14",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "thiserror or anyhow, and why?",
+      "a": "thiserror (2.0.19) in libraries, because the caller must be able to `match` to distinguish 'file missing, use a default' from 'file corrupt, fail loudly' from 'timeout, retry with backoff'; it is a pure proc macro generating the Display/Error/From impls with zero runtime cost. anyhow (1.0.104) in applications, binaries, tests, and glue, where handling is almost always 'log with context, return 500'. anyhow::Error is 8 bytes on 64-bit (vtable stored inside the allocation) versus 16 for `Box<dyn Error + Send + Sync>`. Converting thiserror into anyhow is one `?`; the reverse is impossible.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c15",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "Why is `unwrap()` in a library a bug, and when is panicking correct?",
+      "a": "It converts a condition the caller could handle into a process-level event they never opted into. Under `panic = \"unwind\"` in a Tokio service it surfaces as `JoinError::is_panic`, silently killing one task and producing a bare 500; under `panic = \"abort\"` it kills the whole process; across an `extern \"C\"` boundary it is a guaranteed abort. Panic is correct only for your own broken invariants (indexing a slice you just sized, a poisoned lock, `unreachable!()` after an exhaustive check). Test: could a well-behaved caller with valid arguments trigger this? If yes, it must be a `Result`.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c16",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "How do you diagnose a compile time that jumped from 40 seconds to 9 minutes, or a binary that grew several MB?",
+      "a": "`cargo build --timings` to confirm codegen (not the frontend) dominates, then `cargo llvm-lines --release | head -30` for LLVM IR lines and copy counts per generic function, then `cargo bloat --release --crates` and `-n 20` to attribute the binary. Fix with the de-monomorphisation trick std uses on itself: keep the generic wrapper two lines and move the body into a non-generic inner function, `fn read<P: AsRef<Path>>(p: P) { fn inner(p: &Path) { /* body */ } inner(p.as_ref()) }`.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c17",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "Why does `#[async_trait]` still exist when `async fn` in traits stabilised in Rust 1.75?",
+      "a": "The built-in version desugars to `-> impl Future`, an anonymous associated type of unknown size, which makes the trait not dyn compatible. Services need `Arc<dyn Repository + Send + Sync>`, so the macro rewrites each method to return `Pin<Box<dyn Future<Output = T> + Send + '_>>`, costing one heap allocation per call. If the trait is only ever used with static dispatch, skip the macro: native `async fn` in traits is free and gives better errors.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c18",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "You need a collection of mixed types implementing one trait. What are the options?",
+      "a": "Generics do not solve it: `Vec<T>` holds one concrete `T`. Either `Vec<Box<dyn Draw>>` for an open set (16 bytes per element, one heap allocation each, indirect calls, trait must be dyn compatible so no Clone/PartialEq/generic methods), or an enum with one variant per implementation for a closed set (static dispatch through an exhaustive match, derives Clone/PartialEq freely, no allocation, but every value is sized to the largest variant and all impls must live in one crate). The `enum_dispatch` crate generates the delegating match. Closed set means enum; open or plugin-shaped means dyn.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c19",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "Distinguish error[E0282], error[E0207], and error[E0119].",
+      "a": "E0282 'type annotations needed' is inference having no information, typically on `.parse()` or `.collect()` which are generic over their return type; fix with a turbofish (`.collect::<Vec<_>>()`) or a binding annotation. E0207 'the type parameter T is not constrained' is an `impl` block declaring a parameter that appears nowhere in the trait or self type; fix with a `PhantomData<T>` field, by moving `T` down to the methods, or by making it an associated type. E0119 'conflicting implementations' is the coherence overlap check, usually a blanket impl covering a type that already has its own impl.",
+      "module": "T20-rust-types"
+    },
+    {
+      "id": "T20-rust-types-c20",
+      "topic": "Traits, Generics, Enums, Pattern Matching, Error Handling (Result/?)",
+      "q": "How does Rust's approach differ from Java generics and Go interfaces?",
+      "a": "Java erases, so `List<String>` and `List<Integer>` are one class with inserted casts, primitives are boxed (1,000,000 `Integer` objects versus a contiguous 4 MB `Vec<i32>` buffer), and you cannot implement your interface for a type you do not own. Rust monomorphises and the orphan rule permits `impl MyTrait for String`; bounds are checked at definition time, not instantiation time. Go interfaces are structural and implicit (accidental conformance is possible) and always dynamically dispatched through a 2-word fat pointer; Rust traits are nominal and explicit with static dispatch by default. Go generics since 1.18 use GC shape stenciling plus dictionaries, a middle ground that avoids bloat but does not get Rust's full inlining.",
+      "module": "T20-rust-types"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T07-explainability-d1",
+      "module": "T07-explainability",
+      "q": "Define interpretability and explainability without using either word in the definition.",
+      "a": "Interpretability: how far a human can understand the model's internal mechanism (global, intrinsic to the model). Explainability: an account of why this particular input produced this particular output (local, usually produced after the fact).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-explainability-d2",
+      "module": "T07-explainability",
+      "q": "Your PM wants to show the model's reasoning block to users as the explanation. Give the 20-second refusal.",
+      "a": "CoT is not a description of the computation. Anthropic measured hint-verbalisation faithfulness at 25% for Claude 3.7 Sonnet and 39% for DeepSeek R1, dropping to 20% and 29% on harmful prompts; Turpin et al. showed fluent rationales for biased answers with up to 36% accuracy loss on 13 BBH tasks. Ship instead: verified citations with locators, tool calls with arguments, and an explicit statement when a claim has no supporting source — all derived from the trace, so faithful by construction.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-explainability-d3",
+      "module": "T07-explainability",
+      "q": "Give the number that rules KernelSHAP out for a 50k-token prompt.",
+      "a": "~2|F| + 2048 samples per explained output, so about 3k forward passes at just 512 features, before you even reach 50k tokens. Plus off-manifold masks on correlated tokens and a scalar-only output type.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-explainability-d4",
+      "module": "T07-explainability",
+      "q": "You must produce chunk-level attribution for a RAG answer with k=8. What do you run and what does it cost?",
+      "a": "Leave-one-out occlusion: regenerate with each chunk removed and score semantic agreement against the original answer. Cost k+1 = 9 generation calls. For interpretable results add sufficiency (each chunk alone) and a closed-book baseline: 2k+2 = 18 calls. Audit path only, not per request.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-explainability-d5",
+      "module": "T07-explainability",
+      "q": "Name the field in a trace whose absence makes every explanation unreplayable.",
+      "a": "Versions — model@version, prompt@version, tool schema version, and index snapshot id. Unpinned aliases like '-latest' mean two identical requests can produce different explanations and you cannot reconstruct either.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-explainability-d6",
+      "module": "T07-explainability",
+      "q": "A regulator asks why the model denied a claim. List the artefacts you produce.",
+      "a": "The decision record (inputs, retrieved policy sections with quoted spans, tool results, the rule or threshold that produced the outcome, all versions), the human-oversight record if gated (who reviewed, what they saw, how long they took, what they changed), the system card with eval results and documented limitations, and aggregate outcome monitoring disaggregated by group. Do not generate a post-hoc rationale by asking the model why.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-explainability-d7",
+      "module": "T07-explainability",
+      "q": "Occlusion says a chunk had zero influence. State both possible worlds.",
+      "a": "The chunk was irrelevant, OR the same fact was redundantly available elsewhere (another chunk or the model's parameters). Occlusion measures necessity only; with correlated evidence necessity goes to zero.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-explainability-d8",
+      "module": "T07-explainability",
+      "q": "Are attention weights an explanation? Cite the papers.",
+      "a": "No. Jain & Wallace, 'Attention is not Explanation' (NAACL 2019) found adversarial attention distributions with the same prediction; Wiegreffe & Pinter, 'Attention is not not Explanation' (EMNLP 2019) softened the claim without restoring attention as faithful attribution.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-explainability-d9",
+      "module": "T07-explainability",
+      "q": "You shipped explanations and users now accept wrong answers MORE often. Diagnose and fix.",
+      "a": "Plausibility rose without faithfulness — textbook automation bias. Fix: render only trace-derived verified evidence, mark unverified claims explicitly, and run an error-injection study on reviewers (corrupt a claim in a random half, compare detection with and without the explanation). If detection does not improve, the explanation is decoration and should be replaced, not tuned.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-explainability-d10",
+      "module": "T07-explainability",
+      "q": "Two claims about CoT that people conflate. Separate them.",
+      "a": "1) CoT is causally load-bearing — often true; remove it and accuracy drops. 2) CoT is a faithful description of the computation — measured at 25-39% on the standard hint test. The first is why CoT works; the second is why it is not an explanation.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-explainability-d11",
+      "module": "T07-explainability",
+      "q": "Your explanation endpoint is being used to reverse-engineer a fraud model. Design the fix.",
+      "a": "Two-tier explanations. Internal reviewer: full trace with features, scores, thresholds. Subject: a reason code from a fixed audited vocabulary plus an appeal route — no scores, no feature ordering, no distance-to-threshold. Rate-limit the endpoint and alert on near-duplicate submissions with systematic single-field variation, which is the observable extraction signature.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-explainability-d12",
+      "module": "T07-explainability",
+      "q": "Under a latency budget you must cut one explanation component. Which, and how?",
+      "a": "Per-sentence NLI verification — and cut it by making it asynchronous, not by disabling it: serve the answer with citations marked 'verifying', then flag or downgrade sentences that fail. Nothing free (provenance, versions, tool args) is ever cut. State the cost: a UI that can retract is worse UX than the latency you saved.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-explainability-d13",
+      "module": "T07-explainability",
+      "q": "When do you deliberately ship no rationale at all?",
+      "a": "Low stake and high volume (autocomplete, search ranking, tag suggestions); adversarial decisions where the subject is the adversary (reason code + appeal instead); when the only available explanation is plausible-but-unverifiable, since that manufactures unearned confidence; and when the requirement is really a guarantee, where you build constrained generation plus verification instead. Provenance and abstention remain mandatory in all cases.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-explainability-d14",
+      "module": "T07-explainability",
+      "q": "One sentence on where mechanistic interpretability belongs in 2026.",
+      "a": "Post-incident forensics on open-weights models you control, plus safety research — circuit-tracer was open-sourced May 2025 — and not in a production request path, because you need a per-model transcoder and graph construction costs orders of magnitude more than the generation it explains.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-explainability-d15",
+      "module": "T07-explainability",
+      "q": "Rank explanation techniques by cost per explanation and say where each lives.",
+      "a": "Provenance ~0, request path, always on. NLI entailment per sentence ~10-40ms, request path for high stakes. Chunk occlusion k+1 generations, audit path. Self-consistency 5-20 generations, offline. SHAP on tabular components, hundreds-to-thousands of evals, batch job. Attribution graphs, research-grade, forensics only.",
+      "difficulty": "mid"
+    }
+  ]
+}

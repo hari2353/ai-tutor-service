@@ -1,0 +1,88 @@
+{
+  "flashcards": [
+    {
+      "id": "T18-databricks-vs-snowflake-c1",
+      "topic": "Data Warehouse Comparison",
+      "q": "Databricks vs Snowflake vs BigQuery vs Redshift - one-line workload fit for each?",
+      "a": "Databricks: ETL/ML/streaming-heavy, Spark-native. Snowflake: BI/SQL-heavy, high concurrency, low tuning. BigQuery: spiky/ad-hoc, zero capacity planning (GCP-only). Redshift: AWS-native mixed BI/ELT (AWS-only).",
+      "module": "T18-databricks-vs-snowflake"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-c2",
+      "topic": "Data Warehouse Comparison",
+      "q": "In 2026, is the real lock-in point the storage format or the catalog?",
+      "a": "The catalog. All four platforms now converge on open formats (Delta/Iceberg), but Unity Catalog, Snowflake's Polaris/Open Catalog, Glue, and BigLake each still gate native-table-only performance features, making the catalog the practical lock-in point.",
+      "module": "T18-databricks-vs-snowflake"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-c3",
+      "topic": "Data Warehouse Comparison",
+      "q": "Rough price anchors: Databricks, Snowflake, BigQuery, Redshift?",
+      "a": "Databricks: $0.08-$0.70/DBU + separate cloud VM cost. Snowflake: $2-4/credit, doubling per warehouse size tier. BigQuery: $6.25/TiB on-demand or $0.04-0.06/slot-hr capacity (break-even ~467 TiB/month). Redshift: RA3 ~$1.086/node-hr + ~$24.58/TB-mo storage, or Serverless $0.375/RPU-hr.",
+      "module": "T18-databricks-vs-snowflake"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-c4",
+      "topic": "Data Warehouse Comparison",
+      "q": "ML/AI story ranking across the four platforms?",
+      "a": "Databricks (strongest: MLflow, GPU clusters, Mosaic AI) > BigQuery (BQML + Vertex AI) > Snowflake (Snowpark ML, Cortex) > Redshift (thinnest - SageMaker pass-through via Redshift ML).",
+      "module": "T18-databricks-vs-snowflake"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-c5",
+      "topic": "Data Warehouse Comparison",
+      "q": "Why can the 'same workload' be cheaper on Databricks for one company and cheaper on Snowflake for another?",
+      "a": "The pricing models charge for fundamentally different things - Databricks rewards compute-type/cluster discipline (DBU + separate VM cost), Snowflake rewards warehouse-sizing/auto-suspend discipline (credits/hour). Cost comparisons are really comparisons of operational discipline applied to different pricing models, not pure architecture comparisons.",
+      "module": "T18-databricks-vs-snowflake"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-c6",
+      "topic": "Data Warehouse Comparison",
+      "q": "When is Databricks usually the wrong choice, plainly stated?",
+      "a": "A pure BI/SQL shop with no ML, no streaming, no need for Spark-scale processing - you pay for and operationally own a platform built for a workload you don't have. Also a poor fit for small teams without dedicated platform engineering.",
+      "module": "T18-databricks-vs-snowflake"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-c7",
+      "topic": "Data Warehouse Comparison",
+      "q": "When is BigQuery usually the wrong choice?",
+      "a": "When you need fine-grained compute isolation between workloads on the default on-demand model (noisy-neighbor risk on shared slots), or when you're not on GCP and don't want to be - it's a GCP product first, with no multi-cloud story.",
+      "module": "T18-databricks-vs-snowflake"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-c8",
+      "topic": "Data Warehouse Comparison",
+      "q": "What is BigQuery's on-demand vs capacity break-even point?",
+      "a": "Roughly 467 TiB scanned per month. Below that, on-demand ($6.25/TiB) tends to be cheaper; above it, capacity/reservations ($0.04-0.06/slot-hr) usually win - though bursty workloads can favor on-demand even above that threshold.",
+      "module": "T18-databricks-vs-snowflake"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-c9",
+      "topic": "Data Warehouse Comparison",
+      "q": "When would you deliberately run two of these platforms simultaneously rather than pick one?",
+      "a": "When workload segments genuinely don't share a good single-platform fit (e.g., Databricks for ML/feature pipelines feeding Snowflake for BI), with Iceberg/Delta UniForm as the interoperable handoff layer - but this adds real overhead: two governance models, two cost centers, and a catalog-sharing layer to maintain.",
+      "module": "T18-databricks-vs-snowflake"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-c10",
+      "topic": "Data Warehouse Comparison",
+      "q": "Why is Redshift often dismissed as 'legacy' unfairly?",
+      "a": "RA3 with managed storage and Redshift Serverless have closed much of the historical elasticity gap versus Snowflake/BigQuery. For teams deeply embedded in AWS (Glue, Lake Formation, IAM, Kinesis), the integration cost of migrating off Redshift is real and often underweighted.",
+      "module": "T18-databricks-vs-snowflake"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-c11",
+      "topic": "Data Warehouse Comparison",
+      "q": "Why does this comparison have a stated 'shelf life'?",
+      "a": "All four platforms have been converging for two years (Snowflake adding Snowpark/Iceberg, Databricks adding SQL warehouses/BI features, BigQuery adding BQML, Redshift adding Serverless) and will keep converging - a decision anchored purely to today's feature/cost differences risks being stale within 12-18 months.",
+      "module": "T18-databricks-vs-snowflake"
+    },
+    {
+      "id": "T18-databricks-vs-snowflake-c12",
+      "topic": "Data Warehouse Comparison",
+      "q": "What's the single biggest red flag in a platform-choice interview answer?",
+      "a": "Recommending one platform as universally superior with no workload qualifier, or citing a single cost-comparison headline as though it generalizes across workload types.",
+      "module": "T18-databricks-vs-snowflake"
+    }
+  ]
+}

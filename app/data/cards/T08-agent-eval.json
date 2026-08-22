@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T08-agent-eval-c1",
+      "topic": "Agent Eval",
+      "q": "Three failure classes outcome-only agent eval is blind to.",
+      "a": "1) Right destination via a wrong/dangerous path (correct amount refunded via the wrong tool, losing state elsewhere). 2) Lucky one-off success that won't repeat under real variance. 3) Agent self-reports success when the actual tool call failed or the action didn't happen.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c2",
+      "topic": "Agent Eval",
+      "q": "The four eval layers for agents, in order.",
+      "a": "1) Tool-call accuracy (binary, per call: right tool, right args). 2) Trajectory eval (golden fuzzy-match or LLM judge on the full trace, 6 dims scored independently: tool selection, arg extraction, result use, error recovery, plan coherence, task completion). 3) Task completion vs ACTUAL system state, never the agent's own summary. 4) Cost/steps per task, first-class metric alongside accuracy.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c3",
+      "topic": "Agent Eval",
+      "q": "Why must task completion be checked against system state instead of the agent's final message?",
+      "a": "An agent can produce a confident, well-formed success message describing an action that didn't happen or happened wrong. Check the actual DB row, the actual mail-provider send log, the actual side effect - never trust the self-report.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c4",
+      "topic": "Agent Eval",
+      "q": "pass@1 vs pass^k - define both and give the reported gap.",
+      "a": "pass@1 = success in at least one of k tries (optimistic). pass^k = ALL k tries succeed (honest reliability number). On realistic multi-turn tau-bench tasks: pass^1 ~70-80% can drop to pass^8 below 25% even for capable models.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c5",
+      "topic": "Agent Eval",
+      "q": "How do you build a golden trajectory correctly?",
+      "a": "Record a real production or expert-solved run, lightly edit into canonical with a domain expert. Explicitly annotate required calls (must appear), forbidden calls (must never appear), and optional/order-independent calls. This is what enables fuzzy matching instead of brittle exact-match.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c6",
+      "topic": "Agent Eval",
+      "q": "The biggest mistake teams make building golden trajectory sets.",
+      "a": "Building the golden set entirely from easy happy-path traces, so the eval never exercises error recovery or policy-edge-case behavior - a regression there goes completely undetected in the dashboard.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c7",
+      "topic": "Agent Eval",
+      "q": "Why track cost and steps per task as first-class metrics, and why report p95 not just mean?",
+      "a": "An agent gaining 2 points accuracy at 4x cost/steps is a Pareto tradeoff, not a strict win - hidden if not tracked. Mean cost can hide a p95 tail from runs that spiral into long retry chains; that tail is usually where real incidents and budget blowouts live.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c8",
+      "topic": "Agent Eval",
+      "q": "How do you build a CI gate on agent eval that doesn't flake?",
+      "a": "Never gate on a single run - use N>=3-5 repeats, gate on aggregate/pass^k with a pre-registered threshold. Hard-gate deterministic checks (tool-call accuracy, state). Statistically gate judge-based checks (drop across a run-set, not one trace). Pin agent AND judge model versions. Quarantine known-flaky tasks.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c9",
+      "topic": "Agent Eval",
+      "q": "Tool-call accuracy: deterministic verifier vs LLM judge - when to use which?",
+      "a": "Deterministic verification (exact match, regex, range check) wherever the argument space allows - cheaper, faster, no judge bias. Reserve an LLM judge only for genuinely open-ended arguments (free-text search query) with no deterministic 'close enough' check.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c10",
+      "topic": "Agent Eval",
+      "q": "Why score trajectory dimensions (tool selection, arg extraction, error recovery, plan coherence...) independently instead of one aggregate number?",
+      "a": "An aggregate hides which specific capability regressed. If error recovery degrades but tool selection stays perfect, an aggregate score might not move enough to trip an alert, while the per-dimension error-recovery score would.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c11",
+      "topic": "Agent Eval",
+      "q": "tau-bench / tau2-bench: what makes this benchmark shape worth imitating?",
+      "a": "Realistic multi-turn tool-and-simulated-user tasks against a real mutable backend database (not a transcript check), checked against actual state plus a policy document, with pass^k built in specifically to force confronting nondeterminism.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c12",
+      "topic": "Agent Eval",
+      "q": "What biases from LLM-as-judge carry over to trajectory-judge scoring, and what's added?",
+      "a": "Verbosity, self-preference, position bias (if comparing trajectories pairwise) all carry over directly. Added risk: trajectory traces are long, so the judge's own long-context degradation becomes a failure mode a short single-turn judge call doesn't have.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c13",
+      "topic": "Agent Eval",
+      "q": "Trajectory accuracy baseline without memory/context engineering, and typical improvement from fixes.",
+      "a": "Reported baseline as low as 0.12 trajectory accuracy (12% of runs followed a correct reasoning path) without memory. Targeted fixes (better tool descriptions, explicit planning, memory) reported to lift trajectory accuracy 20-47 points and goal completion up to 32 points in comparable setups.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c14",
+      "topic": "Agent Eval",
+      "q": "How do you make a 6-hour full eval suite practical for CI gating?",
+      "a": "Tier it: a fast, small, high-signal subset (highest-risk/frequency tasks, full N-repeat rigor) gates every PR in minutes; the full suite with full repeats runs on a slower cadence (nightly/pre-release) and gates the actual release. Validate periodically that the fast subset actually correlates with the full suite's failure modes.",
+      "module": "T08-agent-eval"
+    },
+    {
+      "id": "T08-agent-eval-c15",
+      "topic": "Agent Eval",
+      "q": "Tools used in production agent eval, and what each is best at.",
+      "a": "LangSmith - LangGraph-native, node-by-node state diffs, replay against a new model. Braintrust - dataset+scoring+monitoring+CI gates in one lifecycle. Arize Phoenix - OpenTelemetry-native tracing, trajectory-level spans, production drift detection.",
+      "module": "T08-agent-eval"
+    }
+  ]
+}

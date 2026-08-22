@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T17-wal-recovery-c1",
+      "topic": "WAL & Recovery",
+      "q": "State the write-ahead logging rule in one sentence.",
+      "a": "The log record for a change must be durable before the corresponding data page is allowed to reach disk, and the commit log record must be durable before the client is told the transaction committed.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c2",
+      "topic": "WAL & Recovery",
+      "q": "Name ARIES's three recovery phases and what each does.",
+      "a": "Analysis: scan from last checkpoint, build Transaction Table + Dirty Page Table, find where redo must start. Redo: replay ALL changes forward (committed and uncommitted) - 'repeat history'. Undo: roll back uncommitted transactions in reverse order using Compensation Log Records.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c3",
+      "topic": "WAL & Recovery",
+      "q": "What is a pageLSN and how does it make redo idempotent?",
+      "a": "pageLSN is the LSN of the last log record reflected in a given page. Redo skips any log record whose LSN <= the page's current pageLSN, so already-applied changes are never reapplied - safe to rerun recovery from scratch.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c4",
+      "topic": "WAL & Recovery",
+      "q": "Why does redo replay changes from uncommitted transactions too?",
+      "a": "At analysis time you can't cheaply/correctly determine what's 'needed' without the state you're reconstructing. Redo is deliberately blind ('repeat history'); undo removes the effects of transactions that never committed afterward.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c5",
+      "topic": "WAL & Recovery",
+      "q": "What is a Compensation Log Record (CLR) and why does undo need it?",
+      "a": "A CLR logs each undo action itself, so a crash during recovery's undo phase doesn't lose track of progress. It makes undo replayable and idempotent, matching the guarantees of the forward log.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c6",
+      "topic": "WAL & Recovery",
+      "q": "What is a checkpoint's actual purpose?",
+      "a": "Solely to bound recovery time by giving analysis a recent starting point (the oldest recLSN of any dirty page as of the checkpoint) instead of scanning from the start of the log. Not for saving disk space.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c7",
+      "topic": "WAL & Recovery",
+      "q": "What is the most common real-world cause of WAL directory filling up disk?",
+      "a": "A disconnected or stuck replication slot (physical or logical) retaining WAL segments because its consumer isn't reading them, preventing log truncation.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c8",
+      "topic": "WAL & Recovery",
+      "q": "Name two real fsync 'lies' that cause silent data loss.",
+      "a": "A volatile disk write-back cache (no battery backing) can ack a write before it's physically durable. The 2018 Linux kernel fsync-error-handling bug cleared the dirty-page error flag after a failed fsync, letting a later fsync call falsely report success.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c9",
+      "topic": "WAL & Recovery",
+      "q": "Why do databases PANIC on fsync failure instead of retrying?",
+      "a": "Because of documented kernel behavior where a retried fsync after a failure can report false success, silently discarding data the app believed was durable. PANICing (crashing) is the defensive alternative to that risk.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c10",
+      "topic": "WAL & Recovery",
+      "q": "What is group commit and what does it optimize?",
+      "a": "Batching multiple transactions' WAL records into one fsync call instead of one fsync per commit, amortizing the fixed fsync latency across many transactions - often an order-of-magnitude throughput gain under concurrency.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c11",
+      "topic": "WAL & Recovery",
+      "q": "Postgres synchronous_commit on vs off - what's the tradeoff?",
+      "a": "on: fsync WAL before acking commit (full durability, higher latency). off: ack before fsync completes, risking loss of the last fraction-of-a-second of acked commits on an OS/machine crash, in exchange for throughput.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c12",
+      "topic": "WAL & Recovery",
+      "q": "InnoDB innodb_flush_log_at_trx_commit values and their meaning?",
+      "a": "1 = fsync every commit (full ACID durability). 2 = write to OS cache every commit, fsync ~once/sec (survives mysqld crash, not OS crash). 0 = write+fsync ~once/sec regardless of commits (fastest, can lose ~1s of transactions).",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c13",
+      "topic": "WAL & Recovery",
+      "q": "What does Postgres full_page_writes protect against, and what's its cost?",
+      "a": "Torn pages - a crash mid-write leaving a page partly old/partly new bytes, which normal WAL replay can't repair. Cost: WAL volume spikes right after every checkpoint since the whole page is logged on its first post-checkpoint write.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c14",
+      "topic": "WAL & Recovery",
+      "q": "Why is kill -9 not a valid test of durability guarantees?",
+      "a": "It doesn't interrupt in-flight disk writes or lose OS page cache the way a real power loss does. A valid test pulls power or fault-injects mid-write and verifies exactly what was acknowledged survived.",
+      "module": "T17-wal-recovery"
+    },
+    {
+      "id": "T17-wal-recovery-c15",
+      "topic": "WAL & Recovery",
+      "q": "Why did WAL win over shadow paging as the dominant recovery architecture?",
+      "a": "Shadow paging gives crash safety via copy-on-write + atomic root swap but destroys physical locality over time and complicates fine-grained concurrent transactions. WAL keeps pages in place, preserving locality and allowing independent row/page-level locking or MVCC.",
+      "module": "T17-wal-recovery"
+    }
+  ]
+}

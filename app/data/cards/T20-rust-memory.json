@@ -1,0 +1,158 @@
+{
+  "flashcards": [
+    {
+      "id": "T20-rust-memory-c1",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "What are the three cases that genuinely force you to use Box<T>?",
+      "a": "1) Recursive types: `struct Node { next: Node }` has infinite size, rustc emits E0072; boxing makes the field a fixed 8 bytes. 2) Trait objects: `dyn Trait` is unsized so it only exists behind a pointer; size_of::<Box<dyn Debug>>() == 16 (data ptr + vtable ptr). 3) Large moves: a move is a memcpy of the stack representation, so moving a [u8; 1<<20] costs 1 MiB per move. Outside these three, Box is usually unnecessary.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c2",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "Measured cost of Rc::clone vs Arc::clone, and where does the difference come from?",
+      "a": "Measured on rustc 1.97.1 -O, x86_64, i5-12450H, 50M iterations of clone-then-drop: Rc = 1.53 ns/op, Arc = 14.44 ns/op, a 9.4x ratio. Rc uses a plain load-add-store on a usize; Arc uses fetch_add(1, Relaxed) which lowers to `lock xadd` and requires exclusive ownership of the cache line. A bare AtomicUsize::fetch_add(Relaxed) measured 6.04 ns, and Arc clone+drop is two of those plus a branch. Both types are 8 bytes on the stack with a 16-byte header (strong + weak).",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c3",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "Which memory orderings does Arc use for clone and drop, and why?",
+      "a": "Clone is fetch_add(1, Relaxed): incrementing publishes nothing, since you already had a valid Arc so the value already exists. Drop is fetch_sub(1, Release): writes made through this Arc must become visible to whichever thread runs the destructor. The last dropper, seeing the old count was 1, executes atomic::fence(Acquire) before touching the data; that fence pairs with every other thread's Release decrement to establish exclusive access. Overflow is checked against MAX_REFCOUNT = isize::MAX as usize and calls abort(), not panic!, because a caught panic would leave the count corrupt.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c4",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "Why does an Rc/Arc reference cycle leak, and what is the observable symptom in production?",
+      "a": "Rust has no cycle collector, because that would require a tracing runtime. Two nodes holding strong references to each other never reach strong count 0, so their Drop impls never run. Leaking is safe in Rust: mem::forget and Box::leak are both safe functions, and leak-freedom is explicitly NOT part of the memory-safety guarantee. Symptom: RSS climbs monotonically under steady load and never returns to baseline, no crash, nothing in logs, and a heap profiler shows live allocations with no live root. Fix: owning edges are Rc/Arc, back-edges are Weak.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c5",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "What is the strong-count / weak-count invariant in Rc and Arc?",
+      "a": "The header is 16 bytes on 64-bit: strong (usize, or AtomicUsize for Arc) and weak. The VALUE is dropped when strong hits 0. The ALLOCATION is freed when weak hits 0. All the strong references collectively hold one implicit weak count, which is why an Rc with no Weaks frees its allocation immediately at strong 0. Weak::upgrade() returns Option<Rc<T>> and yields None once the value is gone; for Arc it is a compare-exchange loop that refuses to increment from 0, making it race-free against a concurrent last drop.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c6",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "Cell<T> vs RefCell<T>: mechanism, size, and failure mode.",
+      "a": "Cell never hands out a reference: get() copies out (needs T: Copy), set() copies in, replace()/take() move. Nothing to invalidate means no bookkeeping, so size_of::<Cell<u64>>() == 8 (zero overhead) and it CANNOT panic. RefCell hands out real Ref/RefMut guards that deref to &T/&mut T, so it tracks live borrows in an extra isize flag: size_of::<RefCell<u64>>() == 16, size_of::<RefCell<()>>() == 8. Both cost ~0.25 ns/op measured. If the data is small and Copy, Cell is strictly better and removes a class of runtime failure.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c7",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "What is the exact RefCell panic message on current stable Rust, and why is it hard to debug?",
+      "a": "Verified on rustc 1.97.1: borrow_mut() while a Ref is live panics with `RefCell already borrowed` (error type BorrowMutError); borrow() while a RefMut is live panics with `RefCell already mutably borrowed` (error type BorrowError). Older releases and most blog posts phrase these as `already borrowed: BorrowMutError`. Hard to debug because (a) the line number is the SECOND borrow, not the still-live first one, and (b) it is a re-entrancy bug, so it is rare and load-dependent. Use try_borrow_mut() to get an Err you can log with your own context.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c8",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "What is the encoding of RefCell's borrow flag?",
+      "a": "One isize (std::cell::BorrowFlag) held in a Cell: 0 means unborrowed; n > 0 means n live shared borrows (Ref); n < 0 means mutably borrowed. Normally exactly -1, but it can go further negative because RefMut::map_split splits one RefMut into two disjoint ones over non-overlapping parts of the value. borrow() fails if flag < 0; borrow_mut() fails if flag != 0.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c9",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "How does Rust's Mutex<T> differ structurally from Java's synchronized and Go's sync.Mutex?",
+      "a": "Rust's Mutex OWNS the T. The only way to reach the data is lock(), which returns a MutexGuard that derefs to &mut T, so `forgot to take the lock` is not expressible. Java's synchronized/ReentrantLock guard a BLOCK; the lock-to-fields mapping lives in a @GuardedBy annotation checked only by optional tools. Go's sync.Mutex is a bare field with no type-level link to what it protects, which is why Go shipped a ThreadSanitizer-based race detector in Go 1.1 (2013) that its docs peg at 2x-20x execution time and 5x-10x memory, and which only reports races that actually occurred on the executed interleaving.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c10",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "Two ways Rust's std Mutex is WORSE than Java's, for someone porting from Java.",
+      "a": "1) Non-reentrant. std documents locking a Mutex on a thread that already holds it as unspecified behaviour that will not return; Java's synchronized and ReentrantLock are reentrant. A recursive helper that is fine in Java hangs in Rust, symptom being a thread parked in futex_wait at 0% CPU with no log output. 2) Poisoning. A panic while holding the guard marks the mutex poisoned permanently, so every subsequent lock() returns Err(PoisonError), which is why real code is full of .unwrap(). PoisonError::into_inner() recovers the guard; parking_lot::Mutex drops poisoning entirely and is 1 byte instead of 8.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c11",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "Measured uncontended costs of Mutex vs RwLock, and when does RwLock actually win?",
+      "a": "Measured on rustc 1.97.1 -O, 30M iterations: Mutex lock+unlock 13.19 ns, RwLock read+unlock 15.12 ns, RwLock write+unlock 13.34 ns, AtomicUsize fetch_add 6.04 ns, RefCell borrow_mut 0.25 ns. RwLock::read was SLOWER than Mutex::lock, because a read lock still performs an atomic RMW to register the reader, so N readers still contend on the same cache line. RwLock only wins when critical sections are long enough (roughly hundreds of ns and up) that parallel reader execution dominates acquisition cost. For read-mostly data replaced wholesale, use arc-swap instead.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c12",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "Define Send and Sync precisely, and explain the auto-trait mechanism.",
+      "a": "Send: the value can be moved to another thread. Sync: &T can be shared with another thread, formally T: Sync iff &T: Send. Both are AUTO TRAITS: you do not implement them, the compiler derives them structurally, so a struct is Send if all its fields are Send and Sync if all its fields are Sync. The recursion bottoms out at a handful of hand-written positive and negative impls in std. Consequence: adding one Rc field deep inside a struct silently makes the whole aggregate !Send, and the error surfaces hundreds of lines away at a thread::spawn or tokio::spawn.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c13",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "Why is Rc neither Send nor Sync, and why is MutexGuard Sync but not Send?",
+      "a": "Rc is !Send because its strong count is a plain usize; two threads incrementing it would interleave and lose an update, the count would read low, the value would drop while a live Rc still points at it, and you get use-after-free. !Sync follows because any thread with &Rc<T> can call clone(). MutexGuard is !Send because unlocking must happen on the locking thread (POSIX makes pthread_mutex_unlock from a non-owner UB) and the guard's Drop is what unlocks. MutexGuard IS Sync when T: Sync, because &MutexGuard<T> only yields &T, and sharing a reference to the guard never moves the guard, so the unlock stays put.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c14",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "Send/Sync status of the common types, with the exact compiler errors.",
+      "a": "Rc<T>: !Send, !Sync. Arc<T> where T: Send + Sync: Send + Sync. Cell<T>/RefCell<T> where T: Send: Send YES, Sync NO. Mutex<T> where T: Send: Send + Sync. MutexGuard<'_, T> where T: Sync: Sync YES, Send NO. &T where T: Sync: Send. *const T / *mut T: !Send, !Sync by fiat, forcing an explicit unsafe impl. Errors: `error[E0277]: Rc<i32> cannot be sent between threads safely`, `error[E0277]: RefCell<i32> cannot be shared between threads safely`, `error[E0277]: std::sync::MutexGuard<'static, i32> cannot be sent between threads safely`.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c15",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "What are the five superpowers of unsafe, and what does unsafe NOT turn off?",
+      "a": "Five: 1) dereference a raw pointer, 2) call an unsafe fn or method, 3) access or modify a mutable static, 4) implement an unsafe trait, 5) access union fields. It turns off NOTHING else. The borrow checker still runs inside an unsafe block, lifetimes are still checked, move semantics and type checking are unchanged, Drop still fires. The only change is that rustc stops asking you to prove those five are safe and starts ASSUMING you were right, then optimizes on that assumption. unsafe is silent mode, not permissive mode.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c16",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "What is the difference between an `unsafe fn` and an `unsafe {}` block, and what did edition 2024 change?",
+      "a": "Opposite directions. An unsafe BLOCK discharges an obligation: `I checked the preconditions`. An unsafe FN imposes one on callers: `read my # Safety doc`. Rust 2024 edition (shipped in 1.85.0, 2025-02-20) made this explicit by turning unsafe_op_in_unsafe_fn on by default, so the body of an unsafe fn is no longer implicitly an unsafe block and you must write the inner unsafe {}. Edition 2024 also requires `unsafe extern \"C\"` blocks and unsafe attributes such as #[unsafe(no_mangle)], and promotes static_mut_refs from warn to deny.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c17",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "Why is UnsafeCell<T> the only legal way to mutate through a &T?",
+      "a": "rustc tells LLVM that a &T points at memory that will not change for the reference's lifetime (noalias, plus readonly where applicable). UnsafeCell is the marker that suppresses that annotation. Mutating through a &T not inside an UnsafeCell is undefined behaviour EVEN IF you observe the right answer, because LLVM has already been licensed to cache the load, hoist it out of a loop, or reorder around it. A raw-pointer cast is not a workaround: the UB is a property of the &T existing over that memory, not of the syntax used to write. UnsafeCell is repr(transparent) so it costs 0 bytes, and it is !Sync, which is where Cell's and RefCell's !Sync comes from.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c18",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "What does soundness mean for an unsafe abstraction, and why is Vec sound despite being full of unsafe?",
+      "a": "Sound iff NO safe caller, using ANY combination of the public API in ANY order, can cause undefined behaviour. Vec is sound because its public API makes its internal invariants (len <= cap, first len elements initialized, pointer valid for cap elements) unbreakable from outside. The proof this is load-bearing is set_len: if it were safe, a caller could set len past the initialized region and index, reading uninitialized memory, so it is correctly an unsafe fn. Three teeth people miss: two individually safe methods can be jointly unsound; your type must stay sound composed with any other sound crate; and panics count, because unwinding runs Drop on a temporarily invalid object.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c19",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "Why does undefined behaviour usually only manifest under --release, with a verified example?",
+      "a": "At -O0 the optimizer does almost nothing, so a broken assumption often has no visible consequence. At -O the optimizer USES the assumption, and when it is false it can emit ud2, delete a branch it proved unreachable, or produce a value that is neither true nor false. Verified on rustc 1.97.1: reading an uninitialized bool via MaybeUninit::uninit().assume_init() prints `saw-false` and exits 0 in debug, and dies with `Illegal instruction (core dumped)`, exit status 132, at -O, from identical source on the same machine. Note integer overflow is NOT UB: it is defined to panic with debug_assertions and to wrap without, controlled by -C overflow-checks.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c20",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "What does Miri catch, what are its defaults, and what can it fundamentally not do?",
+      "a": "Nightly only (cargo +nightly miri test). Catches out-of-bounds, use-after-free, uninitialized reads, misaligned accesses, invalid values, violated intrinsic preconditions, DATA RACES with weak-memory emulation, LEAKS (anything live at exit not reachable from a static), and aliasing violations. Defaults: seed 0; -Zmiri-many-seeds explores 0..64; preemption 1% per basic block; compare_exchange_weak fails 80%; num-cpus reported as 1; provenance GC every 10,000 basic blocks. Cannot: prove soundness (it tests executions, not all safe callers), do networking, run most FFI, or explore all interleavings. Miri-clean is not sound.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c21",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "Stacked Borrows vs Tree Borrows: what is the live disagreement and how should you handle it in CI?",
+      "a": "Rust has NOT stabilized a definition of UB for references. Stacked Borrows (Jung et al., POPL 2020) models each location as a stack of borrow tags; a reborrow pops the tags above it and using a popped tag is UB. Strict, justifies aggressive noalias, and is Miri's default. Tree Borrows (Villani, Hostert, Dreyer, Jung; PLDI 2025, Distinguished Paper, 6 of 89 accepted) replaces the stack with a tree mirroring the reborrow structure; over the 30,000 most-downloaded crates it rejects 54% fewer test cases and its Rocq proofs show it keeps most SB optimizations plus read-read reordering. CI procedure: gate on Stacked Borrows; use -Zmiri-tree-borrows as a DIAGNOSTIC. Miri's README warns the eventual official model is likely STRICTER than Tree Borrows, so TB-accepted code may be declared UB later.",
+      "module": "T20-rust-memory"
+    },
+    {
+      "id": "T20-rust-memory-c22",
+      "topic": "Box/Rc/Arc/RefCell, Interior Mutability, Send + Sync, Unsafe",
+      "q": "What does Rust's concurrency guarantee actually cover, and what does it not?",
+      "a": "It prevents DATA RACES for safe code: two threads accessing the same memory without synchronization where at least one writes. It does NOT prevent deadlocks (two mutexes in inconsistent order deadlock exactly as in C), logical race conditions (memory-safe but wrong-order operations), memory leaks (mem::forget and Box::leak are safe; Rc/Arc cycles leak), priority inversion, lock convoying, or unbounded queue growth. Making that narrow claim unprompted, instead of saying `Rust prevents concurrency bugs`, is the clearest staff-level signal in this topic.",
+      "module": "T20-rust-memory"
+    }
+  ]
+}

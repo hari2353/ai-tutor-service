@@ -1,0 +1,214 @@
+{
+  "flashcards": [
+    {
+      "id": "T28-claude-architect-c1",
+      "topic": "The Claude Architect Model",
+      "q": "What did agentic coding actually change about the engineering bottleneck?",
+      "a": "It moved it rather than removing it. On Anthropic's Claude Code team, writing code, writing tests and refactoring rarely slow them down anymore, and verification, code review and security took their place. The consequence for a Principal: the artifacts you author shift from implementations to specs, ADRs and enforcement (lint rules, hooks, CI gates, fitness functions).",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c2",
+      "topic": "The Claude Architect Model",
+      "q": "State the three levels of control over an agent, and the rule that follows.",
+      "a": "Level 1 instruction (CLAUDE.md or AGENTS.md explains the rule) is a recommendation. Level 2 reminder (a skill re-states it at the moment it matters) raises compliance but stays probabilistic. Level 3 enforcement (hook, lint rule, CI gate, or a type that makes the wrong thing unrepresentable) is a constraint. Rule: anything you would be upset to find violated belongs at Level 3.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c3",
+      "topic": "The Claude Architect Model",
+      "q": "Give the mechanical reason a rule in conversation history will be ignored later.",
+      "a": "Compaction reliably preserves the current task, recent errors and file names, and reliably loses initial instructions, intermediate decisions and style rules. So a style rule stated in conversation is gone by turn 60. A rule in CLAUDE.md lives in the system prompt and survives compaction. A rule in a lint config cannot be lost at all.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c4",
+      "topic": "The Claude Architect Model",
+      "q": "Why is plan mode a control rather than a convention?",
+      "a": "Because the write tools are physically unavailable in plan mode: it is a hard read-only sandbox enforced at the tool level, not a promise the model keeps. That is the difference between Level 1 ('please don't edit yet') and Level 3 applied to the agent's own workflow, and it is why plan mode changes outcomes. Microsoft Agent Framework ships the same idea as a plan/execute mode provider.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c5",
+      "topic": "The Claude Architect Model",
+      "q": "What makes a spec self-contained, and what failure does each clause prevent?",
+      "a": "It names the files and interfaces involved (prevents assumption propagation, where the agent invents a plausible module boundary and builds three PRs on it), states what is out of scope (prevents abstraction bloat and scope creep), and ends with an end-to-end verification step that actually runs (prevents fail-plausible completion, where a green mocked unit test hides the broken thing). Add an 'open questions for the human' section; an empty list on an ambiguous task is suspicious.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c6",
+      "topic": "The Claude Architect Model",
+      "q": "What does Karpathy's catalogue of remaining agent failures say?",
+      "a": "The models make wrong assumptions on your behalf and run with them without checking. They do not manage confusion, do not seek clarifications, do not surface inconsistencies, do not present tradeoffs, and do not push back when they should. They are still a little too sycophantic. Consequence: a wrong architectural premise arrives looking identical to a right one, which is why an explicit 'open questions' slot in the spec is the mitigation.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c7",
+      "topic": "The Claude Architect Model",
+      "q": "Give the five properties of an agent-sized unit of work.",
+      "a": "Bounded blast radius (you can name the files it should touch). A stated contract (interfaces and error semantics fixed in advance). Machine-checkable success (a command whose exit code decides done). Reversibility (one git revert undoes it). Fits the context (relevant code and constraints in one window). Two or more failures means the decomposition is the problem, not the agent.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c8",
+      "topic": "The Claude Architect Model",
+      "q": "Name five categories of work an agent predictably cannot do.",
+      "a": "1 Under-determined design decisions with long shadows (consistency models, tenancy, service boundaries, data ownership), because the agent lacks the political, organizational and roadmap constraints and returns a plausible answer confidently. 2 Correctness resting on unwritten invariants, which is why mature codebases invert the calculus relative to greenfield. 3 Thinly-represented APIs (internal libraries, recently-changed SDKs), where confident hallucination concentrates. 4 Cross-cutting migrations where 15% of call sites need judgment, because it will make the 15% look like the 85%. 5 Work where the test suite is the thing being fixed.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c9",
+      "topic": "The Claude Architect Model",
+      "q": "What should you write into AGENTS.md, and what should you keep out?",
+      "a": "In: exact copy-pasteable commands for install/test/lint/types/migrate; a map of the tree telling the agent where to look next (including a pointer to docs/adr with 'stop if your plan contradicts an ADR'); hard rules stated AND noted as CI-enforced; a behaviour block (read before modifying, prefer three duplicate lines over a premature abstraction, don't comment unchanged code, don't add error handling the contract doesn't require, diagnose before retrying, report honestly, stop and ask above about 60% uncertainty); an explicit verifiable 'done means'. Out: anything you'd be upset to see violated but haven't enforced, secrets, permission logic, long prose rationale (that's an ADR, link it), and content that will drift from the code.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c10",
+      "topic": "The Claude Architect Model",
+      "q": "AGENTS.md versus CLAUDE.md in 2026: what is the status?",
+      "a": "AGENTS.md became the de facto cross-tool convention (read natively by Codex, Cursor, Copilot, Gemini CLI, Aider, Windsurf, Zed and 20+ others, stewarded by the Linux Foundation's Agentic AI Foundation, adopted in 60,000+ repositories). It is a convention, not an ISO/IETF standard. It exists because teams maintained .cursorrules, CLAUDE.md and copilot-instructions.md in parallel. Practical answer for a polyglot shop: AGENTS.md as source of truth, CLAUDE.md as a thin pointer plus Claude-specific additions.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c11",
+      "topic": "The Claude Architect Model",
+      "q": "In what order do you review an agent-authored PR, and why that order?",
+      "a": "Test diff, then file list, then code. Test diff first because the highest-cost catchable failure is 'passes tests while being wrong', typically by mocking out the broken dependency or asserting the implementation rather than the behaviour; the question is 'would this test fail if the feature were absent?'. File list second, against the spec's named files, because that catches scope leakage and dead code cheaply. Code last, grepping for escape hatches and swallowed errors, which compile silently and therefore survive review.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c12",
+      "topic": "The Claude Architect Model",
+      "q": "List the nine failure classes in agent-written code, roughly by descending cost.",
+      "a": "1 Assumption propagation. 2 Passes tests while being wrong. 3 Silent bypass of language guarantees (type: ignore, Any, casts, unsafe). 4 Swallowed errors (bare except, discarded Result, unawaited coroutine, ignored return code). 5 Confident hallucination on thin APIs. 6 Abstraction bloat. 7 Dead code accumulation. 8 Scope leakage. 9 Fail-plausible reporting (fabricated command output).",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c13",
+      "topic": "The Claude Architect Model",
+      "q": "Which agent-code failure class is not catchable at diff-review time, and what catches it?",
+      "a": "Assumption propagation. If the model misunderstood something early and built on a faulty premise, the diff can be locally excellent and globally wrong, and you may not notice until you are five PRs deep with the architecture cemented. What catches it: reviewing the plan rather than the diff, requiring the spec to name interfaces, and architecture-fitness functions in CI (import-linter, dependency rules, boundary tests) that fail mechanically on a wrong premise.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c14",
+      "topic": "The Claude Architect Model",
+      "q": "Give the delivery-data numbers on the review bottleneck.",
+      "a": "DORA 2025: high-AI-adoption teams merged 98% more PRs with review time up 91% and PR size up 154%. 2026: median PR review time up 441% and 31% more PRs merging with no review at all. Agentic PRs wait 5.3x longer for a reviewer and run 2.6x larger. Median batch size roughly doubled between Q1 2025 and Q1 2026, growing about 2.5x faster from October onward. Atlassian: 99% of AI-using developers saved 10+ hours per week and most reported no decrease in overall workload.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c15",
+      "topic": "The Claude Architect Model",
+      "q": "State the METR result and why it is the most important number in this topic.",
+      "a": "METR's July 2025 randomized controlled trial (16 experienced open-source developers, 246 tasks on repositories they regularly contributed to) found early-2025 AI tools made them 19% SLOWER, while they predicted a 24% speedup and, after experiencing the slowdown, still estimated they had been 20% faster. That 39-point perception gap means self-report is not evidence, which invalidates most productivity claims. METR's continuation estimates the slowdown flipping to about +18% faster by early 2026.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c16",
+      "topic": "The Claude Architect Model",
+      "q": "What is comprehension debt?",
+      "a": "Generation and discrimination are different capabilities, so you can review code competently after your ability to write it from scratch has atrophied, and there is a threshold at which review silently becomes rubber-stamping. Mechanism: the agent never tires, the code looks plausible, tests pass or seem to, you are shipping under pressure, so you skim and merge, and three days later cannot explain how it works. Unlike technical debt it appears in no dashboard.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c17",
+      "topic": "The Claude Architect Model",
+      "q": "Give the mitigations for comprehension debt.",
+      "a": "TDD, so the specification stays in your head and you get the machine-checkable success criterion for free. Ask for the justification and evaluate the reasoning, not just the output. Deliberately hand-write some things to keep the capability. Own one subsystem end to end, so depth exists somewhere. Treat 'I don't understand this' as a stop signal rather than a win. None of them are complete.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c18",
+      "topic": "The Claude Architect Model",
+      "q": "Why is the compiler analogy for agentic coding wrong?",
+      "a": "A compiler is deterministic and its output is correct by construction, so you never need to read it. An agent's output is probabilistic and occasionally confidently wrong, so somebody must retain the ability to read and judge it. The evidence: 38% of developers report reviewing AI-generated logic takes MORE effort than reviewing human-written code, while only 48% consistently check AI-assisted code before committing. That gap is an unpriced risk, not nostalgia.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c19",
+      "topic": "The Claude Architect Model",
+      "q": "What did Anthropic's Claude Code team change, before and after?",
+      "a": "Planning: six-month roadmaps to just-in-time planning (prototype, put internal users on it, act on feedback), with rituals moving from design docs to PR and prototype discussions. Context gathering: find the author, to ask Claude first then ask whether the question itself can be automated. Code review: humans review everything, to Claude handling style/lint/bug-catching/tests and humans reviewing where domain expertise matters (legal risk tolerance, trust boundaries and security, product taste). Team makeup: fixed roles to blurred, hiring on creative builders with product sense and engineers with deep systems expertise, explicitly de-indexed on raw throughput.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c20",
+      "topic": "The Claude Architect Model",
+      "q": "What three metrics did Anthropic track to know new norms were sticking, and what warning came with them?",
+      "a": "Onboarding ramp time going down (engineers shipping real code within their first week), PR cycle time going down (which surfaces where CI and build systems fail to scale under the new code volume), and Claude-assisted commit share going up (effectively 100% for four months). The warning: do not confuse throughput with success. Throughput is one metric; the real metric is the thing you were trying to solve.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c21",
+      "topic": "The Claude Architect Model",
+      "q": "Would you adopt just-in-time planning anywhere? State the precondition.",
+      "a": "Only conditionally. It worked for the Claude Code team because coding was the dominant cost, their users were internal, and their surface moved weekly (a six-month roadmap was out of date by month three). It fails where the roadmap exists for coordination with downstream teams, compliance calendars, or contractual commitments, because agentic coding reduces implementation cost and does not reduce coordination cost. Adopt the meta-practice unconditionally: question why a process exists, grant explicit permission to kill obsolete ones, and pick the noisiest workflow first.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c22",
+      "topic": "The Claude Architect Model",
+      "q": "What do you never delegate, and what is the organizing principle?",
+      "a": "Never: architectural decisions and their rationale, trust and security boundaries, data model ownership, error-semantics contracts, dependency additions, anything with legal or compliance exposure, and the ship decision. Principle: reversibility multiplied by shadow length. An implementation mistake is cheap and local; a wrong service boundary or consistency model is paid for over years by people who were not in the conversation. The agent may draft the ADR; the test is whether you can defend the REJECTED alternatives without re-reading it.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c23",
+      "topic": "The Claude Architect Model",
+      "q": "What is the rule for subagent use when review is your bottleneck?",
+      "a": "One subagent per independently reviewable artifact. If two subagents produce work you can only evaluate together, you have parallelized generation and serialized review, which is the wrong direction. Reach for a subagent for context isolation (about 67% fewer tokens than skills in multi-domain scenarios), genuine parallelism across independent files, or a different permission scope. Not because you have a lot of tools.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c24",
+      "topic": "The Claude Architect Model",
+      "q": "What is fresh-context self-review and why does it work?",
+      "a": "Having the model review its own diff in a clean context window. It feels wrong to ask the same model to critique itself, and it works because most of the errors are context artifacts (assumptions made 40 turns ago, dead code from a superseded approach) rather than capability limits. Anthropic ships this as Code Review, used by every internal team, handling style, linting, PR feedback, bug-catching pre-commit and test-adding, which preserves the human review budget for things needing expertise.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c25",
+      "topic": "The Claude Architect Model",
+      "q": "Name the first two CI gates to add for an agent-heavy team.",
+      "a": "1 Fail the PR if it touched files the linked spec did not name; about twenty lines, and it catches scope leakage, dead-code accumulation and opportunistic refactors in one rule (three of the nine failure classes). 2 A diff-size cap with a split requirement, because it is the only thing that actually addresses the merged-unreviewed problem: a 200-line PR reviewed properly beats a 2,000-line PR skimmed, and the skim is what is really happening in 31% of PRs.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c26",
+      "topic": "The Claude Architect Model",
+      "q": "How is AI fluency actually assessed in 2026 senior interviews?",
+      "a": "New round types: code-review rounds, 'evaluate this LLM-generated solution' rounds, and 'AI delta' assessments where you tackle a real GitHub issue in 2-4 hours and are scored on what you add beyond what the AI produced (exploration strategy, engineering rigour, edge cases, documentation). OpenAI allows AI in coding rounds with screen-share and narration, with the boundary being not dumping the whole problem in. Exponent runs a combined coding-plus-design round using Claude Code where the interviewer scores prompting strategy, verification ability, and whether you let the AI make architectural decisions; their stated top pitfall is 'not understanding what the AI is going to do, relying on AI to make decisions for you'.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c27",
+      "topic": "The Claude Architect Model",
+      "q": "Why does leaning on AI during a live interview often hurt candidates?",
+      "a": "Follow-up questions expose that they cannot explain a subtle bug the model introduced. The reported pattern across multiple HN threads is that candidates using AI in live interviews frequently perform worse for exactly this reason. There is also a documented case of a borderline senior candidate getting a soft thumbs-down for insisting LLMs could help with a regression problem where it did not make technical sense: knowing the tools is table stakes, knowing when not to reach for them is the seniority signal.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c28",
+      "topic": "The Claude Architect Model",
+      "q": "Why does agentic coding work in greenfield and invert in mature codebases?",
+      "a": "In greenfield, personal projects, MVPs and small teams you control the stack, can refactor aggressively, throw code away without political friction, and comprehension debt stays manageable, so the agent's weaknesses matter less. In mature codebases with complex invariants the agent does not know what it does not know, cannot intuit unwritten rules, and its confidence scales inversely with context understanding. Also: the last 10% is not linear, and the economics flip somewhere around 75-85% depending on domain complexity.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c29",
+      "topic": "The Claude Architect Model",
+      "q": "What is the bimodal adoption fact and why does it matter for a team?",
+      "a": "Armin Ronacher's 5,000-developer poll found 44% now write less than 10% of their code manually while another 44% still write over 90% manually. It is a bimodal distribution, not a bell curve. It matters because 'how we build software here' is no longer a shared practice, code review across the two populations is genuinely difficult, and Stack Overflow found only 16% reporting 'great' productivity gains. The fix is standardizing the workflow (spec, plan, gates, review), not the tool: the tool is not the practice.",
+      "module": "T28-claude-architect"
+    },
+    {
+      "id": "T28-claude-architect-c30",
+      "topic": "The Claude Architect Model",
+      "q": "Give the one-line summary of what actually worries a senior engineer about agentic coding.",
+      "a": "The danger is not that the agent fails. It is that it succeeds so confidently in the wrong direction that you stop checking the compass. And the corollary: if your ability to read does not scale with the agent's ability to output, you are not engineering, you are hoping.",
+      "module": "T28-claude-architect"
+    }
+  ]
+}

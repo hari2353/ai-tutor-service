@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T13-incidents-d1",
+      "module": "T13-incidents",
+      "q": "Name the four ICS-derived incident roles.",
+      "a": "Incident Commander, Operations Lead, Communications Lead, Scribe.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T13-incidents-d2",
+      "module": "T13-incidents",
+      "q": "99.9% availability over a 30-day window. How many minutes of full unavailability is the error budget?",
+      "a": "About 43.2 minutes. 30 days = 43,200 minutes; 0.1% of that is 43.2.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T13-incidents-d3",
+      "module": "T13-incidents",
+      "q": "Which of these belongs on a pager and which on a dashboard: (a) 'CPU on host-7 at 92%', (b) 'fraction of /v1/search requests under 400ms below SLO burn threshold'?",
+      "a": "(b) pages. It is a symptom alert and fires only when users are affected, by any cause including ones you never instrumented. (a) is a cause alert: dashboard or ticket. It fires when nobody is harmed and misses breakage whose cause you did not anticipate.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T13-incidents-d4",
+      "module": "T13-incidents",
+      "q": "What is the maximum sustainable pager load per 8-to-12-hour on-call shift, and what is the stated reason for that number?",
+      "a": "About 2 paging events. The reason given in the Google SRE Book is operational, not humane: below that the on-call has time to handle the event accurately, restore service, clean up and write the postmortem. Above it, incidents stop being investigated thoroughly and the team stops learning from them.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T13-incidents-d5",
+      "module": "T13-incidents",
+      "q": "Write the first external status update at minute 6 of an incident where you have no idea what is wrong. Name the four required parts.",
+      "a": "Parts: what users see, when it started, what we are doing, when the next update comes. 'Since 14:12 UTC, a portion of requests to /v1/search are returning HTTP 500. Other endpoints are unaffected. We are investigating and have engineers engaged. Next update by 14:45 UTC.' No cause, no resolution ETA, no speculation. The next-update-by promise is the load-bearing part.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-incidents-d6",
+      "module": "T13-incidents",
+      "q": "Rewrite these two postmortem findings so they are not blame: (a) 'the on-call missed the page', (b) 'reviewer approved a bad config'.",
+      "a": "(a) 'The page was one of 41 fired in that 8-hour shift, of which 4 were actionable. Fix: delete the 17 alerts with zero actions in 90 days, convert 12 cause-alerts to tickets.' (b) 'The config had no schema validation and no canary stage; review was the only gate. Fix: schema-validate at build time, canary to 1% of the fleet for 10 minutes before global propagation.' Test: if the finding cannot be falsified by a code, config or alert change, it is not a finding.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-incidents-d7",
+      "module": "T13-incidents",
+      "q": "You are IC. A mitigation reduces the error rate from 40% to 12% but does not resolve. The team wants another 30 minutes tuning the same lever. What do you do and why?",
+      "a": "Force a hypothesis reset. A mitigation that reduces but does not eliminate impact is evidence the current hypothesis is downstream of the cause, not evidence you are close. Run an explicit 'what else could produce this?' round before allowing more tuning. Cloudflare on 18 November 2025 spent 11:32 to 13:05, about 93 minutes, chasing elevated Workers KV errors that were downstream of a core-proxy panic; the 13:05 bypass reduced impact and did not resolve it.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-incidents-d8",
+      "module": "T13-incidents",
+      "q": "Your service oscillates between fully healthy and fully broken roughly every 5 minutes. Two engineers are convinced it is a DDoS. What is your first hypothesis?",
+      "a": "A periodic job producing bad state, not an adversary. A five-minute oscillation is a five-minute cron. Match the oscillation period against scheduler intervals before reaching for the attack hypothesis. This is exactly the Cloudflare November 2025 saw-tooth: a feature file regenerated every 5 minutes while a ClickHouse cluster was updated node by node, so it was sometimes good and sometimes bad.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-incidents-d9",
+      "module": "T13-incidents",
+      "q": "Give the three cases where mitigate-before-diagnose is the wrong default, with one concrete example each.",
+      "a": "(1) The mitigation is irreversible or data-destructive: failing over a primary with unknown replication lag permanently loses unreplicated writes (GitHub, 21 Oct 2018, where a 43-second partition produced a split write set and 24h 11m of reconciliation). (2) You cannot state the mitigation's own blast radius: 'restart the fleet' when you do not know whether it comes back. (3) The suspect is a stateful in-flight operation: rolling back a half-applied schema migration is usually worse than letting it finish.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T13-incidents-d10",
+      "module": "T13-incidents",
+      "q": "State the Google SRE Workbook's three burn-rate alert tiers, including short windows and budget consumed.",
+      "a": "Tier 1: 14.4x burn, 1-hour long window, 5-minute short window, 2% of budget consumed, PAGE. Tier 2: 6x, 6-hour long window, 30-minute short window, 5% consumed, PAGE. Tier 3: 1x, 3-day long window, 6-hour short window, 10% consumed, TICKET. Both windows must breach; the short window exists so the alert clears within minutes once burning stops.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-incidents-d11",
+      "module": "T13-incidents",
+      "q": "List at least four contributing factors for the Cloudflare 18 November 2025 outage, then say which single fix you would prioritise and why.",
+      "a": "(1) A query against system.columns written without a database-name filter, relying on implicit behaviour. (2) A permissions change making r0 access explicit, which altered that behaviour. (3) A gradual node-by-node rollout that made the fault intermittent and delayed diagnosis. (4) A hard 200-feature preallocation limit (normal usage ~60) with no graceful degradation. (5) Rust error handling that turned a failed Result into a panic instead of falling back to last-known-good. Prioritise (5): it converts an entire class of bad-config events from a global outage into a stale-config degradation. Rank by how many future incidents a fix prevents, not by proximity to the trigger.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-incidents-d12",
+      "module": "T13-incidents",
+      "q": "Your org writes excellent postmortems and keeps having the same outages. Diagnose it with a metric and name the mechanical fixes.",
+      "a": "Metric: fraction of incidents in the last 12 months whose contributing factors recur from an earlier incident. Above about 20% the writing is not the problem, action-item completion is. Causes: items owned by a team not a person; items living only in the postmortem doc and never entering the backlog where they compete with feature work; items phrased so they cannot be completed; too many, since 14 items completes about 3. Fix: cap Sev1 at 5 ranked items, each with a named individual, a real ticket and a date, plus an explicit 'considered and not doing' list with one-line reasons.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-incidents-d13",
+      "module": "T13-incidents",
+      "q": "You are the only person on the incident call who understands the failing system. You are also the IC. What do you do?",
+      "a": "Hand off IC, do not try to do both. Give the IC role to someone who can run a call (a manager, a TPM, another on-call engineer) and become the Ops Lead yourself, announcing the handoff explicitly in the channel. The IC role requires coordination skill, not domain expertise, which is the entire reason the split works. Doing both means the coordination machine halts silently and nobody notices for ~20 minutes.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-incidents-d14",
+      "module": "T13-incidents",
+      "q": "Your error budget is exhausted and a VP wants the feature shipped anyway. What do you actually do?",
+      "a": "Do not say 'I enforce the freeze', which signals you have never had this conversation. The budget is decision support, not a veto: present the cost concretely ('this consumes budget we do not have, so the next incident this quarter breaches the customer SLA and costs $N in credits'), let the accountable person decide, and write down what was decided. Then escalate the policy rather than each ship decision, because an error budget nobody will ever honour is worse than none, since it looks like a control while being a dashboard.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T13-incidents-d15",
+      "module": "T13-incidents",
+      "q": "An interviewer asks what you would have done differently in your worst outage. Give the answer shape that scores at staff level, and the trap.",
+      "a": "The trap is a counterfactual about yourself ('I should have noticed sooner'), which sounds humble and signals you still think in terms of individual carefulness. Answer with a system change: 'Nothing about my actions given what I knew at 03:12. The system change is that there was no symptom-based alert on query memory pressure, so detection depended on a human watching an error-rate graph. A burn-rate alert would have cut time-to-detect from N minutes to about 2.' Same discipline as a postmortem: findings must be properties of systems, falsifiable by a code, config or alert change.",
+      "difficulty": "staff"
+    }
+  ]
+}

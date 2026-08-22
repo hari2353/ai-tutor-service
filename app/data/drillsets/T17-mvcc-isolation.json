@@ -1,0 +1,102 @@
+{
+  "drills": [
+    {
+      "id": "T17-mvcc-isolation-d1",
+      "module": "T17-mvcc-isolation",
+      "q": "Explain Postgres's xmin/xmax visibility rule precisely.",
+      "a": "A tuple version is visible to a snapshot if xmin's transaction committed before the snapshot was taken, and either xmax is unset (still live) or xmax's transaction has not committed as of the snapshot. Checked per-tuple during a scan.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-mvcc-isolation-d2",
+      "module": "T17-mvcc-isolation",
+      "q": "Why does MVCC let readers never block writers, unlike 2PL?",
+      "a": "A reader simply reads an older, already-committed row version instead of waiting for the newest write to finish - it never needs a lock on the current version. Writers still conflict with other writers on the same row, but reader-writer blocking is eliminated entirely.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-mvcc-isolation-d3",
+      "module": "T17-mvcc-isolation",
+      "q": "Name all six concurrency anomalies with a one-line definition each.",
+      "a": "Dirty read (uncommitted write visible), dirty write (overwrite an uncommitted write), read skew (same row, two reads in one txn, different answers), phantom read (predicate result set changes mid-txn), lost update (same-row read-modify-write, one write clobbers another), write skew (disjoint rows, writes jointly violate an invariant neither alone violated).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-mvcc-isolation-d4",
+      "module": "T17-mvcc-isolation",
+      "q": "Walk through the doctors-on-call write skew example in full, two transactions.",
+      "a": "Invariant: >=1 doctor on call. Alice's txn reads count=2 from its snapshot, decides safe to go off-call, updates Alice's row, commits. Bob's txn concurrently reads count=2 from its own snapshot, decides safe, updates Bob's row, commits. Final count=0. No write-write conflict was ever detected because the two updates touched different rows.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-mvcc-isolation-d5",
+      "module": "T17-mvcc-isolation",
+      "q": "Why does snapshot isolation stop read skew but not write skew, mechanically?",
+      "a": "Read skew is prevented directly because a fixed snapshot gives internally consistent repeated reads. Write skew is a violated cross-transaction invariant caused by disjoint writes - SI's conflict detection only checks for same-row write-write conflicts, which never occurs in write skew since the rows written are different.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-mvcc-isolation-d6",
+      "module": "T17-mvcc-isolation",
+      "q": "Give the real default isolation level for Postgres, MySQL, Oracle, and SQL Server.",
+      "a": "Postgres, Oracle, SQL Server: Read Committed. MySQL/InnoDB: Repeatable Read (with gap locks suppressing most phantoms beyond the ANSI minimum).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T17-mvcc-isolation-d7",
+      "module": "T17-mvcc-isolation",
+      "q": "Is Oracle's SERIALIZABLE actually serializable? What's the practical consequence?",
+      "a": "No - Oracle's SERIALIZABLE is snapshot isolation under a different name; it implements neither SSI nor 2PL-style predicate locking. Write skew remains possible on Oracle SERIALIZABLE, so you must add explicit row locking (SELECT ... FOR UPDATE) to actually protect a cross-row invariant.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-mvcc-isolation-d8",
+      "module": "T17-mvcc-isolation",
+      "q": "Explain how Postgres's SSI detects write skew without blocking any reader.",
+      "a": "SERIALIZABLE transactions take non-blocking SIREAD locks on data they read. A later write to SIREAD-covered data creates an rw-antidependency edge. A cycle of two such edges through a pivot transaction (a dangerous structure) triggers a serialization failure, aborting one transaction for retry - all without ever blocking a read.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-mvcc-isolation-d9",
+      "module": "T17-mvcc-isolation",
+      "q": "An account balance goes negative despite a CHECK(balance >= 0) constraint and every individual UPDATE looking correct. Diagnose.",
+      "a": "Lost update or write skew between two concurrent balance-modifying transactions under Read Committed or Snapshot Isolation. A single-row CHECK constraint can't catch a cross-row/cross-transaction invariant violation. Fix: SELECT ... FOR UPDATE before computing the new value, or run at SERIALIZABLE and handle retries.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-mvcc-isolation-d10",
+      "module": "T17-mvcc-isolation",
+      "q": "Design the fix for a flight-booking system where two transactions might both book the last seat.",
+      "a": "Best: atomic conditional UPDATE flights SET seats_available = seats_available - 1 WHERE id=? AND seats_available > 0, checking the affected-row count - folds check-then-write into one atomic statement, no separate stale read. Alternatives: SELECT ... FOR UPDATE before deciding, or SERIALIZABLE with retry handling.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-mvcc-isolation-d11",
+      "module": "T17-mvcc-isolation",
+      "q": "Why do predicate locks matter, and what happens under pure 2PL without them?",
+      "a": "Row locks alone only guard rows that existed when the lock was taken - a newly inserted row matching the same query condition slips through unnoticed (a phantom). Predicate locks lock the range/condition itself, catching new matching rows too.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-mvcc-isolation-d12",
+      "module": "T17-mvcc-isolation",
+      "q": "What operational risk comes from XID wraparound, and what prevents it?",
+      "a": "32-bit XIDs wrap every ~4 billion transactions; ambiguity in xmin comparisons could cause data corruption. Autovacuum's freeze rewrites old tuples' xmin to a frozen sentinel. An under-vacuumed high-write table risks Postgres forcing read-only mode as the counter approaches the limit.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T17-mvcc-isolation-d13",
+      "module": "T17-mvcc-isolation",
+      "q": "When would you choose SELECT ... FOR UPDATE over running the whole transaction at SERIALIZABLE?",
+      "a": "When you know exactly which rows back the invariant and want to pay locking cost only there, rather than SIREAD bookkeeping and a higher retry rate across the whole transaction. Risk: missing one of the dangerous reads silently reintroduces the anomaly with no warning - SERIALIZABLE doesn't require hand-enumerating them.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T17-mvcc-isolation-d14",
+      "module": "T17-mvcc-isolation",
+      "q": "Why does MySQL choose a stronger default isolation level (Repeatable Read) than Postgres/Oracle/SQL Server (Read Committed)?",
+      "a": "Historically tied to statement-based replication needing more deterministic read behavior to replay correctly across replicas - Repeatable Read's stronger per-transaction snapshot consistency reduced a class of replication correctness bugs that Read Committed's per-statement snapshot would have made harder to reason about.",
+      "difficulty": "staff"
+    }
+  ]
+}
