@@ -1,0 +1,9 @@
+{
+  "name": "chunking-lab",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/chunking.test.ts",
+    "test:solution": "node --run test"
+  }
+}

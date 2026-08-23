@@ -2,7 +2,7 @@
 
 > **Track:** T21 Architecture & Design Principles · **Time:** 3h · **Prereqs:** none · **Updated:** 2026-07-26
 > **Module id:** `T21-resilience-catalogue` · **Tags:** resilience, critical
-> **Lab:** `labs/py/01-circuit-breaker/`
+> **Lab:** `labs/py/01-circuit-breaker/` · `labs/go/01-circuit-breaker/`
 
 ## The 30-second version
 

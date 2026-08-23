@@ -1,0 +1,12 @@
+[package]
+name = "bpe_tokenizer"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+# cargo test               → src/starter.rs  (must FAIL)
+# cargo test --features solution → src/solution.rs (must PASS)
+solution = []
+
+[profile.test]
+opt-level = 1

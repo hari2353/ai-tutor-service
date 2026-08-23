@@ -3,6 +3,7 @@ __pycache__/
 .venv/
 .pytest_cache/
 node_modules/
+target/
 
 # operational data from the job-hunter agent, not curriculum: a live queue of
 # real listings being targeted. Stays on disk, stays out of history.

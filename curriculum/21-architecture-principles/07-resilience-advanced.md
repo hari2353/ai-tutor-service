@@ -2,6 +2,7 @@
 
 > **Track:** T21 Architecture & Design Principles · **Time:** 2.0h · **Prereqs:** none · **Updated:** 2026-08-01
 > **Module id:** `T21-resilience-advanced` · **Tags:** resilience
+> **Lab:** `labs/java/01-rate-limiter/`
 
 ## Why this gets asked
 

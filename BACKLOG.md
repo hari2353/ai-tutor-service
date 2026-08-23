@@ -17,7 +17,7 @@
 
 | Item | Blocker | Unblocks when |
 |---|---|---|
-| Labs in `labs/go, java, rust, ts, infra` | Go/JDK/Rust/Node-ts toolchains not installed here | Each installed toolchain → spawn `/tutor-lab <module>` batches; house pattern (`starter` fails → `--solution` passes) transfers as-is |
+| Remaining labs in `labs/go, java, rust, ts, infra` beyond the first per language | One lab per language now exists and gates green (`go/01-circuit-breaker`, `java/01-rate-limiter`, `rust/01-bpe-tokenizer`, `ts/01-chunking`); infra wants Docker | Spawn `/tutor-lab <module>` batches per language; house pattern (`starter` fails → solution passes) proven in all five toolchains |
 | CI on GitHub Actions (`windows-latest` runner executing `run.ps1`) | Repo not yet pushed | Add `.github/workflows/ci.yml` post-upload; the suite is already subprocess-clean |
 
 ## C. Scheduled maintenance, not creation

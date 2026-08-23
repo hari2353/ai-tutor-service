@@ -2,7 +2,7 @@
 
 > **Track:** T06 RAG (Retrieval-Augmented Generation) · **Time:** 2h · **Prereqs:** embeddings basics (05-llm-internals) · **Updated:** 2026-07-26
 > **Module id:** `T06-chunking` · **Tags:** sprint, ingest
-> **Lab:** `labs/py/08-chunking/`
+> **Lab:** `labs/py/08-chunking/` · `labs/ts/01-chunking/`
 
 ## The 30-second version
 
