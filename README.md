@@ -1,5 +1,7 @@
 # AI Tutor Service
 
+[![ci](https://github.com/hari2353/ai-tutor-service/actions/workflows/ci.yml/badge.svg)](https://github.com/hari2353/ai-tutor-service/actions/workflows/ci.yml)
+
 Personal interview-and-mastery system for **Hari Siva Rami Dwarampudi** — Principal AI Engineer, actively interviewing.
 
 **36 tracks · 454 modules · ~1,048 hours** — with a **32-module, ~89-hour, 10-weekend sprint** on top that's what actually decides your next loop. Fully local, free tier, zero cloud spend.
