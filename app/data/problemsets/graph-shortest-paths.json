@@ -1,0 +1,23 @@
+{"problems": [
+  {"id": "lc-505", "title": "The Maze II", "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/the-maze-ii/", "module": "T02-graph-shortest",
+   "notes": "Dijkstra where each edge weight is the rolling distance until you hit a wall, not a fixed 1 — the state transition is unusual"},
+  {"id": "lc-1786", "title": "Number of Restricted Paths From First to Last Node", "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/", "module": "T02-graph-shortest",
+   "notes": "run Dijkstra from the destination first to get distanceToLastNode, then DP-count strictly-decreasing-distance paths"},
+  {"id": "lc-2039", "title": "The Time When the Network Becomes Idle", "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/the-time-when-the-network-becomes-idle/", "module": "T02-graph-shortest",
+   "notes": "unweighted BFS shortest paths from the master server, then a closed-form simulation of resend timing per node"},
+  {"id": "lc-864", "title": "Shortest Path to Get All Keys", "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/shortest-path-to-get-all-keys/", "module": "T02-graph-shortest",
+   "notes": "BFS over (position, keys-bitmask) state space — locks can only be passed once the matching key bit is set"},
+  {"id": "lc-882", "title": "Reachable Nodes In Subdivided Graph", "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/reachable-nodes-in-subdivided-graph/", "module": "T02-graph-shortest",
+   "notes": "Dijkstra on the original graph first, then account separately for partially-traveled subdivided edges near the frontier"},
+  {"id": "lc-1928", "title": "Minimum Cost to Reach Destination in Time", "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/minimum-cost-to-reach-destination-in-time/", "module": "T02-graph-shortest",
+   "notes": "Dijkstra/DP over (node, time-used) — a resource-constrained shortest path where cost and time are optimized separately"},
+  {"id": "lc-2045", "title": "Second Minimum Time to Reach Destination", "pattern": "Shortest Paths (Dijkstra/Bellman-Ford/A*/Johnson)", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/second-minimum-time-to-reach-destination/", "module": "T02-graph-shortest",
+   "notes": "BFS tracking the two smallest distinct distances per node, plus a traffic-light parity adjustment to convert hops into real time"}
+]}

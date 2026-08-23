@@ -1,0 +1,20 @@
+{"problems": [
+  {"id": "lc-268", "title": "Missing Number", "pattern": "Cyclic Sort", "difficulty": "Easy",
+   "url": "https://leetcode.com/problems/missing-number/", "module": "T02-p05-cyclic-sort",
+   "notes": "XOR or the sum-formula both beat cyclic sort here — know all three, the interviewer will probe which is 'better' and why"},
+  {"id": "lc-448", "title": "Find All Numbers Disappeared in an Array", "pattern": "Cyclic Sort", "difficulty": "Easy",
+   "url": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/", "module": "T02-p05-cyclic-sort",
+   "notes": "in-place cyclic sort, or sign-marking at index |nums[i]|-1, gets you O(n) time and O(1) extra space"},
+  {"id": "lc-645", "title": "Set Mismatch", "pattern": "Cyclic Sort", "difficulty": "Easy",
+   "url": "https://leetcode.com/problems/set-mismatch/", "module": "T02-p05-cyclic-sort",
+   "notes": "cyclic sort finds the swapped pair (the duplicate and the missing number) in a single pass"},
+  {"id": "lc-442", "title": "Find All Duplicates in an Array", "pattern": "Cyclic Sort", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/find-all-duplicates-in-an-array/", "module": "T02-p05-cyclic-sort",
+   "notes": "sign-marking variant of cyclic sort: values are 1..n, so index into the array itself as a visited set"},
+  {"id": "lc-769", "title": "Max Chunks To Make Sorted", "pattern": "Cyclic Sort", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/max-chunks-to-make-sorted/", "module": "T02-p05-cyclic-sort",
+   "notes": "not cyclic sort itself, but the same 'permutation of 0..n-1 in place' reasoning: a chunk closes when runningMax == index"},
+  {"id": "lc-41", "title": "First Missing Positive", "pattern": "Cyclic Sort", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/first-missing-positive/", "module": "T02-p05-cyclic-sort",
+   "notes": "THE cyclic sort problem: place nums[i] at index nums[i]-1 in place, then scan for the first index that's still wrong, O(n)/O(1)"}
+]}

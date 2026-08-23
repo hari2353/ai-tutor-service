@@ -1,0 +1,200 @@
+{
+  "flashcards": [
+    {
+      "id": "T21-resilience-catalogue-c1",
+      "topic": "Resilience Catalogue",
+      "q": "What are the three circuit breaker states?",
+      "a": "CLOSED (pass through) -> OPEN (fail fast, no thread spent) -> HALF_OPEN (limited probes) -> back to CLOSED on success, or OPEN on any probe failure.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c2",
+      "topic": "Resilience Catalogue",
+      "q": "Correct nesting order of the four resilience patterns?",
+      "a": "Bulkhead -> CircuitBreaker -> Retry -> Timeout (outermost to innermost). Timeout innermost because you retry a timed-out attempt; retry inside the breaker so one logical failure = one breaker outcome; bulkhead outermost so rejection costs no thread.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c3",
+      "topic": "Resilience Catalogue",
+      "q": "Why does minimumNumberOfCalls exist on a circuit breaker?",
+      "a": "Without it, 1 failure out of 1 call is a 100% failure rate and trips the breaker instantly on low-traffic endpoints. Typical value: 20.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c4",
+      "topic": "Resilience Catalogue",
+      "q": "Why failure RATE and not failure COUNT?",
+      "a": "A count trips on volume: high-traffic endpoints trip constantly, low-traffic ones never do. Rate normalises across traffic levels.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c5",
+      "topic": "Resilience Catalogue",
+      "q": "Formula for full jitter backoff?",
+      "a": "sleep = rand(0, min(cap, base * 2**attempt)). The default choice - lowest contention and good spread.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c6",
+      "topic": "Resilience Catalogue",
+      "q": "Formula for decorrelated jitter?",
+      "a": "sleep = min(cap, rand(base, prev * 3)). Slightly better completion time under heavy contention.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c7",
+      "topic": "Resilience Catalogue",
+      "q": "Why is jitter necessary at all?",
+      "a": "Plain exponential backoff synchronises clients - everyone fails at T and retries at T+1, T+2, T+4 together. Jitter breaks the synchronisation so the recovering service is not hit by waves.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c8",
+      "topic": "Resilience Catalogue",
+      "q": "Retry amplification math?",
+      "a": "3 attempts against a fully-failing downstream = 3x offered load. Two layers of retrying services = 9x. This is why retry needs a circuit breaker.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c9",
+      "topic": "Resilience Catalogue",
+      "q": "Retry budget vs maxAttempts?",
+      "a": "maxAttempts is per-request and does not bound aggregate load. A retry budget caps retries as a fraction of total fleet requests (~10%), which is the only mechanism that directly bounds amplification. Envoy, gRPC and Finagle implement it.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c10",
+      "topic": "Resilience Catalogue",
+      "q": "Which HTTP statuses are retryable?",
+      "a": "Retry: connection errors, timeouts, 429, 502, 503, 504. Never retry: 400, 401, 403, 404, 422.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c11",
+      "topic": "Resilience Catalogue",
+      "q": "Three preconditions for safe retry?",
+      "a": "1) The operation is idempotent or carries an idempotency key. 2) The error is actually retryable. 3) There is a budget bounding total retries.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c12",
+      "topic": "Resilience Catalogue",
+      "q": "How do you size a bulkhead?",
+      "a": "Little's Law: concurrency = throughput x latency. 100 rps at 50ms p99 = 5 slots; provision ~2x for burst, so 10. Then verify under load.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c13",
+      "topic": "Resilience Catalogue",
+      "q": "Semaphore vs thread-pool bulkhead?",
+      "a": "Semaphore: cheap counter, work runs on the caller's thread, cannot interrupt a blocking call - use in async code. Thread-pool: true isolation and an enforceable timeout on blocking clients, at the cost of context switches.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c14",
+      "topic": "Resilience Catalogue",
+      "q": "Dependency returns 200s but takes 30 seconds. Does a failure-rate breaker trip?",
+      "a": "No - every call succeeds. You need slowCallRateThreshold with slowCallDurationThreshold (e.g. trip if >50% of calls exceed 2s). Slow success exhausts threads exactly like failure.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c15",
+      "topic": "Resilience Catalogue",
+      "q": "How do you set a read timeout?",
+      "a": "From the downstream's p99, not a guess: timeout ~= p99 x 1.5, then verify against your own SLO. Connect timeout separately at 1-3s.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c16",
+      "topic": "Resilience Catalogue",
+      "q": "What does a client-side timeout NOT protect you from?",
+      "a": "Server-side work continuing after you give up. Unless cancellation is propagated (gRPC cancellation, context, asyncio cancellation) the server keeps holding its DB connection - a capacity leak, and a correctness bug for writes.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c17",
+      "topic": "Resilience Catalogue",
+      "q": "Why propagate deadlines instead of durations?",
+      "a": "Timeout budget must shrink with call depth. A fixed 3s at every layer lets the innermost call consume the whole user-facing budget, leaving no time to fall back. Pass an absolute deadline; each layer takes min(remaining, its own max).",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c18",
+      "topic": "Resilience Catalogue",
+      "q": "If you could only add ONE resilience pattern, which?",
+      "a": "Timeout. Everything else assumes a bounded call: an unbounded call never returns to retry, never records a breaker outcome, and holds a bulkhead slot forever.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c19",
+      "topic": "Resilience Catalogue",
+      "q": "Fallback quality ranking?",
+      "a": "Stale cache > degraded response > default value > queue-for-later > fast 503 with Retry-After. Never let a fallback call another unprotected remote service.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c20",
+      "topic": "Resilience Catalogue",
+      "q": "Which circuit breaker library for Java?",
+      "a": "Resilience4j. Hystrix has been in maintenance mode since 2018 - naming it as a current recommendation is an interview red flag.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c21",
+      "topic": "Resilience Catalogue",
+      "q": "Resilience4j's documented decorator order?",
+      "a": "Bulkhead -> TimeLimiter -> RateLimiter -> CircuitBreaker -> Retry. Note retry is outermost there, which permits retrying after a breaker rejection when the retry can be routed to a different instance.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c22",
+      "topic": "Resilience Catalogue",
+      "q": "Circuit breaker granularity - per what?",
+      "a": "Per (service, route-template). Too coarse and one bad endpoint blocks healthy ones; too fine and no breaker reaches minimumNumberOfCalls. Key on route templates, not raw URLs, or memory grows with path parameters.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c23",
+      "topic": "Resilience Catalogue",
+      "q": "Your breaker flaps open/closed every few seconds. Diagnose.",
+      "a": "minimumNumberOfCalls too low or window too small (tiny sample = 100% rate); or waitDurationInOpenState too short so probes hit a service still restarting; or permittedCallsInHalfOpen = 1 so one sample decides everything.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c24",
+      "topic": "Resilience Catalogue",
+      "q": "Should resilience live in the service mesh or in application code?",
+      "a": "Both. Mesh (Envoy outlier detection, retry budgets, pool limits) gives uniform transport-level defaults with no redeploy. But the mesh does not know if an operation is idempotent, cannot express business fallbacks, and cannot do per-tenant policy.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c25",
+      "topic": "Resilience Catalogue",
+      "q": "How do you make a retried write safe?",
+      "a": "Idempotency key per logical operation; server stores (key -> response) in a dedup store and returns the stored response on repeat. Must be atomic - INSERT ... ON CONFLICT DO NOTHING checking affected rows, not read-then-write. TTL must exceed the max retry window.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c26",
+      "topic": "Resilience Catalogue",
+      "q": "Resilience strategy for an LLM agent calling 5 tools?",
+      "a": "Per-tool bulkheads and timeouts derived from the agent's total budget; retry only transient transport errors and 429, never semantic tool errors; per-tool breaker with a structured 'tool unavailable' observation so the model routes around it; token/cost and step-count caps as the outermost bulkhead; and checkpointed state so failures resume rather than restart.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c27",
+      "topic": "Resilience Catalogue",
+      "q": "Rank the four patterns by how often their absence causes a real incident.",
+      "a": "1) Missing timeout 2) Missing bulkhead 3) Retry without breaker/budget 4) Missing breaker alone. This is roughly the inverse of how often they get discussed.",
+      "module": "T21-resilience-catalogue"
+    },
+    {
+      "id": "T21-resilience-catalogue-c28",
+      "topic": "Resilience Catalogue",
+      "q": "How do you test a circuit breaker without sleeping?",
+      "a": "Inject a clock. FakeClock.advance() drives the OPEN -> HALF_OPEN transition deterministically. Tests that call time.sleep() are broken tests.",
+      "module": "T21-resilience-catalogue"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "flashcards": [
+    {"id": "T32-exec-communication-c1", "topic": "Exec Communication", "q": "What's the mechanical process for translating a model's confusion matrix into a dollar figure for an executive?", "a": "Attach a real cost or value to each confusion-matrix cell (TP value, FP cost, FN cost, TN value), multiply each by the count of that outcome at the chosen operating threshold and expected volume, and sum to get net expected value — report that, not AUC/precision/recall.", "module": "T32-exec-communication"},
+    {"id": "T32-exec-communication-c2", "topic": "Exec Communication", "q": "What is the fixed shape of a 'one-slide result' per the Minto Pyramid Principle applied to ML reporting?", "a": "Headline number (in the audience's currency) -> confidence/range -> the single biggest driver of uncertainty -> a clear ask. Everything else (methodology, full metric tables) goes in an appendix.", "module": "T32-exec-communication"},
+    {"id": "T32-exec-communication-c3", "topic": "Exec Communication", "q": "When a room has two executives disagreeing before you've finished stating your headline number, what's the disciplined response?", "a": "Finish stating the headline and range first, then reframe the disagreement as a concrete modeling question (which cost/timeline/risk assumption they differ on) rather than refereeing it live — and if the disagreement is genuinely non-quantifiable (politics, risk appetite), say so plainly rather than forcing it into the cost-table frame.", "module": "T32-exec-communication"}
+  ]
+}

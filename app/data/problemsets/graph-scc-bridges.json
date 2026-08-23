@@ -1,0 +1,23 @@
+{"problems": [
+  {"id": "lc-1361", "title": "Validate Binary Tree Nodes", "pattern": "SCC, Bridges & Articulation Points", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/validate-binary-tree-nodes/", "module": "T02-graph-scc",
+   "notes": "in-degree check (exactly one root, everyone else indegree 1) plus a reachability/cycle check from that root"},
+  {"id": "lc-959", "title": "Regions Cut By Slashes", "pattern": "SCC, Bridges & Articulation Points", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/regions-cut-by-slashes/", "module": "T02-graph-scc",
+   "notes": "union-find on four sub-triangles per grid cell — a connectivity-structure warm-up before true SCC/bridge problems"},
+  {"id": "lc-2076", "title": "Process Restricted Friend Requests", "pattern": "SCC, Bridges & Articulation Points", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/process-restricted-friend-requests/", "module": "T02-graph-scc",
+   "notes": "union-find with a restriction check before every union — reject a merge if it would connect two restricted people"},
+  {"id": "lc-1192", "title": "Critical Connections in a Network", "pattern": "SCC, Bridges & Articulation Points", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/critical-connections-in-a-network/", "module": "T02-graph-scc",
+   "notes": "Tarjan's bridge-finding via discovery/low-link times — the canonical bridges problem, memorize the low-link update rule"},
+  {"id": "lc-2360", "title": "Longest Cycle in a Graph", "pattern": "SCC, Bridges & Articulation Points", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/longest-cycle-in-a-graph/", "module": "T02-graph-scc",
+   "notes": "functional graph (each node has out-degree <= 1); iterative timestamp/coloring detects the cycle length without recursion overflow"},
+  {"id": "lc-928", "title": "Minimize Malware Spread II", "pattern": "SCC, Bridges & Articulation Points", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/minimize-malware-spread-ii/", "module": "T02-graph-scc",
+   "notes": "connected components + removal-impact analysis; removing an infected node can only help if it's the sole bridge to a clean component"},
+  {"id": "lc-1568", "title": "Minimum Number of Days to Disconnect Island", "pattern": "SCC, Bridges & Articulation Points", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/minimum-number-of-days-to-disconnect-island/", "module": "T02-graph-scc",
+   "notes": "articulation-point-flavored grid problem — the answer is always 0, 1, or 2; brute-force removing 1 or 2 cells is enough"}
+]}

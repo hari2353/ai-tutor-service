@@ -1,0 +1,23 @@
+{"problems": [
+  {"id": "lc-1408", "title": "String Matching in an Array", "pattern": "String Algorithms (KMP/Z/Rolling Hash)", "difficulty": "Easy",
+   "url": "https://leetcode.com/problems/string-matching-in-an-array/", "module": "T02-adv-strings",
+   "notes": "naive substring matching warm-up — small n makes brute force fine here, before KMP is actually needed"},
+  {"id": "lc-28", "title": "Find the Index of the First Occurrence in a String", "pattern": "String Algorithms (KMP/Z/Rolling Hash)", "difficulty": "Easy",
+   "url": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/", "module": "T02-adv-strings",
+   "notes": "implement KMP's failure function by hand — this IS the point of the problem, not just calling indexOf"},
+  {"id": "lc-459", "title": "Repeated Substring Pattern", "pattern": "String Algorithms (KMP/Z/Rolling Hash)", "difficulty": "Easy",
+   "url": "https://leetcode.com/problems/repeated-substring-pattern/", "module": "T02-adv-strings",
+   "notes": "KMP failure-function trick: the string is periodic iff n % (n - fail[n-1]) == 0"},
+  {"id": "lc-187", "title": "Repeated DNA Sequences", "pattern": "String Algorithms (KMP/Z/Rolling Hash)", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/repeated-dna-sequences/", "module": "T02-adv-strings",
+   "notes": "rolling hash (or bit-encode each of ACGT in 2 bits) over fixed-length windows to detect repeats in O(n)"},
+  {"id": "lc-214", "title": "Shortest Palindrome", "pattern": "String Algorithms (KMP/Z/Rolling Hash)", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/shortest-palindrome/", "module": "T02-adv-strings",
+   "notes": "run KMP's failure function on s + '#' + reverse(s) to find the longest palindromic prefix in one pass"},
+  {"id": "lc-1392", "title": "Longest Happy Prefix", "pattern": "String Algorithms (KMP/Z/Rolling Hash)", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/longest-happy-prefix/", "module": "T02-adv-strings",
+   "notes": "a direct application of the KMP failure array — the answer is just fail[n-1], no searching needed at all"},
+  {"id": "lc-1044", "title": "Longest Duplicate Substring", "pattern": "String Algorithms (KMP/Z/Rolling Hash)", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/longest-duplicate-substring/", "module": "T02-adv-strings",
+   "notes": "binary search on the candidate length + Rabin-Karp rolling hash to check feasibility at each length in O(n)"}
+]}

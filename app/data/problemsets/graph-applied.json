@@ -1,0 +1,23 @@
+{"problems": [
+  {"id": "lc-1791", "title": "Find Center of Star Graph", "pattern": "Applied Graphs", "difficulty": "Easy",
+   "url": "https://leetcode.com/problems/find-center-of-star-graph/", "module": "T02-graph-applied",
+   "notes": "trivial but a good 'read graph structure fast' warm-up — the center is whichever node appears in both of the first edge's endpoints twice"},
+  {"id": "lc-1462", "title": "Course Schedule IV", "pattern": "Applied Graphs", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/course-schedule-iv/", "module": "T02-graph-applied",
+   "notes": "precompute all-pairs reachability (Floyd-Warshall or per-node DFS in topo order) — a realistic dependency-resolution query problem"},
+  {"id": "lc-2192", "title": "All Ancestors of a Node in a Directed Acyclic Graph", "pattern": "Applied Graphs", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/", "module": "T02-graph-applied",
+   "notes": "DFS/BFS from each node, or propagate ancestor sets forward in topo order — a realistic 'who depends on this' query"},
+  {"id": "lc-851", "title": "Loud and Rich", "pattern": "Applied Graphs", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/loud-and-rich/", "module": "T02-graph-applied",
+   "notes": "DFS memoized over a DAG of 'richer than' relations — a dependency-propagation problem much like GraphRAG entity resolution"},
+  {"id": "lc-2049", "title": "Count Nodes With the Highest Score", "pattern": "Applied Graphs", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/count-nodes-with-the-highest-score/", "module": "T02-graph-applied",
+   "notes": "subtree-size product scoring — PageRank-adjacent 'importance' scoring computed with a single post-order DFS"},
+  {"id": "lc-1443", "title": "Minimum Time to Collect All Apples in a Tree", "pattern": "Applied Graphs", "difficulty": "Medium",
+   "url": "https://leetcode.com/problems/minimum-time-to-collect-all-apples-in-a-tree/", "module": "T02-graph-applied",
+   "notes": "DFS the tree; only count edges on a root-to-apple path, and count them twice since you must walk back"},
+  {"id": "lc-1857", "title": "Largest Color Value in a Directed Graph", "pattern": "Applied Graphs", "difficulty": "Hard",
+   "url": "https://leetcode.com/problems/largest-color-value-in-a-directed-graph/", "module": "T02-graph-applied",
+   "notes": "topo sort + DP tracking a 26-color frequency vector per node; a cycle means no valid topo order, so return -1"}
+]}
