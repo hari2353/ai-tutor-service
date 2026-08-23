@@ -2,6 +2,7 @@
 
 > **Track:** T07 Agentic AI · **Time:** 2.5h · **Prereqs:** `T07-agent-loop-from-scratch` · **Updated:** 2026-07-26
 > **Module id:** `T07-tool-engineering` · **Tags:** sprint, core, tools
+> **Lab:** `labs/py/04-tool-engineering/`
 
 ## The 30-second version
 

@@ -2,6 +2,7 @@
 
 > **Track:** T06 RAG (Retrieval-Augmented Generation) · **Time:** 2.5h · **Prereqs:** 03-vector-index-internals, 14-metadata-design · **Updated:** 2026-08-01
 > **Module id:** `T06-semantic-caching` · **Tags:** production,critical
+> **Lab:** `labs/py/15-semantic-cache/`
 
 ## The 30-second version
 

@@ -265,6 +265,7 @@ TRACKS = [
         "quarkus | Quarkus: Build-Time DI, GraalVM Native, Panache, Mutiny | 2 | java",
         "go-core | Go: Goroutines, Channels, Context, Generics, Memory Model, pprof | 3 | go",
         "go-services | Go: Worker Pools, gRPC, a Fast Vector-Search Microservice | 2.5 | go",
+        "scala-jvm | Scala for the JVM Engineer: Immutability, Case Classes, Futures — and Scala 3 Today | 2.5 | scala",
         "fastapi-to-go | Porting FastAPI → Go: The Rewrite, Benchmarked, and When It's Wrong | 3 | go,critical",
         "monolith-vs-micro | Monolith vs Modular Monolith vs Microservices vs Monorepo | 2.5 | architecture,critical",
         "node-ts | Node/TS: Event Loop, Streams, NestJS/Fastify, Vercel AI SDK | 2.5 | node",
@@ -332,6 +333,7 @@ TRACKS = [
         "emr | EMR Deep: Clusters vs Serverless, Steps API, Bootstrap, Packaging, Spot Strategy | 3 | aws,critical",
         "scheduling-triggering | Scheduling & Auto-Triggering: Cron vs Event vs Sensor, EventBridge, Step Functions, S3 Events | 2.5 | orchestration,critical",
         "backfill-replay | Backfills, Replays, Idempotent Reruns, Late Data, and Not Corrupting the Warehouse | 2.5 | pipelines,critical",
+        "trino-presto | Trino & Presto: Federated Query Engines, Catalogs, and When They Beat a Warehouse | 2.5 | query,critical",
     ]),
     dict(id="T19", dir="19-testing-quality", title="Testing & Quality Engineering", icon="🧪", phase="A", prereqs=[], modules=[
         "test-strategy | Test Strategy: Pyramid vs Trophy, What to Test, What Never To | 2 | strategy,critical",

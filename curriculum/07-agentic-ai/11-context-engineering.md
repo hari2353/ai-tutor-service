@@ -2,6 +2,7 @@
 
 > **Track:** T07 Agentic AI · **Time:** 3h · **Prereqs:** `T07-agent-loop-from-scratch`, `T07-agent-memory` · **Updated:** 2026-07-26
 > **Module id:** `T07-context-engineering` · **Tags:** sprint (W4), memory, context
+> **Lab:** `labs/py/10-context-engineering/`
 
 ## The 30-second version
 

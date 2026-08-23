@@ -2,6 +2,7 @@
 
 > **Track:** T17 Databases: SQL, NoSQL, Vector · **Time:** 3h · **Prereqs:** none
 > **Module id:** `T17-mvcc-isolation` · **Tags:** sprint, internals, critical
+> **Lab:** `labs/py/12-mvcc-isolation/`
 
 ## The 30-second version
 

@@ -2,6 +2,7 @@
 
 > **Track:** T06 RAG (Retrieval-Augmented Generation) · **Time:** 2h · **Prereqs:** 04-hybrid-search, 05-reranking, 07-advanced-rag · **Updated:** 2026-07-28
 > **Module id:** `T06-rag-eval` · **Tags:** eval
+> **Lab:** `labs/py/17-rag-eval/`
 
 ## The 30-second version
 

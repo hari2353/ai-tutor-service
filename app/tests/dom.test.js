@@ -295,6 +295,33 @@ T("no module title breaks HTML escaping", () => {
 });
 
 // ---------------------------------------------------------------- report
+// --- regression: every view must have real data behind it (UI completeness) ---
+(() => {
+  const C = global.window.CURRICULUM;
+  const FC = (global.window.FLASHCARDS || {}).flashcards || [];
+  const DR = (global.window.DRILLS || {}).drills || [];
+  const PR = (global.window.PROBLEMS || {}).problems || [];
+  const checks = [
+    ["tracks",        C.tracks.length,            (n) => n >= 36],
+    ["modules",       C.totals.modules,           (n) => n >= 450],
+    ["sprint",        C.sprint.modules,           (n) => n === 32],
+    ["badges",        C.badges.length,            (n) => n >= 40],
+    ["flashcards",    FC.length,                  (n) => n >= 5000],
+    ["drills",        DR.length,                  (n) => n >= 4500],
+    ["problems",      PR.length,                  (n) => n >= 100],
+  ];
+  let ok = true;
+  for (const [name, got, pass] of checks) {
+    if (!pass(got)) { console.log(`  ✗ ui-data ${name} = ${got} (below floor)`); ok = false; }
+  }
+  // every module id unique; every card/drill/problem id unique
+  const uniq = (arr) => new Set(arr).size === arr.length;
+  const mids = C.tracks.flatMap(t => t.modules.map(m => m.id));
+  ok = ok && uniq(mids) && uniq(FC.map(c => c.id)) && uniq(DR.map(d => d.id)) && uniq(PR.map(p => p.id));
+  console.log(`  ${ok ? "✓" : "✗"} UI data completeness (${C.totals.tracks} tracks / ${C.totals.modules} modules / ${FC.length} cards / ${DR.length} drills / ${PR.length} problems)`);
+  if (!ok) process.exit(1);
+})();
+
 const pass = results.filter(r => r[0] === "PASS").length;
 const fail = results.filter(r => r[0] === "FAIL");
 for (const [st, name, msg] of results) {

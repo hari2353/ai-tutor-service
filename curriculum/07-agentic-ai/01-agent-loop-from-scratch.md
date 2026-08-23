@@ -2,6 +2,7 @@
 
 > **Track:** T07 Agentic AI · **Time:** 3h · **Prereqs:** none · **Updated:** 2026-07-26
 > **Module id:** `T07-agent-loop-from-scratch` · **Tags:** sprint (W1), core, loop
+> **Lab:** labs/py/02-agent-loop/
 
 ## The 30-second version
 

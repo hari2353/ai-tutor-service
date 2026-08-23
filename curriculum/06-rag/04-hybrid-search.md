@@ -2,6 +2,7 @@
 
 > **Track:** T06 RAG (Retrieval-Augmented Generation) · **Time:** 2h · **Prereqs:** 01-chunking, 03-vector-index-internals · **Updated:** 2026-07-26
 > **Module id:** `T06-hybrid-search` · **Tags:** sprint, retrieval
+> **Lab:** labs/py/05-hybrid-search/
 
 ## The 30-second version
 

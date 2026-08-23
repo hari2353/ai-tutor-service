@@ -2988,7 +2988,7 @@
       "icon": "\ud83c\udf10",
       "phase": "B",
       "prereqs": [],
-      "hours": 32.5,
+      "hours": 35.0,
       "modules": [
         {
           "id": "T11-java-modern",
@@ -3070,6 +3070,17 @@
           "status": "todo"
         },
         {
+          "id": "T11-scala-jvm",
+          "slug": "scala-jvm",
+          "title": "Scala for the JVM Engineer: Immutability, Case Classes, Futures \u2014 and Scala 3 Today",
+          "hours": 2.5,
+          "tags": [
+            "scala"
+          ],
+          "order": 7,
+          "status": "todo"
+        },
+        {
           "id": "T11-fastapi-to-go",
           "slug": "fastapi-to-go",
           "title": "Porting FastAPI \u2192 Go: The Rewrite, Benchmarked, and When It's Wrong",
@@ -3078,7 +3089,7 @@
             "go",
             "critical"
           ],
-          "order": 7,
+          "order": 8,
           "status": "todo"
         },
         {
@@ -3090,7 +3101,7 @@
             "architecture",
             "critical"
           ],
-          "order": 8,
+          "order": 9,
           "status": "todo"
         },
         {
@@ -3101,7 +3112,7 @@
           "tags": [
             "node"
           ],
-          "order": 9,
+          "order": 10,
           "status": "todo"
         },
         {
@@ -3112,7 +3123,7 @@
           "tags": [
             "frontend"
           ],
-          "order": 10,
+          "order": 11,
           "status": "todo"
         },
         {
@@ -3124,7 +3135,7 @@
             "api",
             "critical"
           ],
-          "order": 11,
+          "order": 12,
           "status": "todo"
         },
         {
@@ -3136,7 +3147,7 @@
             "python",
             "critical"
           ],
-          "order": 12,
+          "order": 13,
           "status": "todo"
         }
       ]
@@ -3601,7 +3612,7 @@
       "icon": "\ud83c\udfed",
       "phase": "A",
       "prereqs": [],
-      "hours": 40.5,
+      "hours": 43.0,
       "modules": [
         {
           "id": "T18-pyspark-scratch",
@@ -3777,6 +3788,18 @@
             "critical"
           ],
           "order": 14,
+          "status": "todo"
+        },
+        {
+          "id": "T18-trino-presto",
+          "slug": "trino-presto",
+          "title": "Trino & Presto: Federated Query Engines, Catalogs, and When They Beat a Warehouse",
+          "hours": 2.5,
+          "tags": [
+            "query",
+            "critical"
+          ],
+          "order": 15,
           "status": "todo"
         }
       ]
@@ -6085,7 +6108,7 @@
   ],
   "totals": {
     "tracks": 36,
-    "modules": 452,
-    "hours": 1043.0
+    "modules": 454,
+    "hours": 1048.0
   }
 }

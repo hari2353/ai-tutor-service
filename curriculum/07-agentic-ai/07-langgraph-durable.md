@@ -2,6 +2,7 @@
 
 > **Track:** T07 Agentic AI · **Time:** 3h · **Prereqs:** `T07-langgraph-core`, `T07-agent-loop-from-scratch` · **Updated:** 2026-07-26
 > **Module id:** `T07-langgraph-durable` · **Tags:** sprint, framework, langgraph
+> **Lab:** `labs/py/14-langgraph-durable/`
 
 ## The 30-second version
 

@@ -2,6 +2,7 @@
 
 > **Track:** T05 LLM Internals · **Time:** 3h · **Prereqs:** T05-autoregression, T05-tokenization · **Updated:** 2026-07-26
 > **Module id:** `T05-attention` · **Tags:** sprint, internals, critical
+> **Lab:** `labs/py/11-attention/`
 
 ## The 30-second version
 

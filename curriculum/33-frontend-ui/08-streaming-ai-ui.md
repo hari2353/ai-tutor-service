@@ -230,6 +230,10 @@ function toolCallReducer(state, event) {
 
 Keying by `toolCallId` and updating the existing entry (rather than appending a new "tool result" message and letting the UI show two separate cards) is what makes the card animate from "Searching flights..." to "Found 3 flights" instead of flashing a loading card, then a completely separate result card. This is the same reconciliation-over-replacement principle as React's key-based list diffing, applied to application state instead of the DOM.
 
+### A2UI and the agentic-UX vocabulary
+
+Job descriptions increasingly name **A2UI** and "AI-native front-ends," and both map cleanly onto machinery this module already covers — treat them as vocabulary to translate, not new topics. A2UI (Google, late 2025, positioned alongside the A2A protocol) describes agents driving user interfaces through structured output: the model emits a declarative component-tree payload — a card, a form, a chart spec — instead of raw text, and the client renders native components from it. That is generative UI with the tool-call → component contract made explicit, and it runs on exactly the mechanics above: SSE/token streaming carries the deltas, the message-parts model interleaves typed events with text, optimistic tool-call rendering shows intent instantly and reconciles when results land, and agent-to-agent handoffs ride the protocol covered in `T07-a2a-protocol`. The design constraint worth volunteering unprompted: render contracts must be **schema-versioned**, so a client built against component schema v1 keeps working when a server starts emitting v2-era tools — unknown components degrade to a fallback card carrying the raw payload rather than crashing the render tree. It's the same discipline as pinning the stream format and reconciling by id instead of replacing: old clients survive new capabilities by design, not by luck. Answering an A2UI question with those named mechanics, rather than buzzwords, is the senior signal.
+
 ---
 
 ## Build it from scratch

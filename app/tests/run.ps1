@@ -41,6 +41,31 @@ Write-Host ""; Write-Host "-- review gate --"
 & $PY "$ROOT\app\tests\review_gate.py" | Select-Object -Last 3
 if ($LASTEXITCODE -ne 0) { $fail = $true }
 
+# ---- security gate (always runs; stdlib-only) --------------------------------
+Write-Host ""; Write-Host "-- security & privacy gate --"
+& $PY "$ROOT\scripts\security_check.py"
+if ($LASTEXITCODE -ne 0) { $fail = $true }
+
+# ---- unit + integration tests (pytest) ---------------------------------------
+& $PY -m pytest --version >$null 2>&1
+if ($LASTEXITCODE -eq 0) {
+  Write-Host ""; Write-Host "-- unit: build_data pipeline --"
+  Push-Location $ROOT
+  & $PY -m pytest app/tests/test_build_data.py -q 2>&1 | Select-Object -Last 2 | ForEach-Object { Write-Host "    $_" }
+  if ($LASTEXITCODE -ne 0) { $fail = $true }
+  Pop-Location
+  Write-Host ""; Write-Host "-- integration: full pipeline as subprocesses --"
+  Push-Location $ROOT
+  & $PY -m pytest app/tests/test_pipeline.py -q 2>&1 | Select-Object -Last 3 | ForEach-Object { Write-Host "    $_" }
+  if ($LASTEXITCODE -ne 0) { $fail = $true }
+  Pop-Location
+} else {
+  # a missing pytest is NOT a pass and NOT a failure: these suites were never
+  # exercised. Tracked separately so green can never cover untested code.
+  Write-Host ""; Write-Host "  SKIPPED unit+integration - pytest not installed ($PY -m pip install pytest)"
+  $skipped = $true
+}
+
 # ---- labs -------------------------------------------------------------------
 Write-Host ""; Write-Host "-- labs --"
 & $PY -m pytest --version >$null 2>&1
