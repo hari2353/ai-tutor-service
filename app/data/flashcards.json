@@ -38724,6 +38724,118 @@
       "q": "What belongs in a production voice-agent evaluation suite beyond LLM-judge answer checks?",
       "a": "Per-stage metrics (ASR accuracy per accent/noise cohort, turn-error rate, TTFA p50/p95/p99), task completion, and audio-level naturalness (blind ELO scoring catches silent vendor model rotations). Run nightly synthetic-call regression (interruptions, noise, packet loss, code-switching) gating deploys in CI \u2014 transcript-level judging is blind to all voice-specific failures.",
       "module": "T26-voice-models"
+    },
+    {
+      "id": "T14-negotiation-c1",
+      "topic": "Negotiation",
+      "q": "Should you generally accept a counteroffer from your current employer after resigning to take another job?",
+      "a": "Usually no \u2014 a counteroffer typically fixes only the comp gap, not the underlying reasons (scope, growth, management) you started looking, which tend to resurface in 6-12 months; there's also a real trust cost once you've shown you were prepared to leave. Exception: a genuine structural fix (scope/role change), not just matched salary.",
+      "module": "T14-negotiation"
+    },
+    {
+      "id": "T14-negotiation-c2",
+      "topic": "Negotiation",
+      "q": "How does negotiating an internal promotion-driven comp increase differ from negotiating a new external offer?",
+      "a": "External leverage comes from a competing offer or credible walk-away. Internal comp is bounded by the company's own leveling bands and a fixed budget cycle \u2014 the real lever is building the promotion case itself well before the comp conversation, since comp mostly follows once the level change is approved.",
+      "module": "T14-negotiation"
+    },
+    {
+      "id": "T14-negotiation-c3",
+      "topic": "Negotiation",
+      "q": "Galinsky & Mussweiler's anchoring research found roughly what correlation between a negotiation's first stated offer and the final outcome, and what reduces that effect?",
+      "a": "A meta-analytic correlation of roughly 0.497. The effect is substantially reduced when the other party actively counters it by focusing on their own reservation price, alternatives, or target \u2014 not by passively deflecting alone.",
+      "module": "T14-negotiation"
+    },
+    {
+      "id": "T14-negotiation-c4",
+      "topic": "Negotiation",
+      "q": "In a market downturn with scarce competing-offer leverage, what should shift in your negotiation approach?",
+      "a": "Weight shifts toward lower-friction levers that don't require a hard alternative to justify (sign-on bonus, start date, equity refresh terms), and toward market-data anchoring over a walk-away posture \u2014 the mechanics still apply, but the realistic ceiling is lower and asking as if conditions were a hot market reads as out of touch.",
+      "module": "T14-negotiation"
+    },
+    {
+      "id": "T14-negotiation-c5",
+      "topic": "Negotiation",
+      "q": "As a manager advising a report on a lowball offer, what should you avoid doing even though you have relevant knowledge?",
+      "a": "Avoid using internal knowledge of another company's band in a way traceable back to you, and avoid negotiating on their behalf directly with the recruiter \u2014 coach on mechanics (vesting, comparable data, drafting a specific counter) and calibration/confidence, but it's their negotiation.",
+      "module": "T14-negotiation"
+    },
+    {
+      "id": "T16-os-internals-c1",
+      "topic": "OS Internals",
+      "q": "Why does accessing memory on a remote NUMA node cost more than accessing local memory, and by roughly how much?",
+      "a": "Each CPU socket has its own locally-attached memory controller; remote access crosses an inter-socket interconnect (QPI/UPI, Infinity Fabric), commonly cited around 1.5-2x local DRAM latency or more. Fix: numactl --cpunodebind/--membind to keep threads and memory on the same node, or kernel NUMA balancing.",
+      "module": "T16-os-internals"
+    },
+    {
+      "id": "T16-os-internals-c2",
+      "topic": "OS Internals",
+      "q": "Why do production runbooks for Redis/MongoDB commonly say to disable Transparent Huge Pages (THP)?",
+      "a": "THP's background page-promotion/compaction work can happen synchronously on the allocation path, and for workloads with frequent small allocations plus fork()-based background saves (Redis/MongoDB's pattern), that compaction stall causes multi-ms to multi-hundred-ms latency spikes \u2014 the opposite of THP's intended TLB-miss-reduction benefit for this specific allocation pattern.",
+      "module": "T16-os-internals"
+    },
+    {
+      "id": "T16-os-internals-c3",
+      "topic": "OS Internals",
+      "q": "What two Linux kernel primitives actually implement container isolation, and how does this differ from VM isolation?",
+      "a": "Namespaces (PID, network, mount, UTS, IPC, user) give a process group its own view of kernel resources; cgroups enforce resource limits. Every container still runs on the SAME host kernel \u2014 no hypervisor-enforced hardware boundary \u2014 so a kernel escape compromises the whole host, unlike a VM escape which must break a much narrower hypervisor boundary.",
+      "module": "T16-os-internals"
+    },
+    {
+      "id": "T16-os-internals-c4",
+      "topic": "OS Internals",
+      "q": "What mechanisms provide real hardware-backed isolation for genuinely untrusted multi-tenant workloads beyond plain containers?",
+      "a": "gVisor (a userspace kernel intercepting syscalls to shrink host kernel attack surface) or Firecracker/Kata Containers (lightweight VMs giving genuine hypervisor isolation at near-container startup speed) \u2014 used specifically because namespace/cgroup isolation alone is judged insufficient for adversarial multi-tenancy.",
+      "module": "T16-os-internals"
+    },
+    {
+      "id": "T32-exec-communication-c1",
+      "topic": "Exec Communication",
+      "q": "What's the mechanical process for translating a model's confusion matrix into a dollar figure for an executive?",
+      "a": "Attach a real cost or value to each confusion-matrix cell (TP value, FP cost, FN cost, TN value), multiply each by the count of that outcome at the chosen operating threshold and expected volume, and sum to get net expected value \u2014 report that, not AUC/precision/recall.",
+      "module": "T32-exec-communication"
+    },
+    {
+      "id": "T32-exec-communication-c2",
+      "topic": "Exec Communication",
+      "q": "What is the fixed shape of a 'one-slide result' per the Minto Pyramid Principle applied to ML reporting?",
+      "a": "Headline number (in the audience's currency) -> confidence/range -> the single biggest driver of uncertainty -> a clear ask. Everything else (methodology, full metric tables) goes in an appendix.",
+      "module": "T32-exec-communication"
+    },
+    {
+      "id": "T32-exec-communication-c3",
+      "topic": "Exec Communication",
+      "q": "When a room has two executives disagreeing before you've finished stating your headline number, what's the disciplined response?",
+      "a": "Finish stating the headline and range first, then reframe the disagreement as a concrete modeling question (which cost/timeline/risk assumption they differ on) rather than refereeing it live \u2014 and if the disagreement is genuinely non-quantifiable (politics, risk appetite), say so plainly rather than forcing it into the cost-table frame.",
+      "module": "T32-exec-communication"
+    },
+    {
+      "id": "T33-build-tooling-c1",
+      "topic": "Build Tooling",
+      "q": "Why isn't a bundler's code-splitting chunk boundary purely automatic for dynamically imported routes?",
+      "a": "Shared dependencies between two lazy-loaded routes force a real tradeoff: duplicate the shared module into both chunks (faster per-route initial load, wasted bytes) or extract a common chunk (no duplication, extra request/cache dependency) \u2014 a genuine tuning decision (splitChunks/manualChunks), not an automatic default.",
+      "module": "T33-build-tooling"
+    },
+    {
+      "id": "T33-build-tooling-c2",
+      "topic": "Build Tooling",
+      "q": "In a large multi-route app, a shared UI library re-downloads on every route navigation with no caching benefit. Likely cause?",
+      "a": "The bundler's automatic common-chunk extraction heuristic wasn't tuned for the app's actual sharing pattern, so the shared dependency is being duplicated into every route chunk instead of pulled into its own long-lived, independently-cached chunk \u2014 fix via explicit splitChunks.cacheGroups (webpack) or manualChunks (Rollup/Vite).",
+      "module": "T33-build-tooling"
+    },
+    {
+      "id": "T33-build-tooling-c3",
+      "topic": "Build Tooling",
+      "q": "Why do production JS bundles ship with content hashes in filenames instead of stable names?",
+      "a": "A content hash changes the filename whenever the bytes change, letting the deploy set an extremely long, aggressive cache lifetime (immutable) with zero staleness risk \u2014 a new deploy is simply a new URL, no cache invalidation needed. Stable filenames + cache-control alone create a real version-skew race during deploys.",
+      "module": "T33-build-tooling"
+    },
+    {
+      "id": "T33-build-tooling-c4",
+      "topic": "Build Tooling",
+      "q": "Does content-hashed asset naming eliminate version-skew risk entirely on its own?",
+      "a": "No \u2014 the entry HTML file referencing the hashed URLs must itself never be aggressively cached (Cache-Control: no-cache or very short-lived), since it's the one artifact that has to update every deploy to point at new hashes; long-lived HTML caching would serve stable HTML pointing at stale hashed assets indefinitely.",
+      "module": "T33-build-tooling"
     }
   ]
 }

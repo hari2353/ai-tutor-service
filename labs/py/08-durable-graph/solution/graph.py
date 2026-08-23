@@ -78,6 +78,14 @@ class SqliteCheckpointer:
         )
         self.conn.commit()
 
+    def close(self) -> None:
+        """Release the file handle. On Windows an open sqlite3 connection
+        locks the .db file, so tests must close() before os.remove()."""
+        try:
+            self.conn.close()
+        except sqlite3.Error:
+            pass
+
     def save(self, checkpoint: Checkpoint) -> None:
         self.conn.execute(
             "INSERT OR REPLACE INTO checkpoints "

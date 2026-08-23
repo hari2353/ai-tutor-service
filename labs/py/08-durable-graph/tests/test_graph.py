@@ -119,14 +119,15 @@ def test_in_memory_checkpointer_records_every_step(G):
 def test_sqlite_checkpointer_records_every_step(G):
     fd, path = tempfile.mkstemp(suffix=".db")
     os.close(fd)
+    cp = G.SqliteCheckpointer(path)
     try:
-        cp = G.SqliteCheckpointer(path)
         graph = _linear_graph(cp, G)
         graph.run("t1", {})
         history = cp.list_checkpoints("t1")
         assert [c.step for c in history] == [0, 1, 2]
         assert history[-1].state == {"a": 1, "b": 2}
     finally:
+        cp.close()
         os.remove(path)
 
 
@@ -134,9 +135,11 @@ def test_checkpointer_load_latest_returns_none_when_absent(G):
     assert G.InMemoryCheckpointer().load_latest("nope") is None
     fd, path = tempfile.mkstemp(suffix=".db")
     os.close(fd)
+    cp = G.SqliteCheckpointer(path)
     try:
-        assert G.SqliteCheckpointer(path).load_latest("nope") is None
+        assert cp.load_latest("nope") is None
     finally:
+        cp.close()
         os.remove(path)
 
 
@@ -238,6 +241,8 @@ def test_resume_with_sqlite_survives_a_simulated_process_restart(G):
         assert counter["b"] == 2
         assert counter["c"] == 1
     finally:
+        cp1.close()
+        cp2.close()
         os.remove(path)
 
 
