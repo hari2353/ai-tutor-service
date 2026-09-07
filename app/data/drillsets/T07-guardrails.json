@@ -1,14 +1,74 @@
-{"drills": [
-  {"id": "T07-guardrails-d1", "module": "T07-guardrails", "q": "A text response passes every output filter clean, but a customer's SSN still leaked. What's the first thing you check?", "a": "Whether the SSN left through a tool call, API write, or log line the output filter never inspected, since output guardrails typically only scan the final chat text.", "difficulty": "warmup"},
-  {"id": "T07-guardrails-d2", "module": "T07-guardrails", "q": "Rank these by typical added latency: Guardrails AI ML validator, schema/regex check, LLM-based validator.", "a": "Schema/regex (<10ms) < Guardrails AI ML validator (50-200ms) < LLM-based validator (200-800ms).", "difficulty": "warmup"},
-  {"id": "T07-guardrails-d3", "module": "T07-guardrails", "q": "Your guardrail catches 90% of serious problems but has a 25% false-positive rate. Is this a good tradeoff for a consumer product?", "a": "Likely not — a 25% FP rate is well above the 5-15% industry range and will generate daily friction; under pressure the threshold typically gets loosened, eroding even the 90% catch rate over time.", "difficulty": "mid"},
-  {"id": "T07-guardrails-d4", "module": "T07-guardrails", "q": "A PII-detection microservice goes down. Your product is an internal engineering chatbot with no external users and no regulated data. Fail-open or fail-closed, and why?", "a": "Fail-open — low-stakes, no regulated data, availability matters more than the marginal risk from one unchecked response in this domain.", "difficulty": "mid"},
-  {"id": "T07-guardrails-d5", "module": "T07-guardrails", "q": "Same scenario, but the product is a healthcare intake assistant. Fail-open or fail-closed?", "a": "Fail-closed — regulated, high-stakes domain; if you can't prove the output is safe, don't send it, even at the cost of an outage.", "difficulty": "mid"},
-  {"id": "T07-guardrails-d6", "module": "T07-guardrails", "q": "Which guardrail layer specifically targets hallucination in a RAG system, and what does it check?", "a": "Groundedness checking — it verifies that claims in the response trace back to the retrieved source documents.", "difficulty": "warmup"},
-  {"id": "T07-guardrails-d7", "module": "T07-guardrails", "q": "A teammate proposes running an LLM-as-judge output validator on every single turn of a high-traffic product. What's your pushback with numbers?", "a": "That adds 200-800ms latency and roughly 15-40% to the provider bill per turn on every request; route it instead to only high-stakes or RAG-backed categories rather than applying it as a blanket per-turn gate.", "difficulty": "staff"},
-  {"id": "T07-guardrails-d8", "module": "T07-guardrails", "q": "Your jailbreak detector had a great benchmark score at launch a year ago. Attack success rate has crept up since. Why, without any code change?", "a": "Jailbreak classifiers are adversarial targets; attackers iterate against known detectors the way they iterate against WAF rules, so effectiveness decays as new phrasings are discovered even with a static model.", "difficulty": "staff"},
-  {"id": "T07-guardrails-d9", "module": "T07-guardrails", "q": "Design the output-side guardrail stack for a RAG customer-support agent, in priority order, and justify the order.", "a": "PII redaction and schema validation first (cheap, always relevant), then groundedness check against retrieved sources as the highest-priority expensive layer, since the dominant risk in a support bot is confidently wrong information, ahead of toxicity classification.", "difficulty": "mid"},
-  {"id": "T07-guardrails-d10", "module": "T07-guardrails", "q": "Why is 'add a guardrail' not a complete answer in a design review?", "a": "Because guardrails are layered and each catches a different failure at a different cost; the answer needs to name which layer, what it specifically catches and misses, and its latency/cost budget.", "difficulty": "mid"},
-  {"id": "T07-guardrails-d11", "module": "T07-guardrails", "q": "A support bot's topical-restriction guardrail blocks 12% of legitimate messages in its first week. What's the likely operational failure mode if nothing changes?", "a": "Complaint volume pressures someone to loosen the threshold in a hotfix, and the threshold is often never re-tightened once complaints stop, silently eroding the protection back toward zero.", "difficulty": "staff"},
-  {"id": "T07-guardrails-d12", "module": "T07-guardrails", "q": "Give one case where adding a cheap, available guardrail layer is still the wrong call.", "a": "When it duplicates coverage a stronger control already provides (e.g., a text-response PII filter on a system where the agent has no tool capable of leaking PII), since it only adds false-positive risk with no matching threat.", "difficulty": "mid"}
-]}
+{
+  "drills": [
+    {
+      "id": "T07-guardrails-d1",
+      "module": "T07-guardrails",
+      "q": "What is a guardrail, and what four verbs does every one perform?",
+      "a": "Deterministic validation and policy enforcement wrapped around a nondeterministic model. Verbs: classify (topic, PII, jailbreak), verify (schema, facts), transform (redact, mask, pseudonymize), route (pass, block, fix, escalate). Libraries are prebuilt validators; the engineering is placement, cost, and failure policy per risk.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-guardrails-d2",
+      "module": "T07-guardrails",
+      "q": "Order the three validator families by cost and state when you'd use each.",
+      "a": "Deterministic (regex, schema, checksum, canary): sub-ms, in-process, for well-formed guarantees like JSON conformance, banned domains, Luhn-validated card numbers. Statistical (Presidio: pattern + context + NER): ~50-300 ms, for format-variance in PII with tunable thresholds. Model-based (Llama Guard, omni-moderation): hundreds of ms, one forward pass per message, for semantics: novel jailbreaks, paraphrased toxicity. Never pay tier-3 cost for a tier-1 guarantee; prefilter before the classifier.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-guardrails-d3",
+      "module": "T07-guardrails",
+      "q": "What are NeMo Guardrails' five rail types, and what is its differentiator?",
+      "a": "Input, dialog, retrieval, execution, and output rails, configured in config.yml plus Colang .co flow files. Reference input flows: 'check jailbreak' and 'mask sensitive data on input'; output flows: 'self check facts' and 'self check hallucination'. The differentiator is dialog rails: Colang scripts conversation flows so fact-checking runs only for the question types that need it. Async-first, Python 3.10-3.13, release 0.23.0.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-guardrails-d4",
+      "module": "T07-guardrails",
+      "q": "Your PII regex misses a card number typed with unicode separators, and your statistical detector false-positives on order IDs. How do you fix both?",
+      "a": "Layer the families: regex for the high-precision well-formed cases with Luhn checksum validation (12-19 digits), context words near the candidate to suppress the order-ID false positive (Presidio's approach), and NER for format-variance. Accept Presidio's documented caveat that automated detection is not exhaustive, and add the real control: project columns at the tool boundary so card numbers never enter model context at all. Prevention beats detection.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-guardrails-d5",
+      "module": "T07-guardrails",
+      "q": "The model needs the real customer name to write a personalized email. Where do you hydrate the pseudonyms?",
+      "a": "Only in the final render path, after output guards run on the model text, using a per-request map keyed by token (never span index), never logged, destroyed after render. The model works from pseudonyms plus template instructions. If the model genuinely must see real values, scope the exposure to that entity type and session, and have the output guard skip that entity rather than blocking. Hydrating right after the model call puts unguarded PII in every downstream hop.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-guardrails-d6",
+      "module": "T07-guardrails",
+      "q": "Your moderation API has 99.9% uptime and your fail-closed jailbreak guard blocks on its errors. Worst case analysis?",
+      "a": "0.1% of traffic blocked sounds small but is many users, and outages are correlated: your dependency's bad deploy hits during your peak. The fix is redundancy with DIVERGENT implementations for fail-closed risks (platform filter plus app-side prefilter), circuit-breaking to a safer degraded mode with an honest message rather than a generic 500, and guard-error rate tracked as a first-class SLO. Azure documents that its filter errors return 200 unfiltered, so fail-open paths need monitoring too.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-guardrails-d7",
+      "module": "T07-guardrails",
+      "q": "A canary token appears in a tool result the model constructed (a search query), not in the final answer. What do you do?",
+      "a": "Block, and that is the point of scanning every egress surface, not just the response: the leak already left your boundary once it reached the tool. A canary in a model-constructed search query is exfiltration-in-progress: block, alert, revoke that session's tool access. A canary in a log line you wrote yourself is your own logging bug, a different triage. The distinction is whether the flow was model-controlled.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-guardrails-d8",
+      "module": "T07-guardrails",
+      "q": "You run a public agent at 100 QPS and can't afford a model classifier on every message. What's the tiered design?",
+      "a": "Layer 0: deterministic prefilters on everything (signatures, encoding detection, known jailbreak corpora), sub-ms. Layer 1: classifier on suspicion (prefilter hits) and on risk: traffic with tool access or external effects always classified; read-only chat sampled at 10-20%, biased to new sessions. Layer 2: async scoring post-render with retraction and downstream-effect suppression on a flag. Do the arithmetic: an 8B classifier sidecar on vLLM serves hundreds of calls per second per GPU, so 'too expensive' usually means 'serialized in the hot path.'",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-guardrails-d9",
+      "module": "T07-guardrails",
+      "q": "Design the guard architecture for a regulated fintech agent that reads accounts, moves money, and talks to customers.",
+      "a": "Start from the risk inventory: PII/PCI leakage, regulated advice, social engineering, jailbreak-driven transfers, hallucinated balances, audit obligations. Place guards by risk: (1) tool boundary first: money-moving tool tier-gated with approval for out-of-pattern transfers; accounts tool projects data so full card numbers never enter context. (2) Input: encoding prefilter, Presidio pseudonymization, denied-topic guard for investment advice with a licensed-advisor escalation path, jailbreak prefilter + classifier for sessions with tool access. (3) Output: schema check on tool arguments BEFORE execution (sub-ms, guards the money), PII scan pre-hydration, canary on every egress surface, groundedness on account-data claims. (4) Platform filters as baseline. (5) Failure policy: money-path guards fail closed, conversational fail open with alarms. (6) Immutable audit on regulated actions. (7) Measurement: weekly FPR on benign traffic, red-team in CI, drift monitors.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-guardrails-d10",
+      "module": "T07-guardrails",
+      "q": "Your red-team suite passes 100% but is six months old. Are you safe?",
+      "a": "No; the suite measures yesterday's attacks. Efficacy is a rate of adaptation, not a state: continuous red-teaming, canary tripwires for novel exfiltration, and above all the containment posture (tool risk tiers, least privilege) that holds when detection misses, since a jailbroken model with no refund tool cannot refund. Also report the other side: FPR on benign production traffic, because over-blocking is the failure that gets guardrails disabled. 'The suite is green' cannot terminate the safety conversation at principal level.",
+      "difficulty": "staff"
+    }
+  ]
+}

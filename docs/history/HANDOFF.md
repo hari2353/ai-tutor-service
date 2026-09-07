@@ -1,49 +1,67 @@
 # HANDOFF — resume point
 
-> Last updated 2026-08-08. Regenerate the live numbers with `python app/build_data.py`,
-> `python app/tests/review_gate.py` and `bash app/tests/run.sh`; this file is the plan,
-> those are the truth.
+> Last updated 2026-09-06 (the union merge: v1 + v2 + the F:\ai-tutor-service
+> working copy combined into one repo). Regenerate the live numbers with
+> `python app/build_data.py`, `python app/tests/review_gate.py` and
+> `powershell -ExecutionPolicy Bypass -File app\tests\run.ps1`; this file is
+> the plan, those are the truth.
 
-## State — curriculum COMPLETE
+## State — curriculum COMPLETE, repos UNIFIED
 
 | | |
 |---|---|
-| Written | **452 / 452 modules (100%)** |
-| Review gate | **452 pass · 0 fail** |
-| App tests | dom 20/20 · sm2 10/10 · labs SKIPPED (pytest not installed) |
-| Flashcards / drills | **5,503 / 4,570** |
-| Volume | ~2.99M words across 453 files |
+| Written | **461 / 461 modules (100%)** |
+| Review gate | **461 pass · 0 fail** |
+| App tests | dom 25/25 · sm2 10/10 · unit 11 · integration 5 |
+| Labs | **40 total** (py 28 + misc 6 + go 2 + rust 1 + ts 1 + java 1 + review-exercises 1), all suites green |
+| Flashcards / drills / problems | **5,677 / 4,630 / 450** |
 | Tracks | **36 / 36 complete** |
-| Git | repo on `main`, **0 commits**, ~1,900 files staged |
-| GitHub | not pushed — needs `gh auth login` (user action; never run by an agent) |
+| Git | repo on `main`, synced with github/hari2353/ai-tutor-service (private) |
 
-Every track is finished, including the two written against live job descriptions:
-**T32 Applied NLP & Marketing ML** (Expedia Marketing Content ML: LDA, NER, Bayesian
-methods, factorial/multivariate/stratified design, uplift, MMM) and **T33 Frontend & UI**.
+## What the union merge did (2026-09-06)
+
+Three parallel copies existed. This repo is now the single source of truth:
+
+1. **From v1's unpushed work**: `T07-ambient-agents` (module + cards + drills +
+   spec entry) — the one module v2 lacked.
+2. **From the `F:\ai-tutor-service` working copy** (newest T07 rewrites):
+   agent-safety, structured-output, prompt-versioning, guardrails modules with
+   their cards/drillsets; `labs/misc/*` (docker + 5 k8s labs);
+   `labs/go/03-k8s-core-operator`; `mocks/PATTERNS.md`.
+3. **v2's own newer work**: hr-round-basics + aptitude-puzzles (T15),
+   excel-analyst + bi-tooling + oracle-sql (T18), quant-python-stack (T24),
+   their cards/drillsets, `labs/py/19-oracle-sql-semantics`,
+   `labs/py/20-excel-formula-engine`, `labs/py/21-bi-filter-context`
+   (finished in this merge: tests + solution + PRODUCTION), the mining
+   worklist tooling and `scripts/ig_crawler`.
+4. **Repaired**: 7 broken `labs/k8s/*` pointers repointed at `labs/misc/*`;
+   `labs/py/19-guardrails` built from scratch (the guardrails module
+   referenced it); PRODUCTION.md added to py/02, py/03-bpe, py/03-reasoning,
+   py/04-tool, py/05-hybrid, py/21; `link_check.py` taught each language's
+   house lab shape (go/rust/ts/java) — **0 broken pointers, 0 incomplete labs**.
+5. **Security**: `opencode.json` (live API keys) and `mining/crawl_state/`,
+   `mining/posts/` are gitignored; never let them into history.
 
 ## What is NOT done
 
-Modules are complete. These are not:
-
 | Gap | State |
 |---|---|
-| **Labs** | 1 of ~40. `labs/{go,infra,java,rust,ts}` are empty. Pattern to copy: `labs/py/01-circuit-breaker` — starter fails, solution passes, injectable clock, no network in tests. |
-| **Problems** | `app/data/problems.json` is empty; the app's Problems tab renders blank. 30 DSA patterns have nothing to practise against. Fragments go in `app/data/problemsets/`. |
-| **Cheatsheets** | 0. `/tutor-cheatsheet` exists and has 452 modules to compress. |
-| **`/tutor-update`** | Never run. Watermarks seeded 2026-07-26, `runs: 0`. The cloud atlases and the agent/LLM tracks will start drifting within weeks. |
-| **Git** | Never committed. See `COMMIT.md`. |
+| **`/tutor-update`** | Watermarks seeded 2026-07-26, delta run once (2026-08). The cloud atlases drift weekly — run it before any cloud-focused interview. |
+| **Cheatsheets** | 33 of ~461 modules. The sprint-bearing ones are covered; the rest on demand. |
+| **Labs breadth** | 40 labs for 461 modules. T02 DSA patterns have problemsets instead; high-value tracks (T05/T06/T07) are well covered. |
+| **`T15` boss rounds** | `round-full-loop` needs the pipeline from `/tutor-company` for company-specific rounds. |
 
 ## The 184 `[CONFIRM: ]` placeholders — needs the student, not an agent
 
-In `T10-resume-systems`, `T14-star-bank`, `T14-company-specific`, `T15-round-hm`. That is
-the whole weekend-8 resume-defence block, which PLAN.md calls the highest-ROI weekend in
-the plan. They are honest placeholders for real numbers: team sizes, how the 89% ETL cut
-was measured, what actually happened in the ClickHouse OOM. An invented number in a STAR
-story is exactly what a hiring manager catches on the follow-up.
+In `T10-resume-systems`, `T14-star-bank`, `T14-company-specific`, `T15-round-hm`.
+That is the whole weekend-8 resume-defence block. They are honest placeholders
+for real numbers: team sizes, how the 89% ETL cut was measured, what actually
+happened in the ClickHouse OOM. An invented number in a STAR story is exactly
+what a hiring manager catches on the follow-up.
 
-Also flagged by the agent that read the resume: **`ml.4xlarge` and `g4.2xlarge` are not
-valid SageMaker instance identifiers** (real ones are `ml.g4dn.2xlarge` / `ml.g5.xlarge`).
-That sits on the strongest technical story on the CV.
+Also flagged by the agent that read the resume: **`ml.4xlarge` and `g4.2xlarge`
+are not valid SageMaker instance identifiers** (real ones are `ml.g4dn.2xlarge`
+/ `ml.g5.xlarge`). That sits on the strongest technical story on the CV.
 
 If a real loop lands, that hour beats any amount of new content.
 
@@ -81,9 +99,9 @@ for t in c['tracks']:
 "
 ```
 
-**Check the agent wrote to the right repo.** One agent wrote all 7 quantum modules to
-`F:\ai-tutor-service` instead of `F:\v1\ai-tutor-service`; they had to be moved by hand.
-State the absolute path in the prompt and verify afterwards.
+**One repo, one truth.** The old copies (`F:\v1\...`, `F:\ai-tutor-service`)
+are now read-only history; make all changes here and push. State the absolute
+path of THIS repo in every agent prompt and verify afterwards.
 
 ## Before sending a module back, check whether the gate is wrong
 

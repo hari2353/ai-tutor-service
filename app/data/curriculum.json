@@ -333,7 +333,7 @@
       "icon": "\ud83e\udd16",
       "phase": "A",
       "prereqs": [],
-      "hours": 76.0,
+      "hours": 79.0,
       "modules": [
         {
           "id": "T07-agent-loop-from-scratch",
@@ -709,6 +709,18 @@
           "status": "todo"
         },
         {
+          "id": "T07-ambient-agents",
+          "slug": "ambient-agents",
+          "title": "Ambient Agents: Unattended, Long-Running, Resumable - the Half Nobody Demos",
+          "hours": 3.0,
+          "tags": [
+            "harness",
+            "critical"
+          ],
+          "order": 29,
+          "status": "todo"
+        },
+        {
           "id": "T07-agent-zero-to-prod",
           "slug": "agent-zero-to-prod",
           "title": "Zero \u2192 Production: The Complete Multi-Agent System, End to End",
@@ -718,7 +730,7 @@
             "capstone",
             "critical"
           ],
-          "order": 29,
+          "order": 30,
           "status": "todo",
           "sprint_order": 27,
           "sprint_week": 9
@@ -1707,7 +1719,7 @@
       "icon": "\u2694\ufe0f",
       "phase": "A",
       "prereqs": [],
-      "hours": 10.0,
+      "hours": 13.0,
       "modules": [
         {
           "id": "T15-round-coding",
@@ -1785,6 +1797,29 @@
             "final"
           ],
           "order": 6,
+          "status": "todo"
+        },
+        {
+          "id": "T15-hr-round-basics",
+          "slug": "hr-round-basics",
+          "title": "The 50-Question HR Round: Introduction, Goals, Failure, Teamwork, Salary, Closing",
+          "hours": 1.5,
+          "tags": [
+            "behavioral",
+            "critical"
+          ],
+          "order": 7,
+          "status": "todo"
+        },
+        {
+          "id": "T15-aptitude-puzzles",
+          "slug": "aptitude-puzzles",
+          "title": "Placement Aptitude: Seating, Blood Relations, Direction Sense, Ranking, Ranking Tricks",
+          "hours": 1.5,
+          "tags": [
+            "aptitude"
+          ],
+          "order": 8,
           "status": "todo"
         }
       ]
@@ -3612,7 +3647,7 @@
       "icon": "\ud83c\udfed",
       "phase": "A",
       "prereqs": [],
-      "hours": 43.0,
+      "hours": 49.5,
       "modules": [
         {
           "id": "T18-pyspark-scratch",
@@ -3800,6 +3835,41 @@
             "critical"
           ],
           "order": 15,
+          "status": "todo"
+        },
+        {
+          "id": "T18-excel-analyst",
+          "slug": "excel-analyst",
+          "title": "Excel for Data Analysts: LET, LAMBDA, Dynamic Arrays, XLOOKUP, the 15 Modern Formulas",
+          "hours": 2.0,
+          "tags": [
+            "excel",
+            "critical"
+          ],
+          "order": 16,
+          "status": "todo"
+        },
+        {
+          "id": "T18-bi-tooling",
+          "slug": "bi-tooling",
+          "title": "Power BI & Tableau: Power Query, Star Schema, DAX vs LOD, RLS, Dashboards That Answer Why",
+          "hours": 2.5,
+          "tags": [
+            "bi",
+            "critical"
+          ],
+          "order": 17,
+          "status": "todo"
+        },
+        {
+          "id": "T18-oracle-sql",
+          "slug": "oracle-sql",
+          "title": "Oracle SQL Dialect: ROWNUM vs FETCH, NVL, Sequences, Recursive CTEs, Window Functions",
+          "hours": 2.0,
+          "tags": [
+            "sql"
+          ],
+          "order": 18,
           "status": "todo"
         }
       ]
@@ -5202,7 +5272,7 @@
       "prereqs": [
         "T03"
       ],
-      "hours": 26.5,
+      "hours": 29.0,
       "modules": [
         {
           "id": "T24-time-series-core",
@@ -5320,6 +5390,19 @@
             "critical"
           ],
           "order": 9,
+          "status": "todo"
+        },
+        {
+          "id": "T24-quant-python-stack",
+          "slug": "quant-python-stack",
+          "title": "The Python Quant Stack: QuantLib, cvxpy, PyPortfolioOpt, arch, TA-Lib, Numba in Anger",
+          "hours": 2.5,
+          "tags": [
+            "finance",
+            "python",
+            "critical"
+          ],
+          "order": 10,
           "status": "todo"
         }
       ]
@@ -6108,7 +6191,7 @@
   ],
   "totals": {
     "tracks": 36,
-    "modules": 454,
-    "hours": 1048.0
+    "modules": 461,
+    "hours": 1063.0
   }
 }

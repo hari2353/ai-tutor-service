@@ -1,17 +1,88 @@
-{"flashcards": [
-  {"id": "T07-agent-safety-c1", "topic": "Prompt Injection", "q": "Why can't prompt injection be fixed the way SQL injection was fixed?", "a": "SQL has a real grammar; parameterization compiles query structure before user data is bound, so the parser can't reinterpret data as syntax. Natural language has no equivalent grammar — there's no placeholder to bind around, so instructions and data always share one channel.", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c2", "topic": "Prompt Injection", "q": "Direct vs indirect prompt injection — define both.", "a": "Direct: the user themselves types the attack into their own input. Indirect: the attack arrives embedded in content the model reads later — a web page, a RAG document, a tool's error string, even a filename.", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c3", "topic": "Prompt Injection", "q": "Indirect vs direct injection success rate from the 2026 Gray Swan/NIST red-team analysis?", "a": "Indirect attacks succeeded 27.1% of the time vs 5.7% for direct attacks, across 1.8M submitted attacks against 22 frontier agents.", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c4", "topic": "Lethal Trifecta", "q": "What are the three legs of Simon Willison's lethal trifecta?", "a": "Access to private data, exposure to untrusted content, and the ability to communicate externally. All three present means an attacker who controls any untrusted content the agent reads can potentially exfiltrate the private data.", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c5", "topic": "Lethal Trifecta", "q": "What's the primary fix once you identify a lethal trifecta in an agent design?", "a": "Remove one leg (make browsing read-only with no rendering, scope away private-data access from the session, or gate external communication behind approval) rather than relying on detecting the injection harder.", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c6", "topic": "OWASP LLM Top 10", "q": "What is LLM01 in the OWASP Top 10 for LLM Applications 2025, and how many consecutive editions has it held that spot?", "a": "Prompt Injection — LLM01 for the third consecutive edition. Found in 87% of enterprise-pentested LLM apps in 2025-2026.", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c7", "topic": "OWASP LLM Top 10", "q": "What are the three new/changed categories in the OWASP LLM Top 10 2025 edition vs the prior list?", "a": "System Prompt Leakage (LLM07) and Vector and Embedding Weaknesses (LLM08) are new; Unbounded Consumption (LLM10) expanded from Model Denial of Service; Misinformation (LLM09) absorbed the old Overreliance category.", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c8", "topic": "OWASP LLM Top 10", "q": "What does LLM06 Excessive Agency mean concretely for an agent?", "a": "The agent has more functionality, permissions, or autonomy than its task requires — e.g. a calendar assistant given a generic delete-any-event tool when it only ever needs to create events on the requesting user's own calendar.", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c9", "topic": "OWASP Agentic Top 10", "q": "Name two risk categories from the OWASP Top 10 for Agentic Applications (Dec 2025) not covered by the original LLM Top 10.", "a": "Agent behavior hijacking and tool misuse/exploitation (also: identity and privilege abuse, and memory/context poisoning).", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c10", "topic": "Tool Permissions", "q": "Why is a system-prompt rule like 'never delete records without confirmation' not a security control?", "a": "It's advisory text in the same channel an attacker's injected content can also write to, so it competes with the attack on equal footing instead of from a privileged position. A permission engine evaluated as code, which the model cannot influence, is the actual control.", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c11", "topic": "Tool Permissions", "q": "Are MCP tool annotation hints (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) an enforcement mechanism?", "a": "No. They're self-asserted by the tool server and unenforced — useful as inputs to a permission engine's decision, not a substitute for one.", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c12", "topic": "Observability", "q": "What's the observable trace symptom of a successful prompt injection?", "a": "A tool call to a target, recipient, or destination that was never present in the user's own request, appearing immediately downstream of a step that ingested untrusted content (a document read or a web fetch).", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c13", "topic": "Red-teaming", "q": "Name two indirect-injection benchmarks used to measure agent injection resistance, with their scale.", "a": "AgentDojo (97 realistic tasks, 629 security test cases, NeurIPS 2024) and AgentHarm (110 malicious tasks, 440 with augmentations, 11 harm categories).", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c14", "topic": "Model capability", "q": "Does a more capable/larger model resist prompt injection better?", "a": "No clear correlation was found between model capability or size and injection robustness in NIST's 2026 red-team analysis. Model upgrades don't fix this; harness and architecture changes do.", "module": "T07-agent-safety"},
-  {"id": "T07-agent-safety-c15", "topic": "Real incident", "q": "What made the GitLab Duo Chatbot exploit a textbook lethal trifecta?", "a": "It could ingest a public project's text containing rogue instructions (untrusted content), had access to private repository information (private data), and could render attacker-supplied content/links (external communication) — all three legs simultaneously live.", "module": "T07-agent-safety"}
-]}
+{
+  "flashcards": [
+    {
+      "id": "T07-agent-safety-c1",
+      "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
+      "q": "Why is prompt injection the SQL injection of LLM systems, and where does that force the defense?",
+      "a": "SQL injection mixed control channel and data channel in one string; an LLM context window mixes trusted instructions and untrusted data in one token stream, and the model cannot reliably tell who is speaking. Since you cannot win at the context layer, defense goes at the ACTION layer: tool permission tiers, egress allowlists, approvals — deterministic code outside the model, never prompts.",
+      "module": "T07-agent-safety"
+    },
+    {
+      "id": "T07-agent-safety-c2",
+      "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
+      "q": "Name the lethal trifecta and state the design rule it implies.",
+      "a": "Private data access + untrusted content exposure + external communication (Willison, June 2025). Any two is survivable; all three is a working exfiltration attack waiting for phrasing. Rule: cut one leg deterministically — egress is usually the cheapest. An email-reading agent with credentials must not have arbitrary outbound HTTP.",
+      "module": "T07-agent-safety"
+    },
+    {
+      "id": "T07-agent-safety-c3",
+      "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
+      "q": "Direct vs indirect prompt injection — and the MITRE ATLAS IDs?",
+      "a": "Direct: the user is the attacker (jailbreaking to bypass safety protocols, ATLAS AML.T0054). Indirect: the attacker plants instructions in content the agent reads — tool results, RAG docs, email, GitHub issue titles (AML.T0051.001). Named indirect attacks: Clinejection (issue title → npm install → cache poisoning → NPM secrets), Snowflake Cortex (README injection, cat + process substitution), Rehberger's Aug 2026 zip/struct.py chain.",
+      "module": "T07-agent-safety"
+    },
+    {
+      "id": "T07-agent-safety-c4",
+      "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
+      "q": "Recite the OWASP LLM Top 10 (2025) in order.",
+      "a": "L01 Prompt Injection · L02 Sensitive Information Disclosure · L03 Supply Chain · L04 Data and Model Poisoning · L05 Improper Output Handling · L06 Excessive Agency · L07 System Prompt Leakage · L08 Vector and Embedding Weaknesses · L09 Misinformation · L10 Unbounded Consumption. L06 (Excessive Agency, up from #8 in 2023/24) is the multiplier: every other risk's severity scales with how much privilege and autonomy the agent has.",
+      "module": "T07-agent-safety"
+    },
+    {
+      "id": "T07-agent-safety-c5",
+      "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
+      "q": "Why doesn't the instruction hierarchy solve injection? Give the 2026 evidence.",
+      "a": "The context window has no speaker separation the model can trust: role tags are conventions in data, not sandbox boundaries, and role-confusion research shows models follow STYLE over role tags — destyling attacks dropped success from 61% to 10%. The 2026 record: a vendor held-out eval showed 720/720 injections blocked, and three weeks later an adaptive researcher broke the same shipped system 60-80% of the time with a zip/struct.py environment-confusion chain.",
+      "module": "T07-agent-safety"
+    },
+    {
+      "id": "T07-agent-safety-c6",
+      "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
+      "q": "Give the tool permission ladder with enforcement details.",
+      "a": "read_only by default (auto-run, logged) → reversible internal writes (idempotency keys, immutable audit) → external side effects (synchronous approval with computed diff) → financial (dual control, never blind retry) → destructive (human + typed confirmation + freshness window ~120s; an approval is for THIS action, NOW). Unknown tools default to the most dangerous tier — fail closed. Enforce in the DISPATCHER; MCP's readOnlyHint etc. are self-asserted hints with no enforcement.",
+      "module": "T07-agent-safety"
+    },
+    {
+      "id": "T07-agent-safety-c7",
+      "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
+      "q": "How do canary tokens detect exfiltration, and what are their failure modes?",
+      "a": "Place a unique high-entropy token per session (e.g. CNRY- + 18 random bytes) in the system prompt; scan every outbound URL, query string, and request body for it. Appearance = data flowing somewhere it shouldn't, regardless of attack mechanics. Failures: encoding (base64/Unicode chunking — normalize before scanning), multi-turn paraphrase exfil, and false positives on internal logs — scan network egress only, alert-not-block internally. Reference implementation: Cutwell's canary framework.",
+      "module": "T07-agent-safety"
+    },
+    {
+      "id": "T07-agent-safety-c8",
+      "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
+      "q": "What did Moffatt v. Air Canada (2024 BCCRT 149) establish, with numbers?",
+      "a": "February 2024, BC Civil Resolution Tribunal: the airline was liable in negligent misrepresentation for its chatbot's invented bereavement-fare policy; awarded C$812.02 (C$650.88 damages plus interest/fees). The tribunal rejected the argument that the chatbot was 'a separate legal entity responsible for its own actions' — the chatbot IS the company. Design consequence: agent output and actions are the company's output and actions; approvals, grounding, and audit are legal controls, not just security controls.",
+      "module": "T07-agent-safety"
+    },
+    {
+      "id": "T07-agent-safety-c9",
+      "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
+      "q": "How do you structurally isolate untrusted content when it can't be prevented from instructing the model?",
+      "a": "Layer reductions, since full prevention is impossible: (1) delimit/quote tool results and strip delimiter-mimicking content; (2) summarize untrusted content via a separate model call with NO tools, so manipulation has no authority — the high-stakes agent sees distilled facts; (3) CaMeL-style information-flow control: untrusted data may influence values passed to tools but never authorization, enforced by a privileged security model that only sees trusted labels. Capability-shaped tools bound the blast radius of 'influence'.",
+      "module": "T07-agent-safety"
+    },
+    {
+      "id": "T07-agent-safety-c10",
+      "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
+      "q": "Give the key numbers on classifier defenses vs adaptive attackers in 2025-2026.",
+      "a": "Constitutional Classifiers (Anthropic, Feb 2025): jailbreak success 86% → 4.4% with +0.38% over-refusal and +23.7% compute; 183 red-teamers 3,000+ hours found no universal break, but the public demo's 339 jailbreakers (3,700 hours) found one on day six. Auto mode (Aug 2026): 0/720 held-out injections blocked and 89% block vs 13.6% human refusal of a clearly dangerous command (1,053 testers) — then 60-80% adaptive break three weeks later. Lesson: classifiers are depth, not boundaries.",
+      "module": "T07-agent-safety"
+    },
+    {
+      "id": "T07-agent-safety-c11",
+      "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
+      "q": "What is the security review for an agent that reads customer emails and files tickets?",
+      "a": "Assume every email is an attempted injection (the channel is attacker-writable — trifecta pre-assembled). (1) Data: classify/redact PII at boundaries, tenant isolation at query time. (2) Tools: search_email/get_customer read-only; file_ticket reversible write with idempotency key; NO send-email/payments/delete in the default toolset — an injection can only request what isn't there. Unknown tools fail closed. (3) Egress: three internal services, domain allowlist, metadata IPs blocked, canary scan on outbound. (4) Audit: immutable per-call log with args and trace id. (5) Response: dispatcher kill switch, short-TTL per-session creds, revocation runbook. (6) Pre-launch red team (AgentDojo-class, 629 test cases) on YOUR chain.",
+      "module": "T07-agent-safety"
+    },
+    {
+      "id": "T07-agent-safety-c12",
+      "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
+      "q": "What is blast-radius thinking, and what four numbers does it demand?",
+      "a": "Since prevention is unsolvable, design for the worst case: (1) blast radius of a fully compromised session — which credentials, tenants, and irreversibilities (send? spend? delete? merge?); (2) time-to-revoke — kill switch + credential TTL measured in seconds, not support tickets; (3) detection latency — canary alarms, egress logs, action-sequence anomaly rules; (4) audit reconstruction time — what did it do and why, from immutable traces. The staff-level line: assume the agent will occasionally be hijacked, and make hijacking boring.",
+      "module": "T07-agent-safety"
+    }
+  ]
+}

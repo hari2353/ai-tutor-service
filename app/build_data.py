@@ -50,6 +50,7 @@ TRACKS = [
         "loop-engineering | Loop Engineering: The Canonical Loop, Budgets, Compaction Triggers, Stop Conditions | 3 | harness,critical",
         "risk-taxonomy | Risk Taxonomy & Permission Resolution: read_only → financial → destructive | 2.5 | harness,critical",
         "harness-evals | Evaluating the Harness Itself: Injection Resistance, Timeouts, Over-Tooling | 2.5 | harness,critical",
+        "ambient-agents | Ambient Agents: Unattended, Long-Running, Resumable - the Half Nobody Demos | 3 | harness,critical",
         "agent-zero-to-prod | Zero → Production: The Complete Multi-Agent System, End to End | 4 | capstone,critical",
     ]),
     dict(id="T21", dir="21-architecture-principles", title="Architecture & Design Principles", icon="🏛️", phase="A", prereqs=[], modules=[
@@ -146,6 +147,8 @@ TRACKS = [
         "round-behavioral | Boss: Behavioral / Leadership Round | 1 | boss",
         "round-hm | Boss: Hiring Manager Resume Grill | 1 | boss",
         "round-full-loop | Boss: Full Onsite Loop (5 rounds) | 4 | boss,final",
+        "hr-round-basics | The 50-Question HR Round: Introduction, Goals, Failure, Teamwork, Salary, Closing | 1.5 | behavioral,critical",
+        "aptitude-puzzles | Placement Aptitude: Seating, Blood Relations, Direction Sense, Ranking, Ranking Tricks | 1.5 | aptitude",
     ]),
     dict(id="T02", dir="02-dsa-21-patterns", title="DSA: 21 Patterns", icon="🧩", phase="A", prereqs=[], modules=[
         "p01-two-pointers | Two Pointers | 2 | pattern",
@@ -334,6 +337,9 @@ TRACKS = [
         "scheduling-triggering | Scheduling & Auto-Triggering: Cron vs Event vs Sensor, EventBridge, Step Functions, S3 Events | 2.5 | orchestration,critical",
         "backfill-replay | Backfills, Replays, Idempotent Reruns, Late Data, and Not Corrupting the Warehouse | 2.5 | pipelines,critical",
         "trino-presto | Trino & Presto: Federated Query Engines, Catalogs, and When They Beat a Warehouse | 2.5 | query,critical",
+        "excel-analyst | Excel for Data Analysts: LET, LAMBDA, Dynamic Arrays, XLOOKUP, the 15 Modern Formulas | 2 | excel,critical",
+        "bi-tooling | Power BI & Tableau: Power Query, Star Schema, DAX vs LOD, RLS, Dashboards That Answer Why | 2.5 | bi,critical",
+        "oracle-sql | Oracle SQL Dialect: ROWNUM vs FETCH, NVL, Sequences, Recursive CTEs, Window Functions | 2 | sql",
     ]),
     dict(id="T19", dir="19-testing-quality", title="Testing & Quality Engineering", icon="🧪", phase="A", prereqs=[], modules=[
         "test-strategy | Test Strategy: Pyramid vs Trophy, What to Test, What Never To | 2 | strategy,critical",
@@ -474,6 +480,7 @@ TRACKS = [
         "basel | Basel I → II → III → IV: Capital, RWA, LCR/NSFR, What Each Fixed | 2.5 | banking,critical",
         "mrm | Model Risk Management: SR 11-7, Validation, Governance, the MRM Role | 2.5 | banking,critical",
         "ai-in-finance | AI in Finance: Fraud, Credit, AML, Explainability & Fair-Lending Constraints | 2.5 | ai,critical",
+        "quant-python-stack | The Python Quant Stack: QuantLib, cvxpy, PyPortfolioOpt, arch, TA-Lib, Numba in Anger | 2.5 | finance,python,critical",
     ]),
     dict(id="T25", dir="25-product-business", title="Product Thinking & Business (MBA)", icon="💼", phase="B", prereqs=[], modules=[
         "product-thinking | Product Thinking for Engineers: Problem → Outcome → Solution | 2 | product,critical",

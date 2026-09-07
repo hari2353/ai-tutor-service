@@ -4,7 +4,7 @@
 
 Personal interview-and-mastery system for **Hari Siva Rami Dwarampudi** — Principal AI Engineer, actively interviewing.
 
-**36 tracks · 454 modules · ~1,048 hours** — with a **32-module, ~89-hour, 10-weekend sprint** on top that's what actually decides your next loop. Fully local, free tier, zero cloud spend.
+**36 tracks · 461 modules · ~1,063 hours** — with a **32-module, ~89-hour, 10-weekend sprint** on top that's what actually decides your next loop. Fully local, free tier, zero cloud spend.
 
 > Numbers drift as content lands. The live counts are always in `CONTENT-STATUS.md`
 > (regenerate with `python app/build_data.py`). Historical planning docs live in `docs/history/`.

@@ -36,9 +36,9 @@ jobs:
         run: python -m pip install pytest numpy
 
       # One command runs every layer: data rebuild -> DOM/state (25) ->
-      # SM-2 (10) -> review gate (454 modules) -> security scan ->
+      # SM-2 (10) -> review gate (461 modules) -> security scan ->
       # unit (11) + integration (5) -> every lab suite in labs/ across
-      # py, go, rust, ts and java (~950 cases).
+      # py, go, rust, ts and java plus misc (~860 cases).
       - name: Full suite (app\tests\run.ps1)
         shell: pwsh
         run: powershell -ExecutionPolicy Bypass -File app\tests\run.ps1

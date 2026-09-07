@@ -1,0 +1,109 @@
+{
+  "flashcards": [
+    {
+      "id": "T07-ambient-agents-c1",
+      "topic": "Ambient Agents",
+      "q": "What is the \"resume token\" for a durable interrupt, and why doesn't it depend on the original process still being alive?",
+      "a": "The pair (thread_id, checkpointer). interrupt() raises, the checkpointer persists state keyed by thread_id, and the process exiting doesn't matter because resume just means a different process later loads state by thread_id and calls Command(resume=value). The token is typically embedded in a notification link, not held in any process's memory.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c2",
+      "topic": "Ambient Agents",
+      "q": "Why is an eight-hour-old human approval not automatically safe to act on?",
+      "a": "It's a claim about the world as of when it was requested, not now. The order it authorized a refund for may already be refunded through another channel, the account may be closed, the price may have changed. Fix: re-read the live precondition inside the executing node, right before the side effect, instead of trusting the state snapshot captured at pause time.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c3",
+      "topic": "Ambient Agents",
+      "q": "What can and can't be stored in a LangGraph checkpoint?",
+      "a": "Can: ids, paths, primitive values. Can't: open DB connections, file handles, sockets, locks (the OS handle means nothing in a new process), and in-memory closures over live objects (fail at serialization or reconstruct broken). Nodes must re-acquire live resources on every execution.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c4",
+      "topic": "Ambient Agents",
+      "q": "How do you stop an agent from silently discarding its own best work when it hits a budget?",
+      "a": "Don't hold results in context waiting to be assembled into a final message. Write results to durable storage as they're produced (a row per finding), and keep progress externally visible (a todo list, a row count). A run truncated by cost_budget or deadline then has value proportional to how far it got, instead of all-or-nothing.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c5",
+      "topic": "Ambient Agents",
+      "q": "Quote LangGraph's own docs on what happens when interrupt() resumes, and state why.",
+      "a": "\"The runtime restarts the entire node from the beginning... any code that ran before the interrupt() will execute again.\" Why: checkpointing happens at node (super-step) granularity, not statement granularity. A paused node has no saved program counter to jump back into; the runtime's only record is that the node hasn't produced its writes yet.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c6",
+      "topic": "Ambient Agents",
+      "q": "What happens if a node contains a `while True` loop calling interrupt() repeatedly, and what's the fix?",
+      "a": "Each resume replays every prior iteration of the loop, exponentially: resume 2 replays 1 iteration, resume 3 replays 2, and so on. Fix: don't loop inside the node at all. Use a conditional edge back to a node that calls interrupt() exactly once per invocation, carrying re-prompt state between invocations instead of iterations.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c7",
+      "topic": "Ambient Agents",
+      "q": "List the fix order for a mutating side effect that has to sit near an interrupt(), most to least preferred.",
+      "a": "1) Move it after the interrupt or into a separate node (free, the default). 2) Make it naturally idempotent (upsert, not insert). 3) Attach a deterministic idempotency key from (thread_id, checkpoint_id, op), TTL longer than the longest realistic approval wait. 4) Wrap in @task -- reduces duplicate work but is NOT exactly-once; a task that starts and fails to complete re-runs on resumption.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c8",
+      "topic": "Ambient Agents",
+      "q": "What does WAL mode fix for SQLite under two processes, and what does it NOT fix?",
+      "a": "Fixes: readers no longer block on a writer (they read the last-committed snapshot while the writer appends to a separate -wal file, folded back roughly every 1,000 pages / ~4MB). Does NOT fix: writer/writer contention -- SQLite has exactly one writer regardless of journal mode. busy_timeout makes a second writer retry instead of erroring immediately, but under 3+ concurrent writers even a generous timeout eventually expires.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c9",
+      "topic": "Ambient Agents",
+      "q": "What's the signal that you've outgrown SqliteSaver and need PostgresSaver?",
+      "a": "A shape, not a specific error: more than one process regularly writing checkpoints, or more than one replica serving the agent. At that point Postgres is a correctness requirement, not an upgrade -- MVCC and row-level locking give real concurrent writers, which WAL mode was never going to provide.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c10",
+      "topic": "Ambient Agents",
+      "q": "Why don't tool-call-level idempotency keys (thread_id, checkpoint_id, op) protect against a redelivered webhook or overlapping cron fire?",
+      "a": "A redelivered webhook or overlapping cron produces a whole new run with a fresh checkpoint_id, so the derived key changes too. The guard has to sit in front of thread creation: dedupe on the trigger's own identity (delivery_id, event_id, cron-fire bucket), checked atomically before a new thread is started.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c11",
+      "topic": "Ambient Agents",
+      "q": "Give the Anthropic per-org rate-limit shape and the one caching detail that matters for budgeting it.",
+      "a": "Per-org token-bucket across RPM/ITPM/OTPM, replenishing continuously rather than resetting on the minute. Roughly 1,000 RPM/2M ITPM/400K OTPM on Start, 10,000/10M/2M on Scale for Sonnet-class models. Cached-read tokens don't count against ITPM, so a workload with an 80% cache-hit rate gets meaningfully more real throughput than the raw ceiling suggests.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c12",
+      "topic": "Ambient Agents",
+      "q": "Why does independent per-run rate-limit backoff cause a 429 storm across a fleet of ambient agents?",
+      "a": "If crons cluster (many jobs scheduled on the hour) and each run backs off independently on a 429, everyone hits the limit together, backs off together, and retries together -- a thundering herd that repeats every refill cycle. Fix: a shared token-bucket limiter the scheduler checks before dispatch, not each run discovering the limit via a failed request.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c13",
+      "topic": "Ambient Agents",
+      "q": "How do you detect a silently-dead ambient run when nobody is watching in real time?",
+      "a": "Track last_checkpoint_at per thread and alert on staleness relative to the task's own expected cadence (minutes for a research run, low single digits for a cron job) -- not on \"no logs,\" since a completed run also produces no new logs. A fixed global threshold either pages constantly on slow legitimate work or misses a genuinely dead process.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c14",
+      "topic": "Ambient Agents",
+      "q": "Design the two-layer kill switch for an ambient agent, and what does RunControl.request_drain() cover?",
+      "a": "Soft: a run_status column checked at EVERY tool-call boundary (not once per loop iteration), so an admin action stops the next side effect without touching the process. Hard: revoke the credentials its tools use, which works even if the process never checks run_status again. RunControl.request_drain() is the graceful, cooperative, in-process SIGTERM handler for a deploy -- it is not an emergency stop and isn't reachable from outside the process.",
+      "module": "T07-ambient-agents"
+    },
+    {
+      "id": "T07-ambient-agents-c15",
+      "topic": "Ambient Agents",
+      "q": "What's unsafe to change in a graph's schema for threads that are currently interrupted, versus completed?",
+      "a": "Completed threads tolerate any topology change. Interrupted threads do NOT tolerate renaming or removing a node, since the thread may be about to enter a node that no longer exists. For state keys: add/remove is safe, rename loses the saved value -- ship a rename via expand/contract (add key, dual-write, deploy, remove later).",
+      "module": "T07-ambient-agents"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "drills": [
+    {
+      "id": "T07-ambient-agents-d1",
+      "module": "T07-ambient-agents",
+      "q": "What is the resume token for a durable interrupt, concretely?",
+      "a": "The pair (thread_id, checkpointer) -- not a process, session, or callback. A different process loads state by thread_id and calls Command(resume=value).",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-ambient-agents-d2",
+      "module": "T07-ambient-agents",
+      "q": "What does interrupt() actually resume from on LangGraph?",
+      "a": "The beginning of the node, not the line where interrupt() was called -- checkpointing is node-granular, not statement-granular. Any code before the interrupt runs again.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-ambient-agents-d3",
+      "module": "T07-ambient-agents",
+      "q": "Name three things that cannot go into a LangGraph checkpoint.",
+      "a": "Open DB connections/file handles, sockets or locks, and in-memory closures over live objects. State should hold ids, paths, and primitives only.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-ambient-agents-d4",
+      "module": "T07-ambient-agents",
+      "q": "An eight-hour-old approval comes back. Why can't you just act on it directly?",
+      "a": "It authorizes an intent based on the world as it was eight hours ago. Re-read the live precondition inside the executing node, right before the side effect, rather than trusting the paused snapshot.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d5",
+      "module": "T07-ambient-agents",
+      "q": "A node has a `while True` loop calling interrupt() to re-prompt on invalid input. What breaks on the third resume?",
+      "a": "Exponential replay: each resume replays every prior iteration of the loop, so the third resume replays two full iterations of pre-interrupt code. Fix: a conditional edge back to a node that calls interrupt() exactly once per invocation.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d6",
+      "module": "T07-ambient-agents",
+      "q": "Rank the fixes for a mutating side effect near an interrupt(), best first.",
+      "a": "Move it after the interrupt or into its own node > make it naturally idempotent (upsert) > deterministic idempotency key with a long TTL > wrap in @task (still not exactly-once).",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d7",
+      "module": "T07-ambient-agents",
+      "q": "Two processes write to one SQLite checkpoint file with WAL mode enabled. Does that fix contention?",
+      "a": "Only reader/writer contention. SQLite still has exactly one writer regardless of journal mode; busy_timeout lets a second writer retry, but under 3+ concurrent writers it will eventually expire anyway.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d8",
+      "module": "T07-ambient-agents",
+      "q": "What's the actual signal that tells you to move off SqliteSaver to PostgresSaver?",
+      "a": "More than one process regularly writing checkpoints, or more than one replica -- not a specific error. At that point Postgres is a correctness requirement (real concurrent writers via MVCC), not an upgrade.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d9",
+      "module": "T07-ambient-agents",
+      "q": "A webhook redelivers and your tool-call idempotency key (thread_id, checkpoint_id, op) doesn't stop the duplicate run. Why not, and what's the fix?",
+      "a": "Redelivery starts a whole new run with a fresh checkpoint_id, so the derived key differs too. Fix: dedupe on the trigger's own identity (delivery_id) before thread creation, not inside the graph.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d10",
+      "module": "T07-ambient-agents",
+      "q": "A cron job runs every 15 minutes but occasionally takes 35. What goes wrong and what's the fix?",
+      "a": "Overlapping runs hit the same downstream resources simultaneously. Fix: lock on the job's identity (not the thread id) before a new fire starts, skipping the fire if a run is already in progress.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-ambient-agents-d11",
+      "module": "T07-ambient-agents",
+      "q": "A hundred cron-triggered agents each stay within their own per-run cost budget, but you get a 429 storm on the hour. Diagnose.",
+      "a": "Per-run budgets say nothing about the shared, org-wide provider rate limit. Independent per-run backoff on 429 synchronizes into a thundering herd. Fix: a shared token-bucket limiter the scheduler checks before dispatch.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-ambient-agents-d12",
+      "module": "T07-ambient-agents",
+      "q": "How do you tell a silently-dead ambient run apart from one that's just slow, without watching it live?",
+      "a": "Alert on last_checkpoint_at staleness relative to the task's own expected cadence, not on \"no logs\" -- a completed run also stops producing logs, so that signal can't distinguish the two states.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-ambient-agents-d13",
+      "module": "T07-ambient-agents",
+      "q": "Is RunControl.request_drain() a kill switch?",
+      "a": "No. It's the graceful, cooperative, in-process SIGTERM handler for a deploy -- it doesn't cancel a hung tool call and isn't reachable from outside the process. A real kill switch needs a run_status check at every tool-call boundary (soft) plus credential revocation (hard).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-ambient-agents-d14",
+      "module": "T07-ambient-agents",
+      "q": "You need to rename a state key, and there are ambient threads currently interrupted that might not resume for weeks. What do you ship?",
+      "a": "Expand/contract: add the new key, dual-write it alongside the old one from every touching node, deploy, and only remove the old key once every in-flight thread has passed through a dual-write node.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-ambient-agents-d15",
+      "module": "T07-ambient-agents",
+      "q": "When would you skip the durable-interrupt machinery entirely?",
+      "a": "When the human is present and the wait is seconds -- an inline confirmation beats a durable interrupt, an approvals table, and an expiry policy. The ambient machinery earns its cost only once the wait genuinely spans processes, hours, or days.",
+      "difficulty": "staff"
+    }
+  ]
+}

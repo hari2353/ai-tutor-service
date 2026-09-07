@@ -1,0 +1,309 @@
+# Topic worklist (deduped)
+
+43168 useful posts -> **19420 unique topics** (11591 gaps, 7153 partial)
+
+## Gap topics, by frequency
+
+- **🚀Get 180% hike in Salary with Data Science job - link in bio 👨‍🎓 Subscribe to our YouTube Channel to become Ma** ×1266 — @datasciencebrain (rep: mining/posts/Cz7yiBkr1LJ/)
+- **15 Excel Formulas That Surprise 5+ Year Users 1** ×1216 — @kethakiproperties (rep: mining/posts/DcOEXEik4vt/)
+- **✨Is freelancing the future of work** ×1068 — @entrepreneursonig (rep: mining/posts/DBHGs1ToCBp/)
+- **📌⬇️ Save and Read through here if you don’t know where to start with tech or programming** ×777 — @pythonlifetelugu (rep: mining/posts/CxhrhA8ATHE/)
+- **HR Interview Questions | Quick Guide Prepare these common HR questions to crack your interview** ×396 — @pythonlifetelugu (rep: mining/posts/DbvKoFRiTFX/)
+- **Understand these 3 things before you begin this journey** ×373 — @umerhaddii007 (rep: mining/posts/C2CvZXqtQHb/)
+- **Download The Ultimate ChatGPT Prompts Handbook (Link is in Bio) if you want Advance and done for you ChatGPT P** ×330 — @theaiguyhere (rep: mining/posts/DHvbeI9CFkh/)
+- **The Future of Humanoid Robotics just Begins** ×295 — @kethakiproperties (rep: mining/posts/C4sF0KeJjJH/)
+- **From Sam Altman's blog** ×285 — @theartificialintelligence (rep: mining/posts/DOTdRmnCTwg/)
+- **🚀 These 8 Machine Learning projects are running in production at Microsoft, Amazon, and American Express right** ×275 — @datasciencescoop (rep: mining/posts/DSpI4abjf8G/)
+- **On July 11, 2025, India etched its name in medical history by successfully conducting the world’s first telero** ×236 — @evolving.ai (rep: mining/posts/DMDfGNVtrFf/)
+- **Top 30 Linux Interview Questions 1** ×233 — @pythonlifetelugu (rep: mining/posts/DbAp8i6CYRD/)
+- **DSA THIS IS ALL YOU NEED** ×180 — @datasciencescoop (rep: mining/posts/DSuGVTbkrfe/)
+- **Why This Resume is ATS-Friendly: 1️⃣Simple Formatting No tables, columns, text boxes, images, or unusual fonts** ×176 — @datasciencebrain (rep: mining/posts/DFjhck3yEQ7/)
+- **Read this before your next tech interview I failed interviews for 2 years straight** ×163 — @codewithupasana (rep: mining/posts/DPTfc25jLHA/)
+- **If you’re a data scientist, how do you know you’re effective in your work** ×149 — @bashi_fuirkashi (rep: mining/posts/DAqinYsAUNW/)
+- **Most college students don’t realize how tough tech interviews actually are — until it’s too late** ×131 — @codewithupasana (rep: mining/posts/DPgofJiEudS/)
+- **Puzzle Solving Tricks | Aptitude Shortcut Placement & competitive exams lo puzzles fast ga solve cheyyadaniki ** ×116 — @pythonlifetelugu (rep: mining/posts/DcSDgPFCZkt/)
+- **Resources to learn 👇: 💻Online Courses: Coursera (Andrew Ng's "Machine Learning"), edX, Udemy** ×115 — @datasciencebrain (rep: mining/posts/C5r9PldS71V/)
+- **One personal story that motivates me in my coding journey is the experience of building my first fully functio** ×109 — @bashi_fuirkashi (rep: mining/posts/Ct89zmXgoa_/)
+- **To prevent this financial disaster, databases rely on ACID Properties and Concurrency Control** ×94 — @datasciencescoop (rep: mining/posts/DYZwGOEsza2/)
+- **36 Basic Terminologies You Should Know Before Starting Machine Learning - Part 2 20** ×90 — @datasciencebrain (rep: mining/posts/DPagCdLAjbW/)
+- **Freelancing is great until… ⚠️ I became a freelancer 8 years ago** ×89 — @entrepreneursonig (rep: mining/posts/C-NjJJ7AKrv/)
+- **First Like💗 & Save📍 this for future reference, and share💌 with your friend** ×82 — @datasciencebrain (rep: mining/posts/C8Lk5kJSFOK/)
+- **⚡️ What is your opinion** ×80 — @duodevlogs (rep: mining/posts/Cggrtt0sX18/)
+- **Read Caption for detailed explanation Implied Volatility (IV): Implied volatility represents the market’s cons** ×72 — @datasciencescoop (rep: mining/posts/C1PQALHxd7a/)
+- **Power BI Interview Questions | Quick Guide Basic Questions 1** ×68 — @pythonlifetelugu (rep: mining/posts/DbsbO6kiUYZ/)
+- **Google paid $2** ×67 — @evolving.ai (rep: mining/posts/DAd1xk8N-5U/)
+- **Only god can save me now 🥰** ×63 — @whatshotdelhi (rep: mining/posts/DSIXnNJgUP7/)
+- **AI Cancer Ni Ela Detect Chestundi** ×59 — @pythonlifetelugu (rep: mining/posts/DbkMh5NTB41/)
+- **👀 Type I & II Errors Explained Clearly👇🏻 Type 1 and Type 2 errors are concepts from statistical hypothesis tes** ×57 — @datasciencebrain (rep: mining/posts/C8ZivpJyHbU/)
+- **🇫🇮 Finland is doing something wild** ×55 — @mrk_talkstech (rep: mining/posts/DR9oFAkgcex/)
+- **💫 Here are six of the best and most structured courses with detailed curriculum that you can pursue: - Compute** ×45 — @datasciencebrain (rep: mining/posts/ChgyY1rDCOg/)
+- **⚡️ Details explained here…** ×44 — @datasciencebrain (rep: mining/posts/ChcLcGfjEnk/)
+- **There are several websites where you can practice data science by applying your skills and working on real-wor** ×42 — @datasciencebrain (rep: mining/posts/Ct4T7cuv8Oj/)
+- **"Google's AI deleted man's entire hard drive" Google’s new AI coding tool just wiped a photographer’s entire h** ×37 — @techie_programmer (rep: mining/posts/DR4fEzDjDSf/)
+- **Optionsellers** ×35 — @uncover.quantum (rep: mining/posts/DF21gzoOC6M/)
+- **Startup Companies in Chennai | IT Jobs & Career Guide Chennai has a growing startup ecosystem across FinTech, ** ×34 — @pythonlifetelugu (rep: mining/posts/Db5kZGqiR6K/)
+- **Porsche has presented a spectacular track car for enthusiasts and collectors at Rennsport Reunion 7 at Weather** ×33 — @futurewalt.ai (rep: mining/posts/DBgOjOOSKaA/)
+- **React JS Roadmap: 1** ×32 — @pythonlifetelugu (rep: mining/posts/CyZ6_F9rHWG/)
+- **𝟭) 𝗖𝗼𝗻𝘀𝗶𝘀𝘁𝗲𝗻𝘁 𝗛𝗮𝘀𝗵𝗶𝗻𝗴 Distributed systems use Consistent Hashing to distribute data across servers** ×32 — @uncover.quantum (rep: mining/posts/Cj2vCpAD9lj/)
+- **🚀🧪 GOOGLE’S QUANTUM AI JUST BROKE THE LAWS OF PHYSICS 🚀🧪 This is absolutely mind-blowing** ×31 — @airesearches (rep: mining/posts/DPHODxoCpOE/)
+- **How to be a developer who doesn’t even use Google, Stackoverflow or AI tools like ChatGPT, GitHub Copilot** ×30 — @devrelmegha (rep: mining/posts/DBCveOTt7kp/)
+- **Tomorrow is the International day of girls in STEM** ×27 — @codingmermaid.ai (rep: mining/posts/C3K2vbrtah9/)
+- **Section s : - Personal details - Objective - Work experience / internships - Education - Project works - Hard-** ×26 — @pythonlifetelugu (rep: mining/posts/CrQEb1xgsfG/)
+- **The trading interview process at Jane Street is structured to evaluate candidates on various foundational skil** ×26 — @uncover.quantum (rep: mining/posts/DPRVjr8ieTX/)
+- **Excel Formula Cheat Sheet | Must Know Formulas for Data Analysts Master these important Excel formulas for dat** ×24 — @pythonlifetelugu (rep: mining/posts/DbqF2ABCV0S/)
+- **Learning: 💠100 Days of ML & 100 Dyas of DL playlists from CampusX 💠Krish Naik Playlists 💠Statquest Practice: 💠** ×24 — @datasciencebrain (rep: mining/posts/DBSpHnav0AN/)
+- **🚀🔍 As AI and data science intricately intertwine, we are compelled to explore whether this emergence signifies** ×24 — @uncover.quantum (rep: mining/posts/Csl-Mh8tU1v/)
+- **Do you want to become Data Scientist or Data Analyst** ×23 — @pythonlifetelugu (rep: mining/posts/C_4e_eQvdH1/)
+- **🚨 BREAKING: Google just dropped their biggest AI updates ever during Google I/O 2026** ×23 — @evolving.ai (rep: mining/posts/DYrdtXsiMpM/)
+- **In 2015, Sam Altman, one of the co-founders of OpenAI, shared his worries about the future of artificial intel** ×21 — @innovation (rep: mining/posts/DCZnEP6seae/)
+- **My toolkit 👉🏻 Yeah, I know, I have a separate toolkit for my data science & AI jobs, but I guess that’s normal** ×21 — @pythonlifetelugu (rep: mining/posts/DVrCWUwgU1-/)
+- **POV: You’re a software developer and you fear that AI may replace you ⚠️ 📌When I started freelancing in 2016, ** ×20 — @rizdev.in (rep: mining/posts/DATegI4Nte3/)
+- **Follow @freeway_monk for** ×19 — @freeway_monk (rep: mining/posts/CgPVQrXJZx_/)
+- **In a recent episode, @portfoliobreakdown explained how people think Jake Paul made his money from YouTube and ** ×19 — @portfoliobreakdown (rep: mining/posts/DXTKSBlkTCI/)
+- **Many people step into data analytics with a simplified picture of the role** ×18 — @pythonlifetelugu (rep: mining/posts/DXebBL7jcrY/)
+- **‘Neural Network’ by Kim Seonghyun is an interactive installation from Design Korea that uses real neural netwo** ×18 — @datasciencescoop (rep: mining/posts/DWY9uTtikvt/)
+- **🚗 Interview Experience at Cars24 (Java Developer - 3+ YOE) - Round 1 The first round was purely technical, foc** ×18 — @codes.manish (rep: mining/posts/DAz04CMufxv/)
+- **Check link-in-bio 🔗** ×16 — @freeway_monk (rep: mining/posts/C1pJi9-yFAG/)
+- **Things You Should Know Before Starting NLP: If you can explain these 18 NLP terms clearly, You probably unders** ×16 — @aiwithtani (rep: mining/posts/DR7BYirjJV7/)
+- **🚨 MATHEMATICS JUST KILLED THE MATRIX THEORY Scientists proved the universe CANNOT be a computer simulation** ×14 — @umerhaddii007 (rep: mining/posts/DQmZN2VD4aO/)
+- **Getting an internship as a software developer with no prior experience can be challenging, but it’s definitely** ×13 — @codewithupasana (rep: mining/posts/CwoJszMt9xv/)
+- **HTML (Day 1 - 6): Day 1: Introduction to HTML Day 2: Creating a Basic HTML Page Day 3: HTML Tags and Attribute** ×13 — @techie_programmer (rep: mining/posts/CtbUZVcA3_n/)
+- **Comment your answer BEFORE reading 👇 SELECT COUNT() FROM employees WHERE salary > 50000 HAVING COUNT() > 5 Wil** ×12 — @codedsoul_05 (rep: mining/posts/DX0hXyjT-22/)
+- **Full Stack Data Science with Gen AI – New Batch Starting August 22nd **PythonLife** is a prominent Telugu-firs** ×12 — @pythonlifetelugu (rep: mining/posts/DcTjpOhTLu2/)
+- **The concept of a “second brain” refers to a system for organizing and storing information outside of our own m** ×12 — @innovation (rep: mining/posts/DIcWdYiTkmB/)
+- **This is not just a scaling problem** ×12 — @iamsaumyaawasthi (rep: mining/posts/Db-7dRmMin2/)
+- **🔥 5 Powerful Ways Lambda Expressions & Functional Interfaces Supercharge Your Java Code** ×12 — @uncover.quantum (rep: mining/posts/DLm7uxnTYiG/)
+- **🚨 Andrew Tulloch just left the $12 billion startup he co-founded with former OpenAI CTO Mira Murati to join Me** ×12 — @codingmermaid.ai (rep: mining/posts/DPybG2tiMkt/)
+- **12 Must Visit places in Hyderabad📍 - 1** ×11 — @aesthetic_droll (rep: mining/posts/DCGSMz9Opsi/)
+- **Motivation to code is fueled by various factors that drive individuals to engage in programming and pursue the** ×11 — @hackproduct (rep: mining/posts/CtjIz_5gFHj/)
+- **🍓🤖 Dyson has moved beyond vacuum cleaners by applying robotics and controlled indoor systems to grow strawberr** ×11 — @innovation (rep: mining/posts/DS-Akm3DRzC/)
+- **🖲️You can’t enter the AI world without these prompt engineering courses by IBM Like & save this reel** ×11 — @genieincodebottle (rep: mining/posts/CyoBuLCt5FS/)
+- **Amazon’s internal AI coding agent may have just delivered a preview of the “agent era” downside** ×10 — @evolving.ai (rep: mining/posts/DVE1Joek_Vg/)
+- **Comment “PROJECT PROMPT” to get the free full ChatGPT prompt to help you build resume-ready projects that impr** ×10 — @bashi_fuirkashi (rep: mining/posts/DMLG8IMRQHh/)
+- **Free & courses 🚀🔥 Credits- Brij Kishore Pandey 🔎 𝗠𝗮𝗰𝗵𝗶𝗻𝗲 𝗟𝗲𝗮𝗿𝗻𝗶𝗻𝗴 𝗠𝗮𝗿𝘃𝗲𝗹𝘀: ⚙️Intro to Machine Learning: https:** ×10 — @datasciencescoop (rep: mining/posts/Crf09Y1gOZ9/)
+- **Here's how YouTube can help you prepare your next data science interview** ×10 — @datasciencebrain (rep: mining/posts/DBozsSyo1Fe/)
+- **Thanks to @Lovable** ×10 — @innovation (rep: mining/posts/DbbEkXQmVm3/)
+- **The last post was manipulating Mongodb with python and I completed the part that was necessary for the assignm** ×10 — @techie_programmer (rep: mining/posts/CQcOFIjjmnw/)
+- **📊 SAVE THIS: Your Complete Data Analyst Mock Test Guide 📊 Getting ready for a data analyst interview or certif** ×10 — @datasciencebrain (rep: mining/posts/DPs55dpkzim/)
+- **🚀 Designing a Real-Time Read/Write System (Like Google Docs) ⸻ 🧩 1️⃣ Core Requirements ✅ Functional • ✏️ Simul** ×10 — @uncover.quantum (rep: mining/posts/DUyNmnnE2nx/)
+- **🚨⚡ NVIDIA CEO Jensen Huang says companies may run their own small nuclear reactors in 6-7 years to keep up wit** ×10 — @evolving.ai (rep: mining/posts/DR2LD7jCAQA/)
+- **@Higgsfield** ×9 — @innovation (rep: mining/posts/DcjVM0BmUbo/)
+- **Day 91 Of Complete Data Science Masterclass - Variational Autoencoders in Machine Learning ALL NOTES AS PDFs W** ×9 — @datasciencebrain (rep: mining/posts/DKjbUZ3zKsb/)
+- **Here's a breakdown of the points to include as "Do's" and "Don'ts" when writing an email for a job application** ×9 — @datasciencebrain (rep: mining/posts/Ct5mt5LLExd/)
+- **IT Interview Lo Ee Questions Tappaka Prepare Cheyandi | Freshers Must Know 1** ×9 — @code2careerai (rep: mining/posts/Dcxh0YICeb1/)
+- **Most devs say “async processing” — that’s just WHAT, not HOW or WHEN** ×9 — @mrk_talkstech (rep: mining/posts/DX6uIJEzUgB/)
+- **No problem** ×9 — @datasciencescoop (rep: mining/posts/DAXkAHbNIFa/)
+- **⚡ useMemo vs useCallback One of the most confusing React topics for developers** ×9 — @iamsaumyaawasthi (rep: mining/posts/DZmU3mrhP5-/)
+- **5 platforms that actually hire data scientists 👇🏻 Check part 1 and 2 to get to know even more job boards and f** ×8 — @genieincodebottle (rep: mining/posts/DBRSF4bo7b8/)
+- **Comment "GENAI" below to get Python for Generative AI - Just ₹199** ×8 — @datasciencebrain (rep: mining/posts/DbZvT2Whcr9/)
+- **Every programming language has a different learning curve** ×8 — @rizdev.in (rep: mining/posts/DVumofYE3o6/)
+- **Ghost everyone in 2026 and master AI** ×8 — @codingmermaid.ai (rep: mining/posts/DWMdayPTY3u/)
+- **Hey folks, I hope you all are doing good** ×8 — @duodevlogs (rep: mining/posts/Ct7RfvDgGi0/)
+- **I am a bad data scientist** ×8 — @techwith.ram (rep: mining/posts/DFdtK_0yXUo/)
+- **Important Full Forms Asked in Full Stack Developer Interviews Master these commonly asked full forms to improv** ×8 — @pythonlifetelugu (rep: mining/posts/Da47rXsiZ5Y/)
+- **Top IT Jobs by Cities in India (2026–2027) Bengaluru Best for: AI & Machine Learning Software Development DevO** ×8 — @pythonlifetelugu (rep: mining/posts/DaDTtq5CZlg/)
+- **⚡️Hey guys, I hope you all are having a productive day** ×8 — @duodevlogs (rep: mining/posts/CZmOQMNgLIb/)
+- **⚡️Some projects which will enhance your programming skills** ×8 — @pythonlifetelugu (rep: mining/posts/CgUbJmID2z-/)
+- **🏆Exmaples for all 20 NumPy Array Methods🏆 Before you read further, please like this reel💗, save it for future🔶** ×8 — @tajamul.codes (rep: mining/posts/C4PSAtPrFwq/)
+- **🚨 BREAKING: Higgsfield just put up the biggest prize in AI history 🤯🎥 $1,000,000 in cash, 14 winners, a jury w** ×8 — @innovation (rep: mining/posts/DboI80cDCgz/)
+- **🧠✨ 4 MUST-WATCH Videos to Master LLMs & Generative AI ✨🧠 Ready to dive deep into the world of Large Language M** ×8 — @datasciencescoop (rep: mining/posts/DNNOOKOzarR/)
+- **@1x** ×7 — @entrepreneursonig (rep: mining/posts/Dam-1BQjRAy/)
+- **A recent exchange sparked debate after an AI system logically reasoned through questions of existence and real** ×7 — @theartificialintelligence (rep: mining/posts/DSiHFeYgd2j/)
+- **Computer Networks Cheat Sheet (2026) What is a Computer Network** ×7 — @pythonlifetelugu (rep: mining/posts/DbTDnl8jXq6/)
+- **Continue reading 👇 Becoming a machine learning engineer is absolutely possible even if you don’t have a CS deg** ×7 — @codingmermaid.ai (rep: mining/posts/C3ISlf5t27A/)
+- **Glow up** ×7 — @mrk_talkstech (rep: mining/posts/DLQX_PPTYFE/)
+- **Had such a wonderful time at @microsoft Build 2026** ×7 — @airesearches (rep: mining/posts/DZK8eHglXxn/)
+- **How to Use Cursor AI (2026 Beginner Guide) Step 1: Install Cursor • Download Cursor AI • Install on Windows, m** ×7 — @pythonlifetelugu (rep: mining/posts/DbfF3TLCQwb/)
+- **Kubernetes Roadmap 2026 Kubernetes architecture, pods, nodes, clusters, deployments, services, replica sets, n** ×7 — @datasciencescoop (rep: mining/posts/DTA4iCokzLj/)
+- **Machine Learning | Telugu Machine Learning ante data nundi patterns nerchukoni predictions or decisions automa** ×7 — @datasciencescoop (rep: mining/posts/DZPrOttzm2K/)
+- **Top DevSecOps Job Roles (2026) 1** ×7 — @pythonlifetelugu (rep: mining/posts/DbYOqQfCVST/)
+- **Top Government Jobs for Software Engineers (2026) PSUs (Public Sector Undertakings) 1** ×7 — @pythonlifetelugu (rep: mining/posts/Dbcu4H9DQ5U/)
+- **Using @lovable** ×7 — @entrepreneursonig (rep: mining/posts/DWUN85ZD6wD/)
+- **Why We Should Build AI Tools Instead of Only Using Them Only AI tools use chese vallaki productivity increase ** ×7 — @kiransagar.pyy (rep: mining/posts/DbkNMx7zMKE/)
+- **⚡ Event-Driven Architecture Explained in 60 Seconds** ×7 — @codedsoul_05 (rep: mining/posts/DNlGqpizxjZ/)
+- **⚡️30 Days of Code: Day 18 — Work update and a very useful website you should know about** ×7 — @duodevlogs (rep: mining/posts/CkysSUZDdmH/)
+- **𝗦𝗤𝗟 Short Notes 🔥📑📌 Save it ✅ 📌JOIN TELEGRAM AND LINKEDIN For more Coding Resources and Handwritten Notes 🤩📑🚀 ** ×7 — @codes.manish (rep: mining/posts/Cv6Z_pHNGmH/)
+- **👉 Notebooks 👈 Github Link - https://github** ×7 — @datasciencescoop (rep: mining/posts/CLBhdvXA7rI/)
+- **📌 Disclaimer: This meme is created for educational, awareness, and entertainment purposes only** ×7 — @pythonlifetelugu (rep: mining/posts/DcbCHZkpLvu/)
+- **15 must try viral desserts in hyderabad📍 - 1** ×6 — @aesthetic_droll (rep: mining/posts/DPiOjPvAVuv/)
+- **5 ways that Generative AI will affect data scientists in 2025 - Magic of data , day 15 A story (almost) as old** ×6 — @hackproduct (rep: mining/posts/DDnQOmGTnOO/)
+- **: OpenAI just unexpectedly introduced Sora, an impressive text-to-video AI model able to create realistic and ** ×6 — @airesearches (rep: mining/posts/C3dEUUPKrd9/)
+- **Comment “LINKS” and I’ll dm you these resources for free so you can land a job in 2026 Tech companies are desp** ×6 — @bashi_fuirkashi (rep: mining/posts/DS74b4JE8MD/)
+- **Fullstack Development Course — The Odin Project Day 29 Roundup Linting Linters are tools that will scan your c** ×6 — @duodevlogs (rep: mining/posts/CuMld00LY_D/)
+- **Google has released 8 𝗙𝗥𝗘𝗘 𝗖𝗢𝗨𝗥𝗦𝗘𝗦 to master AI 🔥🙌 No payments required Here are 8 FREE courses you don't want** ×6 — @jam.with.ai (rep: mining/posts/DFVKQgLMzuR/)
+- **Itna sach nahi bolna tha @anmolraina13 😭 Video Credits- @anmolraina13 [ Disneyland, manesar, Delhi relatable v** ×6 — @whatshotdelhi (rep: mining/posts/DMCfRQIhkBO/)
+- **Java Inka Worth Aa** ×6 — @pythonlifetelugu (rep: mining/posts/Dcnzv4AiV5m/)
+- **NVIDIA’s new Vera CPU is making a serious statement** ×6 — @evolving.ai (rep: mining/posts/DY23QwhDYIH/)
+- **Watch till the end if you are looking to learn data science from scratch 👇🏻 Although I learned a lot on data a** ×6 — @pythonlifetelugu (rep: mining/posts/C2cvlEVNuM2/)
+- **What is Amazon EC2** ×6 — @rizdev.in (rep: mining/posts/DNil-Cdz6Hr/)
+- **You’re estimating training compute for an LLM** ×6 — @hackproduct (rep: mining/posts/DUOTJm6E0Vz/)
+- **⚡️ These are three of the best detailed learning resources that can teach you from your initial stage to becom** ×6 — @duodevlogs (rep: mining/posts/Cu_vgnUgv7d/)
+- **❗ READ FULL CAPTION — Two students at Harvard University have customized and hooked up Meta’s Ray-Ban smart gl** ×6 — @theartificialintelligens (rep: mining/posts/DAv3jOjgpIb/)
+- **⭐️ Linear Algebra Course by Prof Gilbert Strang ⭐️ Link - https://www** ×6 — @datasciencescoop (rep: mining/posts/B8gKJ8uAx5w/)
+- **👉 Deep Learning 👈 Credits - Ian Goodfellow and Yoshua Bengio and Aaron Courville Link - lnkd** ×6 — @datasciencescoop (rep: mining/posts/CLXBWHvrE2T/)
+- **📥 Save this reel for resources** ×6 — @duodevlogs (rep: mining/posts/ChjU8utjw2j/)
+- **🔎 Discovering millions of on the web 🔍 📌 Search has indexed almost 25 million of the datasets, giving you a si** ×6 — @datasciencescoop (rep: mining/posts/CLs89b0r1J4/)
+- **🚨 Overnight Linux creator Linus Torvalds wrote another well crafted message that reaffirms the Linux kernel po** ×6 — @gauravgoyalai (rep: mining/posts/Da2xoUbAKeW/)
+- **🤔Do tech companies have enough data literacy in 2023** ×6 — @codingmermaid.ai (rep: mining/posts/CqF6WkND1AS/)
+- **2M users want same 5K seats** ×5 — @techie_programmer (rep: mining/posts/DcQ145vtmT-/)
+- **9 Mistakes to Avoid when starting your career in** ×5 — @datasciencescoop (rep: mining/posts/CL0zXrPoeeD/)
+- **@Lovable** ×5 — @innovation (rep: mining/posts/DcIf14wj7Bd/)
+- **@lovable** ×5 — @innovation (rep: mining/posts/DbMB97rE4p4/)
+- **@lovable** ×5 — @innovation (rep: mining/posts/Da0mOyRmS53/)
+- **@lovable** ×5 — @innovation (rep: mining/posts/DadT50_GdMw/)
+- **@lovable** ×5 — @innovation (rep: mining/posts/DaG1O0Cgc1X/)
+- **@lovable** ×5 — @innovation (rep: mining/posts/DX6E6Z-Dwik/)
+- **A French news outlet just reported an AI video as breaking news 😳🎥 The post described a high-speed chase in so** ×5 — @innovation (rep: mining/posts/DbrMQP9E7OL/)
+- **AI art just gone too far with @higgsfield** ×5 — @innovation (rep: mining/posts/DVU08JYj56W/)
+- **AI is moving faster than ever** ×5 — @innovation (rep: mining/posts/DMnfR_yufGM/)
+- **Another World Cup record** ×5 — @innovation (rep: mining/posts/DaA3gqbDet6/)
+- **BREAKING: the viral raccoon is generated on Higgsfield AI** ×5 — @innovation (rep: mining/posts/DbJ1icLE2nb/)
+- **Best Cybersecurity Certifications for Freshers in 2026 1** ×5 — @kiransagar.pyy (rep: mining/posts/Da2lNo0E2JX/)
+- **Comment “SKILLS” if you want me to DM you these links for free** ×5 — @bashi_fuirkashi (rep: mining/posts/DLvxlhavGS5/)
+- **DBMS Interview Questions | Quick Guide Master these DBMS questions for software interviews** ×5 — @pythonlifetelugu (rep: mining/posts/DbvH30iiWRS/)
+- **Here is everything I learned to become a $265,000 Fullstack Software Engineer (without a college degree): 1** ×5 — @bashi_fuirkashi (rep: mining/posts/C8kLnUEJRUt/)
+- **Higgsfield Seedance 2** ×5 — @innovation (rep: mining/posts/DcCxC5EE_Hi/)
+- **In options trading, gamma is a second-order Greek that measures the rate of delta change with respect to chang** ×5 — @uncover.quantum (rep: mining/posts/DF7yKYmI7qY/)
+- **JavaScript Complete Handbook 🚀 JavaScript is much more than just a scripting language—it’s the backbone of mod** ×5 — @iamnikspatle (rep: mining/posts/DbA3QQgk-0f/)
+- **ML Interview Question Series Interviewer: Walk me through how gradient descent works, How would you decide on ** ×5 — @abhi_techhub (rep: mining/posts/DSuoHWrgps8/)
+- **Microsoft is partnering with Atom Computing to develop the world's most powerful quantum computer** ×5 — @evolving.ai (rep: mining/posts/C_x4huVs8g2/)
+- **Most people learn RAG backwards** ×5 — @codedsoul_05 (rep: mining/posts/DbHGKjADiw0/)
+- **NVIDIA made AI 6x faster overnight NVIDIA just broke AI’s biggest bottleneck — and it’s insane** ×5 — @genieincodebottle (rep: mining/posts/DRuL9btjJub/)
+- **Platform Engineering in 60 seconds 🚀 In many teams today, developers spend too much time dealing with infrastr** ×5 — @codewithupasana (rep: mining/posts/DTqR43xksnM/)
+- **These 8 Python modules can save you hours 🐍⚡ Most beginners only learn syntax, but real Python work starts whe** ×5 — @pycode.dev (rep: mining/posts/DacFQq7gJ6g/)
+- **Top 10 myths busted** ×5 — @datasciencescoop (rep: mining/posts/CL3zq9UrxuF/)
+- **Tree Interview Questions | DSA Quick Guide Master these Tree problems for coding interviews** ×5 — @pycode.dev (rep: mining/posts/Dbslte5DSoS/)
+- **Why do AI models Hallucinate** ×5 — @ml.with.umang (rep: mining/posts/DTsXbX_ky9Z/)
+- **With the prompt – A Chinese man sits at a table and eats noodles with chopsticks; the model generated an almos** ×5 — @theartificialintelligence (rep: mining/posts/C76n3tsyKbw/)
+- **YouTube Resources to follow this guide 👇 Maths & Stats - Statquest & Khan Academy Python - bro code Data prepr** ×5 — @datasciencebrain (rep: mining/posts/C6-U-d3yCf1/)
+- **🎖️ Solution 👇🏻 SELECT CustomerID, OrderDate, Amount, SUM(Amount) OVER (PARTITION BY CustomerID ORDER BY OrderD** ×5 — @datasciencebrain (rep: mining/posts/C_YE_46y0Ar/)
+- **💼 How to Demonstrate Project Work and Get Hired – BASE Format ⸻ 🅱️ B — Background 📌 Clearly explain your proje** ×5 — @decode_leox (rep: mining/posts/DMQOKpRIZuV/)
+- **🗄️ JPA Annotations Every Spring Boot Developer Should Know JPA becomes easy when you understand the annotation** ×5 — @rizdev.in (rep: mining/posts/DZu-RkrMUeF/)
+- **🚀 QUEUE & DEQUE: THE BACKBONE OF FAST DATA PROCESSING ⚡ Every time you use BFS, schedule tasks, process reques** ×5 — @sde_ii_labs (rep: mining/posts/Dae3ADsO7WF/)
+- **🚨 24 hours ago OpenAI dropped GPT Images 2** ×5 — @innovation (rep: mining/posts/DXcdHE_k78T/)
+- **🚨 China’s largest open source model went public on Monday, and within a day someone used it to hack Higgsfield** ×5 — @innovation (rep: mining/posts/DbWU56yAVtM/)
+- **🚨 Former Google CEO Eric Schmidt has warns about the dangers of AI girlfriends** ×5 — @evolving.ai (rep: mining/posts/DC6jqLosP0w/)
+- **100 Days fo Data Analysis Study Plan 🚀 📊Day 1 - Day 8: Excel • Begin by mastering the basics of Excel** ×4 — @datasciencebrain (rep: mining/posts/C2L-RfvrjRk/)
+- **@lovable** ×4 — @innovation (rep: mining/posts/DXkatbXE1y3/)
+- **AI in Medical Domain AI healthcare field ni revolutionize chestundi** ×4 — @kiransagar.pyy (rep: mining/posts/DbkMUmdzjNt/)
+- **AI took my everything, but also gave me everything 👇 🤡The problem with doing what you love is that if you do i** ×4 — @codingmermaid.ai (rep: mining/posts/C8exZuKAB1j/)
+- **Are Python Jobs in Demand Right Now** ×4 — @pythonlifetelugu (rep: mining/posts/DWIpuP2iZbu/)
+- **Best Free AI Courses to Learn in 2026 Start your AI journey with these high-quality free courses from trusted ** ×4 — @decode_leox (rep: mining/posts/Da459wtifRb/)
+- **China’s Robot Olympics have turned out to be way more entertaining than most people expected** ×4 — @innovation (rep: mining/posts/Dci-bCGANzO/)
+- **Cities in 2070 👀🔮 Which city should be next** ×4 — @evolving.ai (rep: mining/posts/CvkVZL0Mp0B/)
+- **Comment “AI” and I’ll send you the ultimate AI roadmap** ×4 — @upskillwithsatish (rep: mining/posts/DZsd6P9MKxs/)
+- **DBMS Interview Questions 🔥📑📌 Save it ✅ 📌JOIN TELEGRAM AND LINKEDIN For more Coding Resources and Handwritten N** ×4 — @codes.manish (rep: mining/posts/CveBYkgrljw/)
+- **Day 100 Of Complete Data Science Masterclass - Mamba: A Transformer Alternative ALL NOTES AS PDFs WILL BE SHAR** ×4 — @datasciencebrain (rep: mining/posts/DLSYLkjzBOr/)
+- **Day 3 OF COMPLETE DATA SCIENCE MASTERCLASS - Python Basics (I know you guys might be thinking where's oops con** ×4 — @datasciencebrain (rep: mining/posts/DFcycgoyA4n/)
+- **Day-1/7 GenAI Series** ×4 — @thepracticai (rep: mining/posts/DTa2K_OCXG2/)
+- **During Portugal’s devastating storm crisis, Ricardo used @Lovable** ×4 — @innovation (rep: mining/posts/DZ40ZUPjHdX/)
+- **Full Stack Developers Kosam Best Projects 💻🚀 Full Stack Developers resume lo include chesukovalsina best real-** ×4 — @pythonlifetelugu (rep: mining/posts/DcTRx60CfnI/)
+- **GTA San Andreas remade with @higgsfield** ×4 — @airesearches (rep: mining/posts/DTMbRKVkTV5/)
+- **GitHub Tricks Every Developer Must Know | Boost Your Productivity Want to use GitHub like a Pro** ×4 — @pythonlifetelugu (rep: mining/posts/Dbp5ck8iU72/)
+- **Here’s a structured roadmap to help you learn Data Structures and Algorithms (DSA) in Java: Week 1: Basics of ** ×4 — @sde_ii_labs (rep: mining/posts/DCIsEGnPRLZ/)
+- **Jensen Huang showed a data center chip for the GB200 NVL72 system** ×4 — @uncover.quantum (rep: mining/posts/DEhtSsBIgfT/)
+- **Kind of wild that Will Smith eating spaghetti is still the go-to reference point for AI progress 😂🍝 But it’s s** ×4 — @datasciencebrain (rep: mining/posts/DUoqG1gCIUW/)
+- **Krdo tag 😮‍💨** ×4 — @whatshotdelhi (rep: mining/posts/DRcmX0JgR1p/)
+
+## Partial topics
+
+- ~How do you start web development ×3091
+- ~I asked ChatGPT the most common question “How to start programming”… This was the response… Starting programmi ×1235
+- ~Comment “GUIDE” and I’ll help you make the projects that can get you hired ×718
+- ~50 SQL Questions you need to cover before an interview 1 ×472
+- ~When I came to the US in 2018, I had zero ML experience ×392
+- ~🚀 Learn these coding topics sincerely ×282
+- ~These are the SOLID Principles every developer must know before a low-level design interview ×235
+- ~Top 20 HR Interview Questions & Answers (2026) 1 ×193
+- ~Anthropic introduced Claude Fable 5 ×191
+- ~Have you ever conducted an A/B testing ×169
+- ~🚀 SQL for Data Analysis: The Ultimate Data Cleaning Cheat Sheet Let’s be honest — 80% of data analysis is clea ×143
+- ~Prompt engineering isn’t dead ×129
+- ~🔥 STOP Picking Random Metrics ×120
+- ~1 ×119
+- ~Here are five unique fullstack project ideas: Node ×118
+- ~THE KAGAMI PROTOCOL Classification: Faction Archive -Σ | Planetary Codename: Seishin-9 Origin: In the 22nd cen ×107
+- ~🔐 Authentication looks simple… until the interviewer asks you what actually happens after you click “Login” ×99
+- ~🚨👀 Another huge week in AI — here’s what’s new in the last 7 days: 1 ×97
+- ~Oracle SQL Complete Notes Part 2 | Advanced Oracle SQL Concepts Continue your Oracle SQL learning with advance ×93
+- ~Agent memory is not a bigger context window ×83
+- ~🤯🚨 There are no signs of a slowdown in AI right now ×83
+- ~Linux Complete Notes (2026) What is Linux ×77
+- ~Power BI Fresher Roadmap | Beginner to Job-Ready Power BI nerchukoni Data Analyst job ki vellali anukuntunnara ×77
+- ~36 Basic Terminologies You Should Know Before Starting Machine Learning - Part 1 ▪︎ Data-Related Terms 1 ×74
+- ~💫 Improve yourself as a developer - Clear basics: One cannot become a good programmer if the basics aren’t cle ×71
+- ~🚫 STOP ×68
+- ~✨Agentic AI YouTube Channels You Must Follow 👉 ➡️ CampusX – Perfect for students and beginners, CampusX breaks ×59
+- ~Prompt Engineering at Scale: Stop Guessing, Start Testing Most people treat prompts like magic spells—tweak ra ×57
+- ~🚀 50 JAVA MAP METHODS EVERY DEVELOPER SHOULD KNOW 🗺️☕ Almost every backend application relies on Maps ×57
+- ~☕ WHY ARE JAVA STREAMS LAZY ×53
+- ~Save this Post as a guide for future reference ×52
+- ~SQL Scenario-Based Interview Questions If SQL interviews feel unpredictable, it is usually because real interv ×51
+- ~If I had just one day to prepare for an interview, I would spend that entire day on my resume ×49
+- ~🚀 DYNAMIC PROGRAMMING PATTERNS EVERY DSA ENGINEER MUST KNOW Dynamic Programming (DP) is one of the most feared ×46
+- ~My data analyst diary When I started my journey towards data science and AI, it was hard to break directly int ×44
+- ~Trigger warning: 1 - You probably suck at SQL, but convinced yourself you’re an expert ×43
+- ~🚀 Monotonic Queue in Java | Master Sliding Window Problems in O(n) A Monotonic Queue is a special double-ended ×38
+- ~The Flask lightweight web application framework has hit release 2 ×36
+- ~1 ×34
+- ~How to make your AI burn less money while you’re building apps ×34
+- ~OpenAI introduced GPT-5 ×34
+- ~🚀 PREFIX SUM: THE SHORTCUT EVERY CODER SHOULD LEARN ⚡ Want to answer range sum queries in O(1) instead of O(n) ×32
+- ~Most candidates immediately jump to the logical explanation of tokenizer fallback ×30
+- ~Most developers jump straight into coding ×29
+- ~RAG stands for Retrieval-Augmented Generation ×27
+- ~Essential Coding Resources You Need to Bookmark ⭐️ Want to learn coding but don’t know where to start ×26
+- ~I wasted 1 ×26
+- ~Tableau Fresher Roadmap | Zero to Job Tableau asalu teliyadu ×26
+- ~📌 Only NumPy Cheat Sheet You’ll Ever Need ×26
+- ~🚨👀 Another huge week in AI ×26
+- ~Picture this: It's 2025 and you're a data scientist, making 6 figures in tech ×25
+- ~🧵 Threading Design Mistakes in Java ⸻ 🧩 1️⃣ Creating Threads Inside Threads Just because you can doesn’t mean  ×25
+- ~Most MCP tutorials you’ll find are already out of date ×24
+- ~💥 java ×24
+- ~Classic Vector RAG: • Split doc into chunks • Embed each chunk • Store in vector DB • Retrieve top-k via cosin ×23
+- ~Have been preparing for AWS ❓❓ Three playlists to lessen your work 😌 1 ×23
+- ~Python basics become easier when you know what each part is used for ×23
+- ~EDA (Exploratory Data Analysis) | Telugu Exploratory Data Analysis ante data ni analyze chesi patterns, trends ×22
+- ~Naive RAG — The simplest way to understand Retrieval-Augmented Generation 🤖📚 If you're learning Generative AI, ×22
+- ~Starting Monday with hard topics ×22
+- ~⭐ How Spring Boot Handles Async Requests ☮️ ———- ⚡ 1️⃣ Enable Async Support ✔ Add @EnableAsync in a config cla ×21
+- ~🚀 INSIDE "new Object()" One line of code ×21
+- ~🚨 This is Richard Feynman's learning philosophy packed into one prompt ×21
+- ~🧠 Monotonic Stack Pattern One of the most powerful DSA patterns for coding interviews ×21
+- ~Cyber Security Roadmap | Complete Guide to Become a Cyber Security Engineer Want to build a career in Cyber Se ×20
+- ~You don’t pick the agent pattern ×20
+- ~Your skill isn’t firing because your description is lazy ×20
+- ~🚨 Google’s AlphaEvolve: The AI That Designs Its Own Algorithms 🧠⚡ Google has unveiled AlphaEvolve, a general-p ×20
+- ~🤖 Build Your First AI Agent in Just 30 Minutes ⏱️ Think AI agents are complicated ×20
+- ~Anthropic has signed a new agreement with Google and Broadcom for multiple gigawatts of next-generation TPU ca ×19
+- ~Git Workflow for Developers Short Description A proper Git workflow helps teams collaborate efficiently, avoid ×19
+- ~Here’s a short, punchy & high-engagement Instagram caption that fits this carousel perfectly 👇 ⸻ Python for Da ×19
+- ~Sharing the Walmart interview experience of a selected candidate ☑️ Applied via LinkedIn in mid-May after faci ×19
+- ~“Does it feel better ×19
+- ~🚀 INSIDE ExecutorService Creating a new thread for every task ×19
+- ~Caveman mode once again ×18
+- ~Five Fullstack Development Projects for you developer portfolio… Also know why you’ll be building them and wha ×18
+- ~In real companies, you NEVER replace a production model based on offline accuracy alone ×18
+- ~⚡️ Top 10 Python developer skills to get hired by FAANG Companies Expertise in Core Python: It is crucial to f ×18
+- ~🧵 Database Development Mistakes Made by Application Developers ⸻ 🧩 1️⃣ Missing or Wrong Indexes Indexes aren’t ×18
+- ~Share with your Friends ×17
+- ~Whether you’re building your first project or collaborating in a team, knowing how to use Git is the foundatio ×17
+- ~🔐 How to Design Authentication and Authorization for a REST Backend ⸻ 🧩 Step 1️⃣ Understand the Core Concepts  ×17
+- ~🔥 MASTER MONGODB AGGREGATION WITH 10 STAGES Most developers avoid MongoDB Aggregation because it looks complic ×17
+- ~25 ×16
+- ~90% of candidates answer: “Post-norm is unstable… so we use pre-norm ×16
+- ~LLMs are precisely probabilistic model and have stochastic process in generating the next token ×16
+- ~PostgreSQL Complete Notes | Beginner to Advanced Guide Master PostgreSQL with this complete guide covering dat ×16
+- ~Strong analytics begins with statistical clarity ×16
+- ~This AI agent can go through your CV, find matching jobs online, and start applying for them on its own ×16
+- ~slice a normal embedding in half and the meaning scrambles ×16
+- ~🚨🦞 OpenClaw is free and open source ×16
+- ~Everyone thinks scaling chatbots is about bigger context windows ×15
+- ~Power BI is no longer just a dashboard tool ×15
+- ~True that ×15
+- ~🚀 LINKED LIST PATTERNS EVERY DSA ENGINEER MUST KNOW Linked Lists aren't about memorizing node operations ×15
+- ~Want more Advance ChatGPT Prompts like these ones ×14
+- ~🐼 Your Pandas Cheat Sheet Is Here ×14
+- ~🔐 JWT Validation in Distributed Systems — Practical Design ⸻ 🧩 1️⃣ JWTs Are Stateless by Design Always remembe ×14
+- ~🧠 Instagram Like Count Mismatch — CAP Theorem in Production ⸻ 🧩 1️⃣ The Symptom You See Two users observe diff ×14

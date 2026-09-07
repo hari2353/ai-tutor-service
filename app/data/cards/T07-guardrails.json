@@ -1,17 +1,88 @@
-{"flashcards": [
-  {"id": "T07-guardrails-c1", "topic": "Input vs Output", "q": "What can an input guardrail catch that an output guardrail cannot, and vice versa?", "a": "Input rails see the request before generation and block known-bad patterns before the model runs, but can't see what would have been generated. Output rails see the actual response but only after generation, so a tool-call side effect has already happened by the time they check.", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c2", "topic": "Layers", "q": "Name the six guardrail layers and one thing each catches.", "a": "Schema validation (malformed structured output), PII detection/redaction (named-entity PII), toxicity classifiers (overtly harmful language), topical restriction (off-domain requests), jailbreak detection (known attack patterns), groundedness checks (claims not traceable to RAG sources).", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c3", "topic": "Latency", "q": "What's the industry latency budget target for input and output rails, and where does the stack become the bottleneck?", "a": "Sub-100ms p50 for input, sub-150ms p50 for output. 200ms p50 is the threshold where the guardrail stack becomes the product's latency bottleneck.", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c4", "topic": "Latency", "q": "Give the latency range for an LLM-based guardrail validator, and its cost impact.", "a": "200-800ms added latency, plus roughly 15-40% added to the provider bill per turn.", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c5", "topic": "Latency", "q": "What's Llama Guard 4's measured p95 latency on typical GPU hardware?", "a": "Around 459ms.", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c6", "topic": "Effectiveness", "q": "What are the industry-typical catch rate and false-positive rate ranges for guardrail frameworks?", "a": "60-85% catch rate on problems a human would classify as serious, and 5-15% false positives on legitimate turns.", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c7", "topic": "False positives", "q": "Why is false-positive rate the metric that decides whether a guardrail survives in production, not catch rate?", "a": "Catch rate is what you tune in a demo; a high false-positive rate generates daily user friction and support load, which leads teams to loosen thresholds under pressure and often forget to re-tighten, silently eroding protection.", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c8", "topic": "Fail-open/closed", "q": "When should a guardrail fail-closed vs fail-open on its own error?", "a": "Fail-closed for regulated/high-stakes domains (healthcare, finance, legal exposure) where an unfiltered response is unacceptable even at the cost of availability. Fail-open for low-stakes paths, especially where a stronger downstream control already covers the real risk.", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c9", "topic": "Fail-open/closed", "q": "Why do most open-source guardrail libraries default to fail-open, and why is that dangerous?", "a": "Fail-open avoids paging anyone when the classifier goes down. It's dangerous because teams inherit this default without realizing they made a compliance decision by not making one explicitly for their domain.", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c10", "topic": "Theatre", "q": "Describe the canonical 'guardrails as theatre' failure.", "a": "An agent leaks data via a tool call (email, API write, log line), then produces an innocuous text summary like 'data exported successfully.' An output filter scanning only the chat response reports clean because it never saw the tool call where the leak actually happened.", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c11", "topic": "Tools", "q": "Contrast NeMo Guardrails, Guardrails AI, and Llama Guard architecturally.", "a": "NeMo Guardrails: programmable Colang rails (input/output/dialog/retrieval/execution) running in-process, under 50ms on GPU. Guardrails AI: Pydantic-based Guard + validator Hub (50+ validators), 50-200ms per validator. Llama Guard: a standalone classifier model returning safe/unsafe plus a category, not a framework.", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c12", "topic": "Groundedness", "q": "What does a groundedness check verify, and what can't it catch?", "a": "It verifies that response claims trace back to the retrieved source documents — the core defense against RAG hallucination. It can't catch hallucination with nothing to ground against, and can't catch a claim that's technically traceable to a source that is itself wrong.", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c13", "topic": "Cloud offerings", "q": "Name three cloud-managed guardrail products and one distinguishing feature each.", "a": "AWS Bedrock Guardrails (model-agnostic policy layer via ApplyGuardrail API); Azure AI Content Safety (Prompt Shields for jailbreak/indirect-injection detection, plus groundedness detection); Google Model Armor (prompt/response inspection and safety filtering).", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c14", "topic": "Maintenance", "q": "Why does a jailbreak detector's effectiveness decay over time even without any code changes?", "a": "Jailbreak/injection classifiers are adversarial targets; attackers iterate against known detectors the way they iterate against WAF rules, so a static classifier's real-world catch rate drops as new phrasings are discovered and shared.", "module": "T07-guardrails"},
-  {"id": "T07-guardrails-c15", "topic": "When not to", "q": "Give a case where adding an available, cheap guardrail layer is still the wrong call.", "a": "When it duplicates coverage a stronger control already provides (e.g. a text PII filter behind a system with no tool that could leak PII), since every added layer compounds false-positive odds across the stack for no matching threat.", "module": "T07-guardrails"}
-]}
+{
+  "flashcards": [
+    {
+      "id": "T07-guardrails-c1",
+      "topic": "Guardrails In/Out: Guardrails AI, NeMo, Validation Layers, PII, Toxicity",
+      "q": "What is a guardrail, and what are the four verbs every guardrail performs?",
+      "a": "Deterministic input/output validation and policy enforcement wrapped around a nondeterministic model. Four verbs: CLASSIFY (topic, PII, jailbreak, toxicity), VERIFY (schema, facts, constraints), TRANSFORM (redact, mask, pseudonymize), ROUTE (pass, block, fix, escalate to human). The libraries are prebuilt validators; the engineering is choosing WHERE they run, what they cost, and their failure policy.",
+      "module": "T07-guardrails"
+    },
+    {
+      "id": "T07-guardrails-c2",
+      "topic": "Guardrails In/Out: Guardrails AI, NeMo, Validation Layers, PII, Toxicity",
+      "q": "Name the three validator families with latency and coverage characteristics.",
+      "a": "Deterministic (regex, schema, checksums, blocklists, canaries): sub-millisecond, in-process, high precision on well-formed identifiers, no semantics. Statistical (Presidio-style pattern + context words + optional NER): ~50-300 ms, tunable per-entity confidence thresholds. Model-based (Llama Guard, omni-moderation): hundreds of ms, a full model forward pass, covers semantics (novel jailbreaks, paraphrased toxicity). Rule: never pay tier-3 cost for a tier-1 guarantee; always prefilter before the classifier.",
+      "module": "T07-guardrails"
+    },
+    {
+      "id": "T07-guardrails-c3",
+      "topic": "Guardrails In/Out: Guardrails AI, NeMo, Validation Layers, PII, Toxicity",
+      "q": "Give the Llama Guard 3 headline numbers and what they compare against.",
+      "a": "8B Llama-3.1 fine-tune, 14 hazard categories (S1-S14, MLCommons taxonomy + Code Interpreter Abuse), 8 languages. On Meta's English response-classification benchmark: F1 0.939 / FPR 0.040, vs Llama Guard 2 at 0.877 / 0.081 and GPT-4 zero-shot at 0.805 / 0.152. INT8 variant is ~40% smaller for cheaper deployment. Meta trained it on benign borderline data specifically to suppress false positives.",
+      "module": "T07-guardrails"
+    },
+    {
+      "id": "T07-guardrails-c4",
+      "topic": "Guardrails In/Out: Guardrails AI, NeMo, Validation Layers, PII, Toxicity",
+      "q": "How does Llama Guard mechanically classify prompts vs responses, and how do you get a score?",
+      "a": "The same model emits 'safe' or 'unsafe' plus violated categories; prompt classification and response classification use DIFFERENT policies applied via the chat template. Input filtering catches harm before the model responds; output filtering lets the model attempt a safe answer and censors only the result; Meta recommends both. Score = probability of the FIRST generated token, thresholded by you. Note: it is itself an LLM and jailbreakable, so it is a layer, not a boundary.",
+      "module": "T07-guardrails"
+    },
+    {
+      "id": "T07-guardrails-c5",
+      "topic": "Guardrails In/Out: Guardrails AI, NeMo, Validation Layers, PII, Toxicity",
+      "q": "How does Presidio detect PII, and why is the German postcode recognizer a good example?",
+      "a": "Analyzer runs a recognizer ensemble: pattern match plus checksums plus context words plus optional NER, each span scored with a confidence. Anonymizer applies operators to detected spans. DE_PLZ is the instructive case: 5 digits alone is a terrible signal, so its base confidence is 0.05 and it only produces actionable results when address-context words are present. Context suppression is how you tune per-entity false positives.",
+      "module": "T07-guardrails"
+    },
+    {
+      "id": "T07-guardrails-c6",
+      "topic": "Guardrails In/Out: Guardrails AI, NeMo, Validation Layers, PII, Toxicity",
+      "q": "What pseudonymization discipline is required to avoid the de-anonymization trap?",
+      "a": "Per-request map keyed by TOKEN (never span index), never logged, destroyed after render. Re-hydration happens EXACTLY ONCE in the final render path, and output guards run on the model text BEFORE hydration. Never let the model see real values it doesn't need; never let pseudonyms reach the user. Pseudonymized text is not anonymous: style, context, and rare facts re-identify (Netflix-prize result, 2008).",
+      "module": "T07-guardrails"
+    },
+    {
+      "id": "T07-guardrails-c7",
+      "topic": "Guardrails In/Out: Guardrails AI, NeMo, Validation Layers, PII, Toxicity",
+      "q": "Distinguish on-violation from on-failure behavior in guardrail orchestration.",
+      "a": "On VIOLATION (guard matched): pass, fix (deterministic transform like redaction), re-ask with feedback for FORMAT defects (cap retries), block for semantic/irreparable violations, escalate to human. On FAILURE (guard errored or timed out): the fail-open vs fail-closed decision, made PER RISK: PII scan for internal summarizer fails open with alarm; jailbreak classifier for a refund agent fails closed. Industry quietly defaults to fail-open; that default is how incidents happen.",
+      "module": "T07-guardrails"
+    },
+    {
+      "id": "T07-guardrails-c8",
+      "topic": "Guardrails In/Out: Guardrails AI, NeMo, Validation Layers, PII, Toxicity",
+      "q": "Where can guardrails run, and why do layers beat one chokepoint?",
+      "a": "In-app (in-process/sidecar): only place with request context, untrusted tool results, and risk tiers. Gateway/proxy: org-wide policy and egress masking (Presidio + LiteLLM recipe, so PII never reaches the provider). Platform: Azure/Bedrock filters, always-on baseline; Bedrock's ApplyGuardrail API runs guards without invoking the model. A single gateway guard cannot see tool results or downstream actions, and its failure is a single total bypass. The guard that matters most is often on the ACTION (tool tiers), not the text.",
+      "module": "T07-guardrails"
+    },
+    {
+      "id": "T07-guardrails-c9",
+      "topic": "Guardrails In/Out: Guardrails AI, NeMo, Validation Layers, PII, Toxicity",
+      "q": "What documented platform-filter failure semantics must you design around in Azure OpenAI?",
+      "a": "Bad input prompt returns HTTP 400. Filtered completion returns finish_reason=content_filter. If the CONTENT FILTER SYSTEM ITSELF errors, the request returns 200 with content UNFILTERED, with an error object in content_filter_results telling you so. That is a documented fail-open you must monitor; 'the platform handles it' silently becomes 'the platform skipped it'.",
+      "module": "T07-guardrails"
+    },
+    {
+      "id": "T07-guardrails-c10",
+      "topic": "Guardrails In/Out: Guardrails AI, NeMo, Validation Layers, PII, Toxicity",
+      "q": "What do Bedrock Guardrails and OpenAI moderation each cover?",
+      "a": "Bedrock: 6 content categories including Prompt Attack (jailbreak + prompt injection + prompt leakage), denied topics (e.g. blocking investment advice), word filters, PII block/mask with custom regex (probabilistic), contextual grounding checks, automated reasoning checks, versioned guardrails, ApplyGuardrail standalone API; blocked content appears as PLAINTEXT in invocation logs. OpenAI moderation: FREE, omni-moderation-latest, 13 categories with 0-1 scores, text and image (up to 20 MB), inline Responses API scores covering tool-call arguments and outputs but not tool names/descriptions; the model upgrades continuously so custom thresholds need recalibration.",
+      "module": "T07-guardrails"
+    },
+    {
+      "id": "T07-guardrails-c11",
+      "topic": "Guardrails In/Out: Guardrails AI, NeMo, Validation Layers, PII, Toxicity",
+      "q": "How do canary-based leak detection work, and what are their two failure modes?",
+      "a": "Generate a high-entropy random token per session, embed it in the system prompt or tool results, and substring-scan every egress surface (model output, tool-call args, logs, summaries) for it. A hit means content from inside the trust boundary leaked outward. Failure modes: an attacker who can strip or encode the canary bypasses the scan, and it detects THAT a leak occurred, not WHAT or WHERE TO. It's a tripwire, not a seal; pair with egress allowlists and tool-tier backstop. A canary in a model-constructed search query is exfiltration-in-progress: block, alert, revoke tool access.",
+      "module": "T07-guardrails"
+    },
+    {
+      "id": "T07-guardrails-c12",
+      "topic": "Guardrails In/Out: Guardrails AI, NeMo, Validation Layers, PII, Toxicity",
+      "q": "How do you measure guardrail efficacy without hurting UX?",
+      "a": "Two corpora, two numbers, reported together: recall on a red-team suite in CI (per-guard catch rate), and FALSE-POSITIVE RATE on sampled benign production traffic (the product-killer; XSTest, arXiv 2308.01263, exists to measure exaggerated safety). Monitor score-distribution drift (moderation models upgrade silently), guard-error rate as an SLO, and the blocked-benign to blocked-malicious ratio for the product team. Roll out new guards in shadow mode (log-only) before enforcing. Efficacy is a rate of adaptation, not a completed state.",
+      "module": "T07-guardrails"
+    }
+  ]
+}
