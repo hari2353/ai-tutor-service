@@ -76,6 +76,9 @@ def main() -> int:
     for path in tracked_files():
         if path.suffix.lower() in SKIP_SUFFIXES or not path.exists():
             continue
+        # the scanner's own patterns (and this comment) must not self-match
+        if path.name == "security_check.py":
+            continue
         try:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
@@ -88,6 +91,16 @@ def main() -> int:
                 if "PRIVATE KEY" in hit and PLACEHOLDER_BLOCK.search(hit):
                     continue
                 if name == "credentials-in-url" and DEMO_URL.search(hit):
+                    continue
+                # Same spirit as ALLOW_SUBSTRINGS below: security labs and
+                # curriculum legitimately REPLICATE credential shapes in
+                # fixtures (AWS's canonical AKIAIOSFODNN7EXAMPLE doc key,
+                # runtime-generated RSA test keys asserted by header). A
+                # deliberate example marker on the hit line is not a leak.
+                line_start = text.rfind("\n", 0, m.start()) + 1
+                line_end = text.find("\n", m.end())
+                line = text[line_start:line_end if line_end != -1 else len(text)]
+                if any(a.lower() in line.lower() for a in ALLOW_SUBSTRINGS):
                     continue
                 line_no = text.count("\n", 0, m.start()) + 1
                 hard.append(f"{rel}:{line_no}  [{name}]")

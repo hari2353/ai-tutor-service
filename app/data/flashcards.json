@@ -17337,84 +17337,84 @@
       "id": "T07-agent-safety-c1",
       "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
       "q": "Why is prompt injection the SQL injection of LLM systems, and where does that force the defense?",
-      "a": "SQL injection mixed control channel and data channel in one string; an LLM context window mixes trusted instructions and untrusted data in one token stream, and the model cannot reliably tell who is speaking. Since you cannot win at the context layer, defense goes at the ACTION layer: tool permission tiers, egress allowlists, approvals \u2014 deterministic code outside the model, never prompts.",
+      "a": "SQL injection mixed control channel and data channel in one string; an LLM context window mixes trusted instructions and untrusted data in one token stream, and the model cannot reliably tell who is speaking. Since you cannot win at the context layer, defense goes at the ACTION layer: tool permission tiers, egress allowlists, approvals \u00e2\u20ac\u201d deterministic code outside the model, never prompts.",
       "module": "T07-agent-safety"
     },
     {
       "id": "T07-agent-safety-c2",
       "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
       "q": "Name the lethal trifecta and state the design rule it implies.",
-      "a": "Private data access + untrusted content exposure + external communication (Willison, June 2025). Any two is survivable; all three is a working exfiltration attack waiting for phrasing. Rule: cut one leg deterministically \u2014 egress is usually the cheapest. An email-reading agent with credentials must not have arbitrary outbound HTTP.",
+      "a": "Private data access + untrusted content exposure + external communication (Willison, June 2025). Any two is survivable; all three is a working exfiltration attack waiting for phrasing. Rule: cut one leg deterministically \u00e2\u20ac\u201d egress is usually the cheapest. An email-reading agent with credentials must not have arbitrary outbound HTTP.",
       "module": "T07-agent-safety"
     },
     {
       "id": "T07-agent-safety-c3",
       "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
-      "q": "Direct vs indirect prompt injection \u2014 and the MITRE ATLAS IDs?",
-      "a": "Direct: the user is the attacker (jailbreaking to bypass safety protocols, ATLAS AML.T0054). Indirect: the attacker plants instructions in content the agent reads \u2014 tool results, RAG docs, email, GitHub issue titles (AML.T0051.001). Named indirect attacks: Clinejection (issue title \u2192 npm install \u2192 cache poisoning \u2192 NPM secrets), Snowflake Cortex (README injection, cat + process substitution), Rehberger's Aug 2026 zip/struct.py chain.",
+      "q": "Direct vs indirect prompt injection \u00e2\u20ac\u201d and the MITRE ATLAS IDs?",
+      "a": "Direct: the user is the attacker (jailbreaking to bypass safety protocols, ATLAS AML.T0054). Indirect: the attacker plants instructions in content the agent reads \u00e2\u20ac\u201d tool results, RAG docs, email, GitHub issue titles (AML.T0051.001). Named indirect attacks: Clinejection (issue title \u00e2\u2020\u2019 npm install \u00e2\u2020\u2019 cache poisoning \u00e2\u2020\u2019 NPM secrets), Snowflake Cortex (README injection, cat + process substitution), Rehberger's Aug 2026 zip/struct.py chain.",
       "module": "T07-agent-safety"
     },
     {
       "id": "T07-agent-safety-c4",
       "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
       "q": "Recite the OWASP LLM Top 10 (2025) in order.",
-      "a": "L01 Prompt Injection \u00b7 L02 Sensitive Information Disclosure \u00b7 L03 Supply Chain \u00b7 L04 Data and Model Poisoning \u00b7 L05 Improper Output Handling \u00b7 L06 Excessive Agency \u00b7 L07 System Prompt Leakage \u00b7 L08 Vector and Embedding Weaknesses \u00b7 L09 Misinformation \u00b7 L10 Unbounded Consumption. L06 (Excessive Agency, up from #8 in 2023/24) is the multiplier: every other risk's severity scales with how much privilege and autonomy the agent has.",
+      "a": "L01 Prompt Injection \u00c2\u00b7 L02 Sensitive Information Disclosure \u00c2\u00b7 L03 Supply Chain \u00c2\u00b7 L04 Data and Model Poisoning \u00c2\u00b7 L05 Improper Output Handling \u00c2\u00b7 L06 Excessive Agency \u00c2\u00b7 L07 System Prompt Leakage \u00c2\u00b7 L08 Vector and Embedding Weaknesses \u00c2\u00b7 L09 Misinformation \u00c2\u00b7 L10 Unbounded Consumption. L06 (Excessive Agency, up from #8 in 2023/24) is the multiplier: every other risk's severity scales with how much privilege and autonomy the agent has.",
       "module": "T07-agent-safety"
     },
     {
       "id": "T07-agent-safety-c5",
       "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
       "q": "Why doesn't the instruction hierarchy solve injection? Give the 2026 evidence.",
-      "a": "The context window has no speaker separation the model can trust: role tags are conventions in data, not sandbox boundaries, and role-confusion research shows models follow STYLE over role tags \u2014 destyling attacks dropped success from 61% to 10%. The 2026 record: a vendor held-out eval showed 720/720 injections blocked, and three weeks later an adaptive researcher broke the same shipped system 60-80% of the time with a zip/struct.py environment-confusion chain.",
+      "a": "The context window has no speaker separation the model can trust: role tags are conventions in data, not sandbox boundaries, and role-confusion research shows models follow STYLE over role tags \u00e2\u20ac\u201d destyling attacks dropped success from 61% to 10%. The 2026 record: a vendor held-out eval showed 720/720 injections blocked, and three weeks later an adaptive researcher broke the same shipped system 60-80% of the time with a zip/struct.py environment-confusion chain.",
       "module": "T07-agent-safety"
     },
     {
       "id": "T07-agent-safety-c6",
       "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
       "q": "Give the tool permission ladder with enforcement details.",
-      "a": "read_only by default (auto-run, logged) \u2192 reversible internal writes (idempotency keys, immutable audit) \u2192 external side effects (synchronous approval with computed diff) \u2192 financial (dual control, never blind retry) \u2192 destructive (human + typed confirmation + freshness window ~120s; an approval is for THIS action, NOW). Unknown tools default to the most dangerous tier \u2014 fail closed. Enforce in the DISPATCHER; MCP's readOnlyHint etc. are self-asserted hints with no enforcement.",
+      "a": "read_only by default (auto-run, logged) \u00e2\u2020\u2019 reversible internal writes (idempotency keys, immutable audit) \u00e2\u2020\u2019 external side effects (synchronous approval with computed diff) \u00e2\u2020\u2019 financial (dual control, never blind retry) \u00e2\u2020\u2019 destructive (human + typed confirmation + freshness window ~120s; an approval is for THIS action, NOW). Unknown tools default to the most dangerous tier \u00e2\u20ac\u201d fail closed. Enforce in the DISPATCHER; MCP's readOnlyHint etc. are self-asserted hints with no enforcement.",
       "module": "T07-agent-safety"
     },
     {
       "id": "T07-agent-safety-c7",
       "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
       "q": "How do canary tokens detect exfiltration, and what are their failure modes?",
-      "a": "Place a unique high-entropy token per session (e.g. CNRY- + 18 random bytes) in the system prompt; scan every outbound URL, query string, and request body for it. Appearance = data flowing somewhere it shouldn't, regardless of attack mechanics. Failures: encoding (base64/Unicode chunking \u2014 normalize before scanning), multi-turn paraphrase exfil, and false positives on internal logs \u2014 scan network egress only, alert-not-block internally. Reference implementation: Cutwell's canary framework.",
+      "a": "Place a unique high-entropy token per session (e.g. CNRY- + 18 random bytes) in the system prompt; scan every outbound URL, query string, and request body for it. Appearance = data flowing somewhere it shouldn't, regardless of attack mechanics. Failures: encoding (base64/Unicode chunking \u00e2\u20ac\u201d normalize before scanning), multi-turn paraphrase exfil, and false positives on internal logs \u00e2\u20ac\u201d scan network egress only, alert-not-block internally. Reference implementation: Cutwell's canary framework.",
       "module": "T07-agent-safety"
     },
     {
       "id": "T07-agent-safety-c8",
       "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
       "q": "What did Moffatt v. Air Canada (2024 BCCRT 149) establish, with numbers?",
-      "a": "February 2024, BC Civil Resolution Tribunal: the airline was liable in negligent misrepresentation for its chatbot's invented bereavement-fare policy; awarded C$812.02 (C$650.88 damages plus interest/fees). The tribunal rejected the argument that the chatbot was 'a separate legal entity responsible for its own actions' \u2014 the chatbot IS the company. Design consequence: agent output and actions are the company's output and actions; approvals, grounding, and audit are legal controls, not just security controls.",
+      "a": "February 2024, BC Civil Resolution Tribunal: the airline was liable in negligent misrepresentation for its chatbot's invented bereavement-fare policy; awarded C$812.02 (C$650.88 damages plus interest/fees). The tribunal rejected the argument that the chatbot was 'a separate legal entity responsible for its own actions' \u00e2\u20ac\u201d the chatbot IS the company. Design consequence: agent output and actions are the company's output and actions; approvals, grounding, and audit are legal controls, not just security controls.",
       "module": "T07-agent-safety"
     },
     {
       "id": "T07-agent-safety-c9",
       "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
       "q": "How do you structurally isolate untrusted content when it can't be prevented from instructing the model?",
-      "a": "Layer reductions, since full prevention is impossible: (1) delimit/quote tool results and strip delimiter-mimicking content; (2) summarize untrusted content via a separate model call with NO tools, so manipulation has no authority \u2014 the high-stakes agent sees distilled facts; (3) CaMeL-style information-flow control: untrusted data may influence values passed to tools but never authorization, enforced by a privileged security model that only sees trusted labels. Capability-shaped tools bound the blast radius of 'influence'.",
+      "a": "Layer reductions, since full prevention is impossible: (1) delimit/quote tool results and strip delimiter-mimicking content; (2) summarize untrusted content via a separate model call with NO tools, so manipulation has no authority \u00e2\u20ac\u201d the high-stakes agent sees distilled facts; (3) CaMeL-style information-flow control: untrusted data may influence values passed to tools but never authorization, enforced by a privileged security model that only sees trusted labels. Capability-shaped tools bound the blast radius of 'influence'.",
       "module": "T07-agent-safety"
     },
     {
       "id": "T07-agent-safety-c10",
       "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
       "q": "Give the key numbers on classifier defenses vs adaptive attackers in 2025-2026.",
-      "a": "Constitutional Classifiers (Anthropic, Feb 2025): jailbreak success 86% \u2192 4.4% with +0.38% over-refusal and +23.7% compute; 183 red-teamers 3,000+ hours found no universal break, but the public demo's 339 jailbreakers (3,700 hours) found one on day six. Auto mode (Aug 2026): 0/720 held-out injections blocked and 89% block vs 13.6% human refusal of a clearly dangerous command (1,053 testers) \u2014 then 60-80% adaptive break three weeks later. Lesson: classifiers are depth, not boundaries.",
+      "a": "Constitutional Classifiers (Anthropic, Feb 2025): jailbreak success 86% \u00e2\u2020\u2019 4.4% with +0.38% over-refusal and +23.7% compute; 183 red-teamers 3,000+ hours found no universal break, but the public demo's 339 jailbreakers (3,700 hours) found one on day six. Auto mode (Aug 2026): 0/720 held-out injections blocked and 89% block vs 13.6% human refusal of a clearly dangerous command (1,053 testers) \u00e2\u20ac\u201d then 60-80% adaptive break three weeks later. Lesson: classifiers are depth, not boundaries.",
       "module": "T07-agent-safety"
     },
     {
       "id": "T07-agent-safety-c11",
       "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
       "q": "What is the security review for an agent that reads customer emails and files tickets?",
-      "a": "Assume every email is an attempted injection (the channel is attacker-writable \u2014 trifecta pre-assembled). (1) Data: classify/redact PII at boundaries, tenant isolation at query time. (2) Tools: search_email/get_customer read-only; file_ticket reversible write with idempotency key; NO send-email/payments/delete in the default toolset \u2014 an injection can only request what isn't there. Unknown tools fail closed. (3) Egress: three internal services, domain allowlist, metadata IPs blocked, canary scan on outbound. (4) Audit: immutable per-call log with args and trace id. (5) Response: dispatcher kill switch, short-TTL per-session creds, revocation runbook. (6) Pre-launch red team (AgentDojo-class, 629 test cases) on YOUR chain.",
+      "a": "Assume every email is an attempted injection (the channel is attacker-writable \u00e2\u20ac\u201d trifecta pre-assembled). (1) Data: classify/redact PII at boundaries, tenant isolation at query time. (2) Tools: search_email/get_customer read-only; file_ticket reversible write with idempotency key; NO send-email/payments/delete in the default toolset \u00e2\u20ac\u201d an injection can only request what isn't there. Unknown tools fail closed. (3) Egress: three internal services, domain allowlist, metadata IPs blocked, canary scan on outbound. (4) Audit: immutable per-call log with args and trace id. (5) Response: dispatcher kill switch, short-TTL per-session creds, revocation runbook. (6) Pre-launch red team (AgentDojo-class, 629 test cases) on YOUR chain.",
       "module": "T07-agent-safety"
     },
     {
       "id": "T07-agent-safety-c12",
       "topic": "Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails",
       "q": "What is blast-radius thinking, and what four numbers does it demand?",
-      "a": "Since prevention is unsolvable, design for the worst case: (1) blast radius of a fully compromised session \u2014 which credentials, tenants, and irreversibilities (send? spend? delete? merge?); (2) time-to-revoke \u2014 kill switch + credential TTL measured in seconds, not support tickets; (3) detection latency \u2014 canary alarms, egress logs, action-sequence anomaly rules; (4) audit reconstruction time \u2014 what did it do and why, from immutable traces. The staff-level line: assume the agent will occasionally be hijacked, and make hijacking boring.",
+      "a": "Since prevention is unsolvable, design for the worst case: (1) blast radius of a fully compromised session \u00e2\u20ac\u201d which credentials, tenants, and irreversibilities (send? spend? delete? merge?); (2) time-to-revoke \u00e2\u20ac\u201d kill switch + credential TTL measured in seconds, not support tickets; (3) detection latency \u00e2\u20ac\u201d canary alarms, egress logs, action-sequence anomaly rules; (4) audit reconstruction time \u00e2\u20ac\u201d what did it do and why, from immutable traces. The staff-level line: assume the agent will occasionally be hijacked, and make hijacking boring.",
       "module": "T07-agent-safety"
     },
     {
@@ -17435,7 +17435,7 @@
       "id": "T07-agent-safety-c15",
       "topic": "Real incident",
       "q": "What made the GitLab Duo Chatbot exploit a textbook lethal trifecta?",
-      "a": "It could ingest a public project's text containing rogue instructions (untrusted content), had access to private repository information (private data), and could render attacker-supplied content/links (external communication) \u2014 all three legs simultaneously live.",
+      "a": "It could ingest a public project's text containing rogue instructions (untrusted content), had access to private repository information (private data), and could render attacker-supplied content/links (external communication) \u00e2\u20ac\u201d all three legs simultaneously live.",
       "module": "T07-agent-safety"
     },
     {
@@ -21985,7 +21985,7 @@
       "id": "T10-case-studies-c1",
       "topic": "Case Studies",
       "q": "What was the root cause of Knight Capital's 2012 $440M loss, precisely?",
-      "a": "A deployment script failed silently to update 1 of 8 trading servers but reported success; the unpatched server ran dormant 2003-era code that misinterpreted a repurposed flag bit, triggering runaway trading \u2014 4M unintended orders, ~$7B in unwanted positions, ~$440M lost in 45 minutes.",
+      "a": "A deployment script failed silently to update 1 of 8 trading servers but reported success; the unpatched server ran dormant 2003-era code that misinterpreted a repurposed flag bit, triggering runaway trading \u00e2\u20ac\u201d 4M unintended orders, ~$7B in unwanted positions, ~$440M lost in 45 minutes.",
       "module": "T10-case-studies"
     },
     {
@@ -22020,21 +22020,21 @@
       "id": "T10-case-studies-c6",
       "topic": "Case Studies",
       "q": "What's the fix for GitHub's split-brain failure mode, precisely?",
-      "a": "Quorum-based failover requiring agreement from multiple independent observers before promoting a new primary, rather than a single node's local 'I can't reach the primary' view \u2014 reduces but doesn't eliminate the risk of promoting during a transient partition.",
+      "a": "Quorum-based failover requiring agreement from multiple independent observers before promoting a new primary, rather than a single node's local 'I can't reach the primary' view \u00e2\u20ac\u201d reduces but doesn't eliminate the risk of promoting during a transient partition.",
       "module": "T10-case-studies"
     },
     {
       "id": "T10-case-studies-c7",
       "topic": "Case Studies",
       "q": "What did Prime Video's 2023 monolith move actually apply to, and what result did it produce?",
-      "a": "One internal service (Video Quality Analysis monitoring), not the whole platform \u2014 moved from Step Functions/Lambda/S3-hop orchestration to a single ECS task with in-memory data passing, cutting infrastructure cost over 90% and increasing scaling capacity. Rest of Prime Video stayed microservices.",
+      "a": "One internal service (Video Quality Analysis monitoring), not the whole platform \u00e2\u20ac\u201d moved from Step Functions/Lambda/S3-hop orchestration to a single ECS task with in-memory data passing, cutting infrastructure cost over 90% and increasing scaling capacity. Rest of Prime Video stayed microservices.",
       "module": "T10-case-studies"
     },
     {
       "id": "T10-case-studies-c8",
       "topic": "Case Studies",
       "q": "Why is 'Prime Video proves microservices are bad' a misreading of the case study?",
-      "a": "The change was scoped to one service whose workload was a tight, sequentially-dependent processing pipeline \u2014 exactly the shape where orchestration/inter-hop overhead dominates. The lesson is matching granularity to workload coordination pattern, not a blanket verdict against microservices.",
+      "a": "The change was scoped to one service whose workload was a tight, sequentially-dependent processing pipeline \u00e2\u20ac\u201d exactly the shape where orchestration/inter-hop overhead dominates. The lesson is matching granularity to workload coordination pattern, not a blanket verdict against microservices.",
       "module": "T10-case-studies"
     },
     {
@@ -22048,7 +22048,7 @@
       "id": "T10-case-studies-c10",
       "topic": "Case Studies",
       "q": "When is full process-level service separation actually worth its operational cost, per the Segment lesson?",
-      "a": "When components genuinely need independent scaling or independent team ownership \u2014 not merely fault isolation, which is often achievable in-process at lower operational cost (fewer deploy pipelines, less on-call surface).",
+      "a": "When components genuinely need independent scaling or independent team ownership \u00e2\u20ac\u201d not merely fault isolation, which is often achievable in-process at lower operational cost (fewer deploy pipelines, less on-call surface).",
       "module": "T10-case-studies"
     },
     {
@@ -22082,8 +22082,8 @@
     {
       "id": "T10-poc-to-prod-c4",
       "topic": "POC to Prod",
-      "q": "Per multiple 2026 analyses, what's the primary cause of AI pilots failing to reach production \u2014 model capability or something else?",
-      "a": "Organizational/operational causes: data readiness gaps, unclear ownership, missing evaluation infrastructure, and change management debt \u2014 not model capability.",
+      "q": "Per multiple 2026 analyses, what's the primary cause of AI pilots failing to reach production \u00e2\u20ac\u201d model capability or something else?",
+      "a": "Organizational/operational causes: data readiness gaps, unclear ownership, missing evaluation infrastructure, and change management debt \u00e2\u20ac\u201d not model capability.",
       "module": "T10-poc-to-prod"
     },
     {
@@ -22097,7 +22097,7 @@
       "id": "T10-poc-to-prod-c6",
       "topic": "POC to Prod",
       "q": "What is the AI-specific addition to the classic MVP-to-production gate that traditional CRUD features don't need?",
-      "a": "An automated evaluation harness (golden set with known-good outputs or a graded rubric) gating every model/prompt/retrieval-config change, plus drift monitoring on live traffic \u2014 because output quality can silently degrade in ways a binary-correctness test suite wouldn't catch.",
+      "a": "An automated evaluation harness (golden set with known-good outputs or a graded rubric) gating every model/prompt/retrieval-config change, plus drift monitoring on live traffic \u00e2\u20ac\u201d because output quality can silently degrade in ways a binary-correctness test suite wouldn't catch.",
       "module": "T10-poc-to-prod"
     },
     {
@@ -22111,7 +22111,7 @@
       "id": "T10-poc-to-prod-c8",
       "topic": "POC to Prod",
       "q": "What's the single most expensive mistake in the POC-to-prod pipeline?",
-      "a": "Skipping a gate's QUESTION while reusing its CODE \u2014 e.g. taking POC code straight to production because 'it already works,' inheriting all the risk the POC deliberately never tested.",
+      "a": "Skipping a gate's QUESTION while reusing its CODE \u00e2\u20ac\u201d e.g. taking POC code straight to production because 'it already works,' inheriting all the risk the POC deliberately never tested.",
       "module": "T10-poc-to-prod"
     },
     {
@@ -22125,7 +22125,7 @@
       "id": "T10-poc-to-prod-c10",
       "topic": "POC to Prod",
       "q": "Why can an MVP pilot succeed on its cohort but fail at full production rollout?",
-      "a": "Pilot cohorts are often self-selected (early adopters, more tolerant, sometimes internal/friendly users) and don't represent the full population's needs or usage patterns \u2014 MVP exit criteria measured on a non-representative cohort can mask a mismatch that only appears at real scale.",
+      "a": "Pilot cohorts are often self-selected (early adopters, more tolerant, sometimes internal/friendly users) and don't represent the full population's needs or usage patterns \u00e2\u20ac\u201d MVP exit criteria measured on a non-representative cohort can mask a mismatch that only appears at real scale.",
       "module": "T10-poc-to-prod"
     },
     {
@@ -22713,7 +22713,7 @@
       "id": "T17-sql-mastery-c1",
       "topic": "SQL Mastery",
       "q": "What is SQL's logical execution order and why does it matter for window functions?",
-      "a": "FROM/JOIN -> WHERE -> GROUP BY -> HAVING -> WINDOW FUNCTIONS -> SELECT -> DISTINCT -> ORDER BY -> LIMIT. Window functions compute AFTER WHERE/HAVING, so you can't filter on a window function's result in the same query's WHERE \u2014 must wrap in a CTE and filter the outer query.",
+      "a": "FROM/JOIN -> WHERE -> GROUP BY -> HAVING -> WINDOW FUNCTIONS -> SELECT -> DISTINCT -> ORDER BY -> LIMIT. Window functions compute AFTER WHERE/HAVING, so you can't filter on a window function's result in the same query's WHERE \u00e2\u20ac\u201d must wrap in a CTE and filter the outer query.",
       "module": "T17-sql-mastery"
     },
     {
@@ -22727,7 +22727,7 @@
       "id": "T17-sql-mastery-c3",
       "topic": "SQL Mastery",
       "q": "What's the default window frame when ORDER BY is present but no frame clause is specified, and why is it a bug risk for running totals?",
-      "a": "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW \u2014 RANGE groups rows with equal ORDER BY values together as peers, so a running total by date gives every row sharing a date the SAME cumulative value, not a true row-by-row total. Use ROWS explicitly instead.",
+      "a": "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW \u00e2\u20ac\u201d RANGE groups rows with equal ORDER BY values together as peers, so a running total by date gives every row sharing a date the SAME cumulative value, not a true row-by-row total. Use ROWS explicitly instead.",
       "module": "T17-sql-mastery"
     },
     {
@@ -22741,7 +22741,7 @@
       "id": "T17-sql-mastery-c5",
       "topic": "SQL Mastery",
       "q": "What can a LATERAL join (or CROSS APPLY) do that a plain subquery in FROM cannot?",
-      "a": "Reference columns from tables appearing earlier in the same FROM clause \u2014 a plain FROM subquery is evaluated once, independent of other tables, and can't see the outer row's columns.",
+      "a": "Reference columns from tables appearing earlier in the same FROM clause \u00e2\u20ac\u201d a plain FROM subquery is evaluated once, independent of other tables, and can't see the outer row's columns.",
       "module": "T17-sql-mastery"
     },
     {
@@ -22755,7 +22755,7 @@
       "id": "T17-sql-mastery-c7",
       "topic": "SQL Mastery",
       "q": "Why does a dedup query need a deterministic tiebreaker in its ORDER BY?",
-      "a": "Without one, ties on the primary sort key (e.g. updated_at) make ROW_NUMBER() pick an arbitrary row, potentially a different one on each re-run \u2014 add a monotonic tiebreaker (id DESC) to make dedup idempotent.",
+      "a": "Without one, ties on the primary sort key (e.g. updated_at) make ROW_NUMBER() pick an arbitrary row, potentially a different one on each re-run \u00e2\u20ac\u201d add a monotonic tiebreaker (id DESC) to make dedup idempotent.",
       "module": "T17-sql-mastery"
     },
     {
@@ -22769,7 +22769,7 @@
       "id": "T17-sql-mastery-c9",
       "topic": "SQL Mastery",
       "q": "What's the single highest-leverage index to add for a slow window-function query on a large table?",
-      "a": "A composite index on (partition_columns..., order_column) \u2014 lets the engine use the index's existing order instead of an explicit Sort step per partition, often more impactful than indexing individual filter columns.",
+      "a": "A composite index on (partition_columns..., order_column) \u00e2\u20ac\u201d lets the engine use the index's existing order instead of an explicit Sort step per partition, often more impactful than indexing individual filter columns.",
       "module": "T17-sql-mastery"
     },
     {
@@ -22811,7 +22811,7 @@
       "id": "T21-anti-patterns-c3",
       "topic": "Anti-Patterns",
       "q": "How does the transactional outbox pattern fix dual writes?",
-      "a": "Write the state change and an outbox event row in the same DB transaction; a separate relay (poller or CDC) publishes the event, retrying until acked \u2014 converts two unsafe writes into one atomic write plus a durable at-least-once relay.",
+      "a": "Write the state change and an outbox event row in the same DB transaction; a separate relay (poller or CDC) publishes the event, retrying until acked \u00e2\u20ac\u201d converts two unsafe writes into one atomic write plus a durable at-least-once relay.",
       "module": "T21-anti-patterns"
     },
     {
@@ -22825,21 +22825,21 @@
       "id": "T21-anti-patterns-c5",
       "topic": "Anti-Patterns",
       "q": "What is the highest-leverage single fix underlying most distributed-monolith and dual-write pain?",
-      "a": "Fixing shared-database ownership \u2014 giving each table exactly one writer/owning service, with other consumers going through an API or an event-derived read replica.",
+      "a": "Fixing shared-database ownership \u00e2\u20ac\u201d giving each table exactly one writer/owning service, with other consumers going through an API or an event-derived read replica.",
       "module": "T21-anti-patterns"
     },
     {
       "id": "T21-anti-patterns-c6",
       "topic": "Anti-Patterns",
       "q": "What operational metrics reveal a god object?",
-      "a": "Disproportionate PR churn and merge-conflict rate concentrated in one file/class, and high bus-factor risk (few people understand the whole thing) \u2014 not size alone.",
+      "a": "Disproportionate PR churn and merge-conflict rate concentrated in one file/class, and high bus-factor risk (few people understand the whole thing) \u00e2\u20ac\u201d not size alone.",
       "module": "T21-anti-patterns"
     },
     {
       "id": "T21-anti-patterns-c7",
       "topic": "Anti-Patterns",
       "q": "Do the reliability and latency costs of chatty services scale the same way with call count?",
-      "a": "No. Latency compounds additively/multiplicatively along a sync chain (40 calls @10ms \u2248 400ms floor); reliability compounds multiplicatively per-call success rate (99.9%^40 \u2248 96% \u2014 a five-nines dependency set becomes a two-nines user experience).",
+      "a": "No. Latency compounds additively/multiplicatively along a sync chain (40 calls @10ms \u00e2\u2030\u02c6 400ms floor); reliability compounds multiplicatively per-call success rate (99.9%^40 \u00e2\u2030\u02c6 96% \u00e2\u20ac\u201d a five-nines dependency set becomes a two-nines user experience).",
       "module": "T21-anti-patterns"
     },
     {
@@ -22874,7 +22874,7 @@
       "id": "T21-anti-patterns-c12",
       "topic": "Anti-Patterns",
       "q": "When is a shared database NOT the anti-pattern?",
-      "a": "When it's a deliberate, planned single-schema design for a small team needing real cross-entity ACID transactions, with one team owning the whole schema \u2014 the anti-pattern is specifically accidental, unplanned multi-writer coupling.",
+      "a": "When it's a deliberate, planned single-schema design for a small team needing real cross-entity ACID transactions, with one team owning the whole schema \u00e2\u20ac\u201d the anti-pattern is specifically accidental, unplanned multi-writer coupling.",
       "module": "T21-anti-patterns"
     },
     {
@@ -23965,15 +23965,15 @@
     {
       "id": "T12-cicd-c6",
       "topic": "CI/CD & GitOps",
-      "q": "ArgoCD vs Flux \u2014 where does each genuinely win?",
-      "a": "ArgoCD wins on bundled dashboard, multi-cluster hub-and-spoke management, and broader adoption. Flux wins on native Helm chart lifecycle fidelity (HelmRelease stays fully visible/interoperable with standard Helm tooling) \u2014 a real, concrete tradeoff, not a popularity contest.",
+      "q": "ArgoCD vs Flux \u00e2\u20ac\u201d where does each genuinely win?",
+      "a": "ArgoCD wins on bundled dashboard, multi-cluster hub-and-spoke management, and broader adoption. Flux wins on native Helm chart lifecycle fidelity (HelmRelease stays fully visible/interoperable with standard Helm tooling) \u00e2\u20ac\u201d a real, concrete tradeoff, not a popularity contest.",
       "module": "T12-cicd"
     },
     {
       "id": "T12-cicd-c7",
       "topic": "CI/CD & GitOps",
       "q": "Does Deployment's RollingUpdate, ArgoCD, or Flux alone perform traffic-percentage canary analysis?",
-      "a": "No \u2014 none of them. That requires a dedicated progressive delivery controller: Argo Rollouts (replaces Deployment with a Rollout CRD) or Flagger (wraps an existing Deployment unmodified).",
+      "a": "No \u00e2\u20ac\u201d none of them. That requires a dedicated progressive delivery controller: Argo Rollouts (replaces Deployment with a Rollout CRD) or Flagger (wraps an existing Deployment unmodified).",
       "module": "T12-cicd"
     },
     {
@@ -23987,35 +23987,35 @@
       "id": "T12-cicd-c9",
       "topic": "CI/CD & GitOps",
       "q": "A canary rollout on a low-traffic service keeps flapping between proceed and rollback. Likely cause?",
-      "a": "Statistical noise at low sample size \u2014 a small percentage weight on a low-volume service yields too few requests per analysis interval to reliably distinguish a real regression from noise. Fix with a fixed absolute request count instead of a percentage, or a wider analysis interval.",
+      "a": "Statistical noise at low sample size \u00e2\u20ac\u201d a small percentage weight on a low-volume service yields too few requests per analysis interval to reliably distinguish a real regression from noise. Fix with a fixed absolute request count instead of a percentage, or a wider analysis interval.",
       "module": "T12-cicd"
     },
     {
       "id": "T12-cicd-c10",
       "topic": "CI/CD & GitOps",
       "q": "Why do many teams keep syncPolicy.automated off (manual sync) for production even with a fully automated pipeline otherwise?",
-      "a": "Manual sync keeps a deliberate human confirmation point between the diff being computed/visible and it actually being applied to production \u2014 a considered tradeoff of slower prod deploys for a final human check on the highest-blast-radius environment.",
+      "a": "Manual sync keeps a deliberate human confirmation point between the diff being computed/visible and it actually being applied to production \u00e2\u20ac\u201d a considered tradeoff of slower prod deploys for a final human check on the highest-blast-radius environment.",
       "module": "T12-cicd"
     },
     {
       "id": "T12-cicd-c11",
       "topic": "CI/CD & GitOps",
       "q": "What does GitHub Actions OIDC (permissions: id-token: write) provide over a stored cloud secret?",
-      "a": "Short-lived, workflow-run-scoped credentials minted just for that run, instead of a long-lived static secret in the repo/org secret store \u2014 closing the risk of an exfiltrated static credential being reused long after the workflow finished.",
+      "a": "Short-lived, workflow-run-scoped credentials minted just for that run, instead of a long-lived static secret in the repo/org secret store \u00e2\u20ac\u201d closing the risk of an exfiltrated static credential being reused long after the workflow finished.",
       "module": "T12-cicd"
     },
     {
       "id": "T12-cicd-c12",
       "topic": "CI/CD & GitOps",
       "q": "Why do production GitOps setups typically split a config repo from the application source repo?",
-      "a": "Keeps the GitOps controller's Git polling/diff surface scoped to deploy-relevant changes, and lets deploy history be reviewed independently from application code history \u2014 scales better once multiple teams/services need independent deploy cadences and audit trails.",
+      "a": "Keeps the GitOps controller's Git polling/diff surface scoped to deploy-relevant changes, and lets deploy history be reviewed independently from application code history \u00e2\u20ac\u201d scales better once multiple teams/services need independent deploy cadences and audit trails.",
       "module": "T12-cicd"
     },
     {
       "id": "T12-eks-ecs-ecr-c1",
       "topic": "EKS/ECS/ECR",
       "q": "Why is 'ECS vs Fargate' a category error?",
-      "a": "ECS/EKS are orchestrators (where/how containers are scheduled); EC2/Fargate are compute engines (what they run on). They're orthogonal axes \u2014 you can pair either orchestrator with either compute option, giving 4 real combinations, not 2.",
+      "a": "ECS/EKS are orchestrators (where/how containers are scheduled); EC2/Fargate are compute engines (what they run on). They're orthogonal axes \u00e2\u20ac\u201d you can pair either orchestrator with either compute option, giving 4 real combinations, not 2.",
       "module": "T12-eks-ecs-ecr"
     },
     {
@@ -24029,49 +24029,49 @@
       "id": "T12-eks-ecs-ecr-c3",
       "topic": "EKS/ECS/ECR",
       "q": "Roughly what price premium does Fargate carry over equivalent EC2 capacity, and what is it buying?",
-      "a": "Commonly quoted in the 40-60% range above equivalent EC2 compute. It buys zero node management \u2014 no patching, capacity planning, or autoscaler tuning \u2014 a good trade for bursty/unpredictable workloads, a bad default for large steady-state fleets.",
+      "a": "Commonly quoted in the 40-60% range above equivalent EC2 compute. It buys zero node management \u00e2\u20ac\u201d no patching, capacity planning, or autoscaler tuning \u00e2\u20ac\u201d a good trade for bursty/unpredictable workloads, a bad default for large steady-state fleets.",
       "module": "T12-eks-ecs-ecr"
     },
     {
       "id": "T12-eks-ecs-ecr-c4",
       "topic": "EKS/ECS/ECR",
       "q": "What's the honest default recommendation for a new AWS-only team with no hard Kubernetes requirement?",
-      "a": "ECS + Fargate \u2014 simplest operational model, zero control-plane fee. Graduate to EKS only for a real, named requirement (multi-cloud, a specific k8s-only tool/operator, deliberate hiring/ecosystem bet), not by default.",
+      "a": "ECS + Fargate \u00e2\u20ac\u201d simplest operational model, zero control-plane fee. Graduate to EKS only for a real, named requirement (multi-cloud, a specific k8s-only tool/operator, deliberate hiring/ecosystem bet), not by default.",
       "module": "T12-eks-ecs-ecr"
     },
     {
       "id": "T12-eks-ecs-ecr-c5",
       "topic": "EKS/ECS/ECR",
       "q": "How does IAM authentication differ between an ECS task and an EKS pod?",
-      "a": "ECS: a task role is a normal IAM role directly assumed by the task, no federation layer. EKS: a ServiceAccount has no IAM identity by default \u2014 needs IRSA (OIDC federation) or EKS Pod Identity to get any AWS permissions at all.",
+      "a": "ECS: a task role is a normal IAM role directly assumed by the task, no federation layer. EKS: a ServiceAccount has no IAM identity by default \u00e2\u20ac\u201d needs IRSA (OIDC federation) or EKS Pod Identity to get any AWS permissions at all.",
       "module": "T12-eks-ecs-ecr"
     },
     {
       "id": "T12-eks-ecs-ecr-c6",
       "topic": "EKS/ECS/ECR",
       "q": "A pod on EKS can't reach S3 despite the referenced IAM role having correct permissions. First thing to check?",
-      "a": "Whether the ServiceAccount-to-IAM-role association (IRSA annotation or Pod Identity association) actually exists and is correctly configured, and whether the pod spec references that specific ServiceAccount \u2014 a correct policy is irrelevant if the federation link is missing.",
+      "a": "Whether the ServiceAccount-to-IAM-role association (IRSA annotation or Pod Identity association) actually exists and is correctly configured, and whether the pod spec references that specific ServiceAccount \u00e2\u20ac\u201d a correct policy is irrelevant if the federation link is missing.",
       "module": "T12-eks-ecs-ecr"
     },
     {
       "id": "T12-eks-ecs-ecr-c7",
       "topic": "EKS/ECS/ECR",
       "q": "Can a DaemonSet run on an EKS Fargate profile? Why or why not, and what replaces it?",
-      "a": "No \u2014 Fargate gives each pod isolated compute with no shared-node concept for a DaemonSet's one-per-node pattern to attach to. Sidecar containers are the standard replacement for logging/monitoring coverage on Fargate-profile pods.",
+      "a": "No \u00e2\u20ac\u201d Fargate gives each pod isolated compute with no shared-node concept for a DaemonSet's one-per-node pattern to attach to. Sidecar containers are the standard replacement for logging/monitoring coverage on Fargate-profile pods.",
       "module": "T12-eks-ecs-ecr"
     },
     {
       "id": "T12-eks-ecs-ecr-c8",
       "topic": "EKS/ECS/ECR",
       "q": "Why don't EKS worker nodes need imagePullSecrets to pull from ECR (same-account, same-region)?",
-      "a": "Authentication happens automatically via the node's own IAM role (or the Fargate task's execution role) \u2014 the node's AWS identity itself authenticates the pull, unlike a third-party registry which needs an explicit imagePullSecrets-referenced Secret.",
+      "a": "Authentication happens automatically via the node's own IAM role (or the Fargate task's execution role) \u00e2\u20ac\u201d the node's AWS identity itself authenticates the pull, unlike a third-party registry which needs an explicit imagePullSecrets-referenced Secret.",
       "module": "T12-eks-ecs-ecr"
     },
     {
       "id": "T12-eks-ecs-ecr-c9",
       "topic": "EKS/ECS/ECR",
       "q": "What happens to ECR images if no lifecycle policy is set?",
-      "a": "ECR retains every pushed image indefinitely by default \u2014 a slow, easy-to-miss storage cost leak. A lifecycle policy (e.g. keep last N tagged images, expire untagged after N days) is the standard fix.",
+      "a": "ECR retains every pushed image indefinitely by default \u00e2\u20ac\u201d a slow, easy-to-miss storage cost leak. A lifecycle policy (e.g. keep last N tagged images, expire untagged after N days) is the standard fix.",
       "module": "T12-eks-ecs-ecr"
     },
     {
@@ -24085,7 +24085,7 @@
       "id": "T12-eks-ecs-ecr-c11",
       "topic": "EKS/ECS/ECR",
       "q": "When does the EKS control-plane fee actually become a trap, contrary to intuition?",
-      "a": "When a team runs many small EKS clusters instead of consolidating \u2014 the fixed ~$73/month fee multiplies across each small cluster, even though the aggregate workload might be large enough that a single larger cluster's fee would be negligible.",
+      "a": "When a team runs many small EKS clusters instead of consolidating \u00e2\u20ac\u201d the fixed ~$73/month fee multiplies across each small cluster, even though the aggregate workload might be large enough that a single larger cluster's fee would be negligible.",
       "module": "T12-eks-ecs-ecr"
     },
     {
@@ -24099,13 +24099,13 @@
       "id": "T12-jenkins-c1",
       "topic": "Jenkins",
       "q": "What does the Jenkins controller do, and why shouldn't it run build steps directly?",
-      "a": "Handles scheduling, web UI/REST API, and build history/artifact storage \u2014 not build execution. Running builds on it directly causes resource contention and is a security anti-pattern since the controller typically holds credentials for every pipeline's deploy targets.",
+      "a": "Handles scheduling, web UI/REST API, and build history/artifact storage \u00e2\u20ac\u201d not build execution. Running builds on it directly causes resource contention and is a security anti-pattern since the controller typically holds credentials for every pipeline's deploy targets.",
       "module": "T12-jenkins"
     },
     {
       "id": "T12-jenkins-c2",
       "topic": "Jenkins",
-      "q": "Static vs dynamic Jenkins agents \u2014 mechanism and tradeoff?",
+      "q": "Static vs dynamic Jenkins agents \u00e2\u20ac\u201d mechanism and tradeoff?",
       "a": "Static: long-lived VM, connects via JNLP/inbound-agent or SSH, state persists across builds (real cross-build flakiness risk). Dynamic (Kubernetes plugin): fresh pod per build, torn down after, no state persistence, but pays a cold-start cost per build.",
       "module": "T12-jenkins"
     },
@@ -24127,14 +24127,14 @@
       "id": "T12-jenkins-c5",
       "topic": "Jenkins",
       "q": "What are the two directory conventions in a Jenkins shared library repo, and what's the risk of not pinning @Library references?",
-      "a": "vars/<name>.groovy = a directly callable pipeline step; src/ = supporting Groovy classes. Unpinned references (@Library('lib@master')) mean every pipeline using it can silently change behavior the moment someone merges to the library's default branch \u2014 pin to a tag instead.",
+      "a": "vars/<name>.groovy = a directly callable pipeline step; src/ = supporting Groovy classes. Unpinned references (@Library('lib@master')) mean every pipeline using it can silently change behavior the moment someone merges to the library's default branch \u00e2\u20ac\u201d pin to a tag instead.",
       "module": "T12-jenkins"
     },
     {
       "id": "T12-jenkins-c6",
       "topic": "Jenkins",
       "q": "Builds sit Pending despite agents showing healthy CPU/memory. What's the likely bottleneck?",
-      "a": "Executor count \u2014 the per-agent concurrency limit \u2014 is a distinct capacity constraint from raw resource headroom. Diagnose from the build queue view, not agent resource dashboards.",
+      "a": "Executor count \u00e2\u20ac\u201d the per-agent concurrency limit \u00e2\u20ac\u201d is a distinct capacity constraint from raw resource headroom. Diagnose from the build queue view, not agent resource dashboards.",
       "module": "T12-jenkins"
     },
     {
@@ -24148,7 +24148,7 @@
       "id": "T12-jenkins-c8",
       "topic": "Jenkins",
       "q": "A REST API call to Jenkins gets a 403 even though credentials/permissions are confirmed correct. Likely cause?",
-      "a": "A missing CSRF 'crumb' token \u2014 Jenkins requires it by default on state-changing requests, and its absence produces a 403 that looks like a permissions failure but isn't. Fetch a crumb from the crumb issuer endpoint first.",
+      "a": "A missing CSRF 'crumb' token \u00e2\u20ac\u201d Jenkins requires it by default on state-changing requests, and its absence produces a 403 that looks like a permissions failure but isn't. Fetch a crumb from the crumb issuer endpoint first.",
       "module": "T12-jenkins"
     },
     {
@@ -24161,7 +24161,7 @@
     {
       "id": "T12-jenkins-c10",
       "topic": "Jenkins",
-      "q": "Jenkins's origin \u2014 what was it forked from, and why?",
+      "q": "Jenkins's origin \u00e2\u20ac\u201d what was it forked from, and why?",
       "a": "Forked from Hudson (originally Sun Microsystems, 2004) in 2011, after an Oracle-Sun trademark/governance dispute split the community.",
       "module": "T12-jenkins"
     },
@@ -39739,6 +39739,377 @@
       "q": "When should you NOT use constrained decoding?",
       "a": "Tiny fixed vocabularies (3-value sentiment: membership check beats a CFG). One-shot human-facing prose (the tax is paid, nothing gained \u2014 even *requesting* JSON narrows which answer you get). Cold schemas on tight latency SLOs (10-60s first compile). Cross-field/value semantics (grammar is positional, not relational \u2014 use code validation + repair loop). Open-weight models on reasoning-heavy tasks before measuring the tax.",
       "module": "T07-structured-output"
+    },
+    {
+      "id": "C-AZ-identity-c15",
+      "topic": "Azure Identity",
+      "q": "Name a real-world limit-related failure mode with managed identity creation in automation.",
+      "a": "A Terraform apply creating many user-assigned identities in a tight loop within one subscription/region can hit the 80-creates-per-20-seconds throttle before the tenant-wide 400/20s limit, producing retriable throttling errors that look like generic API failures unless the specific limit is known.",
+      "module": "C-AZ-identity"
+    },
+    {
+      "id": "T10-case-studies-c12",
+      "topic": "Case Studies",
+      "q": "Why didn't downstream circuit breakers save AWS's and Cloudflare's customers during the 2025 outages?",
+      "a": "A breaker still needs to reach the dependency (or its health check) to decide whether to trip; when the control-plane failure breaks the addressing/discovery layer itself (DNS, proxy fleet), the breaker's own health-check path degrades along with the thing it's meant to protect against.",
+      "module": "T10-case-studies"
+    },
+    {
+      "id": "T10-case-studies-c13",
+      "topic": "Case Studies",
+      "q": "What's the minimum viable retrofit to add blast-radius containment to an existing global control plane?",
+      "a": "A canary tier (small fleet %/one low-traffic region) that receives every push first, gated behind automated health signals with a bake time before wider rollout, plus rollback faster than full propagation \u00e2\u20ac\u201d a checkpoint insertion, not a rearchitecture.",
+      "module": "T10-case-studies"
+    },
+    {
+      "id": "T10-case-studies-c14",
+      "topic": "Case Studies",
+      "q": "What did Google's SRE book (2016) formalize, and why did it matter for postmortem quality?",
+      "a": "The 'blameless postmortem' \u00e2\u20ac\u201d removing the incentive to stay vague to avoid blaming an individual, which made it safe to publish the actual mechanical failure chain in enough detail to be useful to people who weren't there, including future readers of the case study.",
+      "module": "T10-case-studies"
+    },
+    {
+      "id": "T10-poc-to-prod-c12",
+      "topic": "POC to Prod",
+      "q": "How should you give leadership a project cost estimate without hiding the staged-gate structure inside one number?",
+      "a": "Give a firm number for the next gate only, plus a conditional range for what follows based on that gate's outcome, and name the abandonment branch explicitly \u00e2\u20ac\u201d one collapsed total either overstates near-term spend or hides the real chance the project stops before production.",
+      "module": "T10-poc-to-prod"
+    },
+    {
+      "id": "T10-poc-to-prod-c13",
+      "topic": "POC to Prod",
+      "q": "Production reveals the MVP's core adoption assumption was wrong for the general population. What's the correct move?",
+      "a": "Treat it as the prototype gate's question (is this the right thing to build) failing retroactively, and re-run real user validation with a representative sample \u00e2\u20ac\u201d not push forward with production hardening, which fixes an operational problem, not a product-fit one.",
+      "module": "T10-poc-to-prod"
+    },
+    {
+      "id": "T12-cicd-c13",
+      "topic": "CI/CD & GitOps",
+      "q": "What's the difference between Sealed Secrets and External Secrets Operator for keeping secrets out of plaintext Git?",
+      "a": "Sealed Secrets encrypts the value client-side with a cluster-specific public key before committing (only the in-cluster controller's private key can decrypt). External Secrets Operator commits only a reference (which key, which vault) and syncs the real value from an external secrets manager at reconcile time \u00e2\u20ac\u201d Git never holds the value, encrypted or not.",
+      "module": "T12-cicd"
+    },
+    {
+      "id": "T12-cicd-c14",
+      "topic": "CI/CD & GitOps",
+      "q": "How do you guarantee a deployed image was actually built by CI, not manually pushed with the same tag?",
+      "a": "Sign the image at build time (cosign keyless signing via the CI workflow's OIDC identity) with an SLSA-style provenance attestation, then verify the signature and signing identity at admission time (Kyverno) \u00e2\u20ac\u201d pinned to the immutable image digest, not the mutable tag, since a tag can be repointed after signing.",
+      "module": "T12-cicd"
+    },
+    {
+      "id": "T12-eks-ecs-ecr-c13",
+      "topic": "EKS/ECS/ECR",
+      "q": "Why can an EKS cluster fail to schedule pods on 'insufficient IP addresses' even with free CPU/memory on nodes?",
+      "a": "The default VPC CNI assigns each pod a real routable VPC IP, so pod density is bounded by ENI secondary-IP capacity and free subnet address space, independent of compute. Fix with larger subnets, prefix delegation (/28 prefixes instead of individual IPs), or an overlay-mode CNI.",
+      "module": "T12-eks-ecs-ecr"
+    },
+    {
+      "id": "T12-eks-ecs-ecr-c14",
+      "topic": "EKS/ECS/ECR",
+      "q": "What's the core mechanical difference between Cluster Autoscaler and Karpenter for EKS node provisioning?",
+      "a": "Cluster Autoscaler only scales pre-defined ASG node groups' size. Karpenter provisions nodes directly without ASGs, picking best-fit instance type/AZ per pending pod's actual resource requests at scheduling time, and actively consolidates underutilized nodes \u00e2\u20ac\u201d faster scale-up, better bin-packing, bounded by NodePool/EC2NodeClass constraints.",
+      "module": "T12-eks-ecs-ecr"
+    },
+    {
+      "id": "T12-jenkins-c13",
+      "topic": "Jenkins",
+      "q": "If the Jenkins controller's disk dies, what's lost that Jenkinsfiles in source control don't cover?",
+      "a": "Job configs, build history/artifacts, and credentials (encrypted via master.key \u00e2\u20ac\u201d losing that key makes credentials.xml's values permanently unrecoverable) \u00e2\u20ac\u201d Jenkinsfiles only define pipeline logic, not job config, credentials, or history.",
+      "module": "T12-jenkins"
+    },
+    {
+      "id": "T12-jenkins-c14",
+      "topic": "Jenkins",
+      "q": "Does adopting JCasC (Jenkins Configuration as Code) remove the need to back up $JENKINS_HOME?",
+      "a": "No \u00e2\u20ac\u201d JCasC makes system/job configuration reconstructable from version control, but credentials' encrypted values/key and build history/artifacts are runtime data JCasC doesn't cover, and still need their own backup and rotation strategy.",
+      "module": "T12-jenkins"
+    },
+    {
+      "id": "T14-principal-competencies-c11",
+      "topic": "Principal Competencies",
+      "q": "In a blameless postmortem, how should a principal engineer separate accountability from blame?",
+      "a": "Own the outcome plainly without hedging, but pivot immediately to the structural question \u00e2\u20ac\u201d what process/system gap let an individual action cause this \u00e2\u20ac\u201d and drive toward a mechanism (a check, a changed default) rather than 'we'll be more careful,' which doesn't scale.",
+      "module": "T14-principal-competencies"
+    },
+    {
+      "id": "T14-principal-competencies-c12",
+      "topic": "Principal Competencies",
+      "q": "Two peer principal engineers publicly disagree on technical direction with no shared decision-maker. What's the resolution mechanism?",
+      "a": "Reduce the disagreement to its actual empirical/risk-tolerance crux and get real evidence fast (a spike, small reversible pilot) rather than arguing from priors; if it's a genuine values tradeoff with no factual resolution, escalate explicitly to a documented decision-maker rather than letting it stall unresolved.",
+      "module": "T14-principal-competencies"
+    },
+    {
+      "id": "T14-principal-competencies-c13",
+      "topic": "Principal Competencies",
+      "q": "How does AI coding agent delegation change what 'technical depth' signals at the principal level, versus Larson's 2021 framing?",
+      "a": "Depth increasingly shows in judgment about when to delegate implementation to an agent vs. do it by hand, and in critically reviewing AI-generated designs/code for plausible-but-subtly-wrong failure modes \u00e2\u20ac\u201d the credibility signal shifts from 'wrote the hardest code' to 'right about when to trust agent output,' same underlying judgment, different venue.",
+      "module": "T14-principal-competencies"
+    },
+    {
+      "id": "T14-principal-competencies-c14",
+      "topic": "Principal Competencies",
+      "q": "How should a candidate calibrate whether a 'principal engineer' title at a small company actually matches principal-level scope?",
+      "a": "Ask scope-revealing questions (what do other principal/staff engineers own, a recent cross-team decision the role drove) rather than trusting the title \u00e2\u20ac\u201d a small company's whole engineering org can be a legitimate principal-scope problem even if it'd be staff-scope at a much larger company; the calibration is about problem shape, not headcount.",
+      "module": "T14-principal-competencies"
+    },
+    {
+      "id": "T16-cpython-runtime-c13",
+      "topic": "CPython Runtime",
+      "q": "How do subinterpreters (PEP 684, 3.12+) differ from both free-threading and multiprocessing?",
+      "a": "Each subinterpreter has its own GIL (true parallelism, unlike classic threading) and shares the OS process (no fork/pickling overhead, unlike multiprocessing), but doesn't share Python objects directly by default \u00e2\u20ac\u201d communication goes through explicit restricted channels, closer to message-passing than shared-memory threading.",
+      "module": "T16-cpython-runtime"
+    },
+    {
+      "id": "T16-cpython-runtime-c14",
+      "topic": "CPython Runtime",
+      "q": "Why doesn't CPython's RSS shrink proportionally after objects are freed?",
+      "a": "pymalloc manages small objects (<~512 bytes) in 256KB arenas; an arena can only be returned to the OS once every pool within it is completely empty, so one long-lived small object can pin an otherwise-empty arena resident even though CPython considers that memory free for reuse.",
+      "module": "T16-cpython-runtime"
+    },
+    {
+      "id": "T16-cpython-runtime-c15",
+      "topic": "CPython Runtime",
+      "q": "How did the compact dict implementation (guaranteed ordering since 3.7) reduce memory instead of increasing it?",
+      "a": "It splits storage into a sparse array of small integer indices plus a dense, insertion-ordered array of the actual hash/key/value triples \u00e2\u20ac\u201d indices are far smaller than full triples, shrinking the sparse portion by roughly 20-25% while adding an ordering guarantee as a side effect of the dense array being append-only.",
+      "module": "T16-cpython-runtime"
+    },
+    {
+      "id": "T16-go-v8-runtime-c13",
+      "topic": "Go & V8 Runtimes",
+      "q": "What does a Go write barrier do during concurrent GC marking, and why is it needed?",
+      "a": "Extra work on every pointer write during the concurrent mark phase to catch the mutator concurrently mutating the object graph in a way that could hide a live object from the collector (a tricolor-invariant violation) \u00e2\u20ac\u201d the real, always-on cost of running marking concurrently with the mutator instead of stopping the world for it.",
+      "module": "T16-go-v8-runtime"
+    },
+    {
+      "id": "T16-go-v8-runtime-c14",
+      "topic": "Go & V8 Runtimes",
+      "q": "Name V8's compilation tiers between Ignition and TurboFan, and why they exist.",
+      "a": "Sparkplug (fast baseline JIT, compiles Ignition bytecode to unoptimized machine code almost immediately) and Maglev (mid-tier optimizing compiler). They exist for the same reason the JVM's C1 exists between its interpreter and C2: TurboFan's compile cost is too slow to apply to every warm function, pure interpretation too slow for functions that run enough to matter.",
+      "module": "T16-go-v8-runtime"
+    },
+    {
+      "id": "T16-go-v8-runtime-c15",
+      "topic": "Go & V8 Runtimes",
+      "q": "In Node.js, does a resolved Promise's .then() callback or an earlier-scheduled setTimeout(fn, 0) run first?",
+      "a": "The Promise callback always runs first \u00e2\u20ac\u201d V8's microtask queue is fully drained after every callback the event loop runs, before it proceeds to the next macrotask (setTimeout, I/O, setImmediate), regardless of scheduling order. A recursively self-scheduling microtask chain can starve timers/I/O entirely.",
+      "module": "T16-go-v8-runtime"
+    },
+    {
+      "id": "T16-jvm-runtime-c13",
+      "topic": "JVM Runtime",
+      "q": "What is carrier-thread pinning with virtual threads (Project Loom), and what's the fix?",
+      "a": "A virtual thread inside a synchronized block can't unmount from its carrier thread when it blocks, since monitor ownership can't safely migrate carriers mid-hold \u00e2\u20ac\u201d under load this starves the limited carrier pool. Fix: replace synchronized with ReentrantLock around the blocking call; locate pinning with -Djdk.tracePinnedThreads=full or JFR pinning events.",
+      "module": "T16-jvm-runtime"
+    },
+    {
+      "id": "T16-jvm-runtime-c14",
+      "topic": "JVM Runtime",
+      "q": "How do you confirm a Metaspace growth pattern is a classloader leak rather than legitimate dynamic class generation churn?",
+      "a": "Take heap dumps across two redeploys and diff classloader instance counts (Eclipse MAT has a dedicated classloader-leak report) \u00e2\u20ac\u201d a count that grows by roughly one per redeploy and never drops is the leak signature; a framework properly releasing old classes on redeploy shows churn, not accumulation.",
+      "module": "T16-jvm-runtime"
+    },
+    {
+      "id": "T16-jvm-runtime-c15",
+      "topic": "JVM Runtime",
+      "q": "Why isn't volatile a substitute for synchronized/AtomicInteger for a multi-threaded counter?",
+      "a": "volatile guarantees happens-before visibility/ordering for each individual read and write of that field, but no mutual exclusion \u00e2\u20ac\u201d a compound read-modify-write (increment) can still race between threads exactly like CPython's x += 1, since volatile never made the multi-step operation atomic.",
+      "module": "T16-jvm-runtime"
+    },
+    {
+      "id": "T17-sql-mastery-c13",
+      "topic": "SQL Mastery",
+      "q": "Why is INSERT ... ON CONFLICT DO UPDATE safer under concurrency than a SELECT-then-INSERT-or-UPDATE pattern in application code?",
+      "a": "ON CONFLICT is atomic at the database level \u00e2\u20ac\u201d the conflict check and resulting insert-or-update happen as one indivisible operation under the row's lock. A check-then-act pattern has a real race window: two concurrent transactions can both see 'no row exists' and both attempt an INSERT.",
+      "module": "T17-sql-mastery"
+    },
+    {
+      "id": "T17-sql-mastery-c14",
+      "topic": "SQL Mastery",
+      "q": "A query slows drastically after a migration adds 10x rows to a joined table, with no query change. What's the first thing to check, before touching indexes?",
+      "a": "Whether table statistics are stale \u00e2\u20ac\u201d if ANALYZE hasn't run since the migration, the planner may still cost-estimate against the old row count and pick a now-catastrophic join strategy (e.g. nested loop over a table that's no longer small). Stale statistics is the most common root cause of this exact symptom.",
+      "module": "T17-sql-mastery"
+    },
+    {
+      "id": "T21-anti-patterns-c13",
+      "topic": "Anti-Patterns",
+      "q": "When de-risking a 12-service distributed monolith, what's the actual unit you migrate \u00e2\u20ac\u201d services or tables?",
+      "a": "Tables. Ownership, not the service diagram, is the real coupling graph; fix one table's ownership at a time (API or CDC replica cutover, reconciled in parallel, then old path removed) before revisiting whether the service boundaries themselves are wrong.",
+      "module": "T21-anti-patterns"
+    },
+    {
+      "id": "T21-anti-patterns-c14",
+      "topic": "Anti-Patterns",
+      "q": "What new failure mode does org-wide CDC (e.g. Debezium) introduce to fix dual writes?",
+      "a": "Every downstream consumer now implicitly depends on the source DB's WAL format and replication behavior \u00e2\u20ac\u201d a schema change upstream can silently break every consumer at once, and replication lag creates new read-your-own-write bugs; the connector itself becomes a new operational single point of failure.",
+      "module": "T21-anti-patterns"
+    },
+    {
+      "id": "T21-anti-patterns-c15",
+      "topic": "Anti-Patterns",
+      "q": "Why is CDC still a net win over dual writes despite adding its own failure surface?",
+      "a": "Dual writes fail silently and randomly across many call sites (undetectable drift); CDC failures are visible (lag metrics, connector health, DLQ depth) and centralized in one place to monitor instead of N ad-hoc reconciliation jobs.",
+      "module": "T21-anti-patterns"
+    },
+    {
+      "id": "T22-consensus-c12",
+      "topic": "Choosing Consensus for Permissioned Settlement",
+      "q": "Why would a 20-bank interbank settlement system use classical BFT rather than PoW or PoS?",
+      "a": "Participants are known, small, and accountable -- exactly PBFT's precondition. This gives instant deterministic finality with no energy cost and no probabilistic waiting period, at the cost of needing formal governance for validator-set changes, which the banks already have.",
+      "module": "T22-consensus"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c11",
+      "topic": "CBDC Diagnostic",
+      "q": "How do you evaluate whether a CBDC proposal is a genuine distributed-ledger design or centralization with blockchain branding?",
+      "a": "Ask whether the central bank retains unilateral issuance/reversal/freeze control. If yes (true of most actual CBDC designs), it's a centralized digital payment system possibly using blockchain-derived data structures (hash chains, Merkle trees) for engineering benefits, without blockchain's actual distributed-trust property.",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T22-enterprise-blockchain-c12",
+      "topic": "Internal Audit Log Case",
+      "q": "Should an entirely internal company audit-logging system use a private permissioned blockchain?",
+      "a": "No -- your own company is unambiguously the trusted operator of every node since no external party's distrust is the problem being solved. A tamper-evident audit log (Merkle-tree-based hash chaining applied to a conventional database) delivers the same tamper-detection property without consensus overhead.",
+      "module": "T22-enterprise-blockchain"
+    },
+    {
+      "id": "T32-content-generation-ml-c11",
+      "topic": "Content Generation ML",
+      "q": "Roughly how much cheaper is a budget-tier model than a frontier model for high-volume, low-risk content generation (early 2026 pricing)?",
+      "a": "Roughly 20-30x. Frontier models (GPT-5.4, Claude Sonnet 4.6) run about $2.50-3/million input and ~$15/million output tokens; budget models (Gemini 1.5 Flash, GPT-4.1 Nano) run $0.075-0.10/$0.30-0.40 \u00e2\u20ac\u201d making risk-tiered routing a cost lever, not just a quality one.",
+      "module": "T32-content-generation-ml"
+    },
+    {
+      "id": "T32-content-generation-ml-c12",
+      "topic": "Content Generation ML",
+      "q": "By roughly how much does RAG-constrained generation reduce hallucination rates versus ungrounded generation, per published research?",
+      "a": "Roughly 30-70% across domains, with about a 40% aggregate improvement in factual accuracy; in structured-output tasks specifically, hallucinated fields drop from ~21% ungrounded to under 7.5% (steps) / under 4.5% (tables) with retrieval grounding.",
+      "module": "T32-content-generation-ml"
+    },
+    {
+      "id": "T32-creative-optimization-c11",
+      "topic": "Creative Optimization",
+      "q": "Why is Thompson Sampling generally a better default than UCB for a fast-moving, fatigue-prone creative portfolio?",
+      "a": "UCB's confidence bounds typically assume stationary rewards and stay tight (slow to react) as an arm accumulates observations even as true performance declines. Thompson Sampling's posterior naturally re-widens when combined with decayed/windowed observations, fitting the non-stationary fatigue pattern better.",
+      "module": "T32-creative-optimization"
+    },
+    {
+      "id": "T32-creative-optimization-c12",
+      "topic": "Creative Optimization",
+      "q": "When is UCB still a reasonable choice over Thompson Sampling for ad creative allocation?",
+      "a": "When the portfolio refreshes frequently enough that non-stationarity isn't dominant, or when deterministic, easier-to-audit allocation behavior matters for stakeholder-facing reporting \u00e2\u20ac\u201d the choice trades non-stationarity handling against auditability/simplicity, not a universal ranking.",
+      "module": "T32-creative-optimization"
+    },
+    {
+      "id": "T32-marketing-measurement-c11",
+      "topic": "Marketing Measurement",
+      "q": "With only 12 available markets, why is synthetic control preferred over simple difference-in-differences for a geo holdout?",
+      "a": "Synthetic control builds a weighted combination of untreated markets specifically chosen to reproduce the treated market's own pre-treatment trajectory, rather than assuming any single market or simple average is comparable -- at small N, simple DiD's parallel-trends assumption is hard to defend with few comparison units to check it against.",
+      "module": "T32-marketing-measurement"
+    },
+    {
+      "id": "T32-marketing-measurement-c12",
+      "topic": "Marketing Measurement",
+      "q": "What should you do if no combination of available control markets can reproduce a treated market's pre-treatment trend well in a synthetic control design?",
+      "a": "Report the poor pre-treatment fit explicitly rather than presenting the resulting estimate as ground truth -- a bad fit means no credible counterfactual exists among the available markets; fall back to a different design (longer-time-series MMM, or accepting the question can't be answered causally with the markets available).",
+      "module": "T32-marketing-measurement"
+    },
+    {
+      "id": "T33-accessibility-c13",
+      "topic": "Accessibility",
+      "q": "What accessibility concern does large-scale parallax/auto-playing animation raise that has nothing to do with screen readers or keyboards?",
+      "a": "Vestibular disorders \u00e2\u20ac\u201d large-scale motion can trigger genuine physiological symptoms (dizziness, nausea). Fix by respecting prefers-reduced-motion and providing a substantially reduced/static alternative, not just slowing the animation down.",
+      "module": "T33-accessibility"
+    },
+    {
+      "id": "T33-accessibility-c14",
+      "topic": "Accessibility",
+      "q": "Does prefers-reduced-motion: reduce mean disabling all CSS animation and transitions?",
+      "a": "No \u00e2\u20ac\u201d it targets large-scale, parallax-style, or auto-playing motion affecting a significant portion of the viewport. Small functional motion (hover states, focus-ring transitions, loading spinners) is generally fine and often helps orientation; blanket-disabling all transitions is an over-application.",
+      "module": "T33-accessibility"
+    },
+    {
+      "id": "T33-design-systems-c11",
+      "topic": "Design Systems",
+      "q": "How do design systems ship a breaking prop rename across hundreds of call sites without a coordinated big-bang migration?",
+      "a": "A codemod (an automated AST transformation, commonly jscodeshift) rewrites consuming code from the old shape to the new one mechanically, published with the new major version so each team migrates on its own schedule; a deprecation window supporting the old prop with a console warning decouples release from full migration.",
+      "module": "T33-design-systems"
+    },
+    {
+      "id": "T33-design-systems-c12",
+      "topic": "Design Systems",
+      "q": "Beyond sentiment, what are concrete metrics for measuring design system success?",
+      "a": "% of UI built from system components vs custom one-offs (via static import analysis), frequency/size of style-prop escape-hatch usage (rising trend = eroding fit), time-to-ship vs pre-system baseline, and for federated systems, the ratio of external-team contributions to core-team contributions.",
+      "module": "T33-design-systems"
+    },
+    {
+      "id": "T33-frontend-security-c13",
+      "topic": "Frontend Security",
+      "q": "Why is checking event.source instead of event.origin insufficient in a postMessage handler?",
+      "a": "event.source identifies which window object sent the message but says nothing about that window's origin (which can also change via navigation after the reference was captured) -- origin validation and source validation solve different problems; skipping the origin check leaves message forgery from any origin possible.",
+      "module": "T33-frontend-security"
+    },
+    {
+      "id": "T33-frontend-security-c14",
+      "topic": "Frontend Security",
+      "q": "What does Subresource Integrity (SRI) protect against for a third-party CDN-hosted script tag?",
+      "a": "A compromised CDN or vendor account silently swapping the script content. The browser computes a hash of the fetched script and refuses to execute it if it doesn't match the integrity attribute's hash, failing closed instead of silently executing tampered code.",
+      "module": "T33-frontend-security"
+    },
+    {
+      "id": "T33-frontend-testing-c12",
+      "topic": "Frontend Testing",
+      "q": "Why do large, full-component-tree Jest snapshots become low-value testing over time?",
+      "a": "They change on almost any legitimate change (a new class name, a wrapper div), so reviewers develop the habit of running --updateSnapshot and approving without reading the diff \u00e2\u20ac\u201d the human verification step the snapshot depends on gets trained out by its own noisiness. Snapshots earn their keep on small, stable, low-churn output, not entire render trees.",
+      "module": "T33-frontend-testing"
+    },
+    {
+      "id": "T33-frontend-testing-c13",
+      "topic": "Frontend Testing",
+      "q": "What does mutation testing measure that line coverage doesn't, and what's its practical cost tradeoff?",
+      "a": "Line coverage only confirms a line executed, not that a test asserted on its consequence correctly. Mutation testing (Stryker) introduces deliberate bugs and reports what % of mutants tests actually catch \u00e2\u20ac\u201d a stronger signal, but computationally expensive, so typically run as a periodic/targeted audit rather than a per-PR blocking gate.",
+      "module": "T33-frontend-testing"
+    },
+    {
+      "id": "T33-react-advanced-c13",
+      "topic": "React Advanced",
+      "q": "Can a plain callback function be passed as a prop from a Server Component to a Client Component?",
+      "a": "No \u00e2\u20ac\u201d a function is server-side code and code doesn't cross the RSC serialization boundary, only data does; passing one produces a runtime error. The one exception is a Server Action ('use server' function), which the framework serializes as an invokable reference, not literal function code.",
+      "module": "T33-react-advanced"
+    },
+    {
+      "id": "T33-react-advanced-c14",
+      "topic": "React Advanced",
+      "q": "A Server Component renders a Client Component that needs an onClick handler. Where must that handler be authored?",
+      "a": "On the client side of the boundary, inside the Client Component itself \u00e2\u20ac\u201d a Server Component can pass data props to a Client Component, but cannot author server-side and ship across an event-handling function as a prop, since functions don't serialize across the RSC payload.",
+      "module": "T33-react-advanced"
+    },
+    {
+      "id": "T33-react-core-c11",
+      "topic": "React Core",
+      "q": "Why does useLayoutEffect fix a visible flicker that useEffect causes when measuring and repositioning DOM elements?",
+      "a": "useEffect runs asynchronously AFTER the browser paints, so a layout-changing update inside it causes a visible pre-update paint then a corrected second paint. useLayoutEffect runs synchronously after DOM update but BEFORE paint, so the correction is reflected before anything is shown \u00e2\u20ac\u201d one correct paint, no flicker.",
+      "module": "T33-react-core"
+    },
+    {
+      "id": "T33-react-core-c12",
+      "topic": "React Core",
+      "q": "Why isn't useLayoutEffect the default over useEffect if it avoids flicker?",
+      "a": "It's synchronous and blocks the browser from painting until it completes, so using it for non-layout work (fetching, subscriptions, logging) adds unnecessary blocking to the critical rendering path. Reserve it specifically for synchronous DOM measurement-and-mutation that must be invisible to the user.",
+      "module": "T33-react-core"
+    },
+    {
+      "id": "T33-state-management-c11",
+      "topic": "State Management",
+      "q": "In a TanStack Query optimistic update, what does onMutate need to do, in order, before the network request resolves?",
+      "a": "Cancel in-flight queries for the affected data (prevent a background refetch overwriting the optimistic value), snapshot the current cache value for rollback, then write the optimistic value into the cache with setQueryData so the UI updates immediately.",
+      "module": "T33-state-management"
+    },
+    {
+      "id": "T33-state-management-c12",
+      "topic": "State Management",
+      "q": "Why does an optimistic mutation still trigger a refetch in onSettled even after the mutation succeeds?",
+      "a": "The optimistic value was a guess, not a guarantee \u00e2\u20ac\u201d server-side side effects (a concurrent update, a server-computed field) the optimistic update couldn't know about can diverge from the guess even on success; a real refetch reconciles the cache with actual server truth, preventing drift from compounding across many optimistic mutations.",
+      "module": "T33-state-management"
     }
   ]
 }
