@@ -19,6 +19,10 @@ Thumbs.db
 mining/crawl_state/
 mining/posts/
 
+# crawl-derived bulk artifacts: the 80MB+ social graph and similar dumps are
+# operational data, not curriculum. Regenerate with scripts/ig_crawler.
+mining/graph.json
+
 # local AI-tool configs carry live API keys (Bearer tokens). Keep them out of
 # history; they are machine-local, never part of the curriculum.
 opencode.json
