@@ -51,6 +51,7 @@ TRACKS = [
         "risk-taxonomy | Risk Taxonomy & Permission Resolution: read_only → financial → destructive | 2.5 | harness,critical",
         "harness-evals | Evaluating the Harness Itself: Injection Resistance, Timeouts, Over-Tooling | 2.5 | harness,critical",
         "ambient-agents | Ambient Agents: Unattended, Long-Running, Resumable - the Half Nobody Demos | 3 | harness,critical",
+        "recursive-language-models | Recursive Language Models: External Context, Programmatic Inspection, Recursive Calls | 2.5 | agents,context,critical",
         "agent-zero-to-prod | Zero → Production: The Complete Multi-Agent System, End to End | 4 | capstone,critical",
     ]),
     dict(id="T21", dir="21-architecture-principles", title="Architecture & Design Principles", icon="🏛️", phase="A", prereqs=[], modules=[
@@ -85,6 +86,7 @@ TRACKS = [
         "semantic-caching | Semantic Caching: Exact + Semantic + Prefix Layers, vCache, Hit-Rate Tuning | 2.5 | production,critical",
         "data-structuring | Structuring Source Data: Tables, Code, PDFs, Hierarchies, Knowledge Graphs | 2.5 | ingest",
         "text-preprocessing | Tokenization vs Stemming vs Lemmatization, Stopwords, Normalization, TF-IDF | 2 | ingest,critical",
+        "poisoned-rag-defense | RAG Poisoning Defense: Trust, Isolation, Provenance, and Validity Gates | 3 | security,critical",
     ]),
     dict(id="T10", dir="10-system-design", title="System Design", icon="🏗️", phase="A", prereqs=[], modules=[
         "distributed-fundamentals | CAP/PACELC, Consistency Models, Replication, Partitioning | 3 | fundamentals,critical",

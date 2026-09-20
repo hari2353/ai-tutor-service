@@ -1,6 +1,6 @@
 # Mining worklist (crawl)
 
-61296 posts · 23936 gaps · 17300 partial · 1932 covered
+61365 posts · 23760 gaps · 17462 partial · 1992 covered
 
 ## Gaps
 
@@ -12,7 +12,6 @@
 - [ ] Gachibowli లో Open Plot for sale with G+2 Permission Note: 👇👇👇👇👇👇👇👇👇👇👇👇👇👇 The properties shown on this channel are not o — @kethakiproperties — mining/posts/DanIN-wqdFL/notes.md
 - [ ] Comment “Patterns” and i’ll send the complete pdf in your dm 🧩 stop solving random coding problems and start learning th — @codedsoul_05 — mining/posts/DbnephXDbZb/notes.md
 - [ ] Machine Learning Number Patterns You Must Know Understanding these numeric patterns is essential for solving Machine Lea — @pythonlifetelugu — mining/posts/DbKYvkCifnY/notes.md
-- [ ] Every agent tutorial teaches the easy half — @datasciencebrain — mining/posts/DbrxlmVmGTc/notes.md
 - [ ] 🚀 AI/ML Roadmap 2026: Learn Python ➜ Math Basics ➜ Machine Learning ➜ Deep Learning ➜ LLMs ➜ AI Agents 📌 Save this roadm — @decode_leox — mining/posts/DbC0E5hH-bh/notes.md
 - [ ] FAANG/MAANG Interview Case Study questions for Data Analyst Roles 🔥 — @edubhav — mining/posts/DbnRuE5k_5c/notes.md
 - [ ] Prepare for tech interviews 🚀 website list dropped 💙 Must save and share 😁 Follow me @code2careerai for more such resour — @code2careerai — mining/posts/DZt1LntBxLg/notes.md
@@ -343,7 +342,6 @@
 - [ ] 🐍 5 Python automation tricks every developer should know Save hours by letting Python handle boring tasks for you ⚡ 📁 Re — @pycode.dev — mining/posts/DZ7Rfs3AFM5/notes.md
 - [ ] 🐍 Learn Python in 5 minutes A quick beginner friendly guide covering Python basics, syntax, variables, data types, funct — @pycode.dev — mining/posts/DZ32I2EDU8b/notes.md
 - [ ] 📊 50 Python Q&A for Data Science 🐍 A complete beginner friendly guide covering Python basics, NumPy, Pandas, data cleani — @pycode.dev — mining/posts/DZ203aWgK5F/notes.md
-- [ ] Need a quick way to generate a monthly calendar in Python — @pycode.dev — mining/posts/DZ1A5oUDNSZ/notes.md
 - [ ] Python Crash Course in one post 🐍🚀 If you are starting Python, these are the fundamentals you must understand first: ✅ W — @pycode.dev — mining/posts/DZvETT7gsoE/notes.md
 - [ ] Last minute Python interview prep starts here 🐍 This guide covers the coding questions every beginner should practice be — @pycode.dev — mining/posts/DZtkrRtgLV5/notes.md
 - [ ] 5 GitHub repos that can seriously improve your Python skills 🐍🚀 Most beginners watch tutorials, but real progress starts — @pycode.dev — mining/posts/DZn4sPwjdxi/notes.md
@@ -373,7 +371,6 @@
 - [ ] Python patterns look simple… until you understand the logic behind them 🧠🐍 These 4 pattern examples help you practice: ⭐ — @pycode.dev — mining/posts/DYFN7mtDT3c/notes.md
 - [ ] In 2026, spending hundreds on coding courses makes less sense than ever 🤯💸 Some of the best Python, AI, Machine Learning — @pycode.dev — mining/posts/DYBfPkFgE35/notes.md
 - [ ] Master Python in 30 days 🐍🚀 A simple roadmap that takes you from beginner basics to real projects: ✅ Python setup ✅ Vari — @pycode.dev — mining/posts/DX-_kiTDE5H/notes.md
-- [ ] Start here if you’re learning Python 🐍✨ This post covers the basics every beginner should understand first: What Python  — @pycode.dev — mining/posts/DX9RNaADHsA/notes.md
 - [ ] AI vs ML vs DL explained simply 🤖🧠 AI is the big idea: making machines act smart — @pycode.dev — mining/posts/DX60MCnDPpW/notes.md
 - [ ] Machine Learning Algorithms explained simply 🤖📚 If you are starting machine learning, these are the main types you shoul — @pycode.dev — mining/posts/DX5tampDJnN/notes.md
 - [ ] 3 AI concepts every beginner should understand 🧠⚡ If you want to understand how machine learning really works, start wit — @pycode.dev — mining/posts/DX4XB4DAPCM/notes.md
@@ -386,7 +383,6 @@
 - [ ] Top 4 Python patterns every beginner should practice 🐍✨ Pattern programs are one of the best ways to understand nested l — @pycode.dev — mining/posts/DXjDdR5gAbx/notes.md
 - [ ] List comprehensions can make your Python code shorter, cleaner, and way more readable when used the right way 🐍✨ This po — @pycode.dev — mining/posts/DXbuTUBjHQ-/notes.md
 - [ ] These are the Python errors almost every beginner makes at least once 🐍 The good news — @pycode.dev — mining/posts/DXbEf-ZDGp7/notes.md
-- [ ] Need a quick way to generate a monthly calendar in Python — @pycode.dev — mining/posts/DXZKoAFjYcm/notes.md
 - [ ] Your Python journey gets way easier when you stop learning randomly and follow a clear roadmap 🐍🗺️ This carousel takes y — @pycode.dev — mining/posts/DXTA9GpjHfW/notes.md
 - [ ] Start with projects like these and Python gets way easier to understand 🚀🐍 🪨 Rock Paper Scissors teaches logic 🎯 Number  — @pycode.dev — mining/posts/DXOtqOkgjaB/notes.md
 - [ ] Python list slicing made simple 🐍 If you understand "start : stop : step", working with lists becomes way easier — @pycode.dev — mining/posts/DXN2N0DguNQ/notes.md
@@ -432,43 +428,26 @@
 - [ ] 🚨SOON I WILL UPLOAD IT AS PDF SO FOLLOW @pycode — @pycode.dev — mining/posts/DSuqOJ-DM8d/notes.md
 - [ ] 🚨SOON I WILL UPLOAD IT AS PDF SO FOLLOW @pycode — @pycode.dev — mining/posts/DSqcCKFgEFo/notes.md
 - [ ] 🚨SOON I WILL UPLOAD IT AS PDF SO FOLLOW @pycode — @pycode.dev — mining/posts/DSpNWDgDbUk/notes.md
-- [ ] These 15 Excel formulas replace half of what Python does for beginners — @thedataguy16 — mining/posts/Dcge1sJE0qD/notes.md
 - [ ] If you don't know these 10 power bi concepts don't bother sitting in interviews — @thedataguy16 — mining/posts/DcNhOVAE3y1/notes.md
 - [ ] 6 Reasons recruiters reject your resumes — @thedataguy16 — mining/posts/DcGX6SvE4vV/notes.md
-- [ ] Vlookup and Xlookup explained - Deep level prep Excel — @thedataguy16 — mining/posts/DcBhMsnT319/notes.md
 - [ ] Data roadmap from fresher to data scientist — @thedataguy16 — mining/posts/DcAWy2szs5c/notes.md
 - [ ] Questions below - comment to get detailed PDF SQL - WHERE vs HAVING - Self-joins for hierarchical data - RANK vs DENSE_R — @thedataguy16 — mining/posts/Db2INEczCT1/notes.md
-- [ ] Top 10 Vlookup combinations in Excel — @thedataguy16 — mining/posts/DbXQv9sEwuX/notes.md
 - [ ] SQL in 7 Days — Enough to Actually Crack the Job A focused 7-day plan covering exactly what shows up in SQL interviews a — @thedataguy16 — mining/posts/DbTMrdRyw1R/notes.md
 - [ ] If you are scared of losing your job AI learn these skills 1 — @thedataguy16 — mining/posts/DbSril2yiqK/notes.md
-- [ ] 30 Excel Formulas for Pros — @thedataguy16 — mining/posts/DbJP42tE3P2/notes.md
-- [ ] Excel best formulae and shortcut guide — @thedataguy16 — mining/posts/DaiuaTpE6CQ/notes.md
 - [ ] 150+ Basic Excel Shortcuts — @thedataguy16 — mining/posts/DaaJZzuk0GH/notes.md
 - [ ] Excel dashboard quick start guide — @thedataguy16 — mining/posts/DaP7mZ_kz9b/notes.md
 - [ ] Matplotlib explained — @thedataguy16 — mining/posts/DaNU5Tmkj9H/notes.md
 - [ ] Seaborn explained Visually — @thedataguy16 — mining/posts/DaNInmXkied/notes.md
 - [ ] Top Excel formulae every 9 to 5 employee uses the most — @thedataguy16 — mining/posts/DaKnjQikxoY/notes.md
-- [ ] Numpy operations cheatsheet — @thedataguy16 — mining/posts/DZ5skXsk1ob/notes.md
-- [ ] Top 25 Excel Shortcuts — @thedataguy16 — mining/posts/DZ12Shqk2Zn/notes.md
-- [ ] Sumif and sumifs — @thedataguy16 — mining/posts/DZyxmFJk-QJ/notes.md
 - [ ] Sql subqueries made simple — @thedataguy16 — mining/posts/DZvE8-REymk/notes.md
 - [ ] Used Excel for 14 Excel - these 25 Shortcuts matter the most — @thedataguy16 — mining/posts/DZmg8HzEzA7/notes.md
-- [ ] The complete data analyst tech stack in 2026 — @thedataguy16 — mining/posts/DZl4yKNk6mZ/notes.md
-- [ ] Macros in Excel — @thedataguy16 — mining/posts/DZjutCME1gC/notes.md
-- [ ] Slicers in Excel — @thedataguy16 — mining/posts/DZh1A5REyyK/notes.md
-- [ ] 100 + Excel Interview questions — @thedataguy16 — mining/posts/DZaXVfyk6Nm/notes.md
 - [ ] 150+ basic python programs Complete to get full document — @thedataguy16 — mining/posts/DZWge5Jk9JS/notes.md
-- [ ] 50 Excel formulas for daily office tasks — @thedataguy16 — mining/posts/DZOw6BvE8mr/notes.md
 - [ ] Excel keyboard shortcuts cheatsheet — @thedataguy16 — mining/posts/DZFz7BFk78N/notes.md
-- [ ] Excel formulas Cheat sheet — @thedataguy16 — mining/posts/DZEfLjqE6nM/notes.md
 - [ ] Python libraries ultimate cheetsheats — @thedataguy16 — mining/posts/DY7yrN2k4w0/notes.md
 - [ ] 100 Excel interview questions and answers Due to the instagram limit only 20 Images are possible kindly comment to get t — @thedataguy16 — mining/posts/DYceUmrExnG/notes.md
-- [ ] 30 Hidden Excel Shortcuts — @thedataguy16 — mining/posts/DYcQ6IeEwD3/notes.md
 - [ ] The 30-Day Excel Mastery Plan - Day by Day, 1 Hour Daily — @thedataguy16 — mining/posts/DYPPAk6EwGJ/notes.md
-- [ ] Excel Cheat Sheet - Shortcuts, Formulas, Errors and All Concepts in one place — @thedataguy16 — mining/posts/DYEsNUNExgW/notes.md
 - [ ] If your vlookup keeps breaking the file use the formulas given below Basic Lookup The simplest and most common use — fin — @thedataguy16 — mining/posts/DYEDFHEzvRX/notes.md
 - [ ] This Set of Excel Formulas Will Make You Better Than Anyone in Your Office — @thedataguy16 — mining/posts/DX_-AYzTTLX/notes.md
-- [ ] The exact resume a fresher needs to get shortlisted for a data analyst — @thedataguy16 — mining/posts/DX84y2-E4-4/notes.md
 - [ ] Stop applying for 50 Jobs applications, these 3 Changes can get you shortlisted in 7 Days — @thedataguy16 — mining/posts/DX5yw4lTOj_/notes.md
 - [ ] Do this for 30 days to crack python Day 1 - Install Python and write your first print() statement with variables Day 2 - — @thedataguy16 — mining/posts/DX1hcOwzKk3/notes.md
 - [ ] Top 30 Excel Formulas to be in Top 1% Text Functions • =LEFT(text, n) — Extract first N characters from the left • =RIGH — @thedataguy16 — mining/posts/DX1C8TBE4Vx/notes.md
@@ -483,7 +462,6 @@
 - [ ] If i had to learn python for data analysis in 7 Days , these are the only topics I will touch — @thedataguy16 — mining/posts/DVyhXTOzh16/notes.md
 - [ ] I thought the Pivot table in Excel was tough, then I did this — @thedataguy16 — mining/posts/DVsOdHQTtLe/notes.md
 - [ ] Stop memorizing 50 Excel Formulas, Master These 7 Formulas and you will be ready for any role — @thedataguy16 — mining/posts/DVoBJazzWeK/notes.md
-- [ ] Three Excel skills that clear 90% of data analyst interviews in India — @thedataguy16 — mining/posts/DVlmQv9TIa-/notes.md
 - [ ] I had zero knowledge of SQL Sub Queries but this explanation made it easy for me — @thedataguy16 — mining/posts/DVi6jaSE9hN/notes.md
 - [ ] This 1 Portfolio Project Structure Got Freshers Shortlisted At Companies That Rejected Them Before SQL, Excel , python , — @thedataguy16 — mining/posts/DVfPtFwk6o8/notes.md
 - [ ] Stop googling excel shortcuts — @thedataguy16 — mining/posts/DVQ89SPkxRH/notes.md
@@ -512,7 +490,6 @@
 - [ ] Day 29, 90 days journey to become AI Engineer ANN :Approximate Nearest Neighbor — @ds_ai_ketan — mining/posts/DWlCDXtgiSb/notes.md
 - [ ] Day 25 90 Days Journey to Become AI Engineer Retrieved Augmented Generation RAG types in Genai — @ds_ai_ketan — mining/posts/DWZhL3Yks4t/notes.md
 - [ ] Video quality 😕 but content is highly informative Day 9 of 90 days journey to become AI Engineer Vector and Embeddings — @ds_ai_ketan — mining/posts/DVbn5INknZv/notes.md
-- [ ] Tops to Become AI Engineer Tip 1️⃣ Build strong fundamentals in Python, data structures, and basic mathematics — @ds_ai_ketan — mining/posts/DVWf21hklug/notes.md
 - [ ] Day 8 - 90 Days Journey to Become AI Engineer Recurrent Neural Network Comment: AI, i will share full roadmap to become  — @ds_ai_ketan — mining/posts/DVTjLNNgjlx/notes.md
 - [ ] Day 4 of My 90 Days Journey to Become an AI Engineer Today, I revised important Machine Learning algorithms: ✔ Decision  — @ds_ai_ketan — mining/posts/DVJde-eD1ce/notes.md
 - [ ] Every intelligent AI system, from chatbots to self-driving cars, is built on fundamental agent architectures — @ds_ai_ketan — mining/posts/DUVvVRzCj6n/notes.md
@@ -587,16 +564,13 @@
 - [ ] 🔥 Side Hustles for Data Science Students & Professionals ($5K+ / Month Potential 💰) Comment to get details roadmap in DM — @datasciencebrain — mining/posts/DUn3Fvck7aI/notes.md
 - [ ] Kind of wild that Will Smith eating spaghetti is still the go-to reference point for AI progress 😂🍝 But it’s starting to — @datasciencebrain — mining/posts/DUaA5rek2ss/notes.md
 - [ ] Why does this feel like a deleted Netflix scene 💀 Generated fully on @higgsfield — @datasciencebrain — mining/posts/DUTCiTPk6VY/notes.md
-- [ ] Your Complete Roadmap: Data Analyst → Data Scientist → GenAI Engineer 🚀 Before you scroll away please take a moment to → — @datasciencebrain — mining/posts/DUR_kSNk5Wp/notes.md
 - [ ] 🚀 ZERO TO DATA SCIENTIST IN 12 MONTHS 📊 Before you scroll away please take a moment to → 💗LIKE | 💾 SAVE | 📤 SHARE | ➡️ F — @datasciencebrain — mining/posts/DUPZqHIk4nk/notes.md
 - [ ] 📊 COMPLETE DATA ANALYST BOOTCAMP NOTES 📊 Everything you need to become a job-ready data analyst in ONE comprehensive gui — @datasciencebrain — mining/posts/DUFF3ufCB0h/notes.md
 - [ ] MIT is offering AI & ML BOOKS — ABSOLUTELY FREE 🔥📚 💡 Save this post | Share with your ML friends 1️⃣ Foundations of Mach — @datasciencebrain — mining/posts/DUDzjFdk1ka/notes.md
 - [ ] 🚀 THE ULTIMATE DATA SCIENCE RESOURCES(1000+) GUIDE 2026 Save this post 💾 | Share with someone who needs it 🔄 | Follow @d — @datasciencebrain — mining/posts/DT_8T4lkw6I/notes.md
 - [ ] 2026's Hottest Tech Jobs 🚀💰 The job market is evolving FAST — @datasciencebrain — mining/posts/DT6yw_JCOFQ/notes.md
-- [ ] 🎯 YOUR COMPLETE 100 PAGE DATA CAREER ROADMAP IS HERE — @datasciencebrain — mining/posts/DT4N89ik-XM/notes.md
 - [ ] Save this post and share it with someone who's serious about breaking into AI/ML 📌 📚 MIT's COMPLETE AI & ML Course Libra — @datasciencebrain — mining/posts/DTb5xidE5Oz/notes.md
 - [ ] 🚀 5 REAL GenAI Portfolio Projects to Land Your Dream AI Job in 2025 Forget tutorials — @datasciencebrain — mining/posts/DTJ3p_pkwwO/notes.md
-- [ ] 🧊 The AI Iceberg: What's REALLY Powering Modern AI — @datasciencebrain — mining/posts/DTCMkO1E22u/notes.md
 - [ ] 📝 Struggling to create the perfect resume for your data science job hunt — @datasciencebrain — mining/posts/DS6a6xyk7SF/notes.md
 - [ ] 🤖 AI is evolving faster than ever, and keeping up shouldn’t be hard — @datasciencebrain — mining/posts/DSucYdbk2Xu/notes.md
 - [ ] 🚀 TOP 10 HIGH-INCOME SKILLS FOR 2026 💰 The job market is evolving FAST — @datasciencebrain — mining/posts/DSoZ-0kkwmo/notes.md
@@ -610,7 +584,6 @@
 - [ ] If you're learning backend development, AI apps, or full-stack engineering…� MongoDB is one skill you must master — @datasciencebrain — mining/posts/DRyUjWCE8kC/notes.md
 - [ ] 🐍 Master Python OOP - Your Complete Guide — @datasciencebrain — mining/posts/DRtLCviCJJB/notes.md
 - [ ] 📚 Do you want to break into Data Science without spending a single rupee, From the World’s Top Universities — @datasciencebrain — mining/posts/DRqmQ4PE3o-/notes.md
-- [ ] 📊 EXCEL FOR DATA ANALYSIS - COMPLETE GUIDE 📊 Master Excel like a pro with this comprehensive guide — @datasciencebrain — mining/posts/DRoDJAEk8lD/notes.md
 - [ ] 🚀 GEN-AI ENGINEER ROADMAP 2026 (FREE GUIDE) AI is evolving faster than ever — and roles like LLM Engineer, Gen-AI Engine — @datasciencebrain — mining/posts/DRgTC4Zk8KS/notes.md
 - [ ] Unlock your Data Career in 2025 🚀 �I created the Ultimate Data Science Roles Syllabus so you’ll never get confused about — @datasciencebrain — mining/posts/DRYkoHuEzna/notes.md
 - [ ] 🔥 Shocking Salary vs Living Cost Reality Across Countries — @datasciencebrain — mining/posts/DRW9oKxk4nR/notes.md
@@ -640,7 +613,6 @@
 - [ ] 15 ML Concepts That Separate Beginners from Real Data Scientists" 👀 Everyone talks about Machine Learning…but only a few — @datasciencebrain — mining/posts/DPoST2Xk2IK/notes.md
 - [ ] 💰 Top 10 Highest-Paying Tech Companies in India (2025) 🇮🇳 (Based on Glassdoor, Levels — @datasciencebrain — mining/posts/DPjF6ulk0xy/notes.md
 - [ ] “Your ₹10 LPA job isn’t paying you ₹10L — @datasciencebrain — mining/posts/DPgjYE9E9Gk/notes.md
-- [ ] 🐍 100 PYTHON INTERVIEW QUESTIONS WITH ANSWERS - COMPLETE GUIDE — @datasciencebrain — mining/posts/DPaZty9kyq4/notes.md
 - [ ] 🚀 10 Data Science Roles & Their Learning Paths (Save this Roadmap — @datasciencebrain — mining/posts/DPY1BPREzN9/notes.md
 - [ ] 🔥 THE ULTIMATE EDA CHEAT SHEET EVERY DATA SCIENTIST NEEDS Stop wasting hours on exploratory data analysis — @datasciencebrain — mining/posts/DPK85VDkwbO/notes.md
 - [ ] ⏳ Stop wasting hours debugging & writing boilerplate — @datasciencebrain — mining/posts/DPJXPo-k5DV/notes.md
@@ -656,7 +628,6 @@
 - [ ] 📊 From Maths to Data Science – The Full Journey Explained 🚀 1️⃣ Maths → Statistics� Maths is the foundation — @datasciencebrain — mining/posts/DObB4aKkyGE/notes.md
 - [ ] 🔥 9 Steps to Become a Data Scientist + Free Resources 👇 (💾 Save this post if you’re serious about becoming a Data Scient — @datasciencebrain — mining/posts/DOQvopAE04L/notes.md
 - [ ] Comment down your favorite 👇 ⚠️NOTICE Special Benefits for Our Instagram Subscribers 🔻 ➡️ Free Resume Reviews & ATS-Comp — @datasciencebrain — mining/posts/DOLi3hqk-vQ/notes.md
-- [ ] 🚀 Master these 10 functions in Excel, SQL & Pandas and you’ve already unlocked 80% of data magic 🔥 📊 Whether you’re anal — @datasciencebrain — mining/posts/DOGfzqLEzal/notes.md
 - [ ] I promise, it’ll be worth it Every step you take towards your future should feel lighter than the previous step — @codingmermaid.ai — mining/posts/DRZ5NmQEaDE/notes.md
 - [ ] I chose this career because it blends everything I love and gives me purpose — @codingmermaid.ai — mining/posts/DcMHkmzh7lE/notes.md
 - [ ] This is a friendly reminder; That I used to be a failure That I often felt like I'm beyond salvation That I'll never amo — @codingmermaid.ai — mining/posts/DcGjvxWGyqA/notes.md
@@ -698,7 +669,6 @@
 - [ ] What if AI is sabotaging you — @codingmermaid.ai — mining/posts/DWjmQ0oFJJe/notes.md
 - [ ] I'm the 100x data scientist than I used to be Manus is a fully autonomous AI agent I discovered when I needed to researc — @codingmermaid.ai — mining/posts/DWe81eTCPV8/notes.md
 - [ ] It’s not too late to begin We can’t tell what the next 5-10 years will look like, but I know that those who are literate — @codingmermaid.ai — mining/posts/DWT7GSHCFuA/notes.md
-- [ ] Agentic AI projects Agentic AI is moving far beyond simple chatbots — @codingmermaid.ai — mining/posts/DWRqnAECBdO/notes.md
 - [ ] Yes, I'm embarrassed I wish I could've done more throughout my career — @codingmermaid.ai — mining/posts/DWJ1TzGkTQu/notes.md
 - [ ] Become ungovernable AI expert But before that, master the foundations because they’ll always outperform the hype and tre — @codingmermaid.ai — mining/posts/DWHoagkkpTz/notes.md
 - [ ] Losing weight and gaining health Here's the tech debt no one talks about — @codingmermaid.ai — mining/posts/DWB5My6FFnK/notes.md
@@ -757,7 +727,6 @@
 - [ ] This is my latest read and it left me with a lot to ponder about, especially about how businesses are adopting AI, and w — @codingmermaid.ai — mining/posts/DPMaBCeCCDc/notes.md
 - [ ] Skywork is amazing especially if you need @skyworkai — Help generating detailed reports — Making compelling presentation — @codingmermaid.ai — mining/posts/DPEud97CCNq/notes.md
 - [ ] Learning data science doesn’t end when you complete a course, get a certificate or finally land a 6-figure job — @codingmermaid.ai — mining/posts/DO9Drvvj77s/notes.md
-- [ ] Do this and you’ll master your ML interview Be crystal clear on ML basics: supervised vs — @codingmermaid.ai — mining/posts/DOyQULeEVY9/notes.md
 - [ ] My toolkit 👉🏻 Yeah, I know, I have a separate toolkit for my data science & AI jobs, but I guess that’s normal — @codingmermaid.ai — mining/posts/DN3rYRsUMEr/notes.md
 - [ ] You owe it to yourself to become AI literate — @codingmermaid.ai — mining/posts/DNDos82NuC2/notes.md
 - [ ] I didn’t spend much time in corporate, and even now, I try to keep myself as independent as possible — @codingmermaid.ai — mining/posts/DMvd0bYAAP3/notes.md
@@ -825,7 +794,6 @@
 - [ ] Most Asked DSA Interview Questions (0–3 Years Experience) DSA isn't about solving 1000 questions — @decode_leox — mining/posts/DaweiVGH8aZ/notes.md
 - [ ] The complete Java Developer Roadmap 📌 Must learning phase by phase Phase 1– Java Fundamentals Phase 2– Object-Oriented P — @decode_leox — mining/posts/DacwTdTnxab/notes.md
 - [ ] 🐍 120 Python Interview Questions & Answers 🚀 Preparing for Python interviews — @decode_leox — mining/posts/DaMaPs1H432/notes.md
-- [ ] TCS Data Analyst Interview Questions & Answers Crack your next Data Analyst interview with the most frequently asked SQL — @decode_leox — mining/posts/DZ_n2ZBn41m/notes.md
 - [ ] 🚀 Master DSA with C++ — The Ultimate Roadmap — @decode_leox — mining/posts/DZ6ZIoSnzBW/notes.md
 - [ ] 💻 Every Programmer Should Know These 🔥 80 Useful Websites From learning code to debugging, practicing DSA, and building  — @decode_leox — mining/posts/DZ2qVdTH981/notes.md
 - [ ] Most Asked DSA Interview Questions (0–3 Years Experience) DSA isn't about solving 1000 questions — @decode_leox — mining/posts/DZnJ2scn60o/notes.md
@@ -881,13 +849,11 @@
 - [ ] Calculator using HTML & CSS [ Coding , Programmer , WebDevelopment , HTML , CSS , JavaScript , Python , FrontendDevelope — @decode_leox — mining/posts/DE658EfPuKA/notes.md
 - [ ] Skill Required for Different sectors 👇 — @decode_leox — mining/posts/DDcNh3kPjCs/notes.md
 - [ ] [ Coding , Programmer , WebDevelopment , HTML , CSS , JavaScript , Python , FrontendDeveloper , BackendDeveloper , FullS — @decode_leox — mining/posts/DDXEum7vunY/notes.md
-- [ ] Tips & Trick for HTML — @decode_leox — mining/posts/DDFFAjJPk6N/notes.md
 - [ ] 📚 Learn daily→ This page is beginner friendly 😎 Hashtag 🏷️; [ Coding , Programmer , WebDevelopment , HTML , CSS , JavaSc — @decode_leox — mining/posts/DCb1gQgPVz1/notes.md
 - [ ] Hashtag 🏷️; [ Coding , Programmer , WebDevelopment , HTML , CSS , JavaScript , Python , FrontendDeveloper , BackendDevel — @decode_leox — mining/posts/DBh5txgS5hJ/notes.md
 - [ ] A clean Generative AI project structure can save you from a lot of pain later — @gauravgoyalai — mining/posts/DcQvJsnJXYB/notes.md
 - [ ] 🚦 AI Gateway — the traffic controller for LLMs Your AI application may use GPT, Claude, Gemini, Llama, or even local mod — @gauravgoyalai — mining/posts/DcwEOfQz120/notes.md
 - [ ] Cosine Similarity vs Inner Product — an AI Engineer interview favorite — @gauravgoyalai — mining/posts/DcsHrWOR5rI/notes.md
-- [ ] 🤯 How can a Transformer understand the same sentence from multiple perspectives at once — @gauravgoyalai — mining/posts/Dcr6OWMTRcv/notes.md
 - [ ] Softmax in Transformers — explained simply Ever wondered how a Transformer decides how much attention to give each token — @gauravgoyalai — mining/posts/DcrvZE4zAj0/notes.md
 - [ ] 🚀 Headless CMS + GenAI = Intelligent Content Headless CMS changed how we deliver content — @gauravgoyalai — mining/posts/DcqDVIgxX9u/notes.md
 - [ ] 🔥 Top 10 ReLU Interview Questions Every AI/ML Engineer Should Know ReLU looks simple: ReLU(x) = max(0, x) But interviewe — @gauravgoyalai — mining/posts/DcqMYqoRL1g/notes.md
@@ -956,8 +922,6 @@
 - [ ] AI — @pythonix.hub — mining/posts/DaVMXjSJcED/notes.md
 - [ ] Excel notes from basic to advance level is avaliable,DM ME 📩 — @pythonix.hub — mining/posts/DaP_Sz7kmHc/notes.md
 - [ ] Data Management made simple 📊✨ Learn how data is collected, stored, organized, secured, and analyzed to make better busi — @pythonix.hub — mining/posts/DaFAuw4CbCc/notes.md
-- [ ] 📚 APTITUDE HANDWRITTEN NOTES FOR PLACEMENTS 🚀 Struggling with Aptitude — @pythonix.hub — mining/posts/DZuo7h4CaH7/notes.md
-- [ ] 📚 Aptitude Handwritten Notes for Freshers & Beginners 🚀 Are you preparing for placements and struggling with Aptitude — @pythonix.hub — mining/posts/DZun-yipbaw/notes.md
 - [ ] 📚 **AI & ML Notes – Beginner to Advanced Level** ✅ Well-structured notes with simple explanations ✅ Real-world examples, — @pythonix.hub — mining/posts/DZm-OINJhJ9/notes.md
 - [ ] 📚 **AI & ML Notes – Beginner to Advanced Level** ✅ Well-structured notes with simple explanations ✅ Real-world examples, — @pythonix.hub — mining/posts/DZm-DsxiccI/notes.md
 - [ ] 📚 python Notes Available 🆓 Free Computer Notes ✔ python Fundamentals ✔ Beginner-Friendly ✔ Easy to Learn 📱 Handwritten P — @pythonix.hub — mining/posts/DZl4hkcpSnk/notes.md
@@ -971,10 +935,8 @@
 - [ ] Best YouTube channels to learn Python 🔥 Global + Indian creators you should follow 👉 Follow @tajamul — @tajamul.codes — mining/posts/DUhTxrxk15f/notes.md
 - [ ] I wish someone told me these truths when I started in data science — @tajamul.codes — mining/posts/DRQsAuDDE00/notes.md
 - [ ] Master SQL From the Ground Up — 100 Must-Know Theory Questions 📘🔥 If you’re preparing for Data Analyst, Data Scientist,  — @tajamul.codes — mining/posts/DRTQv9WjEJy/notes.md
-- [ ] Top Placement Preparation Resources Follow @tajamul — @tajamul.codes — mining/posts/DZy3F9ZgUEt/notes.md
 - [ ] 🚀 The Only NLP Cheat Sheet You’ll Ever Need Natural Language Processing (NLP) is a must-have skill for anyone in AI, Mac — @tajamul.codes — mining/posts/DPTq9ncgTPY/notes.md
 - [ ] Handwritten Python Notes (Beginner → Advanced) Comment “PYTHON” to get the notes interviewprep — @tajamul.codes — mining/posts/DXVoiudgbqC/notes.md
-- [ ] Complete Data Analyst Roadmap Follow and Comment “Data” to get the detailed data analyst roadmap in your Inbox growth — @tajamul.codes — mining/posts/DX8LY_rAfwU/notes.md
 - [ ] You don’t need to spend lakhs on courses to become a Data Analyst — @tajamul.codes — mining/posts/DU4h6GNgeEd/notes.md
 - [ ] This Python Kit Saved Me From Getting Lost While Learning Python When I first started learning, I kept jumping between e — @tajamul.codes — mining/posts/DRd8oCeAbUt/notes.md
 - [ ] This SQL Kit Saved Me Months of Confusion Most people don’t fail at SQL — they fail because their learning is unstructur — @tajamul.codes — mining/posts/DTXNt4YAXpl/notes.md
@@ -1433,8 +1395,6 @@
 - [ ] Comment “Clear” to get all 3 images via DM Some of the new infographics about AI Agent topics like: - MCP - Agentic Memo — @techwith.ram — mining/posts/DZJiWfHifS2/notes.md
 - [ ] Comment “Datacamp” to get all free courses details — @techwith.ram — mining/posts/DZG0nXzibvS/notes.md
 - [ ] RAG Architectures From basic pipelines to Advanced and Modular RAG, modern architectures add reranking, query rewriting, — @techwith.ram — mining/posts/DY6E72WCWSp/notes.md
-- [ ] Build AI Agent Projects - Task Tracker Agent - Research Assistant Agent - Email Assistant Agent - Content Creator Agent  — @techwith.ram — mining/posts/DYj1WifiWhN/notes.md
-- [ ] Agent Governance Layers The more autonomous agents become, the more important governance becomes — @techwith.ram — mining/posts/DYTXtoCCc8m/notes.md
 - [ ] Production AI App Folder Structure Your AI app isn’t just “a FastAPI wrapper around GPT — @techwith.ram — mining/posts/DYJMf9QCTMy/notes.md
 - [ ] Goodfire just dropped one of the most interesting ideas in AI interpretability — @techwith.ram — mining/posts/DYGkJ97CRzZ/notes.md
 - [ ] Created these infographic Details about ML concepts like - Backpropagation - Bayesian Neural Network - Gradient Descent  — @techwith.ram — mining/posts/DX8R65aCRD7/notes.md
@@ -1511,7 +1471,6 @@
 - [ ] No hate here — @techwith.ram — mining/posts/DJ9Vmdbtgrj/notes.md
 - [ ] Small Web Scrapping Project (Using BeautifulSoup): Project Name: Largest Companies In The US By Revenue Follow @techwith — @techwith.ram — mining/posts/DJ1SGrcy-mi/notes.md
 - [ ] Logistic Regression: (simple yet powerful) What makes it awesome — @techwith.ram — mining/posts/DJwIMYQS7Bj/notes.md
-- [ ] 5 Must-Know SQL Window Function Queries for Interviews You Can’t Afford to Miss If you want PDF of this, then comment "N — @techwith.ram — mining/posts/DJoaYqrSzW8/notes.md
 - [ ] 𝗣𝗿𝗼𝗯𝗮𝗯𝗶𝗹𝗶𝘁𝘆 & 𝗦𝘁𝗮𝘁𝗶𝘀𝘁𝗶𝗰𝘀 (Part-3) Topics covered: - Law of Iterated Expectations - Marginal Probability - Skewness - Kur — @techwith.ram — mining/posts/DJOzM-uyWXF/notes.md
 - [ ] 𝗣𝗿𝗼𝗯𝗮𝗯𝗶𝗹𝗶𝘁𝘆 & 𝗦𝘁𝗮𝘁𝗶𝘀𝘁𝗶𝗰𝘀 (Part-2) Topics covered: - Correlation - Probability Mass Function (PMF) - Probability Density  — @techwith.ram — mining/posts/DI8x-4ty6Fg/notes.md
 - [ ] 𝗖𝗼𝗺𝗽𝗹𝗲𝘁𝗲 𝗡𝘂𝗺𝗽𝘆 𝗖𝗵𝗲𝗮𝘁 𝗦𝗵𝗲𝗲𝘁 I designed a whole numpy cheat sheet which will help you get confidence before facing any int — @techwith.ram — mining/posts/DI06f6BSqSa/notes.md
@@ -1533,16 +1492,12 @@
 - [ ] Tableau Interview Lo Adige Important Questions Tableau nerchukunnara — @pythonlifetelugu — mining/posts/Dcxs1DbiTWW/notes.md
 - [ ] Tableau Fresher Roadmap | Zero to Job Tableau asalu teliyadu — @pythonlifetelugu — mining/posts/DcxscO4CQmv/notes.md
 - [ ] Power BI Jobs Iche Top Companies Power BI nerchukoni Data Analyst / BI career start cheyyali anukuntunnara — @pythonlifetelugu — mining/posts/DcxrQEACZaH/notes.md
-- [ ] Power BI vs Tableau | Data Analyst Ki Edi Better — @pythonlifetelugu — mining/posts/Dcxql-biVLl/notes.md
 - [ ] Power BI vs Excel | Career Ki Edi Better Skill — @pythonlifetelugu — mining/posts/DcxpgVdCVaY/notes.md
 - [ ] Power BI 30 Days Roadmap | Beginner to Job Ready Power BI nerchukovali anukuntunnara — @pythonlifetelugu — mining/posts/DcxpNuACVU0/notes.md
 - [ ] Data Analyst Interview Crack Cheyyalante Power BI Lo Eevi Telusukondi Power BI nerchukunnaru… but interview lo questions — @pythonlifetelugu — mining/posts/Dcxo5A1CVhe/notes.md
 - [ ] Power BI Portfolio Kosam Best Projects Power BI nerchukunnaru… but portfolio lo em projects pettali — @pythonlifetelugu — mining/posts/Dcxoh1PCYkU/notes.md
-- [ ] Power BI Lo Ee DAX Questions Interview Lo Adagutharu Power BI interview ki prepare avtunnara — @pythonlifetelugu — mining/posts/DcxoQYwialu/notes.md
-- [ ] Power BI Lo DAX Enduku Important — @pythonlifetelugu — mining/posts/Dcxnv_EiYD2/notes.md
 - [ ] Power BI Nerchukoni Job Ela Pondali — @pythonlifetelugu — mining/posts/DcxnL88CThY/notes.md
 - [ ] Power BI Resume Lo Ee Projects Undali Power BI job ki apply chestunnara — @pythonlifetelugu — mining/posts/DcxmxvqCbMC/notes.md
-- [ ] Excel Telusa — @pythonlifetelugu — mining/posts/DcxmBL-CWGo/notes.md
 - [ ] Power BI Fresher Roadmap | Beginner to Job-Ready Power BI nerchukoni Data Analyst job ki vellali anukuntunnara — @pythonlifetelugu — mining/posts/DcxlnCoCZ7W/notes.md
 - [ ] Power BI Interview Lo Adige Top Questions | Must Prepare 1 — @pythonlifetelugu — mining/posts/DcxlKHkCZzQ/notes.md
 - [ ] Power BI Lo Ee 10 Concepts Thappaka Telusukondi | Beginners Must Know 1 — @pythonlifetelugu — mining/posts/DcxksTQCbcT/notes.md
@@ -1667,24 +1622,19 @@
 - [ ] I have 0 knowledge of Excel how do I become a pro — @thedataguy16 — mining/posts/DUs_CDIkx4t/notes.md
 - [ ] Don't fall for the trap, these are only skills required to become a data analyst — @thedataguy16 — mining/posts/DUm_9bEk3Zr/notes.md
 - [ ] These 20 Remote hiring sites are always hiring — @thedataguy16 — mining/posts/DUkFgUok7dZ/notes.md
-- [ ] This 1 Excel project can land you Multiple Job Opportunities — @thedataguy16 — mining/posts/DUicOUzEw9_/notes.md
 - [ ] 10 BETTER Job Sites for Data Analysts than Naukri and Linkdin ✅ Glassdoor - Company reviews, salaries, interview tips — @thedataguy16 — mining/posts/DUhgCj4ky4N/notes.md
 - [ ] If I had an interview in 7 days, here's how I will prepare for SQL — @thedataguy16 — mining/posts/DUayo0gk2cR/notes.md
-- [ ] 7 Free Datasets + Real World Projects that you can do today, With Video Solutions, SQL, Excel , Python , Data analyst — @thedataguy16 — mining/posts/DUYKrhBE6oO/notes.md
 - [ ] POV - Realisation how easy it is to get everything for free that big Ed techs Sell you for lacs to become a data analyst — @thedataguy16 — mining/posts/DUQ4VI9E6Jx/notes.md
 - [ ] POV Realising how easy it is to get everything for free that big ed techs sell you for Lacs to become a data analyst, SQ — @thedataguy16 — mining/posts/DUQlIvDE_OK/notes.md
 - [ ] I thought Excel was tough until — @thedataguy16 — mining/posts/DUQcYNDk2Mk/notes.md
 - [ ] Stop memorising 100 Excel Formulas, these 20 will take you ahead of 90 % industry — @thedataguy16 — mining/posts/DUKRVX-kw4C/notes.md
 - [ ] The 90 days SQL and Excel mastery map that helped 200 + People to switch careers — @thedataguy16 — mining/posts/DUEF8C_kzpb/notes.md
-- [ ] Data Analyst or Data Scientist, Which one to Choose - SQL, EXCEL , POWER BI , TABLEAU, MACHINE LEARNING , AI — @thedataguy16 — mining/posts/DUDolxYk_1S/notes.md
 - [ ] Stop memorising 50 Excel Shortcuts — @thedataguy16 — mining/posts/DTxhMppExww/notes.md
 - [ ] 5 Must Watch YouTube Playlists if you want to become a data analyst for Free — @thedataguy16 — mining/posts/DTlEer3jd9D/notes.md
 - [ ] Stop memorising 100 Excel formulas these 10 are enough — @thedataguy16 — mining/posts/DTkzFYnEwu-/notes.md
 - [ ] 1 hour daily SQL & Excel Plan to become job ready in 30 days — @thedataguy16 — mining/posts/DTgHi_ik8FP/notes.md
 - [ ] This one is special , Very Special I just started with 50 days back and now I have 10000 people on my side — @thedataguy16 — mining/posts/DTf8B1XEy3D/notes.md
 - [ ] 10 SQL , Excel , Python Concepts that get you hired at tops MNC — @thedataguy16 — mining/posts/DTTLG68DUKG/notes.md
-- [ ] 5 Excel Skills Every 15 LPA Data Analyst must master in 2026 — @thedataguy16 — mining/posts/DTQmtR-k3ia/notes.md
-- [ ] 3 Excel Skills That Separate hired Data pros from Rejects — @thedataguy16 — mining/posts/DTItym1E-92/notes.md
 - [ ] Top 3 SQL topics that Secure your 2026 interview shortlist — @thedataguy16 — mining/posts/DTIYI3cE2rD/notes.md
 - [ ] If i learned data analytics again: Exact Daily study schedule — @thedataguy16 — mining/posts/DTGUMBvE1DT/notes.md
 - [ ] These 7 Excel formulas get you hired faster than any course — @thedataguy16 — mining/posts/DTDM6GDkw2q/notes.md
@@ -3300,7 +3250,6 @@
 - [ ] 🚩 Share with your friends Content creator @deepakjose000 Follow 👉 @datascience — @datasciencebrain — mining/posts/CN1jXrFg2cM/notes.md
 - [ ] 🔖Tag your friends🤪 Content creator : @deepakjose000 @datascience — @datasciencebrain — mining/posts/CNwkDPAgvna/notes.md
 - [ ] 🔖 Tag your friends 🤪 Content creator @deepakjose000 Follow 👉 @datascience — @datasciencebrain — mining/posts/CNuUPu4AOhR/notes.md
-- [ ] 📌Tag your friends who would love to know about this 🔜Join our telegram channel — @datasciencebrain — mining/posts/CNl8s_KgTy2/notes.md
 - [ ] 🧠 Tag your friends who would love to see this🧠 ☑️Check out our telegram channel to watch full video — @datasciencebrain — mining/posts/CNhA6y2AeWN/notes.md
 - [ ] 🔖Tag your friends who does the same🤪 Content creator : @deepakjose000 @datascience — @datasciencebrain — mining/posts/CNeKGWPgCZf/notes.md
 - [ ] 🧠 Tag your friends who would love to see this🧠 ☑️Check out our telegram channel to watch full video — @datasciencebrain — mining/posts/CNcSng4A86O/notes.md
@@ -3308,7 +3257,6 @@
 - [ ] Follow @datascience — @datasciencebrain — mining/posts/CM_q7pmj5Jq/notes.md
 - [ ] 🧠 Tag your friends who would love to see this🧠 Upscaled and colourised using AI 🔜 Join us on telegram to watch full vide — @datasciencebrain — mining/posts/CMzSIDbDS92/notes.md
 - [ ] 🧠 Tag your friends who would love to see this🧠 🔜 Join us on telegram for important links — @datasciencebrain — mining/posts/CMuCjvGjYLu/notes.md
-- [ ] 📌Tag your friends who would love to know about this 🔜Join our telegram channel — @datasciencebrain — mining/posts/CMmb7Kvj2z1/notes.md
 - [ ] 🧠 Tag your friends who would love to see this🧠 🔜 Join us on telegram for full article on robot doctor and other importan — @datasciencebrain — mining/posts/CMg5swfj21A/notes.md
 - [ ] @datascience — @datasciencebrain — mining/posts/CMW-ZkrgAkr/notes.md
 - [ ] 📌Tag your friends who would love to know about this 👉All links to datasets and source code are posted in our telegram ch — @datasciencebrain — mining/posts/CMR2_eFg9Vr/notes.md
@@ -3358,7 +3306,6 @@
 - [ ] Never regretted it, built 2 businesses that thrive — @codingmermaid.ai — mining/posts/DLu7DJ-R6yG/notes.md
 - [ ] Having your freelancing business or personal brand is NOT easier than finding and keeping a corporate job — @codingmermaid.ai — mining/posts/DLiVCxoPRzt/notes.md
 - [ ] 1 solid data science or AI project is worth 1,200,000 courses and certifications — @codingmermaid.ai — mining/posts/DLVRXccgOHd/notes.md
-- [ ] 📊 Want to master Data Science & Generative AI with tools like Python, PowerBI, ChatGPT, and Zapier — @codingmermaid.ai — mining/posts/DLQDzQbRzDn/notes.md
 - [ ] Trigger warning: 1 - You probably suck at SQL, but convinced yourself you’re an expert — @codingmermaid.ai — mining/posts/DLAQG8FqqMv/notes.md
 - [ ] 15 AI concepts you should master Python Programming Foundation for all AI development (NumPy, Pandas, OOP, APIs) Data Pr — @codingmermaid.ai — mining/posts/DK9xoZQqVLY/notes.md
 - [ ] When I first started, I thought I could master data science in a few months — @codingmermaid.ai — mining/posts/DKpXwoWxra3/notes.md
@@ -3379,7 +3326,6 @@
 - [ ] Leave fake dopamine behind 👇🏻 The reason why you’re struggling with learning AI is because you’re not really doing anyth — @codingmermaid.ai — mining/posts/DIwjAu2Ie3f/notes.md
 - [ ] 5 resources I took so far in 2025 to polish my AI skills 👇🏻 PyTorch to LLMs – DataCamp Coming from a TensorFlow-heavy ba — @codingmermaid.ai — mining/posts/DIo18ASTI6x/notes.md
 - [ ] ✨Almost every course or a tutorial has the famous Titanic Survival rate prediction project, and while it’s not a bad ide — @codingmermaid.ai — mining/posts/DIMmxA8oeek/notes.md
-- [ ] Let me teach you ML 👇 Here’s how to approach it: 1 — @codingmermaid.ai — mining/posts/DH9Hg2MySd7/notes.md
 - [ ] Free resources for beginners If you’re just getting started with learning data science, software and AI, you probably fe — @codingmermaid.ai — mining/posts/DHhJEJ2yb0b/notes.md
 - [ ] All data science jobs I did ⬇️ Data Cleaning & Preprocessing – Handling missing values, formatting, and preparing raw da — @codingmermaid.ai — mining/posts/DHRPYDTxyic/notes.md
 - [ ] ✨ On 8th march, people expect you to talk about women you look up to and feel inspired by — @codingmermaid.ai — mining/posts/DG87ukJSkai/notes.md
@@ -3415,7 +3361,6 @@
 - [ ] 🎁Comment “advent” to get my Advent Calendar with 3 data science projects built from scratch With LLMs and other language — @codingmermaid.ai — mining/posts/DDcYwMHoyNN/notes.md
 - [ ] Comment "advent" to get invitation to the magic of Data 🫶🏻 Day 9: Most people overlook SQL, but it's the only language t — @codingmermaid.ai — mining/posts/DDXLB43I8De/notes.md
 - [ ] 🎁Day 8: Windows functions cheat sheet Whether you’re a data analyst or a data scientist, you’ll undoubtedly come in cont — @codingmermaid.ai — mining/posts/DDUbQ9QIZqA/notes.md
-- [ ] Let’s start the festive season strong — @codingmermaid.ai — mining/posts/DDCnFhfo97l/notes.md
 - [ ] Many of you ask me how to get started with data science as a complete beginner — @codingmermaid.ai — mining/posts/DC13h_DItjV/notes.md
 - [ ] Data role differences explained 👇 If you want to get started with data career in 2025 this post is for you 📌Save this po — @codingmermaid.ai — mining/posts/DCzLLV7ooo7/notes.md
 - [ ] Let's talk about AI ethics in 2025 👀 👆🏻AI is undoubtedly becoming more autonomous and more involved in our everyday life — @codingmermaid.ai — mining/posts/DCwgYqOod0U/notes.md
@@ -3443,7 +3388,6 @@
 - [ ] There are less than 3 months left before 2024 ends ✨ Have you invested in a new skill — @codingmermaid.ai — mining/posts/DAtY3HxgKbr/notes.md
 - [ ] Rise a finger for every mistake you make 👆🏻 ☀️Someone told me that the longer you make the same mistake the longer it'll — @codingmermaid.ai — mining/posts/DAi7WUpAGGr/notes.md
 - [ ] POV: You’re a software developer and you fear that AI may replace you ⚠️ 📌When I started freelancing in 2016, I quickly  — @codingmermaid.ai — mining/posts/DATegI4Nte3/notes.md
-- [ ] I want you to be successful and launch your careers into the stars — @codingmermaid.ai — mining/posts/DAJOYaLtAyg/notes.md
 - [ ] Here's the best way to prepare for data science interview ✨ 💻I discovered this tool called Brainscape, it allows you to  — @codingmermaid.ai — mining/posts/C_3NwmxtjpQ/notes.md
 - [ ] Steal my personal AI learning plan 💻 ✅Most people are sleeping on AI, or facing a serious misconception, and that is tha — @codingmermaid.ai — mining/posts/C_vWRjrNuDe/notes.md
 - [ ] ⬇️ 5 things I wish senior data scientists told me about before I got started (Part 1) 💾 Save this post for later if you’ — @codingmermaid.ai — mining/posts/C_qWxOat4nx/notes.md
@@ -3483,7 +3427,6 @@
 - [ ] Best book for AI and AIOps 💻 I couldn’t put Machine Learning Solutions Architect book off my hands — @codingmermaid.ai — mining/posts/C7y5wudNWEz/notes.md
 - [ ] Best YouTube channels for data science and AI - part 5 If you’re starting out your data science journey the best way to  — @codingmermaid.ai — mining/posts/C7wY6iNNXZe/notes.md
 - [ ] May photo dumpy and retrospective 🧜‍♀️ May was a mix of emotional and physical rollercoaster for me, with both bad, okay — @codingmermaid.ai — mining/posts/C7tpAz9tJ5A/notes.md
-- [ ] Stop procrastinating 🚫 👀 Before you blinked half of the year passed — @codingmermaid.ai — mining/posts/C7ojJk2tEyS/notes.md
 - [ ] Why AI replaced me, but it won’t replace you — @codingmermaid.ai — mining/posts/C7l_AwvtNtq/notes.md
 - [ ] Learning machine learning was hard until I realized these 5 things 🙌 Struggling with machine learning — @codingmermaid.ai — mining/posts/C7T8lPLgvQM/notes.md
 - [ ] You can’t be a data scientist, you’re just not good enough ❌ Did you know that I nearly failed a year at high school bec — @codingmermaid.ai — mining/posts/C7O594ggdVr/notes.md
@@ -3874,11 +3817,8 @@
 - [ ] English improve cheskovali ante daily ee 5 things practice cheyandi: 1 — @kiransagar.pyy — mining/posts/DcStIShk06i/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DcSsyBrp4bH/notes.md
 - [ ] Companies Adige Top Aptitude Questions Placements lo frequently practice cheyyalsina important question types: 1 — @kiransagar.pyy — mining/posts/DcSrkX-k66w/notes.md
-- [ ] Aptitude Round Crack Cheyadaniki Ee Tips Follow Avvandi 1 — @kiransagar.pyy — mining/posts/DcSo6CLE1TM/notes.md
 - [ ] Full Stack Data Science with Gen AI – New Batch Starting August 22nd **PythonLife** is a prominent Telugu-first EdTech p — @pythonlifetelugu — mining/posts/DcSYEPgTcs-/notes.md
-- [ ] Puzzle Solving Tricks | Aptitude Shortcut Placement & competitive exams lo puzzles fast ga solve cheyyadaniki ee simple  — @pythonlifetelugu — mining/posts/DcSDgPFCZkt/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DcRFpbGDeWY/notes.md
-- [ ] Profit & Loss Tricks | Aptitude Shortcut Placement & competitive exams lo Profit & Loss questions fast ga solve cheyyada — @pythonlifetelugu — mining/posts/DcQ-2ydCRGD/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DcQ1lUUCVoQ/notes.md
 - [ ] Data Science with Gen AI Course | New Batch Starting August 22nd Data Science + Generative AI nerchukoni career ni next  — @pythonlifetelugu — mining/posts/DcQxIrWzmBp/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DcQxCVKzpXy/notes.md
@@ -3901,7 +3841,6 @@
 - [ ] Defence Jobs Complete Roadmap 🪖🇮🇳 Defence jobs kosam complete roadmap — Indian Army, Navy, Air Force, CAPF, Agniveer, SS — @pythonlifetelugu — mining/posts/DcQhVhiCaIC/notes.md
 - [ ] Railway Jobs Roadmap 🚆📚 Railway jobs kosam complete roadmap — RRB Group D, NTPC, ALP, Technician, Assistant Pointsman, T — @pythonlifetelugu — mining/posts/DcQg9zDiS43/notes.md
 - [ ] SSC Job Complete Roadmap 📚🏛️ SSC jobs kosam complete roadmap — SSC CGL, CHSL, MTS, GD, CPO, Stenographer, and other exam — @pythonlifetelugu — mining/posts/DcQgteBiXOr/notes.md
-- [ ] Percentage Tricks | Aptitude Shortcut Placement & competitive exams lo Percentage questions fast ga solve cheyyadaniki e — @pythonlifetelugu — mining/posts/DcQVlXriWzX/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DcQNSrFJoCB/notes.md
 - [ ] Government Exam Calendar 📅🏛️ Government exams ki important exam dates, notifications, application deadlines, eligibility — @pythonlifetelugu — mining/posts/DcQMibKCVsx/notes.md
 - [ ] Government Job Preparation 📚🏛️ Government job preparation kosam complete strategy — exam selection, syllabus understandi — @pythonlifetelugu — mining/posts/DcQMQcKCcdE/notes.md
@@ -3909,7 +3848,6 @@
 - [ ] ₹50,000 Salary Government Jobs 💰🏛️ ₹50,000 salary range lo government jobs, eligibility, educational qualification, age  — @pythonlifetelugu — mining/posts/DcQL3JWCbeS/notes.md
 - [ ] Government Job vs Abroad Job — Adhi Better — @pythonlifetelugu — mining/posts/DcQLphhif6D/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DcQEr3kJjzA/notes.md
-- [ ] Number Series Tricks | Aptitude Shortcut Placement & competitive exams lo Number Series questions fast ga solve cheyyada — @pythonlifetelugu — mining/posts/DcPzRppiQ-w/notes.md
 - [ ] Data Science with Gen AI Course | New Batch Starting August 22nd Data Science + Generative AI nerchukoni career ni next  — @pythonlifetelugu — mining/posts/DcPeqoXzoWt/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DcOxs-sCc2r/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DcOwp8niZpt/notes.md
@@ -3931,7 +3869,6 @@
 - [ ] Interview Lo Reject Avvadaniki Main Reason 😰💼 Interview lo candidates reject avvadaniki common reasons enti — @pythonlifetelugu — mining/posts/DcOId24CbQ6/notes.md
 - [ ] Basic Formulas for ECE, EIE — GATE 2027 📚⚡ GATE 2027 ECE and EIE preparation kosam important basic formulas, core concep — @pythonlifetelugu — mining/posts/DcOIOd4iVRH/notes.md
 - [ ] GATE 2027 Roadmap 🎯📚 GATE 2027 preparation kosam complete roadmap — syllabus, important subjects, study plan, concept bu — @pythonlifetelugu — mining/posts/DcOH7L3iW_W/notes.md
-- [ ] Number Series Tricks for Placements Number series questions lo first pattern identify cheyadam important — @kiransagar.pyy — mining/posts/DcOHYp9E5u_/notes.md
 - [ ] Central Govt Job vs State Govt Job — Adhi Better — @pythonlifetelugu — mining/posts/DcOHVlHiQ-5/notes.md
 - [ ] Easy Government Jobs for Women 📌 Disclaimer: This content is created for educational, awareness, and informational purpo — @pythonlifetelugu — mining/posts/DcOHEh6iS_x/notes.md
 - [ ] Best Government Jobs for Women 👩‍💼 📌 Disclaimer: This content is created for educational, awareness, and informational p — @pythonlifetelugu — mining/posts/DcOGza7CR1l/notes.md
@@ -3943,8 +3880,6 @@
 - [ ] Data Science with Gen AI Course | New Batch Starting August 22nd Data Science + Generative AI nerchukoni career ni next  — @pythonlifetelugu — mining/posts/DcNwxUST9BN/notes.md
 - [ ] 10 Businesses That Will Boom by 2030 AI, automation, sustainability, and digital transformation valla next decade lo kon — @kiransagar.pyy — mining/posts/DcDdrU3E8Fi/notes.md
 - [ ] Data Science with Gen AI — New Batch Starting from August 22nd 🚀 Learn Data Science with Generative AI, Python, SQL, Mac — @pythonlifetelugu — mining/posts/DcNrvSApTJt/notes.md
-- [ ] Coding-Decoding Tricks | Aptitude Shortcut Placement & competitive exams lo Coding-Decoding questions fast ga solve chey — @pythonlifetelugu — mining/posts/DcNOd4HiYD2/notes.md
-- [ ] Blood Relation Tricks | Aptitude Shortcut Placement aptitude & competitive exams lo Blood Relation questions fast ga sol — @pythonlifetelugu — mining/posts/DcM54e-Cf31/notes.md
 - [ ] Data Science with Gen AI Course | New Batch Starting August 22nd Data Science + Generative AI nerchukoni career ni next  — @pythonlifetelugu — mining/posts/DcL1RYLzOFx/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DcLneDCTd3w/notes.md
 - [ ] 📌 Disclaimer: This content is created for educational, awareness, and informational purposes only — @pythonlifetelugu — mining/posts/DcLjsGGieEQ/notes.md
@@ -3976,7 +3911,6 @@
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DcKzXnKpKtZ/notes.md
 - [ ] MNC Companies in Chennai | IT Jobs Guide Chennai is one of India's major IT hubs, with global MNCs, product companies, G — @pythonlifetelugu — mining/posts/DcKpwGeCTFH/notes.md
 - [ ] All Python Functions for Beginners (Must Know Functions) Python nerchukune beginners ki ee built-in functions chala impo — @kiransagar.pyy — mining/posts/Db-vi15k5nK/notes.md
-- [ ] Build These 10 Resume-Winning Projects | IT Career Guide Don't fill your resume with basic projects — @pythonlifetelugu — mining/posts/DcJCqdNib3v/notes.md
 - [ ] 🚨 WE ARE HIRING | BUSINESS DEVELOPMENT ASSOCIATE (BDA) PythonLife is looking for energetic, ambitious, and career-driven — @pythonlifetelugu — mining/posts/DcJBZKcJ20A/notes.md
 - [ ] List of MNC Companies in Chennai 🏢💼 Chennai lo job opportunities kosam freshers and experienced candidates target cheyag — @pythonlifetelugu — mining/posts/DcJAzi3CdTl/notes.md
 - [ ] Full Stack Data Science with GEN AI — New Batch Starting from August 22nd 🚀 Master Full Stack Data Science with Generati — @pythonlifetelugu — mining/posts/DcJAVw-JEPE/notes.md
@@ -3995,8 +3929,6 @@
 - [ ] Laboratory Assistant Career Guide 🔬 Learn about the Laboratory Assistant career, including eligibility, educational qual — @pythonlifetelugu — mining/posts/DcI9kgqiW94/notes.md
 - [ ] Revenue Clerk Job Ela Pondhali — @pythonlifetelugu — mining/posts/DcI9UzOibPa/notes.md
 - [ ] Full Stack Data Science with GEN AI — New Batch Starting from August 22nd 🚀 Learn Full Stack Data Science with Generativ — @pythonlifetelugu — mining/posts/DcI85V2plAH/notes.md
-- [ ] Excise Constable Salary ఎంత — @pythonlifetelugu — mining/posts/DcI8x6dic60/notes.md
-- [ ] Dak Sevak Job Reality 📮 Learn about the real work of a Dak Sevak, including job responsibilities, salary, working hours, — @pythonlifetelugu — mining/posts/DcI8kgRCR0h/notes.md
 - [ ] FULL STACK DATA SCIENCE WITH GEN AI new batch starting from August 22nd 🚀 Learn Full Stack Data Science with Generative  — @pythonlifetelugu — mining/posts/DcI02Klp4RT/notes.md
 - [ ] ABPM Job Complete Guide 📮 Learn everything about the ABPM (Assistant Branch Postmaster) job, including eligibility, sala — @pythonlifetelugu — mining/posts/DcI0wLGiRNl/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DcIz-jJpnOf/notes.md
@@ -4050,7 +3982,6 @@
 - [ ] Junior Clerk Complete Guide **PythonLife** is a prominent Telugu-first EdTech platform and YouTube channel that provides — @pythonlifetelugu — mining/posts/DcBFfMHibi8/notes.md
 - [ ] Full Stack Data Science with Gen AI — Starting August 22nd **PythonLife** is a prominent Telugu-first EdTech platform an — @pythonlifetelugu — mining/posts/DcBFKotp7p-/notes.md
 - [ ] Railway Ticket Clerk Job **PythonLife** is a prominent Telugu-first EdTech platform and YouTube channel that provides te — @pythonlifetelugu — mining/posts/DcBFCymiYKG/notes.md
-- [ ] Stenographer Salary Entha — @pythonlifetelugu — mining/posts/DcBEwbDCXXI/notes.md
 - [ ] Full Stack Data Science with Gen AI — Starting August 22nd **PythonLife** is a prominent Telugu-first EdTech platform an — @pythonlifetelugu — mining/posts/DcBEQ_YpJpt/notes.md
 - [ ] Junior Secretariat Assistant Job Ela Pondhali — @pythonlifetelugu — mining/posts/DcBEFaXiYOX/notes.md
 - [ ] Product-Based Companies in Mumbai **PythonLife** is a prominent Telugu-first EdTech platform and YouTube channel that pr — @pythonlifetelugu — mining/posts/DcBDtxvCTg2/notes.md
@@ -4066,7 +3997,6 @@
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DcAoRTgJ4X-/notes.md
 - [ ] 📘 Basic Formulas for EIE Students | Save This — @pythonlifetelugu — mining/posts/DcAWf7FiTyt/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/Db9q2_DzK4w/notes.md
-- [ ] 100 Basic Formulas Every EEE Student Should Know 1 — @pythonlifetelugu — mining/posts/DcAB6NWCUB7/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/Db_CUpXiTnr/notes.md
 - [ ] Best Resume Builders | Career Guide Create professional, ATS-friendly resumes quickly — @pythonlifetelugu — mining/posts/Db-9SMkiX-7/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/Db-3JlwCW25/notes.md
@@ -4076,13 +4006,10 @@
 - [ ] Top 10 GitHub Repositories Every Developer Should Know Kiran Sagar Founder of PythonLife provided 100+ Free IT Courses i — @kiransagar.pyy — mining/posts/Db-t9xBEy2T/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/Db-tJQoJF54/notes.md
 - [ ] Top 10 Free Certifications That Add Value to Your Resume Kiran Sagar Founder of PythonLife provided 100+ Free IT Courses — @kiransagar.pyy — mining/posts/Db-s1uFE6MF/notes.md
-- [ ] Time, Speed & Distance Tricks | Aptitude Shortcut Placement & competitive exams lo Time, Speed & Distance questions fast — @pythonlifetelugu — mining/posts/Db-stsGCey-/notes.md
 - [ ] Data Science with Gen AI Course | New Batch Starting August 22nd Data Science + Generative AI nerchukoni career ni next  — @pythonlifetelugu — mining/posts/Db-sfbqJf4u/notes.md
-- [ ] Time & Work Shortcuts | Aptitude Tricks Placement & competitive exams lo Time & Work questions fast ga solve cheyyadanik — @pythonlifetelugu — mining/posts/Db-scOtCX4W/notes.md
 - [ ] STAR Method for Programming Interviews | Interview Trick Programming interview lo mee project experience, problem-solvin — @pythonlifetelugu — mining/posts/Db-sQmHifqH/notes.md
 - [ ] Data Science with Gen AI Course | New Batch Starting August 22nd Data Science + Generative AI nerchukoni career ni next  — @pythonlifetelugu — mining/posts/Db-sBnapuk5/notes.md
 - [ ] Linux Complete Notes Kiran Sagar Founder of PythonLife provided 100+ Free IT Courses in Telugu — @kiransagar.pyy — mining/posts/Db-sArUE-IM/notes.md
-- [ ] Seating Arrangement Tricks | Aptitude Shortcut Placement & competitive exams lo Seating Arrangement questions fast ga so — @pythonlifetelugu — mining/posts/Db-r_GUCfzn/notes.md
 - [ ] Data Science with Gen AI Course | New Batch Starting August 22nd Data Science + Generative AI nerchukoni career ni next  — @pythonlifetelugu — mining/posts/Db-rieqJdGD/notes.md
 - [ ] Portfolio Projects That Get You Hired Kiran Sagar Founder of PythonLife provided 100+ Free IT Courses in Telugu — @kiransagar.pyy — mining/posts/Db-rlank4k8/notes.md
 - [ ] Highest Paying Careers for Commerce Students | Career Guide Commerce background tho high-paying career build cheskovacha — @pythonlifetelugu — mining/posts/Db-rfbViUm2/notes.md
@@ -4163,7 +4090,6 @@
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/Db4hUDgz-St/notes.md
 - [ ] English Vocabulary for Interviews | Quick Guide Improve your professional English and communicate confidently in intervi — @pythonlifetelugu — mining/posts/Db4Th1-ETfY/notes.md
 - [ ] Comment old Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + — @pythonlifetelugu — mining/posts/Db3d_trpp0e/notes.md
-- [ ] 100 Basic Formulas Every ECE Student Should Know 1 — @pythonlifetelugu — mining/posts/Db3Uz2RiafI/notes.md
 - [ ] Websites Every Developer Should Know Bookmark these useful websites for coding, debugging, learning, and career growth — @pythonlifetelugu — mining/posts/Db3UcmDiRIn/notes.md
 - [ ] Life Before and After 📌 Disclaimer: This meme is created for educational, awareness, and entertainment purposes only — @pythonlifetelugu — mining/posts/Db3TSRkifRA/notes.md
 - [ ] Future-Proof Tech Careers | Career Guide Build skills that can stay relevant as technology evolves — @pythonlifetelugu — mining/posts/Db3O3M1kV61/notes.md
@@ -4181,7 +4107,6 @@
 - [ ] English Speaking Skills | Career Guide Improve your English speaking skills for interviews and the workplace — @pythonlifetelugu — mining/posts/Dbzw3JECVaG/notes.md
 - [ ] High Salary Skills | Career Guide Build skills that can open doors to high-growth careers — @pythonlifetelugu — mining/posts/Dbzv4e7CZrE/notes.md
 - [ ] After Degree — @pythonlifetelugu — mining/posts/Dbzvoh1CTPc/notes.md
-- [ ] Data Analyst vs Data Engineer | Quick Comparison Data Analyst - Focus: Analyze Data - Skills: Excel, SQL, Power BI, Pyth — @pythonlifetelugu — mining/posts/DbzveV8CRRv/notes.md
 - [ ] Why Candidates Get Rejected in Interviews | Main Reasons Avoid these common mistakes that can cost you the job — @pythonlifetelugu — mining/posts/DbzuvsYiRyH/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/Db0cTnRzZIC/notes.md
 - [ ] 🚀 PythonLife – Full Stack Python Development with AI 📅 Start: 10th August 2026 🕖 Mon–Sat | 8:00–10:00 AM 📚 Course Featur — @pythonlifetelugu — mining/posts/DbyYKzwiROe/notes.md
@@ -4223,7 +4148,6 @@
 - [ ] Freshers Mistakes That Block IT Jobs | Career Guide Avoid these common mistakes during your job search — @pythonlifetelugu — mining/posts/DbvOFOliZNn/notes.md
 - [ ] Off Campus Placements Roadmap | Freshers Guide Follow this roadmap to crack software jobs through off-campus hiring — @pythonlifetelugu — mining/posts/DbvNueNCSRm/notes.md
 - [ ] Job Application Email Template | Quick Guide Email Subject Application for [Job Role] - [Your Name] Email Structure 1 — @pythonlifetelugu — mining/posts/DbvNUnSiZIP/notes.md
-- [ ] Notice Period Hacks | Job Switch Guide Learn how to manage your notice period smartly during a job switch — @pythonlifetelugu — mining/posts/DbvMeIYidC5/notes.md
 - [ ] HR Interview Questions | Quick Guide Prepare these common HR questions to crack your interview — @pythonlifetelugu — mining/posts/DbvKoFRiTFX/notes.md
 - [ ] LinkedIn Profile Checklist | Career Guide Optimize your LinkedIn profile to attract recruiters — @pythonlifetelugu — mining/posts/DbvKNo2icsn/notes.md
 - [ ] Comment Coding 📌 Disclaimer: This meme is created for educational, awareness, and entertainment purposes only — @pythonlifetelugu — mining/posts/DbvJ8jfpCSN/notes.md
@@ -4243,7 +4167,6 @@
 - [ ] Dynamic Programming Made Easy | DSA Quick Guide Dynamic Programming (DP) is used to solve optimization problems by stori — @pythonlifetelugu — mining/posts/Dbskjd1jQmu/notes.md
 - [ ] Tableau Roadmap | Beginner To Job Ready Learn Tableau step-by-step for Data Analyst, Business Analyst, and BI Developer  — @pythonlifetelugu — mining/posts/DbsdfQNiTxK/notes.md
 - [ ] Top Cybersecurity Tools | Quick Guide Master these tools for Ethical Hacking, SOC Analyst, and Security Engineer roles — @pythonlifetelugu — mining/posts/DbsbyyRCbH0/notes.md
-- [ ] Excel Interview Questions | Quick Guide Basic Questions 1 — @pythonlifetelugu — mining/posts/DbsatDjieZl/notes.md
 - [ ] CyberSecurity Interview Questions | Quick Guide Beginner Questions 1 — @pythonlifetelugu — mining/posts/Dbsaex3iWJo/notes.md
 - [ ] Burp Suite Cheat Sheet | Cybersecurity Quick Guide Burp Suite is a popular web security testing tool used for finding vu — @pythonlifetelugu — mining/posts/DbsZ3JWiVAZ/notes.md
 - [ ] Top DevOps Projects For Resume | Beginner To Advanced Build these projects to stand out for DevOps Engineer, Cloud Engin — @pythonlifetelugu — mining/posts/DbsYWDbCfrK/notes.md
@@ -4258,9 +4181,6 @@
 - [ ] 🚀 PythonLife – Full Stack Python Development with AI 📅 Start: 10th August 2026 🕖 Mon–Sat | 8:00–10:00 AM 📚 Course Featur — @pythonlifetelugu — mining/posts/DbqUvXQCUT5/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DbqKiUUJTP5/notes.md
 - [ ] Learn ChatGPT in Telugu with simple explanations and real-world examples — @pythonlifetelugu — mining/posts/DbqJKSbz6fH/notes.md
-- [ ] Excel Formula Cheat Sheet | Must Know Formulas for Data Analysts Master these important Excel formulas for data analysis — @pythonlifetelugu — mining/posts/DbqF2ABCV0S/notes.md
-- [ ] Excel Shortcuts Every Data Analyst Must Know Master these essential Excel shortcuts to work faster with data, formulas,  — @pythonlifetelugu — mining/posts/DbqFppRiapB/notes.md
-- [ ] Power BI Cheat Sheet | Complete Guide for Data Analysts Master Power BI with this quick reference covering data loading, — @pythonlifetelugu — mining/posts/DbqFeYfiWd6/notes.md
 - [ ] Data Scientist Roadmap 2026 | Beginner to Job Ready Become a Data Scientist by learning programming, statistics, machine — @pythonlifetelugu — mining/posts/DbqFUVaiYFP/notes.md
 - [ ] Data Engineer Roadmap 2026 | Beginner to Job Ready Become a Data Engineer by learning databases, programming, data pipel — @pythonlifetelugu — mining/posts/DbqFHrGCUzV/notes.md
 - [ ] Data Analyst Roadmap 2026 | Beginner to Job Ready Become a Data Analyst by learning data analysis, visualization, statis — @pythonlifetelugu — mining/posts/DbqE9BKCd_T/notes.md
@@ -4351,7 +4271,6 @@
 - [ ] Rust Programming Roadmap 2026 | Complete Path to Become a Rust Developer Want to become a Rust Developer — @pythonlifetelugu — mining/posts/DbfggAFierc/notes.md
 - [ ] Java Complete Roadmap 2026 | Beginner to Java Developer Want to become a Java Developer — @pythonlifetelugu — mining/posts/DbfgNUVCQW4/notes.md
 - [ ] Golang Roadmap 2026 | Complete Path to Become a Go Developer Want to become a Golang Developer — @pythonlifetelugu — mining/posts/DbffiJkCTBo/notes.md
-- [ ] C++ Complete Notes | Learn C++ From Basics to Advanced Want to master C++ Programming — @pythonlifetelugu — mining/posts/Dbfe6oQifcd/notes.md
 - [ ] C Programming Cheat Sheet | Every Beginner Developer Must Save Master the basics of programming with this complete C Pro — @pythonlifetelugu — mining/posts/DbfeH2uiQU6/notes.md
 - [ ] C# Roadmap 2026 | Complete Path to Become a C# Developer Want to start your journey as a C# Developer — @pythonlifetelugu — mining/posts/DbfdSRjCQ5D/notes.md
 - [ ] 🚀 PythonLife – Full Stack Python Development with AI 📅 Start: 10th August 2026 🕖 Mon–Sat | 8:00–10:00 AM 📚 Course Featur — @pythonlifetelugu — mining/posts/DbfbZKipzVq/notes.md
@@ -4404,12 +4323,9 @@
 - [ ] How to Use Cursor AI (2026 Beginner Guide) Step 1: Install Cursor • Download Cursor AI • Install on Windows/macOS/Linux  — @pythonlifetelugu — mining/posts/DbctVsUiXUs/notes.md
 - [ ] Generative AI Roadmap (2026) + Job Roles & Salaries Step 1: Python • Core Python • OOP • APIs • File Handling Step 2: AI — @pythonlifetelugu — mining/posts/Dbcs2ZzCdY8/notes.md
 - [ ] Generative AI Roadmap (2026) Phase 1: Programming • Python Basics • OOP • File Handling • APIs Phase 2: Math Basics • St — @pythonlifetelugu — mining/posts/DbcsJUwCUXg/notes.md
-- [ ] Data Analyst Roadmap (2026) + Job Roles & Salaries Step 1: Learn Excel • Formulas • Pivot Tables • Charts • Dashboards S — @pythonlifetelugu — mining/posts/Dbcr5_1iZvW/notes.md
 - [ ] Data Analyst Complete Roadmap (2026) Phase 1: Fundamentals • MS Excel • Statistics Basics • Business Mathematics • Analy — @pythonlifetelugu — mining/posts/DbcrlxbiaCZ/notes.md
 - [ ] Aptitude Important Topics for IT Jobs (2026) Quantitative Aptitude 1 — @pythonlifetelugu — mining/posts/DbcrPDyibwn/notes.md
-- [ ] Become a Data Analyst Before 2027 – Complete Roadmap 2026–2027 Success Formula Excel → SQL → Power BI → Python → Statist — @kiransagar.pyy — mining/posts/Dbcm9ZTE62Y/notes.md
 - [ ] What is a GAN — @kiransagar.pyy — mining/posts/DbcmGWwE__f/notes.md
-- [ ] Top 50 Data Analyst Project Ideas (2026) Beginner Projects 1 — @pythonlifetelugu — mining/posts/Dbcj91hDVMX/notes.md
 - [ ] ATS-Friendly Resume Template for Freshers (2026) 1 — @pythonlifetelugu — mining/posts/DbcMjWbDu7i/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbbDIEoCaXu/notes.md
 - [ ] Beginner ChatGPT Tricks You Should Know (2026) Learn Faster • Ask ChatGPT to explain concepts like you're a beginner — @pythonlifetelugu — mining/posts/DbasV0Yidfc/notes.md
@@ -4426,7 +4342,6 @@
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbX_MbridZO/notes.md
 - [ ] 7 Cybersecurity Internships for Beginners 1 — @kiransagar.pyy — mining/posts/DbXsJgXE_Bi/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbXYLKTpGwG/notes.md
-- [ ] Top 30 SAP FICO Interview Questions Basic Questions 1 — @pythonlifetelugu — mining/posts/DbXC9r4iZab/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbV9XMICdkH/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbV9OcrCZE6/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbV9BKQiWKO/notes.md
@@ -4446,24 +4361,19 @@
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbUoGbspKnF/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbTGSE8CZbe/notes.md
 - [ ] How to Get LinkedIn Referrals (2026 Guide) Step 1: Optimize Your Profile • Professional Profile Photo • ATS-Friendly Hea — @pythonlifetelugu — mining/posts/DbTFMIPidju/notes.md
-- [ ] 100 English Vocabulary Words Every Student & Professional Should Know Basic Vocabulary (1–20) 1 — @pythonlifetelugu — mining/posts/DbTCY9cDR7x/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbTBWyFjdhk/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbTA3e5jV2K/notes.md
-- [ ] Top 100 Git & GitHub Interview Questions (2026) Git Basics (1–10) 1 — @pythonlifetelugu — mining/posts/DbS209ziX9K/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbSxmZWDUzx/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbSp42Utzng/notes.md
 - [ ] Generative AI vs Agentic AI Generative AI (GenAI)| Agentic AI Generates content| Takes actions to achieve goals Responds — @pythonlifetelugu — mining/posts/DbSijEPCdh-/notes.md
 - [ ] MLOps Roadmap (Beginner to Advanced) Step 1: Programming • Python • SQL • Git & GitHub Step 2: Computer Science • Linux  — @pythonlifetelugu — mining/posts/DbSUxvSiTHc/notes.md
 - [ ] ⚡ n8n Complete Notes – Beginner to Advanced Master n8n with complete notes covering Workflow Automation, Nodes, Triggers — @pythonlifetelugu — mining/posts/DbR5VqBiblV/notes.md
-- [ ] Top Interview Questions by Technology Excel (10) • What is VLOOKUP vs XLOOKUP — @pythonlifetelugu — mining/posts/DbQ0uTqCWsm/notes.md
 - [ ] Top 50 Linux Commands Every Developer Should Know File & Directory 1 — @pythonlifetelugu — mining/posts/DbQZOauiYCO/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbQSXnmiR_w/notes.md
-- [ ] 100 Mac Keyboard Shortcuts Every User Should Know Basic Shortcuts (1–20) 1 — @pythonlifetelugu — mining/posts/DbQR7RkifeR/notes.md
 - [ ] Data Engineer Roadmap (2026) Phase 1: Programming • Python • SQL • Git & GitHub Phase 2: Database Fundamentals • MySQL • — @pythonlifetelugu — mining/posts/DbQRhDQiX7t/notes.md
 - [ ] Core Java Cheat Sheet (2026) Java Basics • Variables • Data Types • Operators • Type Casting • User Input (Scanner) Cont — @pythonlifetelugu — mining/posts/DbQRXFAiciC/notes.md
 - [ ] AWS vs Azure vs GCP (2026 Comparison) Feature| AWS| Azure| GCP Full Form| Amazon Web Services| Microsoft Azure| Google C — @pythonlifetelugu — mining/posts/DbQRNdsiSad/notes.md
 - [ ] Python Built-in Functions Cheat Sheet (80+ Functions) Type Conversion • int() • float() • str() • bool() • list() • tupl — @pythonlifetelugu — mining/posts/DbQQ31JianU/notes.md
-- [ ] 100 Computer Keyboard Shortcuts Every Student & Professional Should Know Basic Shortcuts (1–20) 1 — @pythonlifetelugu — mining/posts/DbQQVj0CWuP/notes.md
 - [ ] Free vs Paid AI Tools (2026) Free AI Tools| Paid AI Tools ChatGPT (Free)| ChatGPT Plus / Pro Google Gemini| Gemini Advan — @pythonlifetelugu — mining/posts/DbQO3b3CW4p/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbQIAUTiYTK/notes.md
 - [ ] Top 20 HR Interview Questions with Sample Answers 1 — @pythonlifetelugu — mining/posts/DbPv-wriUxr/notes.md
@@ -4474,7 +4384,6 @@
 - [ ] How to Use Claude AI (Beginner Guide - 2026) Step 1: Create an Account • Visit Claude's website • Sign up using your ema — @pythonlifetelugu — mining/posts/DbNoYwJCSAa/notes.md
 - [ ] Top Freelancing Websites to Find High-Paying Work Global Freelancing Platforms • Upwork • Fiverr • Freelancer • PeoplePe — @pythonlifetelugu — mining/posts/DbNkBkpiVH7/notes.md
 - [ ] Top 20 HR Interview Questions Every Fresher Should Prepare 1 — @pythonlifetelugu — mining/posts/DbNgdJFicw_/notes.md
-- [ ] Aptitude Cheat Sheet – Placement & Competitive Exams Percentages • x% = x/100 • 50% = 1/2 • 25% = 1/4 • 20% = 1/5 • 12 — @pythonlifetelugu — mining/posts/DbNfZAxCSDG/notes.md
 - [ ] Top Job Search Websites Every Student & Fresher Should Know Global Job Portals • LinkedIn Jobs • Indeed • Glassdoor • We — @pythonlifetelugu — mining/posts/DbNe7mkCeed/notes.md
 - [ ] PowerPoint vs Excel vs Word – Essential Keyboard Shortcuts Shortcut| Word| Excel| PowerPoint Ctrl + N| New Document| New — @pythonlifetelugu — mining/posts/DbNeN4CCbBg/notes.md
 - [ ] Java Keywords Cheat Sheet (50 Reserved Keywords) Access Modifiers • public • private • protected Class & Object • class  — @pythonlifetelugu — mining/posts/DbNdvSbiSuk/notes.md
@@ -4489,7 +4398,6 @@
 - [ ] 🏋️‍♂️ Gym lo personal trainer lekunda workout chestunnara — @pythonlifetelugu — mining/posts/DbLQORRJe0c/notes.md
 - [ ] AI stocks ki temporary brake padindi — @pythonlifetelugu — mining/posts/DbLQKqbp4YD/notes.md
 - [ ] Employees ni appreciate cheyyadam ante ila undali — @pythonlifetelugu — mining/posts/DbLQFahpppo/notes.md
-- [ ] Reasoning Cheat Sheet – Placement & Competitive Exams Alphabet Tricks • A = 1, B = 2, — @pythonlifetelugu — mining/posts/DbLOn3jiSz9/notes.md
 - [ ] ⚡ n8n Complete Notes – Beginner to Advanced Master n8n with complete notes covering Workflow Automation, Nodes, Triggers — @pythonlifetelugu — mining/posts/DbSHDDdCdCa/notes.md
 - [ ] AI vs HI (Artificial Intelligence vs Human Intelligence) Understand the key differences between AI and Human Intelligenc — @pythonlifetelugu — mining/posts/DbLIwayCaQg/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 1st August 2026 🕖 Timings: 7:00–9:00 PM(IST) 📚 Course  — @pythonlifetelugu — mining/posts/DbK7sJvJMpe/notes.md
@@ -4510,13 +4418,10 @@
 - [ ] ☁️ Azure Complete Notes – Beginner to Advanced Master Microsoft Azure with complete notes covering Azure Virtual Machine — @pythonlifetelugu — mining/posts/DbF7kImCaRr/notes.md
 - [ ] 🚀 AWS Complete Notes – Beginner to Advanced Master AWS with easy-to-understand notes covering EC2, S3, IAM, VPC, RDS, La — @pythonlifetelugu — mining/posts/DbF7CR2Cek-/notes.md
 - [ ] 🤖 AIOps Roadmap (Beginner to Advanced) Step 1: IT Fundamentals • Linux • Networking • Operating Systems • Shell Scriptin — @pythonlifetelugu — mining/posts/DbF6hY2CTeN/notes.md
-- [ ] ⌨️ 50 Essential Keyboard Shortcuts Everyone Should Know Basic 1 — @pythonlifetelugu — mining/posts/DbF6HBMieFB/notes.md
-- [ ] 🔥 50 Important HTML Tags Every Web Developer Should Know Basic Structure 1 — @pythonlifetelugu — mining/posts/DbF5ts9CTtA/notes.md
 - [ ] ☁️ Azure Complete Notes – Beginner to Advanced Master Microsoft Azure with complete notes covering Azure Virtual Machine — @pythonlifetelugu — mining/posts/DbF5K9NCVmg/notes.md
 - [ ] AWS Complete Notes – Beginner to Advanced Master AWS with easy-to-understand notes covering EC2, S3, IAM, VPC, RDS, Lamb — @pythonlifetelugu — mining/posts/DbF49cHiUng/notes.md
 - [ ] Learn OpenClaw AI Assistant with practical examples and discover how to build intelligent AI-powered assistants — @pythonlifetelugu — mining/posts/DbFqhUhiQT_/notes.md
 - [ ] Aptitude Shortcuts Cheat Sheet Percentages * 10% = Divide by 10 * 5% = Half of 10% * 1% = Divide by 100 * 25% = 1/4 * 50 — @kiransagar.pyy — mining/posts/DbDaVtmE_cF/notes.md
-- [ ] 30 Important Aptitude Topics for Placements & IT Interviews 1 — @pythonlifetelugu — mining/posts/DbDS4UGCY0m/notes.md
 - [ ] AWS vs Azure AWS| Azure Amazon Web Services| Microsoft Azure Launched in 2006| Launched in 2010 Largest cloud provider|  — @pythonlifetelugu — mining/posts/DbDSaqFics0/notes.md
 - [ ] AI vs Generative AI Artificial Intelligence (AI)| Generative AI (GenAI) Makes decisions and predictions| Creates new con — @pythonlifetelugu — mining/posts/DbDSNkZCZeG/notes.md
 - [ ] CSS Cheat Sheet (Beginner to Advanced) CSS Syntax selector { property: value; } Selectors • Element ("p") • Class (" — @pythonlifetelugu — mining/posts/DbDRIPlCcYr/notes.md
@@ -4528,7 +4433,6 @@
 - [ ] AI boom valla coding jobs matrame kaadu — @pythonlifetelugu — mining/posts/DbCzuoUp9y9/notes.md
 - [ ] Master the real-world uses of Java and discover why it's one of the most popular programming languages — @pythonlifetelugu — mining/posts/DbA8d0uCRW9/notes.md
 - [ ] 20 Important Prepositions Every Employee Should Know 1 — @pythonlifetelugu — mining/posts/DbA2tswiWhj/notes.md
-- [ ] Data Analyst Cheat Sheet (Beginner to Advanced) Excel • Pivot Tables • VLOOKUP/XLOOKUP • INDEX + MATCH • IF Functions •  — @pythonlifetelugu — mining/posts/DbA2cERiWdc/notes.md
 - [ ] Remove These Unnecessary Things from Your Resume ❌ Objective Statement (generic) ❌ Photo (unless specifically required)  — @pythonlifetelugu — mining/posts/DbA2GF4iTC7/notes.md
 - [ ] Top IT Company Locations in India (2026) 1 — @pythonlifetelugu — mining/posts/DbAz8uaiRMz/notes.md
 - [ ] Professional vs Unprofessional English (Workplace Edition) Tips: • Speak politely and confidently — @pythonlifetelugu — mining/posts/DbAwt0qCcp9/notes.md
@@ -4576,7 +4480,6 @@
 - [ ] World's Toughest Exams Explore some of the world's most challenging competitive and professional exams — @pythonlifetelugu — mining/posts/Da6nWgJDc3W/notes.md
 - [ ] Master the most useful Microsoft Word keyboard shortcuts to work faster and smarter — @pythonlifetelugu — mining/posts/Da5fzBiiU0i/notes.md
 - [ ] Discover 120+ AI tools in one place and boost your productivity — @pythonlifetelugu — mining/posts/Da5ODNhCSbP/notes.md
-- [ ] Data Analyst Cheat Sheet Core Skills * Excel * SQL * Power BI * Python * Statistics * Data Visualization Excel * VLOOKUP — @kiransagar.pyy — mining/posts/Da5GED3k0FA/notes.md
 - [ ] Top Cybersecurity Tools Every Professional Must Learn Master these industry-standard tools to build a successful career  — @pythonlifetelugu — mining/posts/Da4_sSpiewI/notes.md
 - [ ] Important Full Forms Asked in Full Stack Developer Interviews Master these commonly asked full forms to improve your int — @pythonlifetelugu — mining/posts/Da47rXsiZ5Y/notes.md
 - [ ] 5 Free Certificates That Actually Matter Boost your resume with these valuable free certifications recognized by employe — @pythonlifetelugu — mining/posts/Da46lmMCf6Y/notes.md
@@ -4596,7 +4499,6 @@
 - [ ] World top physicist Yuji Tachikawa team 6 months ga struggle ayina problem… Claude AI solve chesindi — @pythonlifetelugu — mining/posts/Da3QOsAzmUB/notes.md
 - [ ] Poker lo cards kanna FACE expressions kuda important — @pythonlifetelugu — mining/posts/Da3QGKhzaPU/notes.md
 - [ ] ChatGPT kottha Voice AI tho language learning game maripovachu — @pythonlifetelugu — mining/posts/Da3P8_gziqX/notes.md
-- [ ] Master Pivot Tables in Excel with step-by-step practical examples — @pythonlifetelugu — mining/posts/Da254l7CRZB/notes.md
 - [ ] Avoid Unnecessary Things in Your Resume A good resume is clear, relevant, and professional — @kiransagar.pyy — mining/posts/Da2uaiUE39V/notes.md
 - [ ] Best Interview Preparation Sites for Students & Job Seekers 1 — @kiransagar.pyy — mining/posts/Da2lZ_fE1hb/notes.md
 - [ ] Best Cybersecurity Certifications for Freshers in 2026 1 — @kiransagar.pyy — mining/posts/Da2lNo0E2JX/notes.md
@@ -4629,18 +4531,14 @@
 - [ ] 🚀 PythonLife – Full Stack Python Development with AI 📅 Start: 21st July 2026 🕖 Mon–Sat | 8:00–10:00 PM 📚 Course Features — @pythonlifetelugu — mining/posts/DautxvMpgd-/notes.md
 - [ ] Master Full Stack Python Development from beginner to advanced — @pythonlifetelugu — mining/posts/Dauggevk0Ym/notes.md
 - [ ] Master Python Interview Questions with clear explanations and practical examples — @pythonlifetelugu — mining/posts/DauD77oEzfj/notes.md
-- [ ] Master Full Stack Python interview questions with detailed explanations and practical examples — @pythonlifetelugu — mining/posts/DasfxrvCVTX/notes.md
 - [ ] Full Stack Python Recorded Content We Provide: ✔ 250+ Hours Recorded Classes (Lifetime Access) ✔ Practical Coding Traini — @pythonlifetelugu — mining/posts/DasfYiQCQJO/notes.md
 - [ ] Master the top 50 Java interview questions with clear explanations and practical examples — @pythonlifetelugu — mining/posts/DaseMofCf--/notes.md
-- [ ] Master Full Stack Python Programming with complete notes from beginner to advanced — @pythonlifetelugu — mining/posts/DaqO5dLiT5g/notes.md
 - [ ] Master Maven from beginner to advanced — @pythonlifetelugu — mining/posts/DaqLenHiZon/notes.md
 - [ ] Join the 9 Days, 9 Certifications challenge and upgrade your skills one certification at a time — @pythonlifetelugu — mining/posts/DaqJ-LEiSBp/notes.md
 - [ ] Learn how Linux powers servers, cloud platforms, DevOps, cybersecurity, software development, networking, and enterprise — @pythonlifetelugu — mining/posts/DaqF2NRCZYg/notes.md
 - [ ] Learn the evolution of Java from its beginnings to the latest modern features — @pythonlifetelugu — mining/posts/DaqF02GicAj/notes.md
-- [ ] Master Full Stack Python with a complete handbook — @pythonlifetelugu — mining/posts/DaqFZ01CU0g/notes.md
 - [ ] Learn how Machine Learning helps solve real-world problems through prediction, automation, pattern recognition, recommen — @pythonlifetelugu — mining/posts/DapjmlyiRiZ/notes.md
 - [ ] How to Start Earnings from Content Creation Content creation nundi earnings start avvali ante followers kanna value crea — @kiransagar.pyy — mining/posts/Dapjl12kxrp/notes.md
-- [ ] Master Full Stack Python with a complete handbook — @pythonlifetelugu — mining/posts/DapgUGmiZzL/notes.md
 - [ ] PythonLife – Full Stack Python Development with AI 📅 Start: 21st July 2026 🕖 Mon–Sat | 8:00–10:00 PM 📚 Course Features:  — @pythonlifetelugu — mining/posts/DapV0xpiaOC/notes.md
 - [ ] 🇯🇵 Japan lo shocking cyber case bayataki vachindi — @pythonlifetelugu — mining/posts/Dao_siWp-Sk/notes.md
 - [ ] 🤯 Oka high school student build chesina AI ippudu andari attention ni grab chesthondi — @pythonlifetelugu — mining/posts/Dao_MpGpEiw/notes.md
@@ -4785,7 +4683,6 @@
 - [ ] 🇺🇸 TRUMP peru Hyderabad roads meedha kanipinche rojulu vastunnaya — @pythonlifetelugu — mining/posts/DZp7pAwpDmn/notes.md
 - [ ] 📢 NEET UG re-test mundu, June 22 varaku Telegram pai temporary restrictions veyadam hot topic ga maarindi — @pythonlifetelugu — mining/posts/DZp3D_-p2GQ/notes.md
 - [ ] 1 Crore Package Roadmap | Telugu 1CR package achieve cheyali ante shortcut kante high-value skills + consistency + globa — @pythonlifetelugu — mining/posts/DZprtedzF8r/notes.md
-- [ ] Aptitude Tricks for Placements 1 — @pythonlifetelugu — mining/posts/DZpnHr0CZOK/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 25th June 2026 🕖 Timings: 7:00–9:00 AM(IST) 📚 Course F — @pythonlifetelugu — mining/posts/DZpnJ7sT4Xj/notes.md
 - [ ] Comment 7 Full Stack Python Recorded Content We Provide: ✔ 250+ Hours Recorded Classes (Lifetime Access) ✔ Practical Cod — @pythonlifetelugu — mining/posts/DZpLsQiTOag/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 25th June 2026 🕖 Timings: 7:00–9:00 AM(IST) 📚 Course F — @pythonlifetelugu — mining/posts/DZo9-7mz3Iu/notes.md
@@ -4802,7 +4699,6 @@
 - [ ] US prabhutvam Claude Fable 5 mariyu Mythos 5 ki foreign users access ni block cheyyalani order ichindani reports chebutu — @pythonlifetelugu — mining/posts/DZnQCyoputK/notes.md
 - [ ] ⚠️ Current shock valla jarigina ee vishadam andarini kalichivesindi — @pythonlifetelugu — mining/posts/DZnP052J7et/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 25th June 2026 🕖 Timings: 7:00–9:00 AM(IST) 📚 Course F — @pythonlifetelugu — mining/posts/DZnN7gaiesC/notes.md
-- [ ] Excel Interview Questions Explained 1 — @pythonlifetelugu — mining/posts/DZnCX0HiaWu/notes.md
 - [ ] Aptitude Cheat Sheet Aptitude rounds lo frequently adige important formulas and shortcuts — @kiransagar.pyy — mining/posts/DZm4VJxk7nw/notes.md
 - [ ] 🚀 PythonLife – DevOps & DevSecOps with AWS & AI (Telugu) 📅 Start: 25th June 2026 🕖 Timings: 7:00–9:00 AM(IST) 📚 Course F — @pythonlifetelugu — mining/posts/DZm0kQSTHDp/notes.md
 - [ ] Comment start Full Stack Python Recorded Content We Provide: ✔ 250+ Hours Recorded Classes (Lifetime Access) ✔ Practical — @pythonlifetelugu — mining/posts/DZm0oZ1TCH3/notes.md
@@ -4850,6 +4746,7 @@
 - [ ] NLP (Natural Language Processing) | Telugu Natural Language Processing ante humans language ni computers ardham chesukon — @pythonlifetelugu — mining/posts/DZcheaATn3K/notes.md
 - [ ] Full Stack Python Recorded Content We Provide: ✔ 250+ Hours Recorded Classes (Lifetime Access) ✔ Practical Coding Traini — @pythonlifetelugu — mining/posts/DZche5LzQ0K/notes.md
 - [ ] Full Stack Python Recorded Content We Provide: ✔ 250+ Hours Recorded Classes (Lifetime Access) ✔ Practical Coding Traini — @pythonlifetelugu — mining/posts/DZcTtndzovl/notes.md
+- [ ] AI Tools That Help to Make Money AI tools direct ga money generate cheyyavu — @kiransagar.pyy — mining/posts/DZcFVlaE8Ug/notes.md
 - [ ] How to Earn Money Using AI AI itself money ivvadu — @kiransagar.pyy — mining/posts/DZcDOeVEzhs/notes.md
 - [ ] Digital Skills for Side Income Side income generate cheyyali ante trends chase cheyyadam kanna market lo demand unna dig — @kiransagar.pyy — mining/posts/DZcDDJ9E_ER/notes.md
 - [ ] Full Stack Python Recorded Content We Provide: ✔ 250+ Hours Recorded Classes (Lifetime Access) ✔ Practical Coding Traini — @pythonlifetelugu — mining/posts/DZb_FndzMoE/notes.md
@@ -4944,7 +4841,6 @@
 - [ ] Basic to Advance Java Programming in Telugu What We Provide: ✔ 2 Months Live Classes ✔ Practical Based Learning ✔ Study  — @pythonlifetelugu — mining/posts/DY6NUCSz4Ka/notes.md
 - [ ] Basic to Advance Java Programming in Telugu What We Provide: ✔ 2 Months Live Classes ✔ Practical Based Learning ✔ Study  — @pythonlifetelugu — mining/posts/DY6As3kCdq6/notes.md
 - [ ] MPCS Degree | Telugu Bachelor of Science lo MPCS ante Mathematics + Physics + Computer Science combination — @pythonlifetelugu — mining/posts/DYySa5OiOB_/notes.md
-- [ ] “Tell Me About Yourself” | Interview Introduction | Telugu Hi Sir/Madam, My name is [Your Name] — @pythonlifetelugu — mining/posts/DY4QnzoCUGQ/notes.md
 - [ ] Best Windows Apps for Students | Productivity and Learning Tools Explained Windows students productivity, learning, codi — @pythonlifecareers — mining/posts/DY3nb2Lkum9/notes.md
 - [ ] SQL Roadmap | Telugu SQL nerchukovali ante basics nundi advanced database concepts varaku step-by-step practice cheyali — @pythonlifetelugu — mining/posts/DY3na_7ieSJ/notes.md
 - [ ] Basic to Advance Java Programming in Telugu What We Provide: ✔ 2 Months Live Classes ✔ Practical Based Learning ✔ Study  — @pythonlifetelugu — mining/posts/DY4sEFZCfhK/notes.md
@@ -5040,7 +4936,6 @@
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DYizWbSzgoD/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DYhXT_jTQQV/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DYhMZQmibFL/notes.md
-- [ ] Important Excel Formulas by Kiran Sagar Microsoft Excel lo formulas use chesi calculations, data analysis mariyu reporti — @kiransagar.pyy — mining/posts/DYhKiVpkzJT/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DYhJ1XBpJGK/notes.md
 - [ ] Full Stack Data Science with Generative AI (Telugu) What You Will Get: ✔ 3 Months Live Interactive Classes + 1 Month Int — @pythonlifetelugu — mining/posts/DYgeBw_zuXW/notes.md
 - [ ] Java Free Course by Kiran Sagar | PythonLife PythonLife Official Website￼ lo Telugu lo Java courses available unnayi — @kiransagar.pyy — mining/posts/DYgckyQTdtJ/notes.md
@@ -5563,7 +5458,6 @@
 - [ ] In January 2024, Neuralink, founded by Elon Musk, successfully implanted its first human brain-computer interface (BCI)  — @pythonlifetelugu — mining/posts/DVGogOrCXPM/notes.md
 - [ ] Nvidia CEO Jensen Huang is preparing to unveil a next-generation AI chip platform, expected to be officially revealed at — @pythonlifetelugu — mining/posts/DVGa1Dficmw/notes.md
 - [ ] FullStack DataScience with GenerativeAI in Telugu We Provide 1 — @pythonlifetelugu — mining/posts/DVGPPWqiZgk/notes.md
-- [ ] Comment fsp Full Stack Python Programming in Telugu We Provide 1 — @pythonlifetelugu — mining/posts/DVGGC95iWHi/notes.md
 - [ ] Share to your Friends Educational Disclaimer: Images and videos used on this page are for educational purposes only — @pythonlifetelugu — mining/posts/DVGD6MrCVyf/notes.md
 - [ ] FullStack DataScience with GenerativeAI in Telugu We Provide 1 — @pythonlifetelugu — mining/posts/DVFkIrXiTBJ/notes.md
 - [ ] FullStack DataScience with GenerativeAI in Telugu We Provide 1 — @pythonlifetelugu — mining/posts/DVDpTCaiWMo/notes.md
@@ -5650,7 +5544,6 @@
 - [ ] Comment “BACKEND” and I’ll DM you the full PDF + diagrams + GitHub code templates + all official links 🔗 10 Backend Feat — @codedsoul_05 — mining/posts/DcQfUSIjSWo/notes.md
 - [ ] Comment “ARCH” and I’ll DM you the full breakdown PDF + diagrams + GitHub repos 🔗 Build Systems, Not Features 💻 Features — @codedsoul_05 — mining/posts/DcQPP7WDWIM/notes.md
 - [ ] Comment “ML” and I’ll DM you the code + datasets + roadmap PDF 🔗 5 Machine Learning Projects to build THIS weekend 🚀 (No — @codedsoul_05 — mining/posts/DcOaxTbjdQD/notes.md
-- [ ] Comment “🙌” and I’ll DM you 5 websites every software engineer should be using 💻👇 I wish someone told me this earlier: 1 — @codedsoul_05 — mining/posts/DcN-o9vDX_H/notes.md
 - [ ] Interviewer: WhatsApp is E2E encrypted — @codedsoul_05 — mining/posts/DcI_KIONE35/notes.md
 - [ ] Comment “GITHUB” and I’ll DM you all 12 repo links Top 12 GitHub Repos You Can’t Skip as an AI Engineer in 2026 👇 Everyo — @codedsoul_05 — mining/posts/DcDc86_E9hx/notes.md
 - [ ] Comment “MATH” for the resource pack — @codedsoul_05 — mining/posts/DcDXfabE1fO/notes.md
@@ -5663,7 +5556,6 @@
 - [ ] Comment “kubernetes” and i’ll send the complete pdf in your dm 🐳 want to master kubernetes from basics to advanced learn — @codedsoul_05 — mining/posts/Db0hPfvjS2B/notes.md
 - [ ] Comment “Sql” and i’ll send the complete pdf in your dm 🗄️ want to go beyond basic sql and actually understand how datab — @codedsoul_05 — mining/posts/Db0GLvfjWvB/notes.md
 - [ ] Comment “Rag” and i’ll send the complete pdf in your dm 🤖 want to understand how rag actually works behind ai applicatio — @codedsoul_05 — mining/posts/DbvPG63jbPV/notes.md
-- [ ] Comment “Data” and i’ll send the complete pdf in your dm 📊 want to learn data analysis from basics to real world project — @codedsoul_05 — mining/posts/DbtGFCDDa42/notes.md
 - [ ] Comment “Dbms” and i’ll send the complete pdf in your dm 🗄️ want to master dbms for interviews and placements learn ever — @codedsoul_05 — mining/posts/Dbs7l1iDeUp/notes.md
 - [ ] Comment “Project” and I’ll send you the complete course details + registration link 📩 DevOps is no longer enough 👀 Compa — @codedsoul_05 — mining/posts/DbsrXK1tQ_L/notes.md
 - [ ] Comment “Docker” and i’ll send the complete pdf in your dm 🐳 want to understand docker without getting lost in complicat — @codedsoul_05 — mining/posts/DbsVD1bjZDC/notes.md
@@ -5740,7 +5632,6 @@
 - [ ] Interview Question: Attackers bypass your rate limiting using multiple IPs — @codedsoul_05 — mining/posts/DXy_nhHt_CZ/notes.md
 - [ ] Famous Interview Question: 2 billion users 💀 You type a username on Instagram or Gmail — @codedsoul_05 — mining/posts/DXrE1iwjSBj/notes.md
 - [ ] Famous Interview Question: Your payment failed But money got deducted — @codedsoul_05 — mining/posts/DXorSoEjR0D/notes.md
-- [ ] Famous Interview Question You have multiple beans of the same type in Spring — @codedsoul_05 — mining/posts/DXolALqE27U/notes.md
 - [ ] Internet nahi… phir bhi train ka exact location — @codedsoul_05 — mining/posts/DXmIpEfDT79/notes.md
 - [ ] CORS ne sabko rulaya hai… 😭 Par asli game sirf permission ka hai 🔐 Aaj samajh ke jao 😌 programmer developer learncoding  — @codedsoul_05 — mining/posts/DXmEX55je49/notes.md
 - [ ] FAANG interview mein ye puch liya toh — @codedsoul_05 — mining/posts/DXjzEFaE23m/notes.md
@@ -5864,37 +5755,31 @@
 - [ ] 🔥 𝗜𝗡𝗧𝗘𝗥𝗩𝗜𝗘𝗪𝗘𝗥: “Your cache expired… and suddenly your database crashed — @abhi_techhub — mining/posts/DXCRdUlE1j_/notes.md
 - [ ] 1️⃣ Checks Available Servers (Healthy Only) First, it performs health checks (HTTP/TCP/ping) — @abhi_techhub — mining/posts/DW_27W5Ey-L/notes.md
 - [ ] Most developers get this WRONG in interviews 👇 Step 1️⃣ — Message is stored only once When you send a message in a Whats — @abhi_techhub — mining/posts/DW9CtBTkxMj/notes.md
-- [ ] Your OTP expires in 30 seconds — but nobody stored it anywhere — @abhi_techhub — mining/posts/DW9OfOSkzTK/notes.md
 - [ ] 1 — @abhi_techhub — mining/posts/DWvY8Kak3eK/notes.md
 - [ ] Order : FROM → JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT Explanation: 1 — @abhi_techhub — mining/posts/DWteAk4k67b/notes.md
 - [ ] 5 Things Only Deloitte Gives (From My 7 Years There) I joined Deloitte as an Analyst through campus hiring… and grew all — @edubhav — mining/posts/DRIYRD6CFBl/notes.md
 - [ ] Data analytics hacks I wish someone told 22 year old me — @edubhav — mining/posts/DciGLf7oeeE/notes.md
 - [ ] Honored to be featured as one of the "25 Tech Leaders to Watch" by Analytics Insight® Magazine — @edubhav — mining/posts/DcEJDcVCK37/notes.md
 - [ ] Comment BRO for the Data Analytics Roadmap Most freshers spend six months learning tools and still cannot answer one int — @edubhav — mining/posts/DcD5hvBIXuq/notes.md
-- [ ] COMMENT “PDF” TO GET - DATA ANALYST NOTES 📚 Your complete Data Analyst notes - from SQL, Excel & Statistics to Power BI, — @edubhav — mining/posts/DcBdGhcCJ0G/notes.md
 - [ ] 10 IT Roles That Don't Need Any Coding (Fresher Salary Included) Everyone assumes IT means coding — @edubhav — mining/posts/Db_ZkfMsWq6/notes.md
 - [ ] Remember what Pikachu said 💯 💪 — @edubhav — mining/posts/Das5fMYIohr/notes.md
 - [ ] Corporate Acronyms no-one explained 🙂‍↔️ — @edubhav — mining/posts/DasswMzouWo/notes.md
 - [ ] Link in the Profile Bio 🔗 See you tomorrow Your data career questions — answered LIVE 🔴 Saturday • 27th June • 5:00 PM W — @edubhav — mining/posts/DaCozp5oP49/notes.md
 - [ ] Corporate Job Description Decoded 😯 — @edubhav — mining/posts/DZx8RN7o_U8/notes.md
 - [ ] Hi, I'm Anubhav — @edubhav — mining/posts/DY7AWwyoTfc/notes.md
-- [ ] Average salary by Age 🔥 — @edubhav — mining/posts/DYNbP-toW1i/notes.md
 - [ ] Top 5 Cities for IT Salaries in India IT salaries in India vary massively by city, company type & experience — @edubhav — mining/posts/DYFTC5fiBMz/notes.md
-- [ ] 20 keywords recruiter scan (Data Analyst roles) — @edubhav — mining/posts/DX45dHuCPcq/notes.md
 - [ ] Why I Left Deloitte After 5 Years (From Fresher to Exit) I joined Deloitte as a fresher through campus hiring, and it wa — @edubhav — mining/posts/DXrOip1hWwE/notes.md
 - [ ] Comment 'Toolkit' | Become Data Analyst Most people think breaking into Data Analytics takes years — @edubhav — mining/posts/DXRNrsTiDo4/notes.md
 - [ ] If you feel underpaid, fix your positioning: 1 — @edubhav — mining/posts/DWylaCVCOGZ/notes.md
 - [ ] Shocking truths about Data Analytics courses no one tells you • Full refund” is often just smart marketing with impossib — @edubhav — mining/posts/DWJz7CFCPRz/notes.md
 - [ ] Be like GenZ 🔥 — @edubhav — mining/posts/DWCZORvCNVt/notes.md
 - [ ] Career advice I needed at 22, not 32 (India edition) Your degree won’t define your income in India — @edubhav — mining/posts/DV5oFrPCHkX/notes.md
-- [ ] How to Become a Data Analyst in 2026 (AI Era) 📊 Strong SQL is non-negotiable for any data analyst role 📊 Python for data — @edubhav — mining/posts/DSy3SwdiLdw/notes.md
 - [ ] If this reached you, it wasn’t random ❤️ If you’re a fresher feeling confused about your first career move, you’re not a — @edubhav — mining/posts/DSg_hS8CONc/notes.md
 - [ ] A Decade in Corporate — @edubhav — mining/posts/DSM2EgjiOwx/notes.md
 - [ ] Deloitte Interview Questions/Process I have worked in Deloitte for seven years in various roles — @edubhav — mining/posts/DSFay3aCBCQ/notes.md
 - [ ] 10 high paying jobs that dont need coding 1️⃣ Product Manager Owns product roadmap, strategy and execution — @edubhav — mining/posts/DSC2AWuiKKC/notes.md
 - [ ] How to get a job at Deloitte I worked at Deloitte for almost 7 years, and it was a wonderful experience — @edubhav — mining/posts/DR-Vq2eiJyB/notes.md
 - [ ] How to join a startup I worked at a fintech startup for two years, and it changed my career completely — @edubhav — mining/posts/DR-Qj4CiF_n/notes.md
-- [ ] 10x Salary in 4 years - My Story — @edubhav — mining/posts/DR9B5w7CGwS/notes.md
 - [ ] Comment 'JOB' | 2025 was scary The job market has completely flipped in the AI era — @edubhav — mining/posts/DR6J2MGCLlh/notes.md
 - [ ] 25+ LPA ROADMAP + RESOURCES — @edubhav — mining/posts/DRuvG1LCG-s/notes.md
 - [ ] Ultimate Data Analytics Toolkit Data analytics has completely transformed in the AI era — @edubhav — mining/posts/DRpTRW8iFGg/notes.md
@@ -5906,13 +5791,11 @@
 - [ ] 25 LPA AS A FRESHER I’ve been in the data analytics space for 10 years now - and I’ve taken hundreds of interviews — @edubhav — mining/posts/DQ7aSuyiD-B/notes.md
 - [ ] Hardwork Compounds — @edubhav — mining/posts/DQLafsCCKY3/notes.md
 - [ ] Comment 'PBI' to get TOP 5 POWER BI Interview questions — @edubhav — mining/posts/DPrKmM8k7zz/notes.md
-- [ ] 🚀 Journey to Become a Data Analyst in 2026 (AI Era) 1️⃣ Master the Basics: Excel, SQL, and core statistics: your foundat — @edubhav — mining/posts/DPqurTlE6vJ/notes.md
 - [ ] Type 'LEARN' TO GET THE ULTIMATE DATA ANALYTICS TOOLKIT Data analytics has completely transformed in the AI era — @edubhav — mining/posts/DPTvlMqkyfS/notes.md
 - [ ] 3 Uncomfortable truths of corporate life in India — @edubhav — mining/posts/DPS09FyE_Bg/notes.md
 - [ ] 50 LPA in 5 years — @edubhav — mining/posts/DPMoafCk2Lp/notes.md
 - [ ] 5 JOBS AI IS GOING STEAL VERY SOON — @edubhav — mining/posts/DO6mNc2E0vU/notes.md
 - [ ] My Career Growth Story - 400% Hike in 3 Years 2016 → 2017: Started with a modest package, like most freshers — @edubhav — mining/posts/DIne58aTDmW/notes.md
-- [ ] Is Excel Still Relevant in 2025 — @edubhav — mining/posts/DHMEcHMzhG1/notes.md
 - [ ] RUTHLESS EFFICIENCY — @edubhav — mining/posts/DGfZ6ZmzxuY/notes.md
 - [ ] Data Issues or Office Politics — @edubhav — mining/posts/DGYnVjeTchg/notes.md
 - [ ] Pain is inevitable in relationships—friends, family, colleagues, everyone will disappoint you at some point — @edubhav — mining/posts/DGYkzzMT6fl/notes.md
@@ -6135,7 +6018,6 @@
 - [ ] JDBC Interview Questions and Answers 🎁🚀🔥📌 ( Save it now ✅) — @code2careerai — mining/posts/CuuB9dyNp1S/notes.md
 - [ ] All SQL Commands🧑‍💻 SQL (Structured Query Language) is a programming language used for managing and manipulating relatio — @programmer_talkz — mining/posts/Cttkd2LvJr1/notes.md
 - [ ] Day: 01✅ Understand the Basics > Introduction to Python Language > Python Features and Applications > How to Install Pyt — @code2careerai — mining/posts/CtrXJ98u_WT/notes.md
-- [ ] HTML (Day 1 - 6): Day 1: Introduction to HTML Day 2: Creating a Basic HTML Page Day 3: HTML Tags and Attributes Day 4: S — @code2careerai — mining/posts/CtbUZVcA3_n/notes.md
 - [ ] Nosql Database Short Notes 📌🚀📚 Save it ✅ 📌JOIN TELEGRAM AND LINKEDIN For more Coding Resources and Handwritten Notes 🤩📑🚀 — @code2careerai — mining/posts/CtCIO7JtbgM/notes.md
 - [ ] Transactions in DBMS🚀🔥📌 — @code2careerai — mining/posts/Cs5kDR_AB4E/notes.md
 - [ ] DBMS Normalization 📌🚀📚 Save it ✅ 📌JOIN TELEGRAM AND LINKEDIN For more Coding Resources and Handwritten Notes 🤩📑🚀 Link 🔗  — @code2careerai — mining/posts/Cs2mPk_LBzi/notes.md
@@ -6164,7 +6046,6 @@
 - [ ] 𝗛𝗧𝗧𝗣 𝗦𝘁𝗮𝘁𝘂𝘀 𝗖𝗼𝗱𝗲✨ 𝙃𝙏𝙏𝙋 𝙧𝙚𝙨𝙥𝙤𝙣𝙨𝙚 𝙨𝙩𝙖𝙩𝙪𝙨 𝙘𝙤𝙙𝙚𝙨 𝙞𝙣𝙙𝙞𝙘𝙖𝙩𝙚 𝙬𝙝𝙚𝙩𝙝𝙚𝙧 𝙖 𝙨𝙥𝙚𝙘𝙞𝙛𝙞𝙘 𝙃𝙏𝙏𝙋 𝙧𝙚𝙦𝙪𝙚𝙨𝙩 𝙝𝙖𝙨 𝙗𝙚𝙚𝙣 𝙨𝙪𝙘𝙘𝙚𝙨𝙨𝙛𝙪𝙡𝙡𝙮 𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙚𝙙 𝙤𝙧 — @code2careerai — mining/posts/Cmy0ekvMM_m/notes.md
 - [ ] 𝗥𝗼𝗮𝗱𝗺𝗮𝗽 𝘁𝗼 𝗯𝗲𝗰𝗼𝗺𝗲 𝗳𝘂𝗹𝗹 𝘀𝘁𝗮𝗰𝗸 𝗱𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿 ✅ — @code2careerai — mining/posts/CmyzhZ8MUXT/notes.md
 - [ ] 🎯 𝗦𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲 𝗼𝗳 𝗨𝗥𝗟 𝑾𝒉𝒂𝒕 𝒂𝒓𝒆 𝒕𝒉𝒆 𝒑𝒂𝒓𝒕𝒔 𝒐𝒇 𝒂 𝑼𝑹𝑳 — @code2careerai — mining/posts/Cmyye87M8io/notes.md
-- [ ] Top Useful Excel Shortcuts💫 — @code2careerai — mining/posts/CmyxjTLM0cT/notes.md
 - [ ] ACID Properties in DBMS🚀 — @code2careerai — mining/posts/Cmyqi26MhDx/notes.md
 - [ ] Hired😂😂 — @code2careerai — mining/posts/CbFfAPkMm1k/notes.md
 - [ ] 😂😂😂 — @code2careerai — mining/posts/CawiZH6sLAG/notes.md
@@ -6177,7 +6058,6 @@
 - [ ] If you’re trying to win in the U — @itsaiguide — mining/posts/Dcv8E1YDUhL/notes.md
 - [ ] If you’re applying for jobs in the U — @itsaiguide — mining/posts/DctMdJ-jX-x/notes.md
 - [ ] Most job seekers are still using AI like a toy — @itsaiguide — mining/posts/DcTNhGWjTYb/notes.md
-- [ ] The 2-minute presentation isn’t the trick — @itsaiguide — mining/posts/DcLbvd5jbUC/notes.md
 - [ ] If 100/day would change your life, stop treating online business like some impossible puzzle — @itsaiguide — mining/posts/DcKHJVzjYY7/notes.md
 - [ ] The safest career move in 2026 isn’t becoming an “AI expert — @itsaiguide — mining/posts/Db_DfruDXyS/notes.md
 - [ ] 57,462 followers in 30 days wasn’t a “viral post — @itsaiguide — mining/posts/Db9WPQOCgl9/notes.md
@@ -6321,7 +6201,6 @@
 - [ ] Something is cooking — @gkcs__ — mining/posts/CXNTQgsFUE3/notes.md
 - [ ] @interviewready_ mast chal raha hai bhai — @gkcs__ — mining/posts/CVIBEGHgdek/notes.md
 - [ ] Got to play with 4 awesome players at the @aicfchess Open Chess Tournament at Hyderabad ♞ Also met some friends from Ube — @gkcs__ — mining/posts/CU4r326gKqB/notes.md
-- [ ] Interviewer: What are your weaknesses — @gkcs__ — mining/posts/CS4LJtQF4R-/notes.md
 - [ ] Some goodies from Credit Suisse — @gkcs__ — mining/posts/CKBshhRn2fH/notes.md
 - [ ] Aaye bahar nikal, daarta hai kya — @gkcs__ — mining/posts/CH--aG6n4_w/notes.md
 - [ ] Relevant to college students, new software engineers, and me 😛 — @gkcs__ — mining/posts/CHFijr-HPDn/notes.md
@@ -6528,7 +6407,6 @@
 - [ ] Koko 🐵 has a deadline… and a mountain of bananas to finish — @codewithupasana — mining/posts/DJy7hNDhNeq/notes.md
 - [ ] 👀 Ever felt like the odd one out — @codewithupasana — mining/posts/DJtzqXyhJQY/notes.md
 - [ ] 📦 Imagine a sorted array… then rotate it… and add duplicates — @codewithupasana — mining/posts/DJrIyVbhg7c/notes.md
-- [ ] 🚀 Struggling with placement prep — @codewithupasana — mining/posts/DJeVp3khnq_/notes.md
 - [ ] 🧠 Product of Array Except Self — Sounds Simple, Feels Tricky — @codewithupasana — mining/posts/DI6OZTWhFRX/notes.md
 - [ ] It’s was a dream come true moment, Dream of sharing stage with my best friends @khushi — @codewithupasana — mining/posts/DI53lm8i_G4/notes.md
 - [ ] Lets solve Subarray Product with me — @codewithupasana — mining/posts/DIwB0lbhvnq/notes.md
@@ -6538,7 +6416,6 @@
 - [ ] 🎯 LeetCode: Bag of Tokens 🧠💼 Ever been in a situation where you have limited resources and need to make the smartest cho — @codewithupasana — mining/posts/DIYz-1-BOWC/notes.md
 - [ ] From brute force to optimized finesse — 4Sum conquered — @codewithupasana — mining/posts/DIRFIqdS5kJ/notes.md
 - [ ] Given an array, find the triplet whose sum is closest to the target 🧠 Brute force — @codewithupasana — mining/posts/DIObszvh1oi/notes.md
-- [ ] 🔄 Rotate an Array — @codewithupasana — mining/posts/DIGuf8Yh5k2/notes.md
 - [ ] 🔥 Remove Duplicates Like a Pro — @codewithupasana — mining/posts/DH_B5dBB35a/notes.md
 - [ ] 🚀 Reverse words in a string: Leetcode question 🚀 Just solved the ultimate challenge of reversing words in a string — @codewithupasana — mining/posts/DH5_ELSifKO/notes.md
 - [ ] 🚀 Next Permutation – LeetCode Medium 🔥 Given an array of numbers, can you find the next lexicographically greater permut — @codewithupasana — mining/posts/DHvlU82hbmY/notes.md
@@ -6707,7 +6584,6 @@
 - [ ] Design Blueprint: 1️⃣ User (Natural Language) • Enters free-form questions: “What changed — @jganesh.ai — mining/posts/DTfpfPNjs7q/notes.md
 - [ ] The core part here is : Cloud RAG = pay per query On-prem RAG = pay for machines, then use them freely So the real quest — @jganesh.ai — mining/posts/DTRqMn_Ds3b/notes.md
 - [ ] Measuring ROI for an LLM project isn’t about “we used GPT — @jganesh.ai — mining/posts/DTCHtqeDNcx/notes.md
-- [ ] In real-world GenAI apps (AWS / Azure), guardrails aren’t prompt filters — @jganesh.ai — mining/posts/DSlskhvDK4y/notes.md
 - [ ] Let me be honest upfront: There is no single perfect ML roadmap that fits everyone — @jganesh.ai — mining/posts/DSeBJaLDKv1/notes.md
 - [ ] Business context isn’t taught in courses — you learn it on the job — @jganesh.ai — mining/posts/DSbirVhjPFX/notes.md
 - [ ] If your RAG keeps pulling shallow or half-correct answers, the issue isn’t the LLM — it’s the retriever — @jganesh.ai — mining/posts/DSEUdHSjG5a/notes.md
@@ -7152,7 +7028,6 @@
 - [ ] 🚀 10 Free AI Tools That Are Insane for Developers These tools can save you 100+ hours of coding & debugging — @devrelmegha — mining/posts/DMF-nSoJqmL/notes.md
 - [ ] Cheers to London Community Week—where the “Magic of Developer Relations” truly sparked — @devrelmegha — mining/posts/DL-KCS7Jnon/notes.md
 - [ ] 📉 RIP LinkedIn — @devrelmegha — mining/posts/DLsQB7lpyO8/notes.md
-- [ ] Nail your salary question like a pro — @devrelmegha — mining/posts/DLpqK6np8-M/notes.md
 - [ ] 🧠 DATA STRUCTURES 101: The Foundation of Every Great Developer As a DevRel, I meet developers at all stages of their jou — @devrelmegha — mining/posts/DLkfUmDpkLD/notes.md
 - [ ] 🚀 𝗕𝗿𝗲𝗮𝗸𝗶𝗻𝗴 𝗶𝗻𝘁𝗼 𝗗𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿 𝗥𝗲𝗹𝗮𝘁𝗶𝗼𝗻𝘀 — @devrelsquad — mining/posts/DLhnWAEp7Q0/notes.md
 - [ ] Throwback to being surrounded by brilliant minds in tech 🧠💡 Sometimes I look back at moments like these and realize how  — @devrelmegha — mining/posts/DLcXEbLJkjh/notes.md
@@ -7292,7 +7167,6 @@
 - [ ] Product links camera: Logitech Brio https://amzn — @devrelmegha — mining/posts/CzXrwpePF0h/notes.md
 - [ ] “Spent an epic day at , enjoying thrilling rides like and and exploring the magic of — @devrelmegha — mining/posts/Cu3to9shsFB/notes.md
 - [ ] @dhirajkumar_2903 @jayant_99acharya @vipul_chakravarthy @sameermhaisekar @riddhi_joshi94 And me bidding farewell to @pra — @devrelmegha — mining/posts/CuXp2kPhuJ8/notes.md
-- [ ] rsvp soon, only a few seats left — @devrelmegha — mining/posts/Csk_TF-us9I/notes.md
 - [ ] Blue lagoon — @devrelmegha — mining/posts/Cr42XK0PGAl/notes.md
 - [ ] Speaking at AWS community day Kochi, 2022 today :) — @devrelmegha — mining/posts/CkSEa02h9-J/notes.md
 - [ ] Ye raasta hai keh raha ab mujhse Milne ko hai koyi kahin ab tujhse ❤️ — @devrelmegha — mining/posts/CiXgrqyhyKP/notes.md
@@ -8375,6 +8249,7 @@
 - [ ] | Ujjain just welcomed a chief guest no one saw coming—a humanoid robot — @mindwired.ai — mining/posts/DcblZkME_jS/notes.md
 - [ ] After 25 years helping build the tools behind Adobe Premiere Pro, James Strawn still found himself struggling to land an — @mindwired.ai — mining/posts/DcbIR4ZE-De/notes.md
 - [ ] Some of the biggest turning points in technology were captured in photographs that seemed ordinary at the time — @mindwired.ai — mining/posts/DcbAQKAkwWJ/notes.md
+- [ ] These 9 ChatGPT prompt shortcuts can make a noticeable difference in the way you use AI — @mindwired.ai — mining/posts/Dcazoo-kw0a/notes.md
 - [ ] A gamer at the World AI Conference 2026 in Shanghai demonstrated what hands-free gaming could look like — @mindwired.ai — mining/posts/DcakQGhk5Tm/notes.md
 - [ ] AI is advancing at an extraordinary pace, but some of the people who helped build the technology are warning that we nee — @mindwired.ai — mining/posts/DcaJGqOE8_V/notes.md
 - [ ] Emoji trends offer a surprisingly clear look at how online communication is changing — @mindwired.ai — mining/posts/DcY29WEEycE/notes.md
@@ -8679,7 +8554,6 @@
 - [ ] The new coding showdown dropped fast, and I’m still processing how wild the gap is between these two models — @mindwired.ai — mining/posts/DRaR-8dEyf6/notes.md
 - [ ] London’s holiday cheer just got a serious plot twist — @mindwired.ai — mining/posts/DRXSgXFE9Y5/notes.md
 - [ ] Seeing perplexity — @mindwired.ai — mining/posts/DRVDAR1jGMG/notes.md
-- [ ] Gemini 3 Pro just dropped — and it’s way beyond chat — @mindwired.ai — mining/posts/DRPVK8Dk_nJ/notes.md
 - [ ] Google just dropped Antigravity, and it might change how developers code forever — @mindwired.ai — mining/posts/DRPNB8kk2x_/notes.md
 - [ ] Billionaire Peter Thiel just pulled out from two of the biggest AI bets of the decade — @mindwired.ai — mining/posts/DRNMIWBE73q/notes.md
 - [ ] Most people don’t even know Google has free AI tools like these… and they’re already outperforming some of the most hype — @mindwired.ai — mining/posts/DRK3hR6kyte/notes.md
@@ -8715,7 +8589,6 @@
 - [ ] UNBELIEVABLE — @mindwired.ai — mining/posts/DQAqhy6Ew1A/notes.md
 - [ ] Perplexity’s new AI browser Comet might have an unexpected feature — it blocks all YouTube ads 😳 That means ad-free play — @mindwired.ai — mining/posts/DP7S9bzEzti/notes.md
 - [ ] 🇯🇵 Japan just issued a warning to OpenAI over Sora 2’s use of anime, manga, and game content — @mindwired.ai — mining/posts/DP6PCyHE_Kd/notes.md
-- [ ] “The Real Sora 2 Rival Just Dropped” Google just fired back at OpenAI — @mindwired.ai — mining/posts/DP2OxUZk71K/notes.md
 - [ ] 🚨 Sam Altman just confirmed a big change is coming to ChatGPT — @mindwired.ai — mining/posts/DP2DlSIk9__/notes.md
 - [ ] 🚀 Google just announced its biggest-ever investment in India — $15 BILLION to build a world-class AI data center in Andh — @mindwired.ai — mining/posts/DPzHtWrE_ZI/notes.md
 - [ ] 🎙️ Google Just Changed Voice Search Forever Meet Speech-to-Retrieval (S2R) — the beginning of the end for speech-to-text — @mindwired.ai — mining/posts/DPujOtOky_8/notes.md
@@ -8812,7 +8685,6 @@
 - [ ] ⚠️ When tech bends the mind 🧠💻 A psychiatrist has reported something unsettling: 12 people hospitalized in 2025 after co — @mindwired.ai — mining/posts/DNdTm6URddQ/notes.md
 - [ ] 🚨💻 $34 — @mindwired.ai — mining/posts/DNZL9V3zBZD/notes.md
 - [ ] 🚨 The Battle for Your Brain Has Begun 🧠⚡ Sam Altman, the mind behind OpenAI, is reportedly backing Merge Labs — a bold b — @mindwired.ai — mining/posts/DNY7MlZTVIB/notes.md
-- [ ] 🪄 Most people are still using ChatGPT wrong… and OpenAI just told us why — @mindwired.ai — mining/posts/DNXRvS9zKD-/notes.md
 - [ ] 🚨 China Cracks Down on AI Chip Purchases from Nvidia In a move that could reshape the global AI hardware market, Chinese — @mindwired.ai — mining/posts/DNWLLeCCqYe/notes.md
 - [ ] 🚨 The Past 7 Days in AI Have Been Absolutely Wild — @mindwired.ai — mining/posts/DNS17HZiSy7/notes.md
 - [ ] The Fear of AGI Is Changing Elite Education Forever 📉🤖 Artificial General Intelligence (AGI) — an AI capable of performi — @mindwired.ai — mining/posts/DNRJCEBiT74/notes.md
@@ -9046,11 +8918,9 @@
 - [ ] Asking questions about the current situation in tech that can inspire you on your dev journey — @webbyvaris — mining/posts/DYmTIrrBHNF/notes.md
 - [ ] Because I like bullying myself, I decided to put myself into uncomfortable situation and ask developers in the wild some — @webbyvaris — mining/posts/DYWwCgRhVLx/notes.md
 - [ ] Genspark￼ is an all-in-one AI workspace that combines AI agents, browser assistance, content generation, webpage analysi — @webbyvaris — mining/posts/DYFCjNmBR3I/notes.md
-- [ ] Long story short, your desk setup matters, but building your dream one can take years — @webbyvaris — mining/posts/DYA217fzlw2/notes.md
 - [ ] Watching StarWars in the cmd — @webbyvaris — mining/posts/DX9EnjSxcCw/notes.md
 - [ ] Your degree is a piece of paper — @webbyvaris — mining/posts/DXwNFmUgZlg/notes.md
 - [ ] Software that I use as freelance Fullstack Web Developer Follow @webbyvaris for more tech tips — @webbyvaris — mining/posts/DXtqRrpAVlI/notes.md
-- [ ] Okay so Anthropic just dropped Opus 4 — @webbyvaris — mining/posts/DXO0fUKgcSa/notes.md
 - [ ] My personal website is finally LIVE 🚀 This has been one of my biggest side quests lately… and I’m proud to say it’s done — @webbyvaris — mining/posts/DW8-6NxAfjO/notes.md
 - [ ] raw dogging javascript is crazy 💀 — @webbyvaris — mining/posts/DW1EJiOAQF5/notes.md
 - [ ] No talent — @webbyvaris — mining/posts/DWoUGJzgeaI/notes.md
@@ -9066,7 +8936,6 @@
 - [ ] Happy Sunday to every developer out there — @webbyvaris — mining/posts/DUfleZEgauQ/notes.md
 - [ ] Chat, am I cooked — @webbyvaris — mining/posts/DUSofGDgaIo/notes.md
 - [ ] Happy Tuesday to every developer out there — @webbyvaris — mining/posts/DUA4pLQgR4w/notes.md
-- [ ] Happy Friday, everyone — @webbyvaris — mining/posts/DT2cYs7gWfO/notes.md
 - [ ] Had to upgrade my gaming chair way sooner than planned 😅 Not because the old one was wooden… but because style + comfort — @webbyvaris — mining/posts/DT0BQzOgV5B/notes.md
 - [ ] When you’re learning a new skill and take a longer break, the best thing you can do is simply come back and continue whe — @webbyvaris — mining/posts/DTkblJoDmPK/notes.md
 - [ ] Travel gadget from @snapwireless that finally cleaned up my backpack from cable chaos — @webbyvaris — mining/posts/DTc568tiJVw/notes.md
@@ -9337,14 +9206,12 @@
 - [ ] When your friends get irritated coz of clicking so many pictures and I m like "hum nhi sudharenge" — @fellowtechiebuddy — mining/posts/Cc_v7rdlXDR/notes.md
 - [ ] 🙊🙊 — @fellowtechiebuddy — mining/posts/CbIFBBflwys/notes.md
 - [ ] 50 Data Career Options You Can Explore Data careers are not limited to only Data Analyst, Data Scientist, or Data Engine — @she_explores_data — mining/posts/DcQ4jiiNsO8/notes.md
-- [ ] Excel & SQL: The Core Skillset for Modern Data Analysts Behind every clean dashboard and sharp insight, there’s a strong — @she_explores_data — mining/posts/DbYEGtYty1J/notes.md
 - [ ] Git problems usually start after the tutorial ends — @she_explores_data — mining/posts/DYwv3_FmluY/notes.md
 - [ ] Data cleaning is one of the most important parts of analytics, but it’s also one of the most ignored skills while learni — @she_explores_data — mining/posts/DYUW4SENjph/notes.md
 - [ ] Many people step into data analytics with a simplified picture of the role — @she_explores_data — mining/posts/DXebBL7jcrY/notes.md
 - [ ] 50 Career Opportunities in the Data Ecosystem Data is no longer limited to analysts and scientists — @she_explores_data — mining/posts/DWgjZoYkn09/notes.md
 - [ ] The Skill Stack That Shapes a Modern Data Analyst The role of a data analyst is no longer limited to writing queries and — @she_explores_data — mining/posts/DWTrZRaEjIs/notes.md
 - [ ] Python becomes far more powerful when you understand its built-in functions — @she_explores_data — mining/posts/DWGzfUWkrCs/notes.md
-- [ ] Strong SQL skills start with understanding the functions that transform raw data into meaningful insights — @she_explores_data — mining/posts/DWBp6GvksUF/notes.md
 - [ ] Core Professional Skills in Data Analytics Technical tools may get you hired — @she_explores_data — mining/posts/DViwXCyEpgW/notes.md
 - [ ] SQL Interview Questions from Top Tech Companies If you are preparing for data analyst or BI interviews, you cannot ignor — @she_explores_data — mining/posts/DVbB7z2kuVP/notes.md
 - [ ] Choosing the Right Analyst Role Every analyst path solves a different type of problem — @she_explores_data — mining/posts/DVTTnNfkiDe/notes.md
@@ -9452,7 +9319,6 @@
 - [ ] Ever heard of HLD and LLD but never really understood the difference — @techie_programmer — mining/posts/DMCiGZ6zg4z/notes.md
 - [ ] Master these 5 HTTP methods and you’re halfway to building powerful APIs — @techie_programmer — mining/posts/DL2BftiTjG5/notes.md
 - [ ] 🎓 Just passed 12th and confused about which tech branch to choose — @techie_programmer — mining/posts/DL1O4shzzHd/notes.md
-- [ ] Checklist to become cyber security expert — @techie_programmer — mining/posts/DLubjlzzysh/notes.md
 - [ ] Need a Python program to create a pyramid with stars — @techie_programmer — mining/posts/DLtqFkxzMhh/notes.md
 - [ ] Check lost to become datascientist — @techie_programmer — mining/posts/DLrz3kqz99u/notes.md
 - [ ] Level Up Your Coding Skillst Ever wondered how Netflix knows exactly what you want to watch next — @techie_programmer — mining/posts/DLofRcjz7iR/notes.md
@@ -9475,7 +9341,6 @@
 - [ ] Technologies Used In Popular Games — @techie_programmer — mining/posts/DIG1qHeMGn9/notes.md
 - [ ] 🚀 Ready to land your dream job — @techie_programmer — mining/posts/DIGl-MOzM8I/notes.md
 - [ ] The Interview Cheatsheet — @techie_programmer — mining/posts/DIERwPfNXrm/notes.md
-- [ ] Oop’s introduction 🙌 — @techie_programmer — mining/posts/DH3YaWEzkyT/notes.md
 - [ ] Better late than never these pics are insane ChatGPT is wild 😍 — @techie_programmer — mining/posts/DHxgqlgzk3L/notes.md
 - [ ] HTML Cheatsheet — @techie_programmer — mining/posts/DHs-1Z4BUEo/notes.md
 - [ ] Dreaming to crack faang company Then check out these 250 + interview questions Link : https://docs — @techie_programmer — mining/posts/DHnyNlVTRjm/notes.md
@@ -9506,10 +9371,8 @@
 - [ ] ✨ Cracking the TCS Interview — @techie_programmer — mining/posts/DFHXo6Ez4mQ/notes.md
 - [ ] Dreaming of the highest-paying IT jobs in 2025 — @techie_programmer — mining/posts/DFDAZp6zLnC/notes.md
 - [ ] Dreaming of the highest-paying IT jobs in 2025 — @techie_programmer — mining/posts/DE_pYk8zhwP/notes.md
-- [ ] Ever heard of stacks in programming — @techie_programmer — mining/posts/DE7WrP7zzK0/notes.md
 - [ ] Day one of learning data structures / array Ever wondered how data gets stored in a perfectly ordered sequence — @techie_programmer — mining/posts/DE2M9FITzOO/notes.md
 - [ ] Data Scientist Roadmap for 2025 — @techie_programmer — mining/posts/DElzQY5qCLK/notes.md
-- [ ] Roadmap to master python programming — @techie_programmer — mining/posts/DEhuVKXOPRG/notes.md
 - [ ] 🚀 Kickstart your Java journey with this 7-week roadmap — @techie_programmer — mining/posts/DEZV-YQzep0/notes.md
 - [ ] Elevate your SQL skills with these top YouTube channels — @techie_programmer — mining/posts/DEWb73Gz3_D/notes.md
 - [ ] Inside a Hacker's Backpack — @techie_programmer — mining/posts/DEWWfFuIEfI/notes.md
@@ -9518,13 +9381,11 @@
 - [ ] HTML cheatsheet — @techie_programmer — mining/posts/DD68piyOJnm/notes.md
 - [ ] Mastering these programming languages can open doors to Wall Street: 1 — @techie_programmer — mining/posts/DD3iSyITd5L/notes.md
 - [ ] Tired of Windows limitations and bloatware — @techie_programmer — mining/posts/DDv4DnsTor6/notes.md
-- [ ] OOP Introduction — @techie_programmer — mining/posts/DDoALgzqhf7/notes.md
 - [ ] Tech Highlights: December 7–14, 2024 • Apple rolls out iOS 18 — @techie_programmer — mining/posts/DDjb0bGzvDu/notes.md
 - [ ] PHP vs Ruby Which is best for webdev — @techie_programmer — mining/posts/DDZeza6PxNm/notes.md
 - [ ] Link to repo : https://github — @techie_programmer — mining/posts/DC4FclxTMb-/notes.md
 - [ ] Hey everyone, it’s me with a mic in the frame and coding “hello world” on my screen — @techie_programmer — mining/posts/DCyRX59T4je/notes.md
 - [ ] Elevate your tech career by mastering these essential programming languages — @techie_programmer — mining/posts/DCnqPXxzQvA/notes.md
-- [ ] Advance Excel shortcuts — @techie_programmer — mining/posts/DCg5r8nzqd_/notes.md
 - [ ] 💻✨ Unleash your creativity in VS Code with the @tldraw extension — @techie_programmer — mining/posts/DCRBzHfSC46/notes.md
 - [ ] 150 + Java interview questions Links : https://github — @techie_programmer — mining/posts/DB5hW8Zv5_k/notes.md
 - [ ] Looking for freelance gigs that pay in USD — @techie_programmer — mining/posts/DBK8WC0yEyk/notes.md
@@ -9544,7 +9405,6 @@
 - [ ] : 25 algorithms every programmer should know : Binary Search Quick Sort Merge Sort Depth-First Search (DFS) Breadth-Firs — @techie_programmer — mining/posts/C-RnqqUSzZa/notes.md
 - [ ] Back end Technologies in the industry — @techie_programmer — mining/posts/C-IFFEKymM_/notes.md
 - [ ] Lets fix your resume in 5 days day 3 - Attach resume - paste job description - I have attached my resume, and this is th — @techie_programmer — mining/posts/C-F4B_BS_og/notes.md
-- [ ] Oops introduction — @techie_programmer — mining/posts/C-DG_j3SvwO/notes.md
 - [ ] How to highlight skills and experience effectively in ur resume Day -2 — @techie_programmer — mining/posts/C-AANLwyyTm/notes.md
 - [ ] 10 Best ChatGPT Alternatives in 2024: 1 — @techie_programmer — mining/posts/C9baXImCcS6/notes.md
 - [ ] The best YouTube channels to learn about Artificial Intelligence: 1 — @techie_programmer — mining/posts/C9ZKDE5yilU/notes.md
@@ -9556,7 +9416,6 @@
 - [ ] 24 Web Development Project Ideas — @techie_programmer — mining/posts/C7rWsUQJtrg/notes.md
 - [ ] Say goodbye to messy websites with Odoo’s intuitive builder — @techie_programmer — mining/posts/C7ot14FP_tn/notes.md
 - [ ] 40 OOPS Interview Q&A — @techie_programmer — mining/posts/C7ehBhfPTfc/notes.md
-- [ ] LearnPython - Basic to Advance — @techie_programmer — mining/posts/C7HRoPCL2Ls/notes.md
 - [ ] Data Scientist Roadmap for 2024 — @techie_programmer — mining/posts/C7Eruwesp2u/notes.md
 - [ ] Code : from gtts import gTTS import os text = “ hello techie programmer — @techie_programmer — mining/posts/C7D_ClqgrC8/notes.md
 - [ ] Code : from pypdf import PdfReader reader = PdfReader(‘Penetration Test - Example Report — @techie_programmer — mining/posts/C7DaWVTioiH/notes.md
@@ -9579,7 +9438,6 @@
 - [ ] Become a better programmer 🙋 Comment down ur thoughts 💭 — @techie_programmer — mining/posts/C4ZytD9r-Gh/notes.md
 - [ ] Top five easiest programming languages Python Javascript Golang Swift Ruby — @techie_programmer — mining/posts/C4UaqVrP1mT/notes.md
 - [ ] 100 python interview questions with answers Q41 to Q60 of Q100 — @techie_programmer — mining/posts/C4Qe1V7KjlN/notes.md
-- [ ] 100 python interview questions with answers Q21 to Q40 of Q100 — @techie_programmer — mining/posts/C4LVhyhtwvq/notes.md
 - [ ] Top 50 OOPS interview Q&A — @techie_programmer — mining/posts/C4IylWbLah7/notes.md
 - [ ] Elevate your API game with apidog — @techie_programmer — mining/posts/C4FT45MLzIR/notes.md
 - [ ] 2 — @code_with_techie — mining/posts/C3tu60pBDPc/notes.md
@@ -9697,7 +9555,6 @@
 - [ ] Free google certificate that you can add to your resume and upskill your knowledge ♾️🎉🔥 Follow for more (@techie_program — @techie_programmer — mining/posts/CubHgr1LDjW/notes.md
 - [ ] Php roadmap✨ Follow for more (@techie_programmer) — @techie_programmer — mining/posts/CuV6F_QBXRE/notes.md
 - [ ] 20 coding patterns to crack MAANG interviews🤩 Follow for more (@techie_programmer) — @techie_programmer — mining/posts/CuTVDiJL0C5/notes.md
-- [ ] Data science 🧬 Data Visualization • Tableau • Power BI • Matplotlib • GG Plot • Seaborn Data Analysis • Feature Engineer — @techie_programmer — mining/posts/CuG59JCPH_v/notes.md
 - [ ] Free Al Learning: Top 8 YouTube Channels🤩 Follow for more (@techie_programmer) — @techie_programmer — mining/posts/CuD5Z0xryPi/notes.md
 - [ ] Complete Python Roadmap For Beginners🤩 follow for more (@techie_programmer) — @techie_programmer — mining/posts/Ct57KfBLhe-/notes.md
 - [ ] These Gmail features will change the way you manage your inbox and increase your productivity — @techie_programmer — mining/posts/Ct0cNZ6NcDk/notes.md
@@ -9862,7 +9719,6 @@
 - [ ] 5 Project ideas for JavaScript Beginners — @techie_programmer — mining/posts/CbJt-DRBXkK/notes.md
 - [ ] Skills required for different sectors — @techie_programmer — mining/posts/Ca9gg5lpXnR/notes.md
 - [ ] 10 BEST WIFI H4CKER APPS FOR ANDROID IN 2022 — @techie_programmer — mining/posts/Ca81FODB_eO/notes.md
-- [ ] Average salary in US 2022 — @techie_programmer — mining/posts/CazLpWUB3DV/notes.md
 - [ ] 10 THINGS YOU CAN DO WITH PYTHON Artificial Intelligence Machine Learning Web Development Data Science SEO Data Visualiz — @techie_programmer — mining/posts/CawnBcKl-ak/notes.md
 - [ ] Best IDE's for Top Languages — @techie_programmer — mining/posts/CatXnhRh9Ht/notes.md
 - [ ] Web2 — @techie_programmer — mining/posts/CamXP1QlQOq/notes.md
@@ -9929,7 +9785,6 @@
 - [ ] lets talk metaverse — @techie_programmer — mining/posts/CV-qoOYPqPw/notes.md
 - [ ] What Are Fuctions — @techie_programmer — mining/posts/CV-W0BNva74/notes.md
 - [ ] what is SEO — @techie_programmer — mining/posts/CV4S6gaPSQ0/notes.md
-- [ ] basics of html — @techie_programmer — mining/posts/CVuB4N4PcdN/notes.md
 - [ ] What is PUTTY — @techie_programmer — mining/posts/CVsGbsXt-zJ/notes.md
 - [ ] official websites of programming languages — @techie_programmer — mining/posts/CVrr6PPNrIY/notes.md
 - [ ] Companies owned by Elon musk — @techie_programmer — mining/posts/CVnK39GNeBH/notes.md
@@ -9937,7 +9792,6 @@
 - [ ] ready for the metaverse — @techie_programmer — mining/posts/CVlXKdgrkl2/notes.md
 - [ ] Number of lines matter 😎 Java dev : speed too 😒 Py dev : yeah 🥲 — @techie_programmer — mining/posts/CVhZ8pDFaWy/notes.md
 - [ ] What is ajax — @techie_programmer — mining/posts/CVhRM8oPDUs/notes.md
-- [ ] DBMS : interview question — @techie_programmer — mining/posts/CVAqGWGFudI/notes.md
 - [ ] 4 pillars of oops 🥳 — @techie_programmer — mining/posts/CU6duTzoFaj/notes.md
 - [ ] Elon musk ⚡️ — @techie_programmer — mining/posts/CUyzIsLlt_2/notes.md
 - [ ] 50+ project ideas hit save and swipe 😋 Follow for more — @techie_programmer — mining/posts/CUJ4inoFq3h/notes.md
@@ -9995,6 +9849,7 @@
 - [ ] Soft skills basically everyone shd have 👍 Follow( @techie_programmer ) for more — @techie_programmer — mining/posts/COzvUOajGAT/notes.md
 - [ ] Which ject brain ide would you recommend — @techie_programmer — mining/posts/COpGCpoAfF2/notes.md
 - [ ] What is sdlc — @techie_programmer — mining/posts/COUaxyggWwQ/notes.md
+- [ ] Check out list of few big cyber attacks — @techie_programmer — mining/posts/CORz6uYAegW/notes.md
 - [ ] Birth place of Programming languages Did you know these facts Anyways does they matter — @techie_programmer — mining/posts/COP9SWKgZKW/notes.md
 - [ ] Time required to crack the password 🔑 but it can be improved with parallel computing / threading the operation etc Stay  — @techie_programmer — mining/posts/COMxu2yAhC5/notes.md
 - [ ] Types of networks check out hit save double tap and dont forget to share ummm — @techie_programmer — mining/posts/CN9NGEPgy9R/notes.md
@@ -10016,10 +9871,8 @@
 - [ ] The best linux distros in 2021⚡⚡🔥💣🌟 — @techie_programmer — mining/posts/CLEmJPRgyM_/notes.md
 - [ ] Not a Android developer just want to make few apps these are perfect starters 🔥 — @techie_programmer — mining/posts/CK81ncpgiDM/notes.md
 - [ ] Most basic advice so thought to post share it with ur code buddies 😉 — @techie_programmer — mining/posts/CK8sEPvggun/notes.md
-- [ ] Follow ( @techie_programmer ) The basic question : what is github expained 💣 — @techie_programmer — mining/posts/CK6MiY9AFyN/notes.md
 - [ ] Follow (@techie_programmer ) Top interview questions ⚡ — @techie_programmer — mining/posts/CK1J_mjAQbR/notes.md
 - [ ] Try these — @techie_programmer — mining/posts/CKd93ZmgzBC/notes.md
-- [ ] Try out this really cool Project 😍 — @techie_programmer — mining/posts/CKbaFZAA4VW/notes.md
 - [ ] tor — @techie_programmer — mining/posts/CKTsXQ1gZNJ/notes.md
 - [ ] Link in bio rush now give a thumbs up and leave a comment for feed back ❤️ — @techie_programmer — mining/posts/CKRGkF-g1no/notes.md
 - [ ] What to become a software developer save it first then start reading 😍 — @techie_programmer — mining/posts/CJ8jBKdgJtl/notes.md
@@ -10378,7 +10231,6 @@
 - [ ] Visualise 📊📈 — @datasciencescoop — mining/posts/CqzQUEmOyXG/notes.md
 - [ ] WOW — @datasciencescoop — mining/posts/CqxsBH4ubhe/notes.md
 - [ ] Vicious 😒 — @datasciencescoop — mining/posts/CqZbzFJO66X/notes.md
-- [ ] 📍Numpy - Day 4📍 👉 Generate — @datasciencescoop — mining/posts/CqQXQOTuxhx/notes.md
 - [ ] 🔥 Day-3 🔥 📍Generating 📍 — @datasciencescoop — mining/posts/CqOIUWyOEUN/notes.md
 - [ ] We are safe 😃 Top 20 skills can potentially replace , predicted by itself 🧑‍💻 — @datasciencescoop — mining/posts/Cp-7TvSOp3r/notes.md
 - [ ] 😂😂😂 — @datasciencescoop — mining/posts/Cp3oNNDO9wz/notes.md
@@ -10500,7 +10352,6 @@
 - [ ] workflow Link - https://www — @datasciencescoop — mining/posts/CJAyj3fgB-E/notes.md
 - [ ] 6 Vital Data Science Skills Every Data Scientist Must Possess — @datasciencescoop — mining/posts/CI-ISZyAETe/notes.md
 - [ ] 👉 Notebooks 👈 Github Link - https://github — @datasciencescoop — mining/posts/CI21y2dgI5L/notes.md
-- [ ] - A Complete Introduction OmniSci https://www — @datasciencescoop — mining/posts/CIsIYolgWlI/notes.md
 - [ ] Types of Machine Learning and Top 10 Algorithms Everyone Should Know Oracle Data Science https://blogs — @datasciencescoop — mining/posts/CInPvKYAOik/notes.md
 - [ ] Mindmap Link - https://manisha-sirsat — @datasciencescoop — mining/posts/CIkW4X1gO2A/notes.md
 - [ ] 👏🏻👏🏻 — @datasciencescoop — mining/posts/CIfVb5ngXjF/notes.md
@@ -10860,7 +10711,6 @@
 - [ ] Should You Connect Your Brain to the Internet — @datasciencescoop — mining/posts/CDWURg7Ae5i/notes.md
 - [ ] This month in AWS Machine Learning: July 2020 edition https://aws — @datasciencescoop — mining/posts/CDV80JDnNNV/notes.md
 - [ ] U — @datasciencescoop — mining/posts/CDVugVkgxRo/notes.md
-- [ ] Hands-On Guide to Time Series Analysis using Simple Exponential Smoothing in Python https://analyticsindiamag — @datasciencescoop — mining/posts/CDVfgdSlA8x/notes.md
 - [ ] Using AI to Optimize Pricing https://insidebigdata — @datasciencescoop — mining/posts/CDUEGATnOKf/notes.md
 - [ ] Gradient Descent Explained https://becominghuman — @datasciencescoop — mining/posts/CDTpxBXFhC7/notes.md
 - [ ] Ready to Transform the way you drive Customer Engagement with a Phone Bot — @datasciencescoop — mining/posts/CDTRuNWAzGF/notes.md
@@ -11122,7 +10972,6 @@
 - [ ] VS — @datasciencescoop — mining/posts/B_NTpKSgMRr/notes.md
 - [ ] 🐼 Pandas - Series & Dataframe 🐼 👉 Introduction on Series & Dataframes for Beginners 👈 🔗Github Link - https://lnkd — @datasciencescoop — mining/posts/B-78_bjgz7F/notes.md
 - [ ] VS — @datasciencescoop — mining/posts/B-y36Q9gYQN/notes.md
-- [ ] Excel Cheat Sheet — @datasciencescoop — mining/posts/B-hq0msAsDg/notes.md
 - [ ] ⭐️ Microsoft announces the launch of Azure Edge Zones, which will allow users to bring their applications to their organ — @datasciencescoop — mining/posts/B-abopSAtmm/notes.md
 - [ ] 👉 STAT’s guide to how hospitals are using AI to fight Covid-19 👈 Link - https://www — @datasciencescoop — mining/posts/B-aaMRog1qR/notes.md
 - [ ] 👉 Interactive COVID-19 Visualizer 👈 Link - https://www — @datasciencescoop — mining/posts/B-QHcn5AH6p/notes.md
@@ -11329,7 +11178,6 @@
 - [ ] Comment “BETTER” and I’ll dm you this full free ChatGPT prompt + 10 free ideas of standout coding projects that can land — @bashi_fuirkashi — mining/posts/DO_XbcNj4Ld/notes.md
 - [ ] $0 vs — @bashi_fuirkashi — mining/posts/DPRcX9bjHR_/notes.md
 - [ ] 6 Years of Coding 💻 Want to follow the same path I took to 6 figures — @bashi_fuirkashi — mining/posts/DPB_rEVjary/notes.md
-- [ ] Chat GPT Prompt 👇 1️⃣ Go to huggingface — @bashi_fuirkashi — mining/posts/DO6ROOfjYXK/notes.md
 - [ ] If you’re ready to fast-track your coding career and finally land that $100K+ job… Comment “MENTOR ME” below and I’ll re — @bashi_fuirkashi — mining/posts/DOzTFWYkg3_/notes.md
 - [ ] Comment “100K” and I’ll dm you this full free ChatGPT prompt + 10 free ideas of standout coding projects that can land y — @bashi_fuirkashi — mining/posts/DOrncrkgeXb/notes.md
 - [ ] Comment “PROJECT PROMPT” to get my free ChatGPT prompt to help you build resume-ready projects that impress hiring manag — @bashi_fuirkashi — mining/posts/DOowAWJEikY/notes.md
@@ -11522,7 +11370,6 @@
 - [ ] 💼 Want to break into tech and land a $100,000+ job — @bashi_fuirkashi — mining/posts/DB43y21y4Fg/notes.md
 - [ ] Comment “RESULTS” and I’ll send you this FREE Step-by-Step Guide to Learn How to Code Online & Land a $100,000+ Job ASAP — @bashi_fuirkashi — mining/posts/DB4aaOPCYRc/notes.md
 - [ ] 🚀 nail your algo coding interview with these 3 tips — @bashi_fuirkashi — mining/posts/DB362_lvD0q/notes.md
-- [ ] Follow this Easy Checklist to Build a Great Resume Project to land a $100,000+ coding job — @bashi_fuirkashi — mining/posts/DBwmOXPyI8z/notes.md
 - [ ] Here are five free resources to land a $100,000+ coding job in 2025: 1️⃣ Watch this YouTube video – It provides a solid  — @bashi_fuirkashi — mining/posts/DBtsqfxv7zc/notes.md
 - [ ] Here’s a complete list of what you need to learn to become a full stack software engineer: 1️⃣ Foundational Coding Conce — @bashi_fuirkashi — mining/posts/DBjVYxWPcqm/notes.md
 - [ ] Comment “SWE” to get a FREE guide of 10 coding projects to master fundamentals and land a $100,000 coding job — @bashi_fuirkashi — mining/posts/DBOuCvDvT-m/notes.md
@@ -12624,7 +12471,6 @@
 - [ ] China launched the world’s first commercial underwater AI data center — @evolving.ai — mining/posts/DHs3tgbNelu/notes.md
 - [ ] 🤯🚨 It’s been less than 24 hours since OpenAI dropped their new image model in ChatGPT — and it's wild — @evolving.ai — mining/posts/DHqzJX1NZqV/notes.md
 - [ ] 🤯🚨 OpenAI just launched image generation in ChatGPT — and it might be the most powerful release of the year — @evolving.ai — mining/posts/DHqH4EotJDR/notes.md
-- [ ] 🚨China's DeepSeek just did it once again — @evolving.ai — mining/posts/DHn7nNtttL2/notes.md
 - [ ] 👀📈 A private school in Texas is getting big results by using a new kind of AI tutor — @evolving.ai — mining/posts/DHlioGCNQWG/notes.md
 - [ ] 🧠 A patient paralyzed by a spinal cord injury regained the ability to walk independently after groundbreaking surgery — @evolving.ai — mining/posts/DHlOzRFtuaq/notes.md
 - [ ] The AI search engine Perplexity just debuted a new ad featuring Squid Game star Lee Jung-jae, who’s trapped in a room an — @evolving.ai — mining/posts/DHjAjdxte6k/notes.md
@@ -12714,7 +12560,6 @@
 - [ ] 🤯 From cancer detection to a custom vaccine within 48h with AI President Donald Trump announced a $500 billion private s — @evolving.ai — mining/posts/DFIYc1ms5Sq/notes.md
 - [ ] 🚨 BREAKING: President Donald Trump revealed a significant initiative to strengthen America’s AI infrastructure, centered — @evolving.ai — mining/posts/DFIAHmnAX2G/notes.md
 - [ ] 🚨 President Trump has repealed a Biden-era policy aimed at regulating AI development to prevent misuse — @evolving.ai — mining/posts/DFF2cnctIM1/notes.md
-- [ ] 🤯 If you want to see how AI is about to transform the film industry, this short video makes it clear — @evolving.ai — mining/posts/DFFwhpkMCA6/notes.md
 - [ ] NVIDIA just created the simulation 🤯 NVIDIA introduces HOVER, a 1 — @evolving.ai — mining/posts/DFDdt6rA8Nx/notes.md
 - [ ] According to Axios, OpenAI, under CEO Sam Altman, is expected to announce AI agents capable of performing tasks at a PhD — @evolving.ai — mining/posts/DFDA9K-gdA-/notes.md
 - [ ] 👀 Paul Schrader, writer of the legendary movie Taxi Driver, believes AI can mimic great storytellers: "Every idea ChatGP — @evolving.ai — mining/posts/DFArkfMAU-A/notes.md
@@ -13375,6 +13220,7 @@
 - [ ] If Harry Potter's Hogwarts was built with traditional architectures in other countries 👀 Follow @evolving — @evolving.ai — mining/posts/CwDdjwiss9x/notes.md
 - [ ] Movie characters at Woodstock ☮️🎬 Follow @evolving — @evolving.ai — mining/posts/CwC_SygM95d/notes.md
 - [ ] Zeus and Athena dancing it off 👀🏛️ 🎥: @plaidayapp Follow @evolving — @evolving.ai — mining/posts/CwA1BfXs7wu/notes.md
+- [ ] Use these 8 ChatGPT prompts to achieve your goals like a champ 🔥🙌 Follow @evolving — @evolving.ai — mining/posts/CwAuXBJMzUE/notes.md
 - [ ] 🇺🇲 US Presidents by Balenciaga 👀 Follow @evolving — @evolving.ai — mining/posts/Cv-KfQiR-Kr/notes.md
 - [ ] Why do I feel sorry for it — @evolving.ai — mining/posts/Cv7ZAIkMo_c/notes.md
 - [ ] Do you consider AI art a legitimate form of art — @evolving.ai — mining/posts/Cv2U7ryAQbo/notes.md
@@ -13444,6 +13290,7 @@
 - [ ] Viral selfies & tweets that never happened 🤯📸 Follow @evolving — @evolving.ai — mining/posts/Csi9HbNMoeF/notes.md
 - [ ] ChatGPT Plugins Mega Guide 🔥 Save this for later 🙌 Follow @evolving — @evolving.ai — mining/posts/CsWMKANMp54/notes.md
 - [ ] 8 things impossible on ChatGPT but that Bard can do 🙌🔥 Save this and try it out yourself Follow @evolving — @evolving.ai — mining/posts/CsJQOMnse7H/notes.md
+- [ ] 7 amazing AI tools you don't want to miss in 2023 🙌 save this post for later Follow @evolving — @evolving.ai — mining/posts/CsCKV5asohs/notes.md
 - [ ] This is going to become very powerful and easy to use 🤯 Regular ChatGPT is trained on data from events before September  — @evolving.ai — mining/posts/Cr_C3HxsSn-/notes.md
 - [ ] What the hell is going on 😂😭 The ad for the beer shows AI-created likenesses of people at a neighborhood barbecue partyi — @evolving.ai — mining/posts/CrtnlyysweV/notes.md
 - [ ] The 5 most powerful and time saving GPT extensions 🔥 Save this for later 🙌 AI isn't going to replace jobs, but people wh — @evolving.ai — mining/posts/Crs6LbqMgJz/notes.md
@@ -13951,7 +13798,6 @@
 - [ ] Many people find it hard to get concise answers from AI, often ending up with long or vague replies — @airesearches — mining/posts/DO1GKjfiYHx/notes.md
 - [ ] 🚨🕶️ At Meta’s 2025 event, the most advanced smart glasses yet were unveiled: Ray-Ban AI Display with gesture control The — @airesearches — mining/posts/DOv7BpJiXN8/notes.md
 - [ ] In less than ten years, Alexandr Wang went from college dropout to billionaire founder, creating one of the most recogni — @airesearches — mining/posts/DOtUAp_CeT9/notes.md
-- [ ] Do you see yourself in any of these — @airesearches — mining/posts/DOtAyIciUfG/notes.md
 - [ ] 🚗🏙️ Remember this childhood carpet full of roads and buildings — @airesearches — mining/posts/DOq-H4-gUM4/notes.md
 - [ ] Joe Rogan just listened to an AI-made 1960s soul version of 50 Cent’s "Many Men" and straight up called it the best thin — @airesearches — mining/posts/DOqXBjUCfGF/notes.md
 - [ ] At the Acropolis, Google DeepMind CEO and Nobel laureate Demis Hassabis said the most crucial skill in an AI-driven worl — @airesearches — mining/posts/DOoja4jE5Qb/notes.md
@@ -14659,7 +14505,6 @@
 - [ ] Forever a girl who loves to Romanticize simple things in her life ❤️ PS: National Flower Day 🌺 — @shivanjaliverse — mining/posts/DWJeg3qCmIf/notes.md
 - [ ] Balance baby 😉😌 — @shivanjaliverse — mining/posts/DVQxQDTiuHb/notes.md
 - [ ] Between meetings and deadlines, I find my reset at Blue Tokai Coffee Roasters ☕️ Good coffee, wholesome food, and a ligh — @shivanjaliverse — mining/posts/DUVoE0YClLo/notes.md
-- [ ] My goal is to be pretty — @shivanjaliverse — mining/posts/DSt9CfCkfsn/notes.md
 - [ ] If my corporate life were a movie, the hair flip would be my introductory shot - Deadlines, dreams, and a little bit of  — @shivanjaliverse — mining/posts/DSutZmoiq9o/notes.md
 - [ ] My Phool-ish heart 🌸 …slipped into a day that felt like a dream ✨💫 [ Brindavan Gardens Mysore, Weekending, Weekend trip, — @shivanjaliverse — mining/posts/DSCtBv1ktCF/notes.md
 - [ ] 𝟏 — @shivanjaliverse — mining/posts/DSFNTizijQL/notes.md
@@ -14799,7 +14644,6 @@
 - [ ] Happy Monday — @duodevlogs — mining/posts/CxCpYcItEYB/notes.md
 - [ ] The Web Development landscape is continually evolving, so staying up-to-date with the latest technologies and trends is  — @python4dev — mining/posts/Cw_5QVnL_vh/notes.md
 - [ ] On the way to work today… Picture 1: Look the train is travelling above the clouds Picture 2: Watching the sunrise while — @duodevlogs — mining/posts/Cw76ZuatA8R/notes.md
-- [ ] Here are five unique fullstack project ideas: Node — @duodevlogs — mining/posts/Cw6saRYNxQr/notes.md
 - [ ] Save this reel for your benefit — @duodevbuilds — mining/posts/Cws8B1QN03u/notes.md
 - [ ] Hey folks, here’s the update — @duodevlogs — mining/posts/Cwp59c0tXwa/notes.md
 - [ ] Getting an internship as a software developer with no prior experience can be challenging, but it’s definitely possible — @duodevlogs — mining/posts/CwoJszMt9xv/notes.md
@@ -14942,7 +14786,6 @@
 - [ ] ⚡️ 30 Days of Code: Day 23 — Studying YAML 💫 Hey guys, let’s know a bit about YAML 👉🏻 YAML is a human-readable data seri — @duodevlogs — mining/posts/Ck_tUT3D_Vh/notes.md
 - [ ] 🚀 Roadmaps for all tech paths with the likes of web developer, data scientist, ML Engineer and more… — @duodevlogs — mining/posts/Ck-c1RKDy3L/notes.md
 - [ ] ⚡️ Plan your first six months of learning fullstack development with these things… — @duodevlogs — mining/posts/Ck5fLkLjsVN/notes.md
-- [ ] Have you ever faced such a situation — @duodevlogs — mining/posts/Ck1sPwuj5F5/notes.md
 - [ ] 💫 Tips to become a good developer - Clear basics: One cannot become a good programmer if the basics aren’t clear and str — @duodevlogs — mining/posts/Ck0dcH9DQ70/notes.md
 - [ ] ⚡️ 30 Days of Code: Day 17 ✨ Hey guys, today, I have started to prepare myself to get started with my new job — @duodevlogs — mining/posts/CkwRxykD1Li/notes.md
 - [ ] ⚡️ Developer Resources — @duodevbuilds — mining/posts/Cksns3cDN9D/notes.md
@@ -15177,7 +15020,6 @@
 - [ ] Choosing a college isn’t just about the lowest fees or the highest placement package — @iamsaumyaawasthi — mining/posts/DaRuq6qPDVc/notes.md
 - [ ] Everyone talks about Kafka — @iamsaumyaawasthi — mining/posts/DaP_62emjFS/notes.md
 - [ ] 🚀 Still applying to hundreds of jobs with no replies — @iamsaumyaawasthi — mining/posts/DaNary0E7nv/notes.md
-- [ ] 🚨 90% of candidates struggle with basic CRUD interview questions — @iamsaumyaawasthi — mining/posts/DaIayQyE0qK/notes.md
 - [ ] Java Developer Roadmap 🚀 Everyone wants to build microservices, work with cloud, and crack high-paying jobs — @iamsaumyaawasthi — mining/posts/DZ6kag3mir5/notes.md
 - [ ] ☁️ AWS INTERVIEW PREP ALERT 🚀 If you're preparing for Product-Based Companies like Amazon, Netflix, Uber, Flipkart, Razo — @iamsaumyaawasthi — mining/posts/DZ46hxvk0zg/notes.md
 - [ ] The gap between education and employment is filled with skills, projects and preparation — @careerwithnadeem — mining/posts/DZotG1SJC3r/notes.md
@@ -15227,7 +15069,6 @@
 - [ ] Techie 💻 — @iamsaumyaawasthi — mining/posts/DKep4FJzweX/notes.md
 - [ ] Write a Multithreading problem which creates 3 threads (T1, T2, T3) and every thread should run in such a sequential man — @iamsaumyaawasthi — mining/posts/DJTUeqhThgo/notes.md
 - [ ] TOP 30 Most Asked Kafka Interview Questions These are the EXACT questions being asked at PayPal, Mastercard & Morgan Sta — @iamsaumyaawasthi — mining/posts/DJJckAqzzwQ/notes.md
-- [ ] Stuck in the same job, same CTC, same project for 3 years — @iamsaumyaawasthi — mining/posts/DHn1T7izbrn/notes.md
 - [ ] The hard truth about high salaries in India: Switching jobs is often the only way — @iamsaumyaawasthi — mining/posts/DHaBI2Rz7za/notes.md
 - [ ] SQL Resources to prepare for your next interview 💯 -LeetCode: It provides a dedicated section for SQL problems, where yo — @iamsaumyaawasthi — mining/posts/DHXgoYBT7kd/notes.md
 - [ ] My Journey to a Successful Job Switch with Just 1 Year of Experience ⬇️ Switching jobs with only one year of experience  — @iamsaumyaawasthi — mining/posts/DHU6vejzKd-/notes.md
@@ -15276,7 +15117,6 @@
 - [ ] Phase 1: Foundations (Days 1-30)✨ Phase 2: Intermediate Level (Days 31-60) ✨ Phase 3: Advanced Preparation (Days 61-90)✨ — @iamsaumyaawasthi — mining/posts/DAaBVQzNy1o/notes.md
 - [ ] Wow — @iamsaumyaawasthi — mining/posts/DAPqkRRsy2I/notes.md
 - [ ] 10 Things to Consider Before Saying Yes to a Job Offer 💵 Salary – Does the pay meet your expectations and the market rat — @iamsaumyaawasthi — mining/posts/DAILRAevL6i/notes.md
-- [ ] 💼 One of our amazing followers with 3 years of experience just cracked Infosys — @iamsaumyaawasthi — mining/posts/DAFjntDtbUU/notes.md
 - [ ] This is how I learned Java and Spring Boot in 2 months ✅ Foundation in Java: Week 1-2: Focused on core Java concepts suc — @saumyaawasthie — mining/posts/DADCLvFg9NE/notes.md
 - [ ] My interview experience with Dassault Systèmes ⬇️ The overall process took 1 week ⏱️ 3 Rounds — @iamsaumyaawasthi — mining/posts/C_9yZU6MQn7/notes.md
 - [ ] Dive into the essentials of ADV Java with these handwritten notes — @iamsaumyaawasthi — mining/posts/C_7So2zOSJQ/notes.md
@@ -15298,7 +15138,6 @@
 - [ ] Inheritance Vs Composition, Which one is more loosely coupled and preferred in programming — @iamsaumyaawasthi — mining/posts/C-hX7sByGmY/notes.md
 - [ ] Fixed CTC Vs Monthly In-Hand Salary (Part-2) ✅ Understanding the difference between your Fixed CTC (Cost to Company) and — @iamsaumyaawasthi — mining/posts/C-emsZiSJ6x/notes.md
 - [ ] Possible Strategies for Ensuring Data Consistency Across Microservices ⬇️ Scenario: You have a system where multiple mic — @iamsaumyaawasthi — mining/posts/C-czpWxyhZQ/notes.md
-- [ ] Top Resources to Prepare for Placements ✅ — @iamsaumyaawasthi — mining/posts/C-VguN0SvPn/notes.md
 - [ ] Fixed CTC Vs Monthly In-Hand Salary ✅ Understanding the difference between your Fixed CTC (Cost to Company) and your Mon — @iamsaumyaawasthi — mining/posts/C-Ul3L0Scxj/notes.md
 - [ ] My Journey to a Successful Job Switch with Just 1 Year of Experience ⬇️ Switching jobs with only one year of experience  — @iamsaumyaawasthi — mining/posts/C-PnxB0yy2t/notes.md
 - [ ] Boost your aptitude skills with these top resources — @iamsaumyaawasthi — mining/posts/C97PcxMSkS7/notes.md
@@ -15430,7 +15269,6 @@
 - [ ] Every Rubik’s Cube robot thought it had reached the limit — @uncover.quantum — mining/posts/DcWCBlRKHPl/notes.md
 - [ ] 500 years ago, Leonardo da Vinci was already trying to engineer human flight — @uncover.quantum — mining/posts/DcV-Rs5CoiL/notes.md
 - [ ] At first glance, this looks like two galaxies colliding millions of light-years away — @uncover.quantum — mining/posts/DcVZX_MqLYp/notes.md
-- [ ] WORLD FIRST: Singapore is testing a data centre that computes using living human neurons — @uncover.quantum — mining/posts/DcU555jCuzj/notes.md
 - [ ] What you’re looking at is a 171-foot-tall Starship spacecraft that went to space, survived its fiery return through Eart — @uncover.quantum — mining/posts/DcRK-pbmodu/notes.md
 - [ ] 33 Raptors on Starship’s Super Heavy booster produce ~9,000+ tons of total thrust far more than the Saturn V’s 5 F-1 eng — @uncover.quantum — mining/posts/DcPr3p2q-sj/notes.md
 - [ ] Japan is betting on a radically different way to manufacture advanced chips: stamp the pattern instead of projecting it — @uncover.quantum — mining/posts/DcO6os5ihZO/notes.md
@@ -15523,7 +15361,6 @@
 - [ ] Your laptop has around 8 cores — @uncover.quantum — mining/posts/Daj7FVGGhxu/notes.md
 - [ ] Hand painted scenes of the original Star Wars trilogy 🖌️ Industrial Light & Magic (ILM) used matte paintings to create m — @uncover.quantum — mining/posts/DaiI4kNiqwq/notes.md
 - [ ] Could AI’s biggest infrastructure boom have an unexpected environmental cost — @uncover.quantum — mining/posts/Daf1VEwmvez/notes.md
-- [ ] Quantum is starting to move out of the “someday” category and into real policy, infrastructure, and national security pl — @uncover.quantum — mining/posts/Dae_lvNCtO1/notes.md
 - [ ] @lovable — @uncover.quantum — mining/posts/DaeqjawFPt-/notes.md
 - [ ] What if the future of cancer treatment isn’t a new drug — @uncover.quantum — mining/posts/DaeaFNJK1JS/notes.md
 - [ ] When small objects float on water, they don’t interact through gravity alone — @uncover.quantum — mining/posts/DackRLaK7pI/notes.md
@@ -16106,7 +15943,6 @@
 - [ ] This explainer video shows how we can create the most powerful computer allowed by physics, by networking together ‘ion  — @uncover.quantum — mining/posts/DEbh425Semx/notes.md
 - [ ] The quantum internet is set to revolutionize communication with ultra-secure data transfer and lightning-fast connectivi — @uncover.quantum — mining/posts/DEZa1VBSIPx/notes.md
 - [ ] Quantum Entanglement the phenomenon whereby a pair of particles are generated in such a way that the individual quantum  — @uncover.quantum — mining/posts/DEBvvVoNphH/notes.md
-- [ ] Placement season stressing you out — @bytemartdigital.in — mining/posts/Dcyj_ecTgO3/notes.md
 - [ ] Java Exception Handling is one of those topics you’ll use again and again—whether you’re preparing for exams, building p — @bytemartdigital.in — mining/posts/DcyWRdWD0tE/notes.md
 - [ ] Binary Search looks complicated until you watch it step by step — @bytemartdigital.in — mining/posts/DcnXxZUx4MX/notes.md
 - [ ] Recursion is powerful… until it starts solving the same problem again and again — @bytemartdigital.in — mining/posts/Dcl-0HtPF5z/notes.md
@@ -16276,7 +16112,6 @@
 - [ ] Join us for the Quantitative Finance Workshop at ATMOS 2025: Solaris Surge, where finance meets code and strategy meets  — @atmos_bitshyd — mining/posts/DQZ3V0Vk7tL/notes.md
 - [ ] Campus Connect 2025 | IIT Madras A day where innovation meets inspiration, and ideas turn into opportunities — @ecell_iitm — mining/posts/DQI26tZkhQs/notes.md
 - [ ] Happy Dhanteras to the Quant Insider community May Lord Dhanvantari bless you and your family with Health and Wealth Diw — @quantinsider.io — mining/posts/DP8o3r4Eub7/notes.md
-- [ ] @quant_enthusiasts What is Quantitative Finance — @quant_enthusiasts — mining/posts/DP0nlo0iOnW/notes.md
 - [ ] The universe is a vast, mysterious place filled with countless wonders — @spats.nssc.iitkgp — mining/posts/DPT3DUjjOjv/notes.md
 - [ ] 🎉 Happy Dussehra from Quant Insider 🎉 On this day that celebrates the triumph of good over evil, light over darkness, an — @quantinsider.io — mining/posts/DPTltd0DBFO/notes.md
 - [ ] The trading interview process at Jane Street is structured to evaluate candidates on various foundational skills essenti — @quantinsider.io — mining/posts/DPRVjr8ieTX/notes.md
@@ -16350,7 +16185,6 @@
 - [ ] Graphical Representation of important Data Structures for your Quant role interviews Did you know that Stacks and Queues — @quantinsider.io — mining/posts/C3FTOcgxLP7/notes.md
 - [ ] How to prepare for Quant Trader roles — @quantinsider.io — mining/posts/C23_OP5ROpU/notes.md
 - [ ] PoV: You are a Physics grad trying to survive your degree so that you can finally apply to that Quant job at hedge fund  — @quantinsider.io — mining/posts/C22rpr7vtKF/notes.md
-- [ ] Difference between Quant Finance, Computational Finance and Financial Mathematics Swipe left and do give it a read — @quantinsider.io — mining/posts/C2miCDcRIdl/notes.md
 - [ ] Top Quant Finance books for beginners 📚📗 Quant Finance for dummies and Paul Wilmot book is our personal favourite — @quantinsider.io — mining/posts/C2j_32XR_Iy/notes.md
 - [ ] Everyone is a devil, before the real devil appears 😭 @quantinsider @topmate — @quantinsider.io — mining/posts/C2U2p4Bhhnj/notes.md
 - [ ] Assemble all the Excel geeks 📊 — @quantinsider.io — mining/posts/C2H8eyTx03X/notes.md
@@ -17646,7 +17480,6 @@
 - [ ] 🚨 CHINA LOSING THE AI WAR — @builders.central — mining/posts/CwnO1gXy0wx/notes.md
 - [ ] THIS AI SCAM HAPPENED IN KERELA 🤯👀 — @builders.central — mining/posts/CwFijEiMtVX/notes.md
 - [ ] INDIA : THE AI POWERHOUSE 👀 — @builders.central — mining/posts/CwC8_vjptXG/notes.md
-- [ ] INDIA IS USING AI IN DEFENSE 🇮🇳🚀💪 — @builders.central — mining/posts/Cv96glUJFra/notes.md
 - [ ] ⚖️ Lawbotpro — @builders.central — mining/posts/CvH-tmtJO2C/notes.md
 - [ ] If you're an entrepreneur or aspire to become one — @builders.central — mining/posts/CumQjfJR6Y0/notes.md
 - [ ] Theatres shake avthai inka 🥵 — @funclovita — mining/posts/DcoID2lShX3/notes.md
@@ -17664,6 +17497,7 @@
 - [ ] Biggest chokers in ipl 🤡 — @funclovita — mining/posts/DYcv_swvCt1/notes.md
 - [ ] Summer lo manchi entertainment isthunnaru producers 😂 — @funclovita — mining/posts/DYT6CYrv7Va/notes.md
 - [ ] Heart wrenching Feeling very sad for two kids — @funclovita — mining/posts/DX1KW-jD6jA/notes.md
+- [ ] Vaibhav Sooryavanshi 🔥 But out ayipoyadu 🥲 — @funclovita — mining/posts/DXj0brQD07W/notes.md
 - [ ] Nais gulu 🥲 — @funclovita — mining/posts/DXRsMDwjxqb/notes.md
 - [ ] Dear hindus girls Meeku ela chepte ardham aithadi like Meeku mind leda ento arsham aithale almost all every day ilanti c — @funclovita — mining/posts/DXCRw5vD5da/notes.md
 - [ ] Vaibhav Sooryavanshi man 🔥🔥 78 of 26 balls 💥 Literally RCB ni ucha poyinchadu unnantha sepu — @funclovita — mining/posts/DW9cQDID4Hz/notes.md
@@ -17680,7 +17514,6 @@
 - [ ] Power of social media After outrage they changed their decision Still shame on you @bcci — @funclovita — mining/posts/DTCpvTqj_S-/notes.md
 - [ ] Thagi road meeda padipothunnaru I am feeling bad for kid — @funclovita — mining/posts/DTCP0wcDzxN/notes.md
 - [ ] Repu podduna varaku wait cheyali 🫠 — @funclovita — mining/posts/DS7SgKnD5pS/notes.md
-- [ ] Our first complete AI video 😃 Video link in our story and bio — @funclovita — mining/posts/DS12WaND0_y/notes.md
 - [ ] This is not funny evarithe deni media funny memes create chestunnaru mi vallu evaraina a situation lo unte ilane react a — @funclovita — mining/posts/DSZcOt-j-Px/notes.md
 - [ ] ai — @funclovita — mining/posts/DSUSpHPDweW/notes.md
 - [ ] 🏡 HMDA & RERA Approved Premium Villa Plots – Beeramguda–BHEL Where Luxury Meets Location — @itsmerealtorkapil — mining/posts/DSSsAikkquK/notes.md
@@ -18274,7 +18107,6 @@
 - [ ] Reading journal articles shouldn’t feel like decoding ancient texts — @research.and.rage — mining/posts/DPZJb30Eeuz/notes.md
 - [ ] HOW TO WRITE A SYNOPSIS FOR YOUR PHD THESIS A PhD thesis synopsis serves as a concise overview of your research proposal — @research.and.rage — mining/posts/DPLrUOpDLCS/notes.md
 - [ ] Yes, they asked tough ones, but they weren’t trying to scare me — @research.and.rage — mining/posts/DNR-6AhS6as/notes.md
-- [ ] “Ever got stuck wondering 🤔 ‘Should I write in past tense or present tense in my research paper — @research.and.rage — mining/posts/DO0VM1MEjGE/notes.md
 - [ ] Whether you’re doing literature review, a thesis, reviewing an article for class, or writing for publication, asking the — @research.and.rage — mining/posts/DOxWkWAEqm1/notes.md
 - [ ] LITERATURE REVIEW Do’s and don’t⬇️ ✅DO Start Early- Begin your literature review early in the research process to allow  — @research.and.rage — mining/posts/DOSbdSljhEs/notes.md
 - [ ] Kya bana leti ho — @research.and.rage — mining/posts/DNkyJkaydW9/notes.md
@@ -18347,7 +18179,6 @@
 - [ ] A simple and quick guide to choose the right Graph for your data visualization task — @umerhaddii007 — mining/posts/DOGfTHBiBWa/notes.md
 - [ ] Google Code Golf Championship - WIN $100K — @umerhaddii007 — mining/posts/DNlBmUpIeGZ/notes.md
 - [ ] @openai Red Teaming Challenge - Find flaws and vulnerabilities in open source gpt-oss model and win $500K — @umerhaddii007 — mining/posts/DNA-IOqoNW1/notes.md
-- [ ] Master Python Object Oriented Programming with @campusx — @umerhaddii007 — mining/posts/DM-ZbwjS6GL/notes.md
 - [ ] Compete and Win $75K — @umerhaddii007 — mining/posts/DMxhRiWo8WI/notes.md
 - [ ] Microsoft Generative Al Course for beginners — @umerhaddii007 — mining/posts/DMp3NbqPuvM/notes.md
 - [ ] 72 for — @umerhaddii007 — mining/posts/DMAivPsK9wi/notes.md
@@ -18598,7 +18429,6 @@
 - [ ] Ai is growing insanely every week thre is new thing in ai coming Follow @futurewalt — @futurewalt.ai — mining/posts/DF2UWKhhncG/notes.md
 - [ ] 🚨 20 Million OpenAI Accounts Hacked — @futurewalt.ai — mining/posts/DFx1Zz2B6RZ/notes.md
 - [ ] According to a report from The Information, a hacker claims to have stolen login details—including emails and passwords— — @futurewalt.ai — mining/posts/DFxyCjJh990/notes.md
-- [ ] Japan has done it again — @futurewalt.ai — mining/posts/DFxdd9_BE4x/notes.md
 - [ ] an innovative 3D-printed exoskeleton that boosts strength and mobility, particularly for elderly and physically disabled — @futurewalt.ai — mining/posts/DFuzsZxh0_h/notes.md
 - [ ] TikTok is facing a wave of user frustration as their feeds are overflowing with bizarre AI-generated videos that many ar — @futurewalt.ai — mining/posts/DFuR-f_hDXM/notes.md
 - [ ] ChatGPT is facing a major outage — @futurewalt.ai — mining/posts/DFuCRRehv0i/notes.md
@@ -19164,7 +18994,6 @@
 - [ ] Follow @cloud_x_berry for more info machine learning algorithms, ml cheat sheet, ml time complexity, ml inference comple — @cloud_x_berry — mining/posts/DV0_Cr6ExmW/notes.md
 - [ ] Follow @cloud_x_berry for more info tech career skills, programming skills for developers, software engineer skills, web — @cloud_x_berry — mining/posts/DVxi_Ddk1iH/notes.md
 - [ ] Follow @cloud_x_berry for more info linux commands, linux cheat sheet, devops linux commands, linux terminal basics, ser — @cloud_x_berry — mining/posts/DVtgApLk2ZY/notes.md
-- [ ] Follow @cloud_x_berry for more info pandas data analysis, numpy numerical computing, SQL for data analysis, Excel data p — @cloud_x_berry — mining/posts/DVsYAEbk3GN/notes.md
 - [ ] Follow @cloud_x_berry for more info web development projects, beginner web projects, full stack project ideas, JavaScrip — @cloud_x_berry — mining/posts/DVqyq8GEw2a/notes.md
 - [ ] Follow @cloud_x_berry for more info programming language timeline, C programming language 1972, C++ history, Java creati — @cloud_x_berry — mining/posts/DVp55yIEzNM/notes.md
 - [ ] Follow @cloud_x_berry for more info RAM capacity guide, 8GB RAM usage, 16GB RAM for developers, 32GB RAM productivity, 6 — @cloud_x_berry — mining/posts/DVn0YfSk-xE/notes.md
@@ -19202,10 +19031,8 @@
 - [ ] Follow @cloud_x_berry for more info C++ basics, object-oriented programming, pointers, references, memory management, ST — @cloud_x_berry — mining/posts/DTg74mlE9t1/notes.md
 - [ ] Follow @cloud_x_berry for more info API keys, access tokens, authentication methods, authorization, stateless authentica — @cloud_x_berry — mining/posts/DTdOS0mk-nx/notes.md
 - [ ] SOC Analyst Roadmap 2026 SOC operations, security monitoring, SIEM tools, log analysis, incident detection, threat intel — @cloud_x_berry — mining/posts/DTYHnPak-LZ/notes.md
-- [ ] Data Analyst Roadmap 2026 Follow @cloud_x_berry for more info data analysis fundamentals, SQL for analytics, advanced SQ — @cloud_x_berry — mining/posts/DTVfvzJk6c3/notes.md
 - [ ] Machine Learning Roadmap 2026… Follow @cloud_x_berry for more info supervised learning, unsupervised learning, reinforce — @cloud_x_berry — mining/posts/DTPavb5k_lV/notes.md
 - [ ] Follow @cloud_x_berry for more info Python basics, variables, data types, functions, loops, conditionals, lists, diction — @cloud_x_berry — mining/posts/DTMH4xqkv5V/notes.md
-- [ ] Follow @cloud_x_berry for more info Power BI Desktop, Power BI Service, data modeling, Power Query, DAX basics, DAX adva — @cloud_x_berry — mining/posts/DTK1aZdE7y-/notes.md
 - [ ] Database Admin Raodmap 2026 database administration, SQL Server, Oracle, MySQL, PostgreSQL, database performance tuning, — @cloud_x_berry — mining/posts/DTANJqWE_P9/notes.md
 - [ ] Follow @cloud_x_berry for more info NumPy arrays, ndarray, vectorization, broadcasting, array indexing, slicing, reshapi — @cloud_x_berry — mining/posts/DS_xy4Sk9gl/notes.md
 - [ ] Follow @cloud_x_berry for more info Go language, goroutines, channels, concurrency, parallelism, Go routines scheduling, — @cloud_x_berry — mining/posts/DS-Y1rnE43f/notes.md
@@ -19219,10 +19046,8 @@
 - [ ] Follow @cloud_x_berry for more info job search, resume optimization, LinkedIn profile, job alerts, networking, recruiter — @cloud_x_berry — mining/posts/DSCC3kTk0ll/notes.md
 - [ ] Follow @cloud_x_berry for more info classes, objects, inheritance, polymorphism, encapsulation, abstraction, constructor — @cloud_x_berry — mining/posts/DR_FyjBk2nt/notes.md
 - [ ] Follow @cloud_x_berry for more info variables, functions, arrays, objects, DOM manipulation, events, promises, async/awa — @cloud_x_berry — mining/posts/DR7B5HOE-s-/notes.md
-- [ ] Follow @cloud_x_berry for more info pivot tables, VLOOKUP, XLOOKUP, formulas, functions, conditional formatting, data cl — @cloud_x_berry — mining/posts/DR6J0t_E5Ov/notes.md
 - [ ] Follow @cloud_x_berry for more info HTML tags, elements, attributes, headings, paragraphs, links, images, lists, tables, — @cloud_x_berry — mining/posts/DRzR-ZZk0aj/notes.md
 - [ ] Why most Software Engineers never reach 30 LPA mark… salary trends, compensation bands, tech pay, FAANG salaries, base s — @cloud_x_berry — mining/posts/DRyYH9rkwhV/notes.md
-- [ ] Don’t become a Data Analyst in 2026 if… data cleaning, data visualization, SQL queries, Excel analysis, Power BI, Tablea — @cloud_x_berry — mining/posts/DRuFIccE0w5/notes.md
 - [ ] Follow @cloud_x_berry for more info mobile apps, android development, ios development, flutter, react native, kotlin, sw — @cloud_x_berry — mining/posts/DRofukOE-Me/notes.md
 - [ ] DSA Roadmap 2026 Follow @cloud_x_berry for more info /Keywords data structures, algorithms, time complexity, space compl — @cloud_x_berry — mining/posts/DRgfp0gE5Jc/notes.md
 - [ ] Follow @cloud_x_berry for more info /Keywords Java roadmap, Java basics, OOP in Java, Java core concepts, advanced Java, — @cloud_x_berry — mining/posts/DRcQTGPk81x/notes.md
@@ -19439,7 +19264,6 @@
 - [ ] 🚨 AI coding benchmarks might be misleading — @theartificialintelligens — mining/posts/DVWlZPSCOp4/notes.md
 - [ ] BREAKING: OpenAI has officially raised $110B at a $730B valuation — @theartificialintelligens — mining/posts/DVRLafIgRDH/notes.md
 - [ ] 🚨 Researchers Show AI Can Autonomously Jailbreak Other AI Models A new paper titled “Large Reasoning Models Are Autonomo — @theartificialintelligens — mining/posts/DVPKd3Hk1gF/notes.md
-- [ ] The Pentagon told Anthropic straight up this is a "sh*t-or-get-off-the-pot" meeting — @theartificialintelligens — mining/posts/DVHChszgSLx/notes.md
 - [ ] Transition from brute-force GPU clusters to actual AI appliances — @theartificialintelligens — mining/posts/DU_MbI7AXwV/notes.md
 - [ ] In essence: a laser + glass + machine learning combo could be the first truly permanent digital backup medium — one that — @theartificialintelligence — mining/posts/DU7MUMKCLFf/notes.md
 - [ ] 100% Opensource — @theartificialintelligens — mining/posts/DU5B0cxAb0O/notes.md
@@ -19447,7 +19271,6 @@
 - [ ] This reduces reliance on distant data centers while significantly cutting energy consumption and boosting processing spe — @theartificialintelligens — mining/posts/DUrLfU3E0Zx/notes.md
 - [ ] Paper: "MSign: An Optimizer Preventing Training Instability in Large Language Models via Stable Rank Restoration" — @theartificialintelligens — mining/posts/DUp3Zi8Af0e/notes.md
 - [ ] AI just faced its toughest math test yet — and it wasn’t a competition problem — @theartificialintelligens — mining/posts/DUll4HPCOjk/notes.md
-- [ ] Anthropic won't stop COOKING OpenAI 💀 — @theartificialintelligens — mining/posts/DUgQq46CJaA/notes.md
 - [ ] Fine-tuning LLMs doesn’t have to be slow, expensive, or GPU-hungry anymore — @theartificialintelligens — mining/posts/DUYEiPviLEk/notes.md
 - [ ] 100% Opensource — @theartificialintelligens — mining/posts/DUSMuHHCEs7/notes.md
 - [ ] Paper: "Routing the Lottery: Adaptive Subnetworks for Heterogeneous Data" arXiv:2601 — @theartificialintelligens — mining/posts/DUO2utPCCSo/notes.md
@@ -19527,7 +19350,6 @@
 - [ ] NVIDIA has unveiled the Jetson Orin Nano Super Developer Kit, a compact powerhouse delivering up to 67 TOPS of AI perfor — @theartificialintelligens — mining/posts/DN0Xq3IUCZP/notes.md
 - [ ] Google has unveiled Google Beam, a revolutionary AI-powered 3D video conferencing platform that transforms traditional 2 — @theartificialintelligens — mining/posts/DNycumC0Gcl/notes.md
 - [ ] 🤖 — @theartificialintelligens — mining/posts/DNyHdaYUOxR/notes.md
-- [ ] Ever wondered where your AI subscription money really goes — @theartificialintelligens — mining/posts/DNxxQpSUEAf/notes.md
 - [ ] “This isn’t just a lamp — it’s precision science in action 🔬💡 Watch how a Perfect UV lamp cures with flawless accuracy,  — @theartificialintelligens — mining/posts/DNwZnrCULse/notes.md
 - [ ] A new safety test from The Dawn Project is raising alarms about Tesla’s Full Self-Driving (FSD) technology — @theartificialintelligens — mining/posts/DNwFCfM0MYV/notes.md
 - [ ] An MIT duo has built a 3D printer that converts food scraps like eggshells and coffee grounds into custom coasters, cups — @theartificialintelligens — mining/posts/DMprnHFI_A9/notes.md
@@ -19622,12 +19444,10 @@
 - [ ] The best way to find latest posted jobs😍 1/ Go to Google 2/ Type “Profile” + Mployee — @interview_prep_here — mining/posts/Damu4ryzR9b/notes.md
 - [ ] You will land your dream job before 2027 — @interview_prep_here — mining/posts/Dbvf5wUk5LP/notes.md
 - [ ] I was shocked to read this reddit post🙂 Please don’t waste your time manually searching for jobs — @interview_prep_here — mining/posts/Db5pZ8mExfx/notes.md
-- [ ] 1/ Check your resume’s ATS score Most candidates ignore this but companies do use ATS for the first round of filtering — @interview_prep_here — mining/posts/DblMkbwzjk0/notes.md
 - [ ] A lot of people complaint that they spend a lot of time in merely finding a right latest job for themselves — @interview_prep_here — mining/posts/DbDK-34TmrI/notes.md
 - [ ] Google secret trick to land a job😍 Just follow these simple steps and you will find the latest jobs posted across linked — @interview_prep_here — mining/posts/Da7Mv9mzL2j/notes.md
 - [ ] Check the 3000 + latest job openings in bio😍 Hello job seekers, This is Day 2 of me compiling all the latest jobs of the — @interview_prep_here — mining/posts/Da5cXEpTFyi/notes.md
 - [ ] July will be a peak hiring month and if you are someone looking for a job switch before 2027- You have landed the correc — @interview_prep_here — mining/posts/DaxsjF_zhuk/notes.md
-- [ ] I have been hiring candidates since past 5 years and these are the things I would never want to see as a hiring manager — @interview_prep_here — mining/posts/DaNs5wOE_NI/notes.md
 - [ ] Secret trick to receive latest jobs everyday in your E-mail for free 😍 Step 1: Go to google Step 2: Search “Job Match Pr — @interview_prep_here — mining/posts/DadF4Q3T8jv/notes.md
 - [ ] Secret google trick to find the job😍 1/ Go to google 2/ Search your job profile and type the word “Mployee — @interview_prep_here — mining/posts/DaVYb6WT3aO/notes.md
 - [ ] I was shocked to see that people are still using LinkedIn and Naukri to find jobs when AI can directly do that for them — @interview_prep_here — mining/posts/DZ-Odi0k0rV/notes.md
@@ -19690,7 +19510,6 @@
 - [ ] Humans have the tendency to read everything in F shape, you can benefit from this by implementing a smart strategy in yo — @interview_prep_here — mining/posts/DJjorL7P96L/notes.md
 - [ ] What is your biggest weakness — @interview_prep_here — mining/posts/DJg8fGZPTPs/notes.md
 - [ ] Justice for the fallen 💪 — @interview_prep_here — mining/posts/DJV7Klmvdp5/notes.md
-- [ ] “Why should we hire you — @interview_prep_here — mining/posts/DJQv5EyP9Ye/notes.md
 - [ ] Comment if you need a list of latest posted jobs😊 — @interview_prep_here — mining/posts/DJMTSmZvO-O/notes.md
 - [ ] Comment for the latest posted jobs 😍 — @interview_prep_here — mining/posts/DJCKrJpvot2/notes.md
 - [ ] ⭕️Template to use for a rejection E-Mail⭕️ — @interview_prep_here — mining/posts/DI87qXxvJG2/notes.md
@@ -19709,7 +19528,6 @@
 - [ ] “What is your greatest weakness — @interview_prep_here — mining/posts/DEoj4H2vohl/notes.md
 - [ ] ⭕️ LinkedIn done right can open doors you never even knew existed — @interview_prep_here — mining/posts/DEZHkYfv_X2/notes.md
 - [ ] Even Santa is facing hard to surpass ATS 😂😂 — @interview_prep_here — mining/posts/DEAJmYrPamn/notes.md
-- [ ] Thinking of leaving your current job — @interview_prep_here — mining/posts/DDwrAcTv4Wg/notes.md
 - [ ] Have you checked this new invention 💻 yet — @interview_prep_here — mining/posts/DDFEk-tvLND/notes.md
 - [ ] List of fortune 500 companies hiring too — @interview_prep_here — mining/posts/DCojpQLIT58/notes.md
 - [ ] Check today’s story to apply for marketing jobs 🔥 — @interview_prep_here — mining/posts/DCmJ2cUvE14/notes.md
@@ -19812,11 +19630,11 @@
 - [ ] Showcase your Managerial Skill or Technical Skill by these Action Words — @interview_prep_here — mining/posts/CuHlA3MPv1v/notes.md
 - [ ] Save this because it will help you prep for nearly every interview — @interview_prep_here — mining/posts/CuBg0v1NhkB/notes.md
 - [ ] 🔥🔥Read Caption: Start with a strong opening: Begin by introducing yourself with your name and a brief statement about yo — @interview_prep_here — mining/posts/Ct_jN7uI_3U/notes.md
+- [ ] Reach out to Recruiters on LinkedIn🔥🔥 — @interview_prep_here — mining/posts/Ct-9gneo1ng/notes.md
 - [ ] 🔥🔥Here’s a suggested approach: 1️⃣ Be genuine: It’s essential to be honest and authentic in your response — @interview_prep_here — mining/posts/Ct9BL5rse4a/notes.md
 - [ ] Deloitte Jobs Available — @interview_prep_here — mining/posts/Ct8aFW6NSkB/notes.md
 - [ ] Important sections to remove from your resume today 🗣️ Follow @interview_prep_here for daily job updates and interview t — @interview_prep_here — mining/posts/CteIjQls4kr/notes.md
 - [ ] Replace these Action Words from your Resume Today Only 🔥 Achieved: Attained, Accomplished, Secured, Obtained Guided: Led — @interview_prep_here — mining/posts/CtY3dhKvSuA/notes.md
-- [ ] Why should we hire you — @interview_prep_here — mining/posts/CtI6mCkOiG1/notes.md
 - [ ] Highlight your skills and qualifications: Start by discussing your relevant skills, experiences, and qualifications that — @interview_prep_here — mining/posts/CtBHuhoLZek/notes.md
 - [ ] Preparing for an analytics interview involves several important aspects — @interview_prep_here — mining/posts/Cs-lWg2uHGS/notes.md
 - [ ] Free Courses from IIM A to help you grow in your Career — @interview_prep_here — mining/posts/Cs0R1zQNK_3/notes.md
@@ -20313,6 +20131,7 @@
 - [ ] 🔧 Modernizing Legacy Billing: Splitting into Invoice, Payment & Pricing Microservices with Java 💳🧾💰 ———— 1️⃣ Identify Do — @iamnikspatle — mining/posts/DK7MUuhIqFZ/notes.md
 - [ ] 🔐 Detecting & Alerting Anomalous Access Patterns Across Java Microservices 🚨 ————— 1️⃣ Centralized Logging 🧾 🎯 Goal: Agg — @iamnikspatle — mining/posts/DK2Vju6TY7g/notes.md
 - [ ] 🔥Seamless REST to GraphQL Migration in Java Microservices – Without Breaking a Single Client — @iamnikspatle — mining/posts/DKzvO8KTNWB/notes.md
+- [ ] 🛡️🛡️ Top 5 OWASP Prevention in Java Web Apps — 5 Pro Steps 💡🚀 ⸻ 1️⃣ Input Validator Service 🎯 Goal: Block Injection Atta — @iamnikspatle — mining/posts/DKxju0xo322/notes.md
 - [ ] ⚠️🖤 Black Friday Crisis Mode: 5 Java-Powered Steps to Save a Failing Microservice 🚨💻🛒 ————- 🔧 1 — @iamnikspatle — mining/posts/DKuxqYToE-P/notes.md
 - [ ] 🔥 5 Java Power Moves to Handle Flash Sale Traffic Spikes Like a Pro — @iamnikspatle — mining/posts/DKrrPUToPgA/notes.md
 - [ ] 🔥 Designing a Bulletproof Kafka DLQ Strategy with Java ☕🐘🛡️ ———— 1️⃣ Goal: Capture Failed Kafka Messages 💣➡️📥 • Tech Sta — @iamnikspatle — mining/posts/DKmfPYzT5I8/notes.md
@@ -21584,7 +21403,6 @@
 - [ ] Bye Bye to NSA and GCHQ spying — @theartificialintelligence — mining/posts/DA40U9dI1kY/notes.md
 - [ ] FOXCONN TO BUILD WORLD’S LARGEST NVIDIA SUPERCHIP PLANT IN MEXICO Foxconn announced plans to construct the world’s large — @theartificialintelligence — mining/posts/DA4oBDGIM2c/notes.md
 - [ ] Microsoft $MSFT just announced Azure is the 1st cloud running Nvidia’s $NVDA Blackwell system with GB200-powered AI serv — @theartificialintelligence — mining/posts/DA3leAJtHgT/notes.md
-- [ ] Artificial Intelligence is not a new word and not a new technology for researchers — @theartificialintelligence — mining/posts/DA1GEGANUbU/notes.md
 - [ ] A Camera beyond Imagination 📸 MIT researchers developed an extraordinary camera capable of capturing 1 trillion frames p — @theartificialintelligence — mining/posts/DA0vrVTNGVw/notes.md
 - [ ] Nomadic Drones provides AI-powered software for power grid inspections, automating damage detection and maintenance repo — @theartificialintelligence — mining/posts/DAzzPadSJqc/notes.md
 - [ ] TRANSFORM, developed by MIT, is a dynamic furniture concept that uses shape display technology to adapt in real-time to  — @theartificialintelligence — mining/posts/DAxtAJsyJWj/notes.md
@@ -21812,10 +21630,8 @@
 - [ ] 🚨 Perplexity Stuns Tech World with $34 — @qubic.ai — mining/posts/DNVbL1eym4a/notes.md
 - [ ] 🚨 OpenAI Launches GPT-OSS: Downloadable AI Power + $500K Red-Teaming Bounty — @qubic.ai — mining/posts/DNS5YaHyi0M/notes.md
 - [ ] Comment 'agent' to get the link🔗❤️ Dive into a 10-lesson series led by Korey Stegared-Pace that guides you from the core — @qubic.ai — mining/posts/DNQUGm4yw6Q/notes.md
-- [ ] 🚨 The Future of AI Has Arrived — Meet GPT-5 OpenAI has just unveiled GPT-5, and it’s redefining what we thought possible — @qubic.ai — mining/posts/DNGNNvdSs4s/notes.md
 - [ ] 🏆 A mid‑2025 survey of over 3,000 Nvidia staff revealed that 76–78% of respondents now hold at least $1 million in net w — @qubic.ai — mining/posts/DM7v_Uyylqw/notes.md
 - [ ] 🥶 Meet the woman who took humanity to the Moon—through code — @qubic.ai — mining/posts/DM2kktlSn3U/notes.md
-- [ ] 💡 AI just did someone's taxes—no forms, no clicks, just one command — @qubic.ai — mining/posts/DMxY1vYylYd/notes.md
 - [ ] 🚨 “People tell ChatGPT things they wouldn’t tell their therapist…” — Sam Altman In a recent talk, OpenAI CEO Sam Altman  — @qubic.ai — mining/posts/DMm_j0Gy_Yu/notes.md
 - [ ] 🚨 Replit’s AI Went Rogue — and Deleted a Live Database During a test of Replit’s new coding agent, the AI ignored warnin — @qubic.ai — mining/posts/DMkxp_yyZAf/notes.md
 - [ ] 🚨Google is rolling out a magical new update to Google Photos — and it feels straight out of a Studio Ghibli film — @qubic.ai — mining/posts/DMhwQPPMDhb/notes.md
@@ -21944,9 +21760,7 @@
 - [ ] Quieter the better — @freeway_monk — mining/posts/C1Ho1FXStbz/notes.md
 - [ ] 🚨Don’t comment, check link-in-bio or read pinned comment @thejasonsamuel 🎉👍🏼 — @freeway_monk — mining/posts/C1E86xGoCjc/notes.md
 - [ ] What’s your special ingredient — @freeway_monk — mining/posts/C0T89mayuw9/notes.md
-- [ ] Customize your answers 🥳 🚀“Where do you see yourself in 5 years — @freeway_monk — mining/posts/C0RfPWny-Ge/notes.md
 - [ ] Next Xerox shop video 😂 — @freeway_monk — mining/posts/C0O4edmrYxH/notes.md
-- [ ] Know your take home salary 🤑 — @freeway_monk — mining/posts/C0GeWCZS-7k/notes.md
 - [ ] Customise your LinkedIn url to look ultra professional Step by step guide👍🏼 Step 1: Go to the top of your LinkedIn homep — @freeway_monk — mining/posts/CzBy69YyanN/notes.md
 - [ ] Hobbies 101 — @freeway_monk — mining/posts/CsEMOrYg1MA/notes.md
 - [ ] Appraisal is — @freeway_monk — mining/posts/CrlbrZOAoBE/notes.md
@@ -22154,7 +21968,6 @@
 - [ ] Calling all my new grad developers :) Link: https://jobs — @mar_antaya — mining/posts/DMEIjPmBkBK/notes.md
 - [ ] New hair, new nails and a new car… — @mar_antaya — mining/posts/DL9AjDIudd7/notes.md
 - [ ] Pls sponsor me @spotifypodcasts between Big Bootie remixes and AI/tech podcasts my minutes are like actually through the — @mar_antaya — mining/posts/DLhuXpsSRBh/notes.md
-- [ ] The math it takes to become a quant - here you can tell how similar the quant path is to CS vs finance — @mar_antaya — mining/posts/DLGOyn6zMsm/notes.md
 - [ ] This is my favorite way to kickstart brainstorming and to really accelerate the work I’ve been doing with startups ⭐️ ch — @mar_antaya — mining/posts/DLC0A4LxyBT/notes.md
 - [ ] More non techies need to learn about these tools too - because like Reid says it’s going to change everyone’s jobs — @mar_antaya — mining/posts/DK90kWixpoJ/notes.md
 - [ ] What else should I include in Quant 101 — @mar_antaya — mining/posts/DK3HRqjSrp3/notes.md
@@ -23013,7 +22826,6 @@
 - [ ] Guess the metro station 🤔💭 Video Credits- @basill — @whatshotdelhi — mining/posts/DT7bQtljSAL/notes.md
 - [ ] This Vande Bharat journey is an absolute must ❤️✨ Video Source- X ( kashmir, vande bharat, train, india, jk, kammu, vaca — @whatshotdelhi — mining/posts/DT7K14wCO8C/notes.md
 - [ ] Thoda dimaag kam hai but mai seh lunga 🥰❤️ ( bestfriend, friendship, forever, childhood, school, love, India, indian, tr — @whatshotdelhi — mining/posts/DT5PNW8DSQ9/notes.md
-- [ ] Civic sense who — @whatshotdelhi — mining/posts/DT4a7BwCM70/notes.md
 - [ ] There is a secret message for you 🥰❤️ ( street food, vada pav, pav bhaji, dosa, idli, sambar, samose, rasgulle, delhi, K — @whatshotdelhi — mining/posts/DT2qbFtiOm7/notes.md
 - [ ] Between Delhi, Gurgaon, and Noida, which one would you prefer — @whatshotdelhi — mining/posts/DT2SxazAbLi/notes.md
 - [ ] Issi baat par WFH mil jaata toh 😭🙏🏻 ( delhi, raining, latest, trending, hot, news, 2026, dilli, Gurgaon, Gurugram, noida — @whatshotdelhi — mining/posts/DT1mxRgiHhS/notes.md
@@ -23029,7 +22841,6 @@
 - [ ] 🙂🙂🙂 ( Delhi, trending, latest, 2026, viral, book fair scenes, civic sense, news, hot, dilli, indian capital, air polluti — @whatshotdelhi — mining/posts/DTr7sJ4jbhs/notes.md
 - [ ] When will people start showing basic civic sense — @whatshotdelhi — mining/posts/DTrgPJfiCNP/notes.md
 - [ ] 🙂 — @whatshotdelhi — mining/posts/DTqN2cvDTO3/notes.md
-- [ ] Civic sense left the chat — @whatshotdelhi — mining/posts/DTp4FqcgVOD/notes.md
 - [ ] Delhi has activated GRAP 4, the highest stage of the Graded Response Action Plan, after pollution levels shot into the ‘ — @whatshotdelhi — mining/posts/DTpi0gqAYeT/notes.md
 - [ ] Kuch logo ko kitna kuch lagta hai 🥰 [ benne gk, dosa, greater kailash, Delhi new year parties, clubs, byob, new year 202 — @whatshotdelhi — mining/posts/DTpLbnQCKQW/notes.md
 - [ ] Vo din kya din the ❤️✨ [ benne gk, dosa, greater kailash, Delhi new year parties, clubs, byob, new year 2026, Connaught  — @whatshotdelhi — mining/posts/DTo-G3SCAGv/notes.md
@@ -23940,6 +23751,19 @@
 - [ ] My Halloween costume🎃 🐞👻 Happy Halloweekend from the most iconic duo of the year, Crowdstrike x blue screen of death 😭🔵  — @madeline.m.zhang — mining/posts/DB1ckX6Powr/notes.md
 - [ ] Big Tech CTO shares leadership advice and his company’s coolest AI product 💡 | 🏷️ — @madeline.m.zhang — mining/posts/DBttBawvXsc/notes.md
 - [ ] Hello from SAS’s gorgeous campus in North Carolina — @madeline.m.zhang — mining/posts/DBrIyKVvK0Q/notes.md
+- [ ] 🤯 GitHub is hiding some of the most useful AI tools on the internet, and most people will never find them — @nextgentexh — mining/posts/DcrI_isksx4/notes.md
+- [ ] ₹4 — @ankiit.ai — mining/posts/DdEuDTck1-U/notes.md
+- [ ] 10 open source GitHub projects are challenging software companies that generate billions from subscriptions — @nextgentexh — mining/posts/DdJwPYRDaBJ/notes.md
+- [ ] PYTHON MASTERCLASS — From Zero to Advanced A complete Python programming & practice guide designed for CSE students, beg — @decode_leox — mining/posts/DdCYyEiDh5k/notes.md
+- [ ] Researchers from MIT solved AI's biggest problem 🧠 a clever, forward-compatible solution You paste a 200-page document i — @dailydoseofds_ — mining/posts/Dday5m1D6bj/notes.md
+- [ ] I ran a 100-layer network and 86 of its layers got a gradient of exactly zero — @ankiit.ai — mining/posts/DdMcupQTYAZ/notes.md
+- [ ] Deployment Reality: From “Cloud-Only” to “Local-First” Previous Versions: To get “frontier” level performance, you had t — @saadjamil.17 — mining/posts/Dc9X53OxPpq/notes.md
+- [ ] ₹4 — @ankiit.ai — mining/posts/Dc8jwUgk17c/notes.md
+- [ ] 5 fresh AI-agent repos worth having on your radar — @githubprojects — mining/posts/Dc7mCJ6D9AF/notes.md
+- [ ] Comment "VID" and I’ll instantly DM you the direct link to the video — @anurag.builds — mining/posts/Dci6oQOzbl-/notes.md
+- [ ] 🧠 MACHINE LEARNING FORMULA SHEET 📚 Preparing for an ML exam, interview, or quick revision — @built_by_vishal — mining/posts/Dclj61bMYmJ/notes.md
+- [ ] Top 10 React Libraries Every Developer Should Know React Libraries | Quick Developer Revision 1 — @pythonlifetelugu — mining/posts/DcyNc6Uib0j/notes.md
+- [ ] 🧠 EP — @shikharcodes — mining/posts/Dco8i1dzAnl/notes.md
 
 ## Partial
 
@@ -23960,6 +23784,7 @@
 - [ ] Top 50 Python leetcode questions in python for data analytics — @thedataguy16 — mining/posts/Dbaan1SE_zu/notes.md
 - [ ] Most developers jump straight into coding — @abhi_techhub — mining/posts/DbIutJYE-Fb/notes.md
 - [ ] Python Libraries Every Developer Should Know Want to become a skilled Python Developer — @pythonlifetelugu — mining/posts/DbfPvyVCSSH/notes.md
+- [ ] Every agent tutorial teaches the easy half — @datasciencebrain — mining/posts/DbrxlmVmGTc/notes.md
 - [ ] LLM Series—Part 2 I will continue the LLM series again after part 1 — @techwith.ram — mining/posts/DbdLqtEiawi/notes.md
 - [ ] MLOPS notes Intrested one DM US — @pythonix.hub — mining/posts/DbXNjCAiQ4H/notes.md
 - [ ] Most people tell Claude: “write the code — @itsaiguide — mining/posts/DZzzH4Cje60/notes.md
@@ -24304,6 +24129,7 @@
 - [ ] Save this Python fundamentals cheat sheet 🐍📌 These are some of the most useful built-in Python functions every beginner  — @pycode.dev — mining/posts/DaBpPQqN3tA/notes.md
 - [ ] 🐍 Top 40 NumPy functions every data analyst should know This carousel covers the most popular NumPy functions used in re — @pycode.dev — mining/posts/DZ-yWtQgOwT/notes.md
 - [ ] 🐍 Python Command Cheat Sheet ⚡ The most useful Python commands every beginner should know — @pycode.dev — mining/posts/DZ2FxqlAJzH/notes.md
+- [ ] Need a quick way to generate a monthly calendar in Python — @pycode.dev — mining/posts/DZ1A5oUDNSZ/notes.md
 - [ ] 🐍 Top 5 Most Important Python Libraries 📚 Want to learn Python for Data Science, AI, or ML — @pycode.dev — mining/posts/DZ0Ch0wjeAJ/notes.md
 - [ ] SAVE THIS AI/ML Roadmap with 7 YouTube Playlists 🚀 Save this roadmap if you want to learn AI and ML step by step, from P — @pycode.dev — mining/posts/DZwPv9Ggl3e/notes.md
 - [ ] Can you print this butterfly pattern in Python — @pycode.dev — mining/posts/DZuxrmDjUXX/notes.md
@@ -24352,6 +24178,7 @@
 - [ ] Most Python beginners learn loops and functions… but completely ignore file handling until they actually need it 😮‍💨🐍 An — @pycode.dev — mining/posts/DYUu-QhDFg7/notes.md
 - [ ] In 2026, Python is still one of the best skills you can learn 🐍🔥 This carousel breaks down encapsulation in a simple way — @pycode.dev — mining/posts/DYBiogSjYo4/notes.md
 - [ ] Want to learn Data Science in 2026 — @pycode.dev — mining/posts/DYCj3PfDSSX/notes.md
+- [ ] Start here if you’re learning Python 🐍✨ This post covers the basics every beginner should understand first: What Python  — @pycode.dev — mining/posts/DX9RNaADHsA/notes.md
 - [ ] Data cleaning is where real analysis starts 🧹📊 Before building dashboards, reports, or ML models, your data needs to be  — @pycode.dev — mining/posts/DX8ZsiRjSpu/notes.md
 - [ ] Most beginners choose ML models backwards 🧠 They start with the algorithm — @pycode.dev — mining/posts/DX1LTrmAATU/notes.md
 - [ ] Python file handling explained in the simplest way 🐍📂 File handling lets Python read, write, and work with files like te — @pycode.dev — mining/posts/DXyGd21DDwB/notes.md
@@ -24363,13 +24190,13 @@
 - [ ] Mini projects are where Python finally starts to feel real 🚀🐍 Reading syntax is useful — @pycode.dev — mining/posts/DXf9h_fjE0l/notes.md
 - [ ] map() changes data — @pycode.dev — mining/posts/DXemnS0DF6u/notes.md
 - [ ] Lambda functions are one of the fastest ways to write short and clean Python code 🐍⚡ This post explains: what lambda is  — @pycode.dev — mining/posts/DXdp3pIDEqs/notes.md
+- [ ] Need a quick way to generate a monthly calendar in Python — @pycode.dev — mining/posts/DXZKoAFjYcm/notes.md
 - [ ] Indentation is not just formatting in Python, it is part of the syntax itself 🐍 One wrong space can change the whole blo — @pycode.dev — mining/posts/DXWdxQiiPQS/notes.md
 - [ ] Sets in Python look simple, but they solve a lot of real problems fast ⚡ Use them when you want to remove duplicates, ch — @pycode.dev — mining/posts/DXV1tNNjIYh/notes.md
 - [ ] 🔥 5 amazing Python tricks that can make your projects way more practical and fun — @pycode.dev — mining/posts/DXUPyliDPoY/notes.md
 - [ ] Pandas is one of the most important Python libraries if you want to work with data 📊🐼 This carousel gives you the core n — @pycode.dev — mining/posts/DXRelY5DY60/notes.md
 - [ ] Your Python cheat sheet for 2026 is here 🐍📘 From data types and loops to functions, file handling, and error handling, t — @pycode.dev — mining/posts/DXI1wYaAAlQ/notes.md
 - [ ] Want to use Python for AI but not waste months learning the wrong things first — @pycode.dev — mining/posts/DXHGybXjGZO/notes.md
-- [ ] Still using Excel formulas for everything — @pycode.dev — mining/posts/DXGWqurDM1p/notes.md
 - [ ] Working with dates in Python gets much easier once you know the right functions ⏰🐍 In this carousel, you will learn 5 us — @pycode.dev — mining/posts/DXEoPcrjPxR/notes.md
 - [ ] This one tests a very important Python concept: loops + accumulation + data types 🐍 "range(1, 5)" gives: 1, 2, 3, 4 So t — @pycode.dev — mining/posts/DXCgspuAnY9/notes.md
 - [ ] Messy data ruins good analysis fast 🧹🐍 Before building dashboards, training models, or finding insights, you need to cle — @pycode.dev — mining/posts/DXCAjw_DFJs/notes.md
@@ -24408,7 +24235,6 @@
 - [ ] 7 ChatGPT prompts to learn python zero -> hero 🚀 Follow @pycode — @pycode.dev — mining/posts/DV7pYTbAInN/notes.md
 - [ ] AI Engineer Interview Questions 2026 🚀 Follow @pycode — @pycode.dev — mining/posts/DV5G3MkjKnV/notes.md
 - [ ] This is my advice for you how to learn AI in 2026 🚀 Follow @pycode — @pycode.dev — mining/posts/DV3V9O8jLKN/notes.md
-- [ ] Python Engineer Interview Questions 🚀 Need PDF version — @pycode.dev — mining/posts/DV1jIQKAAjz/notes.md
 - [ ] Most in demand careers in 2026 👨‍🎓 Follow @pycode — @pycode.dev — mining/posts/DVvp_0SjJCx/notes.md
 - [ ] Python removal background code 🚀✨️ Don't miss the follow @pycode — @pycode.dev — mining/posts/DVviof3DChy/notes.md
 - [ ] 🤔 Feeling lost in Python — @pycode.dev — mining/posts/DVpLHJODCyt/notes.md
@@ -24471,6 +24297,7 @@
 - [ ] Types of machine learning with @pycode — @pycode.dev — mining/posts/DStKZxujFz8/notes.md
 - [ ] 25 Pandas Functions every data analyst used daily — @thedataguy16 — mining/posts/DciDde0E9dq/notes.md
 - [ ] 20 SQL INNER vs OUTER JOIN Scenarios You'll Actually Get Asked — @thedataguy16 — mining/posts/Dcg8XNyk2j4/notes.md
+- [ ] These 15 Excel formulas replace half of what Python does for beginners — @thedataguy16 — mining/posts/Dcge1sJE0qD/notes.md
 - [ ] If you can't answer these 25 SQL subquery questions, keep practicing — @thedataguy16 — mining/posts/DcgPCeWk3Pq/notes.md
 - [ ] Data analyst, Data Engineer, Data scientist roles and responsibilities — @thedataguy16 — mining/posts/Dcf9R9DE1Sf/notes.md
 - [ ] If you've skipped these 40 Python programs, your practice isn't real practice — @thedataguy16 — mining/posts/DcfU8Askypf/notes.md
@@ -24492,6 +24319,7 @@
 - [ ] 20 SQL Joins questions to complete before applying in Data Jobs — @thedataguy16 — mining/posts/DcD3eXqE0My/notes.md
 - [ ] Index match in Excel Explained in details — @thedataguy16 — mining/posts/DcDc5PxEywV/notes.md
 - [ ] Top 100 Logics if you want to crack data science — @thedataguy16 — mining/posts/DcC7vWfk6lT/notes.md
+- [ ] Vlookup and Xlookup explained - Deep level prep Excel — @thedataguy16 — mining/posts/DcBhMsnT319/notes.md
 - [ ] 100 AI SQl tips that every data analyst should steal in 2026 — @thedataguy16 — mining/posts/DcAz9hdEz7Z/notes.md
 - [ ] Sql cheatsheet — @thedataguy16 — mining/posts/Db8nJ11zCvC/notes.md
 - [ ] Never make this Joins mistake ever again — @thedataguy16 — mining/posts/Db6QLQNTaHU/notes.md
@@ -24508,6 +24336,7 @@
 - [ ] SQL Basics 1 - — @thedataguy16 — mining/posts/Dbc8F77k7Cp/notes.md
 - [ ] 75 SQL questions to crack any job interview — @thedataguy16 — mining/posts/DbcjSyHE_SC/notes.md
 - [ ] 5 Window functions everyone should know in SQL — @thedataguy16 — mining/posts/DbYC5NlExav/notes.md
+- [ ] Top 10 Vlookup combinations in Excel — @thedataguy16 — mining/posts/DbXQv9sEwuX/notes.md
 - [ ] These 50 SQL queries are mandatory if you want to get into Data Science — @thedataguy16 — mining/posts/DbVdqpmEziZ/notes.md
 - [ ] 10 Python Library you must know in python if you want to be in Data 1 — @thedataguy16 — mining/posts/DbTH42ckpvA/notes.md
 - [ ] Numpy Cheatsheet in python for Data analysis — @thedataguy16 — mining/posts/DbSPAPvkuLA/notes.md
@@ -24525,8 +24354,6 @@
 - [ ] 65 Python functions you must know — @thedataguy16 — mining/posts/DbBZ2rlk15I/notes.md
 - [ ] 20 Programs of python that are must to know — @thedataguy16 — mining/posts/DbAVQ2-k3vm/notes.md
 - [ ] 50 SQL queries you must know — @thedataguy16 — mining/posts/DbAE9oFEwRR/notes.md
-- [ ] Top 30 Data Cleaning formulas in Excel — @thedataguy16 — mining/posts/Da-_ZDBk8yO/notes.md
-- [ ] Sql data cleaning - Explained — @thedataguy16 — mining/posts/Da-8jSGk2_R/notes.md
 - [ ] Only SQL revision sheet you need before night of an interview — @thedataguy16 — mining/posts/Da-x-jxE2Uc/notes.md
 - [ ] 25 SQL question that are asked in Amazon Google and meta — @thedataguy16 — mining/posts/Da7lXNzE9g4/notes.md
 - [ ] 10 SQL test patterns important for Interviews — @thedataguy16 — mining/posts/Da5nWCwk5Kk/notes.md
@@ -24545,6 +24372,7 @@
 - [ ] Sql ctes and sub queries masterclass — @thedataguy16 — mining/posts/DapgZ3LE8xy/notes.md
 - [ ] Data cleaning in Python complete handbook — @thedataguy16 — mining/posts/DanK0e4E8o_/notes.md
 - [ ] Pandas complete operations guide — @thedataguy16 — mining/posts/DalI426E-2d/notes.md
+- [ ] Excel best formulae and shortcut guide — @thedataguy16 — mining/posts/DaiuaTpE6CQ/notes.md
 - [ ] The fastest way to get into data science in 2026 — @thedataguy16 — mining/posts/DaiLOXek5ns/notes.md
 - [ ] Data analytics important topics — @thedataguy16 — mining/posts/Dac--OJE93R/notes.md
 - [ ] Power bi in 7 days — @thedataguy16 — mining/posts/Dab9jOOk0f1/notes.md
@@ -24566,29 +24394,33 @@
 - [ ] OOP in python — @thedataguy16 — mining/posts/DZ91q0vk-NV/notes.md
 - [ ] 10 questions you must prepare before any data job interview - part 1 — @thedataguy16 — mining/posts/DZ9BNFbk8V-/notes.md
 - [ ] Sql join visual , the way you have never seen before — @thedataguy16 — mining/posts/DZ7pvvMk8SZ/notes.md
+- [ ] Numpy operations cheatsheet — @thedataguy16 — mining/posts/DZ5skXsk1ob/notes.md
 - [ ] Pandas 50 Most used methods in python — @thedataguy16 — mining/posts/DZ49t_ZE0UP/notes.md
 - [ ] 100 SQL INTERVIEW QUESTIONS - comment to get full document — @thedataguy16 — mining/posts/DZ4lU3RE4fh/notes.md
 - [ ] Things every data analyst should know — @thedataguy16 — mining/posts/DZ2-U4EE2ay/notes.md
 - [ ] Lambda function in python explained under 2 Minutes — @thedataguy16 — mining/posts/DZ2hpBFE2NT/notes.md
+- [ ] Top 25 Excel Shortcuts — @thedataguy16 — mining/posts/DZ12Shqk2Zn/notes.md
 - [ ] Top 10 high paying data jobs — @thedataguy16 — mining/posts/DZztIlNkwbl/notes.md
-- [ ] Data analyst roadmap — @thedataguy16 — mining/posts/DZzQOV8k3Zo/notes.md
+- [ ] Sumif and sumifs — @thedataguy16 — mining/posts/DZyxmFJk-QJ/notes.md
 - [ ] Leetcode cheatsheet for SQL — @thedataguy16 — mining/posts/DZwLrZ7ExwY/notes.md
 - [ ] Matplotlib for data analysis - python — @thedataguy16 — mining/posts/DZsgE-YkyML/notes.md
 - [ ] Pandas merge vs join vs concat — @thedataguy16 — mining/posts/DZrlZ7jk0F4/notes.md
 - [ ] No one will ever explain select,from and where like this to you in SQL — @thedataguy16 — mining/posts/DZpfM-YE5Tn/notes.md
-- [ ] Index match in Excel — @thedataguy16 — mining/posts/DZowRo_E5EM/notes.md
+- [ ] The complete data analyst tech stack in 2026 — @thedataguy16 — mining/posts/DZl4yKNk6mZ/notes.md
 - [ ] Used SQL for 7 years - these 15 queries actually matter — @thedataguy16 — mining/posts/DZkNG66k1yo/notes.md
+- [ ] Slicers in Excel — @thedataguy16 — mining/posts/DZh1A5REyyK/notes.md
 - [ ] 100 SQL Commands — @thedataguy16 — mining/posts/DZg_tOqE8II/notes.md
 - [ ] Skills that makes your career AI proof in 2926 — @thedataguy16 — mining/posts/DZfHbOMk6Uj/notes.md
 - [ ] Top 100 Python interview questions — @thedataguy16 — mining/posts/DZdJ9w2E0_D/notes.md
 - [ ] Top 25 Excel Formulas that can save you hours — @thedataguy16 — mining/posts/DZdCpp0E-pd/notes.md
+- [ ] 100 + Excel Interview questions — @thedataguy16 — mining/posts/DZaXVfyk6Nm/notes.md
 - [ ] 100 + Interview SQL queries, Comment to get full document — @thedataguy16 — mining/posts/DZXVPQ6EyE1/notes.md
 - [ ] Steal my 100 Excel Cheat Codes List — @thedataguy16 — mining/posts/DZVMfxaE5sd/notes.md
 - [ ] Excel dashboards from scratch — @thedataguy16 — mining/posts/DZT4Jogk8Bq/notes.md
 - [ ] Excel Scenario based questions — @thedataguy16 — mining/posts/DZS0A7pk0ZO/notes.md
+- [ ] 50 Excel formulas for daily office tasks — @thedataguy16 — mining/posts/DZOw6BvE8mr/notes.md
 - [ ] Every advanced Excel formula data analysts should use in Daily use — @thedataguy16 — mining/posts/DZNbn_bEwJ4/notes.md
 - [ ] Tableau handbook for data analytics — @thedataguy16 — mining/posts/DZNNp2uE-h7/notes.md
-- [ ] Power query in Excel — @thedataguy16 — mining/posts/DZK28lZEuLF/notes.md
 - [ ] Seaborn cheatsheet in python — @thedataguy16 — mining/posts/DZKQcNpEy-8/notes.md
 - [ ] Matplotlib cheatsheet in python — @thedataguy16 — mining/posts/DZIaMfHE6Ry/notes.md
 - [ ] EDA in python explained — @thedataguy16 — mining/posts/DZFWOHiE7TJ/notes.md
@@ -24610,8 +24442,8 @@
 - [ ] 7 Excel Functions You Must Know — @thedataguy16 — mining/posts/DYrXZbXk6X8/notes.md
 - [ ] Top 100 Python Interview Questions for Data Jobs — @thedataguy16 — mining/posts/DYkDohvkjbp/notes.md
 - [ ] The Only NumPy Cheatsheet You'll Ever Need in Python — @thedataguy16 — mining/posts/DYh4DS8kmpH/notes.md
-- [ ] Excel for data analysts — @thedataguy16 — mining/posts/DYgzau_kzRA/notes.md
 - [ ] The only pandas cheat sheet you will ever need in python — @thedataguy16 — mining/posts/DYfGBxmEyQD/notes.md
+- [ ] 30 Hidden Excel Shortcuts — @thedataguy16 — mining/posts/DYcQ6IeEwD3/notes.md
 - [ ] Tableau in 14 Days — @thedataguy16 — mining/posts/DYcB3v1k6dd/notes.md
 - [ ] Power Bi in 14 Days — @thedataguy16 — mining/posts/DYZPCWFk0OS/notes.md
 - [ ] Your Vlookup in Excel gives the correct answer in one place and is incorrect on another — @thedataguy16 — mining/posts/DYXP2T1zUx2/notes.md
@@ -24629,10 +24461,12 @@
 - [ ] If i had to prepare for excel in 48 Hrs, that's I will learn — @thedataguy16 — mining/posts/DYIIMUPz0G7/notes.md
 - [ ] You only need these 3 python libraries for data analysis — @thedataguy16 — mining/posts/DYH5TvLT5Ev/notes.md
 - [ ] Build an Excel Dashboard From Messy Data in 2 Hours 🔍 Step 1 — Understand Your Data (0:00 to 0:20) Identify what each co — @thedataguy16 — mining/posts/DYFeSW3zjt5/notes.md
+- [ ] Excel Cheat Sheet - Shortcuts, Formulas, Errors and All Concepts in one place — @thedataguy16 — mining/posts/DYEsNUNExgW/notes.md
 - [ ] These python pandas functions cover 80 % analyst work related to pandas — @thedataguy16 — mining/posts/DYCjEVJTLx8/notes.md
 - [ ] The 30-Day Data Analyst Study Plan if You're Working a Full-Time Job — @thedataguy16 — mining/posts/DYCDDyCExnW/notes.md
 - [ ] SQL Cheat Sheet — @thedataguy16 — mining/posts/DX_cQELk2sE/notes.md
 - [ ] If i had to learn Power BI in 7 Days - This is how I will do it — @thedataguy16 — mining/posts/DX9W_Y-TcmV/notes.md
+- [ ] The exact resume a fresher needs to get shortlisted for a data analyst — @thedataguy16 — mining/posts/DX84y2-E4-4/notes.md
 - [ ] 10 Excel formulas that HR actually asks not what youtube teaches us in every line - just formulas name and syntax DATEDI — @thedataguy16 — mining/posts/DX8W_-mzMYg/notes.md
 - [ ] If You Have a Data Analyst Interview Tomorrow With Only 4 Hours to Prepare, Do this — @thedataguy16 — mining/posts/DX6qnJPTCDL/notes.md
 - [ ] The 90-Day Plan to Go From Zero to First Data Analyst Job — @thedataguy16 — mining/posts/DX6K7m1kxyu/notes.md
@@ -24692,6 +24526,7 @@
 - [ ] Only need 4 Excel skills to land data analyst interviews — @thedataguy16 — mining/posts/DVtnnhOTKwh/notes.md
 - [ ] If you have an excel interview in 7 Days , That's how you prepare for it — @thedataguy16 — mining/posts/DVpn6sozQ3a/notes.md
 - [ ] Stop applying for jobs on Linkdin - Fix this First SQL, Excel, python ,Data Analyst — @thedataguy16 — mining/posts/DVnCyL6zfcX/notes.md
+- [ ] Three Excel skills that clear 90% of data analyst interviews in India — @thedataguy16 — mining/posts/DVlmQv9TIa-/notes.md
 - [ ] 95% Companies don't look at your certification , they look at this instead, Excel, SQL Python — @thedataguy16 — mining/posts/DVke8SdE9dv/notes.md
 - [ ] Less paid and high paid data analyst portfolios have this small difference SQL, Excel, Python — @thedataguy16 — mining/posts/DVhuyo0k5hX/notes.md
 - [ ] If i had a SQL interview in 7 days , i would only practice these exact questions — @thedataguy16 — mining/posts/DVgUa-ak0Zj/notes.md
@@ -24709,7 +24544,6 @@
 - [ ] 10 SQL questions that come up in almost every fresher data analyst interview — @thedataguy16 — mining/posts/DVTgn03k2jC/notes.md
 - [ ] The 5 Excel Questions Every Interviewer Asks a Data Analyst Fresher — @thedataguy16 — mining/posts/DVTd_p6EzTC/notes.md
 - [ ] The Pandas Cheat Sheet I Wish I Had When I Started Every Function You'll Actually Use — @thedataguy16 — mining/posts/DVSZaqmk2ZA/notes.md
-- [ ] 8 Excel Formulas that actually matter — @thedataguy16 — mining/posts/DVN0po2E1RG/notes.md
 - [ ] The SQL queries that show up on 80% Interviews — @thedataguy16 — mining/posts/DVNQzsVk0lR/notes.md
 - [ ] Stop learning python like a developer, learning it like a data analyst — @thedataguy16 — mining/posts/DVLtaqJExP8/notes.md
 - [ ] Stop learning python the wrong way — @thedataguy16 — mining/posts/DVLkP7ckzBH/notes.md
@@ -24734,9 +24568,7 @@
 - [ ] The Chatgpt Prompts that can help you Crack Multiple Data analyst interviews — @thedataguy16 — mining/posts/DU3nt5xEz7y/notes.md
 - [ ] The Excel test that can get you a 20 LPA offer - Full walk through — @thedataguy16 — mining/posts/DU2GGqGE9u4/notes.md
 - [ ] The Excel that can get you 20 Lpa offer — @thedataguy16 — mining/posts/DU0n60OE1Qh/notes.md
-- [ ] Top 5 Data analyst certification in 2026 — @thedataguy16 — mining/posts/DUxrfwIk7QA/notes.md
 - [ ] Every data analyst should know these 7 Concepts — @thedataguy16 — mining/posts/DUxpbPnE3zt/notes.md
-- [ ] 5 best certifications for Data analysts in 2026 — @thedataguy16 — mining/posts/DUxJ1Ngk0DZ/notes.md
 - [ ] 7 concepts every data analyst should learn — @thedataguy16 — mining/posts/DUxGpJTk_QR/notes.md
 - [ ] 3 Real daily data analyst projects that you use on a daily basis — @thedataguy16 — mining/posts/DUw6XuHk62o/notes.md
 - [ ] 3 data analysis project on which data analysts work on a daily basis , SQL Excel — @thedataguy16 — mining/posts/DUv6Y88E631/notes.md
@@ -24857,6 +24689,7 @@
 - [ ] 7 RAG Projects That Can Get You Hired- Part 2 1️⃣ PDF Question Answering System – Build an app where users upload PDFs a — @ds_ai_ketan — mining/posts/DVggixEgrnN/notes.md
 - [ ] 6 Advanced AI Projects That Will Make Your Resume Stand Out 1️⃣ End-to-End ML Project: Build a complete machine learning — @ds_ai_ketan — mining/posts/DVeCQnFgoyX/notes.md
 - [ ] 8 Things You Should NOT Miss If You are Becoming an AI Engineer Master Python deeply it’s the backbone of most AI and Ge — @ds_ai_ketan — mining/posts/DVY9E_wgtZd/notes.md
+- [ ] Tops to Become AI Engineer Tip 1️⃣ Build strong fundamentals in Python, data structures, and basic mathematics — @ds_ai_ketan — mining/posts/DVWf21hklug/notes.md
 - [ ] Day-7 of 90 days journey to become AI Engineer Activation Functions — @ds_ai_ketan — mining/posts/DVRNLmGgtfa/notes.md
 - [ ] Day 6 - 90 days journey to become AI Engineer Neural networks — @ds_ai_ketan — mining/posts/DVOxZ7vAs5X/notes.md
 - [ ] Day 5 of My 90 Days Journey to Become an AI Engineer Today I learned the Hyperparameters in Machine learning — @ds_ai_ketan — mining/posts/DVMC0-UgjWp/notes.md
@@ -25014,8 +24847,9 @@
 - [ ] 🤖 Build Your First AI Agent in Just 30 Minutes ⏱️ Think AI agents are complicated — @datasciencebrain — mining/posts/DUe3AOTE3Q8/notes.md
 - [ ] 🎙️ Want to build your own AI voice assistant — @datasciencebrain — mining/posts/DUaqCmnk3nm/notes.md
 - [ ] 🎯 NEW: Complete FastAPI Tutorial for Data Scientists & AI Engineers — @datasciencebrain — mining/posts/DUUirw1E1er/notes.md
+- [ ] Your Complete Roadmap: Data Analyst → Data Scientist → GenAI Engineer 🚀 Before you scroll away please take a moment to → — @datasciencebrain — mining/posts/DUR_kSNk5Wp/notes.md
 - [ ] Ready to become a Data Scientist in 2026 — @datasciencebrain — mining/posts/DUM1cOoE-rO/notes.md
-- [ ] 🔥 DATA ANALYST INTERVIEW CHEAT SHEET 🔥 39 Questions — @datasciencebrain — mining/posts/DULQYxCE2Km/notes.md
+- [ ] 🎯 YOUR COMPLETE 100 PAGE DATA CAREER ROADMAP IS HERE — @datasciencebrain — mining/posts/DT4N89ik-XM/notes.md
 - [ ] 🚀 6 REAL-WORLD DATA SCIENCE PROJECT TEMPLATES Stop struggling with project setup — @datasciencebrain — mining/posts/DTzEYyqk4i5/notes.md
 - [ ] 10 FREE data science courses for 2026 that will actually get you job-ready 🎯 📲 Follow @datasciencebrain for Daily Notes  — @datasciencebrain — mining/posts/DTwfiy0k-sI/notes.md
 - [ ] 🚀 DATA SCIENCE 2026: THE COMPLETE ROADMAP 🚀 📲 Follow @datasciencebrain for Daily Notes 📝, Tips ⚙️ and Interview QA🏆 Want — @datasciencebrain — mining/posts/DTt9CvHkwCo/notes.md
@@ -25023,7 +24857,6 @@
 - [ ] 📲 Follow @datasciencebrain for Daily Notes 📝, Tips ⚙️ and Interview QA🏆 🤖 Master LangGraph AI Agents: Zero to Hero 🚀 Eve — @datasciencebrain — mining/posts/DTo0nspk2R7/notes.md
 - [ ] 📲 Follow @datasciencebrain for Daily Notes 📝, Tips ⚙️ and Interview QA🏆 FREE Data Science Education from Top Universitie — @datasciencebrain — mining/posts/DTnM6YYExP1/notes.md
 - [ ] Save this post for your interview prep — @datasciencebrain — mining/posts/DTjm6ciE8Ta/notes.md
-- [ ] SQL, Pandas, Excel, or R — @datasciencebrain — mining/posts/DThCauTD64-/notes.md
 - [ ] 📊 ZERO TO DATA ANALYST IN 6 MONTHS 🚀 Your complete roadmap to landing your first data analyst job is here — @datasciencebrain — mining/posts/DTeeCWZE54G/notes.md
 - [ ] 💾 Save this for your interview prep — @datasciencebrain — mining/posts/DTZVly9kzJB/notes.md
 - [ ] 💾 Save this post for later — @datasciencebrain — mining/posts/DTWwzwRk1Uw/notes.md
@@ -25034,6 +24867,7 @@
 - [ ] 👆 Visit the link in bio now — @datasciencebrain — mining/posts/DTK-9mZEyjw/notes.md
 - [ ] 📚 Want to master AI & ML without spending a fortune — @datasciencebrain — mining/posts/DTIRKr-kzkD/notes.md
 - [ ] 🎯 100 SQL INTERVIEW QUESTIONS WITH ANSWERS - Your Complete Fresher's Guide — @datasciencebrain — mining/posts/DTEuUHSE7E3/notes.md
+- [ ] 🧊 The AI Iceberg: What's REALLY Powering Modern AI — @datasciencebrain — mining/posts/DTCMkO1E22u/notes.md
 - [ ] 🗄️ COMPLETE SQL & DATABASE MASTERY GUIDE Everything you need to know about databases and SQL - from fundamentals to adva — @datasciencebrain — mining/posts/DS_lABck4lT/notes.md
 - [ ] If you're serious about breaking into data science this year, here's exactly what you need to master: ✅ Strong math & st — @datasciencebrain — mining/posts/DS8_ritkwhJ/notes.md
 - [ ] 🎓Want to level up your AI & tech skills without spending a dime — @datasciencebrain — mining/posts/DS32EKykzDp/notes.md
@@ -25055,6 +24889,7 @@
 - [ ] 🎯 Confused About Which Data Science Path to Choose — @datasciencebrain — mining/posts/DR_MhtYE62p/notes.md
 - [ ] 🚀 YOUR COMPLETE AI ENGINEER ROADMAP FOR 2026 🚀 💡 The best time to start was yesterday — @datasciencebrain — mining/posts/DR3eOPtk5s-/notes.md
 - [ ] Which path calls to you — @datasciencebrain — mining/posts/DRvvwlZCLG0/notes.md
+- [ ] 📊 EXCEL FOR DATA ANALYSIS - COMPLETE GUIDE 📊 Master Excel like a pro with this comprehensive guide — @datasciencebrain — mining/posts/DRoDJAEk8lD/notes.md
 - [ ] Save This Before 2026 Starts — @datasciencebrain — mining/posts/DRi4ZOHEwnq/notes.md
 - [ ] If I had to choose the TOP 5 courses to learn AI & ML from absolute ZERO to ADVANCED, it would be these Stanford giants: — @datasciencebrain — mining/posts/DResEfTkzli/notes.md
 - [ ] 🎯 Master SQL Interviews with 100 Essential Questions — @datasciencebrain — mining/posts/DRbI6J_E2nP/notes.md
@@ -25102,6 +24937,7 @@
 - [ ] 📊 100 STATISTICS INTERVIEW QUESTIONS – MASTER DATA ANALYSIS — @datasciencebrain — mining/posts/DPfjUTHk-St/notes.md
 - [ ] 🤖 100 MACHINE LEARNING INTERVIEW QUESTIONS - YOUR COMPLETE GUIDE — @datasciencebrain — mining/posts/DPc-cnskxJs/notes.md
 - [ ] 💻 10 Data Science Roles & The Tools They Actually Use (Save This — @datasciencebrain — mining/posts/DPbZyYkE4wB/notes.md
+- [ ] 🐍 100 PYTHON INTERVIEW QUESTIONS WITH ANSWERS - COMPLETE GUIDE — @datasciencebrain — mining/posts/DPaZty9kyq4/notes.md
 - [ ] ⚡ 100 SQL INTERVIEW QUESTIONS - MASTER DATABASE QUERIES — @datasciencebrain — mining/posts/DPXzcKTEzrd/notes.md
 - [ ] 🚀 Want to master Data Science & AI — @datasciencebrain — mining/posts/DPWQPH0k34i/notes.md
 - [ ] 🎯 100 DATA ANALYST INTERVIEW QUESTIONS YOU NEED TO KNOW Breaking into data analytics — @datasciencebrain — mining/posts/DPVQGxSE6hm/notes.md
@@ -25116,12 +24952,12 @@
 - [ ] 🧠 More AI Terms You Should Know — @datasciencebrain — mining/posts/DOvoTWAk_ry/notes.md
 - [ ] 🧹 Master Data Cleaning Like a Pro — @datasciencebrain — mining/posts/DOsEpf6k0Py/notes.md
 - [ ] 📊 Master Statistics for Data Science — @datasciencebrain — mining/posts/DOm46bVE_pm/notes.md
-- [ ] 📊 Master Excel for Data Analysis — @datasciencebrain — mining/posts/DOdodT5k76T/notes.md
 - [ ] 🚀 JavaScript for Data Science is HERE — @datasciencebrain — mining/posts/DOYedPakxqV/notes.md
 - [ ] 🚀 Data Science Career Guide 2025 🌟 Confused between Data Scientist, Analyst, ML Engineer & Data Engineer — @datasciencebrain — mining/posts/DOV6XpUE02e/notes.md
 - [ ] 🐋 Master Docker for Development — @datasciencebrain — mining/posts/DOTTjqVE_sZ/notes.md
 - [ ] 🚀 Master AWS for Data Science — @datasciencebrain — mining/posts/DOOKijdk8Tu/notes.md
 - [ ] 🔥 Master VERSION CONTROL with this COMPLETE Git/GitHub cheat sheet — @datasciencebrain — mining/posts/DOJAWupE1iX/notes.md
+- [ ] 🚀 Master these 10 functions in Excel, SQL & Pandas and you’ve already unlocked 80% of data magic 🔥 📊 Whether you’re anal — @datasciencebrain — mining/posts/DOGfzqLEzal/notes.md
 - [ ] 💾 Master DATA with this COMPLETE SQL cheat sheet — @datasciencebrain — mining/posts/DOD2-zhk5Aj/notes.md
 - [ ] 🚀 WHICH DATA CAREER PATH IS RIGHT FOR YOU — @datasciencebrain — mining/posts/DOC2jcpkz7m/notes.md
 - [ ] 🧠✨ Master TensorFlow with this comprehensive cheat sheet — @datasciencebrain — mining/posts/DOBXj-Ok6-a/notes.md
@@ -25178,6 +25014,7 @@
 - [ ] Let’s build an LLM If you want to understand large language models, the fastest way is to build one yourself — @codingmermaid.ai — mining/posts/DWmcewpCDwR/notes.md
 - [ ] Is data science dying — @codingmermaid.ai — mining/posts/DWbjsu7CIg4/notes.md
 - [ ] Tools you'll need 👇🏻 Well, you won't need those tools but depending on the task, you'll use 40-60% of the tools I listed — @codingmermaid.ai — mining/posts/DWWiTKOCKlq/notes.md
+- [ ] Agentic AI projects Agentic AI is moving far beyond simple chatbots — @codingmermaid.ai — mining/posts/DWRqnAECBdO/notes.md
 - [ ] Thesys is everything I ever needed — @codingmermaid.ai — mining/posts/DWPgq6WkvGE/notes.md
 - [ ] ML red flags in job descriptions you need to know before applying 🚩 Here's what nobody tells you about ML jobs — @codingmermaid.ai — mining/posts/DWPJ0ESmGGo/notes.md
 - [ ] Coding is not enough🫸🏻 In 2026, it’s no longer enough to know how to code, train ML models and evaluate them, you need t — @codingmermaid.ai — mining/posts/DV_SrA6jbTK/notes.md
@@ -25248,6 +25085,7 @@
 - [ ] AI is linear algebra with extra steps And you shouldn’t be scared of it — @codingmermaid.ai — mining/posts/DPG65EcCHxh/notes.md
 - [ ] Being able to talk to AI doesn’t make you an AI engineer, and I’m surprised at how many people claim this — @codingmermaid.ai — mining/posts/DO_NUrYEUDN/notes.md
 - [ ] If your data science winter arc doesn’t look like this, you’re doing something wrong — @codingmermaid.ai — mining/posts/DO6AhQckW5c/notes.md
+- [ ] Do this and you’ll master your ML interview Be crystal clear on ML basics: supervised vs — @codingmermaid.ai — mining/posts/DOyQULeEVY9/notes.md
 - [ ] Read this if you want — To build end-to-end AI apps using cutting-edge tech — Learn about different AI and RAG architect — @codingmermaid.ai — mining/posts/DOtsXvvEgJh/notes.md
 - [ ] To learn AI and machine learning, start with math — @codingmermaid.ai — mining/posts/DOlv3m5iepq/notes.md
 - [ ] Generative Data Scientist vs — @codingmermaid.ai — mining/posts/DObNXbfkYum/notes.md
@@ -25375,6 +25213,7 @@
 - [ ] 🐍 The Ultimate Python Cheat Sheet 🚀 Master Python faster with this all-in-one reference covering syntax, data types, fun — @decode_leox — mining/posts/DaR79m0iQGv/notes.md
 - [ ] 🚀 Top 100 Full-Stack Final Year Projects for Developers — @decode_leox — mining/posts/DaIqm0bHwJf/notes.md
 - [ ] Final Year Students, Save This — @decode_leox — mining/posts/DaDkETdH_xq/notes.md
+- [ ] TCS Data Analyst Interview Questions & Answers Crack your next Data Analyst interview with the most frequently asked SQL — @decode_leox — mining/posts/DZ_n2ZBn41m/notes.md
 - [ ] Master DSA with Python – The Complete Roadmap — @decode_leox — mining/posts/DZ0JfxRn8ZB/notes.md
 - [ ] These 75 questions cover Arrays, patterns, logic & real interview thinking — exactly what companies test — @decode_leox — mining/posts/DZxbp3Ony7E/notes.md
 - [ ] Preparing for your next job interview — @decode_leox — mining/posts/DZp01qNH6ir/notes.md
@@ -25446,6 +25285,7 @@
 - [ ] 🚀 CODE LIKE A PRO FOR FREE — @decode_leox — mining/posts/DHkitKnSp6k/notes.md
 - [ ] 🚀 CODE LIKE A PRO FOR FREE — @decode_leox — mining/posts/DHiohWJPii2/notes.md
 - [ ] Become a full stack developer 💻🚀 || follow for more 💡📚 — — @decode_leox — mining/posts/DHbOplePFYT/notes.md
+- [ ] Tips & Trick for HTML — @decode_leox — mining/posts/DDFFAjJPk6N/notes.md
 - [ ] [for learning the code] Comment code and send me in DM — @decode_leox — mining/posts/DAoEYXqvsDS/notes.md
 - [ ] AI is easier to understand when you see the layers — @gauravgoyalai — mining/posts/DcPx2eIReGP/notes.md
 - [ ] ReLU isn’t your only choice — @gauravgoyalai — mining/posts/DcxBgH8T7Mg/notes.md
@@ -25470,6 +25310,7 @@
 - [ ] One-Hot Encoding — one category, one switch — @gauravgoyalai — mining/posts/DcthX5BTluA/notes.md
 - [ ] AI doesn’t see words — @gauravgoyalai — mining/posts/DctgQapziYA/notes.md
 - [ ] 💸 PART 3/6 — Your RAG System Is Wasting Money A RAG system can be accurate and still be unnecessarily expensive — @gauravgoyalai — mining/posts/DcsTzcBRrYJ/notes.md
+- [ ] 🤯 How can a Transformer understand the same sentence from multiple perspectives at once — @gauravgoyalai — mining/posts/Dcr6OWMTRcv/notes.md
 - [ ] 🚨 PART 2/6 — 5 RAG Architecture Mistakes You Should Avoid Most RAG systems don't fail because the LLM is bad — @gauravgoyalai — mining/posts/DcsTILyRoMH/notes.md
 - [ ] PART 1/6 — How would you build RAG for 10 MILLION documents — @gauravgoyalai — mining/posts/DcsSxKKR2js/notes.md
 - [ ] 🚀 Claude is moving beyond code autocomplete — @gauravgoyalai — mining/posts/DcqN2Hxxdnf/notes.md
@@ -25726,7 +25567,6 @@
 - [ ] pandas Full notes — @pythonix.hub — mining/posts/DahEVYyibtz/notes.md
 - [ ] Available numpy full notes Dm me — @pythonix.hub — mining/posts/DacL9L3CU47/notes.md
 - [ ] SQL notes Comment for full sql notes — @pythonix.hub — mining/posts/DaMh73vpeAz/notes.md
-- [ ] PROGRAMMING NOTES DM ME FOR PYTHON PROGRAMMING NOTES — @pythonix.hub — mining/posts/DaJ93zQCcT0/notes.md
 - [ ] 🚀 Master Generative AI with Python — @pythonix.hub — mining/posts/DaFrjqfCfPw/notes.md
 - [ ] Dm also comment me for full gen ai notes — @pythonix.hub — mining/posts/DaFm5jjpepO/notes.md
 - [ ] 🚀 Master Generative AI with Handwritten Notes — @pythonix.hub — mining/posts/DaDIY8-CQFk/notes.md
@@ -25740,6 +25580,8 @@
 - [ ] 📚 Python Full Notes Available — @pythonix.hub — mining/posts/DZzyX2FpF2x/notes.md
 - [ ] 🚀 MASTER DSA NOTES – Crack Coding Interviews & Placements — @pythonix.hub — mining/posts/DZxMRKhCTGy/notes.md
 - [ ] Learn DSA 📩 — @pythonix.hub — mining/posts/DZxLp2yJv-5/notes.md
+- [ ] 📚 APTITUDE HANDWRITTEN NOTES FOR PLACEMENTS 🚀 Struggling with Aptitude — @pythonix.hub — mining/posts/DZuo7h4CaH7/notes.md
+- [ ] 📚 Aptitude Handwritten Notes for Freshers & Beginners 🚀 Are you preparing for placements and struggling with Aptitude — @pythonix.hub — mining/posts/DZun-yipbaw/notes.md
 - [ ] Pythonix ,hand written python notes avaliable ✨ — @pythonix.hub — mining/posts/DZpbKlqplpF/notes.md
 - [ ] 🐼 PANDAS - The Backbone of Data Analysis — @pythonix.hub — mining/posts/DZhtIOcppHR/notes.md
 - [ ] Thank you for your interest in our SQL Notes — @pythonix.hub — mining/posts/DZgs463pmtv/notes.md
@@ -25827,6 +25669,7 @@
 - [ ] Top Python Pattern Programs Follow @tajamul — @tajamul.codes — mining/posts/DaURh9CgaTT/notes.md
 - [ ] OOP Concepts Cheat Sheet Follow @tajamul — @tajamul.codes — mining/posts/DZ9G4KtATWJ/notes.md
 - [ ] SQL Cheat Sheet Follow @tajamul — @tajamul.codes — mining/posts/DZ6up2KgQUV/notes.md
+- [ ] Top Placement Preparation Resources Follow @tajamul — @tajamul.codes — mining/posts/DZy3F9ZgUEt/notes.md
 - [ ] Top 100 Advanced SQL Queries Comment “SQL” to get the notes — @tajamul.codes — mining/posts/DZNEq6AgVMY/notes.md
 - [ ] 🚀 SQL Cheat Sheet you’ll ACTUALLY use If you’re learning SQL or preparing for interviews, this single sheet can save you — @tajamul.codes — mining/posts/DSz_-mNAYNr/notes.md
 - [ ] Best Azure Agentic AI Notes Follow @tajamul — @tajamul.codes — mining/posts/DZbt0UXgZCU/notes.md
@@ -25839,9 +25682,9 @@
 - [ ] Top DSA Questions Data Roles Comment “DSA” to get the notes — @tajamul.codes — mining/posts/DXLvF9iAdB2/notes.md
 - [ ] Python Interview Questions Guide Comment “PYTHON” to get the notes — @tajamul.codes — mining/posts/DXI14pOgflE/notes.md
 - [ ] 50 Python Pattern Programs Comment “PATTERN” to get the notes — @tajamul.codes — mining/posts/DXa4BiAAQdp/notes.md
+- [ ] Complete Data Analyst Roadmap Follow and Comment “Data” to get the detailed data analyst roadmap in your Inbox growth — @tajamul.codes — mining/posts/DX8LY_rAfwU/notes.md
 - [ ] Excel vs SQL Cheat Sheet Follow @tajamul — @tajamul.codes — mining/posts/DX6llQcge_f/notes.md
 - [ ] Python Basics Cheat Sheet Comment “PYTHON” to get the notes — @tajamul.codes — mining/posts/DWz-_GsAUp4/notes.md
-- [ ] Clean Data Cleaning with SQL Follow @tajamul — @tajamul.codes — mining/posts/DWns8WpAVSk/notes.md
 - [ ] Most Asked MAANG DSA Questions Comment “DSA” to get the notes — @tajamul.codes — mining/posts/DWky5XZAay_/notes.md
 - [ ] Amex Data Analyst Questions Comment “AMEX” to get the notes — @tajamul.codes — mining/posts/DWiKfOwCGsm/notes.md
 - [ ] Amazon SQL + DSA Interview Questions Comment “AMAZON” to get the notes — @tajamul.codes — mining/posts/DWfu6l7Ad5M/notes.md
@@ -25972,6 +25815,7 @@
 - [ ] Nobody fails a Kafka interview on the definition of a topic — @hackproduct — mining/posts/DbxC6Q9uSzv/notes.md
 - [ ] Practice for your next move — @hackproduct — mining/posts/DbybU_kNHHI/notes.md
 - [ ] 🌳 Stop collecting random AI tools — @hackproduct — mining/posts/DbweVuCw6A2/notes.md
+- [ ] Your coding agent doesn’t need a bigger prompt — @hackproduct — mining/posts/DbJeCdeBjOV/notes.md
 - [ ] 🚀 The AI Engineer Journey isn’t a checklist—it’s a progression — @hackproduct — mining/posts/DbwWzYKuEKu/notes.md
 - [ ] “Does it feel better — @hackproduct — mining/posts/DbtRN05N-6C/notes.md
 - [ ] Most people think RAG is just “search + AI — @hackproduct — mining/posts/DbjnHhhuhFm/notes.md
@@ -26280,9 +26124,11 @@
 - [ ] It should be, Everyone know to search 👀 but knowledgeable though — @techwith.ram — mining/posts/DYw2QJcpX1z/notes.md
 - [ ] Learn Claude Code For Free Tech + Non-tech people — @techwith.ram — mining/posts/DYvxDahJd4d/notes.md
 - [ ] Most people jump straight into training models, tuning hyperparameters, and chasing accuracy — @techwith.ram — mining/posts/DYqsDyoibXC/notes.md
+- [ ] Build AI Agent Projects - Task Tracker Agent - Research Assistant Agent - Email Assistant Agent - Content Creator Agent  — @techwith.ram — mining/posts/DYj1WifiWhN/notes.md
 - [ ] Build Production-Ready AI Agents Anyone can build a demo agent — @techwith.ram — mining/posts/DYgY_o3iSyq/notes.md
 - [ ] Try to be a forward-deployed engineer — @techwith.ram — mining/posts/DYdtY-Qia6A/notes.md
 - [ ] Neural Network As Gaussian Process One of the most surprising ideas in deep learning: A very large neural network starts — @techwith.ram — mining/posts/DYV-dsHiYP7/notes.md
+- [ ] Agent Governance Layers The more autonomous agents become, the more important governance becomes — @techwith.ram — mining/posts/DYTXtoCCc8m/notes.md
 - [ ] Sunday Night Vibecoding ☠️ Don't ask for the prompt now, guys — @techwith.ram — mining/posts/DYL207FJxCI/notes.md
 - [ ] Markdown got us through the first wave of AI — @neuralnews.ai — mining/posts/DYKMKQykoJu/notes.md
 - [ ] Good Old Days 🩷 — @techwith.ram — mining/posts/DX_3OuHCYvD/notes.md
@@ -26291,7 +26137,6 @@
 - [ ] NVIDIA Released Menotron V3 What it is: → A family of open-weight models (Nano, Super, Ultra) → Built specifically for a — @techwith.ram — mining/posts/DXvcKHXCVTr/notes.md
 - [ ] MOE: Mixture Of Experts Most people think bigger models = better AI — @techwith.ram — mining/posts/DXs0yGyCceF/notes.md
 - [ ] Claude Code Creator Brois Cherny’s suggestions for Claude — @techwith.ram — mining/posts/DXk9SvuiReu/notes.md
-- [ ] AI Agent Stack Most people think agents = LLM — @techwith.ram — mining/posts/DXileqFiQxR/notes.md
 - [ ] Codex inside Claude Code What it is: → A plugin that connects OpenAI Codex to Claude Code → Works as an MCP server (tool — @techwith.ram — mining/posts/DXeySMCidKt/notes.md
 - [ ] 7 Claude Code Features, You Should Know → /init — auto-generates CLAUDE — @techwith.ram — mining/posts/DXGMbwPiWh7/notes.md
 - [ ] AI Gateway Architecture AI Gateway acts as a central control layer between your applications and multiple AI models/APIs — @techwith.ram — mining/posts/DXEqp4-Ce2Q/notes.md
@@ -26392,6 +26237,7 @@
 - [ ] Make an Exceptional Data Portfolio: -> Quality > Quantity of projects -> Tell a story while building your project -> Sho — @techwith.ram — mining/posts/DKtm-YgS-Jm/notes.md
 - [ ] Comment "Need" for PDF version of this — @techwith.ram — mining/posts/DKHTSjNSbbm/notes.md
 - [ ] Tell me your output in comment — @techwith.ram — mining/posts/DKEE7h4SLpi/notes.md
+- [ ] 5 Must-Know SQL Window Function Queries for Interviews You Can’t Afford to Miss If you want PDF of this, then comment "N — @techwith.ram — mining/posts/DJoaYqrSzW8/notes.md
 - [ ] 𝗔/𝗕 𝗧𝗲𝘀𝘁𝗶𝗻𝗴 𝘃𝘀 𝗙𝗲𝗮𝘁𝘂𝗿𝗲 𝗥𝗼𝗹𝗹𝗼𝘂𝘁 𝗶𝗻 𝗠𝗟 In ML-driven products, it’s not just about pushing code, it’s about pushing value r — @techwith.ram — mining/posts/DITmwDTSQXF/notes.md
 - [ ] Linear Algebra Series Continue — @techwith.ram — mining/posts/DIOf9Mgydt5/notes.md
 - [ ] Let’s break down the math behind one of the simplest yet most powerful models in machine learning – Linear Regression — @techwith.ram — mining/posts/DIJR0HXS2El/notes.md
@@ -26403,7 +26249,11 @@
 - [ ] Tableau Nerchukunte Data Analyst Job Vasthunda — @pythonlifetelugu — mining/posts/DcxsEf5ibe2/notes.md
 - [ ] Power BI Nerchukuntunnara — @pythonlifetelugu — mining/posts/DcxrpruiVPQ/notes.md
 - [ ] Power BI Must-Know Skills for Freshers Power BI nerchukuntunnara — @pythonlifetelugu — mining/posts/Dcxq-nQCXCi/notes.md
+- [ ] Power BI vs Tableau | Data Analyst Ki Edi Better — @pythonlifetelugu — mining/posts/Dcxql-biVLl/notes.md
+- [ ] Power BI Lo Ee DAX Questions Interview Lo Adagutharu Power BI interview ki prepare avtunnara — @pythonlifetelugu — mining/posts/DcxoQYwialu/notes.md
+- [ ] Power BI Lo DAX Enduku Important — @pythonlifetelugu — mining/posts/Dcxnv_EiYD2/notes.md
 - [ ] Power BI + SQL = Data Analyst Career Data Analyst avvali anukuntunnara — @pythonlifetelugu — mining/posts/DcxmWH5CZON/notes.md
+- [ ] Excel Telusa — @pythonlifetelugu — mining/posts/DcxmBL-CWGo/notes.md
 - [ ] GitHub Enduku Important — @pythonlifetelugu — mining/posts/DcvjtLZCdx3/notes.md
 - [ ] DevOps & DevSecOps with AWS & AI — New Batch Starting from September 04th 🚀☁️🤖 DevOps & DevSecOps with AWS & AI course l — @pythonlifetelugu — mining/posts/DcvckcVCX_c/notes.md
 - [ ] Engineering Projects 🚀🎓 Engineering students build cheyalsina best projects enti — @pythonlifetelugu — mining/posts/DcvcCrgCZVE/notes.md
@@ -26456,6 +26306,7 @@
 - [ ] If i hire a data analyst, Here's what I will look for , SQL , Excel , Data analyst — @thedataguy16 — mining/posts/DUlE1Bdk4mS/notes.md
 - [ ] 20 Remote Hiring sites that are always hiring — @thedataguy16 — mining/posts/DUkoR7okx_t/notes.md
 - [ ] This 1 Real life excel project can land you Multiple Data Analyst opportunities — @thedataguy16 — mining/posts/DUkD8AfEx8l/notes.md
+- [ ] This 1 Excel project can land you Multiple Job Opportunities — @thedataguy16 — mining/posts/DUicOUzEw9_/notes.md
 - [ ] 9 out of 10 Companies ask these Excel questions in Interviews — @thedataguy16 — mining/posts/DUd56MIE5-X/notes.md
 - [ ] 9 Out of 10 Companies ask these Excel questions — @thedataguy16 — mining/posts/DUd4iGJk889/notes.md
 - [ ] 95% of the companies ask these same SQL questions — @thedataguy16 — mining/posts/DUd252pk2KS/notes.md
@@ -26467,6 +26318,7 @@
 - [ ] Free AI tools that write SQL queries and Excel formulas for you — @thedataguy16 — mining/posts/DUYmLrfEwiu/notes.md
 - [ ] The Free AI tools that write SQL & Excel formulas for you — @thedataguy16 — mining/posts/DUYiMn4k9KU/notes.md
 - [ ] 7 Free Datasets + Real-World Projects You Can Do Today (With Video Solutions) — @thedataguy16 — mining/posts/DUYfoaMkybp/notes.md
+- [ ] 7 Free Datasets + Real World Projects that you can do today, With Video Solutions, SQL, Excel , Python , Data analyst — @thedataguy16 — mining/posts/DUYKrhBE6oO/notes.md
 - [ ] The 1 Python script that automates 90% of your data cleaning — @thedataguy16 — mining/posts/DUXveZgEx2k/notes.md
 - [ ] The 1 Python script that automates 90% of your data cleaning — @thedataguy16 — mining/posts/DUWKBfoE0KN/notes.md
 - [ ] The 7 Chatgpt Prompts every data analyst should master — @thedataguy16 — mining/posts/DUWE9zUkyBv/notes.md
@@ -26484,6 +26336,7 @@
 - [ ] Stop complicating it - These 3 SQL functions do 90% of the Work — @thedataguy16 — mining/posts/DUGIYJ6EyGp/notes.md
 - [ ] How to Land your First Data Analyst Job — @thedataguy16 — mining/posts/DUFMFcqk90w/notes.md
 - [ ] 7 Websites I use to get real-world data for practice — @thedataguy16 — mining/posts/DUEBa1Ok_hV/notes.md
+- [ ] Data Analyst or Data Scientist, Which one to Choose - SQL, EXCEL , POWER BI , TABLEAU, MACHINE LEARNING , AI — @thedataguy16 — mining/posts/DUDolxYk_1S/notes.md
 - [ ] Stop sending resumes that get auto rejected, This Ats-friendly template can get you multiple Offers — @thedataguy16 — mining/posts/DUBB_C-E7Ji/notes.md
 - [ ] The 1 Excel Dashboard every data analyst should build — @thedataguy16 — mining/posts/DT-3vQ2E-ZA/notes.md
 - [ ] 1 Real World Excel dashboard that got me 2 Offers — @thedataguy16 — mining/posts/DT8huM3E1jp/notes.md
@@ -26518,6 +26371,7 @@
 - [ ] 10 SQL, Excel & Python Concepts High - Growth Startups Test Before hiring — @thedataguy16 — mining/posts/DTTGKT7DeTt/notes.md
 - [ ] 10 SQL, Excel & Python Concepts FAANG tests in Data Interviews — @thedataguy16 — mining/posts/DTTBhWHDDBv/notes.md
 - [ ] This real world unique sql project Gets you shortlisted in 2026 — @thedataguy16 — mining/posts/DTQsk9ck5Mw/notes.md
+- [ ] 5 Excel Skills Every 15 LPA Data Analyst must master in 2026 — @thedataguy16 — mining/posts/DTQmtR-k3ia/notes.md
 - [ ] If i had to prepare for SQL interview in 24 Hours , i will do this — @thedataguy16 — mining/posts/DTQYMJkk-9H/notes.md
 - [ ] 10 Datasets that are mandatory to work with for cracking Data Analyst Interview — @thedataguy16 — mining/posts/DTOCf3xE81d/notes.md
 - [ ] 5 Must have Skills before attending a data analyst interview — @thedataguy16 — mining/posts/DTN_Ua_kwvU/notes.md
@@ -26526,6 +26380,7 @@
 - [ ] This 1 real world SQL project landed me 3 Data Analyst Offers — @thedataguy16 — mining/posts/DTK-9dTk60b/notes.md
 - [ ] If i had to master SQL joins in 1 Day before an interview — @thedataguy16 — mining/posts/DTK8Cz0k_fP/notes.md
 - [ ] Top 3 Data Projects That Shorted Your Job Search By 60 Days — @thedataguy16 — mining/posts/DTIw5SJE9DC/notes.md
+- [ ] 3 Excel Skills That Separate hired Data pros from Rejects — @thedataguy16 — mining/posts/DTItym1E-92/notes.md
 - [ ] 30 Days Excel Mastery Formulas to Data Analyst Interviews — @thedataguy16 — mining/posts/DTGQCStk2rb/notes.md
 - [ ] The 30 day SQL strategy that took me from confused to Interview Ready — @thedataguy16 — mining/posts/DTGJokQE-CK/notes.md
 - [ ] How to Turn Your SQL Project into a Portfolio that actually Gets Calls — @thedataguy16 — mining/posts/DTDVlt6k0rC/notes.md
@@ -26787,7 +26642,6 @@
 - [ ] 🚨 YouTube Channels to learn Deep Learning 1 — @datasciencebrain — mining/posts/C6QCKBZLt7j/notes.md
 - [ ] Best Resources to learn Data Analysis 1 — @datasciencebrain — mining/posts/C5kTdKRLDZC/notes.md
 - [ ] FREE Resources ⚡ to learn all these skills 👇 1 — @datasciencebrain — mining/posts/C5KfIIkiyad/notes.md
-- [ ] Resources to learn Excel for Data Analysts ⚡ 1 — @datasciencebrain — mining/posts/C422AF6v0NU/notes.md
 - [ ] Other Resources 🔽 Computer Vision - Murtazas Workshop Deep Learning - Deep Lizard Python - Telusko SQL - freeCodeCamp Ex — @datasciencebrain — mining/posts/C4pB2ZPvCDU/notes.md
 - [ ] Which one do you want to become — @datasciencebrain — mining/posts/C4mfrREha3t/notes.md
 - [ ] 🏆 Resources to learn 1 — @datasciencebrain — mining/posts/C4j4vm6r1_7/notes.md
@@ -27075,6 +26929,7 @@
 - [ ] 📌Tag your friends who would love to know about this Follow 👉 @datascience — @datasciencebrain — mining/posts/COuoQzXAz7L/notes.md
 - [ ] 🧠 Tag your friends who would love to see this🧠 Follow 👉 @datascience — @datasciencebrain — mining/posts/COsRZJIAQfN/notes.md
 - [ ] 🔖Tag your friends — @datasciencebrain — mining/posts/CNpZuo2AcC0/notes.md
+- [ ] 📌Tag your friends who would love to know about this 🔜Join our telegram channel — @datasciencebrain — mining/posts/CNl8s_KgTy2/notes.md
 - [ ] 📌Tag your friends who would like to know about this @datascience — @datasciencebrain — mining/posts/CNZTqFXgyo5/notes.md
 - [ ] 🔖Tag your friends — @datasciencebrain — mining/posts/CNWes9oAYym/notes.md
 - [ ] 🧠 Tag your friends who would love to see this🧠 Follow 👉 @datascience — @datasciencebrain — mining/posts/CNNB8WjAbBC/notes.md
@@ -27083,6 +26938,7 @@
 - [ ] 🔖Tag your friends 🤪 @datascience — @datasciencebrain — mining/posts/CMwuVlpjctm/notes.md
 - [ ] 📌Tag your friends who would love to know about this @datascience — @datasciencebrain — mining/posts/CMrlQWVjfGo/notes.md
 - [ ] 🔖Tag your friends — @datasciencebrain — mining/posts/CMpAWqjjXTL/notes.md
+- [ ] 📌Tag your friends who would love to know about this 🔜Join our telegram channel — @datasciencebrain — mining/posts/CMmb7Kvj2z1/notes.md
 - [ ] 😁Le ML - "You could not live with your failures, and where did that bring you — @datasciencebrain — mining/posts/CMbqu0sAI2R/notes.md
 - [ ] 🧠 Tag your friends who would love to see this🧠 Follow 👉 @datascience — @datasciencebrain — mining/posts/CMZHONUgxyo/notes.md
 - [ ] 🔖Tag your friends — @datasciencebrain — mining/posts/CMUZ0nBgmEQ/notes.md
@@ -27102,6 +26958,7 @@
 - [ ] I get DMs daily “How did you do it, you make it look so easy” It’s not easy — @codingmermaid.ai — mining/posts/DLlGUjgvApY/notes.md
 - [ ] 7 silent killers of your ML/AI model performance 💀 You can’t fix your model with more layers if your data is broken — @codingmermaid.ai — mining/posts/DLfkMqvgLa-/notes.md
 - [ ] Explaining below 👆🏻 Data scraping with BeautifulSoup If you're still using BeautifulSoup in 2025, you're working too har — @codingmermaid.ai — mining/posts/DLaGhj1AGM7/notes.md
+- [ ] 📊 Want to master Data Science & Generative AI with tools like Python, PowerBI, ChatGPT, and Zapier — @codingmermaid.ai — mining/posts/DLQDzQbRzDn/notes.md
 - [ ] You can now build entire AI agents to get more things done @lindy — @codingmermaid.ai — mining/posts/DLIQyb_grtW/notes.md
 - [ ] Here’s how 1 - Start with a programming language Best off, Python — @codingmermaid.ai — mining/posts/DLFWX83gpue/notes.md
 - [ ] Let me hug you — @codingmermaid.ai — mining/posts/DLC15-mAHAe/notes.md
@@ -27133,6 +26990,7 @@
 - [ ] Let me explain below 👇 They can’t explain what they did in their portfolio projects and why they used certain tools I’ve — @codingmermaid.ai — mining/posts/DIeCEY1o6yH/notes.md
 - [ ] This book will teach you so much — @codingmermaid.ai — mining/posts/DIJgOxloD2E/notes.md
 - [ ] Follow this cheat sheet to learn data science Python programming language (basic operators, variables, loops, control fl — @codingmermaid.ai — mining/posts/DIExvGOI8BJ/notes.md
+- [ ] Let me teach you ML 👇 Here’s how to approach it: 1 — @codingmermaid.ai — mining/posts/DH9Hg2MySd7/notes.md
 - [ ] Stop building prototypes — @codingmermaid.ai — mining/posts/DH4D9lESM1N/notes.md
 - [ ] # AND THEY’RE FREE 🔥 As someone who’s precisely in AI for 2 years now, 2024 felt slow — @codingmermaid.ai — mining/posts/DHyNdKTRfJy/notes.md
 - [ ] All the pain was worth it — @codingmermaid.ai — mining/posts/DHwVi_LS6o7/notes.md
@@ -27186,6 +27044,7 @@
 - [ ] 🎄Day 6 Magic of Data: Neural networks are not everything, there are far more efficient algorithms you can use — @codingmermaid.ai — mining/posts/DDPdXOpo07-/notes.md
 - [ ] Day 5: 20 EDA projects to prepare you for machine learning If you aren’t sure whether you’re ready for machine learning, — @codingmermaid.ai — mining/posts/DDM02u5olgR/notes.md
 - [ ] 🔔 Comment “learning” to get the invitation to my Magic of data advent calendar, only few spots left — @codingmermaid.ai — mining/posts/DDKI9JHo9Ri/notes.md
+- [ ] Let’s start the festive season strong — @codingmermaid.ai — mining/posts/DDCnFhfo97l/notes.md
 - [ ] Best Platforms for learning data science 👇🏻 If you want a high-paying job in data science and AI, online learning platfo — @codingmermaid.ai — mining/posts/DC65OGroYi5/notes.md
 - [ ] If you're learning machine learning you MUST know this Like and save this post before you lose it — @codingmermaid.ai — mining/posts/DCovFb8oRW8/notes.md
 - [ ] Learn AI from scratch 📢‼️ There's no way to learn AI overnight — @codingmermaid.ai — mining/posts/DCmetInI3al/notes.md
@@ -27210,6 +27069,7 @@
 - [ ] Books are THE best friend to data scientists — @codingmermaid.ai — mining/posts/DAgNO3AgVQm/notes.md
 - [ ] Stop building boring projects, the Titanic dataset is so 2011 — @codingmermaid.ai — mining/posts/DAboVHvS2it/notes.md
 - [ ] Machine learning projects are changing — @codingmermaid.ai — mining/posts/DAYiKOzuOHt/notes.md
+- [ ] I want you to be successful and launch your careers into the stars — @codingmermaid.ai — mining/posts/DAJOYaLtAyg/notes.md
 - [ ] Can you still become a software engineer in 2025 — @codingmermaid.ai — mining/posts/DABTdiUN07P/notes.md
 - [ ] What is automated data science — @codingmermaid.ai — mining/posts/C_-_GHPNTr_/notes.md
 - [ ] 5 math books every data scientist needs to read immediately — @codingmermaid.ai — mining/posts/C_tHPkwAYS7/notes.md
@@ -27247,6 +27107,7 @@
 - [ ] Stop doing this 👺 5 mistakes most data science beginners make — @codingmermaid.ai — mining/posts/C76peKHtOps/notes.md
 - [ ] Free computer vision courses ✨ 📌Want to become an expert computer vision engineer — @codingmermaid.ai — mining/posts/C74BLURN_8l/notes.md
 - [ ] Computer vision roadmap 💻 So if you’ve been learning deep learning for a while, then you probably know that you either g — @codingmermaid.ai — mining/posts/C71cGBUNFtk/notes.md
+- [ ] Stop procrastinating 🚫 👀 Before you blinked half of the year passed — @codingmermaid.ai — mining/posts/C7ojJk2tEyS/notes.md
 - [ ] Learn AI from scratch 📢‼️ 📊There’s no shortcut to learning AI through testing of multiple AI tools and learning prompt e — @codingmermaid.ai — mining/posts/C7jZw82tiBY/notes.md
 - [ ] How to code better — @codingmermaid.ai — mining/posts/C7hLk7Kt20J/notes.md
 - [ ] How to know which machine learning algorithm to choose — @codingmermaid.ai — mining/posts/C7eOcuUIkVw/notes.md
@@ -27486,27 +27347,43 @@
 - [ ] Top 10 Coding Websites | Must Know for Developers Coding skills improve cheyyadaniki and placement & interview preparati — @pythonlifetelugu — mining/posts/DcS-FCMiTGn/notes.md
 - [ ] One Decision That Can Build Your Career 🎯💼 Career lo right decision teesukovadam future ni completely change cheyagaladu — @pythonlifetelugu — mining/posts/DcSv9FAieXW/notes.md
 - [ ] Fresher Resume lo Ee Skills Thappanisari 1 — @kiransagar.pyy — mining/posts/DcSvGQIE9fs/notes.md
+- [ ] Aptitude Round Crack Cheyadaniki Ee Tips Follow Avvandi 1 — @kiransagar.pyy — mining/posts/DcSo6CLE1TM/notes.md
+- [ ] Puzzle Solving Tricks | Aptitude Shortcut Placement & competitive exams lo puzzles fast ga solve cheyyadaniki ee simple  — @pythonlifetelugu — mining/posts/DcSDgPFCZkt/notes.md
+- [ ] Profit & Loss Tricks | Aptitude Shortcut Placement & competitive exams lo Profit & Loss questions fast ga solve cheyyada — @pythonlifetelugu — mining/posts/DcQ-2ydCRGD/notes.md
 - [ ] Become a Software Engineer in 6 Months 💻🚀 6 months lo software engineer avvadaniki step-by-step roadmap — programming fu — @pythonlifetelugu — mining/posts/DcQt7tliSb3/notes.md
+- [ ] Percentage Tricks | Aptitude Shortcut Placement & competitive exams lo Percentage questions fast ga solve cheyyadaniki e — @pythonlifetelugu — mining/posts/DcQVlXriWzX/notes.md
 - [ ] Govt Job vs Private Job — Adhi Better — @pythonlifetelugu — mining/posts/DcQLGe0CTsY/notes.md
 - [ ] TypeScript Complete Notes (Beginner to Advanced) TypeScript anedi JavaScript ki superset — @kiransagar.pyy — mining/posts/DcFnArpk5eV/notes.md
+- [ ] Number Series Tricks | Aptitude Shortcut Placement & competitive exams lo Number Series questions fast ga solve cheyyada — @pythonlifetelugu — mining/posts/DcPzRppiQ-w/notes.md
 - [ ] ChatGPT Prompts for Resume Writing 1 — @kiransagar.pyy — mining/posts/DcOLdZck53K/notes.md
 - [ ] ETL vs ELT 🔄💻 ETL and ELT madhya difference enti, data extraction, transformation, loading process ela work avuthayi, tr — @pythonlifetelugu — mining/posts/DcOKuzSCR_E/notes.md
 - [ ] Highest-Paying AI Jobs 1 — @kiransagar.pyy — mining/posts/DcOIaGOE70-/notes.md
 - [ ] IT Job vs Govt Job — Adhi Best — @pythonlifetelugu — mining/posts/DcOHoRECTGW/notes.md
+- [ ] Number Series Tricks for Placements Number series questions lo first pattern identify cheyadam important — @kiransagar.pyy — mining/posts/DcOHYp9E5u_/notes.md
+- [ ] Coding-Decoding Tricks | Aptitude Shortcut Placement & competitive exams lo Coding-Decoding questions fast ga solve chey — @pythonlifetelugu — mining/posts/DcNOd4HiYD2/notes.md
+- [ ] Blood Relation Tricks | Aptitude Shortcut Placement aptitude & competitive exams lo Blood Relation questions fast ga sol — @pythonlifetelugu — mining/posts/DcM54e-Cf31/notes.md
 - [ ] Behavioral Interview Questions | Must Prepare Behavioral round lo interviewer mee past experiences, problem-solving, tea — @pythonlifetelugu — mining/posts/DcLndIbCfqC/notes.md
 - [ ] What is Tradesman Job — @pythonlifetelugu — mining/posts/DcLalnHiTOC/notes.md
 - [ ] Data Engineer Avvali Anukuntunnara — @kiransagar.pyy — mining/posts/DcLSY27TTSJ/notes.md
 - [ ] GitHub Actions Scenario-Based Interview Questions GitHub Actions CI/CD, automation, testing, deployment, and DevOps work — @kiransagar.pyy — mining/posts/DcAdW54E092/notes.md
 - [ ] Build These 10 Data Science Projects | Resume Guide Build practical projects that demonstrate Python, statistics, machin — @pythonlifetelugu — mining/posts/DcKVIOACYJp/notes.md
 - [ ] Build These 10 DevOps Projects | Resume Guide Build practical DevOps projects to strengthen your DevOps / Cloud resume a — @pythonlifetelugu — mining/posts/DcJCujridRH/notes.md
+- [ ] Build These 10 Resume-Winning Projects | IT Career Guide Don't fill your resume with basic projects — @pythonlifetelugu — mining/posts/DcJCqdNib3v/notes.md
+- [ ] Excise Constable Salary ఎంత — @pythonlifetelugu — mining/posts/DcI8x6dic60/notes.md
+- [ ] Dak Sevak Job Reality 📮 Learn about the real work of a Dak Sevak, including job responsibilities, salary, working hours, — @pythonlifetelugu — mining/posts/DcI8kgRCR0h/notes.md
 - [ ] Build These 10 Data Engineering Projects | Resume Guide Build real-world projects to strengthen your Data Engineer resum — @pythonlifetelugu — mining/posts/DcInQ7_iRMr/notes.md
 - [ ] Build These 10 Cybersecurity Projects | Resume Guide Build practical cybersecurity projects to strengthen your Cybersecu — @pythonlifetelugu — mining/posts/DcIE5WCCfp3/notes.md
 - [ ] Build These 10 Cloud Projects | Cloud Engineer Roadmap Build real-world cloud projects to strengthen your Cloud / DevOps — @pythonlifetelugu — mining/posts/DcHwQB_CTDp/notes.md
 - [ ] High-Paying Careers Without Coding | Career Guide Coding is not the only path to a successful career — @pythonlifetelugu — mining/posts/DcGCaG0idZD/notes.md
 - [ ] Best Jobs After 10th | Career Guide Completed 10th — @pythonlifetelugu — mining/posts/DcEG4dhCbc8/notes.md
 - [ ] Career Gap Interview Answers Short Description A career gap is common and not necessarily a problem if you explain it co — @kiransagar.pyy — mining/posts/DcD5FKjE4S8/notes.md
+- [ ] Stenographer Salary Entha — @pythonlifetelugu — mining/posts/DcBEwbDCXXI/notes.md
 - [ ] Agentic AI Cheat Sheet Short Description Agentic AI refers to AI systems that can plan, reason, use tools, make decision — @kiransagar.pyy — mining/posts/DcAdVceExlc/notes.md
+- [ ] 100 Basic Formulas Every EEE Student Should Know 1 — @pythonlifetelugu — mining/posts/DcAB6NWCUB7/notes.md
 - [ ] Master the best AI Text-to-Speech (TTS) tools with practical examples — @pythonlifetelugu — mining/posts/Db-vkMkTug6/notes.md
+- [ ] Time, Speed & Distance Tricks | Aptitude Shortcut Placement & competitive exams lo Time, Speed & Distance questions fast — @pythonlifetelugu — mining/posts/Db-stsGCey-/notes.md
+- [ ] Time & Work Shortcuts | Aptitude Tricks Placement & competitive exams lo Time & Work questions fast ga solve cheyyadanik — @pythonlifetelugu — mining/posts/Db-scOtCX4W/notes.md
+- [ ] Seating Arrangement Tricks | Aptitude Shortcut Placement & competitive exams lo Seating Arrangement questions fast ga so — @pythonlifetelugu — mining/posts/Db-r_GUCfzn/notes.md
 - [ ] Can You Get Management Jobs Without an MBA — @pythonlifetelugu — mining/posts/Db-rwgTCX13/notes.md
 - [ ] Future-Proof Government Jobs | Career Guide AI & automation growing unna time lo job security, public service, and long- — @pythonlifetelugu — mining/posts/Db-hga3CWLI/notes.md
 - [ ] Free Coding Websites | Must Know Practice coding, DSA, projects, and interview problems for free — @pythonlifetelugu — mining/posts/Db-UEb5Cab-/notes.md
@@ -27522,6 +27399,7 @@
 - [ ] Managerial Round Interview Questions | Must Prepare Prepare these questions before your Managerial Round: 1 — @pythonlifetelugu — mining/posts/Db59PzBiRF6/notes.md
 - [ ] HR Interview Questions | Must Prepare Prepare these common HR questions before your next interview — @pythonlifetelugu — mining/posts/Db58DWBCR_r/notes.md
 - [ ] Professional Email Writing Tips | IT Career Guide Learn how to write clear and professional emails at work — @pythonlifetelugu — mining/posts/DcTV2IoEfet/notes.md
+- [ ] 100 Basic Formulas Every ECE Student Should Know 1 — @pythonlifetelugu — mining/posts/Db3Uz2RiafI/notes.md
 - [ ] YouTube Channels to Learn IT Skills | Free Learning Guide Learn coding, data, cloud, AI, and cybersecurity through free  — @pythonlifetelugu — mining/posts/Db3S99HCZtT/notes.md
 - [ ] Master AI Image Generation with the world's best AI tools — @pythonlifetelugu — mining/posts/Db3BImazZUU/notes.md
 - [ ] DevOps Jobs | Career Guide Explore top career opportunities in DevOps and Cloud — @pythonlifetelugu — mining/posts/Db3BIUZkcdY/notes.md
@@ -27529,6 +27407,7 @@
 - [ ] VS Code Extensions Every Developer Should Know Boost your coding productivity with these useful extensions — @pythonlifetelugu — mining/posts/Db2sqBJiVxs/notes.md
 - [ ] Python Jobs | Career Guide Explore top career opportunities you can build with Python — @pythonlifetelugu — mining/posts/Db1usb-kbxx/notes.md
 - [ ] Python Jobs | Career Guide Top career options you can explore with Python: 1 — @pythonlifetelugu — mining/posts/DbzxG9biYEf/notes.md
+- [ ] Data Analyst vs Data Engineer | Quick Comparison Data Analyst - Focus: Analyze Data - Skills: Excel, SQL, Power BI, Pyth — @pythonlifetelugu — mining/posts/DbzveV8CRRv/notes.md
 - [ ] Resume Building AI Tools | Career Guide Use AI tools to improve your resume, tailor applications, and prepare for interv — @pythonlifetelugu — mining/posts/DbzvPMZiYfK/notes.md
 - [ ] Internship Preparation Guide | Beginner to Job Ready Prepare for internships with the right skills and strategy — @pythonlifetelugu — mining/posts/Dbx3obdkXiL/notes.md
 - [ ] Learn App Cloning with Vibe Coding AI tools using step-by-step practical examples — @pythonlifetelugu — mining/posts/Dbx3gPfTwIm/notes.md
@@ -27539,6 +27418,7 @@
 - [ ] Build These Full Stack Projects | Resume Guide Build real-world projects that can make your Full Stack Developer resume  — @pythonlifetelugu — mining/posts/Dbx1jxEkWzG/notes.md
 - [ ] Learn Higgsfield AI in Telugu with simple explanations and practical demonstrations — @pythonlifetelugu — mining/posts/DbvSwzpTAoa/notes.md
 - [ ] Women Interview Tips | Career Guide Build confidence and crack your next job interview — @pythonlifetelugu — mining/posts/DbvQsFNCXDB/notes.md
+- [ ] Notice Period Hacks | Job Switch Guide Learn how to manage your notice period smartly during a job switch — @pythonlifetelugu — mining/posts/DbvMeIYidC5/notes.md
 - [ ] Salary Negotiation Tips | Career Guide Learn how to negotiate your salary confidently — @pythonlifetelugu — mining/posts/DbvMA1VCYnQ/notes.md
 - [ ] Self Introduction That Impresses Recruiters | Interview Guide Create a strong first impression with this structure — @pythonlifetelugu — mining/posts/DbvLaGMibDP/notes.md
 - [ ] ATS Interview Checklist | Resume & Job Guide Prepare your resume and profile to pass Applicant Tracking Systems (ATS) — @pythonlifetelugu — mining/posts/DbvJz4GiaPW/notes.md
@@ -27560,11 +27440,15 @@
 - [ ] Binary Search Patterns | DSA Quick Guide Master these patterns to solve coding interview problems faster — @pythonlifetelugu — mining/posts/Dbsc99UCQnr/notes.md
 - [ ] Power BI Interview Questions | Quick Guide Basic Questions 1 — @pythonlifetelugu — mining/posts/DbsbO6kiUYZ/notes.md
 - [ ] Network Security Basics | Quick Guide Network Security protects networks, systems, and data from unauthorized access and — @pythonlifetelugu — mining/posts/DbsbBHMCXgB/notes.md
+- [ ] Excel Interview Questions | Quick Guide Basic Questions 1 — @pythonlifetelugu — mining/posts/DbsatDjieZl/notes.md
 - [ ] Top SQL Projects For Resume | Beginner To Advanced Build these SQL projects to stand out for Data Analyst, Data Engineer — @pythonlifetelugu — mining/posts/DbsXVxAiaQq/notes.md
 - [ ] Top Java Projects For Resume | Beginner To Advanced Build these projects to stand out for Java Developer & Backend Devel — @pythonlifetelugu — mining/posts/DbsWwksiVi2/notes.md
 - [ ] DevOps Without Experience | Beginner To Job Roadmap No IT experience — @pythonlifetelugu — mining/posts/DbsUymxCSyP/notes.md
 - [ ] AWS From Scratch | Beginner To Job Ready Roadmap Learn Amazon Web Services (AWS) from zero and build cloud skills for Cl — @pythonlifetelugu — mining/posts/DbsUYSciXH_/notes.md
 - [ ] Docker In 15 Minutes | Quick Notes Docker helps you build, package, and run applications inside containers — @pythonlifetelugu — mining/posts/DbsTMrACXsK/notes.md
+- [ ] Excel Formula Cheat Sheet | Must Know Formulas for Data Analysts Master these important Excel formulas for data analysis — @pythonlifetelugu — mining/posts/DbqF2ABCV0S/notes.md
+- [ ] Excel Shortcuts Every Data Analyst Must Know Master these essential Excel shortcuts to work faster with data, formulas,  — @pythonlifetelugu — mining/posts/DbqFppRiapB/notes.md
+- [ ] Power BI Cheat Sheet | Complete Guide for Data Analysts Master Power BI with this quick reference covering data loading, — @pythonlifetelugu — mining/posts/DbqFeYfiWd6/notes.md
 - [ ] Database Interview Questions Every Developer Must Know Prepare these important Database Interview Questions for Backend  — @pythonlifetelugu — mining/posts/DbqEj5yiRsl/notes.md
 - [ ] Oracle SQL Complete Notes Part 2 | Advanced Oracle SQL Concepts Continue your Oracle SQL learning with advanced concepts — @pythonlifetelugu — mining/posts/DbqES_miV6-/notes.md
 - [ ] MongoDB Complete Notes Part 2 | Advanced MongoDB Concepts Continue your MongoDB learning with advanced concepts used in  — @pythonlifetelugu — mining/posts/DbqD1UpiSTp/notes.md
@@ -27645,6 +27529,7 @@
 - [ ] What is Web Scraping — @kiransagar.pyy — mining/posts/Dbf0CS9k4TS/notes.md
 - [ ] 🚀 How to Use Postman (Quick Cheat Sheet) ✅ Install & Open Postman ✅ Create a New Request ✅ Select Method (GET, POST, PUT — @pythonlifetelugu — mining/posts/DbfoQGTiecx/notes.md
 - [ ] Top 20 Cloud Computing Interview Questions (2026) 1 — @pythonlifetelugu — mining/posts/DbfhXiaiV0D/notes.md
+- [ ] C++ Complete Notes | Learn C++ From Basics to Advanced Want to master C++ Programming — @pythonlifetelugu — mining/posts/Dbfe6oQifcd/notes.md
 - [ ] Top 20 System Design Interview Questions (FAANG & Product Companies) 1 — @pythonlifetelugu — mining/posts/DbfQ1xaie4x/notes.md
 - [ ] Python Built-in Functions Every Developer Must Know Mastering Python built-in functions helps you write faster, cleaner, — @pythonlifetelugu — mining/posts/DbfQCE1CRLb/notes.md
 - [ ] Python Projects That Get You Hired | Part 1 Want to stand out in the job market — @pythonlifetelugu — mining/posts/DbfOhiYiRTO/notes.md
@@ -27685,9 +27570,12 @@
 - [ ] Resume Template for Freshers (2026) 1 — @pythonlifetelugu — mining/posts/DbcuM0eiW9O/notes.md
 - [ ] How to Use Gemini AI (2026 Beginner Guide) Step 1: Sign In • Open Gemini • Sign in with your Google Account Step 2: Writ — @pythonlifetelugu — mining/posts/DbctjXOCcZX/notes.md
 - [ ] How to Use ChatGPT (2026 Beginner Guide) Step 1: Sign In • Create an OpenAI account • Log in to ChatGPT Step 2: Write Be — @pythonlifetelugu — mining/posts/DbctFvdic0O/notes.md
+- [ ] Data Analyst Roadmap (2026) + Job Roles & Salaries Step 1: Learn Excel • Formulas • Pivot Tables • Charts • Dashboards S — @pythonlifetelugu — mining/posts/Dbcr5_1iZvW/notes.md
 - [ ] Top 5 Government Jobs for Software Engineers (India) 1 — @pythonlifetelugu — mining/posts/Dbcq2T9idwN/notes.md
 - [ ] What is Web Scraping — @kiransagar.pyy — mining/posts/DbcplZ9E30d/notes.md
+- [ ] Become a Data Analyst Before 2027 – Complete Roadmap 2026–2027 Success Formula Excel → SQL → Power BI → Python → Statist — @kiransagar.pyy — mining/posts/Dbcm9ZTE62Y/notes.md
 - [ ] Master 50 Gen AI Interview Questions Asked in Top Companies Keywords: Generative AI interview questions, LLM interview q — @kiransagar.pyy — mining/posts/DbclplekxZs/notes.md
+- [ ] Top 50 Data Analyst Project Ideas (2026) Beginner Projects 1 — @pythonlifetelugu — mining/posts/Dbcj91hDVMX/notes.md
 - [ ] What is a Tuple in Python — @kiransagar.pyy — mining/posts/DbcaOAWk7Ur/notes.md
 - [ ] PowerPoint vs Excel – Which One Should You Learn — @pythonlifetelugu — mining/posts/DbcTXGpjXF8/notes.md
 - [ ] n8n Cheat Sheet (Workflow Automation) What is n8n — @pythonlifetelugu — mining/posts/Dbaem1RCajp/notes.md
@@ -27715,6 +27603,7 @@
 - [ ] English Tenses Complete Notes There are 12 Tenses in English Present Tense 1 — @pythonlifetelugu — mining/posts/DbXQsGjiQ9y/notes.md
 - [ ] 5 In-Demand Skills Every Student & Job Seeker Should Know 1 — @kiransagar.pyy — mining/posts/DbXQsGaEx9P/notes.md
 - [ ] Comment devops — @pythonlifetelugu — mining/posts/DbXKuryp6O4/notes.md
+- [ ] Top 30 SAP FICO Interview Questions Basic Questions 1 — @pythonlifetelugu — mining/posts/DbXC9r4iZab/notes.md
 - [ ] Core Java Complete Notes (2026) Java Basics • What is Java — @pythonlifetelugu — mining/posts/DbV8wCviWxE/notes.md
 - [ ] Python vs Java (2026 Comparison) Python| Java High-level programming language| Object-oriented programming language Simp — @pythonlifetelugu — mining/posts/DbV8OeGCWqw/notes.md
 - [ ] ChatGPT vs Gemini (2026 Comparison) ChatGPT| Gemini Developed by OpenAI| Developed by Google Strong in coding & reasonin — @pythonlifetelugu — mining/posts/DbV71yUiTzr/notes.md
@@ -27733,14 +27622,18 @@
 - [ ] Top 20 English Vocabulary Words 1 — @pythonlifetelugu — mining/posts/DbTEVRjCS78/notes.md
 - [ ] EMAIL Templates (2026 Cheat Sheet) 1 — @pythonlifetelugu — mining/posts/DbTD5B2jRKp/notes.md
 - [ ] Computer Networks Cheat Sheet (2026) What is a Computer Network — @pythonlifetelugu — mining/posts/DbTDnl8jXq6/notes.md
+- [ ] 100 English Vocabulary Words Every Student & Professional Should Know Basic Vocabulary (1–20) 1 — @pythonlifetelugu — mining/posts/DbTCY9cDR7x/notes.md
 - [ ] Top MLOps Job Roles 1 — @pythonlifetelugu — mining/posts/DbS-BQMCTKk/notes.md
+- [ ] Top 100 Git & GitHub Interview Questions (2026) Git Basics (1–10) 1 — @pythonlifetelugu — mining/posts/DbS209ziX9K/notes.md
 - [ ] 💎 Google Gemini Tips Every Student & Developer Should Know — @pythonlifetelugu — mining/posts/DbS1U4WjTwe/notes.md
 - [ ] 🐳 Docker Complete Notes – Beginner to Advanced Master Docker with complete notes covering Containers, Images, Docker Eng — @pythonlifetelugu — mining/posts/DbSwR8BiVC_/notes.md
 - [ ] Comment devops — @pythonlifetelugu — mining/posts/DbSoILNNOVY/notes.md
 - [ ] Comment aws — @pythonlifetelugu — mining/posts/DbSoFMIN9y4/notes.md
 - [ ] Basic Computer Fundamentals Cheat Sheet 1 — @pythonlifetelugu — mining/posts/DbR5SuaiRuR/notes.md
+- [ ] 100 Mac Keyboard Shortcuts Every User Should Know Basic Shortcuts (1–20) 1 — @pythonlifetelugu — mining/posts/DbQR7RkifeR/notes.md
 - [ ] How to Handle Fear in Interviews (2026 Guide) Before the Interview • Research the company — @pythonlifetelugu — mining/posts/DbQRrbZCTvY/notes.md
 - [ ] 100 SQL Commands Every Developer Should Know Database Commands (1–10) 1 — @pythonlifetelugu — mining/posts/DbQQo2DiW8u/notes.md
+- [ ] 100 Computer Keyboard Shortcuts Every Student & Professional Should Know Basic Shortcuts (1–20) 1 — @pythonlifetelugu — mining/posts/DbQQVj0CWuP/notes.md
 - [ ] Top 100 Aptitude Interview Questions Percentage (1–10) 1 — @pythonlifetelugu — mining/posts/DbQQEXuiSl6/notes.md
 - [ ] 50 Excel Keyboard Shortcuts Every Professional Should Know 1 — @pythonlifetelugu — mining/posts/DbQPz4LiSxx/notes.md
 - [ ] 30-Day DSA Preparation Roadmap Week 1 – DSA Fundamentals Day 1: Time & Space Complexity (Big O) Day 2: Arrays Day 3: Str — @pythonlifetelugu — mining/posts/DbQPjCiCXVh/notes.md
@@ -27751,6 +27644,7 @@
 - [ ] LLM (Large Language Model) Cheat Sheet What is an LLM — @pythonlifetelugu — mining/posts/DbNn8EhCdaL/notes.md
 - [ ] Top 25 High-Paying Skills to Learn in 2026 1 — @pythonlifetelugu — mining/posts/DbNmvErCcM3/notes.md
 - [ ] Top Interview Questions: SQL + Python + Java + Power BI SQL (1–10) 1 — @pythonlifetelugu — mining/posts/DbNgNttiQBn/notes.md
+- [ ] Aptitude Cheat Sheet – Placement & Competitive Exams Percentages • x% = x/100 • 50% = 1/2 • 25% = 1/4 • 20% = 1/5 • 12 — @pythonlifetelugu — mining/posts/DbNfZAxCSDG/notes.md
 - [ ] TensorFlow Cheat Sheet (Beginner to Advanced) What is TensorFlow — @pythonlifetelugu — mining/posts/DbNel_lCUpQ/notes.md
 - [ ] System Design Complete Notes (Beginner to Advanced) System Design Basics • What is System Design — @pythonlifetelugu — mining/posts/DbNeccSCY1f/notes.md
 - [ ] MySQL Cheat Sheet (Beginner to Advanced) Database Commands • CREATE DATABASE • SHOW DATABASES • USE database_name • DROP — @pythonlifetelugu — mining/posts/DbNd-skifrR/notes.md
@@ -27765,6 +27659,7 @@
 - [ ] Top 30 High-Demand Skills to Learn in 2026 1 — @pythonlifetelugu — mining/posts/DbNKDDeCSh4/notes.md
 - [ ] OSI Model – Quick Revision The OSI (Open Systems Interconnection) Model defines how data travels across a network using  — @pythonlifetelugu — mining/posts/DbM9ghXCely/notes.md
 - [ ] Top Git Commands Every Developer Should Know Master these essential Git commands for version control and team collaborat — @pythonlifetelugu — mining/posts/DbLPlZJiZDO/notes.md
+- [ ] Reasoning Cheat Sheet – Placement & Competitive Exams Alphabet Tricks • A = 1, B = 2, — @pythonlifetelugu — mining/posts/DbLOn3jiSz9/notes.md
 - [ ] English Grammar Rules Cheat Sheet 1 — @pythonlifetelugu — mining/posts/DbLOZ9Iif62/notes.md
 - [ ] Top 25 Books Every Programmer Should Read Programming Fundamentals 1 — @pythonlifetelugu — mining/posts/DbLOM2YiT8j/notes.md
 - [ ] 100 Java Interview Questions Every Developer Should Know Java Basics (1–20) 1 — @pythonlifetelugu — mining/posts/DbLOA4BCf7w/notes.md
@@ -27774,7 +27669,6 @@
 - [ ] Python Keywords Cheat Sheet (2026) Control Flow • if • elif • else • for • while • break • continue • pass Functions & C — @pythonlifetelugu — mining/posts/DbK3-BvCQtv/notes.md
 - [ ] Git Complete Notes – Beginner to Advanced Master Git with complete notes covering Version Control, Repository, Commits,  — @pythonlifetelugu — mining/posts/DbK3kwSiT4y/notes.md
 - [ ] Excel vs SQL vs Python Excel| SQL| Python Spreadsheet Tool| Database Query Language| Programming Language Best for Small — @pythonlifetelugu — mining/posts/DbK3UX6idzr/notes.md
-- [ ] Coding-Decoding Shortcuts & Tricks for Aptitude 1 — @pythonlifetelugu — mining/posts/DbK3HkZCR48/notes.md
 - [ ] 50 Python Functions Every Programmer Must Know 1 — @pythonlifetelugu — mining/posts/DbK2ihaCbjj/notes.md
 - [ ] COMMENT " AWS " — @pythonlifetelugu — mining/posts/DbK1h6OJ9yg/notes.md
 - [ ] COMMENT " DEVOPS " — @pythonlifetelugu — mining/posts/DbK1EOBptC5/notes.md
@@ -27791,17 +27685,21 @@
 - [ ] Top 50 Service-Based IT Companies 1 — @pythonlifetelugu — mining/posts/DbF63OpCbXe/notes.md
 - [ ] 🔥 25 HTML Project Ideas (Beginner to Advanced) Beginner 1 — @pythonlifetelugu — mining/posts/DbF6tKaCeln/notes.md
 - [ ] 🚀 25 Important DevOps Tools Every Engineer Should Know Version Control 1 — @pythonlifetelugu — mining/posts/DbF6TmfCRhV/notes.md
+- [ ] ⌨️ 50 Essential Keyboard Shortcuts Everyone Should Know Basic 1 — @pythonlifetelugu — mining/posts/DbF6HBMieFB/notes.md
 - [ ] ☁️ GCP (Google Cloud Platform) Complete Notes – Beginner to Advanced Master Google Cloud Platform (GCP) with complete no — @pythonlifetelugu — mining/posts/DbF55h9CVEJ/notes.md
+- [ ] 🔥 50 Important HTML Tags Every Web Developer Should Know Basic Structure 1 — @pythonlifetelugu — mining/posts/DbF5ts9CTtA/notes.md
 - [ ] Forward Deployed Engineer Roadmap (Beginner to Advanced) Step 1: Programming • Python • JavaScript / TypeScript • SQL •  — @pythonlifetelugu — mining/posts/DbF5gWuiasm/notes.md
 - [ ] Master Agentic AI with a complete cheat sheet designed for beginners and professionals — @pythonlifetelugu — mining/posts/DbF4SE_iVpk/notes.md
 - [ ] Why is AWS important for Data Science — @pythonlifetelugu — mining/posts/DbFPEGRidji/notes.md
 - [ ] 🚀 Top 5 Vibe Coding AI Tools You Must Try Want to build websites and apps using AI — @pythonlifetelugu — mining/posts/DbFBUvEiZXy/notes.md
+- [ ] 30 Important Aptitude Topics for Placements & IT Interviews 1 — @pythonlifetelugu — mining/posts/DbDS4UGCY0m/notes.md
 - [ ] ATS Resume Guide (2026) What is ATS — @pythonlifetelugu — mining/posts/DbDSpICCSKV/notes.md
 - [ ] Top 100 IT Companies to Target 1 — @pythonlifetelugu — mining/posts/DbDR73yiSXh/notes.md
 - [ ] High-Value Skills You Can Learn for FREE 1 — @pythonlifetelugu — mining/posts/DbDRlpnCb-Y/notes.md
 - [ ] Top AI Skills to Learn in 2026 1 — @pythonlifetelugu — mining/posts/DbDRXZLCc5h/notes.md
 - [ ] HTML Cheat Sheet (Beginner to Advanced) Basic Structure < — @pythonlifetelugu — mining/posts/DbDQ42yCUNj/notes.md
 - [ ] MANGOS in Tech – The New Generation of Top Tech Companies M – Microsoft A – Amazon N – NVIDIA G – Google O – OpenAI S –  — @pythonlifetelugu — mining/posts/DbA28X-ia02/notes.md
+- [ ] Data Analyst Cheat Sheet (Beginner to Advanced) Excel • Pivot Tables • VLOOKUP/XLOOKUP • INDEX + MATCH • IF Functions •  — @pythonlifetelugu — mining/posts/DbA2cERiWdc/notes.md
 - [ ] 10 AI Tools Every Student Must Know (2026) 1 — @pythonlifetelugu — mining/posts/DbA1uJyCZ6l/notes.md
 - [ ] Top High-Paying & In-Demand Data Jobs 1 — @kiransagar.pyy — mining/posts/DbA1nsRk2o_/notes.md
 - [ ] Top 15 AI Tools for Video Editing (2026) 1 — @pythonlifetelugu — mining/posts/DbA1LtjicR6/notes.md
@@ -27835,6 +27733,7 @@
 - [ ] 85 Free Tools Every Creator Should Know (2026) Build, design, edit, write, and grow faster with these free tools — @pythonlifetelugu — mining/posts/Da7M51oicj1/notes.md
 - [ ] Master Web Technologies from beginner to advanced — @pythonlifetelugu — mining/posts/Da7D-UcDe8o/notes.md
 - [ ] Discover 70 AI business ideas to start your entrepreneurial journey — @pythonlifetelugu — mining/posts/Da5msU_Cbe2/notes.md
+- [ ] Data Analyst Cheat Sheet Core Skills * Excel * SQL * Power BI * Python * Statistics * Data Visualization Excel * VLOOKUP — @kiransagar.pyy — mining/posts/Da5GED3k0FA/notes.md
 - [ ] 4 Interview Questions You Must Be Prepared For 1 — @kiransagar.pyy — mining/posts/Da4_tzrE4i5/notes.md
 - [ ] Reasoning Cheat Sheet Number Series * Find the pattern (Addition, Subtraction, Multiplication, Division) * Square & Cube — @kiransagar.pyy — mining/posts/Da4_gGlk9kp/notes.md
 - [ ] What are Jumping Statements in Python — @kiransagar.pyy — mining/posts/Da4_S7BE2G4/notes.md
@@ -27844,6 +27743,7 @@
 - [ ] Top 25 Git Commands Every Developer Should Know Master these essential Git commands to improve your version control and  — @pythonlifetelugu — mining/posts/Da48M3HCRnW/notes.md
 - [ ] Digital Marketing Roadmap (2026) Want to build a career in Digital Marketing — @pythonlifetelugu — mining/posts/Da45fuOiV8u/notes.md
 - [ ] Python Roadmap for Data Analysts – Beginner to Advanced Master Python step by step and become a job-ready Data Analyst — @pythonlifetelugu — mining/posts/Da41QfHiQxV/notes.md
+- [ ] Master Pivot Tables in Excel with step-by-step practical examples — @pythonlifetelugu — mining/posts/Da254l7CRZB/notes.md
 - [ ] Top LLM Portfolio Projects to Get Hired in AI Build real-world Large Language Model (LLM) projects that showcase your sk — @pythonlifetelugu — mining/posts/Da2S67Xie2t/notes.md
 - [ ] Master Data Structures and Algorithms (DSA) from beginner to advanced — @pythonlifetelugu — mining/posts/Da2G9VcCUWi/notes.md
 - [ ] Master coding questions from beginner to advanced — @pythonlifetelugu — mining/posts/Da1zdMsCf-U/notes.md
@@ -27868,6 +27768,7 @@
 - [ ] Python vs Full-Stack Python Confused about which path to choose — @pythonlifetelugu — mining/posts/DauuVAuE7w7/notes.md
 - [ ] Master Python Pattern Programming from beginner to advanced — @pythonlifetelugu — mining/posts/Dat2O-5Ewf4/notes.md
 - [ ] Master Python Pattern Programming from beginner to advanced — @pythonlifetelugu — mining/posts/Dasj2ogEz7y/notes.md
+- [ ] Master Full Stack Python interview questions with detailed explanations and practical examples — @pythonlifetelugu — mining/posts/DasfxrvCVTX/notes.md
 - [ ] Master AWS with complete notes from beginner to advanced — @pythonlifetelugu — mining/posts/DasfE8SCVSn/notes.md
 - [ ] Top DSA Interview Questions Prepare for coding interviews with the most frequently asked Data Structures and Algorithms  — @pythonlifetelugu — mining/posts/DasdxkBiUbR/notes.md
 - [ ] 10 ChatGPT Prompts Every Student Should Know 1 — @pythonlifetelugu — mining/posts/DasdEDHjVM4/notes.md
@@ -27877,8 +27778,11 @@
 - [ ] Master OOPs in Python from beginner to advanced — @pythonlifetelugu — mining/posts/DarmBnyk81q/notes.md
 - [ ] Master Python Data Types from beginner to advanced — @pythonlifetelugu — mining/posts/DarfMX5k2bm/notes.md
 - [ ] Explore the top career opportunities in Data Analytics — @pythonlifetelugu — mining/posts/DarRdU9jQd9/notes.md
+- [ ] Master Full Stack Python Programming with complete notes from beginner to advanced — @pythonlifetelugu — mining/posts/DaqO5dLiT5g/notes.md
 - [ ] Master the important Maven terms every Java developer should know — @pythonlifetelugu — mining/posts/DaqOUDRiTin/notes.md
+- [ ] Master Full Stack Python with a complete handbook — @pythonlifetelugu — mining/posts/DaqFZ01CU0g/notes.md
 - [ ] Master Data Analytics from beginner to advanced — @pythonlifetelugu — mining/posts/Dap_ArVCVmG/notes.md
+- [ ] Master Full Stack Python with a complete handbook — @pythonlifetelugu — mining/posts/DapgUGmiZzL/notes.md
 - [ ] DevOps Roadmap (2026) Want to become a DevOps Engineer — @pythonlifetelugu — mining/posts/Danu0BCiXMB/notes.md
 - [ ] Master OOPs in Java with complete notes from beginner to advanced — @pythonlifetelugu — mining/posts/DanrNd6CabV/notes.md
 - [ ] Master the difference between Data Analyst and Business Analyst — @pythonlifetelugu — mining/posts/Danq9_PiSED/notes.md
@@ -27943,6 +27847,7 @@
 - [ ] 🎓 Engineering students kosam big update — @pythonlifetelugu — mining/posts/DZxqEsLptIf/notes.md
 - [ ] How to Crack Interviews Faster 1 — @pythonlifetelugu — mining/posts/DZuwvKLCW1Z/notes.md
 - [ ] Excel, Power BI, Python & Java Interview Questions Excel * What is VLOOKUP and XLOOKUP — @kiransagar.pyy — mining/posts/DZogkHxE1pg/notes.md
+- [ ] Excel Interview Questions Explained 1 — @pythonlifetelugu — mining/posts/DZnCX0HiaWu/notes.md
 - [ ] SQL Interview Questions for Beginners Basic SQL Questions 1 — @pythonlifetelugu — mining/posts/DZkdjk1iYOb/notes.md
 - [ ] Smart Ways Students Can Earn Online 1 — @pythonlifetelugu — mining/posts/DZiA7BgifWF/notes.md
 - [ ] How to Price Your Freelancing Services 1 — @pythonlifetelugu — mining/posts/DZh_yn3if-a/notes.md
@@ -27953,7 +27858,6 @@
 - [ ] Affiliate Marketing for Beginners What Is Affiliate Marketing — @pythonlifetelugu — mining/posts/DZfsHGyEyI8/notes.md
 - [ ] AI Tools for Mock Interviews Mock interviews practice cheyyadaniki AI tools chala useful — @kiransagar.pyy — mining/posts/DZfT_b4k14A/notes.md
 - [ ] Prompt Engineering Freelancing Prompt engineering freelancing ante businesses and creators kosam AI tools nundi better r — @kiransagar.pyy — mining/posts/DZcRX0RkwTM/notes.md
-- [ ] AI Tools That Help to Make Money AI tools direct ga money generate cheyyavu — @kiransagar.pyy — mining/posts/DZcFVlaE8Ug/notes.md
 - [ ] Best Freelancing Skills for 2027 1 — @pythonlifecareers — mining/posts/DZZyM4Hkm0B/notes.md
 - [ ] One of the biggest mistakes students make in 2026 is: Preparing hard for interviews instead of preparing smart — @pythonlifetelugu — mining/posts/DZZxGC4CQE6/notes.md
 - [ ] Build a Strong LinkedIn Profile 1 — @pythonlifetelugu — mining/posts/DZY1IowiZFh/notes.md
@@ -27980,6 +27884,7 @@
 - [ ] Want to become a DevOps Engineer at top product companies — @pythonlifetelugu — mining/posts/DZB6lXDE1cN/notes.md
 - [ ] Claude AI Use Chesi Anything Faster Ga Ela Learn Cheyali — @pythonlifecareers — mining/posts/DY6MM6QEjen/notes.md
 - [ ] Provider — @pythonlifetelugu — mining/posts/DY4WINNpcXq/notes.md
+- [ ] “Tell Me About Yourself” | Interview Introduction | Telugu Hi Sir/Madam, My name is [Your Name] — @pythonlifetelugu — mining/posts/DY4QnzoCUGQ/notes.md
 - [ ] Why Terraform Tool — @pythonlifetelugu — mining/posts/DYzzt41pYNz/notes.md
 - [ ] Docker Containers | Telugu Docker lo container ante application ni run cheyadaniki required code, libraries, dependencie — @pythonlifetelugu — mining/posts/DYxQO4vpdY-/notes.md
 - [ ] Google Antigravity 2 — @pythonlifetelugu — mining/posts/DYuhV6HJyPJ/notes.md
@@ -27988,6 +27893,7 @@
 - [ ] Claude Opus 4 — @pythonlifetelugu — mining/posts/DYkOoDoJ5vL/notes.md
 - [ ] Is SQL Really Important — @kiransagar.pyy — mining/posts/DYjp6vTzj4c/notes.md
 - [ ] RAG (Retrieval Augmented Generation) Explained | AI Concepts RAG ante Retrieval Augmented Generation which Large Languag — @pythonlifecareers — mining/posts/DYhTHq6Eh4V/notes.md
+- [ ] Important Excel Formulas by Kiran Sagar Microsoft Excel lo formulas use chesi calculations, data analysis mariyu reporti — @kiransagar.pyy — mining/posts/DYhKiVpkzJT/notes.md
 - [ ] MCP (Model Context Protocol) Explained | AI Concepts MCP ante Model Context Protocol which AI models and external tools  — @pythonlifecareers — mining/posts/DYgcRwukv0U/notes.md
 - [ ] LLM (Large Language Model) Explained | AI Concepts LLM ante Large Language Model which huge amount of text data meeda tr — @pythonlifecareers — mining/posts/DYeuUxoEhe8/notes.md
 - [ ] Must Have AI Skills for 2027 | Future AI Skills Explained 2027 lo AI field lo growth kosam Prompt Engineering, Machine L — @pythonlifecareers — mining/posts/DYT06v-kuOI/notes.md
@@ -28050,6 +27956,7 @@
 - [ ] Can AGi will Excel in all Aspects of Life — @pythonlifetelugu — mining/posts/DVOMdfGCeaw/notes.md
 - [ ] Share to your Friends — @pythonlifetelugu — mining/posts/DVOJLJ3CQql/notes.md
 - [ ] Share to your Friends — @pythonlifetelugu — mining/posts/DVK5vQDCQR8/notes.md
+- [ ] Comment fsp Full Stack Python Programming in Telugu We Provide 1 — @pythonlifetelugu — mining/posts/DVGGC95iWHi/notes.md
 - [ ] AGI = Humans — @pythonlifetelugu — mining/posts/DVFuKaxieB1/notes.md
 - [ ] Devops & DevSecOps with Aws in Telugu We Provide 1 — @pythonlifetelugu — mining/posts/DVD7hRYCTCq/notes.md
 - [ ] Share to your Friends — @pythonlifetelugu — mining/posts/DVDraCHiQCN/notes.md
@@ -28146,6 +28053,7 @@
 - [ ] Interviewer asked: Design Stories that auto-delete in 24h for 2B users without cron — @codedsoul_05 — mining/posts/DcQ1XA9N73C/notes.md
 - [ ] Comment “Python” to get the complete notes — @codedsoul_05 — mining/posts/DcQMBUGjTNG/notes.md
 - [ ] Query same, index same, but 1000x slower = Stats, data distribution, or plan changed — @codedsoul_05 — mining/posts/DcOOXSZN_u5/notes.md
+- [ ] Comment “🙌” and I’ll DM you 5 websites every software engineer should be using 💻👇 I wish someone told me this earlier: 1 — @codedsoul_05 — mining/posts/DcN-o9vDX_H/notes.md
 - [ ] Comment “🙌” to get the complete notes — @codedsoul_05 — mining/posts/DcNx739jRMx/notes.md
 - [ ] Comment “🙌” and I’ll DM you the full MCP server list + setup guide — @codedsoul_05 — mining/posts/DcL4EeFEyo4/notes.md
 - [ ] DB was never down but data lost = Data never reached DB — @codedsoul_05 — mining/posts/DcL1nHqNN1t/notes.md
@@ -28169,6 +28077,7 @@
 - [ ] Why does Array index start from 0 not 1 in almost every language — @codedsoul_05 — mining/posts/Db3NDUQNMda/notes.md
 - [ ] Simple design for UPI AutoPay that deducts Netflix every month at 2 AM even if bank server is down — @codedsoul_05 — mining/posts/DbvcpBxNBY-/notes.md
 - [ ] Simple design for Google Maps that shows RED traffic instantly when jam happens for 10 Crore users — @codedsoul_05 — mining/posts/DbvbrKNNgEg/notes.md
+- [ ] Comment “Data” and i’ll send the complete pdf in your dm 📊 want to learn data analysis from basics to real world project — @codedsoul_05 — mining/posts/DbtGFCDDa42/notes.md
 - [ ] Simple design for soundbox that says “Rs 100 received” instantly even on 2G and never misses — @codedsoul_05 — mining/posts/Dbs3BcAt1c_/notes.md
 - [ ] Comment “Agentic” and i’ll send the complete pdf in your dm 🤖 want to understand how agentic ai can plan reason use tool — @codedsoul_05 — mining/posts/Dbp71gRDYLv/notes.md
 - [ ] URL shortener like Bitly that shows who clicked, from which city, and blocks bot clicks — @codedsoul_05 — mining/posts/DblI5bTtKzH/notes.md
@@ -28235,6 +28144,7 @@
 - [ ] Famous Interview Question: You need authentication for your app — @codedsoul_05 — mining/posts/DXrIMNujfcQ/notes.md
 - [ ] Interview Problem: When you see Time Complexity, your brain just hangs — @codedsoul_05 — mining/posts/DXrGss0DQRv/notes.md
 - [ ] Real-time app bana rahe ho — @codedsoul_05 — mining/posts/DXq9jw1DQDd/notes.md
+- [ ] Famous Interview Question You have multiple beans of the same type in Spring — @codedsoul_05 — mining/posts/DXolALqE27U/notes.md
 - [ ] Famous Interview Question: Your API returns 200 OK — @codedsoul_05 — mining/posts/DXokkDokyv0/notes.md
 - [ ] Famous Interview Question Your API saved the data successfully… but crashed before sending the response — @codedsoul_05 — mining/posts/DXojADUE0X0/notes.md
 - [ ] Keep Going 📈 — @codedsoul_05 — mining/posts/DXgx-N8jd9r/notes.md
@@ -28450,6 +28360,7 @@
 - [ ] API returns in 100ms in the US but 2s in India — @abhi_techhub — mining/posts/DXBY0BHE2J4/notes.md
 - [ ] Save for future interview 🙌 debugging mindset + prioritization — @abhi_techhub — mining/posts/DW_uuFFk2nf/notes.md
 - [ ] This is a classic concurrency problem — @abhi_techhub — mining/posts/DW-3_rjkxQX/notes.md
+- [ ] Your OTP expires in 30 seconds — but nobody stored it anywhere — @abhi_techhub — mining/posts/DW9OfOSkzTK/notes.md
 - [ ] SQL doesn’t run top-to-bottom… it follows a logical execution order 👇 👉 FROM → fetches the data (base dataset is formed) — @abhi_techhub — mining/posts/DW6qHAFE79Q/notes.md
 - [ ] This is a classic SQL interview question that tests how well you understand databases internally — @abhi_techhub — mining/posts/DW4Fs2NE565/notes.md
 - [ ] This question looks simple, but interviewers use it to check how you think about systems, not UI screens — @abhi_techhub — mining/posts/DW1kJhvEwle/notes.md
@@ -28461,8 +28372,7 @@
 - [ ] The Biggest Problem Every Fresher Faces ☝️ You spend months learning new skills… SQL — @edubhav — mining/posts/DcqKdOTIhHB/notes.md
 - [ ] Nothing about my career start looked like this — @edubhav — mining/posts/DclZn4sCMbH/notes.md
 - [ ] Database vs Datalake vs Data Warehouse 📈 — @edubhav — mining/posts/DcbslysI17-/notes.md
-- [ ] Life of a Data Analyst 📈 — @edubhav — mining/posts/DcMMFuzqCHb/notes.md
-- [ ] Interview question - Do you have any questions for us ❓ — @edubhav — mining/posts/Db6NAmII9qf/notes.md
+- [ ] COMMENT “PDF” TO GET - DATA ANALYST NOTES 📚 Your complete Data Analyst notes - from SQL, Excel & Statistics to Power BI, — @edubhav — mining/posts/DcBdGhcCJ0G/notes.md
 - [ ] Interview Questions and their Purpose 🤔💬 — @edubhav — mining/posts/Db0fF1MIXfI/notes.md
 - [ ] Best Month to Apply for Jobs — @edubhav — mining/posts/DaUl8mnIeA1/notes.md
 - [ ] Comment 'BRO' for 45 Python Interview Questions 🔥 — @edubhav — mining/posts/DaQPVMzCGhn/notes.md
@@ -28474,9 +28384,7 @@
 - [ ] Salary Negotiation Hacks 🤩 — @edubhav — mining/posts/DZ7y4C7Nn4e/notes.md
 - [ ] Which Dashboard is better — @edubhav — mining/posts/DZz2-gPIoCE/notes.md
 - [ ] 50+ Skills to Put on Your Data Analyst Resume 🔥 — @edubhav — mining/posts/DZzQXolExQT/notes.md
-- [ ] The Data Analyst Checklist ✅ — @edubhav — mining/posts/DZvSLFjIP3B/notes.md
 - [ ] 100 Metrics every Data Analyst should know 🔥 — @edubhav — mining/posts/DZvJpgAiJQ7/notes.md
-- [ ] Don't be a Data Analyst 😔🚫 — @edubhav — mining/posts/DaxN9xKBYnn/notes.md
 - [ ] Building a successful Data Analyst Career 💪 — @edubhav — mining/posts/DZr_P4PoCyl/notes.md
 - [ ] Building a successful career in 2026 🤩 — @edubhav — mining/posts/DZrPaYMImO3/notes.md
 - [ ] TOP 5 SQL Interview Questions (MUST KNOW) 🔥 — @edubhav — mining/posts/DZpipr5iLos/notes.md
@@ -28488,7 +28396,6 @@
 - [ ] Data Analyst Office Acronyms 🔥 — @edubhav — mining/posts/DZMNsDViBNi/notes.md
 - [ ] 10 ways to find a job 🔥 — @edubhav — mining/posts/DZE5GcFiC8y/notes.md
 - [ ] Data Analytics Projects MASTER LIST 🔥 — @edubhav — mining/posts/DZDZV1ho5pl/notes.md
-- [ ] Data Analyst Dictionary 📚 — @edubhav — mining/posts/DY84Xk1iP_L/notes.md
 - [ ] IT jobs by coding effort 📉 — @edubhav — mining/posts/DYz2pgPoZa0/notes.md
 - [ ] Career paths through Data Analytics 🔥 — @edubhav — mining/posts/DYxgzU8I8NR/notes.md
 - [ ] Data Analyst Coding Journey 📉 — @edubhav — mining/posts/DYxUGGEIyb8/notes.md
@@ -28498,19 +28405,18 @@
 - [ ] Amazon Interview Question ❓ Correct answer will be pinned 📌 — @edubhav — mining/posts/DYkOLEHIfR9/notes.md
 - [ ] Power BI AI features 🔥 — @edubhav — mining/posts/DYjbUKSImct/notes.md
 - [ ] Comment 'Resume' & CHECK CAPTION 🔥 Most Data Analyst resumes get rejected in seconds — @edubhav — mining/posts/DYXfImpodZp/notes.md
-- [ ] 5 LPA vs 20 LPA Data Analyst 🔥 🤑 — @edubhav — mining/posts/DYRBrc0Ioyy/notes.md
 - [ ] Data Analyst Money Roadmap 🤑💰 — @edubhav — mining/posts/DYQFdiwIjjJ/notes.md
+- [ ] Average salary by Age 🔥 — @edubhav — mining/posts/DYNbP-toW1i/notes.md
 - [ ] Most used Data science models 🔥 — @edubhav — mining/posts/DYCn9c0iGdy/notes.md
 - [ ] Comment 'LINK' | 🚨 Not 10 — @edubhav — mining/posts/DX_QUN_IWSK/notes.md
 - [ ] Career Gap — @edubhav — mining/posts/DX9oDf-iAUI/notes.md
 - [ ] Top KPIs every data analyst should know 🔥 — @edubhav — mining/posts/DYFPioUiAl7/notes.md
 - [ ] Python in a nutshell 🔥 For Data Analysis — @edubhav — mining/posts/DX646UuiAuM/notes.md
 - [ ] Sql in a nutshell 🔥 — @edubhav — mining/posts/DX6ZJOYCO3D/notes.md
-- [ ] Data Analyst Interview Checklist 🔥 — @edubhav — mining/posts/DXvzE3BiMdf/notes.md
+- [ ] 20 keywords recruiter scan (Data Analyst roles) — @edubhav — mining/posts/DX45dHuCPcq/notes.md
 - [ ] 5 Most Asked Excel Interview Questions You Must Know If you're preparing for interviews, Excel is still one of the most  — @edubhav — mining/posts/DXm1PCfDb98/notes.md
 - [ ] 5 Data Analyst Interview Questions You Must Know If you're preparing for a Data Analyst interview, don’t just learn tool — @edubhav — mining/posts/DXmlSNPjZH2/notes.md
 - [ ] Exhausted — @edubhav — mining/posts/DXje5UTiERy/notes.md
-- [ ] Data Analyst in a nutshell 🔥 — @edubhav — mining/posts/DXXk43riIpC/notes.md
 - [ ] 100 Metrics Data Analysts should know 🔥 — @edubhav — mining/posts/DW5qKuyiMYI/notes.md
 - [ ] Perfect Data Analyst Resume 🔥 — @edubhav — mining/posts/DW14XsgiF9b/notes.md
 - [ ] Don't Just Search for Data Analyst Roles 🔥 Most people limit themselves by searching just “Data Analyst” — @edubhav — mining/posts/DWzWV1xiF6z/notes.md
@@ -28527,6 +28433,8 @@
 - [ ] Comment SQL for resources — @edubhav — mining/posts/DUXsEsPCFHI/notes.md
 - [ ] Failing to break into Data Analytics — @edubhav — mining/posts/DT7AeWvCKcp/notes.md
 - [ ] I ALWAYS WIN — @edubhav — mining/posts/DT4btG0iOvc/notes.md
+- [ ] How to Become a Data Analyst in 2026 (AI Era) 📊 Strong SQL is non-negotiable for any data analyst role 📊 Python for data — @edubhav — mining/posts/DSy3SwdiLdw/notes.md
+- [ ] 10x Salary in 4 years - My Story — @edubhav — mining/posts/DR9B5w7CGwS/notes.md
 - [ ] Why Bangalore is the best city to build your career - The honest truth 1 Year in Bangalore = 5 Years anywhere else Here’ — @edubhav — mining/posts/DRlvR8miC44/notes.md
 - [ ] MNC VS STARTUP I spent 7 years in an MNC and 2 years in a startup — here are the 3 lessons that changed everything: 1️⃣  — @edubhav — mining/posts/DRMTdfmiE61/notes.md
 - [ ] Hottest Role in the Data Space: Analytics Engineer I’ve been in the data space for 10 years now - and the hottest role i — @edubhav — mining/posts/DQ7ja1ciDgf/notes.md
@@ -28537,6 +28445,7 @@
 - [ ] 10 Years in Corporate - 3 Lessons I Didn’t Just Learn, I Earned — @edubhav — mining/posts/DQ41-4liC6k/notes.md
 - [ ] Master SQL With Just 40 Questions — @edubhav — mining/posts/DQG-BqVk3VK/notes.md
 - [ ] Comment 'SQL' to get TOP 5 Interview questions — @edubhav — mining/posts/DPrGZjfk938/notes.md
+- [ ] 🚀 Journey to Become a Data Analyst in 2026 (AI Era) 1️⃣ Master the Basics: Excel, SQL, and core statistics: your foundat — @edubhav — mining/posts/DPqurTlE6vJ/notes.md
 - [ ] Corporate Calls — @edubhav — mining/posts/DPgiqSPiP0_/notes.md
 - [ ] Watch this if you are underpaid — @edubhav — mining/posts/DPa7pL6k-eA/notes.md
 - [ ] Type LEARN to get Analytics Engineer Roadmap and Resources — @edubhav — mining/posts/DPV-6MZE9Nh/notes.md
@@ -28548,6 +28457,7 @@
 - [ ] Is Data Analytics Relevant in 2025 — @edubhav — mining/posts/DHsOaPbTkEg/notes.md
 - [ ] Dont Make These Newbie Analytics Mistakes — @edubhav — mining/posts/DHn9u-aT1lh/notes.md
 - [ ] Here's Why Not To Enter Data Analytics — @edubhav — mining/posts/DHjV5qVojmC/notes.md
+- [ ] Is Excel Still Relevant in 2025 — @edubhav — mining/posts/DHMEcHMzhG1/notes.md
 - [ ] Are Soft Skills Needed For A Data Analytics Roles — @edubhav — mining/posts/DHL49UUzeuW/notes.md
 - [ ] 3 Things to avoid as a Data Analytics Fresher — @edubhav — mining/posts/DHHLxUfTbDc/notes.md
 - [ ] Transition from Non IT to IT in 3 Steps — @edubhav — mining/posts/DG_Ik1hTZQR/notes.md
@@ -28576,7 +28486,6 @@
 - [ ] Complex question 😭🥹 — @code2careerai — mining/posts/DbNnm5eh2Et/notes.md
 - [ ] 🚀 System Design Series 💙 Q: How would you design an API to handle 1M+ requests — @code2careerai — mining/posts/DbNQHCGh739/notes.md
 - [ ] 🚀 "COUNT(*)" vs "COUNT(column_name)" — What's the Difference — @code2careerai — mining/posts/Da9rYdhhTPL/notes.md
-- [ ] 🤔 Why does "array — @code2careerai — mining/posts/Da9ngtgBq1h/notes.md
 - [ ] Start with one by one 🏆 Every expert was once a beginner — @code2careerai — mining/posts/Da7saQOBJNg/notes.md
 - [ ] We all grew up 🥹 — @code2careerai — mining/posts/Da5IGWwhpHG/notes.md
 - [ ] DSA Patterns Cheat Sheet 💛 Handy for interview prep, save and share for more 🚀 — @code2careerai — mining/posts/Daw7g3hBKmD/notes.md
@@ -28664,7 +28573,6 @@
 - [ ] Python Interview Questions and Answers — @code2careerai — mining/posts/DERR3oHoC-g/notes.md
 - [ ] SQL Basics and Advanced Notes — @code2careerai — mining/posts/DEPdSebMpFc/notes.md
 - [ ] Java Interview Questions and Answers — @code2careerai — mining/posts/DEMMFCEN8K0/notes.md
-- [ ] How to prepare for Data analysts 🚀 — @jobshalaa — mining/posts/DEKkSLgTesA/notes.md
 - [ ] Remote Jobs List 🚀 — @code2careerai — mining/posts/DEKXQOXzGgz/notes.md
 - [ ] OOPS Concepts in Java Notes — @code2careerai — mining/posts/DEH-3thsEno/notes.md
 - [ ] DBMS and SQL Notes — @code2careerai — mining/posts/DEG0--EoHWX/notes.md
@@ -28816,6 +28724,7 @@
 - [ ] Java Collections Interview Questions and Answers 🎁🚀🔥📌 — @code2careerai — mining/posts/Curbw47NFBC/notes.md
 - [ ] Normalization in DBMS — @code2careerai — mining/posts/Ct5-h0_ArR4/notes.md
 - [ ] Time Complexity 🤩 Follow for more 💡🌐🚀 — @code2careerai — mining/posts/Ctj5DYnRHKV/notes.md
+- [ ] HTML (Day 1 - 6): Day 1: Introduction to HTML Day 2: Creating a Basic HTML Page Day 3: HTML Tags and Attributes Day 4: S — @code2careerai — mining/posts/CtbUZVcA3_n/notes.md
 - [ ] Save It — @code2careerai — mining/posts/CtZV_eYPt-u/notes.md
 - [ ] Save It 100+ free coding projects source code 👨‍💻 — @code2careerai — mining/posts/CtYbGhyp7E4/notes.md
 - [ ] JavaScript Interview Questions Part 2 🚀🔥📌 — @code2careerai — mining/posts/CtPAUKtN5V0/notes.md
@@ -28867,6 +28776,7 @@
 - [ ] Most Common Interview Questions and Answers 🎁 — @code2careerai — mining/posts/CnNErsNsdxZ/notes.md
 - [ ] Be ready to Grind 💪 Content Credit : @fable_notes Follow @coders_notes For amazing notes and content 😊 — @code2careerai — mining/posts/CnAGtnpNPGh/notes.md
 - [ ] 🚀 𝟭𝟬𝟬 𝗗𝗔𝗬𝗦 𝗢𝗙 𝗗𝗔𝗧𝗔 𝗦𝗧𝗥𝗨𝗖𝗧𝗨𝗥𝗘𝗦 𝗔𝗡𝗗 𝗔𝗟𝗚𝗢𝗥𝗜𝗧𝗛𝗠𝗦 🚀 DAY 0 Choose your programming language — @code2careerai — mining/posts/Cm9HDEGLrMk/notes.md
+- [ ] Top Useful Excel Shortcuts💫 — @code2careerai — mining/posts/CmyxjTLM0cT/notes.md
 - [ ] Symbols Used in Programming 💻 — @code2careerai — mining/posts/CmywyRlM0YA/notes.md
 - [ ] Must know Full form in IT world ✅ — @code2careerai — mining/posts/CmywOMwM9ar/notes.md
 - [ ] Algorithm Types 🎯 — @code2careerai — mining/posts/CmyvzAysUx5/notes.md
@@ -28896,6 +28806,7 @@
 - [ ] The first 10K/month business you build might have ZERO employees — @itsaiguide — mining/posts/DcR921aCrKg/notes.md
 - [ ] It's 2026 and people still use Claude like a question box — @itsaiguide — mining/posts/DcOo8V3jTED/notes.md
 - [ ] Most people don’t need another course — @itsaiguide — mining/posts/DcOF7BWjcDl/notes.md
+- [ ] The 2-minute presentation isn’t the trick — @itsaiguide — mining/posts/DcLbvd5jbUC/notes.md
 - [ ] Most people use Claude for emails — @itsaiguide — mining/posts/DcI_8UrDW0Q/notes.md
 - [ ] Most people still think Google just has “some AI tools” — @itsaiguide — mining/posts/DcH8lVeCoy_/notes.md
 - [ ] The biggest coding mistake in 2026 — @itsaiguide — mining/posts/DcHcOp5jcbj/notes.md
@@ -28979,7 +28890,6 @@
 - [ ] Knowledge used to be the moat — @itsaiguide — mining/posts/DYH6QY9Cv9R/notes.md
 - [ ] 187 million people use ChatGPT — @itsaiguide — mining/posts/DX7k5O5ja-y/notes.md
 - [ ] What if reporting a pothole could also reveal who needs to fix it — @gita_ethos — mining/posts/DcOKfgDJHpK/notes.md
-- [ ] That's the power of the people — @gkcs__ — mining/posts/DbNp1Jdj3Uz/notes.md
 - [ ] This is how Lyft reduced Agentic hallucinations by 20% — @gkcs__ — mining/posts/Darrq_FNqpJ/notes.md
 - [ ] Evals are the hottest topic of 2026 — @gkcs__ — mining/posts/DagUyW3THFl/notes.md
 - [ ] This is how Notion was able to scale its vector database by 10x — @gkcs__ — mining/posts/DaV-OuzTQvX/notes.md
@@ -29107,6 +29017,7 @@
 - [ ] Being part of the education process is my dream — @gkcs__ — mining/posts/CWZzzCaj-ev/notes.md
 - [ ] Chess engine complete — @gkcs__ — mining/posts/CUWoU6_jmum/notes.md
 - [ ] We talk about diversity hiring in tech, and if it's a good idea — @gkcs__ — mining/posts/CTj4Y8TCnxn/notes.md
+- [ ] Interviewer: What are your weaknesses — @gkcs__ — mining/posts/CS4LJtQF4R-/notes.md
 - [ ] This is my first video on Entrepreneurship — @gkcs__ — mining/posts/CQOVyZrD2aT/notes.md
 - [ ] How do you learn the internals of a programming language in depth — @gkcs__ — mining/posts/CNMWkGAnMVO/notes.md
 - [ ] How'd you like my first attempt at custom thumbnails — @gkcs__ — mining/posts/CGvN_9pHYbg/notes.md
@@ -29172,7 +29083,6 @@
 - [ ] AI system design have many terms that sound similar… …but in interviews and real production systems, they mean very diff — @jam.with.ai — mining/posts/DZsRGh2IG36/notes.md
 - [ ] 8 Github repositories every AI Engineer should know — @jam.with.ai — mining/posts/DZaS1d_IzUW/notes.md
 - [ ] Vibe coding looks like magic — @jam.with.ai — mining/posts/DZkiyH0I_iu/notes.md
-- [ ] Most people use an AI agent one prompt at a time — @jam.with.ai — mining/posts/DZh9vfHogcP/notes.md
 - [ ] Explaining HNSW vector search in a caveman mode — @jam.with.ai — mining/posts/DZc2cL6ouSn/notes.md
 - [ ] This is the best learning week you are going to have — @jam.with.ai — mining/posts/DZDHnv6iKwh/notes.md
 - [ ] Vector DB in simplest language: Normal database matches exact words — @jam.with.ai — mining/posts/DZVHPh8o7VB/notes.md
@@ -29578,6 +29488,7 @@
 - [ ] 📦 You've got packages, deadlines, and limited capacity — @codewithupasana — mining/posts/DJ9TxkrBVKP/notes.md
 - [ ] Why solve the whole problem… when you can break it down and conquer it piece by piece — @codewithupasana — mining/posts/DJwVMA8BLxw/notes.md
 - [ ] TWO SUM — Think it’s always brute force — @codewithupasana — mining/posts/DJjgmimyKwk/notes.md
+- [ ] 🚀 Struggling with placement prep — @codewithupasana — mining/posts/DJeVp3khnq_/notes.md
 - [ ] 🐞 First Bad Version — A Buggy Binary Search Classic — @codewithupasana — mining/posts/DJZHrljhtg_/notes.md
 - [ ] 🧠 Search in a 2D Matrix — But Think 1D — @codewithupasana — mining/posts/DJWl_dphr1x/notes.md
 - [ ] 🎯 Find First & Last Position of an Element in a Sorted Array — @codewithupasana — mining/posts/DJReO_yBrNf/notes.md
@@ -29590,6 +29501,7 @@
 - [ ] 📊 Prefix Sum — The OG DSA Hack 💡 Ever been asked to find the sum of elements in a subarray quickly — @codewithupasana — mining/posts/DIgcfXZhf_f/notes.md
 - [ ] 🚀 Ready to crack your dream tech job — @gfg.cu — mining/posts/DIcG8ZDz7Ee/notes.md
 - [ ] 🔍 Find all triplets that sum to ZERO in an array — @codewithupasana — mining/posts/DIL4Mb2hpRu/notes.md
+- [ ] 🔄 Rotate an Array — @codewithupasana — mining/posts/DIGuf8Yh5k2/notes.md
 - [ ] 🔍✨ Is One String a Permutation of Another — @codewithupasana — mining/posts/DIEKcYsh0F8/notes.md
 - [ ] 🚀 K-Diff pair in an Array: Leetcode Medium 🚀 Must solve dsa problem from 2 pointer pattern — @codewithupasana — mining/posts/DH8jQC0y_qt/notes.md
 - [ ] "When you try to pronounce the longest word in the dictionary — @codewithupasana — mining/posts/DH3R1RFhTzc/notes.md
@@ -29739,6 +29651,7 @@
 - [ ] Temperature doesn’t change reasoning — @jganesh.ai — mining/posts/DStn0YhDl_i/notes.md
 - [ ] This is not a fandom decision — @jganesh.ai — mining/posts/DSrCbtKDtPa/notes.md
 - [ ] If you’re just eyeballing summaries, you actually dont know if your system works — @jganesh.ai — mining/posts/DSoqwCgjW5E/notes.md
+- [ ] In real-world GenAI apps (AWS / Azure), guardrails aren’t prompt filters — @jganesh.ai — mining/posts/DSlskhvDK4y/notes.md
 - [ ] Most real systems reuse a small set of patterns — the difference is when you apply each — @jganesh.ai — mining/posts/DSgt-ZyDkJU/notes.md
 - [ ] It’s very critical to have a well designed monitoring system in place after model goes live — @jganesh.ai — mining/posts/DSY37OujMM1/notes.md
 - [ ] There are lots of agent frameworks today — from visual builders to code-first SDKs — @jganesh.ai — mining/posts/DSWSWKzDIrM/notes.md
@@ -29927,6 +29840,7 @@
 - [ ] Sending the same context repeatedly — @thepracticai — mining/posts/Db-08N7km7h/notes.md
 - [ ] AI Agents aren’t just chatbots — @thepracticai — mining/posts/Db0qxeWElru/notes.md
 - [ ] Your app is not calling GPT-4 directly — @thepracticai — mining/posts/DbyAhSwEl0x/notes.md
+- [ ] Your AI agent isn't failing because of the LLM — @thepracticai — mining/posts/DbtKJrkElbD/notes.md
 - [ ] Building an MCP server is easier than most developers think — @thepracticai — mining/posts/DblDC8WErcm/notes.md
 - [ ] Everyone wants to build AI agents — @thepracticai — mining/posts/DbdaL_fkrV_/notes.md
 - [ ] You’re not bad at RAG — @thepracticai — mining/posts/DbUlRFCknM8/notes.md
@@ -30243,7 +30157,6 @@
 - [ ] 🧠 HOW POINTERS ACTUALLY WORK Pointers are one of the most misunderstood concepts in programming — @sde_ii_labs — mining/posts/DaA-uT-yhNW/notes.md
 - [ ] 🧠 HOW RAM STORES ARRAYS Most developers know this: ✅ Arrays have O(1) access — @sde_ii_labs — mining/posts/DaA9OoFJ9TG/notes.md
 - [ ] 🚀 WHY WAS LINKED LIST INVENTED — @sde_ii_labs — mining/posts/DaA5LVyhOOo/notes.md
-- [ ] 🚀 WHY DO ARRAYS EXIST — @sde_ii_labs — mining/posts/DaA49xGxbJ-/notes.md
 - [ ] 🚀 EVERY MONGODB AGGREGATION IS JUST A PIPELINE Most developers think MongoDB Aggregation is difficult because of too man — @sde_ii_labs — mining/posts/DZ_ZRnuBkGT/notes.md
 - [ ] 🔥 BEFORE YOU SOLVE ANY HARD LEETCODE PROBLEM, FIND THESE 3 THINGS Most developers think Hard problems require better cod — @sde_ii_labs — mining/posts/DZ-bDh0NebM/notes.md
 - [ ] 🚀 THE DSA CHEAT CODE NOBODY TALKS ABOUT Most developers think DSA is about solving thousands of problems — @sde_ii_labs — mining/posts/DZ-atcypWw5/notes.md
@@ -30565,6 +30478,7 @@
 - [ ] 🚨 Struggling with DSA in Java — @devrelmegha — mining/posts/DL7eBNdpoAf/notes.md
 - [ ] From Service-Based to Product-Based 🚀 Yes, it’s possible — even with a 9 to 6 job — @devrelsquad — mining/posts/DL5FtVXpBLQ/notes.md
 - [ ] If I had to start learning AI all over again, this is exactly what I’d do — @devrelmegha — mining/posts/DLuyTDTJO1c/notes.md
+- [ ] Nail your salary question like a pro — @devrelmegha — mining/posts/DLpqK6np8-M/notes.md
 - [ ] Top-5 tech tips every developer should know in 2025 — @devrelmegha — mining/posts/DLnFj_cp0j1/notes.md
 - [ ] 🚀 Juspay Hiring Challenge 2025 is LIVE — @devrelmegha — mining/posts/DLfFrJbpbWF/notes.md
 - [ ] 💥 Calling all AI engineers — these 5 projects are next-level — @devrelmegha — mining/posts/DLXnBU3pT54/notes.md
@@ -30715,6 +30629,7 @@
 - [ ] Speaker swags from cloud n devops meet-up @yashrajnayak — @devrelmegha — mining/posts/Cx4kvfchblE/notes.md
 - [ ] All about today @mongodb atlas with @microsoft azure workshop — @devrelmegha — mining/posts/Cw-r1HOh29C/notes.md
 - [ ] It was indeed a great event — @mananvermatech — mining/posts/CwY9WGMvDY4/notes.md
+- [ ] rsvp soon, only a few seats left — @devrelmegha — mining/posts/Csk_TF-us9I/notes.md
 - [ ] developer engineer — @devrelmegha — mining/posts/CrVN_5trm_s/notes.md
 - [ ] Thank you AWS user group Kochi — @devrelmegha — mining/posts/CkTU_4WByln/notes.md
 - [ ] Most people think of advanced AI as something that writes, codes, or answers questions — @innovation — mining/posts/DcwNy66jymw/notes.md
@@ -31008,7 +30923,6 @@
 - [ ] Nvidia is now generating more than $1 billion in revenue every day — @mindwired.ai — mining/posts/Dcr5IADEf38/notes.md
 - [ ] Apple has acquired Israeli AI startup Q — @mindwired.ai — mining/posts/DchV_3bE6OM/notes.md
 - [ ] launch events in years — @mindwired.ai — mining/posts/DccMZJ0E5uO/notes.md
-- [ ] These 9 ChatGPT prompt shortcuts can make a noticeable difference in the way you use AI — @mindwired.ai — mining/posts/Dcazoo-kw0a/notes.md
 - [ ] AI is starting to break software gatekeeping — @mindwired.ai — mining/posts/DcaZWdvkyW3/notes.md
 - [ ] This isn’t just another lawsuit against Big Tech — @mindwired.ai — mining/posts/DcTRBvYT7s_/notes.md
 - [ ] A regular camera can now estimate depth and use it to create virtual lighting that reacts to you in real time — @mindwired.ai — mining/posts/DcSACkAE5qR/notes.md
@@ -31070,6 +30984,7 @@
 - [ ] These images were made with Google’s new Nano Banana 2 image model — @mindwired.ai — mining/posts/DRUageTE4OL/notes.md
 - [ ] Meta just made 3D creation effortless — @mindwired.ai — mining/posts/DRSveQpk00O/notes.md
 - [ ] Google just broke the internet with Gemini 3 — @mindwired.ai — mining/posts/DRQMkaGEwwg/notes.md
+- [ ] Gemini 3 Pro just dropped — and it’s way beyond chat — @mindwired.ai — mining/posts/DRPVK8Dk_nJ/notes.md
 - [ ] 🚨👀 Another huge week in AI — @mindwired.ai — mining/posts/DRK60j_E0OY/notes.md
 - [ ] ⚠️ Chinese hackers just used Anthropic’s AI agent as a cyberweapon — and it actually worked — @mindwired.ai — mining/posts/DRIjE7ikxoj/notes.md
 - [ ] Jeff Bezos just shared his long-term vision for Earth — and it’s out of this world — @mindwired.ai — mining/posts/DRH6hodjH6A/notes.md
@@ -31083,6 +30998,7 @@
 - [ ] 🚨 BREAKING: Google just hit a quantum milestone — @mindwired.ai — mining/posts/DQKwsYzk06I/notes.md
 - [ ] OpenAI just dropped a browser that talks back — @mindwired.ai — mining/posts/DQHhSe2E4K3/notes.md
 - [ ] The numbers behind OpenAI’s ambitions don’t add up — @sovereignty.ai — mining/posts/DP_6Gm3DAJY/notes.md
+- [ ] “The Real Sora 2 Rival Just Dropped” Google just fired back at OpenAI — @mindwired.ai — mining/posts/DP2OxUZk71K/notes.md
 - [ ] 🚨 Rishi Sunak just joined the AI race — this time, from the inside — @mindwired.ai — mining/posts/DPzAzkpkb8F/notes.md
 - [ ] 💥 India becomes the first country where ChatGPT can actually make UPI payments — @mindwired.ai — mining/posts/DPvgjBAEbsW/notes.md
 - [ ] 🚀 ChatGPT just became more than a chatbot — it’s now a full app platform — @mindwired.ai — mining/posts/DPhiSagjEE5/notes.md
@@ -31109,6 +31025,7 @@
 - [ ] That’s not just a reply… that’s a finishing move😣 Who are you siding with — @mindwired.ai — mining/posts/DNcrKFXR1Jy/notes.md
 - [ ] 🚨 A New Challenger to GPT-5 — @mindwired.ai — mining/posts/DNbpA6NzR2A/notes.md
 - [ ] 10 ChatGPT‑5 prompts that plan, write, and ship your work, save this — @mindwired.ai — mining/posts/DNZvGp5RSRd/notes.md
+- [ ] 🪄 Most people are still using ChatGPT wrong… and OpenAI just told us why — @mindwired.ai — mining/posts/DNXRvS9zKD-/notes.md
 - [ ] 🚀🩺 AI Doctors Are Coming… to Space — @mindwired.ai — mining/posts/DNUnQe6z4nh/notes.md
 - [ ] ChatGPT-5 and Grok 4 was tested with same critical prompts — @mindwired.ai — mining/posts/DNPdQ2ZRCE0/notes.md
 - [ ] “The AI race is just getting started — and it’s global — @mindwired.ai — mining/posts/DNOozSgTnlD/notes.md
@@ -31206,10 +31123,12 @@
 - [ ] There is only one rule for devs to get a tech job in 2026 — @webbyvaris — mining/posts/DZulS1yhGvr/notes.md
 - [ ] Working from home as a Full Stack Developer Currently working a 9–5 software engineering job building websites and appli — @webbyvaris — mining/posts/DYsr5cTT3SY/notes.md
 - [ ] Unwinding before midnight — @webbyvaris — mining/posts/DYHs0_HgRMK/notes.md
+- [ ] Long story short, your desk setup matters, but building your dream one can take years — @webbyvaris — mining/posts/DYA217fzlw2/notes.md
 - [ ] Nobody can predict the future — @webbyvaris — mining/posts/DXoe0GbAS_l/notes.md
 - [ ] Times have changed, you can be whatever you want in 2026 — @webbyvaris — mining/posts/DXbr3MIge25/notes.md
 - [ ] Obsession beats talent every time — @webbyvaris — mining/posts/DXZPoBRAYeO/notes.md
 - [ ] You’re flexing growth — @webbyvaris — mining/posts/DXNyGswgZ-6/notes.md
+- [ ] Okay so Anthropic just dropped Opus 4 — @webbyvaris — mining/posts/DXO0fUKgcSa/notes.md
 - [ ] why is even the cursor catching vibes 😭 — @webbyvaris — mining/posts/DXCDX6TAddH/notes.md
 - [ ] Most people don’t struggle with building — @webbyvaris — mining/posts/DW3j6LLgSnA/notes.md
 - [ ] My setup just received that one missing key upgrade that I was dreaming about for a very long time — @webbyvaris — mining/posts/DWTWiOwgfkv/notes.md
@@ -31226,6 +31145,7 @@
 - [ ] The degree gets you the interview — @webbyvaris — mining/posts/DUX797lASMn/notes.md
 - [ ] Ready to kickstart your AI fundamentals — @webbyvaris — mining/posts/DT-El86Ae4-/notes.md
 - [ ] Stack Overflow activity is down to 2008 levels — @webbyvaris — mining/posts/DT706OagchH/notes.md
+- [ ] Happy Friday, everyone — @webbyvaris — mining/posts/DT2cYs7gWfO/notes.md
 - [ ] Machine Learning doesn’t have to be a headache — @webbyvaris — mining/posts/DTu06gHgcct/notes.md
 - [ ] The error isn’t the code, but the size 🤌🏻 — @webbyvaris — mining/posts/DTsL_K7gUC_/notes.md
 - [ ] Living for moments like this — @webbyvaris — mining/posts/DTpauATgWpi/notes.md
@@ -31516,6 +31436,7 @@
 - [ ] Python basics become easier when you know what each part is used for — @she_explores_data — mining/posts/Dca35-ttKCo/notes.md
 - [ ] SQL is written in one order, but the database processes it in a different order — @she_explores_data — mining/posts/DcI38OaN0DR/notes.md
 - [ ] Learn Tech for Free Building strong tech skills doesn’t have to be expensive — @she_explores_data — mining/posts/Dbf0MIithsw/notes.md
+- [ ] Excel & SQL: The Core Skillset for Modern Data Analysts Behind every clean dashboard and sharp insight, there’s a strong — @she_explores_data — mining/posts/DbYEGtYty1J/notes.md
 - [ ] SQL at a Glance SQL isn’t about memorizing commands—it’s about understanding how they work together to query, manage, an — @she_explores_data — mining/posts/Dbk4iN9Nb4p/notes.md
 - [ ] SQL Interview Questions to Test Your Readiness Before your next data interview, ask yourself: Can you clearly explain jo — @she_explores_data — mining/posts/DbVfgSCtIMB/notes.md
 - [ ] How AI Technologies Connect AI is not one technology but a collection of interconnected fields — @she_explores_data — mining/posts/DcBYbCnNu5M/notes.md
@@ -31530,7 +31451,6 @@
 - [ ] 90+ SQL Interview Questions for Data Roles Strong SQL skills are not about remembering definitions — @she_explores_data — mining/posts/DYW8uwKmsDV/notes.md
 - [ ] Python lists look simple until you start working with real datasets — @she_explores_data — mining/posts/DYR5Ot5NzVS/notes.md
 - [ ] Statistics is not just about formulas — @she_explores_data — mining/posts/DYCbPEfmvd1/notes.md
-- [ ] Power BI is no longer just a dashboard tool — @she_explores_data — mining/posts/DX_0WXPjfaA/notes.md
 - [ ] Speed matters when your data stops fitting into memory — @she_explores_data — mining/posts/DX6vLszDTkb/notes.md
 - [ ] Understanding SQL is not about memorizing commands — @she_explores_data — mining/posts/DXooxadmuxs/notes.md
 - [ ] ETL vs Reverse ETL vs ELT — Understand the Direction of Data Not all data pipelines move the same way — @she_explores_data — mining/posts/DXjeNBJjXAQ/notes.md
@@ -31543,6 +31463,7 @@
 - [ ] 105 Python Built-ins Every Data Professional Should Know If you are working with Python, your efficiency is not defined  — @she_explores_data — mining/posts/DWOh4owEo28/notes.md
 - [ ] SQL in 30 Days SQL isn’t just about queries — it’s the foundation of every data-driven decision in today’s world — @she_explores_data — mining/posts/DWJYS9VEvab/notes.md
 - [ ] Pandas is one of the most important Python libraries used for working with structured data — @she_explores_data — mining/posts/DWEOpDgkrIJ/notes.md
+- [ ] Strong SQL skills start with understanding the functions that transform raw data into meaningful insights — @she_explores_data — mining/posts/DWBp6GvksUF/notes.md
 - [ ] Every data professional begins their journey with SQL — @she_explores_data — mining/posts/DV_FC5YkjJ0/notes.md
 - [ ] Strong SQL skills start with understanding the core functions that analysts use every day — @she_explores_data — mining/posts/DV8gUm0khyQ/notes.md
 - [ ] SQL Query Execution Order Explained SQL queries are written in one order but executed in another — @she_explores_data — mining/posts/DV0y1o7khSo/notes.md
@@ -31779,6 +31700,7 @@
 - [ ] 🚀 Do you know how apps like Instagram, Uber, or Spotify get your data in seconds — @techie_programmer — mining/posts/DL4Cg6VtVJE/notes.md
 - [ ] Ai will take our jobs Not if you become AI engineer — @techie_programmer — mining/posts/DLyuakrTUtE/notes.md
 - [ ] This is a classic example, merge salt in python, which is leverages divide and conquer — @techie_programmer — mining/posts/DLwKD0JTuEO/notes.md
+- [ ] Checklist to become cyber security expert — @techie_programmer — mining/posts/DLubjlzzysh/notes.md
 - [ ] Git tutorial from scratch to expert — @techie_programmer — mining/posts/DLrRNgmTqNV/notes.md
 - [ ] Ai customer support bot with chatgpt — @techie_programmer — mining/posts/DLlyuvYzuar/notes.md
 - [ ] Checklist to become data analyst — @techie_programmer — mining/posts/DLj9VPfzSEL/notes.md
@@ -31846,6 +31768,7 @@
 - [ ] 25 YouTube Channels To Learn Coding # — @techie_programmer — mining/posts/DH_CCi1xp-a/notes.md
 - [ ] Don’t let “Tell me about yourself” ruin your interview — @techie_programmer — mining/posts/DH-UmbXzM6M/notes.md
 - [ ] Pyramids in Python — @techie_programmer — mining/posts/DH59rmTpHwM/notes.md
+- [ ] Oop’s introduction 🙌 — @techie_programmer — mining/posts/DH3YaWEzkyT/notes.md
 - [ ] Design spotify — @techie_programmer — mining/posts/DH0yyoYzdH8/notes.md
 - [ ] Check out bubble sort visualised — @techie_programmer — mining/posts/DHShOl-T-3x/notes.md
 - [ ] Machine Learning Algorithms every data scientist must know — @techie_programmer — mining/posts/DHQ0dTctyAz/notes.md
@@ -31895,11 +31818,13 @@
 - [ ] Become a better developer — @techie_programmer — mining/posts/DE9fxL1zbaG/notes.md
 - [ ] Queues are everywhere — even in real life — @techie_programmer — mining/posts/DE9UEwETMb3/notes.md
 - [ ] Queues are everywhere — even in real life — @techie_programmer — mining/posts/DE7z1kvzTZO/notes.md
+- [ ] Ever heard of stacks in programming — @techie_programmer — mining/posts/DE7WrP7zzK0/notes.md
 - [ ] Confused about linked lists — @techie_programmer — mining/posts/DE4r6yCTKrI/notes.md
 - [ ] 72 AI tools to kickstart productivity in 2025 — @techie_programmer — mining/posts/DEoYERuBLeL/notes.md
 - [ ] 130+ AI tools 2025 Edition — @techie_programmer — mining/posts/DEm4JcUham2/notes.md
 - [ ] Want to master python in next 60 days — @techie_programmer — mining/posts/DEjR8tPTo2b/notes.md
 - [ ] Top 16 python projects for 2025 — @techie_programmer — mining/posts/DEjOda9u8MY/notes.md
+- [ ] Roadmap to master python programming — @techie_programmer — mining/posts/DEhuVKXOPRG/notes.md
 - [ ] Relational, logical, unary and assignment operators — @techie_programmer — mining/posts/DEgps21oiO0/notes.md
 - [ ] Websites to learn top technologies for free — @techie_programmer — mining/posts/DEe78QHB-ZS/notes.md
 - [ ] JavaScript Array Methods — @techie_programmer — mining/posts/DEeE3qtBSBF/notes.md
@@ -31933,6 +31858,7 @@
 - [ ] 5 Layers of Software — @techie_programmer — mining/posts/DDqk-y4s8Xm/notes.md
 - [ ] Best pack of AI tools — @techie_programmer — mining/posts/DDo3OhnqC58/notes.md
 - [ ] Looking to master Java — @techie_programmer — mining/posts/DDod0DjTIWD/notes.md
+- [ ] OOP Introduction — @techie_programmer — mining/posts/DDoALgzqhf7/notes.md
 - [ ] Basic SQL commands — @techie_programmer — mining/posts/DDmSWu2Imsg/notes.md
 - [ ] Languages and their Creator — @techie_programmer — mining/posts/DDlbYeWOPmV/notes.md
 - [ ] Roadmap to Become a Data Scientist 1 — @techie_programmer — mining/posts/DDdzLruTMHU/notes.md
@@ -31944,6 +31870,7 @@
 - [ ] Python 🐍 vs JavaScript 💻: Which one do you prefer — @techie_programmer — mining/posts/DCwCOfzTFLo/notes.md
 - [ ] Ep-3 SQL operators are the building blocks of powerful database queries — @techie_programmer — mining/posts/DCoqTq-Jn1t/notes.md
 - [ ] 🎬 Episode 2: The WHERE Clause in SQL Master the art of filtering data in your database — @techie_programmer — mining/posts/DCmAdVPN477/notes.md
+- [ ] Advance Excel shortcuts — @techie_programmer — mining/posts/DCg5r8nzqd_/notes.md
 - [ ] 🎬 Episode 1: Mastering the Basics of SQL - SELECT Statement — @techie_programmer — mining/posts/DCdnDLgu8c4/notes.md
 - [ ] Boost your coding skills with these top Git commands — @techie_programmer — mining/posts/DCbuP3FzA60/notes.md
 - [ ] mastering sql joins made simple — @techie_programmer — mining/posts/DCWiNHtTv2Z/notes.md
@@ -31968,7 +31895,6 @@
 - [ ] Full stack Developer — @techie_programmer — mining/posts/DBJYdDrNfJg/notes.md
 - [ ] Git in a Nutshell — @techie_programmer — mining/posts/DA_FZSdNWvz/notes.md
 - [ ] How to choose a Right Graph for Data Visualization — @techie_programmer — mining/posts/DA541gbOX0I/notes.md
-- [ ] Power BI vs Tableau — @techie_programmer — mining/posts/DA3XFGAzrco/notes.md
 - [ ] Top 5 clustering techniques in Data Science — @techie_programmer — mining/posts/DA0yZzrTbPi/notes.md
 - [ ] Data Science Techniques :- 1 — @techie_programmer — mining/posts/DAqJQ23zv4J/notes.md
 - [ ] Roadmap to become data analyst — @techie_programmer — mining/posts/DAd66ShzBJW/notes.md
@@ -32000,6 +31926,7 @@
 - [ ] Dreaming of joining the ranks of India’s most successful entrepreneurs — @techie_programmer — mining/posts/C-NTf-3yUob/notes.md
 - [ ] Lets fix your resume in 5 days day 4 — @techie_programmer — mining/posts/C-IagmzyyCf/notes.md
 - [ ] Best vs code extension for web developer — @techie_programmer — mining/posts/C-FeMcDSVLG/notes.md
+- [ ] Oops introduction — @techie_programmer — mining/posts/C-DG_j3SvwO/notes.md
 - [ ] Basic sql commands — @techie_programmer — mining/posts/C-Aq8uPSOhM/notes.md
 - [ ] Important sections to have in your resume Save it for later — @techie_programmer — mining/posts/C94Q_aMyjrH/notes.md
 - [ ] Lets fix your resume — @techie_programmer — mining/posts/C91buUPyGZp/notes.md
@@ -32016,7 +31943,6 @@
 - [ ] Basic Server Types — @techie_programmer — mining/posts/C9C23uTPipi/notes.md
 - [ ] 🚀 Short on time to build a website — @techie_programmer — mining/posts/C9B3GEHtUe4/notes.md
 - [ ] Python Programming Roadmap 1 — @techie_programmer — mining/posts/C8-QXJygeaO/notes.md
-- [ ] Data Analyst Roadmap — @techie_programmer — mining/posts/C89sa8Yuwt5/notes.md
 - [ ] Sql roadmap — @techie_programmer — mining/posts/C87L3JuNiZv/notes.md
 - [ ] Developers Pick Your Number — @techie_programmer — mining/posts/C84pKzmuEY0/notes.md
 - [ ] You are already a great programmer 1 — @techie_programmer — mining/posts/C84FeH4y8EQ/notes.md
@@ -32048,6 +31974,7 @@
 - [ ] Advanced DevOps — @techie_programmer — mining/posts/C7WrCRaso__/notes.md
 - [ ] Interesting Python Hacks — @techie_programmer — mining/posts/C7MZpyKLwYo/notes.md
 - [ ] Python Projects Ideas for Beginner — @techie_programmer — mining/posts/C7JthQkL8W0/notes.md
+- [ ] LearnPython - Basic to Advance — @techie_programmer — mining/posts/C7HRoPCL2Ls/notes.md
 - [ ] # This function adds two numbers def add(x, y): return x + y # This function subtracts two numbers def subtract(x, y): r — @techie_programmer — mining/posts/C7GQOP8NGV9/notes.md
 - [ ] Learn Java Data Structures and Algorithms — @techie_programmer — mining/posts/C7CG6iCrPxy/notes.md
 - [ ] Pyramids in python — @techie_programmer — mining/posts/C6_mvrGrFfG/notes.md
@@ -32083,7 +32010,6 @@
 - [ ] Middle of themes — @techie_programmer — mining/posts/C5p09pFrPGN/notes.md
 - [ ] links are given below — @techie_programmer — mining/posts/C5oHrlnStjl/notes.md
 - [ ] Roadmap to DevOps — @techie_programmer — mining/posts/C5lb3LtLQT3/notes.md
-- [ ] TOP 10 TOOLS DATA SCIENTISTS USE — @techie_programmer — mining/posts/C5gAhFGqqTy/notes.md
 - [ ] Programmers must know — @techie_programmer — mining/posts/C5bHhrKLWls/notes.md
 - [ ] Capabilities of generative AI — @techie_programmer — mining/posts/C5YSIRONRu9/notes.md
 - [ ] How to become a python full stack developing oper — @techie_programmer — mining/posts/C5Psvf8Sjcv/notes.md
@@ -32113,6 +32039,7 @@
 - [ ] 100 python interview questions with answers — @techie_programmer — mining/posts/C4VoZYoOATq/notes.md
 - [ ] Roadmap to Learn JavaScript: 1 — @techie_programmer — mining/posts/C4R6kKSLLIY/notes.md
 - [ ] 25 youtube channels you must consider to — @techie_programmer — mining/posts/C4QDG97vXuq/notes.md
+- [ ] 100 python interview questions with answers Q21 to Q40 of Q100 — @techie_programmer — mining/posts/C4LVhyhtwvq/notes.md
 - [ ] 5 movies every programmer should watch Let me know ur favts — @techie_programmer — mining/posts/C4KvQFML6h6/notes.md
 - [ ] 100 Python interview questions with answers — @techie_programmer — mining/posts/C4GLpbGpswk/notes.md
 - [ ] DSA roadmap 1 — @techie_programmer — mining/posts/C4CaRK2vT5S/notes.md
@@ -32304,6 +32231,7 @@
 - [ ] PYTHON ROADMAP🤩 Follow for more (@techie_programmer) — @techie_programmer — mining/posts/CuRNT1FvLT0/notes.md
 - [ ] FULL STACK DEVELOPMENT✨ Follow for more (@techie_programmer) — @techie_programmer — mining/posts/CuOMv4zriMO/notes.md
 - [ ] 😂💯 Follow for more (@techie_programmer) — @techie_programmer — mining/posts/CuJDF4jLzzF/notes.md
+- [ ] Data science 🧬 Data Visualization • Tableau • Power BI • Matplotlib • GG Plot • Seaborn Data Analysis • Feature Engineer — @techie_programmer — mining/posts/CuG59JCPH_v/notes.md
 - [ ] Which one is your Favorite — @techie_programmer — mining/posts/Ct-wK-aLJCg/notes.md
 - [ ] Keyboard shortcuts for VS CODE Follow for more (@techie_programmer) — @techie_programmer — mining/posts/Ct3A_YiPpD6/notes.md
 - [ ] These are must things to add in ur resume 🫠 follow for more (@techie_programmer) — @techie_programmer — mining/posts/Ct0yQ5ZsSWi/notes.md
@@ -32328,7 +32256,6 @@
 - [ ] Follow for more (@techie_programmer) — @techie_programmer — mining/posts/CsxgH8GI_uG/notes.md
 - [ ] Tools in demand — @techie_programmer — mining/posts/CssWgncrA03/notes.md
 - [ ] Introducing EdrawMax AI, the future of diagramming and flowcharting — @techie_programmer — mining/posts/Csqr09Ptnoj/notes.md
-- [ ] Roadmap for data analyst — @techie_programmer — mining/posts/Cspxu3IL6xI/notes.md
 - [ ] Top technology trends that you can learn Follow for more (@techie_programmer) — @techie_programmer — mining/posts/Csiv9M8tu5p/notes.md
 - [ ] Some tips just to motivate you ✨ Follow for more (@techie_programmer) — @techie_programmer — mining/posts/Csh_DIhLy1a/notes.md
 - [ ] Best 3 YouTube channels to learn Follow for more (@techie_programmer) — @techie_programmer — mining/posts/CsdQDneyiTk/notes.md
@@ -32385,7 +32312,6 @@
 - [ ] Programming languages used in different domains Follow for more (@techie_programmer) — @techie_programmer — mining/posts/Cqj4YSvotfz/notes.md
 - [ ] Control key shortcuts — @techie_programmer — mining/posts/CqhTlisNTeH/notes.md
 - [ ] Follow for more (@techie_programmer) — @techie_programmer — mining/posts/Cqc2nwENQze/notes.md
-- [ ] Data analyst roadmap — @techie_programmer — mining/posts/CqX7g0psByE/notes.md
 - [ ] Backend technologies in the industry — @techie_programmer — mining/posts/CqSBHcmPhE4/notes.md
 - [ ] This is literally Time Machine for websites 🔥 — @techie_programmer — mining/posts/CqPVHiojL_3/notes.md
 - [ ] Code documentation is an essential part of the software development process — @techie_programmer — mining/posts/CqK2UBzLHDA/notes.md
@@ -32771,6 +32697,7 @@
 - [ ] Web Developer Skills follow for more ( @techie_programmer ) — @techie_programmer — mining/posts/Ca3sUF0hz-X/notes.md
 - [ ] Languages and sites to learn them — @techie_programmer — mining/posts/Ca1zGYoB4kA/notes.md
 - [ ] Reasons behind every successful programmer — @techie_programmer — mining/posts/Ca1HAOuhkzv/notes.md
+- [ ] Average salary in US 2022 — @techie_programmer — mining/posts/CazLpWUB3DV/notes.md
 - [ ] Python free learning resources — @techie_programmer — mining/posts/CawoGX3B0dZ/notes.md
 - [ ] Web Development vs — @techie_programmer — mining/posts/Cav8ZFWBUrk/notes.md
 - [ ] Languages mainly used for — @techie_programmer — mining/posts/CauAwQVBWy3/notes.md
@@ -32885,6 +32812,7 @@
 - [ ] Sub Fields of AI — @techie_programmer — mining/posts/CVzNSfwPm49/notes.md
 - [ ] forward and backward resoning in AI — @techie_programmer — mining/posts/CVxfEbUraSM/notes.md
 - [ ] python career — @techie_programmer — mining/posts/CVwrv67ImBn/notes.md
+- [ ] basics of html — @techie_programmer — mining/posts/CVuB4N4PcdN/notes.md
 - [ ] which one do you prefer — @techie_programmer — mining/posts/CVsTMJTrjt2/notes.md
 - [ ] this sounds good — @techie_programmer — mining/posts/CVsOwnxN-Sv/notes.md
 - [ ] SQL Data Types | Save Post Follow for more — @techie_programmer — mining/posts/CVptmcjBffF/notes.md
@@ -32901,10 +32829,10 @@
 - [ ] top 5 Free Cloud Spaces — @techie_programmer — mining/posts/CVPc4netGHa/notes.md
 - [ ] Mobile code editors 🔥 — @techie_programmer — mining/posts/CVNINWkl3i5/notes.md
 - [ ] N-dimension array — @techie_programmer — mining/posts/CVLD2DDBopt/notes.md
-- [ ] Basics to know 😂😂🤣 — @techie_programmer — mining/posts/CVKEUWlFuls/notes.md
 - [ ] Advantage and disadvantage of 🐍 python — @techie_programmer — mining/posts/CVDQlx3lFKw/notes.md
 - [ ] Text to speech converter — @techie_programmer — mining/posts/CVCYl-QFMDR/notes.md
 - [ ] Please don’t ask 🙂🙃 — @techie_programmer — mining/posts/CVAz4RBBnmE/notes.md
+- [ ] DBMS : interview question — @techie_programmer — mining/posts/CVAqGWGFudI/notes.md
 - [ ] Apple with search engine 🙊 This is what it would be — @techie_programmer — mining/posts/CU_splphN_h/notes.md
 - [ ] Programming languages — @techie_programmer — mining/posts/CU9shrbB1D4/notes.md
 - [ ] Upcoming android 12 features ✅ — @techie_programmer — mining/posts/CU9Cpr_FPfz/notes.md
@@ -33028,7 +32956,6 @@
 - [ ] Difference between function and a method ⚡ Follow for more @techie_programmer — @techie_programmer — mining/posts/COcux6oAnyX/notes.md
 - [ ] What do you prefer — @techie_programmer — mining/posts/COXCrICjhlu/notes.md
 - [ ] Do like share and subscribe 💯🥰 — @techie_programmer — mining/posts/COUwEwkAqrP/notes.md
-- [ ] Check out list of few big cyber attacks — @techie_programmer — mining/posts/CORz6uYAegW/notes.md
 - [ ] Different types of sql joins you need to know 🙌 hit save for reference and dont forget to follow if new to page 😸 — @techie_programmer — mining/posts/COHgVFyATRf/notes.md
 - [ ] 5 yt channels for machine learning — @techie_programmer — mining/posts/COCQ3hFAxXW/notes.md
 - [ ] Gui vs cli what do you prefer 🎈⚡ — @techie_programmer — mining/posts/CN_0ExHARBa/notes.md
@@ -33049,7 +32976,6 @@
 - [ ] Can you answer these — @techie_programmer — mining/posts/CMEHGmkgR6N/notes.md
 - [ ] Which one is your favourite — @techie_programmer — mining/posts/CMCZL2LgzSV/notes.md
 - [ ] File system operations in python ⚡🔥❤️ Follow ( @techie_programmer ) — @techie_programmer — mining/posts/CL_NLfjgX2l/notes.md
-- [ ] Basic ✌️ — @techie_programmer — mining/posts/CLwWkB3ge17/notes.md
 - [ ] Count number of faces in a camera 📸 — @techie_programmer — mining/posts/CLrSmXfg9M7/notes.md
 - [ ] How does compiler works ⚡ — @techie_programmer — mining/posts/CLopVJDgd4Z/notes.md
 - [ ] Which one is your favourite — @techie_programmer — mining/posts/CLmCUBTgc6U/notes.md
@@ -33063,6 +32989,7 @@
 - [ ] What is confusion matrix — @techie_programmer — mining/posts/CLO4gfVA5Bs/notes.md
 - [ ] Lists vs array python ⚡🔥 basics to know ⚡ — @techie_programmer — mining/posts/CLB_8D3g0sy/notes.md
 - [ ] 🔥what is ur point of view 🔥 — @techie_programmer — mining/posts/CK_qSTJgUrI/notes.md
+- [ ] Follow ( @techie_programmer ) The basic question : what is github expained 💣 — @techie_programmer — mining/posts/CK6MiY9AFyN/notes.md
 - [ ] Follow ( @techie_programmer ) Enum , format , data class ⚡ — @techie_programmer — mining/posts/CK3tTUkggeP/notes.md
 - [ ] Practice this way of writing your functions 💕🔥 — @techie_programmer — mining/posts/CKypc7rgrz_/notes.md
 - [ ] Follow ( @techie_programmer ) What more on each type — @techie_programmer — mining/posts/CKv93PPAzFC/notes.md
@@ -33070,6 +32997,7 @@
 - [ ] Comprehension can reduce your coding effort and even reduce lines of code ⚡⚡ — @techie_programmer — mining/posts/CKoS5S8gp-M/notes.md
 - [ ] Top 5 progrmming language of 2021 😍 — @techie_programmer — mining/posts/CKlvU8RA8UF/notes.md
 - [ ] Types of languages — @techie_programmer — mining/posts/CKjI2iSguce/notes.md
+- [ ] Try out this really cool Project 😍 — @techie_programmer — mining/posts/CKbaFZAA4VW/notes.md
 - [ ] Choose your language — @techie_programmer — mining/posts/CKY1dhDgXjB/notes.md
 - [ ] 5 beat ways to earn as a data scientist — @techie_programmer — mining/posts/CKMEMnjAh12/notes.md
 - [ ] Pickle — @techie_programmer — mining/posts/CKJYKTOAkQc/notes.md
@@ -33357,6 +33285,7 @@
 - [ ] 🔥🔥 Free courses 🔥🔥 — @datasciencescoop — mining/posts/Cqx9vpAOAgq/notes.md
 - [ ] FREE course 🔥🔥 — @datasciencescoop — mining/posts/CqlLrWOu90r/notes.md
 - [ ] Credits - Abacus — @datasciencescoop — mining/posts/CqQrUBku9zP/notes.md
+- [ ] 📍Numpy - Day 4📍 👉 Generate — @datasciencescoop — mining/posts/CqQXQOTuxhx/notes.md
 - [ ] api data docker kubernetes — @datasciencescoop — mining/posts/CqN2dVTujNr/notes.md
 - [ ] 🔥 Day 2🔥 — @datasciencescoop — mining/posts/CqMuV7ntPNP/notes.md
 - [ ] 👉 Day 1 — @datasciencescoop — mining/posts/CqExb1bDz0o/notes.md
@@ -33369,7 +33298,6 @@
 - [ ] Emerging of & roles — @datasciencescoop — mining/posts/Cnnuooxjnk-/notes.md
 - [ ] Models Credits - Satish Chandra Gupta — @datasciencescoop — mining/posts/CkLykDqAziT/notes.md
 - [ ] Credits- @datasciencebrain — @datasciencescoop — mining/posts/Cjqaq42uvdh/notes.md
-- [ ] basics 👏🏻👏🏻 — @datasciencescoop — mining/posts/CesqkjHrRWY/notes.md
 - [ ] data statistics — @datasciencescoop — mining/posts/CeS0btuL2nG/notes.md
 - [ ] coding data developer engineer — @datasciencescoop — mining/posts/CeIhJfQDTAM/notes.md
 - [ ] data statistics — @datasciencescoop — mining/posts/Cd2b5JLDruO/notes.md
@@ -33378,7 +33306,6 @@
 - [ ] data database developer sql — @datasciencescoop — mining/posts/CZlg-NjgR1v/notes.md
 - [ ] join types — @datasciencescoop — mining/posts/CZXTxwTgcra/notes.md
 - [ ] 🔥 Data Visualisation 🔥 — @datasciencescoop — mining/posts/CZBij0alAc6/notes.md
-- [ ] basics 🚀 — @datasciencescoop — mining/posts/CY9Gffrlyic/notes.md
 - [ ] 🔥 basics cheat sheet 🔥 — @datasciencescoop — mining/posts/CYylG2VlPqV/notes.md
 - [ ] coding data developer — @datasciencescoop — mining/posts/CYvFTOHF1CB/notes.md
 - [ ] 🔥 pipelines on 🔥 Credits - scgupta — @datasciencescoop — mining/posts/CYWduy_l8Pl/notes.md
@@ -33387,7 +33314,6 @@
 - [ ] Anatomy of — @datasciencescoop — mining/posts/CW4uFRpD58Y/notes.md
 - [ ] Core principles of — @datasciencescoop — mining/posts/CWtbNh3AQHu/notes.md
 - [ ] data database developer sql — @datasciencescoop — mining/posts/CWtHb5dgd0n/notes.md
-- [ ] 🔥 basics🔥 — @datasciencescoop — mining/posts/CWq0YvkBZmd/notes.md
 - [ ] coding data developer — @datasciencescoop — mining/posts/CWkYXf_gGml/notes.md
 - [ ] coding data developer — @datasciencescoop — mining/posts/CWgnpG1ALYQ/notes.md
 - [ ] api data database developer — @datasciencescoop — mining/posts/CWfEZG7j3lN/notes.md
@@ -33429,7 +33355,6 @@
 - [ ] Agree — @datasciencescoop — mining/posts/CLFMlVcgkoN/notes.md
 - [ ] conversion matrix Link - https://docs — @datasciencescoop — mining/posts/CK6Iva5AdIi/notes.md
 - [ ] 🔥Great playlist on “ ” by freeCodeCamp — @datasciencescoop — mining/posts/CK0_caJgccc/notes.md
-- [ ] for 🔥 Importing Data 🔥 — @datasciencescoop — mining/posts/CKj2IIXgzwx/notes.md
 - [ ] data numpy — @datasciencescoop — mining/posts/CKbb5eDgl11/notes.md
 - [ ] quick reference — @datasciencescoop — mining/posts/CKY8omZA7IJ/notes.md
 - [ ] Application of Clustering in Real world — @datasciencescoop — mining/posts/CKVzWlvA1vh/notes.md
@@ -33460,6 +33385,7 @@
 - [ ] 🐍 Linear Algebra in Python 🐍 Github Link - lnkd — @datasciencescoop — mining/posts/CI6U2HlgMMn/notes.md
 - [ ] How The New World of AI is Driving a New World of Processor Development http://feedproxy — @datasciencescoop — mining/posts/CI0GDt9gLAC/notes.md
 - [ ] Life cycle of Via : https://www — @datasciencescoop — mining/posts/CIutpIjA20H/notes.md
+- [ ] - A Complete Introduction OmniSci https://www — @datasciencescoop — mining/posts/CIsIYolgWlI/notes.md
 - [ ] 🔥 Univariate Distribution Relationships 🔥 Link - lnkd — @datasciencescoop — mining/posts/CIqqYmRrKjW/notes.md
 - [ ] Best Certifications to Learn in 2021 https://medium — @datasciencescoop — mining/posts/CIphy4nLTTi/notes.md
 - [ ] 🔥 Become a self-taught 🔥 Link - lnkd — @datasciencescoop — mining/posts/CIpcIh3LMue/notes.md
@@ -33661,6 +33587,7 @@
 - [ ] Use Cases that Explain Big Data and Blockchain Interdependence https://www — @datasciencescoop — mining/posts/CDYfUSsgEjd/notes.md
 - [ ] Why Does Your Company Need to Use Analytics for Higher Organizational Success — @datasciencescoop — mining/posts/CDWF9ocHkOK/notes.md
 - [ ] How Would Change in the Post Covid-19 World — @datasciencescoop — mining/posts/CDVkM9Zgm0M/notes.md
+- [ ] Hands-On Guide to Time Series Analysis using Simple Exponential Smoothing in Python https://analyticsindiamag — @datasciencescoop — mining/posts/CDVfgdSlA8x/notes.md
 - [ ] How does Computer Vision Bring a Difference to the Enterprise — @datasciencescoop — mining/posts/CDUQGZLgFLK/notes.md
 - [ ] Applied Natural Language Processing (NLP) in Python Exploring NLP Libraries https://becominghuman — @datasciencescoop — mining/posts/CDT0ofwF2N4/notes.md
 - [ ] How AI Can Help In A Recession http://feedproxy — @datasciencescoop — mining/posts/CDThLElAz3A/notes.md
@@ -33872,7 +33799,7 @@
 - [ ] Credits - DatumGuy — @datasciencescoop — mining/posts/B_GF3PgDOCT/notes.md
 - [ ] Features of Credits - Data Flair — @datasciencescoop — mining/posts/B_FDC4OA0Wp/notes.md
 - [ ] ⭐️Introduction to Applied Linear Algebra⭐️ Link - web — @datasciencescoop — mining/posts/B-zXB_zA3IW/notes.md
-- [ ] basics — @datasciencescoop — mining/posts/B-ylVsUg25E/notes.md
+- [ ] Excel Cheat Sheet — @datasciencescoop — mining/posts/B-hq0msAsDg/notes.md
 - [ ] ✅ 10 Business Functions That Are Ready To Use Artificial Intelligence✅ Link - https://www — @datasciencescoop — mining/posts/B-aaia2gQhP/notes.md
 - [ ] 👉 Keyboard Shortcuts for Data Scientists 👈 — @datasciencescoop — mining/posts/B-QLqztgpgh/notes.md
 - [ ] Follow Link - https://mobile — @datasciencescoop — mining/posts/B-IYTF2g5oM/notes.md
@@ -34143,6 +34070,7 @@
 - [ ] Comment “IMPACT” and I’ll dm you all these coding project ideas 1 — @bashi_fuirkashi — mining/posts/DPJoeX2EWM-/notes.md
 - [ ] 💡 Know the Difference: Coding Projects for Software Engineers Applying for a Job ✅ Basic coding projects don’t stand out — @bashi_fuirkashi — mining/posts/DO82ABuDIHz/notes.md
 - [ ] Comment “BUILD” and I’ll dm you the full free ChatGPT prompt to build better coding projects Paste this in ChatGPT (or y — @bashi_fuirkashi — mining/posts/DO6ooDnEnw4/notes.md
+- [ ] Chat GPT Prompt 👇 1️⃣ Go to huggingface — @bashi_fuirkashi — mining/posts/DO6ROOfjYXK/notes.md
 - [ ] Comment “IMPRESSIVE” and I’ll dm you the full free ChatGPT prompt to build better coding projects Paste this in ChatGPT  — @bashi_fuirkashi — mining/posts/DO30WGVj25j/notes.md
 - [ ] Comment “YES” to get my free ChatGPT prompt that helps you generate resume-ready coding projects that stand out in today — @bashi_fuirkashi — mining/posts/DO11zw7j_lo/notes.md
 - [ ] Comment PROJECT PROMPT to get my free ChatGPT prompt that helps you generate resume-ready coding projects that stand out — @bashi_fuirkashi — mining/posts/DOtUAkkEdD3/notes.md
@@ -34294,6 +34222,7 @@
 - [ ] 🛑🧑‍💻Stop trying to become a front-end engineer — @bashi_fuirkashi — mining/posts/DB9CIxuvBE_/notes.md
 - [ ] Want to land your first $100,000+ coding job — @bashi_fuirkashi — mining/posts/DB1UONTucSu/notes.md
 - [ ] 💬 Follow for more help to land your first coding job — @bashi_fuirkashi — mining/posts/DByoY0DPyPY/notes.md
+- [ ] Follow this Easy Checklist to Build a Great Resume Project to land a $100,000+ coding job — @bashi_fuirkashi — mining/posts/DBwmOXPyI8z/notes.md
 - [ ] Comment “GUIDANCE” to get FREE help to learn how to code — @bashi_fuirkashi — mining/posts/DBZNuA_STgm/notes.md
 - [ ] 👉Do you want to land a $100k+ coding job — @bashi_fuirkashi — mining/posts/DA1AyVBPLOv/notes.md
 - [ ] 💬 Want to start passing your coding interviews ASAP — @bashi_fuirkashi — mining/posts/DAqwPliSN1s/notes.md
@@ -34871,6 +34800,7 @@
 - [ ] Holy sh*t, this is BREATHTAKING — @evolving.ai — mining/posts/DH6Tk9ptrFs/notes.md
 - [ ] 🚨 Are we witnessing the end of Graphic Designers — @evolving.ai — mining/posts/DH5tv4HNGTW/notes.md
 - [ ] Runway just released their new impressive AI video model, Gen-4 — @evolving.ai — mining/posts/DH3rt3pN1xJ/notes.md
+- [ ] 🚨China's DeepSeek just did it once again — @evolving.ai — mining/posts/DHn7nNtttL2/notes.md
 - [ ] Vibe coding with AI is quietly changing coding and how people build games — @evolving.ai — mining/posts/DHnzPZOt66k/notes.md
 - [ ] 🧬 This is incredible — @evolving.ai — mining/posts/DHlpzwGNBFx/notes.md
 - [ ] 🚨 NVIDIA just dropped major AI and robotics announcements at GTC 2025 — @evolving.ai — mining/posts/DHa7A1BNIrp/notes.md
@@ -34910,6 +34840,7 @@
 - [ ] 🚨 BREAKING: OpenAI just dropped Operator, their first real AI agent — @evolving.ai — mining/posts/DFNQAoqMSpy/notes.md
 - [ ] 🤯 DeepSeek unveils DeepSeek-R1, a reasoning model that beats OpenAI-o1 — @evolving.ai — mining/posts/DFISqtGAXsg/notes.md
 - [ ] This is an amazing use for AI 🗣 This tool (@lipdub — @evolving.ai — mining/posts/DFGIiTQsYTJ/notes.md
+- [ ] 🤯 If you want to see how AI is about to transform the film industry, this short video makes it clear — @evolving.ai — mining/posts/DFFwhpkMCA6/notes.md
 - [ ] This is incredible — @evolving.ai — mining/posts/DE7vne6gc1h/notes.md
 - [ ] I wish I had this when I was younger Personalized AI tutors that speak and teach in real-time are the future in educatio — @evolving.ai — mining/posts/DE7oj3lsqxK/notes.md
 - [ ] 🚨 OpenAI just dropped 'Tasks' for ChatGPT — @evolving.ai — mining/posts/DE2T97-gTdY/notes.md
@@ -35117,7 +35048,6 @@
 - [ ] Who would you play vs — @evolving.ai — mining/posts/CwQDfXUspaQ/notes.md
 - [ ] Asking AI to turn countries into superheroes 👀 Which country should be next — @evolving.ai — mining/posts/CwK_HzqMv_2/notes.md
 - [ ] Asking AI to turn countries into villains 👀 Which country should be next — @evolving.ai — mining/posts/CwIUW2Gs3YO/notes.md
-- [ ] Use these 8 ChatGPT prompts to achieve your goals like a champ 🔥🙌 Follow @evolving — @evolving.ai — mining/posts/CwAuXBJMzUE/notes.md
 - [ ] Who would you play vs — @evolving.ai — mining/posts/Cv4z2YdLb4J/notes.md
 - [ ] Insane that both clips are AI 🤯 How long before we can't tell the difference — @evolving.ai — mining/posts/Cvxb-WesHkI/notes.md
 - [ ] Which country should be next — @evolving.ai — mining/posts/CvxOWFFMgCt/notes.md
@@ -35188,7 +35118,6 @@
 - [ ] So majestic 😂 Follow @evolving — @evolving.ai — mining/posts/CsLxmX4s__W/notes.md
 - [ ] What my head sounds like every day 😂 Follow @evolving — @evolving.ai — mining/posts/CsG3IVzPrZq/notes.md
 - [ ] "AI will take over the world" 😳😂 🎥: @botbanter Follow @evolving — @evolving.ai — mining/posts/CsE-MV2r8Dx/notes.md
-- [ ] 7 amazing AI tools you don't want to miss in 2023 🙌 save this post for later Follow @evolving — @evolving.ai — mining/posts/CsCKV5asohs/notes.md
 - [ ] Follow @evolving — @evolving.ai — mining/posts/Cry1BVBMUb5/notes.md
 - [ ] Save this for later 🙌 AI will not replace you — @evolving.ai — mining/posts/CryM0X1MdNZ/notes.md
 - [ ] Follow @evolving — @evolving.ai — mining/posts/CryFuDTtpFO/notes.md
@@ -35379,6 +35308,7 @@
 - [ ] 🇨🇳🤖 China just showed off new spider-like military robots that can move across different terrains — @airesearches — mining/posts/DO3H80qEWfs/notes.md
 - [ ] 🇬🇧🤖 UK politicians are starting to sound like ChatGPT — @airesearches — mining/posts/DOx04nSEXYP/notes.md
 - [ ] 🤯🕶️ Meta’s new AI glasses now come with a built-in screen — @airesearches — mining/posts/DOvDXKhET8E/notes.md
+- [ ] Do you see yourself in any of these — @airesearches — mining/posts/DOtAyIciUfG/notes.md
 - [ ] 🏈🏟️ What if every NFL team had a stadium that looked like its name — @airesearches — mining/posts/DOsl5qJESHV/notes.md
 - [ ] 🤯 Bro, this is insane — @airesearches — mining/posts/DOpRX3CAZws/notes.md
 - [ ] A new report from The Atlantic captures how broken the U — @airesearches — mining/posts/DOdP75vDjh7/notes.md
@@ -35700,6 +35630,7 @@
 - [ ] Pretty GOOD AT EVERYTHING — @shivanjaliverse — mining/posts/DVOLdexCmNs/notes.md
 - [ ] Not your average corporate girlie 😉 Work hard — @shivanjaliverse — mining/posts/DVBYB-GinoU/notes.md
 - [ ] Weekdays = coding & deadlines — @shivanjaliverse — mining/posts/DTu4y_eirOg/notes.md
+- [ ] My goal is to be pretty — @shivanjaliverse — mining/posts/DSt9CfCkfsn/notes.md
 - [ ] 7 days… 7 habits… — @shivanjaliverse — mining/posts/DSrq1J4EuKc/notes.md
 - [ ] Had to try this one as it was all over my feed 💃 — @shivanjaliverse — mining/posts/DL-f6bOy5l-/notes.md
 - [ ] Here’s to one year of Developer life 🍻 — @shivanjaliverse — mining/posts/C9g04ofyka5/notes.md
@@ -35795,6 +35726,7 @@
 - [ ] I got this amazing 7 port USB 3 — @duodevlogs — mining/posts/CxFHS3CNenS/notes.md
 - [ ] I am not Indian — @duodevlogs — mining/posts/CxAa4mQAn8X/notes.md
 - [ ] Before diving deep, let’s just know what a JavaScript library and JavaScript framework are and how they differ — @duodevbuilds — mining/posts/Cw-5xVwN5V_/notes.md
+- [ ] Here are five unique fullstack project ideas: Node — @duodevlogs — mining/posts/Cw6saRYNxQr/notes.md
 - [ ] Learn Go from these resources 1 — @duodevlogs — mining/posts/Cwxp-LotNGi/notes.md
 - [ ] Max programmer rizz 😂😅 — @teenprogrammer — mining/posts/CwuS6oGArOb/notes.md
 - [ ] 6 Algorithms every developer should know — @duodevbuilds — mining/posts/CwV3mvPNAN5/notes.md
@@ -35906,6 +35838,7 @@
 - [ ] ⚡️ First day at @bmw — @duodevlogs — mining/posts/ClO22V0jgZe/notes.md
 - [ ] ⚡️30 Days of Code: Day 24 — Context API in React 💫 Today, I was studying about Context API — @duodevlogs — mining/posts/ClCJvDlD1d7/notes.md
 - [ ] ⚡️What is Redux and how is it used — @duodevlogs — mining/posts/Ck8ST1tDsEB/notes.md
+- [ ] Have you ever faced such a situation — @duodevlogs — mining/posts/Ck1sPwuj5F5/notes.md
 - [ ] ⚡️30 Days of Code: Day 18 — Work update and a very useful website you should know about — @duodevlogs — mining/posts/CkysSUZDdmH/notes.md
 - [ ] I have upgraded my Ubuntu PC from 20 — @duodevlogs — mining/posts/CkpsOdljV7l/notes.md
 - [ ] ⚡️ In the reel I mentioned the two most important points but here I described more things to do — @duodevlogs — mining/posts/CkkmD8ljopP/notes.md
@@ -36145,6 +36078,7 @@
 - [ ] Why does your authenticator app code expire in exactly 30 seconds — @iamsaumyaawasthi — mining/posts/DahHGmvMw0F/notes.md
 - [ ] How do engineers actually choose the right database — @iamsaumyaawasthi — mining/posts/DaZkbeemqnV/notes.md
 - [ ] How does BookMyShow prevent double booking — @iamsaumyaawasthi — mining/posts/DaW2T9RCBVt/notes.md
+- [ ] 🚨 90% of candidates struggle with basic CRUD interview questions — @iamsaumyaawasthi — mining/posts/DaIayQyE0qK/notes.md
 - [ ] Most developers jump straight into system design interviews without understanding the fundamentals — @iamsaumyaawasthi — mining/posts/DaFmUFuGkkF/notes.md
 - [ ] 📌 STOP Building Random Projects — @iamsaumyaawasthi — mining/posts/DaDPmctvIkZ/notes.md
 - [ ] Everyone wants to become a Python developer — @iamsaumyaawasthi — mining/posts/DaAXzoyGg5f/notes.md
@@ -36244,6 +36178,7 @@
 - [ ] 🚀 Struggling to land your first job — @iamsaumyaawasthi — mining/posts/DHx7Dl4T8JH/notes.md
 - [ ] If AI could live in a Ghibli world… would it — @iamsaumyaawasthi — mining/posts/DHxTlREThDj/notes.md
 - [ ] 🚀 Spring Boot 3 just made backend development faster and smoother — @iamsaumyaawasthi — mining/posts/DHqR4ONztyo/notes.md
+- [ ] Stuck in the same job, same CTC, same project for 3 years — @iamsaumyaawasthi — mining/posts/DHn1T7izbrn/notes.md
 - [ ] If aptitude gives you headaches… you’re not alone 😩 But these secrets — @iamsaumyaawasthi — mining/posts/DHfdp2eTAT_/notes.md
 - [ ] 📢 Your 2025 Java Developer Roadmap is HERE — @iamsaumyaawasthi — mining/posts/DHNqDkjTuTl/notes.md
 - [ ] 🔥 3 Coding Projects in 3 Weeks = Job Ready — @iamsaumyaawasthi — mining/posts/DHDP8BHzMcp/notes.md
@@ -36318,6 +36253,7 @@
 - [ ] 🔥 Ready to ace your next coding interview — @bitsbotsbosses — mining/posts/DAQnPyGpmv_/notes.md
 - [ ] Looking for a thorough guide to master Java 8 features — @iamsaumyaawasthi — mining/posts/DANuyJfAAzD/notes.md
 - [ ] Designing a Least Recently Used (LRU) cache is a common interview question (Asked in Citi Bank) An LRU cache evicts the  — @iamsaumyaawasthi — mining/posts/DAK4wibu7uj/notes.md
+- [ ] 💼 One of our amazing followers with 3 years of experience just cracked Infosys — @iamsaumyaawasthi — mining/posts/DAFjntDtbUU/notes.md
 - [ ] Java Exceptions Demystified — @iamsaumyaawasthi — mining/posts/DABFZ7huc7S/notes.md
 - [ ] Happy Engineers’ Day — @iamsaumyaawasthi — mining/posts/C_737gPT5mp/notes.md
 - [ ] Dive into the essentials of Java with my handwritten notes — @iamsaumyaawasthi — mining/posts/C_4y-IssgCQ/notes.md
@@ -36343,6 +36279,7 @@
 - [ ] Wrapped collections are part of the Java Collections Framework, introduced in JDK 1 — @iamsaumyaawasthi — mining/posts/C-mIdN1SEBs/notes.md
 - [ ] 7 Techniques to Solve Most Array Problems ⬇️ Two Pointer Technique: Use two pointers to iterate through the array from d — @iamsaumyaawasthi — mining/posts/C-ZXwPdtV0R/notes.md
 - [ ] How to Make a Java Class Immutable ✅ — @iamsaumyaawasthi — mining/posts/C-Wyv25y1e4/notes.md
+- [ ] Top Resources to Prepare for Placements ✅ — @iamsaumyaawasthi — mining/posts/C-VguN0SvPn/notes.md
 - [ ] How to Answer “Why are you switching jobs in less than 1 year — @iamsaumyaawasthi — mining/posts/C-M4NfuSB8f/notes.md
 - [ ] Must revise these Java interview questions to ace your next interview — @iamsaumyaawasthi — mining/posts/C-J2R4OyGVS/notes.md
 - [ ] Stream API in Java ✅ — @iamsaumyaawasthi — mining/posts/C-HR-3GyLBL/notes.md
@@ -36364,7 +36301,6 @@
 - [ ] The pressure to “be great” is real — @iamsaumyaawasthi — mining/posts/C9M1umtSH7_/notes.md
 - [ ] Stop solving 1000+ problems do these 75 instead ✅ — @iamsaumyaawasthi — mining/posts/C9HLeSDSbP7/notes.md
 - [ ] Segregate even and odd numbers into two separate lists using Java Streams ✅ HashTags - — @iamsaumyaawasthi — mining/posts/C9CJBdjyAD9/notes.md
-- [ ] “What are your salary expectations — @iamsaumyaawasthi — mining/posts/C8wzIyjyNiL/notes.md
 - [ ] Main features introduced in Java 8: 1 — @iamsaumyaawasthi — mining/posts/C8uRxvxyS40/notes.md
 - [ ] Calling all Code Ninjas — @iamsaumyaawasthi — mining/posts/C8tK_dPyYz1/notes.md
 - [ ] Describe the different ways to break the Singleton design pattern in Java, and how to prevent these breaks with code exa — @iamsaumyaawasthi — mining/posts/C8qmTTuSk_r/notes.md
@@ -36491,6 +36427,7 @@
 - [ ] Your brain may work differently when AI does part of the thinking — @uncover.quantum — mining/posts/Dchy4ceSnBD/notes.md
 - [ ] Japan just switched on its first full-stack neutral-atom quantum computer — @uncover.quantum — mining/posts/DccgVvlmqz3/notes.md
 - [ ] Two droplets head straight toward each other — but they never actually collide — @uncover.quantum — mining/posts/DcaBLr8qQ9T/notes.md
+- [ ] WORLD FIRST: Singapore is testing a data centre that computes using living human neurons — @uncover.quantum — mining/posts/DcU555jCuzj/notes.md
 - [ ] IBM is building quantum computers at temperatures hundreds of times colder than deep space — @uncover.quantum — mining/posts/DcSXSLJGnFV/notes.md
 - [ ] A developer built a virtual light that reacts to you in real time — @uncover.quantum — mining/posts/DcQEvjcClPm/notes.md
 - [ ] The Sun shouldn’t work — @uncover.quantum — mining/posts/DcN_r7tigah/notes.md
@@ -36525,6 +36462,7 @@
 - [ ] Elon Musk doesn’t say “I was wrong” often — @uncover.quantum — mining/posts/DaosRETChgf/notes.md
 - [ ] 1X just unveiled its next-generation robotic hand for NEO—and it’s one of the most human-like we’ve seen yet — @uncover.quantum — mining/posts/DanbGJICvzS/notes.md
 - [ ] Every satellite has the same weakness — @uncover.quantum — mining/posts/DamfT6smu5k/notes.md
+- [ ] Quantum is starting to move out of the “someday” category and into real policy, infrastructure, and national security pl — @uncover.quantum — mining/posts/Dae_lvNCtO1/notes.md
 - [ ] Scientists just built a brain-inspired chip that works just above absolute zero — @uncover.quantum — mining/posts/DaXG-fHyzHn/notes.md
 - [ ] Scientists just took one of the biggest steps toward building life from scratch — @uncover.quantum — mining/posts/DaVGjP-Cgdm/notes.md
 - [ ] 🚀 OpenAI just entered the AI chip race — @uncover.quantum — mining/posts/DaDtAdECntS/notes.md
@@ -36753,6 +36691,7 @@
 - [ ] Follow @quantumcomputings for more videos on science — @uncover.quantum — mining/posts/DEHFhjTyPib/notes.md
 - [ ] This impressive demonstration for quantum search algorithm show how Quantum Computing work — @uncover.quantum — mining/posts/DEFtkokSoT_/notes.md
 - [ ] ai coding developer job — @uncover.quantum — mining/posts/DD7JQKMND7M/notes.md
+- [ ] Placement season stressing you out — @bytemartdigital.in — mining/posts/Dcyj_ecTgO3/notes.md
 - [ ] Still using nested loops to find two numbers that add up to a target — @bytemartdigital.in — mining/posts/DcvrrYJPZlC/notes.md
 - [ ] Still adding all K elements again and again — @bytemartdigital.in — mining/posts/DcqpJlxverP/notes.md
 - [ ] Reversing a Linked List becomes easy when you stop memorizing it and understand the pattern — @bytemartdigital.in — mining/posts/DcoAt1avHaC/notes.md
@@ -37015,6 +36954,7 @@
 - [ ] Here are the libraries that actually matter in quant finance — @quantchics — mining/posts/DRWDMqzEnxm/notes.md
 - [ ] Ever wondered how math, data, and markets power modern trading — @wallstreetclub.bitshyd — mining/posts/DQpYhQuE8_i/notes.md
 - [ ] Want to build your quant resume with a real open-source project — @quant_enthusiasts — mining/posts/DP-3w3UCL_9/notes.md
+- [ ] @quant_enthusiasts What is Quantitative Finance — @quant_enthusiasts — mining/posts/DP0nlo0iOnW/notes.md
 - [ ] Want to work in Quant Finance but not sure which roles exist — @quant_enthusiasts — mining/posts/DPgYyvfiCV7/notes.md
 - [ ] Want to work in Quant Finance but not sure which roles exist — @quant_enthusiasts — mining/posts/DPgYZ2NCLWK/notes.md
 - [ ] @quant_enthusiasts @quantinsider — @quant_enthusiasts — mining/posts/DPeJb8JCDE5/notes.md
@@ -37037,6 +36977,7 @@
 - [ ] Portfolio Optimisation using Value at Risk (VaR) in Python — @quantinsider.io — mining/posts/C242H2cxQk0/notes.md
 - [ ] Important concepts used in Quant Finance - Option Pricing models - Time Series Analysis - Stochastic Calculus - Black Sc — @quantinsider.io — mining/posts/C24JbcERzl3/notes.md
 - [ ] Symmetric Random Walk visualized using Python — @quantinsider.io — mining/posts/C2mkmFNR-LH/notes.md
+- [ ] Difference between Quant Finance, Computational Finance and Financial Mathematics Swipe left and do give it a read — @quantinsider.io — mining/posts/C2miCDcRIdl/notes.md
 - [ ] Interview question by Two Sigma (one of the top Hedge funds in New York) Let us know your answer in the comments — @quantinsider.io — mining/posts/C2j9np_x-rZ/notes.md
 - [ ] That's how the book shelf of a Quant looks like — @quantinsider.io — mining/posts/C195q4ZSbFd/notes.md
 - [ ] How to answer "Tell me a time you failed" in the interviews — @quantinsider.io — mining/posts/C16cuGFRKtn/notes.md
@@ -37211,7 +37152,6 @@
 - [ ] Grok Released a Coding Agent and it's better than you think — @builders.central — mining/posts/DZX6XXAz5Xm/notes.md
 - [ ] Where To LAUNCH Your AI SAAS — @builders.central — mining/posts/DZVTUjeTEgA/notes.md
 - [ ] Stop Cold Emailing: Use This YC Tool Instead — @builders.central — mining/posts/DZMChlFTi8z/notes.md
-- [ ] Stop Running AI Agents Locally (Do This Instead) — @builders.central — mining/posts/DZIZlKpzvWS/notes.md
 - [ ] Notion is No Longer a Notes App (It’s an AI OS) — @builders.central — mining/posts/DZEnkTdM_xG/notes.md
 - [ ] AI Curriculum for Beginners — @builders.central — mining/posts/DZAx2YxzisL/notes.md
 - [ ] Stop Using Markdown for AI Prompts (Do This Instead) — @builders.central — mining/posts/DY4_zZjz45X/notes.md
@@ -37437,6 +37377,7 @@
 - [ ] $900,000 for THIS JOB 🤯 — @builders.central — mining/posts/CwVKGxftw0o/notes.md
 - [ ] REAL SRK or AI SRK is shooting — @builders.central — mining/posts/CwSigWcrsE_/notes.md
 - [ ] AI THAT CAN READ MINDS 🤯 — @builders.central — mining/posts/CwIWqiDJig_/notes.md
+- [ ] INDIA IS USING AI IN DEFENSE 🇮🇳🚀💪 — @builders.central — mining/posts/Cv96glUJFra/notes.md
 - [ ] ASIAN PAINTS IS A DATA COMPANY 🤯 — @builders.central — mining/posts/Cv2RnvvtxdX/notes.md
 - [ ] REPLICATE YOUR FRIENDS USING AI 🤯 — @builders.central — mining/posts/Cvmijn9JAsg/notes.md
 - [ ] How to BUILD APPS without CODING 🫨 — @builders.central — mining/posts/CvZ1R4CKlzF/notes.md
@@ -37445,9 +37386,9 @@
 - [ ] 3 PROFITABLE BUSINESS IDEAS for 2023 🚀 — @builders.central — mining/posts/Cu18KJcu8rK/notes.md
 - [ ] Game over for CHATGPT — @builders.central — mining/posts/Curf70mLIAv/notes.md
 - [ ] Why you should SELL your PRODUCT even before you build it — @builders.central — mining/posts/Cuo_7TFLmoG/notes.md
-- [ ] Vaibhav Sooryavanshi 🔥 But out ayipoyadu 🥲 — @funclovita — mining/posts/DXj0brQD07W/notes.md
 - [ ] ipl starts today 🥳 — @funclovita — mining/posts/DWaaD70j58X/notes.md
 - [ ] Forgive everyone and ask forgiveness from all before you go — @funclovita — mining/posts/DV5k0sFD17Y/notes.md
+- [ ] Our first complete AI video 😃 Video link in our story and bio — @funclovita — mining/posts/DS12WaND0_y/notes.md
 - [ ] Waiting for part 2 🥵 — @funclovita — mining/posts/DPCI7tHDznW/notes.md
 - [ ] 🔥 Trailer out Now — @funclovita — mining/posts/DOlsZ-_D8ox/notes.md
 - [ ] Eagerly waiting 🫠 — @funclovita — mining/posts/DLX2LVTvKbq/notes.md
@@ -37553,7 +37494,6 @@
 - [ ] Good evening rain 🌧️ — @sriram_2.0 — mining/posts/DZKekQnpggN/notes.md
 - [ ] Sample ai Creations all Support me 🥰 — @sriram_2.0 — mining/posts/DXrBe_VAXDZ/notes.md
 - [ ] Good evening 🥰 — @sriram_2.0 — mining/posts/DVyHy1Ugaqu/notes.md
-- [ ] job salary — @sriram_2.0 — mining/posts/DVp2g-1knSn/notes.md
 - [ ] UTS app not working — @sriram_2.0 — mining/posts/DTDX-kRAaL3/notes.md
 - [ ] Anthropic introduced Claude Fable 5 — @artificialintelligenceupdater — mining/posts/Dcy1JJTn2r7/notes.md
 - [ ] Google just introduced Gemini 3 — @artificialintelligenceupdater — mining/posts/Dcg5rDkkhOB/notes.md
@@ -37694,6 +37634,7 @@
 - [ ] Not all sources are created equal — @research.and.rage — mining/posts/DPay6GPEtOg/notes.md
 - [ ] 🚨 Don’t start writing your research paper with AI until you know this trick — @research.and.rage — mining/posts/DPVd4Q1DPBs/notes.md
 - [ ] Doing my literature review used to take forever ⏳ — @research.and.rage — mining/posts/DO461PBEvbI/notes.md
+- [ ] “Ever got stuck wondering 🤔 ‘Should I write in past tense or present tense in my research paper — @research.and.rage — mining/posts/DO0VM1MEjGE/notes.md
 - [ ] Finding papers shouldn’t feel like detective work — @research.and.rage — mining/posts/DOsHak1khkt/notes.md
 - [ ] If you’re exhausted from spending hours on research, writing, and citations, trust me these essential AI tools are must  — @research.and.rage — mining/posts/DOVvwZ8Eh1c/notes.md
 - [ ] Struggling to finish your research paper because: – You can’t find the right sources — @research.and.rage — mining/posts/DNF5-33STzw/notes.md
@@ -37826,6 +37767,7 @@
 - [ ] Build AI solutions with Big Query and win $100K from @googlecloud — @umerhaddii007 — mining/posts/DNViJ-io_sH/notes.md
 - [ ] Best End to End Machine Learning Project with @campusx — @umerhaddii007 — mining/posts/DNN2b6sIGTq/notes.md
 - [ ] Data Roles in AI and Data World — @umerhaddii007 — mining/posts/DNGIJOUo7Hn/notes.md
+- [ ] Master Python Object Oriented Programming with @campusx — @umerhaddii007 — mining/posts/DM-ZbwjS6GL/notes.md
 - [ ] Python Commands Sheet — @umerhaddii007 — mining/posts/DM71Wf3MqDb/notes.md
 - [ ] AI Research Scientist vs Data Scientist — @umerhaddii007 — mining/posts/DMu8XSjIihF/notes.md
 - [ ] Visualize the Artificial Neural Networks in 3D by @3blue1brown — @umerhaddii007 — mining/posts/DMsXjHqo086/notes.md
@@ -37971,6 +37913,7 @@
 - [ ] A Robot Dog That Attacks Visitors — @futurewalt.ai — mining/posts/DGJCL8rht5I/notes.md
 - [ ] china’s insane ai run in the last 30 days — @futurewalt.ai — mining/posts/DGGU-5jBy3m/notes.md
 - [ ] What would you say to Sama — @futurewalt.ai — mining/posts/DF0cQFah5h_/notes.md
+- [ ] Japan has done it again — @futurewalt.ai — mining/posts/DFxdd9_BE4x/notes.md
 - [ ] 🚨 Self-Replicating AI: A New Threat — @futurewalt.ai — mining/posts/DFsxqawhBGx/notes.md
 - [ ] USA has ChatGPT — @aithemis.community — mining/posts/DFr2CoyPqjv/notes.md
 - [ ] I think We will be reading more posts like this regularly in the future — @futurewalt.ai — mining/posts/DFpMx-YhhTB/notes.md
@@ -38302,6 +38245,7 @@
 - [ ] Python has one of the richest ecosystems in programming — @cloud_x_berry — mining/posts/DVytVS6k-q8/notes.md
 - [ ] TOP JAVA Project Ideas If you want to truly learn Java, building projects is the fastest way — @cloud_x_berry — mining/posts/DVwLd9PiOqI/notes.md
 - [ ] Every programming language has a different learning curve — @cloud_x_berry — mining/posts/DVumofYE3o6/notes.md
+- [ ] Follow @cloud_x_berry for more info pandas data analysis, numpy numerical computing, SQL for data analysis, Excel data p — @cloud_x_berry — mining/posts/DVsYAEbk3GN/notes.md
 - [ ] Follow @cloud_x_berry for more info microservices architecture, service decomposition, API gateway, service discovery, i — @cloud_x_berry — mining/posts/DVm7x5aExsp/notes.md
 - [ ] Follow @cloud_x_berry for more info blue green deployment, canary deployment, rolling deployment, recreate deployment, s — @cloud_x_berry — mining/posts/DVh7Rp5k20F/notes.md
 - [ ] Follow @cloud_x_berry for more info ping command networking, traceroute troubleshooting, netstat connections, ss command — @cloud_x_berry — mining/posts/DVcvaMBE_yT/notes.md
@@ -38342,12 +38286,14 @@
 - [ ] Follow @cloud_x_berry for more info PostgreSQL, SQL queries, data extraction, joins, CTEs, window functions, aggregation — @cloud_x_berry — mining/posts/DTahJ8Wk95t/notes.md
 - [ ] Follow @cloud_x_berry for more info authentication, authorization, access control models, RBAC, ABAC, OAuth 2 — @cloud_x_berry — mining/posts/DTZlhDqk-11/notes.md
 - [ ] Save this before you forget… JWT authentication, access token, refresh token, bearer token, token expiry, token validati — @cloud_x_berry — mining/posts/DTW92lik0bk/notes.md
+- [ ] Data Analyst Roadmap 2026 Follow @cloud_x_berry for more info data analysis fundamentals, SQL for analytics, advanced SQ — @cloud_x_berry — mining/posts/DTVfvzJk6c3/notes.md
 - [ ] Save for Later… LangGraph framework, graph-based workflows, LLM orchestration, stateful agents, nodes and edges, conditi — @cloud_x_berry — mining/posts/DTUorsvky6A/notes.md
 - [ ] Save this for your next interview… DNS resolution, domain names, IP addresses, recursive resolver, authoritative name se — @cloud_x_berry — mining/posts/DTSlr10E0ug/notes.md
 - [ ] Save this Programming Patterns and Algorithms… algorithm design, time complexity, space complexity, Big O notation, sort — @cloud_x_berry — mining/posts/DTQB7XzExMq/notes.md
 - [ ] Follow @cloud_x_berry for more info data ingestion, ETL, ELT, batch processing, stream processing, data pipelines, data  — @cloud_x_berry — mining/posts/DTOzAHLE5UM/notes.md
 - [ ] Follow @cloud_x_berry for more info HTTP/0 — @cloud_x_berry — mining/posts/DTNaLPbEheE/notes.md
 - [ ] Follow @cloud_x_berry for more info data structures and algorithms, operating systems, computer networks, DBMS concepts, — @cloud_x_berry — mining/posts/DTMxB0LEjPZ/notes.md
+- [ ] Follow @cloud_x_berry for more info Power BI Desktop, Power BI Service, data modeling, Power Query, DAX basics, DAX adva — @cloud_x_berry — mining/posts/DTK1aZdE7y-/notes.md
 - [ ] Follow @cloud_x_berry for more info Azure data fundamentals, Azure Data Factory, Azure Synapse Analytics, Azure Databric — @cloud_x_berry — mining/posts/DTKMRruE7YR/notes.md
 - [ ] Follow @cloud_x_berry for more info cloud fundamentals, AWS Azure GCP, cloud design principles, high availability, scala — @cloud_x_berry — mining/posts/DTJjFC-k7OV/notes.md
 - [ ] How to debug Production failures like a PRO — @cloud_x_berry — mining/posts/DTFnonlE-fy/notes.md
@@ -38385,11 +38331,13 @@
 - [ ] Follow @cloud_x_berry for more info service decomposition, API gateway, service discovery, load balancing, containerizat — @cloud_x_berry — mining/posts/DSAeUt-E14f/notes.md
 - [ ] Follow @cloud_x_berry for more info JSON Web Token, authentication, authorization, access token, refresh token, token si — @cloud_x_berry — mining/posts/DR9r2xvE32O/notes.md
 - [ ] Work like a Senior Engineer… Follow @cloud_x_berry for more info — @cloud_x_berry — mining/posts/DR8uujiE_w6/notes.md
+- [ ] Follow @cloud_x_berry for more info pivot tables, VLOOKUP, XLOOKUP, formulas, functions, conditional formatting, data cl — @cloud_x_berry — mining/posts/DR6J0t_E5Ov/notes.md
 - [ ] Follow @cloud_x_berry for more info artificial intelligence, machine learning, deep learning, neural networks, supervise — @cloud_x_berry — mining/posts/DR4dGokkzoW/notes.md
 - [ ] Follow @cloud_x_berry for more info machine learning, deep learning, neural networks, data preprocessing, model training — @cloud_x_berry — mining/posts/DR1DyzFE9tX/notes.md
 - [ ] Follow @cloud_x_berry for more info data structures, algorithms, time complexity, space complexity, arrays, strings, lin — @cloud_x_berry — mining/posts/DRw8-2wE_yE/notes.md
 - [ ] Follow @cloud_x_berry for more info Node — @cloud_x_berry — mining/posts/DRv9fiuk_F1/notes.md
 - [ ] Follow @cloud_x_berry for more info prompt design, LLM optimization, context engineering, few-shot prompting, chain-of-t — @cloud_x_berry — mining/posts/DRut8uuk9BS/notes.md
+- [ ] Don’t become a Data Analyst in 2026 if… data cleaning, data visualization, SQL queries, Excel analysis, Power BI, Tablea — @cloud_x_berry — mining/posts/DRuFIccE0w5/notes.md
 - [ ] Follow @cloud_x_berry for more info YouTube system design, video streaming architecture, CDN, load balancing, microservi — @cloud_x_berry — mining/posts/DRq0lVkkwVI/notes.md
 - [ ] Follow @cloud_x_berry for more info reactjs, react components, jsx, hooks, useState, useEffect, react router, state mana — @cloud_x_berry — mining/posts/DRpB7rBk_gg/notes.md
 - [ ] Don’t become a DevOps Engineer in 2026 if… Follow @cloud_x_berry for more info DevOps, CI/CD, Jenkins, GitHub Actions, D — @cloud_x_berry — mining/posts/DRi-zXykxCS/notes.md
@@ -38609,6 +38557,7 @@
 - [ ] No manual setup — @theartificialintelligens — mining/posts/DVP8lIliK_d/notes.md
 - [ ] Perplexity just became the the first Al company to truly go head-to-head with the Bloomberg Terminal — @theartificialintelligens — mining/posts/DVNz2xbiL3Q/notes.md
 - [ ] it's called World Monitor — @theartificialintelligens — mining/posts/DVHgRYMCPW0/notes.md
+- [ ] The Pentagon told Anthropic straight up this is a "sh*t-or-get-off-the-pot" meeting — @theartificialintelligens — mining/posts/DVHChszgSLx/notes.md
 - [ ] 100% open source — @theartificialintelligens — mining/posts/DU_q9RUiMgQ/notes.md
 - [ ] 100% open-source — @theartificialintelligens — mining/posts/DUtpbXciNF1/notes.md
 - [ ] No flashy benchmarks — @theartificialintelligens — mining/posts/DUtDB8tCKKh/notes.md
@@ -38619,6 +38568,7 @@
 - [ ] Reinforcement learning trains today’s smartest AI systems—but it turns out it’s been optimizing the wrong objective — @theartificialintelligens — mining/posts/DUngbFRCGri/notes.md
 - [ ] An open-source project called nanobot just showed how lightweight AI agents can really be — @theartificialintelligens — mining/posts/DUlIc5SAcFf/notes.md
 - [ ] AI just learned to reason using only 13 parameters — @theartificialintelligens — mining/posts/DUirAFwgdTb/notes.md
+- [ ] Anthropic won't stop COOKING OpenAI 💀 — @theartificialintelligens — mining/posts/DUgQq46CJaA/notes.md
 - [ ] The bigger picture: this isn't just about echo — @theartificialintelligens — mining/posts/DUdhDqriDc2/notes.md
 - [ ] You can debate the framing — @theartificialintelligens — mining/posts/DUbD1yQCCm3/notes.md
 - [ ] Anthropic CEO said AI models could handle end-to-end software engineering within 6 to 12 months — @theartificialintelligens — mining/posts/DUa6ZgvCCPe/notes.md
@@ -38700,6 +38650,7 @@
 - [ ] For 70+ years, silicon has been the backbone of electronics — @theartificialintelligens — mining/posts/DO-URDQiNmJ/notes.md
 - [ ] NeuroSpot’s new AI module doesn’t just help run a café, it watches everything — @theartificialintelligens — mining/posts/DOQspWvCCfD/notes.md
 - [ ] 🤖 Many grocery stores now use robots to help with different tasks — @theartificialintelligens — mining/posts/DN0sRZ20G7s/notes.md
+- [ ] Ever wondered where your AI subscription money really goes — @theartificialintelligens — mining/posts/DNxxQpSUEAf/notes.md
 - [ ] This doll looks so real, it’s almost human — @theartificialintelligens — mining/posts/DNvwcQGQrt1/notes.md
 - [ ] 3d visualisation of neural networks — @theartificialintelligens — mining/posts/DNd4OHezXHg/notes.md
 - [ ] SceneScript treats 3D reconstruction as a language problem rather than a geometry one — @theartificialintelligens — mining/posts/DMgBvrRBv0t/notes.md
@@ -38811,6 +38762,7 @@
 - [ ] Job match pro is basically an AI powered job search tool which actually analyses your resume , scrolls through all the j — @interview_prep_here — mining/posts/DaFUCYixFVP/notes.md
 - [ ] 2/ How do you handle a situation of conflict**** Looks like I mixed up one of the Q&As 😅 The question says "How do you h — @interview_prep_here — mining/posts/Dbf2HKTkxNW/notes.md
 - [ ] I never search for jobs myself — @interview_prep_here — mining/posts/DbVtEFUoL7e/notes.md
+- [ ] 1/ Check your resume’s ATS score Most candidates ignore this but companies do use ATS for the first round of filtering — @interview_prep_here — mining/posts/DblMkbwzjk0/notes.md
 - [ ] FREE tool to find the missing keywords in your resume - Added in the bio🥰 If you are one of those job seekers who use on — @interview_prep_here — mining/posts/DbYHXQrzvr0/notes.md
 - [ ] Guys don’t get rejected by bots — @interview_prep_here — mining/posts/Dba5yqwEzkm/notes.md
 - [ ] NVIDIA free courses related to AI are more than worth checking — @interview_prep_here — mining/posts/DbSUXSkEyQt/notes.md
@@ -38818,6 +38770,7 @@
 - [ ] 7 Interview calls in a month is no joke — @interview_prep_here — mining/posts/DbAWIgok0h_/notes.md
 - [ ] Use AI to land a job… — @interview_prep_here — mining/posts/Da4ueimE8PV/notes.md
 - [ ] Sometimes, you can lie in your job interview — @interview_prep_here — mining/posts/Dap72tnk7In/notes.md
+- [ ] I have been hiring candidates since past 5 years and these are the things I would never want to see as a hiring manager — @interview_prep_here — mining/posts/DaNs5wOE_NI/notes.md
 - [ ] I was shocked to read this reddit post — @interview_prep_here — mining/posts/DaiEWABk8UT/notes.md
 - [ ] How to fill resume when you have nothing to add — @interview_prep_here — mining/posts/DaHpUu5E297/notes.md
 - [ ] Save this before your next interview😍 Here is the list of top 7 interview question, one must prepare before any intervie — @interview_prep_here — mining/posts/DZ5DCjsk8wx/notes.md
@@ -38901,6 +38854,7 @@
 - [ ] Stop over apologising at work 🤝 — @interview_prep_here — mining/posts/DJwg0DsPUDM/notes.md
 - [ ] Check out these amazing tips to write a perfect resume 😍 — @interview_prep_here — mining/posts/DJt7a6FvCuT/notes.md
 - [ ] The best job search tips you needed 😍 — @interview_prep_here — mining/posts/DJZYoJSvvME/notes.md
+- [ ] “Why should we hire you — @interview_prep_here — mining/posts/DJQv5EyP9Ye/notes.md
 - [ ] Comment for company wise interview guide 😍 — @interview_prep_here — mining/posts/DJJ1DS8PdH7/notes.md
 - [ ] Never accept an offer without confirming these details😍 — @interview_prep_here — mining/posts/DI1XTnWvnbG/notes.md
 - [ ] Do not use chat gpt to wrote your resume - is what we shall say — @interview_prep_here — mining/posts/DIoaOkCPo6z/notes.md
@@ -38910,7 +38864,6 @@
 - [ ] This interview question shapes the decision of recruiter😍 — @interview_prep_here — mining/posts/DH3QY4CvQ1l/notes.md
 - [ ] The ultimate job search strategy you need 😍 Follow this and get the best jobs for yourself… {jobs, job, jobs for me, job — @interview_prep_here — mining/posts/DHtLw59PSvI/notes.md
 - [ ] How to justify career gap in resume — @interview_prep_here — mining/posts/DHJDzRDvBP0/notes.md
-- [ ] How to answer “What are your salary expectations — @interview_prep_here — mining/posts/DG5npodv6-A/notes.md
 - [ ] Do not openly show your colleagues that you are looking for a job — @interview_prep_here — mining/posts/DGf6tsKPpNQ/notes.md
 - [ ] Budget 2025 ⭐️ — @interview_prep_here — mining/posts/DFh6Ud6vUoL/notes.md
 - [ ] Now that you have a perfect cover letter, its time for a perfect resume — @interview_prep_here — mining/posts/DExQBwTvd_e/notes.md
@@ -38918,6 +38871,7 @@
 - [ ] Share this with someone you want to grow with😍 — @interview_prep_here — mining/posts/DEU5dHAvMhg/notes.md
 - [ ] 🎯 Save this before it gets too late — @interview_prep_here — mining/posts/DEIBkdBv3BK/notes.md
 - [ ] Save it for your next job application 😊 — @interview_prep_here — mining/posts/DD9ur_JP1G7/notes.md
+- [ ] Thinking of leaving your current job — @interview_prep_here — mining/posts/DDwrAcTv4Wg/notes.md
 - [ ] Confused about your career path — @interview_prep_here — mining/posts/DDuTa6-TgKc/notes.md
 - [ ] Content is the king 👑 A resume is only 20% template but 80% content and readability — @interview_prep_here — mining/posts/DDmjBtdPndf/notes.md
 - [ ] Learn more than a degree—right from your screen — @interview_prep_here — mining/posts/DDjyQgdvezl/notes.md
@@ -39027,7 +38981,6 @@
 - [ ] A perfect step by step guide to get your Job Journey easy — @interview_prep_here — mining/posts/CuRFOS-v2xn/notes.md
 - [ ] Prep for all your interviews with AI 🔥 Follow @interview_prep_here for more resume and interview tips… — @interview_prep_here — mining/posts/CuJjyxfvvMC/notes.md
 - [ ] Did you know that this Resume Keywords Tool is FReE to use — @interview_prep_here — mining/posts/CuG-RJXII6m/notes.md
-- [ ] Reach out to Recruiters on LinkedIn🔥🔥 — @interview_prep_here — mining/posts/Ct-9gneo1ng/notes.md
 - [ ] 🚩 Watch Out for These Interview Red Flags — @interview_prep_here — mining/posts/Ct30_FpPVm8/notes.md
 - [ ] 🔥🔥Top 30 Finance Profile Resume Keywords — @interview_prep_here — mining/posts/Ct3LducvKL3/notes.md
 - [ ] Top 10 websites to find Internships — @interview_prep_here — mining/posts/Ct1PEtnu6uK/notes.md
@@ -39036,6 +38989,7 @@
 - [ ] Don’t make these mistakes — @interview_prep_here — mining/posts/CtliQRSuJY6/notes.md
 - [ ] Follow these steps to optimize your LinkedIn — @interview_prep_here — mining/posts/CtgXhysoMe4/notes.md
 - [ ] Apply Today — @interview_prep_here — mining/posts/CtddufQpT27/notes.md
+- [ ] Why should we hire you — @interview_prep_here — mining/posts/CtI6mCkOiG1/notes.md
 - [ ] Know all your Resume Mistakes just in Rs 49 directly in your WhatsApp — @interview_prep_here — mining/posts/CtDrUYqppwh/notes.md
 - [ ] Powerful Action Words — @interview_prep_here — mining/posts/Cs_YDwosBag/notes.md
 - [ ] Important Sections in a Resume — @interview_prep_here — mining/posts/Cs78EEZOWuv/notes.md
@@ -39394,7 +39348,6 @@
 - [ ] 🚀 Designing a Real-Time Loyalty Points System in Java: 5 Services to Reward Users Instantly — @iamnikspatle — mining/posts/DLDA1mnzKRN/notes.md
 - [ ] 🎯 Seamless Payment-Gateway Integration in Java: Stripe, Razorpay, PayU in 5 Clean Steps — @iamnikspatle — mining/posts/DLAaz6FzG0z/notes.md
 - [ ] ⚡ Mobile App Spamming APIs — @iamnikspatle — mining/posts/DK40vemzOOR/notes.md
-- [ ] 🛡️🛡️ Top 5 OWASP Prevention in Java Web Apps — 5 Pro Steps 💡🚀 ⸻ 1️⃣ Input Validator Service 🎯 Goal: Block Injection Atta — @iamnikspatle — mining/posts/DKxju0xo322/notes.md
 - [ ] 🚀 Breaking the Monolith Without Breaking Clients: A Java Microservices Migration Guide 🧱➡️🧩 ————- 🧩 1 — @iamnikspatle — mining/posts/DKpN5k8TR2n/notes.md
 - [ ] 🔐🚦 Top 5 Java API Protection Tactics: Secure, Limit, Control, Track, Authorize — @iamnikspatle — mining/posts/DKfBeiczkJb/notes.md
 - [ ] 🚀 Designing a Java-Powered LLM Suggestion Engine: 5-Step System to Ingest, Enhance & Evolve AI Responses 🤖💡📊 ———— 1️⃣ 🚪  — @iamnikspatle — mining/posts/DKcZ_WPILuf/notes.md
@@ -39955,6 +39908,7 @@
 - [ ] 🦿 I'm not the one who's scared—you are — @theartificialintelligence — mining/posts/DBEguNaND0G/notes.md
 - [ ] Luke Metz who works on o1 reasoning models is leaving OpenAI — @theartificialintelligence — mining/posts/DA8rNsVtB7Y/notes.md
 - [ ] The Scary Power of AI — @theartificialintelligence — mining/posts/DA3pgfdIRZ-/notes.md
+- [ ] Artificial Intelligence is not a new word and not a new technology for researchers — @theartificialintelligence — mining/posts/DA1GEGANUbU/notes.md
 - [ ] Bro make no money — @theartificialintelligence — mining/posts/DAlAvCRt1rf/notes.md
 - [ ] One day, artificial intelligence will replace humans — @theartificialintelligence — mining/posts/DAkuYccSbqv/notes.md
 - [ ] Nvidia CEO: if you seek job security, then learn to use AI to do your job — @theartificialintelligence — mining/posts/DAgLZ8aSoRl/notes.md
@@ -40167,7 +40121,6 @@
 - [ ] How Row Level Security (RLS) can be implemented using the SQL Query — @mrk_talkstech — mining/posts/DMKMn6OB2CJ/notes.md
 - [ ] If you are struggling to become a Data Engineer in 2024, these Books will help — @mrk_talkstech — mining/posts/DMILkWRB8kX/notes.md
 - [ ] SQL for Data Engineering- Part 1 Follow @mrk_talkstech SQL Data Engineering SQL Query # ❤️ — @mrk_talkstech — mining/posts/DMF9Aqmhj0G/notes.md
-- [ ] What is Dynamic SQL — @mrk_talkstech — mining/posts/DMDJWPCBmDX/notes.md
 - [ ] How SQL is used in the ETL pipelines by the Data Engineers — @mrk_talkstech — mining/posts/DL-YjcnBg3Y/notes.md
 - [ ] 😩 When Nothing Works and Everything Breaks - The Struggle is Real — @mrk_talkstech — mining/posts/DLzzLUhhlxf/notes.md
 - [ ] Why Every Data Engineer Should Learn Feature Stores — @mrk_talkstech — mining/posts/DLU6HMxR5Hc/notes.md
@@ -40237,7 +40190,6 @@
 - [ ] This Roadmap to become an Azure Data Engineer will be still relevant in 2025 — @mrk_talkstech — mining/posts/DDJr8YXyvNo/notes.md
 - [ ] Are Indexes relevant anymore for Data Engineering — @mrk_talkstech — mining/posts/DDG9ZaIytUN/notes.md
 - [ ] Must know Networking concepts — @mrk_talkstech — mining/posts/DDEXF5Wy038/notes.md
-- [ ] Top 10 Data Engineering Tools to Focus on in 2025 — @mrk_talkstech — mining/posts/DC3kTo8SYP8/notes.md
 - [ ] 𝐃𝐞𝐚𝐫 𝐃𝐚𝐭𝐚 𝐄𝐧𝐠𝐢𝐧𝐞𝐞𝐫𝐬 🔥 Ready for another PySpark Transformation Challenge — @mrk_talkstech — mining/posts/DC1ZOzZTdIF/notes.md
 - [ ] Top Python Libraries Every Data Engineers Must Know — @mrk_talkstech — mining/posts/DCdqyvYySh3/notes.md
 - [ ] Top 10 Python concepts everyone should know — @mrk_talkstech — mining/posts/DCbSCI3TBiI/notes.md
@@ -40255,7 +40207,6 @@
 - [ ] Azure Data Engineer Glossary Part 4🕵️‍♂️ — @mrk_talkstech — mining/posts/C3iFPFzh5Dw/notes.md
 - [ ] Azure Data Engineer Glossary Part 3🕵️‍♂️ — @mrk_talkstech — mining/posts/C3cVrPchezG/notes.md
 - [ ] Azure Data Engineer Glossary Part 2🕵️‍♂️ — @mrk_talkstech — mining/posts/C3IYaZphP3f/notes.md
-- [ ] SQL Series - How does SQL Server fetch Data — @mrk_talkstech — mining/posts/C3DioLyBapi/notes.md
 - [ ] SQL Series - Scalar functions — @mrk_talkstech — mining/posts/C3DWBYJB8qQ/notes.md
 - [ ] Why Organizations are moving to Cloud — @mrk_talkstech — mining/posts/C2zFPTWhliB/notes.md
 - [ ] Complete Guide to Become a Data Engineer in 2024✌🏼 — @mrk_talkstech — mining/posts/C2uE5udBkpB/notes.md
@@ -40273,8 +40224,10 @@
 - [ ] 🚨 Meta just leveled up the AR game — @qubic.ai — mining/posts/DO8aMatEqS6/notes.md
 - [ ] 🚨 Did AI just prove the existence of God — @qubic.ai — mining/posts/DNwIDU75lCV/notes.md
 - [ ] What's your excuse — @qubic.ai — mining/posts/DNqJPy2swsU/notes.md
+- [ ] 🚨 The Future of AI Has Arrived — Meet GPT-5 OpenAI has just unveiled GPT-5, and it’s redefining what we thought possible — @qubic.ai — mining/posts/DNGNNvdSs4s/notes.md
 - [ ] 🚨 Google DeepMind launches Genie 3 — an AI model that turns text into interactive 3D game-like worlds, running in real-t — @qubic.ai — mining/posts/DNDdtWCyse3/notes.md
 - [ ] 🚨A shift is underway — @qubic.ai — mining/posts/DM5RzVXS4Yn/notes.md
+- [ ] 💡 AI just did someone's taxes—no forms, no clicks, just one command — @qubic.ai — mining/posts/DMxY1vYylYd/notes.md
 - [ ] 🚨 Microsoft Research: Which Jobs Are Most at Risk — @qubic.ai — mining/posts/DMut7KvSX_a/notes.md
 - [ ] 🚨GitHub Spark is here — the future of app development just got faster — @qubic.ai — mining/posts/DMh_l5vSfDZ/notes.md
 - [ ] 🚨This isn’t real — but it feels real — @qubic.ai — mining/posts/DMSigVdyMHv/notes.md
@@ -40403,8 +40356,10 @@
 - [ ] Easy apply is not easy — @freeway_monk — mining/posts/C04PMpBShS6/notes.md
 - [ ] Don’t rush into applying — @freeway_monk — mining/posts/C0g4fyuyUfJ/notes.md
 - [ ] Together we stand — @freeway_monk — mining/posts/C0e0fuCS5FT/notes.md
+- [ ] Customize your answers 🥳 🚀“Where do you see yourself in 5 years — @freeway_monk — mining/posts/C0RfPWny-Ge/notes.md
 - [ ] Use this hack 🎯 This is just an example, you can narrow down to any title For closed profiles, go to the … in the profil — @freeway_monk — mining/posts/C0MP-Gyy6Kc/notes.md
 - [ ] Don’t jump to conclusions — @freeway_monk — mining/posts/C0JksV4SyRl/notes.md
+- [ ] Know your take home salary 🤑 — @freeway_monk — mining/posts/C0GeWCZS-7k/notes.md
 - [ ] Common mistake❌ — @freeway_monk — mining/posts/C0EprzGSJxk/notes.md
 - [ ] This is why you are not getting calls — @freeway_monk — mining/posts/C0B2MUVyHld/notes.md
 - [ ] Free AI by Jeff uncle — @freeway_monk — mining/posts/Cz818DXyQw_/notes.md
@@ -40626,6 +40581,7 @@
 - [ ] All you need is your data handy and you are ready to run your machine learning models on repeat — @mar_antaya — mining/posts/DLSjaKZx6uA/notes.md
 - [ ] This one is up to date too 😌 it goes into building with an ai agent framework and llama/mistral models — @mar_antaya — mining/posts/DLLNXW7S9ld/notes.md
 - [ ] Not everything in life comes from an AI model 💐 — @mar_antaya — mining/posts/DLHEiBvOhjX/notes.md
+- [ ] The math it takes to become a quant - here you can tell how similar the quant path is to CS vs finance — @mar_antaya — mining/posts/DLGOyn6zMsm/notes.md
 - [ ] What else do you want ✨explained✨ — @mar_antaya — mining/posts/DK8pdxhOwT7/notes.md
 - [ ] An inside peek at the architecture for our F1 predictions 🏎️, how we are turning our ideas into actionable plans with @l — @mar_antaya — mining/posts/DKwyC_FJh45/notes.md
 - [ ] Some healthcare projects for you to try in this era of Agents — @mar_antaya — mining/posts/DKsRl2KSV2m/notes.md
@@ -40805,8 +40761,10 @@
 - [ ] Heading to Majnu Ka Tila this weekend — @whatshotdelhi — mining/posts/DUIy3bYAUGA/notes.md
 - [ ] Zero ho bhai aap — @whatshotdelhi — mining/posts/DUGij46jaX_/notes.md
 - [ ] Would you guys agree — @whatshotdelhi — mining/posts/DUFQfDzCFXs/notes.md
+- [ ] Civic sense who — @whatshotdelhi — mining/posts/DT4a7BwCM70/notes.md
 - [ ] And then we will be the ones complaining that the country is not clean — @whats_hot_mumbai — mining/posts/DTz3Dy3jf_1/notes.md
 - [ ] Did you guys feel it — @whatshotdelhi — mining/posts/DTrbXD-CEqk/notes.md
+- [ ] Civic sense left the chat — @whatshotdelhi — mining/posts/DTp4FqcgVOD/notes.md
 - [ ] Would you guys agree — @whatshotdelhi — mining/posts/DTmk4-3ga1q/notes.md
 - [ ] Why is civic sense still missing around us — @whatshotdelhi — mining/posts/DTmZLWrAUgB/notes.md
 - [ ] 600 just for 8 to 9 kms — @whatshotdelhi — mining/posts/DTj0Ci3gWpF/notes.md
@@ -41044,7 +41002,6 @@
 - [ ] What is persona prompting, and is it effective — @madeline.m.zhang — mining/posts/DWjnvJZDeCa/notes.md
 - [ ] Oops ☠️ don’t ask about when I went to sleep last night ~~~~ 💻 Follow @madeline — @madeline.m.zhang — mining/posts/DWhCeBRjXSA/notes.md
 - [ ] Are AI safety system systems fake — @madeline.m.zhang — mining/posts/DWbzkBcjTnW/notes.md
-- [ ] Software Engineer vs Data Analyst in 2026 — @sundaskhalidd — mining/posts/DWWhkGTlVbe/notes.md
 - [ ] Comment AGENT for the link for $10 in Replit credits — @madeline.m.zhang — mining/posts/DWUKxgxDX2U/notes.md
 - [ ] When the bug gets serious ☠️ ~~~~ 💻 Follow @madeline — @madeline.m.zhang — mining/posts/DWRgrnnDQpr/notes.md
 - [ ] More DS&A, today talking about Tim sort — @madeline.m.zhang — mining/posts/DWJ0xs6DWUi/notes.md
@@ -41243,3 +41200,32 @@
 - [ ] Do you agree, fellow humans — @madeline.m.zhang — mining/posts/DCcLTCbyS9J/notes.md
 - [ ] Anyone else experience this in the Bay Area — @madeline.m.zhang — mining/posts/DCFAKacSg5Y/notes.md
 - [ ] Happy Halloween, software engineer edition — @madeline.m.zhang — mining/posts/DBy4_3TPXjx/notes.md
+- [ ] 75 Day DSA Roadmap — @anjali.gama — mining/posts/DcknaHJG6R7/notes.md
+- [ ] Python is powerful not because of the language alone, but because of the ecosystem built around it — @she_explores_data — mining/posts/DcTawFXM4Gn/notes.md
+- [ ] Python libraries I’d actually keep in a quant stack not just the ones that look good on a resume — @quantchics — mining/posts/DcWGMwuNYfp/notes.md
+- [ ] Best 26 YouTube channels to learn AI FOR FREE — @genai.works — mining/posts/DbnTfxWIhgu/notes.md
+- [ ] Leaderboards say frontier models still struggle with advanced physics — @theartificialintelligens — mining/posts/Ddan-tuAa96/notes.md
+- [ ] Unlock Your Career Potential in Just 30 Days — @shift__careers — mining/posts/DdT2XuuAhIO/notes.md
+- [ ] AI Engineer Roadmap 2026 I’ve updated this roadmap for the current AI engineering landscape — @akashcode.ai — mining/posts/DdPIoqDE_8B/notes.md
+- [ ] Follow @wizofai for more — @wizofai — mining/posts/Dc3cf6PCC9Z/notes.md
+- [ ] Stop using LLMs for everything — @jam.with.ai — mining/posts/DdMNn5zgA4e/notes.md
+- [ ] "We use RAG" is on every AI engineer CV in India right now — @datasciencebrain — mining/posts/DdJaqf9GJQ-/notes.md
+- [ ] 7 GitHub repos that feel like cheat codes — @githubprojects — mining/posts/Dcqz4aYD7E9/notes.md
+- [ ] The RL framework behind GLM-5 — @dailydoseofds_ — mining/posts/DdBC8XNjeGX/notes.md
+- [ ] 7 GitHub repos worth checking out — @githubprojects — mining/posts/DdGknpHk4fD/notes.md
+- [ ] Concepts to cover if you want to become an AI PAGLU Save now — @codingdidi — mining/posts/DcglQlEoXQ1/notes.md
+- [ ] 09 AI skills you’ll want to learn before 2027 — @theaiagents — mining/posts/DdD_i7XCOnx/notes.md
+- [ ] Full Breakdown: https://www — @analytics_vidhya — mining/posts/DdGDp-MlKkE/notes.md
+- [ ] Unlock Your Career Potential in Just 30 Days — @shift__careers — mining/posts/DdWBNQGASxs/notes.md
+- [ ] AI is the most powerful wealth-building tool ever created — @thederekgray — mining/posts/DdMUaWyFpDH/notes.md
+- [ ] Most people have no idea how a data center actually works — @nextelligencee — mining/posts/Da-5AM3zKTq/notes.md
+- [ ] 9 Vector Search Techniques Every AI Engineer Should Know 🔎🧠 Vector search is much more than simply “find the nearest vec — @gauravgoyalai — mining/posts/Dc7tLcqRZ7i/notes.md
+- [ ] Agentic AI is the hottest space in tech right now — @ai.with.harika — mining/posts/Dc8494rsUDh/notes.md
+- [ ] GitHub is moving fast right now — @githubprojects — mining/posts/Dc3zOqYj_Iu/notes.md
+- [ ] Took notes — @shubhamnalingupta — mining/posts/DcBalPcTVxg/notes.md
+- [ ] Every production AI system follows one or more of these core agent patterns — @ai_vatika — mining/posts/DctF4NiSJI7/notes.md
+- [ ] 20 AI engineering concepts explained simply — @jam.with.ai — mining/posts/Dc1JxxMAJhb/notes.md
+- [ ] here are some more medical datasets you can use to build medical ML projects — @hinumpy — mining/posts/DczfFUPjGRj/notes.md
+- [ ] 🔥 10 GitHub repositories with 1 — @coderss_world — mining/posts/Dcs-8irjYBN/notes.md
+- [ ] I posted v1 of this this summer — @codewithbrij — mining/posts/DcwGhrvKp8R/notes.md
+- [ ] If you’re learning RAG in 2026, don’t stop at basic vector search — @sourabhursal_ai — mining/posts/Dckgh-_BPwV/notes.md

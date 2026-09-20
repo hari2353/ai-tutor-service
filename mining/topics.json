@@ -3,7 +3,7 @@
     {
       "key": "coding",
       "label": "How do you start web development",
-      "count": 3091,
+      "count": 3092,
       "gap_verdict": "partial",
       "top_creators": [
         [
@@ -411,7 +411,7 @@
     {
       "key": "agent",
       "label": "Comment “GUIDE” and I’ll help you make the projects that can get you hired",
-      "count": 718,
+      "count": 719,
       "gap_verdict": "partial",
       "top_creators": [
         [
@@ -615,12 +615,12 @@
     {
       "key": "llm",
       "label": "When I came to the US in 2018, I had zero ML experience",
-      "count": 392,
+      "count": 394,
       "gap_verdict": "partial",
       "top_creators": [
         [
           "theartificialintelligens",
-          34
+          35
         ],
         [
           "ds_ai_ketan",
@@ -1155,7 +1155,7 @@
     {
       "key": "backend|coding",
       "label": "These are the SOLID Principles every developer must know before a low-level design interview",
-      "count": 235,
+      "count": 236,
       "gap_verdict": "partial",
       "top_creators": [
         [
@@ -1281,6 +1281,74 @@
       ]
     },
     {
+      "key": "agent|coding",
+      "label": "Anthropic introduced Claude Fable 5",
+      "count": 195,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "evolving.ai",
+          31
+        ],
+        [
+          "mindwired.ai",
+          18
+        ],
+        [
+          "theartificialintelligence",
+          17
+        ]
+      ],
+      "representative": {
+        "shortcode": "Dcy1JJTn2r7",
+        "creator": "artificialintelligenceupdater",
+        "caption": "Anthropic introduced Claude Fable 5.1 and Claude Mythos 5.1 in September 2026, describing them as the company's most advanced models for coding and knowledge work. The two are the same underlying model, differentiated only by safeguard levels — Fable 5.1 is generally available, while Mythos 5.1 is restricted to vetted professionals in cybersecurity and life sciences through trusted access programs",
+        "source": "creator:artificialintelligenceupdater"
+      },
+      "members": [
+        "DV3qdGDlBLB",
+        "DPEud97CCNq",
+        "DNGme4xMZRh",
+        "DMNuY5Mgn3Y",
+        "DL7xIP0REA6",
+        "DVtDi4EEXyr",
+        "DcAZGBBxuJF",
+        "DbTS_r_uf98",
+        "DbKHeGRujI_",
+        "DaOstxZOnr1",
+        "DY80IfTO0eC",
+        "DYaPz34B3RO",
+        "DX3XtnniCTS",
+        "DWfiYEmCa_F",
+        "DVYX4rPiSLB",
+        "DYPT2pMtw_d",
+        "DX15O2dIWz0",
+        "DXrnUC_CONR",
+        "DWy6IZtCF0C",
+        "DYhWVUrN3qy",
+        "DVbVUJAk5gZ",
+        "DVLE-ZgE0Nl",
+        "DVEhKN_k_ix",
+        "DTbDHh_Db7x",
+        "DS0SbFLjdIY",
+        "DIiOBLGheD2",
+        "DIdXJasConI",
+        "DY3u7uhk_t-",
+        "DXT4ktik_ZO",
+        "DbB_CQNE-UF",
+        "DaqXfBdD_K9",
+        "DY-fXwCk01S",
+        "DPrB1U4jlA5",
+        "DM5T6gVu6t2",
+        "DDfNU_DPtTN",
+        "Dcwj_vCE3y6",
+        "DckrVYkE710",
+        "DavjXbAExAG",
+        "DaDXO-1kxkT",
+        "DY7_HGeEwy1"
+      ]
+    },
+    {
       "key": "interview question",
       "label": "Top 20 HR Interview Questions & Answers (2026) 1",
       "count": 193,
@@ -1349,77 +1417,9 @@
       ]
     },
     {
-      "key": "agent|coding",
-      "label": "Anthropic introduced Claude Fable 5",
-      "count": 191,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "evolving.ai",
-          31
-        ],
-        [
-          "mindwired.ai",
-          18
-        ],
-        [
-          "theartificialintelligence",
-          17
-        ]
-      ],
-      "representative": {
-        "shortcode": "Dcy1JJTn2r7",
-        "creator": "artificialintelligenceupdater",
-        "caption": "Anthropic introduced Claude Fable 5.1 and Claude Mythos 5.1 in September 2026, describing them as the company's most advanced models for coding and knowledge work. The two are the same underlying model, differentiated only by safeguard levels — Fable 5.1 is generally available, while Mythos 5.1 is restricted to vetted professionals in cybersecurity and life sciences through trusted access programs",
-        "source": "creator:artificialintelligenceupdater"
-      },
-      "members": [
-        "DV3qdGDlBLB",
-        "DPEud97CCNq",
-        "DNGme4xMZRh",
-        "DMNuY5Mgn3Y",
-        "DL7xIP0REA6",
-        "DVtDi4EEXyr",
-        "DcAZGBBxuJF",
-        "DbTS_r_uf98",
-        "DbKHeGRujI_",
-        "DaOstxZOnr1",
-        "DY80IfTO0eC",
-        "DYaPz34B3RO",
-        "DX3XtnniCTS",
-        "DWfiYEmCa_F",
-        "DVYX4rPiSLB",
-        "DYPT2pMtw_d",
-        "DX15O2dIWz0",
-        "DXrnUC_CONR",
-        "DWy6IZtCF0C",
-        "DYhWVUrN3qy",
-        "DVbVUJAk5gZ",
-        "DVLE-ZgE0Nl",
-        "DVEhKN_k_ix",
-        "DTbDHh_Db7x",
-        "DS0SbFLjdIY",
-        "DIiOBLGheD2",
-        "DIdXJasConI",
-        "DY3u7uhk_t-",
-        "DXT4ktik_ZO",
-        "DbB_CQNE-UF",
-        "DaqXfBdD_K9",
-        "DY-fXwCk01S",
-        "DPrB1U4jlA5",
-        "DM5T6gVu6t2",
-        "DDfNU_DPtTN",
-        "Dcwj_vCE3y6",
-        "DckrVYkE710",
-        "DavjXbAExAG",
-        "DaDXO-1kxkT",
-        "DY7_HGeEwy1"
-      ]
-    },
-    {
       "key": "weak:none",
       "label": "DSA THIS IS ALL YOU NEED",
-      "count": 180,
+      "count": 181,
       "gap_verdict": "GAP",
       "top_creators": [
         [
@@ -1428,7 +1428,7 @@
         ],
         [
           "pythonlifetelugu",
-          29
+          30
         ],
         [
           "fellowtechiebuddy",
@@ -2491,7 +2491,7 @@
     {
       "key": "agent|api",
       "label": "🚨👀 Another huge week in AI — here’s what’s new in the last 7 days: 1",
-      "count": 97,
+      "count": 98,
       "gap_verdict": "partial",
       "top_creators": [
         [
@@ -2831,7 +2831,7 @@
     {
       "key": "agent|llm|rag",
       "label": "Agent memory is not a bigger context window",
-      "count": 83,
+      "count": 84,
       "gap_verdict": "partial",
       "top_creators": [
         [
@@ -3032,7 +3032,7 @@
       "key": "backend|coding|python",
       "label": "⚡️ What is your opinion",
       "count": 80,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "duodevlogs",
@@ -5346,12 +5346,12 @@
     {
       "key": "api|python",
       "label": "React JS Roadmap: 1",
-      "count": 32,
+      "count": 33,
       "gap_verdict": "GAP",
       "top_creators": [
         [
           "pythonlifetelugu",
-          8
+          9
         ],
         [
           "techie_programmer",
@@ -5400,7 +5400,8 @@
         "Ce_IC7EjgN0",
         "CZm2e_ngdWR",
         "CUX_1LEA12A",
-        "CPoQAI2A2Jm"
+        "CPoQAI2A2Jm",
+        "DcyNc6Uib0j"
       ]
     },
     {
@@ -5754,12 +5755,12 @@
     {
       "key": "database|embedding|llm|rag",
       "label": "RAG stands for Retrieval-Augmented Generation",
-      "count": 27,
+      "count": 28,
       "gap_verdict": "partial",
       "top_creators": [
         [
           "gauravgoyalai",
-          7
+          8
         ],
         [
           "akashcodeofficial",
@@ -5803,7 +5804,8 @@
         "DcoQRJKguIZ",
         "DWmaQWBpIZk",
         "Dcgtskwvq7K",
-        "DSjdcxsk4DR"
+        "DSjdcxsk4DR",
+        "Dc7tLcqRZ7i"
       ]
     },
     {
@@ -7385,6 +7387,54 @@
       ]
     },
     {
+      "key": "algorithm|coding|data structure|system design",
+      "label": "Sharing the Walmart interview experience of a selected candidate ☑️ Applied via LinkedIn in mid-May after facing challen",
+      "count": 20,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "sde_ii_labs",
+          6
+        ],
+        [
+          "iamsaumyaawasthi",
+          4
+        ],
+        [
+          "thatcodergirlie",
+          4
+        ]
+      ],
+      "representative": {
+        "shortcode": "DCQbRf4v6hf",
+        "creator": "iamsaumyaawasthi",
+        "caption": "Sharing the Walmart interview experience of a selected candidate ☑️ \n\nApplied via LinkedIn in mid-May after facing challenges in the job market.\n\nReceived a recruiter call just two days later to discuss experience, current and expected salary, leading to the scheduling of the first interview.\n\nInterview Rounds Overview:\n\nTotal of 3 rounds:\nRound 1: Data Structures & Algorithms (DSA), Spring Boot, ",
+        "source": "creator:iamsaumyaawasthi"
+      },
+      "members": [
+        "DKCS5mCT5wG",
+        "DJeVp3khnq_",
+        "DbVyAX-Oz9T",
+        "Da5a2wOPsJp",
+        "Da5aLwtvNDS",
+        "Da5ZQlxNSdP",
+        "Da3Tn5vBZuY",
+        "Da3P9v-hTC8",
+        "DXEsmeVE3ZJ",
+        "DPteANek3AA",
+        "DCQbRf4v6hf",
+        "DAQnPyGpmv_",
+        "C-4bp30S72D",
+        "DSZAzaZkXgB",
+        "DR7SCz5EeKz",
+        "DRo_NArEU0o",
+        "DRj3DVBkRms",
+        "DV81t2nE7i4",
+        "DRw8-2wE_yE",
+        "Dci6oQOzbl-"
+      ]
+    },
+    {
       "key": "agent|langgraph|llm|rag",
       "label": "You don’t pick the agent pattern",
       "count": 20,
@@ -7796,53 +7846,6 @@
       ]
     },
     {
-      "key": "algorithm|coding|data structure|system design",
-      "label": "Sharing the Walmart interview experience of a selected candidate ☑️ Applied via LinkedIn in mid-May after facing challen",
-      "count": 19,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "sde_ii_labs",
-          6
-        ],
-        [
-          "iamsaumyaawasthi",
-          4
-        ],
-        [
-          "thatcodergirlie",
-          4
-        ]
-      ],
-      "representative": {
-        "shortcode": "DCQbRf4v6hf",
-        "creator": "iamsaumyaawasthi",
-        "caption": "Sharing the Walmart interview experience of a selected candidate ☑️ \n\nApplied via LinkedIn in mid-May after facing challenges in the job market.\n\nReceived a recruiter call just two days later to discuss experience, current and expected salary, leading to the scheduling of the first interview.\n\nInterview Rounds Overview:\n\nTotal of 3 rounds:\nRound 1: Data Structures & Algorithms (DSA), Spring Boot, ",
-        "source": "creator:iamsaumyaawasthi"
-      },
-      "members": [
-        "DKCS5mCT5wG",
-        "DJeVp3khnq_",
-        "DbVyAX-Oz9T",
-        "Da5a2wOPsJp",
-        "Da5aLwtvNDS",
-        "Da5ZQlxNSdP",
-        "Da3Tn5vBZuY",
-        "Da3P9v-hTC8",
-        "DXEsmeVE3ZJ",
-        "DPteANek3AA",
-        "DCQbRf4v6hf",
-        "DAQnPyGpmv_",
-        "C-4bp30S72D",
-        "DSZAzaZkXgB",
-        "DR7SCz5EeKz",
-        "DRo_NArEU0o",
-        "DRj3DVBkRms",
-        "DV81t2nE7i4",
-        "DRw8-2wE_yE"
-      ]
-    },
-    {
       "key": "agent|llm|mlops|rag",
       "label": "“Does it feel better",
       "count": 19,
@@ -8078,7 +8081,7 @@
       "key": "python|sql|statistics",
       "label": "Many people step into data analytics with a simplified picture of the role",
       "count": 18,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -8302,6 +8305,51 @@
         "DSK2XMDk6od",
         "DXwdB17yXjU",
         "DUc52yfiPtA"
+      ]
+    },
+    {
+      "key": "llm|python",
+      "label": "Researchers from MIT solved AI's biggest problem 🧠 a clever, forward-compatible solution You paste a 200-page document i",
+      "count": 17,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "gauravgoyalai",
+          4
+        ],
+        [
+          "genieincodebottle",
+          3
+        ],
+        [
+          "techie_programmer",
+          2
+        ]
+      ],
+      "representative": {
+        "shortcode": "Dday5m1D6bj",
+        "creator": "dailydoseofds_",
+        "caption": "Researchers from MIT solved AI's biggest problem 🧠\n\na clever, forward-compatible solution\n\nYou paste a 200-page document into ChatGPT. You ask a simple question. The answer comes back wrong, even though the information is right there on page 50.\n\nThis is called \"context rot.\" Even when the context fits in the model's window, performance drops. The model loses its ability to recall and reason over ",
+        "source": "saved"
+      },
+      "members": [
+        "DcxCgrBTiJ9",
+        "Dcl6LlNT7hC",
+        "DchiTyYzDNS",
+        "DbkOXTXx-O7",
+        "DcV3SK9AXU2",
+        "C6aX_yer3Sl",
+        "C5SRyd0ScYv",
+        "DVx4eRYk5HZ",
+        "DWwN2ktikXZ",
+        "DXzFjFSExWF",
+        "DTBALrAjEPc",
+        "DWtx0L_DUdG",
+        "C_c8vGKyexn",
+        "C1mQfHuMkxf",
+        "C1Vp8Azoa6U",
+        "DFg_wRjy2HO",
+        "Dday5m1D6bj"
       ]
     },
     {
@@ -8598,50 +8646,6 @@
         "Co42fvPgrSF",
         "CktKyGQAC5A",
         "CkbD3eWpWtF"
-      ]
-    },
-    {
-      "key": "llm|python",
-      "label": "LLMs are precisely probabilistic model and have stochastic process in generating the next token",
-      "count": 16,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "gauravgoyalai",
-          4
-        ],
-        [
-          "genieincodebottle",
-          3
-        ],
-        [
-          "techie_programmer",
-          2
-        ]
-      ],
-      "representative": {
-        "shortcode": "C_c8vGKyexn",
-        "creator": "genieincodebottle",
-        "caption": "LLMs are precisely probabilistic model and have stochastic process in generating the next token.\n\nBased on my GenAI Interview experience over the past few months.\n\nLike, follow, save & follow to receive more content like this in the future..\n\nProbabilistic:\nWhen predicting the next word, LLMs calculate the probability of each possible word based on the given context. For example, in the phrase “Th",
-        "source": "creator:genieincodebottle"
-      },
-      "members": [
-        "DcxCgrBTiJ9",
-        "Dcl6LlNT7hC",
-        "DchiTyYzDNS",
-        "DbkOXTXx-O7",
-        "DcV3SK9AXU2",
-        "C6aX_yer3Sl",
-        "C5SRyd0ScYv",
-        "DVx4eRYk5HZ",
-        "DWwN2ktikXZ",
-        "DXzFjFSExWF",
-        "DTBALrAjEPc",
-        "DWtx0L_DUdG",
-        "C_c8vGKyexn",
-        "C1mQfHuMkxf",
-        "C1Vp8Azoa6U",
-        "DFg_wRjy2HO"
       ]
     },
     {
@@ -10287,7 +10291,7 @@
       "key": "python|statistics",
       "label": "DS vs IT — Adhi Better",
       "count": 11,
-      "gap_verdict": "partial",
+      "gap_verdict": "GAP",
       "top_creators": [
         [
           "datasciencebrain",
@@ -10892,6 +10896,45 @@
       ]
     },
     {
+      "key": "agent|api|rag",
+      "label": "🚀 Master AI Automation with n8n in 2025",
+      "count": 11,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "mindwired.ai",
+          2
+        ],
+        [
+          "ds_ai_ketan",
+          1
+        ],
+        [
+          "gauravgoyalai",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DMD2bPlBg5q",
+        "creator": "ai_updates_01",
+        "caption": "🚀 Master AI Automation with n8n in 2025! 🤖\n\nWant to build AI agents without writing tons of code? Meet n8n – the open-source powerhouse that lets you connect APIs, automate workflows, and integrate AI models (like ChatGPT, DALL·E, or Google tools) with ease.\n\n🎯 Whether you’re a dev, a founder, or just an AI enthusiast — this full course shows you how to:\n\t•\tBuild ChatGPT agents using drag-and-drop",
+        "source": "creator:ai_updates_01"
+      },
+      "members": [
+        "DaBZ3I3SNNu",
+        "DcT30GLzz6L",
+        "DMo-TJmxL4Y",
+        "DMb8V0jRpXD",
+        "DO--ztTj1PU",
+        "Dcs7D_6ADQB",
+        "DOSc8LMCDEn",
+        "DT9YIVsj2J_",
+        "DTM2s-Wkmu2",
+        "DMD2bPlBg5q",
+        "Dc0Zdk9sub9"
+      ]
+    },
+    {
       "key": "api|interview question",
       "label": "100 Java Interview Questions Every Developer Should Know Java Basics (1–20) 1",
       "count": 10,
@@ -11063,6 +11106,36 @@
         "DJPv9Tzh5w9",
         "DIma8scTGZ1",
         "DHTbg4uuwHl"
+      ]
+    },
+    {
+      "key": "agent|llm|python|rag|statistics",
+      "label": "Everyone blames the model when RAG gives a bad answer",
+      "count": 10,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "datasciencebrain",
+          10
+        ]
+      ],
+      "representative": {
+        "shortcode": "DcaGJ5BmJAz",
+        "creator": "datasciencebrain",
+        "caption": "Everyone blames the model when RAG gives a bad answer.\n\nIt's almost never the model. 60–70% of your answer quality is decided before the LLM ever sees the query - in how you split your documents and how you find the pieces again.\n\nMost people ship chunk_size=512 + cosine similarity and call it RAG. That's the setup that breaks first in production.\n\nWhat's inside:\n\n→ 6 chunking strategies - recursi",
+        "source": "creator:datasciencebrain"
+      },
+      "members": [
+        "DcaGJ5BmJAz",
+        "Da1qUF7GCQZ",
+        "DYqsExumG5E",
+        "DYgVaNKmBvR",
+        "DYdv8wxGOxr",
+        "DXvZlRqk1_K",
+        "DXqQq5Xk6Bk",
+        "DP0LU88EzGO",
+        "DLw_eXTT0lY",
+        "DdJaqf9GJQ-"
       ]
     },
     {
@@ -11362,6 +11435,44 @@
       ]
     },
     {
+      "key": "api|coding|llm",
+      "label": "The tokenization numbers worth keeping in your head, all measured on GPT-4o’s tokenizer, not copied off a blog",
+      "count": 10,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "codingmermaid.ai",
+          2
+        ],
+        [
+          "bashi_fuirkashi",
+          2
+        ],
+        [
+          "datasciencebrain",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DbdG6V7k4wX",
+        "creator": "systemsbyakshay",
+        "caption": "The tokenization numbers worth keeping in your head, all measured on GPT-4o’s tokenizer, not copied off a blog.\n\nSave the card. Here’s what’s on it:\n\n- ~4 chars per token, ~0.75 words per token (English)\n- Vocab size: GPT-4o ~200K, Llama 3 ~128K\n- Language tax: the same meaning can cost up to 15x more tokens in another language (NeurIPS 2023)\n- Pretty-printed JSON with long keys costs ~40% more to",
+        "source": "creator:systemsbyakshay"
+      },
+      "members": [
+        "DUBd8jqj8c4",
+        "DNGKJuCzd_H",
+        "C_czqGgAeWj",
+        "DXIQNmIhDBZ",
+        "DVJ_9eFkrzy",
+        "C4I-GGGp6lA",
+        "DbdG6V7k4wX",
+        "DSP-5h6Abv4",
+        "Dcqz4aYD7E9",
+        "DdGDp-MlKkE"
+      ]
+    },
+    {
       "key": "embedding|llm",
       "label": "This is actually a systems design question wearing an LLM costume",
       "count": 10,
@@ -11585,7 +11696,7 @@
       "key": "agent|llm|pandas|python|sql|statistics",
       "label": "📊 SAVE THIS: Your Complete Data Analyst Mock Test Guide 📊 Getting ready for a data analyst interview or certification",
       "count": 10,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "datasciencebrain",
@@ -11753,44 +11864,6 @@
         "DHwRHPTNS9U",
         "DS7Jm10EwPq",
         "DUyNmnnE2nx"
-      ]
-    },
-    {
-      "key": "agent|api|rag",
-      "label": "🚀 Master AI Automation with n8n in 2025",
-      "count": 10,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "mindwired.ai",
-          2
-        ],
-        [
-          "ds_ai_ketan",
-          1
-        ],
-        [
-          "gauravgoyalai",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DMD2bPlBg5q",
-        "creator": "ai_updates_01",
-        "caption": "🚀 Master AI Automation with n8n in 2025! 🤖\n\nWant to build AI agents without writing tons of code? Meet n8n – the open-source powerhouse that lets you connect APIs, automate workflows, and integrate AI models (like ChatGPT, DALL·E, or Google tools) with ease.\n\n🎯 Whether you’re a dev, a founder, or just an AI enthusiast — this full course shows you how to:\n\t•\tBuild ChatGPT agents using drag-and-drop",
-        "source": "creator:ai_updates_01"
-      },
-      "members": [
-        "DaBZ3I3SNNu",
-        "DcT30GLzz6L",
-        "DMo-TJmxL4Y",
-        "DMb8V0jRpXD",
-        "DO--ztTj1PU",
-        "Dcs7D_6ADQB",
-        "DOSc8LMCDEn",
-        "DT9YIVsj2J_",
-        "DTM2s-Wkmu2",
-        "DMD2bPlBg5q"
       ]
     },
     {
@@ -12274,35 +12347,6 @@
         "DJQcHzYTLrN",
         "DI-dFykTpNl",
         "DIu8R9VzcTw"
-      ]
-    },
-    {
-      "key": "agent|llm|python|rag|statistics",
-      "label": "Everyone blames the model when RAG gives a bad answer",
-      "count": 9,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "datasciencebrain",
-          9
-        ]
-      ],
-      "representative": {
-        "shortcode": "DcaGJ5BmJAz",
-        "creator": "datasciencebrain",
-        "caption": "Everyone blames the model when RAG gives a bad answer.\n\nIt's almost never the model. 60–70% of your answer quality is decided before the LLM ever sees the query - in how you split your documents and how you find the pieces again.\n\nMost people ship chunk_size=512 + cosine similarity and call it RAG. That's the setup that breaks first in production.\n\nWhat's inside:\n\n→ 6 chunking strategies - recursi",
-        "source": "creator:datasciencebrain"
-      },
-      "members": [
-        "DcaGJ5BmJAz",
-        "Da1qUF7GCQZ",
-        "DYqsExumG5E",
-        "DYgVaNKmBvR",
-        "DYdv8wxGOxr",
-        "DXvZlRqk1_K",
-        "DXqQq5Xk6Bk",
-        "DP0LU88EzGO",
-        "DLw_eXTT0lY"
       ]
     },
     {
@@ -13334,7 +13378,7 @@
       "key": "api|coding|python|sql",
       "label": "Important Full Forms Asked in Full Stack Developer Interviews Master these commonly asked full forms to improve your int",
       "count": 8,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -13539,39 +13583,39 @@
       ]
     },
     {
-      "key": "api|coding|llm",
-      "label": "The tokenization numbers worth keeping in your head, all measured on GPT-4o’s tokenizer, not copied off a blog",
+      "key": "agent|aws",
+      "label": "The RL framework behind GLM-5",
       "count": 8,
-      "gap_verdict": "partial",
+      "gap_verdict": "GAP",
       "top_creators": [
         [
-          "codingmermaid.ai",
+          "airesearches",
           2
         ],
         [
-          "bashi_fuirkashi",
-          2
+          "innovation",
+          1
         ],
         [
-          "datasciencebrain",
+          "mindwired.ai",
           1
         ]
       ],
       "representative": {
-        "shortcode": "DbdG6V7k4wX",
-        "creator": "systemsbyakshay",
-        "caption": "The tokenization numbers worth keeping in your head, all measured on GPT-4o’s tokenizer, not copied off a blog.\n\nSave the card. Here’s what’s on it:\n\n- ~4 chars per token, ~0.75 words per token (English)\n- Vocab size: GPT-4o ~200K, Llama 3 ~128K\n- Language tax: the same meaning can cost up to 15x more tokens in another language (NeurIPS 2023)\n- Pretty-printed JSON with long keys costs ~40% more to",
-        "source": "creator:systemsbyakshay"
+        "shortcode": "DdBC8XNjeGX",
+        "creator": "dailydoseofds_",
+        "caption": "The RL framework behind GLM-5.2 🧠\n\nOpen-source model that's as good as Opus 4.8.\n\nThe full post-training of GLM-5.2 ran on it in about two days. The same stack sits behind the entire GLM series, from 4.5 to 5.1.\n\nIt's called slime, and it's built around one idea: keep a single RL kernel and push all the variety into data generation.\n\nEvery RL run has two halves. One generates experience, where the",
+        "source": "saved"
       },
       "members": [
-        "DUBd8jqj8c4",
-        "DNGKJuCzd_H",
-        "C_czqGgAeWj",
-        "DXIQNmIhDBZ",
-        "DVJ_9eFkrzy",
-        "C4I-GGGp6lA",
-        "DbdG6V7k4wX",
-        "DSP-5h6Abv4"
+        "DUULXPKE4eG",
+        "DSDWSxGE1ci",
+        "DJEkp7ptheC",
+        "DbIGLz9mVHc",
+        "DJ6tVGTpARp",
+        "DQs5RicDCop",
+        "DZK8eHglXxn",
+        "DdBC8XNjeGX"
       ]
     },
     {
@@ -14222,6 +14266,41 @@
       ]
     },
     {
+      "key": "algorithm|coding|machine learning|python|statistics",
+      "label": "Computer vision roadmap 💻 So if you’ve been learning deep learning for a while, then you probably know that you either g",
+      "count": 7,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "codingmermaid.ai",
+          5
+        ],
+        [
+          "techwith.ram",
+          1
+        ],
+        [
+          "built_by_vishal",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "C71cGBUNFtk",
+        "creator": "codingmermaid.ai",
+        "caption": "Computer vision roadmap 💻\n\nSo if you’ve been learning deep learning for a while, then you probably know that you either go computer vision or NLP. Rarely, you can go both if you’re ambitious like I aspire but fail to be!\n\nSave this post, and let’s first go into the definition:\n\nComputer vision is a field of AI that enables machines to interpret and understand visual data from the world, such as im",
+        "source": "creator:codingmermaid.ai"
+      },
+      "members": [
+        "DR_PpkrEtQV",
+        "DC4VHE_oaFD",
+        "DAyb2OEgsj8",
+        "C71cGBUNFtk",
+        "C4vQjZCtu10",
+        "CxTPLn7K48q",
+        "Dclj61bMYmJ"
+      ]
+    },
+    {
       "key": "algorithm|machine learning|statistics",
       "label": "Continue reading 👇 Becoming a machine learning engineer is absolutely possible even if you don’t have a CS degree",
       "count": 7,
@@ -14324,41 +14403,6 @@
         "DHYIqFQSjFr",
         "DHS52XSRZ2q",
         "DLQX_PPTYFE"
-      ]
-    },
-    {
-      "key": "agent|aws",
-      "label": "Had such a wonderful time at @microsoft Build 2026",
-      "count": 7,
-      "gap_verdict": "GAP",
-      "top_creators": [
-        [
-          "airesearches",
-          2
-        ],
-        [
-          "innovation",
-          1
-        ],
-        [
-          "mindwired.ai",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DZK8eHglXxn",
-        "creator": "madeline.m.zhang",
-        "caption": "Had such a wonderful time at @microsoft Build 2026! Across the announcements, demos, and conversations, the through-line was impossible to miss: agentic AI is no longer just a concept but is now permanent infrastructure.\n\nA few of the announcements that stuck with me:\n- Microsoft Scout: built on OpenClaw, this is an always-on agent that runs across Teams, Outlook, OneDrive, and SharePoint without ",
-        "source": "creator:madeline.m.zhang"
-      },
-      "members": [
-        "DUULXPKE4eG",
-        "DSDWSxGE1ci",
-        "DJEkp7ptheC",
-        "DbIGLz9mVHc",
-        "DJ6tVGTpARp",
-        "DQs5RicDCop",
-        "DZK8eHglXxn"
       ]
     },
     {
@@ -15583,36 +15627,6 @@
       ]
     },
     {
-      "key": "algorithm|coding|machine learning|python|statistics",
-      "label": "Computer vision roadmap 💻 So if you’ve been learning deep learning for a while, then you probably know that you either g",
-      "count": 6,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "codingmermaid.ai",
-          5
-        ],
-        [
-          "techwith.ram",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "C71cGBUNFtk",
-        "creator": "codingmermaid.ai",
-        "caption": "Computer vision roadmap 💻\n\nSo if you’ve been learning deep learning for a while, then you probably know that you either go computer vision or NLP. Rarely, you can go both if you’re ambitious like I aspire but fail to be!\n\nSave this post, and let’s first go into the definition:\n\nComputer vision is a field of AI that enables machines to interpret and understand visual data from the world, such as im",
-        "source": "creator:codingmermaid.ai"
-      },
-      "members": [
-        "DR_PpkrEtQV",
-        "DC4VHE_oaFD",
-        "DAyb2OEgsj8",
-        "C71cGBUNFtk",
-        "C4vQjZCtu10",
-        "CxTPLn7K48q"
-      ]
-    },
-    {
       "key": "api|backend|coding|database|python",
       "label": "Core Java Complete Notes (Beginner to Advanced) Java Basics • What is Java",
       "count": 6,
@@ -16043,6 +16057,40 @@
       ]
     },
     {
+      "key": "database|llm|rag",
+      "label": "Interviewer: Despite being trained on massive datasets, why do Large Language Models still produce hallucinations",
+      "count": 6,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "ds_ai_ketan",
+          2
+        ],
+        [
+          "gauravgoyalai",
+          1
+        ],
+        [
+          "fellowtechiebuddy",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DSaQWFbgpaZ",
+        "creator": "ds_ai_ketan",
+        "caption": "Interviewer: Despite being trained on massive datasets, why do Large Language Models still produce hallucinations?\n\nExplanation:\n\nLarge Language Models hallucinate because of how they are trained and what they are optimized for, not simply because of a lack of data.\n\n1️⃣ LLMs are trained using a next-token prediction objective. Their goal is to generate the most statistically likely continuation o",
+        "source": "creator:ds_ai_ketan"
+      },
+      "members": [
+        "DV_uAAVku3H",
+        "DSaQWFbgpaZ",
+        "DcqDgDpRpy5",
+        "Db1E3_6M9V5",
+        "DSpdXxpjHOT",
+        "Dckgh-_BPwV"
+      ]
+    },
+    {
       "key": "weak:bolna itna nahi sach",
       "label": "Itna sach nahi bolna tha @anmolraina13 😭 Video Credits- @anmolraina13 [ Disneyland, manesar, Delhi relatable videos, lat",
       "count": 6,
@@ -16072,7 +16120,7 @@
       "key": "api|backend|coding|python|sql",
       "label": "Java Inka Worth Aa",
       "count": 6,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -16680,6 +16728,40 @@
         "Cl3qYjmDY-T",
         "ChfgTYpDc5L",
         "Cf7f0dvjYDN"
+      ]
+    },
+    {
+      "key": "agent|api|coding|llm",
+      "label": "✨Agentic AI YouTube Channels Agentic AI is reshaping the industry",
+      "count": 6,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "gauravgoyalai",
+          2
+        ],
+        [
+          "codingmermaid.ai",
+          1
+        ],
+        [
+          "codewithupasana",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DJj1cPexWgU",
+        "creator": "codingmermaid.ai",
+        "caption": "✨Agentic AI YouTube Channels \n\nAgentic AI is reshaping the industry. \n\nIt enables AI systems to act autonomously, collaborate and make decisions. You can literally build Ironman’s Jarvis with 0 lines of code. \n\nIt’s going beyond prompts and chatbots, so it’s more important than anything to master it if you’re serious about learning AI. Here are the best YT channels to learn! \n\n🔹 Krish Naik – A vet",
+        "source": "creator:codingmermaid.ai"
+      },
+      "members": [
+        "DcXyRo2xnb0",
+        "Db4bhE9xCiq",
+        "DJj1cPexWgU",
+        "DXJU-JCmmbs",
+        "DYhvEVTjTJV",
+        "Dcs-8irjYBN"
       ]
     },
     {
@@ -18390,39 +18472,6 @@
       ]
     },
     {
-      "key": "database|llm|rag",
-      "label": "Interviewer: Despite being trained on massive datasets, why do Large Language Models still produce hallucinations",
-      "count": 5,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "ds_ai_ketan",
-          2
-        ],
-        [
-          "gauravgoyalai",
-          1
-        ],
-        [
-          "fellowtechiebuddy",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DSaQWFbgpaZ",
-        "creator": "ds_ai_ketan",
-        "caption": "Interviewer: Despite being trained on massive datasets, why do Large Language Models still produce hallucinations?\n\nExplanation:\n\nLarge Language Models hallucinate because of how they are trained and what they are optimized for, not simply because of a lack of data.\n\n1️⃣ LLMs are trained using a next-token prediction objective. Their goal is to generate the most statistically likely continuation o",
-        "source": "creator:ds_ai_ketan"
-      },
-      "members": [
-        "DV_uAAVku3H",
-        "DSaQWFbgpaZ",
-        "DcqDgDpRpy5",
-        "Db1E3_6M9V5",
-        "DSpdXxpjHOT"
-      ]
-    },
-    {
       "key": "api|coding|machine learning",
       "label": "Is this the end of data science",
       "count": 5,
@@ -18726,6 +18775,39 @@
         "DXyR9ZUmgrs",
         "DXTXgs7GuLQ",
         "DW1gnV2ATFe"
+      ]
+    },
+    {
+      "key": "agent|coding|llm|system design",
+      "label": "Prompt engineering is evolving into loop engineering",
+      "count": 5,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "sde_ii_labs",
+          2
+        ],
+        [
+          "hackproduct",
+          1
+        ],
+        [
+          "jam.with.ai",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DadPiiFoLDf",
+        "creator": "jam.with.ai",
+        "caption": "Prompt engineering is evolving into loop engineering.\nInstead of prompting an AI for every single step, you give the agent a goal and let it plan, execute, verify, and improve until the task is complete.\n\nBut loop engineering is not some completely new idea.\nIt is the same feedback loop software engineers have used for years:\n\nBuild. Test. Fail. Fix. Repeat.\n\nWhat changes now is that AI agents can",
+        "source": "creator:jam.with.ai"
+      },
+      "members": [
+        "DZ7iVH-uotU",
+        "DadPiiFoLDf",
+        "DZk2ItABCOQ",
+        "DZk07KNh7Du",
+        "DdGknpHk4fD"
       ]
     },
     {
@@ -19466,39 +19548,6 @@
         "CJc3rDxI5pR",
         "CG4NQDsgbNi",
         "CALaGNOgcQf"
-      ]
-    },
-    {
-      "key": "agent|api|coding|llm",
-      "label": "✨Agentic AI YouTube Channels Agentic AI is reshaping the industry",
-      "count": 5,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "gauravgoyalai",
-          2
-        ],
-        [
-          "codingmermaid.ai",
-          1
-        ],
-        [
-          "codewithupasana",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DJj1cPexWgU",
-        "creator": "codingmermaid.ai",
-        "caption": "✨Agentic AI YouTube Channels \n\nAgentic AI is reshaping the industry. \n\nIt enables AI systems to act autonomously, collaborate and make decisions. You can literally build Ironman’s Jarvis with 0 lines of code. \n\nIt’s going beyond prompts and chatbots, so it’s more important than anything to master it if you’re serious about learning AI. Here are the best YT channels to learn! \n\n🔹 Krish Naik – A vet",
-        "source": "creator:codingmermaid.ai"
-      },
-      "members": [
-        "DcXyRo2xnb0",
-        "Db4bhE9xCiq",
-        "DJj1cPexWgU",
-        "DXJU-JCmmbs",
-        "DYhvEVTjTJV"
       ]
     },
     {
@@ -20463,6 +20512,38 @@
         "DX-_odSSlqp",
         "DZkyigxyjRO",
         "DUqfGx-Euzw"
+      ]
+    },
+    {
+      "key": "agent|api|database|llm|machine learning|rag",
+      "label": "Agentic AI is the hottest space in tech right now",
+      "count": 4,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "fellowtechiebuddy",
+          1
+        ],
+        [
+          "thepracticai",
+          1
+        ],
+        [
+          "iamsaumyaawasthi",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DVS8DpOjChI",
+        "creator": "fellowtechiebuddy",
+        "caption": "Agentic AI is the hottest space in tech right now. Companies are hiring like crazy. But most candidates can’t even explain the basics.\n\n\t1.\tTool Use / Function Calling: Letting the agent use external tools like APIs, search, or databases to take real actions.\n\n\t2.\tReAct Pattern: The agent thinks (reasons) first, then acts, then observes the result, and repeats.\n\n\t3.\tMulti-Agent Orchestration: Mult",
+        "source": "saved"
+      },
+      "members": [
+        "DVS8DpOjChI",
+        "DbTe2mBS_HV",
+        "DZIEDVCmi70",
+        "Dc8494rsUDh"
       ]
     },
     {
@@ -22319,38 +22400,6 @@
         "DbkeQ7EjXLT",
         "Dbh4qh2jfC1",
         "C_wzcGQu4ak"
-      ]
-    },
-    {
-      "key": "agent|coding|llm|system design",
-      "label": "Prompt engineering is evolving into loop engineering",
-      "count": 4,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "sde_ii_labs",
-          2
-        ],
-        [
-          "hackproduct",
-          1
-        ],
-        [
-          "jam.with.ai",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DadPiiFoLDf",
-        "creator": "jam.with.ai",
-        "caption": "Prompt engineering is evolving into loop engineering.\nInstead of prompting an AI for every single step, you give the agent a goal and let it plan, execute, verify, and improve until the task is complete.\n\nBut loop engineering is not some completely new idea.\nIt is the same feedback loop software engineers have used for years:\n\nBuild. Test. Fail. Fix. Repeat.\n\nWhat changes now is that AI agents can",
-        "source": "creator:jam.with.ai"
-      },
-      "members": [
-        "DZ7iVH-uotU",
-        "DadPiiFoLDf",
-        "DZk2ItABCOQ",
-        "DZk07KNh7Du"
       ]
     },
     {
@@ -24686,7 +24735,7 @@
       "key": "weak:analyst data",
       "label": "5 LPA vs 20 LPA Data Analyst 🔥 🤑",
       "count": 3,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "edubhav",
@@ -25274,37 +25323,6 @@
       ]
     },
     {
-      "key": "agent|api|database|llm|machine learning|rag",
-      "label": "Agentic AI is the hottest space in tech right now",
-      "count": 3,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "fellowtechiebuddy",
-          1
-        ],
-        [
-          "thepracticai",
-          1
-        ],
-        [
-          "iamsaumyaawasthi",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DVS8DpOjChI",
-        "creator": "fellowtechiebuddy",
-        "caption": "Agentic AI is the hottest space in tech right now. Companies are hiring like crazy. But most candidates can’t even explain the basics.\n\n\t1.\tTool Use / Function Calling: Letting the agent use external tools like APIs, search, or databases to take real actions.\n\n\t2.\tReAct Pattern: The agent thinks (reasons) first, then acts, then observes the result, and repeats.\n\n\t3.\tMulti-Agent Orchestration: Mult",
-        "source": "saved"
-      },
-      "members": [
-        "DVS8DpOjChI",
-        "DbTe2mBS_HV",
-        "DZIEDVCmi70"
-      ]
-    },
-    {
       "key": "weak:agreed meme whatshot whatshotdaily",
       "label": "Agreed",
       "count": 3,
@@ -25510,6 +25528,37 @@
         "DZwibKiMWUQ",
         "DUU060AEvAd",
         "DUU3f7YEksB"
+      ]
+    },
+    {
+      "key": "agent|llm|machine learning|mlops",
+      "label": "Best 26 YouTube channels to learn AI FOR FREE",
+      "count": 3,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "jam.with.ai",
+          1
+        ],
+        [
+          "bashi_fuirkashi",
+          1
+        ],
+        [
+          "genai.works",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DbnTfxWIhgu",
+        "creator": "genai.works",
+        "caption": "Best 26 YouTube channels to learn AI FOR FREE!\n\nFree video content covers *a lot* of ground once you know where to look.\nHere’s how it breaks down by stage:\n\n💫 AI Foundations: Khan Academy, freeCodeCamp, MIT OpenCourseWare, StatQuest with Josh Starmer, 3Blue1Brown, and yes, GenAI Works too (!!)\n\n💫 Machine Learning: Data School, Codebasics, CampusX, sentdex, Krish Naik.\n\n💫 Deep Learning: Yannic Kil",
+        "source": "saved"
+      },
+      "members": [
+        "DaqHLUsiCrI",
+        "DbMTQPZBzO2",
+        "DbnTfxWIhgu"
       ]
     },
     {
@@ -29730,7 +29779,7 @@
       "key": "api|backend|coding|sql",
       "label": "☕🔥 Java Exception Handling Cheatsheet for any interview 🚀 ⸻ 1",
       "count": 3,
-      "gap_verdict": "partial",
+      "gap_verdict": "GAP",
       "top_creators": [
         [
           "iamnikspatle",
@@ -29913,6 +29962,37 @@
         "Cjr121GDL0L",
         "ChroYI-DcJp",
         "CcyQcglDT80"
+      ]
+    },
+    {
+      "key": "api|database|python",
+      "label": "⚡️Creating Serverless functions with IBM Cloud Functions",
+      "count": 3,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "kiransagar.pyy",
+          1
+        ],
+        [
+          "duodevlogs",
+          1
+        ],
+        [
+          "decode_leox",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "CYwkhVsgP2P",
+        "creator": "duodevlogs",
+        "caption": "⚡️Creating Serverless functions with IBM Cloud Functions.\n\nI was basically having some bad times trying to understand how the workflow is but then I came to find out the proper way. In my case, I have a database created at IBM Cloudant from where all the REST actions are being done. \n\n💻 Here’s a little overview.\n\n- Create a Cloudant service and populate it with databases.\n- For IBM Cloud functions",
+        "source": "creator:duodevlogs"
+      },
+      "members": [
+        "DbcplZ9E30d",
+        "CYwkhVsgP2P",
+        "DdCYyEiDh5k"
       ]
     },
     {
@@ -30999,6 +31079,33 @@
       ]
     },
     {
+      "key": "agent|llm|rag|transformer",
+      "label": "🚀 2026 में AI सीखना चाहते हो — वो भी FREE",
+      "count": 3,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "gauravgoyalai",
+          2
+        ],
+        [
+          "codingdidi",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "Dbz2f3VReKo",
+        "creator": "gauravgoyalai",
+        "caption": "🚀 2026 में AI सीखना चाहते हो — वो भी FREE?\n\nअगर आप AI, GenAI, LLMs, RAG और AI Agents सीखना चाहते हैं, तो इन 5 FREE resources से शुरुआत करें 👇\n\n1️⃣ Generative AI for Everyone — DeepLearning.AI\n2️⃣ Hugging Face — LLM Course\n3️⃣ Andrej Karpathy — Neural Networks: Zero to Hero\n4️⃣ RAG — Retrieval-Augmented Generation\n5️⃣ Microsoft — Generative AI for Beginners\n\n💡 Best learning path:\nGenAI Basics → LLM",
+        "source": "creator:gauravgoyalai"
+      },
+      "members": [
+        "DcNNc5dRRk6",
+        "Dbz2f3VReKo",
+        "DcglQlEoXQ1"
+      ]
+    },
+    {
       "key": "api|backend|microservice|python",
       "label": "🚀 FASTAPI in one infographic",
       "count": 3,
@@ -31934,7 +32041,7 @@
       "key": "weak:basic formulas should student",
       "label": "100 Basic Formulas Every EEE Student Should Know 1",
       "count": 2,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -32248,32 +32355,6 @@
       "members": [
         "DWgjZoYkn09",
         "CVOXl3wgJGn"
-      ]
-    },
-    {
-      "key": "agent|llm|machine learning|mlops",
-      "label": "6 AI engineering paths",
-      "count": 2,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "jam.with.ai",
-          1
-        ],
-        [
-          "bashi_fuirkashi",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DbMTQPZBzO2",
-        "creator": "bashi_fuirkashi",
-        "caption": "6 AI engineering paths. One decision.\n\nEveryone says they want to “get into AI.”\n\nAlmost nobody knows which AI role they’re actually aiming for.\n\n🐍 Machine Learning Engineer → Train and optimize ML models.\n\n🤖 Applied AI Engineer → Build AI-powered products with LLMs and modern software engineering.\n\n🧠 AI Agent Engineer → Build autonomous agents that reason, plan, and use tools.\n\n⚙️ MLOps Engineer ",
-        "source": "creator:bashi_fuirkashi"
-      },
-      "members": [
-        "DaqHLUsiCrI",
-        "DbMTQPZBzO2"
       ]
     },
     {
@@ -41543,6 +41624,28 @@
       ]
     },
     {
+      "key": "agent|coding|llm|machine learning|mlops|rag",
+      "label": "Most people use an AI agent one prompt at a time",
+      "count": 2,
+      "gap_verdict": "covered",
+      "top_creators": [
+        [
+          "jam.with.ai",
+          2
+        ]
+      ],
+      "representative": {
+        "shortcode": "DZh9vfHogcP",
+        "creator": "jam.with.ai",
+        "caption": "Most people use an AI agent one prompt at a time. I turned it into a repeatable pipeline.\n\nI wrote a reusable style prompt and a script template once. Now every deck is the same three moves: open a new project, paste the style, paste the script, hit enter. Skywork runs the deeper research and builds the slideshow from there. The same tool ships hundreds of skills, so it also handles websites, imag",
+        "source": "creator:jam.with.ai"
+      },
+      "members": [
+        "DZh9vfHogcP",
+        "Dc1JxxMAJhb"
+      ]
+    },
+    {
       "key": "weak:because fail students tech",
       "label": "Most tech students don’t fail because of lack of talent",
       "count": 2,
@@ -45548,7 +45651,7 @@
       "key": "api|interview question|python",
       "label": "Top 30 SAP FICO Interview Questions Basic Questions 1",
       "count": 2,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -45884,6 +45987,28 @@
       "members": [
         "DU09ApHj7zR",
         "DDs4n41tLQ2"
+      ]
+    },
+    {
+      "key": "weak:career days potential unlock",
+      "label": "Unlock Your Career Potential in Just 30 Days",
+      "count": 2,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "shift__careers",
+          2
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdT2XuuAhIO",
+        "creator": "shift__careers",
+        "caption": "Unlock Your Career Potential in Just 30 Days! 🚀\n\nReady for a career breakthrough?\nOur proven 30-day program will help you:\n✅ Discover your unique strengths & talents\n✅ Match with roles that truly fit your goals\n✅ Create a standout CV & cover letter that get interviews\n✨ Plus: Get expert guidance with a 1:1 career coaching session to stay on track and confident",
+        "source": "saved"
+      },
+      "members": [
+        "DdT2XuuAhIO",
+        "DdWBNQGASxs"
       ]
     },
     {
@@ -48217,32 +48342,6 @@
       ]
     },
     {
-      "key": "api|database|python",
-      "label": "⚡️Creating Serverless functions with IBM Cloud Functions",
-      "count": 2,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "kiransagar.pyy",
-          1
-        ],
-        [
-          "duodevlogs",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "CYwkhVsgP2P",
-        "creator": "duodevlogs",
-        "caption": "⚡️Creating Serverless functions with IBM Cloud Functions.\n\nI was basically having some bad times trying to understand how the workflow is but then I came to find out the proper way. In my case, I have a database created at IBM Cloudant from where all the REST actions are being done. \n\n💻 Here’s a little overview.\n\n- Create a Cloudant service and populate it with databases.\n- For IBM Cloud functions",
-        "source": "creator:duodevlogs"
-      },
-      "members": [
-        "DbcplZ9E30d",
-        "CYwkhVsgP2P"
-      ]
-    },
-    {
       "key": "backend|coding|machine learning|python",
       "label": "⚡️First and the foremost, thanks to all the 40K+ people to bear with me till now",
       "count": 2,
@@ -48272,7 +48371,7 @@
       "key": "weak:everyone friday happy hope",
       "label": "⚡️Happy Friday",
       "count": 2,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "webbyvaris",
@@ -49444,7 +49543,7 @@
       "key": "agent|llm|mlops|pandas|python|sql|statistics",
       "label": "📊 ZERO TO DATA ANALYST IN 6 MONTHS 🚀 Your complete roadmap to landing your first data analyst job is here",
       "count": 2,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "datasciencebrain",
@@ -50472,28 +50571,6 @@
       "members": [
         "DY3VeYGH6W6",
         "DVoHOTQD4-B"
-      ]
-    },
-    {
-      "key": "agent|llm|rag|transformer",
-      "label": "🚀 2026 में AI सीखना चाहते हो — वो भी FREE",
-      "count": 2,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "gauravgoyalai",
-          2
-        ]
-      ],
-      "representative": {
-        "shortcode": "Dbz2f3VReKo",
-        "creator": "gauravgoyalai",
-        "caption": "🚀 2026 में AI सीखना चाहते हो — वो भी FREE?\n\nअगर आप AI, GenAI, LLMs, RAG और AI Agents सीखना चाहते हैं, तो इन 5 FREE resources से शुरुआत करें 👇\n\n1️⃣ Generative AI for Everyone — DeepLearning.AI\n2️⃣ Hugging Face — LLM Course\n3️⃣ Andrej Karpathy — Neural Networks: Zero to Hero\n4️⃣ RAG — Retrieval-Augmented Generation\n5️⃣ Microsoft — Generative AI for Beginners\n\n💡 Best learning path:\nGenAI Basics → LLM",
-        "source": "creator:gauravgoyalai"
-      },
-      "members": [
-        "DcNNc5dRRk6",
-        "Dbz2f3VReKo"
       ]
     },
     {
@@ -53731,7 +53808,7 @@
       "key": "weak:complete datascience introduction omnisci",
       "label": "- A Complete Introduction OmniSci https://www",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "datasciencescoop",
@@ -54739,7 +54816,7 @@
       "key": "weak:candidates ignore resume score",
       "label": "1/ Check your resume’s ATS score Most candidates ignore this but companies do use ATS for the first round of filtering",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "interview_prep_here",
@@ -55576,6 +55653,27 @@
       ]
     },
     {
+      "key": "weak:github open projects source",
+      "label": "10 open source GitHub projects are challenging software companies that generate billions from subscriptions",
+      "count": 1,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "nextgentexh",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdJwPYRDaBJ",
+        "creator": "nextgentexh",
+        "caption": "10 open source GitHub projects are challenging software companies that generate billions from subscriptions.\n\nTools like yt-dlp, n8n, Whisper, Penpot, and Bitwarden offer free alternatives to services for video access, automation, transcription, design, and password management.\n\nThese projects are not simply cheaper copies. Many users choose them because they offer more privacy, greater customizat",
+        "source": "saved"
+      },
+      "members": [
+        "DdJwPYRDaBJ"
+      ]
+    },
+    {
       "key": "agent|langgraph|llm|sql|statistics",
       "label": "10 projects",
       "count": 1,
@@ -55915,7 +56013,7 @@
       "key": "weak:computer keyboard shortcuts student",
       "label": "100 Computer Keyboard Shortcuts Every Student & Professional Should Know Basic Shortcuts (1–20) 1",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -56125,7 +56223,7 @@
       "key": "weak:keyboard shortcuts should user",
       "label": "100 Mac Keyboard Shortcuts Every User Should Know Basic Shortcuts (1–20) 1",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -56440,7 +56538,7 @@
       "key": "weak:career salary story years",
       "label": "10x Salary in 4 years - My Story",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "edubhav",
@@ -57826,7 +57924,7 @@
       "key": "weak:data keywords recruiter scan",
       "label": "20 keywords recruiter scan (Data Analyst roles)",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "edubhav",
@@ -59590,7 +59688,7 @@
       "key": "weak:excel formulas pros",
       "label": "30 Excel Formulas for Pros",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "thedataguy16",
@@ -59611,7 +59709,7 @@
       "key": "weak:excel hidden shortcuts",
       "label": "30 Hidden Excel Shortcuts",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "thedataguy16",
@@ -61837,7 +61935,7 @@
       "key": "weak:daily excel formulas office",
       "label": "50 Excel formulas for daily office tasks",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "thedataguy16",
@@ -63160,7 +63258,7 @@
       "key": "weak:amazing miss post tools",
       "label": "7 amazing AI tools you don't want to miss in 2023 🙌 save this post for later Follow @evolving",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "GAP",
       "top_creators": [
         [
           "evolving.ai",
@@ -63580,7 +63678,7 @@
       "key": "weak:actually excel formulas matter",
       "label": "8 Excel Formulas that actually matter",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "thedataguy16",
@@ -77416,6 +77514,27 @@
       ]
     },
     {
+      "key": "agent|backend|llm|rag|system design",
+      "label": "AI Engineer Roadmap 2026 I’ve updated this roadmap for the current AI engineering landscape",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "akashcode.ai",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdPIoqDE_8B",
+        "creator": "akashcode.ai",
+        "caption": "AI Engineer Roadmap 2026\n\nI’ve updated this roadmap for the current AI engineering landscape.\n\nThe focus is not on learning every new AI framework or spending months on topics that most production AI engineers rarely use.\n\nIt starts with the foundations and moves into the areas that matter when you actually build AI systems:\n\n• LLM Engineering\n• RAG & Retrieval\n• Context Engineering\n• Agents & Too",
+        "source": "saved"
+      },
+      "members": [
+        "DdPIoqDE_8B"
+      ]
+    },
+    {
       "key": "agent|api|coding|data structure|database|devops|docker|llm|machine learning|mlops|python|rag|sql|statistics",
       "label": "AI Engineer Roadmap | Complete Guide to Become an AI Engineer Want to become an AI Engineer",
       "count": 1,
@@ -81739,6 +81858,27 @@
       },
       "members": [
         "DK6R-K0InEl"
+      ]
+    },
+    {
+      "key": "weak:building powerful tool wealth",
+      "label": "AI is the most powerful wealth-building tool ever created",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "thederekgray",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdMUaWyFpDH",
+        "creator": "thederekgray",
+        "caption": "AI is the most powerful wealth-building tool ever created.\n\nThe question isn’t whether to use it.\n\nIt’s whether you figure it out before everyone else does.\n\nThis Sunday (Sep 13th), at 5PM EST, my team is hosting a FREE live masterclass.\n\nWe’ll break down exactly how we use AI + Google Maps to make 5-figures/month. \n\nFollow @thederekgray & click the link in my bio to grab your spot 🤝",
+        "source": "saved"
+      },
+      "members": [
+        "DdMUaWyFpDH"
       ]
     },
     {
@@ -87373,7 +87513,7 @@
       "key": "weak:advance excel shortcuts",
       "label": "Advance Excel shortcuts",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "techie_programmer",
@@ -95290,7 +95430,7 @@
       "key": "weak:anthropic cooking openai stop",
       "label": "Anthropic won't stop COOKING OpenAI 💀",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "theartificialintelligens",
@@ -98692,7 +98832,7 @@
       "key": "weak:artificial intelligence technology word",
       "label": "Artificial Intelligence is not a new word and not a new technology for researchers",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "theartificialintelligence",
@@ -103963,7 +104103,7 @@
       "key": "weak:basic",
       "label": "Basic ✌️",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "techie_programmer",
@@ -110851,7 +110991,7 @@
       "key": "agent|airflow|api|aws|database|devops|docker|kafka|kubernetes|llm|machine learning|postgres|python|rag|spark|sql|terraform",
       "label": "Build These 10 Resume-Winning Projects | IT Career Guide Don't fill your resume with basic projects",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -117151,7 +117291,7 @@
       "key": "weak:attacks cyber list techie",
       "label": "Check out list of few big cyber attacks",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "GAP",
       "top_creators": [
         [
           "techie_programmer",
@@ -117403,7 +117543,7 @@
       "key": "weak:become checklist cyber security",
       "label": "Checklist to become cyber security expert",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "techie_programmer",
@@ -121204,7 +121344,7 @@
       "key": "weak:civic credits sense video",
       "label": "Civic sense who",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "whatshotdelhi",
@@ -129751,7 +129891,7 @@
       "key": "weak:answers careertipsdaily customize where",
       "label": "Customize your answers 🥳 🚀“Where do you see yourself in 5 years",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "freeway_monk",
@@ -131431,7 +131571,7 @@
       "key": "weak:analyst data dictionary",
       "label": "Data Analyst Dictionary 📚",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "edubhav",
@@ -131473,7 +131613,7 @@
       "key": "weak:analyst checklist data interview",
       "label": "Data Analyst Interview Checklist 🔥",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "edubhav",
@@ -131578,7 +131718,7 @@
       "key": "devops|numpy|pandas|python|rag|sql|statistics",
       "label": "Data Analyst Roadmap (2026) + Job Roles & Salaries Step 1: Learn Excel • Formulas • Pivot Tables • Charts • Dashboards S",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -131620,7 +131760,7 @@
       "key": "weak:analyst data nutshell",
       "label": "Data Analyst in a nutshell 🔥",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "edubhav",
@@ -131641,7 +131781,7 @@
       "key": "machine learning|sql",
       "label": "Data Analyst or Data Scientist, Which one to Choose - SQL, EXCEL , POWER BI , TABLEAU, MACHINE LEARNING , AI",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "thedataguy16",
@@ -132901,7 +133041,7 @@
       "key": "api|aws|azure|coding|machine learning|python|statistics",
       "label": "Data science 🧬 Data Visualization • Tableau • Power BI • Matplotlib • GG Plot • Seaborn Data Analysis • Feature Engineer",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "techie_programmer",
@@ -137857,7 +137997,7 @@
       "key": "weak:between difference finance quant",
       "label": "Difference between Quant Finance, Computational Finance and Financial Mathematics Swipe left and do give it a read",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "quantinsider.io",
@@ -139390,7 +139530,7 @@
       "key": "coding|numpy|pandas|python|pytorch|system design",
       "label": "Do this and you’ll master your ML interview Be crystal clear on ML basics: supervised vs",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "codingmermaid.ai",
@@ -140020,7 +140160,7 @@
       "key": "weak:these tiktok video yourself",
       "label": "Do you see yourself in any of these",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "airesearches",
@@ -149911,7 +150051,7 @@
       "key": "agent|interview question|langgraph|llm|python|sql|statistics",
       "label": "Every agent tutorial teaches the easy half",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "datasciencebrain",
@@ -150241,6 +150381,27 @@
       },
       "members": [
         "DcCk1fBOFwx"
+      ]
+    },
+    {
+      "key": "agent|coding|langgraph|llm|python|rag",
+      "label": "Every production AI system follows one or more of these core agent patterns",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "ai_vatika",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DctF4NiSJI7",
+        "creator": "ai_vatika",
+        "caption": "Every production AI system follows one or more of these core agent patterns. 🚀\n\nLearn how Prompt Chaining, Routing, Parallelization, Orchestrator-Workers, and Evaluator-Optimizer help build scalable, reliable, and production-ready AI applications.\n\nSave this guide for your next AI project. 📌\n#AI #AIAgents #AgenticAI #GenerativeAI #LLM MachineLearning ArtificialIntelligence PromptEngineering AIEngi",
+        "source": "saved"
+      },
+      "members": [
+        "DctF4NiSJI7"
       ]
     },
     {
@@ -151612,7 +151773,7 @@
       "key": "weak:cheat excel sheet",
       "label": "Excel Cheat Sheet",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "datasciencescoop",
@@ -151633,7 +151794,7 @@
       "key": "weak:cheat excel sheet shortcuts",
       "label": "Excel Cheat Sheet - Shortcuts, Formulas, Errors and All Concepts in one place",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "thedataguy16",
@@ -151738,7 +151899,7 @@
       "key": "weak:excel formulae guide shortcut",
       "label": "Excel best formulae and shortcut guide",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "thedataguy16",
@@ -151801,7 +151962,7 @@
       "key": "weak:analysts data excel",
       "label": "Excel for data analysts",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "thedataguy16",
@@ -151822,7 +151983,7 @@
       "key": "weak:cheat excel formulas sheet",
       "label": "Excel formulas Cheat sheet",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "thedataguy16",
@@ -153292,7 +153453,7 @@
       "key": "backend|coding|interview question|microservice",
       "label": "Famous Interview Question You have multiple beans of the same type in Spring",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "codedsoul_05",
@@ -157114,7 +157275,7 @@
       "key": "weak:berry cloud info powerbiroadmap",
       "label": "Follow @cloud_x_berry for more info Power BI Desktop, Power BI Service, data modeling, Power Query, DAX basics, DAX adva",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "cloud_x_berry",
@@ -157828,7 +157989,7 @@
       "key": "agent|langgraph|machine learning|numpy|pandas|python|pytorch|sql",
       "label": "Follow @cloud_x_berry for more info pandas data analysis, numpy numerical computing, SQL for data analysis, Excel data p",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "cloud_x_berry",
@@ -157849,7 +158010,7 @@
       "key": "weak:berry cloud exceldataanalysis info",
       "label": "Follow @cloud_x_berry for more info pivot tables, VLOOKUP, XLOOKUP, formulas, functions, conditional formatting, data cl",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "cloud_x_berry",
@@ -159418,6 +159579,27 @@
       },
       "members": [
         "CxiHPNmSLLo"
+      ]
+    },
+    {
+      "key": "weak:wizofai",
+      "label": "Follow @wizofai for more",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "wizofai",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "Dc3cf6PCC9Z",
+        "creator": "wizofai",
+        "caption": "Follow @wizofai for more.",
+        "source": "saved"
+      },
+      "members": [
+        "Dc3cf6PCC9Z"
       ]
     },
     {
@@ -164821,7 +165003,7 @@
       "key": "weak:beyond chat dropped gemini",
       "label": "Gemini 3 Pro just dropped — and it’s way beyond chat",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "mindwired.ai",
@@ -184180,6 +184362,27 @@
       ]
     },
     {
+      "key": "weak:engineering karpathy loop method",
+      "label": "How to do Loop Engineering with the Karpathy Method",
+      "count": 1,
+      "gap_verdict": "covered",
+      "top_creators": [
+        [
+          "raycfu",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "Dcw-B00FW8c",
+        "creator": "raycfu",
+        "caption": "How to do Loop Engineering with the Karpathy Method #ai #tech",
+        "source": "saved"
+      },
+      "members": [
+        "Dcw-B00FW8c"
+      ]
+    },
+    {
       "key": "weak:fill nothing projects resume",
       "label": "How to fill resume when you have nothing to add",
       "count": 1,
@@ -187879,7 +188082,7 @@
       "key": "weak:been candidates hiring since",
       "label": "I have been hiring candidates since past 5 years and these are the things I would never want to see as a hiring manager",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "interview_prep_here",
@@ -188632,6 +188835,27 @@
       ]
     },
     {
+      "key": "mlops|numpy|pytorch",
+      "label": "I ran a 100-layer network and 86 of its layers got a gradient of exactly zero",
+      "count": 1,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "ankiit.ai",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdMcupQTYAZ",
+        "creator": "ankiit.ai",
+        "caption": "I ran a 100-layer network and 86 of its layers got a gradient of exactly zero.\n\nNot “very small”. Zero.\n\nHere is the run. 100 layers, width 128, one real forward and backward pass, gradient norm measured at every layer.\n\nWith sigmoid activations the gradient shrinks by ×4.47 per layer — the same factor, every layer, which is why it’s a straight line on a log axis. Compounded over 100 layers that i",
+        "source": "saved"
+      },
+      "members": [
+        "DdMcupQTYAZ"
+      ]
+    },
+    {
       "key": "weak:financial freedom reached work",
       "label": "I reached financial freedom I work less than 20h a week",
       "count": 1,
@@ -189265,7 +189489,7 @@
       "key": "weak:careers launch stars successful",
       "label": "I want you to be successful and launch your careers into the stars",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "codingmermaid.ai",
@@ -190336,7 +190560,7 @@
       "key": "weak:defense india",
       "label": "INDIA IS USING AI IN DEFENSE 🇮🇳🚀💪",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "builders.central",
@@ -197518,7 +197742,7 @@
       "key": "agent|aws|azure|llm|rag",
       "label": "In real-world GenAI apps (AWS / Azure), guardrails aren’t prompt filters",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "jganesh.ai",
@@ -198337,7 +198561,7 @@
       "key": "weak:excel index match",
       "label": "Index match in Excel",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "thedataguy16",
@@ -200416,7 +200640,7 @@
       "key": "weak:candidate interviewer weaknesses",
       "label": "Interviewer: What are your weaknesses",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "gkcs__",
@@ -201550,7 +201774,7 @@
       "key": "weak:excel reels relevant still",
       "label": "Is Excel Still Relevant in 2025",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "edubhav",
@@ -207220,7 +207444,7 @@
       "key": "weak:again done engineers japan",
       "label": "Japan has done it again",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "futurewalt.ai",
@@ -212785,7 +213009,7 @@
       "key": "weak:careertipsdaily home salary take",
       "label": "Know your take home salary 🤑",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "freeway_monk",
@@ -217426,7 +217650,7 @@
       "key": "algorithm|devops|machine learning|mlops|numpy|pandas|python|sql|statistics",
       "label": "Let me teach you ML 👇 Here’s how to approach it: 1",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "codingmermaid.ai",
@@ -218077,7 +218301,7 @@
       "key": "algorithm|pytorch",
       "label": "Let’s start the festive season strong",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "codingmermaid.ai",
@@ -218497,7 +218721,7 @@
       "key": "weak:analyst data life",
       "label": "Life of a Data Analyst 📈",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "edubhav",
@@ -220345,7 +220569,7 @@
       "key": "weak:desk long short story",
       "label": "Long story short, your desk setup matters, but building your dream one can take years",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "webbyvaris",
@@ -222277,7 +222501,7 @@
       "key": "weak:excel exceltraining macros",
       "label": "Macros in Excel",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "thedataguy16",
@@ -225217,7 +225441,7 @@
       "key": "api|coding|interview question|python|sql|system design",
       "label": "Master Full Stack Python interview questions with detailed explanations and practical examples",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -234475,6 +234699,27 @@
       ]
     },
     {
+      "key": "weak:center data idea people",
+      "label": "Most people have no idea how a data center actually works",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "nextelligencee",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "Da-5AM3zKTq",
+        "creator": "nextelligencee",
+        "caption": "Most people have no idea how a data center actually works. Servers, racks, switches, cables, traffic routing. It sounds complex because it is.\n\nA $9 Steam game called Data Center just made all of it click for thousands of people. You build everything from scratch, wire it by hand, and watch real-time traffic flow through your network as coloured packet balls.\n\nMiss a cable connection and the whole",
+        "source": "saved"
+      },
+      "members": [
+        "Da-5AM3zKTq"
+      ]
+    },
+    {
       "key": "agent|api|embedding|llm|python|rag|statistics|transformer",
       "label": "Most people have used ChatGPT",
       "count": 1,
@@ -235669,27 +235914,6 @@
       },
       "members": [
         "DaniExQofaR"
-      ]
-    },
-    {
-      "key": "agent|coding|llm|machine learning|mlops|rag",
-      "label": "Most people use an AI agent one prompt at a time",
-      "count": 1,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "jam.with.ai",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DZh9vfHogcP",
-        "creator": "jam.with.ai",
-        "caption": "Most people use an AI agent one prompt at a time. I turned it into a repeatable pipeline.\n\nI wrote a reusable style prompt and a script template once. Now every deck is the same three moves: open a new project, paste the style, paste the script, hit enter. Skywork runs the deeper research and builds the slideshow from there. The same tool ships hundreds of skills, so it also handles websites, imag",
-        "source": "creator:jam.with.ai"
-      },
-      "members": [
-        "DZh9vfHogcP"
       ]
     },
     {
@@ -239707,7 +239931,7 @@
       "key": "weak:nail question salary stop",
       "label": "Nail your salary question like a pro",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "devrelmegha",
@@ -248527,7 +248751,7 @@
       "key": "weak:introduction",
       "label": "Oop’s introduction 🙌",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "techie_programmer",
@@ -252706,7 +252930,7 @@
       "key": "weak:complete first video",
       "label": "Our first complete AI video 😃 Video link in our story and bio",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "funclovita",
@@ -257578,7 +257802,7 @@
       "key": "api|database|postgres|python|rag|snowflake|sql",
       "label": "Power BI Cheat Sheet | Complete Guide for Data Analysts Master Power BI with this quick reference covering data loading,",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -257662,7 +257886,7 @@
       "key": "weak:power powerbi tableau",
       "label": "Power BI vs Tableau",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "techie_programmer",
@@ -257683,7 +257907,7 @@
       "key": "weak:excel power query",
       "label": "Power query in Excel",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "thedataguy16",
@@ -259888,7 +260112,7 @@
       "key": "coding|interview question|numpy|python",
       "label": "Python Engineer Interview Questions 🚀 Need PDF version",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "pycode.dev",
@@ -260284,6 +260508,27 @@
       ]
     },
     {
+      "key": "api|backend|coding|machine learning|numpy|pandas|python|rag|statistics",
+      "label": "Python is powerful not because of the language alone, but because of the ecosystem built around it",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "she_explores_data",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DcTawFXM4Gn",
+        "creator": "she_explores_data",
+        "caption": "Python is powerful not because of the language alone, but because of the ecosystem built around it.\n\nFrom transforming raw datasets into insights, building predictive models, designing dashboards, developing APIs, to creating applications, Python offers a library for almost every real-world problem.\n\nUnderstanding which tool to use for which task is what separates random coding from structured pro",
+        "source": "saved"
+      },
+      "members": [
+        "DcTawFXM4Gn"
+      ]
+    },
+    {
       "key": "algorithm|numpy|pandas|python|pytorch|sql",
       "label": "Python is the ML language for a reason, Save this for later 👇 Its simple syntax, massive community, and every major fram",
       "count": 1,
@@ -260323,6 +260568,27 @@
       },
       "members": [
         "Da0E8FZA-Ap"
+      ]
+    },
+    {
+      "key": "numpy|pandas|python|pytorch",
+      "label": "Python libraries I’d actually keep in a quant stack not just the ones that look good on a resume",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "quantchics",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DcWGMwuNYfp",
+        "creator": "quantchics",
+        "caption": "Python libraries I’d actually keep in a quant stack not just the ones that look good on a resume.\n\nThere’s a huge difference between knowing Python and knowing which tools belong in a research workflow.\n\nNumPy/SciPy for the numerical core.\npandas for research and data work.\nstatsmodels for econometrics.\nCVXPY for optimisation.\n\nNumba when Python becomes the bottleneck.\nPyTorch/JAX when you’re doin",
+        "source": "saved"
+      },
+      "members": [
+        "DcWGMwuNYfp"
       ]
     },
     {
@@ -261085,7 +261351,7 @@
       "key": "weak:move quantum someday starting",
       "label": "Quantum is starting to move out of the “someday” category and into real policy, infrastructure, and national security pl",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "uncover.quantum",
@@ -278893,7 +279159,7 @@
       "key": "weak:excel exceltraining slicers",
       "label": "Slicers in Excel",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "thedataguy16",
@@ -280048,7 +280314,7 @@
       "key": "weak:analyst data engineer software",
       "label": "Software Engineer vs Data Analyst in 2026",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "sundaskhalidd",
@@ -287080,6 +287346,27 @@
       ]
     },
     {
+      "key": "embedding|llm|machine learning|python|transformer",
+      "label": "Stop using LLMs for everything",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "jam.with.ai",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdMNn5zgA4e",
+        "creator": "jam.with.ai",
+        "caption": "Stop using LLMs for everything!!!\nComment “nlp” to get the resources.\n\nSometimes, a simple NLP technique is all you need.\nSwipe through 22 NLP concepts and tools worth knowing and save this for your next project. \nThe last one might surprise you but trust me, it works the best for many cases. \n.\n.\n.\n[NLP, Natural Language Processing, AI Engineering, Machine Learning, Python, Text Normalisation, To",
+        "source": "saved"
+      },
+      "members": [
+        "DdMNn5zgA4e"
+      ]
+    },
+    {
       "key": "weak:deliver money stop wasting",
       "label": "Stop wasting money on ads that don't deliver",
       "count": 1,
@@ -288091,7 +288378,7 @@
       "key": "weak:excel exceltraining sumif sumifs",
       "label": "Sumif and sumifs",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "thedataguy16",
@@ -294349,7 +294636,7 @@
       "key": "weak:hind people power resigns",
       "label": "That's the power of the people",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "gkcs__",
@@ -294559,7 +294846,7 @@
       "key": "weak:knowing minute presentation trick",
       "label": "The 2-minute presentation isn’t the trick",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "itsaiguide",
@@ -296155,7 +296442,7 @@
       "key": "weak:analyst checklist data",
       "label": "The Data Analyst Checklist ✅",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "edubhav",
@@ -297835,7 +298122,7 @@
       "key": "weak:anthropic pentagon straight told",
       "label": "The Pentagon told Anthropic straight up this is a \"sh*t-or-get-off-the-pot\" meeting",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "theartificialintelligens",
@@ -303001,7 +303288,7 @@
       "key": "weak:become math quant takes",
       "label": "The math it takes to become a quant - here you can tell how similar the quant path is to CS vs finance",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "mar_antaya",
@@ -306697,7 +306984,7 @@
       "key": "weak:chatgpt prompt shortcuts these",
       "label": "These 9 ChatGPT prompt shortcuts can make a noticeable difference in the way you use AI",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "GAP",
       "top_creators": [
         [
           "mindwired.ai",
@@ -308902,7 +309189,7 @@
       "key": "weak:answer current leaving thinking",
       "label": "Thinking of leaving your current job",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "interview_prep_here",
@@ -309007,7 +309294,7 @@
       "key": "weak:excel land multiple project",
       "label": "This 1 Excel project can land you Multiple Job Opportunities",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "thedataguy16",
@@ -319192,7 +319479,7 @@
       "key": "weak:clear excel skills three",
       "label": "Three Excel skills that clear 90% of data analyst interviews in India",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "thedataguy16",
@@ -319822,7 +320109,7 @@
       "key": "coding|interview question|python|rag",
       "label": "Time, Speed & Distance Tricks | Aptitude Shortcut Placement & competitive exams lo Time, Speed & Distance questions fast",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -320932,6 +321219,27 @@
       ]
     },
     {
+      "key": "weak:minute notes took trick",
+      "label": "Took notes",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "shubhamnalingupta",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DcBalPcTVxg",
+        "creator": "shubhamnalingupta",
+        "caption": "Took notes. Here’s the 5-minute AI trick that will get your CV past their filters👇\n\n1️⃣ Decode the job like a machine (because a machine reads it first)\n«You’re an ATS optimization specialist.\nHere is the full job description: [paste JD]\nExtract: – Core required skills (hard filters) – Repeated keywords – Seniority signals – Tools / certifications mentioned multiple times – Soft skills that are ac",
+        "source": "saved"
+      },
+      "members": [
+        "DcBalPcTVxg"
+      ]
+    },
+    {
       "key": "weak:credits kahn tools zain",
       "label": "Tools Credits - Zain Kahn (Twitter)",
       "count": 1,
@@ -321607,7 +321915,7 @@
       "key": "weak:combinations excel vlookup",
       "label": "Top 10 Vlookup combinations in Excel",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "thedataguy16",
@@ -321838,7 +322146,7 @@
       "key": "distributed|interview question",
       "label": "Top 100 Git & GitHub Interview Questions (2026) Git Basics (1–10) 1",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -322195,7 +322503,7 @@
       "key": "weak:excel exceltutorial shortcuts",
       "label": "Top 25 Excel Shortcuts",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "thedataguy16",
@@ -322363,7 +322671,7 @@
       "key": "weak:cleaning data excel formulas",
       "label": "Top 30 Data Cleaning formulas in Excel",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "thedataguy16",
@@ -322804,7 +323112,7 @@
       "key": "api|database|numpy|pandas|python|sql|statistics",
       "label": "Top 50 Data Analyst Project Ideas (2026) Beginner Projects 1",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -324358,7 +324666,7 @@
       "key": "agent|data structure|llm|machine learning|python|rag",
       "label": "Tops to Become AI Engineer Tip 1️⃣ Build strong fundamentals in Python, data structures, and basic mathematics",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "ds_ai_ketan",
@@ -330343,7 +330651,7 @@
       "key": "weak:achieve chatgpt prompts these",
       "label": "Use these 8 ChatGPT prompts to achieve your goals like a champ 🔥🙌 Follow @evolving",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "GAP",
       "top_creators": [
         [
           "evolving.ai",
@@ -331456,7 +331764,7 @@
       "key": "weak:ayipoyadu rrvsrh sooryavanshi vaibhav",
       "label": "Vaibhav Sooryavanshi 🔥 But out ayipoyadu 🥲",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "GAP",
       "top_creators": [
         [
           "funclovita",
@@ -332527,7 +332835,7 @@
       "key": "weak:deep explained vlookup xlookup",
       "label": "Vlookup and Xlookup explained - Deep level prep Excel",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "thedataguy16",
@@ -332905,7 +333213,7 @@
       "key": "weak:first singapore testing world",
       "label": "WORLD FIRST: Singapore is testing a data centre that computes using living human neurons",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "uncover.quantum",
@@ -349306,7 +349614,7 @@
       "key": "weak:answer hire prepare should",
       "label": "Why should we hire you",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "interview_prep_here",
@@ -357181,7 +357489,7 @@
       "key": "agent|api|llm|python|rag|sql|statistics",
       "label": "Your Complete Roadmap: Data Analyst → Data Scientist → GenAI Engineer 🚀 Before you scroll away please take a moment to →",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "datasciencebrain",
@@ -357391,7 +357699,7 @@
       "key": "backend|coding|database|rag|system design",
       "label": "Your OTP expires in 30 seconds — but nobody stored it anywhere",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "abhi_techhub",
@@ -357832,7 +358140,7 @@
       "key": "agent|api|coding|database|llm",
       "label": "Your coding agent doesn’t need a bigger prompt",
       "count": 1,
-      "gap_verdict": "covered",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "hackproduct",
@@ -363415,6 +363723,27 @@
       ]
     },
     {
+      "key": "weak:build datasets medical",
+      "label": "here are some more medical datasets you can use to build medical ML projects",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "hinumpy",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DczfFUPjGRj",
+        "creator": "hinumpy",
+        "caption": "here are some more medical datasets you can use to build medical ML projects! if you comment “dataset”, i’ll dm you all of the links 🌸\n\n#machinelearning #datascience #csmajor #techinternships #resumetips",
+        "source": "saved"
+      },
+      "members": [
+        "DczfFUPjGRj"
+      ]
+    },
+    {
       "key": "weak:college hings knew wish",
       "label": "hings I wish I knew in my college days 👇 Nobody tells you this in lectures",
       "count": 1,
@@ -363943,7 +364272,7 @@
       "key": "weak:facebookreel govtjobs salary trendingreels",
       "label": "job salary",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "sriram_2.0",
@@ -366694,7 +367023,7 @@
       "key": "weak:ever should stuck wondering",
       "label": "“Ever got stuck wondering 🤔 ‘Should I write in past tense or present tense in my research paper",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "research.and.rage",
@@ -367492,7 +367821,7 @@
       "key": "database|devops|python|sql",
       "label": "“Tell Me About Yourself” | Interview Introduction | Telugu Hi Sir/Madam, My name is [Your Name]",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonlifetelugu",
@@ -367765,7 +368094,7 @@
       "key": "weak:expectations known question salary",
       "label": "“What are your salary expectations",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "iamsaumyaawasthi",
@@ -380869,7 +381198,7 @@
       "key": "agent|coding|data structure|interview question|llm|numpy|pandas|python|statistics",
       "label": "🐍 100 PYTHON INTERVIEW QUESTIONS WITH ANSWERS - COMPLETE GUIDE",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "datasciencebrain",
@@ -388930,6 +389259,27 @@
       ]
     },
     {
+      "key": "agent|api|backend|database|llm|mlops|rag",
+      "label": "📊 How do you know what your AI system is actually doing",
+      "count": 1,
+      "gap_verdict": "covered",
+      "top_creators": [
+        [
+          "asyncarchitect",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "Dc96RKrKGqI",
+        "creator": "asyncarchitect",
+        "caption": "📊 How do you know what your AI system is actually doing?\n\nAI systems have many moving parts:\n\n🤖 LLM\n🔎 RAG\n🔧 Tools\n🗄️ Databases\n🔌 APIs\n\nWhen something goes wrong, you need to know WHERE and WHY.\n\nThat's where **AI Observability** comes in.\n\nThe 3 pillars:\n\n📝 Logs → What happened?\n📈 Metrics → How is it performing?\n🔍 Traces → Where did it happen?\n\nTrack things like:\n\n⏱️ Latency\n🪙 Token usage\n💰 Cost\n❌",
+        "source": "saved"
+      },
+      "members": [
+        "Dc96RKrKGqI"
+      ]
+    },
+    {
       "key": "agent|algorithm|bayesian|llm|python|statistics",
       "label": "📊 Master Statistics for Data Science",
       "count": 1,
@@ -389017,7 +389367,7 @@
       "key": "api|llm|python|sql",
       "label": "📊 Want to master Data Science & Generative AI with tools like Python, PowerBI, ChatGPT, and Zapier",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "codingmermaid.ai",
@@ -389689,7 +390039,7 @@
       "key": "weak:aptitude handwritten notes placements",
       "label": "📚 APTITUDE HANDWRITTEN NOTES FOR PLACEMENTS 🚀 Struggling with Aptitude",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonix.hub",
@@ -389710,7 +390060,7 @@
       "key": "weak:aptitude freshers handwritten notes",
       "label": "📚 Aptitude Handwritten Notes for Freshers & Beginners 🚀 Are you preparing for placements and struggling with Aptitude",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "pythonix.hub",
@@ -392020,7 +392370,7 @@
       "key": "agent|database|llm|mlops|pandas|python|sql|statistics",
       "label": "🔥 DATA ANALYST INTERVIEW CHEAT SHEET 🔥 39 Questions",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "datasciencebrain",
@@ -405481,7 +405831,7 @@
       "key": "backend|coding|interview question|sql",
       "label": "🚨 90% of candidates struggle with basic CRUD interview questions",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "iamsaumyaawasthi",
@@ -414637,7 +414987,7 @@
       "key": "weak:array does length list",
       "label": "🤔 Why does \"array",
       "count": 1,
-      "gap_verdict": "partial",
+      "gap_verdict": "covered",
       "top_creators": [
         [
           "code2careerai",
@@ -417913,7 +418263,7 @@
       "key": "weak:film industry short transform",
       "label": "🤯 If you want to see how AI is about to transform the film industry, this short video makes it clear",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "evolving.ai",
@@ -420244,7 +420594,7 @@
       "key": "agent|algorithm|llm|machine learning|mlops|python|statistics|system design|transformer",
       "label": "🧊 The AI Iceberg: What's REALLY Powering Modern AI",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "datasciencebrain",
@@ -422470,7 +422820,7 @@
       "key": "weak:chatgpt people still wrong",
       "label": "🪄 Most people are still using ChatGPT wrong… and OpenAI just told us why",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "mindwired.ai",
@@ -422782,6 +423132,6 @@
       ]
     }
   ],
-  "total_posts": 43168,
-  "unique_topics": 19420
+  "total_posts": 43214,
+  "unique_topics": 19435
 }

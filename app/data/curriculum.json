@@ -333,7 +333,7 @@
       "icon": "\ud83e\udd16",
       "phase": "A",
       "prereqs": [],
-      "hours": 79.0,
+      "hours": 81.5,
       "modules": [
         {
           "id": "T07-agent-loop-from-scratch",
@@ -721,6 +721,19 @@
           "status": "todo"
         },
         {
+          "id": "T07-recursive-language-models",
+          "slug": "recursive-language-models",
+          "title": "Recursive Language Models: External Context, Programmatic Inspection, Recursive Calls",
+          "hours": 2.5,
+          "tags": [
+            "agents",
+            "context",
+            "critical"
+          ],
+          "order": 30,
+          "status": "todo"
+        },
+        {
           "id": "T07-agent-zero-to-prod",
           "slug": "agent-zero-to-prod",
           "title": "Zero \u2192 Production: The Complete Multi-Agent System, End to End",
@@ -730,7 +743,7 @@
             "capstone",
             "critical"
           ],
-          "order": 30,
+          "order": 31,
           "status": "todo",
           "sprint_order": 27,
           "sprint_week": 9
@@ -883,7 +896,7 @@
       "icon": "\ud83d\udcda",
       "phase": "A",
       "prereqs": [],
-      "hours": 39.5,
+      "hours": 42.5,
       "modules": [
         {
           "id": "T06-chunking",
@@ -1102,6 +1115,18 @@
             "critical"
           ],
           "order": 17,
+          "status": "todo"
+        },
+        {
+          "id": "T06-poisoned-rag-defense",
+          "slug": "poisoned-rag-defense",
+          "title": "RAG Poisoning Defense: Trust, Isolation, Provenance, and Validity Gates",
+          "hours": 3.0,
+          "tags": [
+            "security",
+            "critical"
+          ],
+          "order": 18,
           "status": "todo"
         }
       ]
@@ -6191,7 +6216,7 @@
   ],
   "totals": {
     "tracks": 36,
-    "modules": 461,
-    "hours": 1063.0
+    "modules": 463,
+    "hours": 1068.5
   }
 }
