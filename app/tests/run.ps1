@@ -46,6 +46,11 @@ Write-Host ""; Write-Host "-- security & privacy gate --"
 & $PY "$ROOT\scripts\security_check.py"
 if ($LASTEXITCODE -ne 0) { $fail = $true }
 
+# ---- authored content contract ----------------------------------------------
+Write-Host ""; Write-Host "-- authored content contract --"
+& $PY "$ROOT\scripts\content_audit.py"
+if ($LASTEXITCODE -ne 0) { $fail = $true }
+
 # ---- unit + integration tests (pytest) ---------------------------------------
 & $PY -m pytest --version >$null 2>&1
 if ($LASTEXITCODE -eq 0) {

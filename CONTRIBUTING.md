@@ -60,7 +60,7 @@ merge first, correct content second.
 **One sharp edge.** The fragment merge is *additive*. Removing a card from a fragment does
 not remove it from the aggregate -- the old copy persists. If you need to delete or rename
 a card, edit the fragment *and* remove it from `app/data/flashcards.json`, or regenerate
-from scratch. As of the last commit, aggregate and fragments agree exactly (5,503 cards
+from scratch. As of the last commit, aggregate and fragments agree exactly (5,756 cards
 each), so any future divergence means someone edited an aggregate directly.
 
 ## 4. Claim work before you start
@@ -97,7 +97,7 @@ git checkout -b track/T12-devops
 # ... write modules plus their card and drill fragments ...
 
 python app/build_data.py
-python app/tests/review_gate.py   # expect 452 pass / 0 fail
+python app/tests/review_gate.py   # expect 463 pass / 0 fail
 bash app/tests/run.sh
 
 git add -A
@@ -115,7 +115,7 @@ normal for ~1,900 files, not a hang.
 
 ```powershell
 python app/build_data.py         # regenerate; merges card and drill fragments
-python app/tests/review_gate.py  # house format -- expect 452 pass, 0 fail
+python app/tests/review_gate.py  # house format -- expect 463 pass, 0 fail
 bash app/tests/run.sh            # DOM and SM-2 tests
 python app/learning_path.py      # refresh LEARNING-PATH.md
 ```
@@ -151,12 +151,12 @@ Every one was learned by something breaking.
 
 | Work | State |
 |---|---|
-| Labs | 1 of ~40. Pattern: `labs/py/01-circuit-breaker` -- starter fails, solution passes, injectable clock, no network in tests. |
+| Labs | 98 complete. Pattern: `labs/py/01-circuit-breaker` -- starter fails, solution passes, injectable clock, no network in tests. |
 | Problems | `app/data/problems.json` is empty; the app's Problems tab renders blank. Fragments go in `app/data/problemsets/`. |
-| Cheatsheets | 0, against 452 modules. |
+| Cheatsheets | 45 revision sheets, focused on the sprint and high-value additions. |
 | `/tutor-update` | Never run. Watermarks seeded 2026-07-26. Cloud atlases and agent tracks drift fastest. |
 
-Curriculum modules are **452/452 done**. Everything above is the remaining work.
+Curriculum modules are **463/463 done**. The remaining work is refresh cadence, lab breadth, and personal resume confirmation.
 
 ## 9. Do not commit
 

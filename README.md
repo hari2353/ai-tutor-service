@@ -4,7 +4,7 @@
 
 Personal interview-and-mastery system for **Hari Siva Rami Dwarampudi** — Principal AI Engineer, actively interviewing.
 
-**36 tracks · 461 modules · ~1,063 hours** — with a **32-module, ~89-hour, 10-weekend sprint** on top that's what actually decides your next loop. Fully local, free tier, zero cloud spend.
+**36 tracks · 463 modules · ~1,069 hours** — with a **32-module, ~89-hour, 10-weekend sprint** on top that's what actually decides your next loop. Fully local, free tier, zero cloud spend.
 
 > Numbers drift as content lands. The live counts are always in `CONTENT-STATUS.md`
 > (regenerate with `python app/build_data.py`). Historical planning docs live in `docs/history/`.
@@ -67,7 +67,7 @@ curriculum/      theory — deep dives, one .md per concept, 36 tracks incl. clo
 clouds/          AWS · Azure · GCP service atlases + changelogs
   CROSS-CLOUD-MAP.md    the equivalence table to recite in interviews
 labs/            practice — py · java · go · rust · ts · infra, all test-driven
-cheatsheets/     32 auto-generated sprint one-pagers (+ README index)
+cheatsheets/     revision one-pagers (+ README index)
 drills/          question banks
 mocks/           your scored transcripts
 progress/        exported state · CONFIRM-CHECKLIST.md (facts only you can fill)

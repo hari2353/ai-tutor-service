@@ -33024,6 +33024,146 @@
       "q": "What is the principal-level migration path from a vanilla long-context system to RLM?",
       "a": "Instrument context-length versus quality first, identify tasks with context rot, add a read-only external environment and deterministic slice tools, introduce typed child calls behind a feature flag, compare against the old path on a fixed eval set, then expand only if quality/cost/latency justify the operational complexity.",
       "difficulty": "staff"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-d1",
+      "module": "T07-agent-loop-from-scratch",
+      "q": "What are the four controls that turn an agent loop into a production system?",
+      "a": "A stop condition, a budget on steps/tokens/cost, context management, and an error policy that turns tool failures into explicit observations rather than silent corruption.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-d2",
+      "module": "T07-agent-loop-from-scratch",
+      "q": "Why is the model not the agent's memory?",
+      "a": "The model is stateless; memory is whatever messages, state, checkpoints, and external stores the harness sends back on the next call. If the harness drops it, the agent forgot it.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-d3",
+      "module": "T07-agent-loop-from-scratch",
+      "q": "At 95% success per step, what is the approximate success rate of a 10-step agent?",
+      "a": "About 0.95^10, or 60%. Per-step reliability compounds multiplicatively, so longer autonomous loops become fragile quickly.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-d4",
+      "module": "T07-agent-loop-from-scratch",
+      "q": "What should happen when a tool raises an exception?",
+      "a": "Catch it at the tool boundary, convert it to a bounded structured observation with retryability and an error class, append it to the trace, and let the loop decide whether to recover, ask for help, or stop.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-d5",
+      "module": "T07-agent-loop-from-scratch",
+      "q": "Why is a max-step cap not enough to control an agent?",
+      "a": "A step can make multiple parallel calls, consume a large token budget, or run a slow subprocess. Enforce steps together with wall-clock, token, dollar, concurrency, and tool-specific limits.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-d6",
+      "module": "T07-agent-loop-from-scratch",
+      "q": "What makes a tool call safe to retry?",
+      "a": "The operation must be idempotent or carry an idempotency key, and the retry policy must distinguish transient transport failures from business errors. Otherwise an ambiguous timeout can duplicate an external side effect.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-d7",
+      "module": "T07-agent-loop-from-scratch",
+      "q": "How do you resume a failed long-running agent?",
+      "a": "Persist versioned state and checkpoint after durable boundaries, record completed tool calls with idempotency keys, and resume from the last committed state rather than replaying side effects blindly.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-d8",
+      "module": "T07-agent-loop-from-scratch",
+      "q": "What trace fields are necessary to debug an agent loop?",
+      "a": "Run/step IDs, model and prompt versions, selected tools, arguments, tool results/errors, token and cost usage, deadlines, retries, state/checkpoint IDs, and the stop reason.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-d9",
+      "module": "T07-agent-loop-from-scratch",
+      "q": "When should the loop ask a human instead of trying another tool call?",
+      "a": "When the action is consequential, authorization is missing, the budget is near exhaustion, evidence conflicts, or repeated attempts show no progress. Escalation should be typed, auditable, and resumable.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T07-agent-loop-from-scratch-d10",
+      "module": "T07-agent-loop-from-scratch",
+      "q": "What is the difference between a failed tool and a failed agent run?",
+      "a": "A tool failure is an observation the loop may recover from. The run fails only when the policy says the failure is unrecoverable, the budget/stop condition fires, or the final result cannot satisfy its contract.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T21-resilience-catalogue-d1",
+      "module": "T21-resilience-catalogue",
+      "q": "Name the four resilience primitives and their job.",
+      "a": "Timeout bounds one call, retry recovers transient faults, circuit breaker stops calls to a failing dependency, and bulkhead limits concurrent damage to the caller.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T21-resilience-catalogue-d2",
+      "module": "T21-resilience-catalogue",
+      "q": "Why must retry require a timeout?",
+      "a": "Without a timeout, one attempt can wait indefinitely and consume the caller's resources; retry then compounds unbounded latency and concurrency pressure.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T21-resilience-catalogue-d3",
+      "module": "T21-resilience-catalogue",
+      "q": "Why should the breaker usually see one outcome for a retry group?",
+      "a": "Three retry attempts are one logical dependency call. Counting each attempt as a separate breaker failure trips the breaker faster than the business-level failure rate justifies.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T21-resilience-catalogue-d4",
+      "module": "T21-resilience-catalogue",
+      "q": "What is full jitter protecting against?",
+      "a": "It randomizes retry delays so clients that observed the same outage do not wake and retry in synchrony, avoiding a thundering herd during recovery.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T21-resilience-catalogue-d5",
+      "module": "T21-resilience-catalogue",
+      "q": "Why can a circuit breaker stay closed while the service is already hurting users?",
+      "a": "A failure-only breaker ignores slow successful calls. Configure slow-call thresholds or latency-based signals so degraded responses can trip protection before outright errors arrive.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T21-resilience-catalogue-d6",
+      "module": "T21-resilience-catalogue",
+      "q": "What does a bulkhead reject, and why should it reject immediately?",
+      "a": "It rejects new work when the dependency's concurrency capacity is full. Immediate rejection prevents an unbounded queue from converting downstream slowness into caller-wide thread or task exhaustion.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T21-resilience-catalogue-d7",
+      "module": "T21-resilience-catalogue",
+      "q": "How do you size a bulkhead starting from measurements?",
+      "a": "Use Little's Law: concurrency is approximately throughput multiplied by latency, then add a bounded safety factor and validate against saturation and tail latency rather than choosing a number by intuition.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T21-resilience-catalogue-d8",
+      "module": "T21-resilience-catalogue",
+      "q": "Which errors should not trip a breaker?",
+      "a": "Business or expected errors such as a 404 or validation rejection. Classify exceptions explicitly so the breaker represents dependency health, not normal application semantics.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T21-resilience-catalogue-d9",
+      "module": "T21-resilience-catalogue",
+      "q": "Why propagate an absolute deadline instead of a fresh timeout at each layer?",
+      "a": "An absolute deadline preserves the remaining end-to-end budget across nested calls. Fresh per-layer timeouts can let inner work consume the entire user-facing SLO before an outer fallback runs.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T21-resilience-catalogue-d10",
+      "module": "T21-resilience-catalogue",
+      "q": "What is a common breaker-keying mistake?",
+      "a": "Creating one breaker per fully parameterized URL or request ID. Key by service and route template so each breaker gets enough observations without merging unrelated failure domains.",
+      "difficulty": "staff"
     }
   ]
 }
