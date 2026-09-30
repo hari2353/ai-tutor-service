@@ -64,6 +64,11 @@ if ($LASTEXITCODE -eq 0) {
   & $PY -m pytest app/tests/test_pipeline.py -q 2>&1 | Select-Object -Last 3 | ForEach-Object { Write-Host "    $_" }
   if ($LASTEXITCODE -ne 0) { $fail = $true }
   Pop-Location
+  Write-Host ""; Write-Host "-- unit: semantic retrieval --"
+  Push-Location $ROOT
+  & $PY -m pytest app/tests/test_semantic_gap_audit.py -q 2>&1 | Select-Object -Last 2 | ForEach-Object { Write-Host "    $_" }
+  if ($LASTEXITCODE -ne 0) { $fail = $true }
+  Pop-Location
 } else {
   # a missing pytest is NOT a pass and NOT a failure: these suites were never
   # exercised. Tracked separately so green can never cover untested code.

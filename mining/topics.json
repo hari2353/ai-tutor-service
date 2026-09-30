@@ -3,7 +3,7 @@
     {
       "key": "coding",
       "label": "How do you start web development",
-      "count": 3092,
+      "count": 3093,
       "gap_verdict": "partial",
       "top_creators": [
         [
@@ -275,7 +275,7 @@
     {
       "key": "api",
       "label": "✨Is freelancing the future of work",
-      "count": 1068,
+      "count": 1069,
       "gap_verdict": "GAP",
       "top_creators": [
         [
@@ -411,7 +411,7 @@
     {
       "key": "agent",
       "label": "Comment “GUIDE” and I’ll help you make the projects that can get you hired",
-      "count": 719,
+      "count": 720,
       "gap_verdict": "partial",
       "top_creators": [
         [
@@ -1959,12 +1959,12 @@
     {
       "key": "agent|llm|python|statistics",
       "label": "🔥 STOP Picking Random Metrics",
-      "count": 120,
+      "count": 121,
       "gap_verdict": "partial",
       "top_creators": [
         [
           "datasciencebrain",
-          113
+          114
         ],
         [
           "techwith.ram",
@@ -4980,6 +4980,69 @@
       ]
     },
     {
+      "key": "agent|api|coding",
+      "label": "OpenAI introduced GPT-5",
+      "count": 35,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "artificialintelligenceupdater",
+          7
+        ],
+        [
+          "evolving.ai",
+          5
+        ],
+        [
+          "airesearches",
+          4
+        ]
+      ],
+      "representative": {
+        "shortcode": "DVp7O-PkgtR",
+        "creator": "artificialintelligenceupdater",
+        "caption": "OpenAI introduced GPT-5.4, describing it as one of its most capable and efficient frontier models designed to support complex professional tasks. The model combines improvements in reasoning, coding, and workflow execution, allowing it to handle real-world work more effectively with fewer interactions between the user and the system. GPT-5.4 is available in ChatGPT as GPT-5.4 Thinking, as well as ",
+        "source": "creator:artificialintelligenceupdater"
+      },
+      "members": [
+        "DSQGA99gY0x",
+        "DcVItw7REIe",
+        "Db972qBxt3t",
+        "DabBunxk7bi",
+        "DVwxUtrCOoq",
+        "DXt2sKYvspA",
+        "DO82ABuDIHz",
+        "DSmzCSYk7TC",
+        "DcTaQR3APjQ",
+        "DXMyK1Xjfjw",
+        "DItv3Iwg0pZ",
+        "DIhHz6RgQ56",
+        "CzWWKVINyX_",
+        "Da5qbVCmVxt",
+        "DZr-edMsdKw",
+        "DIihbXXRW8G",
+        "DHqaKVaJtgH",
+        "DHDn1-Viysf",
+        "CZK7uiFj88c",
+        "DaGAQ5QsaiN",
+        "DGgNoDAIOBm",
+        "Db8yAeSn6yv",
+        "DWCWQknk8OM",
+        "DVp7O-PkgtR",
+        "DVbA1gekna-",
+        "DU5r2HnEiMM",
+        "DUbTDmgktyE",
+        "DXNB2syDWSW",
+        "DPOpXyyCGLJ",
+        "DaSEIiAjZLZ",
+        "DY1IZYptPbK",
+        "DGdDjBryRNw",
+        "DUTaXqjiQei",
+        "DLc8UVeug8r",
+        "DdRLmBlDVl9"
+      ]
+    },
+    {
       "key": "algorithm|rag",
       "label": "Optionsellers",
       "count": 35,
@@ -5164,68 +5227,6 @@
         "DU0wWgJjGVf",
         "DQZgS0PDHWn",
         "DcoDgvLxgw7"
-      ]
-    },
-    {
-      "key": "agent|api|coding",
-      "label": "OpenAI introduced GPT-5",
-      "count": 34,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "artificialintelligenceupdater",
-          7
-        ],
-        [
-          "evolving.ai",
-          5
-        ],
-        [
-          "airesearches",
-          4
-        ]
-      ],
-      "representative": {
-        "shortcode": "DVp7O-PkgtR",
-        "creator": "artificialintelligenceupdater",
-        "caption": "OpenAI introduced GPT-5.4, describing it as one of its most capable and efficient frontier models designed to support complex professional tasks. The model combines improvements in reasoning, coding, and workflow execution, allowing it to handle real-world work more effectively with fewer interactions between the user and the system. GPT-5.4 is available in ChatGPT as GPT-5.4 Thinking, as well as ",
-        "source": "creator:artificialintelligenceupdater"
-      },
-      "members": [
-        "DSQGA99gY0x",
-        "DcVItw7REIe",
-        "Db972qBxt3t",
-        "DabBunxk7bi",
-        "DVwxUtrCOoq",
-        "DXt2sKYvspA",
-        "DO82ABuDIHz",
-        "DSmzCSYk7TC",
-        "DcTaQR3APjQ",
-        "DXMyK1Xjfjw",
-        "DItv3Iwg0pZ",
-        "DIhHz6RgQ56",
-        "CzWWKVINyX_",
-        "Da5qbVCmVxt",
-        "DZr-edMsdKw",
-        "DIihbXXRW8G",
-        "DHqaKVaJtgH",
-        "DHDn1-Viysf",
-        "CZK7uiFj88c",
-        "DaGAQ5QsaiN",
-        "DGgNoDAIOBm",
-        "Db8yAeSn6yv",
-        "DWCWQknk8OM",
-        "DVp7O-PkgtR",
-        "DVbA1gekna-",
-        "DU5r2HnEiMM",
-        "DUbTDmgktyE",
-        "DXNB2syDWSW",
-        "DPOpXyyCGLJ",
-        "DaSEIiAjZLZ",
-        "DY1IZYptPbK",
-        "DGdDjBryRNw",
-        "DUTaXqjiQei",
-        "DLc8UVeug8r"
       ]
     },
     {
@@ -5864,6 +5865,61 @@
       ]
     },
     {
+      "key": "agent|coding|llm|rag",
+      "label": "🚨👀 Another huge week in AI",
+      "count": 27,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "bashi_fuirkashi",
+          9
+        ],
+        [
+          "gauravgoyalai",
+          6
+        ],
+        [
+          "codingmermaid.ai",
+          5
+        ]
+      ],
+      "representative": {
+        "shortcode": "DKr8M1stAiB",
+        "creator": "evolving.ai",
+        "caption": "🚨👀 Another huge week in AI. Here's what happened in the last 7 days:\n\n1. Apple doesn't see reasoning models as a major breakthrough over standard LLMs, according to their new study\nApple researchers found that reasoning-focused models often fail on harder logic tasks and give up. Standard LLMs did better on simpler tasks.\n\n2. Captions introduces Mirage Studio for expressive video\nMirage Studio cre",
+        "source": "creator:evolving.ai"
+      },
+      "members": [
+        "Dcum9uYRpd_",
+        "DcbkzXCzIXS",
+        "DcVPrv5xxWa",
+        "DcJkATLTHlY",
+        "Db98exmxCJw",
+        "Db97QqMR-m1",
+        "DJWu9FixbOD",
+        "DI_kXEkohDB",
+        "DIwjAu2Ie3f",
+        "DGlsowFS42m",
+        "DF8CES2JLJN",
+        "Db-08N7km7h",
+        "DY2JOfqG4xz",
+        "DU5_vFCDvqb",
+        "DUVuwEglNXA",
+        "DTsfxHCFQWr",
+        "DSc1fDdjn6y",
+        "DLsJhGwxvGW",
+        "DLk7z74BRD0",
+        "DLaTIFqM7r1",
+        "DLP_IE2xHXb",
+        "DLKwEy6xs4l",
+        "DKr8M1stAiB",
+        "DUibT8ZjIux",
+        "DcoDJ-wErWx",
+        "DM-rv35pbM2",
+        "DdSKJ2ZAk9o"
+      ]
+    },
+    {
       "key": "coding|leetcode|python",
       "label": "Essential Coding Resources You Need to Bookmark ⭐️ Want to learn coding but don’t know where to start",
       "count": 26,
@@ -6185,60 +6241,6 @@
         "DOxM9UZEuMz",
         "DI06f6BSqSa",
         "DDghw0izWui"
-      ]
-    },
-    {
-      "key": "agent|coding|llm|rag",
-      "label": "🚨👀 Another huge week in AI",
-      "count": 26,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "bashi_fuirkashi",
-          9
-        ],
-        [
-          "gauravgoyalai",
-          6
-        ],
-        [
-          "codingmermaid.ai",
-          5
-        ]
-      ],
-      "representative": {
-        "shortcode": "DKr8M1stAiB",
-        "creator": "evolving.ai",
-        "caption": "🚨👀 Another huge week in AI. Here's what happened in the last 7 days:\n\n1. Apple doesn't see reasoning models as a major breakthrough over standard LLMs, according to their new study\nApple researchers found that reasoning-focused models often fail on harder logic tasks and give up. Standard LLMs did better on simpler tasks.\n\n2. Captions introduces Mirage Studio for expressive video\nMirage Studio cre",
-        "source": "creator:evolving.ai"
-      },
-      "members": [
-        "Dcum9uYRpd_",
-        "DcbkzXCzIXS",
-        "DcVPrv5xxWa",
-        "DcJkATLTHlY",
-        "Db98exmxCJw",
-        "Db97QqMR-m1",
-        "DJWu9FixbOD",
-        "DI_kXEkohDB",
-        "DIwjAu2Ie3f",
-        "DGlsowFS42m",
-        "DF8CES2JLJN",
-        "Db-08N7km7h",
-        "DY2JOfqG4xz",
-        "DU5_vFCDvqb",
-        "DUVuwEglNXA",
-        "DTsfxHCFQWr",
-        "DSc1fDdjn6y",
-        "DLsJhGwxvGW",
-        "DLk7z74BRD0",
-        "DLaTIFqM7r1",
-        "DLP_IE2xHXb",
-        "DLKwEy6xs4l",
-        "DKr8M1stAiB",
-        "DUibT8ZjIux",
-        "DcoDJ-wErWx",
-        "DM-rv35pbM2"
       ]
     },
     {
@@ -7005,6 +7007,56 @@
       ]
     },
     {
+      "key": "coding|interview question|leetcode",
+      "label": "🧠 Monotonic Stack Pattern One of the most powerful DSA patterns for coding interviews",
+      "count": 22,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "sde_ii_labs",
+          11
+        ],
+        [
+          "akanksha_buchke",
+          3
+        ],
+        [
+          "iamsaumyaawasthi",
+          2
+        ]
+      ],
+      "representative": {
+        "shortcode": "DZtx0RbRvDK",
+        "creator": "sde_ii_labs",
+        "caption": "🧠 Monotonic Stack Pattern\n\nOne of the most powerful DSA patterns for coding interviews.\n\nMany problems that look like O(n²) can be solved in O(n) using a Monotonic Stack.\n\nIf you're preparing for product-based companies, this pattern is a must-know.\n\n🚀 What is a Monotonic Stack?\n\nA Monotonic Stack maintains elements in a specific order.\n\nThere are two types:\n\n📈 Increasing Stack\n\n📉 Decreasing Stack",
+        "source": "creator:sde_ii_labs"
+      },
+      "members": [
+        "DbIVRz4E3im",
+        "DPtr2tCAT6A",
+        "DbqR5vJPvXB",
+        "DaR_qyftLv-",
+        "DaQTywQhS2e",
+        "DaQPaMMJoCp",
+        "DaP1WO9hW37",
+        "DaPu7fHR5Lg",
+        "DaPl9nAhqP-",
+        "DaPbGA7Bt0v",
+        "DaPH_6Dx6Kr",
+        "DaN387ePmqZ",
+        "DZtx0RbRvDK",
+        "DZWfEjDRjtx",
+        "DSApW68iAFq",
+        "DYrvCHQGsOR",
+        "DTDHjfek6I4",
+        "DVjGi11DDRU",
+        "DQHnLI6EiRB",
+        "DPeZrSzElwL",
+        "DFkm8y7yXZS",
+        "DdcH2BJjcjn"
+      ]
+    },
+    {
       "key": "api|spark",
       "label": "In 2015, Sam Altman, one of the co-founders of OpenAI, shared his worries about the future of artificial intelligence",
       "count": 21,
@@ -7247,55 +7299,6 @@
         "DQW3A_sjCzX",
         "DWwDtwJiLvW",
         "DFnXS3-hGso"
-      ]
-    },
-    {
-      "key": "coding|interview question|leetcode",
-      "label": "🧠 Monotonic Stack Pattern One of the most powerful DSA patterns for coding interviews",
-      "count": 21,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "sde_ii_labs",
-          11
-        ],
-        [
-          "akanksha_buchke",
-          3
-        ],
-        [
-          "iamsaumyaawasthi",
-          2
-        ]
-      ],
-      "representative": {
-        "shortcode": "DZtx0RbRvDK",
-        "creator": "sde_ii_labs",
-        "caption": "🧠 Monotonic Stack Pattern\n\nOne of the most powerful DSA patterns for coding interviews.\n\nMany problems that look like O(n²) can be solved in O(n) using a Monotonic Stack.\n\nIf you're preparing for product-based companies, this pattern is a must-know.\n\n🚀 What is a Monotonic Stack?\n\nA Monotonic Stack maintains elements in a specific order.\n\nThere are two types:\n\n📈 Increasing Stack\n\n📉 Decreasing Stack",
-        "source": "creator:sde_ii_labs"
-      },
-      "members": [
-        "DbIVRz4E3im",
-        "DPtr2tCAT6A",
-        "DbqR5vJPvXB",
-        "DaR_qyftLv-",
-        "DaQTywQhS2e",
-        "DaQPaMMJoCp",
-        "DaP1WO9hW37",
-        "DaPu7fHR5Lg",
-        "DaPl9nAhqP-",
-        "DaPbGA7Bt0v",
-        "DaPH_6Dx6Kr",
-        "DaN387ePmqZ",
-        "DZtx0RbRvDK",
-        "DZWfEjDRjtx",
-        "DSApW68iAFq",
-        "DYrvCHQGsOR",
-        "DTDHjfek6I4",
-        "DVjGi11DDRU",
-        "DQHnLI6EiRB",
-        "DPeZrSzElwL",
-        "DFkm8y7yXZS"
       ]
     },
     {
@@ -10631,6 +10634,45 @@
       ]
     },
     {
+      "key": "api|coding|llm",
+      "label": "The tokenization numbers worth keeping in your head, all measured on GPT-4o’s tokenizer, not copied off a blog",
+      "count": 11,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "codingmermaid.ai",
+          2
+        ],
+        [
+          "bashi_fuirkashi",
+          2
+        ],
+        [
+          "datasciencebrain",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DbdG6V7k4wX",
+        "creator": "systemsbyakshay",
+        "caption": "The tokenization numbers worth keeping in your head, all measured on GPT-4o’s tokenizer, not copied off a blog.\n\nSave the card. Here’s what’s on it:\n\n- ~4 chars per token, ~0.75 words per token (English)\n- Vocab size: GPT-4o ~200K, Llama 3 ~128K\n- Language tax: the same meaning can cost up to 15x more tokens in another language (NeurIPS 2023)\n- Pretty-printed JSON with long keys costs ~40% more to",
+        "source": "creator:systemsbyakshay"
+      },
+      "members": [
+        "DUBd8jqj8c4",
+        "DNGKJuCzd_H",
+        "C_czqGgAeWj",
+        "DXIQNmIhDBZ",
+        "DVJ_9eFkrzy",
+        "C4I-GGGp6lA",
+        "DbdG6V7k4wX",
+        "DSP-5h6Abv4",
+        "Dcqz4aYD7E9",
+        "DdGDp-MlKkE",
+        "Dc_UHivjQZg"
+      ]
+    },
+    {
       "key": "api|llm|rag",
       "label": "What does bubble even mean",
       "count": 11,
@@ -10932,6 +10974,45 @@
         "DTM2s-Wkmu2",
         "DMD2bPlBg5q",
         "Dc0Zdk9sub9"
+      ]
+    },
+    {
+      "key": "agent|llm|python|rag",
+      "label": "🚀 The Only Agentic AI Cheat Sheet You’ll Ever Need Agentic AI is revolutionizing how we build intelligent systems — from",
+      "count": 11,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "datasciencebrain",
+          2
+        ],
+        [
+          "ds_ai_ketan",
+          2
+        ],
+        [
+          "gauravgoyalai",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DP2ykonAbDT",
+        "creator": "tajamul.codes",
+        "caption": "🚀 The Only Agentic AI Cheat Sheet You’ll Ever Need\n\nAgentic AI is revolutionizing how we build intelligent systems — from autonomous task execution to multi-agent collaboration.\nWhether you’re an AI Engineer, Data Scientist, or just exploring the future of AI, mastering Agentic AI is becoming essential.\n\nHere’s what you’ll find inside 👇\n⚙️ AI Agent Types — Reactive, Planning & Collaborative\n🧠 Lead",
+        "source": "creator:tajamul.codes"
+      },
+      "members": [
+        "DRGiliuE1iE",
+        "DasP3I1y4gY",
+        "DZxYhrTSYVf",
+        "DZT1Uy0PtRG",
+        "DbuSAKgx-Ah",
+        "DP2ykonAbDT",
+        "DbZwaSLifKI",
+        "DV81YnEiN_S",
+        "DboJ-BFgMSM",
+        "DcMC5zCjyzs",
+        "DdWyNsZk0T9"
       ]
     },
     {
@@ -11435,44 +11516,6 @@
       ]
     },
     {
-      "key": "api|coding|llm",
-      "label": "The tokenization numbers worth keeping in your head, all measured on GPT-4o’s tokenizer, not copied off a blog",
-      "count": 10,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "codingmermaid.ai",
-          2
-        ],
-        [
-          "bashi_fuirkashi",
-          2
-        ],
-        [
-          "datasciencebrain",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DbdG6V7k4wX",
-        "creator": "systemsbyakshay",
-        "caption": "The tokenization numbers worth keeping in your head, all measured on GPT-4o’s tokenizer, not copied off a blog.\n\nSave the card. Here’s what’s on it:\n\n- ~4 chars per token, ~0.75 words per token (English)\n- Vocab size: GPT-4o ~200K, Llama 3 ~128K\n- Language tax: the same meaning can cost up to 15x more tokens in another language (NeurIPS 2023)\n- Pretty-printed JSON with long keys costs ~40% more to",
-        "source": "creator:systemsbyakshay"
-      },
-      "members": [
-        "DUBd8jqj8c4",
-        "DNGKJuCzd_H",
-        "C_czqGgAeWj",
-        "DXIQNmIhDBZ",
-        "DVJ_9eFkrzy",
-        "C4I-GGGp6lA",
-        "DbdG6V7k4wX",
-        "DSP-5h6Abv4",
-        "Dcqz4aYD7E9",
-        "DdGDp-MlKkE"
-      ]
-    },
-    {
       "key": "embedding|llm",
       "label": "This is actually a systems design question wearing an LLM costume",
       "count": 10,
@@ -11864,44 +11907,6 @@
         "DHwRHPTNS9U",
         "DS7Jm10EwPq",
         "DUyNmnnE2nx"
-      ]
-    },
-    {
-      "key": "agent|llm|python|rag",
-      "label": "🚀 The Only Agentic AI Cheat Sheet You’ll Ever Need Agentic AI is revolutionizing how we build intelligent systems — from",
-      "count": 10,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "datasciencebrain",
-          2
-        ],
-        [
-          "ds_ai_ketan",
-          2
-        ],
-        [
-          "gauravgoyalai",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DP2ykonAbDT",
-        "creator": "tajamul.codes",
-        "caption": "🚀 The Only Agentic AI Cheat Sheet You’ll Ever Need\n\nAgentic AI is revolutionizing how we build intelligent systems — from autonomous task execution to multi-agent collaboration.\nWhether you’re an AI Engineer, Data Scientist, or just exploring the future of AI, mastering Agentic AI is becoming essential.\n\nHere’s what you’ll find inside 👇\n⚙️ AI Agent Types — Reactive, Planning & Collaborative\n🧠 Lead",
-        "source": "creator:tajamul.codes"
-      },
-      "members": [
-        "DRGiliuE1iE",
-        "DasP3I1y4gY",
-        "DZxYhrTSYVf",
-        "DZT1Uy0PtRG",
-        "DbuSAKgx-Ah",
-        "DP2ykonAbDT",
-        "DbZwaSLifKI",
-        "DV81YnEiN_S",
-        "DboJ-BFgMSM",
-        "DcMC5zCjyzs"
       ]
     },
     {
@@ -24031,6 +24036,38 @@
       ]
     },
     {
+      "key": "agent|llm|rag|transformer",
+      "label": "🚀 LLM & Fine-Tuning — Complete Notes 🧠 Want to understand how LLMs are **trained, adapted, and fine-tuned for real-world",
+      "count": 4,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "gauravgoyalai",
+          2
+        ],
+        [
+          "codingdidi",
+          1
+        ],
+        [
+          "theagenticaiengineer",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdPdOfsDiI3",
+        "creator": "theagenticaiengineer",
+        "caption": "🚀 LLM & Fine-Tuning — Complete Notes 🧠\n\nWant to understand how LLMs are **trained, adapted, and fine-tuned for real-world tasks?** This roadmap covers the essential concepts you need to move from LLM fundamentals to practical fine-tuning.\n\n📚 **What you’ll learn:**\n🔹 LLM Fundamentals\n🔹 Transformer Architecture\n🔹 Attention & Self-Attention\n🔹 Pre-Training & Next Token Prediction\n🔹 Instruction Tuning ",
+        "source": "saved"
+      },
+      "members": [
+        "DcNNc5dRRk6",
+        "Dbz2f3VReKo",
+        "DcglQlEoXQ1",
+        "DdPdOfsDiI3"
+      ]
+    },
+    {
       "key": "agent|api|llm|mlops|rag",
       "label": "🚀 LangChain vs LlamaIndex: Which LLM Framework Should You Choose",
       "count": 4,
@@ -24775,6 +24812,37 @@
         "DTo-G3SCAGv",
         "DTkHajWAQZ3",
         "DTj0Ci3gWpF"
+      ]
+    },
+    {
+      "key": "agent|llm|machine learning|system design",
+      "label": "7 GitHub repositories every AI Engineer should know If you’re learning AI engineering, working with large language model",
+      "count": 3,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "fellowtechiebuddy",
+          1
+        ],
+        [
+          "iamsaumyaawasthi",
+          1
+        ],
+        [
+          "the.datascience.gal",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DShuBmRk1g3",
+        "creator": "iamsaumyaawasthi",
+        "caption": "7 GitHub repositories every AI Engineer should know\n\nIf you’re learning AI engineering, working with large language models, or building generative AI agents, these open-source repositories can save you months of effort.\n\nThis list covers\nLLM fundamentals\nAI agents for beginners\nprompt engineering resources\nmachine learning system design\nproduction-grade ML and GenAI projects\n\nAll repositories are ",
+        "source": "creator:iamsaumyaawasthi"
+      },
+      "members": [
+        "DcKlkBYG5mR",
+        "DShuBmRk1g3",
+        "DddXwNpE5h0"
       ]
     },
     {
@@ -29507,6 +29575,33 @@
       ]
     },
     {
+      "key": "agent|embedding|llm|python|rag|transformer",
+      "label": "Your RAG pipeline isn’t failing because of the model, it’s failing because of bad chunking",
+      "count": 3,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "pythonlifetelugu",
+          2
+        ],
+        [
+          "__nextdoor.aigirl",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DTgBgRBjxBs",
+        "creator": "__nextdoor.aigirl",
+        "caption": "Your RAG pipeline isn’t failing because of the model, it’s failing because of bad chunking.\n\nChunking decides what your model “remembers” and how relevant your retrievals are.\n\nGet it wrong, and even the best LLM will hallucinate.\nGet it right, and your RAG becomes consistent, precise, and reliable.\n\nHere are 10 practical chunking techniques with Python examples to help you fix it 👇\n\n⸻\n\n1️⃣ Semant",
+        "source": "creator:__nextdoor.aigirl"
+      },
+      "members": [
+        "DawbodGCTQZ",
+        "DTgBgRBjxBs",
+        "Dd02TbZidLb"
+      ]
+    },
+    {
       "key": "agent|database|embedding|llm|rag|system design",
       "label": "Your RAG system is not slow because of the LLM",
       "count": 3,
@@ -31079,33 +31174,6 @@
       ]
     },
     {
-      "key": "agent|llm|rag|transformer",
-      "label": "🚀 2026 में AI सीखना चाहते हो — वो भी FREE",
-      "count": 3,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "gauravgoyalai",
-          2
-        ],
-        [
-          "codingdidi",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "Dbz2f3VReKo",
-        "creator": "gauravgoyalai",
-        "caption": "🚀 2026 में AI सीखना चाहते हो — वो भी FREE?\n\nअगर आप AI, GenAI, LLMs, RAG और AI Agents सीखना चाहते हैं, तो इन 5 FREE resources से शुरुआत करें 👇\n\n1️⃣ Generative AI for Everyone — DeepLearning.AI\n2️⃣ Hugging Face — LLM Course\n3️⃣ Andrej Karpathy — Neural Networks: Zero to Hero\n4️⃣ RAG — Retrieval-Augmented Generation\n5️⃣ Microsoft — Generative AI for Beginners\n\n💡 Best learning path:\nGenAI Basics → LLM",
-        "source": "creator:gauravgoyalai"
-      },
-      "members": [
-        "DcNNc5dRRk6",
-        "Dbz2f3VReKo",
-        "DcglQlEoXQ1"
-      ]
-    },
-    {
       "key": "api|backend|microservice|python",
       "label": "🚀 FASTAPI in one infographic",
       "count": 3,
@@ -32447,32 +32515,6 @@
       "members": [
         "DYPnSM_B94c",
         "DWZiPgxBI8B"
-      ]
-    },
-    {
-      "key": "agent|llm|machine learning|system design",
-      "label": "7 GitHub repositories every AI Engineer should know If you’re learning AI engineering, working with large language model",
-      "count": 2,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "fellowtechiebuddy",
-          1
-        ],
-        [
-          "iamsaumyaawasthi",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DShuBmRk1g3",
-        "creator": "iamsaumyaawasthi",
-        "caption": "7 GitHub repositories every AI Engineer should know\n\nIf you’re learning AI engineering, working with large language models, or building generative AI agents, these open-source repositories can save you months of effort.\n\nThis list covers\nLLM fundamentals\nAI agents for beginners\nprompt engineering resources\nmachine learning system design\nproduction-grade ML and GenAI projects\n\nAll repositories are ",
-        "source": "creator:iamsaumyaawasthi"
-      },
-      "members": [
-        "DcKlkBYG5mR",
-        "DShuBmRk1g3"
       ]
     },
     {
@@ -35492,6 +35534,32 @@
       ]
     },
     {
+      "key": "agent|api|coding|llm|rag|system design",
+      "label": "Claude Hackathon Winner Setup This setup turned Claude from a chatbot into a coding teammate",
+      "count": 2,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "jganesh.ai",
+          1
+        ],
+        [
+          "codingshuttle",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DVphDO6DgXN",
+        "creator": "jganesh.ai",
+        "caption": "Claude Hackathon Winner Setup\n\nThis setup turned Claude from a chatbot into a coding teammate.\n\nUsed by the Anthropic × Forum Ventures hackathon winner to build production SaaS.\n\nResult:\n• 3× faster coding\n• 92% fewer bugs\n• automatic planning, testing, and review\n\nAnd it only requires 4 core pieces.\n\n⸻\n\n1️⃣ SKILL.md (Claude’s brain)\n\nDefines Claude’s working roles:\n\n• Architect → system design\n• ",
+        "source": "creator:jganesh.ai"
+      },
+      "members": [
+        "DVphDO6DgXN",
+        "DdbdxpxAbjp"
+      ]
+    },
+    {
       "key": "aws|azure|database|devops|docker|gcp|kubernetes|python|rag|sql|terraform",
       "label": "Cloud Engineering Salary & Roadmap | Complete Career Guide Want to become a Cloud Engineer and build a high-paying IT ca",
       "count": 2,
@@ -35581,6 +35649,32 @@
       "members": [
         "DcP0SX2mJLS",
         "DcIFd0lBGQY"
+      ]
+    },
+    {
+      "key": "llm|pytorch",
+      "label": "Comment \"SLM\" for the link",
+      "count": 2,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "pp.xtudio",
+          1
+        ],
+        [
+          "fullstackparody",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DTc3iEdE6WP",
+        "creator": "pp.xtudio",
+        "caption": "Comment \"SLM\" for the link...\n\nFine-tune small language models in just 15 minutes — for FREE.\n\nIf you’ve ever tried fine-tuning an LLM, you know the pain:\n❌ CUDA nightmares\n❌ PyTorch dependency hell\n❌ Expensive GPUs\n❌ Broken training scripts & hyperparameter chaos\n\nThat’s exactly what Tunekit fixes.\n\nThis open-source tool removes all the friction.\n\nHere’s how simple it is 👇\n1️⃣ Upload your dataset",
+        "source": "creator:pp.xtudio"
+      },
+      "members": [
+        "DTc3iEdE6WP",
+        "DdEzfn-jV09"
       ]
     },
     {
@@ -47340,32 +47434,6 @@
       ]
     },
     {
-      "key": "agent|embedding|llm|python|rag|transformer",
-      "label": "Your RAG pipeline isn’t failing because of the model, it’s failing because of bad chunking",
-      "count": 2,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "pythonlifetelugu",
-          1
-        ],
-        [
-          "__nextdoor.aigirl",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DTgBgRBjxBs",
-        "creator": "__nextdoor.aigirl",
-        "caption": "Your RAG pipeline isn’t failing because of the model, it’s failing because of bad chunking.\n\nChunking decides what your model “remembers” and how relevant your retrievals are.\n\nGet it wrong, and even the best LLM will hallucinate.\nGet it right, and your RAG becomes consistent, precise, and reliable.\n\nHere are 10 practical chunking techniques with Python examples to help you fix it 👇\n\n⸻\n\n1️⃣ Semant",
-        "source": "creator:__nextdoor.aigirl"
-      },
-      "members": [
-        "DawbodGCTQZ",
-        "DTgBgRBjxBs"
-      ]
-    },
-    {
       "key": "agent|llm|python|statistics|system design",
       "label": "Your college friend at Google is earning ₹60L",
       "count": 2,
@@ -56931,6 +56999,27 @@
       },
       "members": [
         "C7jf7twv21l"
+      ]
+    },
+    {
+      "key": "coding|kubernetes|llm|rag",
+      "label": "14x faster and 90% cheaper LLM inference ⚡ 100% open-source KV cache management",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "dailydoseofds_",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "Dc-eJ7_iSLB",
+        "creator": "dailydoseofds_",
+        "caption": "14x faster and 90% cheaper LLM inference ⚡\n\n100% open-source KV cache management.\n\nLLMs recompute their understanding of the same content on every request. The same system prompts, the same documents, processed from scratch every time. A single GPU throws away roughly 15 TB of reusable cache per day.\n\nLMCache stores that cache and serves it back on repeat requests.\n\nIt runs as a separate process c",
+        "source": "saved"
+      },
+      "members": [
+        "Dc-eJ7_iSLB"
       ]
     },
     {
@@ -121656,27 +121745,6 @@
       ]
     },
     {
-      "key": "agent|api|coding|llm|rag|system design",
-      "label": "Claude Hackathon Winner Setup This setup turned Claude from a chatbot into a coding teammate",
-      "count": 1,
-      "gap_verdict": "GAP",
-      "top_creators": [
-        [
-          "jganesh.ai",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DVphDO6DgXN",
-        "creator": "jganesh.ai",
-        "caption": "Claude Hackathon Winner Setup\n\nThis setup turned Claude from a chatbot into a coding teammate.\n\nUsed by the Anthropic × Forum Ventures hackathon winner to build production SaaS.\n\nResult:\n• 3× faster coding\n• 92% fewer bugs\n• automatic planning, testing, and review\n\nAnd it only requires 4 core pieces.\n\n⸻\n\n1️⃣ SKILL.md (Claude’s brain)\n\nDefines Claude’s working roles:\n\n• Architect → system design\n• ",
-        "source": "creator:jganesh.ai"
-      },
-      "members": [
-        "DVphDO6DgXN"
-      ]
-    },
-    {
       "key": "agent|coding|devops|llm",
       "label": "Claude Opus 4",
       "count": 1,
@@ -123252,6 +123320,27 @@
       ]
     },
     {
+      "key": "agent|api|database|langgraph|llm|python|rag|statistics",
+      "label": "Comment \"GENAI\" below to get Python for Generative AI - Just ₹199",
+      "count": 1,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "datasciencebrain",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdWbQiimHe_",
+        "creator": "datasciencebrain",
+        "caption": "Comment \"GENAI\" below to get Python for Generative AI \n\n- Just ₹199. Cheaper than a movie ticket 🎫. Instant download. Yours forever.\n\n396 GenAI terms. 14 pages. A to Z. From Agents to Zero-shot, every word you'll hear in a GenAI interview is in this carousel.\n\nBut here's the truth nobody tells you 👇\nKnowing what RAG, LoRA and MCP mean won't get you hired.\nBuilding them will.\n\nThe people landing Ge",
+        "source": "saved"
+      },
+      "members": [
+        "DdWbQiimHe_"
+      ]
+    },
+    {
       "key": "agent|api|llm|numpy|pandas|python|rag|sql|statistics",
       "label": "Comment \"GENAI\" below to get Python for Generative AI - just ₹199",
       "count": 1,
@@ -123564,27 +123653,6 @@
       },
       "members": [
         "DaA5l7fsS2K"
-      ]
-    },
-    {
-      "key": "llm|pytorch",
-      "label": "Comment \"SLM\" for the link",
-      "count": 1,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "pp.xtudio",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DTc3iEdE6WP",
-        "creator": "pp.xtudio",
-        "caption": "Comment \"SLM\" for the link...\n\nFine-tune small language models in just 15 minutes — for FREE.\n\nIf you’ve ever tried fine-tuning an LLM, you know the pain:\n❌ CUDA nightmares\n❌ PyTorch dependency hell\n❌ Expensive GPUs\n❌ Broken training scripts & hyperparameter chaos\n\nThat’s exactly what Tunekit fixes.\n\nThis open-source tool removes all the friction.\n\nHere’s how simple it is 👇\n1️⃣ Upload your dataset",
-        "source": "creator:pp.xtudio"
-      },
-      "members": [
-        "DTc3iEdE6WP"
       ]
     },
     {
@@ -193665,6 +193733,27 @@
       ]
     },
     {
+      "key": "weak:interesting really these topics",
+      "label": "If you’re really into AI, these are some interesting topics you can read about and need out on",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "okaashish",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdtUk4lD0yz",
+        "creator": "okaashish",
+        "caption": "If you’re really into AI, these are some interesting topics you can read about and need out on.\n\nMost people only talk about models, prompts, and AI tools. But there’s a whole world of concepts underneath that gets way more interesting.\n\nFrom model collapse and reward hacking to grokking, deceptive alignment, context rot, and mechanistic interpretability.\n\nHow many of these did you already know?\n\n",
+        "source": "saved"
+      },
+      "members": [
+        "DdtUk4lD0yz"
+      ]
+    },
+    {
       "key": "weak:applications hearing nothing sending",
       "label": "If you’re sending 50 applications and hearing nothing",
       "count": 1,
@@ -233037,6 +233126,27 @@
       },
       "members": [
         "DbBLvwgTbvG"
+      ]
+    },
+    {
+      "key": "database|distributed|microservice|system design",
+      "label": "Most developers know Monolith vs Microservices",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "bytesizediaries",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdNujL6xxKS",
+        "creator": "bytesizediaries",
+        "caption": "Most developers know Monolith vs Microservices.\n\nBut in a System Design interview, you may suddenly hear terms like SOA, Event-Driven, Microkernel, or Space-Based Architecture and wonder, “Wait… there are more?” 😅\n\nHere’s the simple version 👇\n\n1️⃣ Layered Architecture\nUI → Business Logic → Data Access → Database.\nSimple, structured, and one of the first architectures most developers work with.\n\n2️",
+        "source": "saved"
+      },
+      "members": [
+        "DdNujL6xxKS"
       ]
     },
     {
@@ -358620,6 +358730,27 @@
       ]
     },
     {
+      "key": "weak:easier gets right search",
+      "label": "Your job search gets easier when you use the right tool for each stage",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "nikita.chepuri",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdEo3CrTJ9j",
+        "creator": "nikita.chepuri",
+        "caption": "Your job search gets easier when you use the right tool for each stage.\n\nThis toolkit brings together 30 free and freemium resources to help you\n\nThe goal is not to use every tool. It is to build a simple system that helps you search smarter and get hired faster.\n\n[Job Search, Career Tools, Resume, Interview Preparation, Remote Jobs, Career Growth]\n\n#JobSearch #CareerGrowth #ResumeTips #InterviewP",
+        "source": "saved"
+      },
+      "members": [
+        "DdEo3CrTJ9j"
+      ]
+    },
+    {
       "key": "weak:before even failing search",
       "label": "Your job search may be failing before you even click “Apply",
       "count": 1,
@@ -364836,6 +364967,27 @@
       ]
     },
     {
+      "key": "api|backend|distributed|microservice|rag",
+      "label": "p50 vs p95 vs p99 Latency — averages don’t tell the whole story",
+      "count": 1,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "interviewroadmap",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdfjIpeTKvK",
+        "creator": "interviewroadmap",
+        "caption": "p50 vs p95 vs p99 Latency — averages don’t tell the whole story.\n\n⚡ p50 — 50% of requests complete at or below this latency.\nThink: typical user experience.\n\n🐢 p95 — 95% of requests complete at or below this latency.\nThink: slow-user experience.\n\n🚨 p99 — 99% of requests complete at or below this latency.\nThink: extreme tail latency / painful outliers.\n\nExample:\n\np50 = 120 ms\np95 = 600 ms\np99 = 120",
+        "source": "saved"
+      },
+      "members": [
+        "DdfjIpeTKvK"
+      ]
+    },
+    {
       "key": "weak:gayi pighal relatable yaha",
       "label": "par yaha mai pighal gayi 🥺🪞💕 [relatable, traditional attire, ethnic, jhumke, jutti, potli, accessories, clothes, modern,",
       "count": 1,
@@ -368508,6 +368660,27 @@
       },
       "members": [
         "Db7zCO1Cb16"
+      ]
+    },
+    {
+      "key": "agent|aws|database|llm|rag",
+      "label": "₹2",
+      "count": 1,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "ankiit.ai",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdWvS94E99f",
+        "creator": "ankiit.ai",
+        "caption": "₹2.92 crore. Amazon publishes that number itself, because a state law makes them.\n\nPrincipal Applied Scientist, AWS Agentic AI. $228,700 to $309,400, Santa Clara. Job ID 10441249,\nchecked live on 15 Sept. The same posting tops out at $269,000 in Seattle, so read the city before\nyou read the number.\n\nNow the part that matters for anyone choosing a track.\n\nAt matched level and city, Amazon’s publish",
+        "source": "saved"
+      },
+      "members": [
+        "DdWvS94E99f"
       ]
     },
     {
@@ -423132,6 +423305,6 @@
       ]
     }
   ],
-  "total_posts": 43214,
-  "unique_topics": 19435
+  "total_posts": 43235,
+  "unique_topics": 19442
 }

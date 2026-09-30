@@ -1,6 +1,6 @@
 # Mining worklist (crawl)
 
-61365 posts · 23760 gaps · 17462 partial · 1992 covered
+61394 posts · 23768 gaps · 17475 partial · 1992 covered
 
 ## Gaps
 
@@ -1380,7 +1380,6 @@
 - [ ] Sam Altman’s 36 principles hit harder than any motivational books — @techwith.ram — mining/posts/Db4lYnNCa5e/notes.md
 - [ ] If you're preparing for an NVIDIA AI/ML interview, don't just memorize definitions — @techwith.ram — mining/posts/Db2CI6JiRlg/notes.md
 - [ ] There are thousands of AI books out there — @techwith.ram — mining/posts/DbpFpT7pKzD/notes.md
-- [ ] Apple released a free app called Language Model Builder — @techwith.ram — mining/posts/DbYEfVAps4B/notes.md
 - [ ] Access HD images link in the comment — @techwith.ram — mining/posts/DbXJ1BtieYa/notes.md
 - [ ] Forward Deployed Engineers (FDEs) are becoming one of the most valuable roles in AI today — @techwith.ram — mining/posts/DbR-lHpicvW/notes.md
 - [ ] How a ML engineer uses: - Descriptive Models - Predictive Models Check out the infographics attached here — @techwith.ram — mining/posts/DbGBtsmiQKd/notes.md
@@ -23764,6 +23763,15 @@
 - [ ] 🧠 MACHINE LEARNING FORMULA SHEET 📚 Preparing for an ML exam, interview, or quick revision — @built_by_vishal — mining/posts/Dclj61bMYmJ/notes.md
 - [ ] Top 10 React Libraries Every Developer Should Know React Libraries | Quick Developer Revision 1 — @pythonlifetelugu — mining/posts/DcyNc6Uib0j/notes.md
 - [ ] 🧠 EP — @shikharcodes — mining/posts/Dco8i1dzAnl/notes.md
+- [ ] 🤖 **AI Interview Quick Revision Cheatsheet — Must Know — @pythonlifetelugu — mining/posts/Dd02TbZidLb/notes.md
+- [ ] 🔌 One free endpoint replaced a wall of paid API keys — @fullstackparody — mining/posts/Dc_UHivjQZg/notes.md
+- [ ] ₹2 — @ankiit.ai — mining/posts/DdWvS94E99f/notes.md
+- [ ] Comment "GENAI" below to get Python for Generative AI - Just ₹199 — @datasciencebrain — mining/posts/DdWbQiimHe_/notes.md
+- [ ] p50 vs p95 vs p99 Latency — averages don’t tell the whole story — @interviewroadmap — mining/posts/DdfjIpeTKvK/notes.md
+- [ ] Comment “PROJECTS” and I’ll share 15 AI Engineering projects with GitHub resources — @karuparti.ai — mining/posts/DdWyNsZk0T9/notes.md
+- [ ] 🚀 LLM & Fine-Tuning — Complete Notes 🧠 Want to understand how LLMs are **trained, adapted, and fine-tuned for real-world — @theagenticaiengineer — mining/posts/DdPdOfsDiI3/notes.md
+- [ ] OpenTerminal is a free Bloomberg Terminal alternative that runs on public market data — no paid APIs needed — @gittrend.io — mining/posts/DdLBNl1Dq_S/notes.md
+- [ ] Someone just open-sourced an entire AI agency — 230+ specialized AI agents, completely free — @theautomationguy.ai — mining/posts/DdJyHWnGl4w/notes.md
 
 ## Partial
 
@@ -26093,6 +26101,7 @@
 - [ ] LLM Series—Part 2 cont — @techwith.ram — mining/posts/Dbfy5YaCVwa/notes.md
 - [ ] Comment “Google” to get the application link — @techwith.ram — mining/posts/DbcTwGyJUqC/notes.md
 - [ ] Agentic AI Roadmap Want to build AI agents that can think, plan, use tools, and complete tasks — @techwith.ram — mining/posts/DbZwaSLifKI/notes.md
+- [ ] Apple released a free app called Language Model Builder — @techwith.ram — mining/posts/DbYEfVAps4B/notes.md
 - [ ] Run AI on your own computer with Ollama — @techwith.ram — mining/posts/DbUlrEECXk-/notes.md
 - [ ] Covered some of the topics of Deep Learning Core Neural Network Concepts — @techwith.ram — mining/posts/DbPd1D3CaN4/notes.md
 - [ ] AI will replace people Reality — @techwith.ram — mining/posts/DbM8a_fpnzq/notes.md
@@ -41229,3 +41238,15 @@
 - [ ] 🔥 10 GitHub repositories with 1 — @coderss_world — mining/posts/Dcs-8irjYBN/notes.md
 - [ ] I posted v1 of this this summer — @codewithbrij — mining/posts/DcwGhrvKp8R/notes.md
 - [ ] If you’re learning RAG in 2026, don’t stop at basic vector search — @sourabhursal_ai — mining/posts/Dckgh-_BPwV/notes.md
+- [ ] If you’re really into AI, these are some interesting topics you can read about and need out on — @okaashish — mining/posts/DdtUk4lD0yz/notes.md
+- [ ] 🚀 Placement Preparation Starts with These Programs — @decode_leox — mining/posts/Dd1sIE3DiAA/notes.md
+- [ ] Worried about staying relevant in the AI era — @codingshuttle — mining/posts/DdbdxpxAbjp/notes.md
+- [ ] 10 GitHub Repositories You Should Check Out 🔥💻 1 — @datawarlord_official — mining/posts/DdSKJ2ZAk9o/notes.md
+- [ ] 🕸️ Give your AI agent a map of your entire codebase — @fullstackparody — mining/posts/DdRLmBlDVl9/notes.md
+- [ ] 🧠 You can train a real LLM from scratch for less than ₹40 — @fullstackparody — mining/posts/DdEzfn-jV09/notes.md
+- [ ] Your agent just hit a task it has no tool for — @datasciencebrain — mining/posts/DdbgF-uGAHF/notes.md
+- [ ] If You’re Serious About AI, Read These My AI Reading List for 2026 🤖📚 If you’re serious about building a career in AI, d — @the.datascience.gal — mining/posts/DddXwNpE5h0/notes.md
+- [ ] Top 100 DSA Interview Questions A pattern-based collection covering Arrays, Linked Lists, Trees, Graphs, DP, Sliding Win — @decode_leox — mining/posts/DdcH2BJjcjn/notes.md
+- [ ] Most developers know Monolith vs Microservices — @bytesizediaries — mining/posts/DdNujL6xxKS/notes.md
+- [ ] 14x faster and 90% cheaper LLM inference ⚡ 100% open-source KV cache management — @dailydoseofds_ — mining/posts/Dc-eJ7_iSLB/notes.md
+- [ ] Your job search gets easier when you use the right tool for each stage — @nikita.chepuri — mining/posts/DdEo3CrTJ9j/notes.md

@@ -29,6 +29,9 @@ if [ $PY_OK -ne 0 ]; then
   # separately so the summary can never claim green for untested labs.
   echo "  SKIPPED — pytest not installed ($PY -m pip install pytest)"
   skipped=1
+else
+  echo; echo "── unit: semantic retrieval ──"
+  (cd "$ROOT" && "$PY" -m pytest app/tests/test_semantic_gap_audit.py -q) || fail=1
 fi
 
 # Non-python labs are gated by their own toolchain. A missing toolchain is a

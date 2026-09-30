@@ -41,6 +41,30 @@ difference is the whole budget.
    source. If it is partial, open the named module and check whether the angle is really
    there. If it is a gap, *then* spend the screenshots.
 
+For topics that use different wording from the curriculum, an optional local semantic pass
+can rank the same modules with Ollama. It is independent of the lexical audit and has no
+third-party Python dependencies:
+
+```bash
+python scripts/semantic_gap_audit.py topics.txt
+python scripts/semantic_gap_audit.py --stdin --top-k 5
+```
+
+The command calls Ollama's local `/api/embed` endpoint in batches. It uses
+`OLLAMA_EMBED_MODEL=nomic-embed-text` by default and accepts `OLLAMA_BASE_URL` when the
+local service is bound somewhere else. Non-local endpoints are rejected unless
+`--allow-remote` is passed explicitly, because curriculum text is sent to the endpoint.
+A missing or unreachable Ollama service exits with an operational error instead of claiming
+topics are gaps. Embeddings are ranked by cosine
+similarity with stable module-id tie-breaking; `>=0.60` is **covered**, `>=0.30` is
+**partial**, and lower scores are **gaps**, matching the existing lexical audit's bucket
+boundaries. These are deterministic triage boundaries, not a substitute for opening the
+named module and checking the angle.
+
+The semantic command reads `app/data/curriculum.json` and authored module Markdown directly.
+It sends curriculum text only to the configured local model, does not read credentials, and
+does not write an embedding cache. Use the lexical command when Ollama is unavailable.
+
 4. **Add what is genuinely missing** via `build_data.py`'s spec and the module format.
 
 ## Why this exists

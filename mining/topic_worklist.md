@@ -1,12 +1,12 @@
 # Topic worklist (deduped)
 
-43214 useful posts -> **19435 unique topics** (11513 gaps, 7220 partial)
+43235 useful posts -> **19442 unique topics** (11516 gaps, 7224 partial)
 
 ## Gap topics, by frequency
 
 - **🚀Get 180% hike in Salary with Data Science job - link in bio 👨‍🎓 Subscribe to our YouTube Channel to become Ma** ×1266 — @datasciencebrain (rep: mining/posts/Cz7yiBkr1LJ/)
 - **15 Excel Formulas That Surprise 5+ Year Users 1** ×1216 — @kethakiproperties (rep: mining/posts/DcOEXEik4vt/)
-- **✨Is freelancing the future of work** ×1068 — @entrepreneursonig (rep: mining/posts/DBHGs1ToCBp/)
+- **✨Is freelancing the future of work** ×1069 — @entrepreneursonig (rep: mining/posts/DBHGs1ToCBp/)
 - **📌⬇️ Save and Read through here if you don’t know where to start with tech or programming** ×777 — @pythonlifetelugu (rep: mining/posts/CxhrhA8ATHE/)
 - **HR Interview Questions | Quick Guide Prepare these common HR questions to crack your interview** ×396 — @pythonlifetelugu (rep: mining/posts/DbvKoFRiTFX/)
 - **Understand these 3 things before you begin this journey** ×373 — @umerhaddii007 (rep: mining/posts/C2CvZXqtQHb/)
@@ -207,9 +207,9 @@
 
 ## Partial topics
 
-- ~How do you start web development ×3092
+- ~How do you start web development ×3093
 - ~I asked ChatGPT the most common question “How to start programming”… This was the response… Starting programmi ×1235
-- ~Comment “GUIDE” and I’ll help you make the projects that can get you hired ×719
+- ~Comment “GUIDE” and I’ll help you make the projects that can get you hired ×720
 - ~50 SQL Questions you need to cover before an interview 1 ×472
 - ~When I came to the US in 2018, I had zero ML experience ×394
 - ~🚀 Learn these coding topics sincerely ×282
@@ -219,7 +219,7 @@
 - ~Have you ever conducted an A/B testing ×169
 - ~🚀 SQL for Data Analysis: The Ultimate Data Cleaning Cheat Sheet Let’s be honest — 80% of data analysis is clea ×143
 - ~Prompt engineering isn’t dead ×129
-- ~🔥 STOP Picking Random Metrics ×120
+- ~🔥 STOP Picking Random Metrics ×121
 - ~1 ×119
 - ~Here are five unique fullstack project ideas: Node ×118
 - ~THE KAGAMI PROTOCOL Classification: Faction Archive -Σ | Planetary Codename: Seishin-9 Origin: In the 22nd cen ×107
@@ -246,18 +246,18 @@
 - ~Trigger warning: 1 - You probably suck at SQL, but convinced yourself you’re an expert ×43
 - ~🚀 Monotonic Queue in Java | Master Sliding Window Problems in O(n) A Monotonic Queue is a special double-ended ×38
 - ~The Flask lightweight web application framework has hit release 2 ×36
+- ~OpenAI introduced GPT-5 ×35
 - ~1 ×34
 - ~How to make your AI burn less money while you’re building apps ×34
-- ~OpenAI introduced GPT-5 ×34
 - ~🚀 PREFIX SUM: THE SHORTCUT EVERY CODER SHOULD LEARN ⚡ Want to answer range sum queries in O(1) instead of O(n) ×32
 - ~Most candidates immediately jump to the logical explanation of tokenizer fallback ×30
 - ~Most developers jump straight into coding ×29
 - ~RAG stands for Retrieval-Augmented Generation ×28
+- ~🚨👀 Another huge week in AI ×27
 - ~Essential Coding Resources You Need to Bookmark ⭐️ Want to learn coding but don’t know where to start ×26
 - ~I wasted 1 ×26
 - ~Tableau Fresher Roadmap | Zero to Job Tableau asalu teliyadu ×26
 - ~📌 Only NumPy Cheat Sheet You’ll Ever Need ×26
-- ~🚨👀 Another huge week in AI ×26
 - ~Picture this: It's 2025 and you're a data scientist, making 6 figures in tech ×25
 - ~🧵 Threading Design Mistakes in Java ⸻ 🧩 1️⃣ Creating Threads Inside Threads Just because you can doesn’t mean  ×25
 - ~Most MCP tutorials you’ll find are already out of date ×24
@@ -268,10 +268,10 @@
 - ~EDA (Exploratory Data Analysis) | Telugu Exploratory Data Analysis ante data ni analyze chesi patterns, trends ×22
 - ~Naive RAG — The simplest way to understand Retrieval-Augmented Generation 🤖📚 If you're learning Generative AI, ×22
 - ~Starting Monday with hard topics ×22
+- ~🧠 Monotonic Stack Pattern One of the most powerful DSA patterns for coding interviews ×22
 - ~⭐ How Spring Boot Handles Async Requests ☮️ ———- ⚡ 1️⃣ Enable Async Support ✔ Add @EnableAsync in a config cla ×21
 - ~🚀 INSIDE "new Object()" One line of code ×21
 - ~🚨 This is Richard Feynman's learning philosophy packed into one prompt ×21
-- ~🧠 Monotonic Stack Pattern One of the most powerful DSA patterns for coding interviews ×21
 - ~Cyber Security Roadmap | Complete Guide to Become a Cyber Security Engineer Want to build a career in Cyber Se ×20
 - ~Sharing the Walmart interview experience of a selected candidate ☑️ Applied via LinkedIn in mid-May after faci ×20
 - ~You don’t pick the agent pattern ×20
