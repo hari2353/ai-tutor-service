@@ -207,7 +207,7 @@
     {
       "key": "rag",
       "label": "15 Excel Formulas That Surprise 5+ Year Users 1",
-      "count": 1216,
+      "count": 1217,
       "gap_verdict": "GAP",
       "top_creators": [
         [
@@ -411,7 +411,7 @@
     {
       "key": "agent",
       "label": "Comment “GUIDE” and I’ll help you make the projects that can get you hired",
-      "count": 720,
+      "count": 722,
       "gap_verdict": "partial",
       "top_creators": [
         [
@@ -615,7 +615,7 @@
     {
       "key": "llm",
       "label": "When I came to the US in 2018, I had zero ML experience",
-      "count": 394,
+      "count": 395,
       "gap_verdict": "partial",
       "top_creators": [
         [
@@ -815,7 +815,7 @@
     {
       "key": "agent|rag",
       "label": "The Future of Humanoid Robotics just Begins",
-      "count": 295,
+      "count": 296,
       "gap_verdict": "GAP",
       "top_creators": [
         [
@@ -1890,13 +1890,13 @@
     },
     {
       "key": "agent|llm",
-      "label": "Prompt engineering isn’t dead",
-      "count": 129,
+      "label": "The real skill in 2027 is systems thinking",
+      "count": 131,
       "gap_verdict": "partial",
       "top_creators": [
         [
           "theartificialintelligens",
-          21
+          22
         ],
         [
           "hackproduct",
@@ -1908,10 +1908,10 @@
         ]
       ],
       "representative": {
-        "shortcode": "DcE70TOB1st",
-        "creator": "hackproduct",
-        "caption": "Prompt engineering isn’t dead. It just stopped being the job. ⚡\n\nThree eras of getting an LLM to do real work — and most people are still stuck in the first one 👇\n\n🟢 1. PROMPT ENGINEERING\nOne window in, one answer out. System prompt + user message → model → response.\nYou control: the words.\nThat’s the whole lever. Better phrasing, better examples, better structure. Real skill — just a small surfac",
-        "source": "creator:hackproduct"
+        "shortcode": "DdgmEKfh_QF",
+        "creator": "bhawna.io",
+        "caption": "The real skill in 2027 is systems thinking.\n\nHarness Engineering: Give your agent a safe, observable stack with retries, sandboxing, and cost limits so it doesn’t spiral out of control.\n\nLoop Engineering: Design how your agent repeats actions, checks its own progress, and knows when to stop instead of looping forever.\n\nContext Engineering: Feed the model the right info at the right time. Too much ",
+        "source": "saved"
       },
       "members": [
         "DSAULkAkt9N",
@@ -10068,6 +10068,46 @@
       ]
     },
     {
+      "key": "agent|llm|python|rag",
+      "label": "🚀 The Only Agentic AI Cheat Sheet You’ll Ever Need Agentic AI is revolutionizing how we build intelligent systems — from",
+      "count": 12,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "datasciencebrain",
+          3
+        ],
+        [
+          "ds_ai_ketan",
+          2
+        ],
+        [
+          "gauravgoyalai",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DP2ykonAbDT",
+        "creator": "tajamul.codes",
+        "caption": "🚀 The Only Agentic AI Cheat Sheet You’ll Ever Need\n\nAgentic AI is revolutionizing how we build intelligent systems — from autonomous task execution to multi-agent collaboration.\nWhether you’re an AI Engineer, Data Scientist, or just exploring the future of AI, mastering Agentic AI is becoming essential.\n\nHere’s what you’ll find inside 👇\n⚙️ AI Agent Types — Reactive, Planning & Collaborative\n🧠 Lead",
+        "source": "creator:tajamul.codes"
+      },
+      "members": [
+        "DRGiliuE1iE",
+        "DasP3I1y4gY",
+        "DZxYhrTSYVf",
+        "DZT1Uy0PtRG",
+        "DbuSAKgx-Ah",
+        "DP2ykonAbDT",
+        "DbZwaSLifKI",
+        "DV81YnEiN_S",
+        "DboJ-BFgMSM",
+        "DcMC5zCjyzs",
+        "DdWyNsZk0T9",
+        "Dd5X-6WGH1n"
+      ]
+    },
+    {
       "key": "api|machine learning",
       "label": "🚨 Andrew Tulloch just left the $12 billion startup he co-founded with former OpenAI CTO Mira Murati to join Meta",
       "count": 12,
@@ -10175,6 +10215,45 @@
         "Db2i151RFtj",
         "Db1wCUczFnv",
         "DcjKr0bjr6J"
+      ]
+    },
+    {
+      "key": "agent|llm|machine learning",
+      "label": "AI, Machine Learning, and Reinforcement Learning are often used like they mean the same thing",
+      "count": 11,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "gauravgoyalai",
+          2
+        ],
+        [
+          "techwith.ram",
+          2
+        ],
+        [
+          "jam.with.ai",
+          2
+        ]
+      ],
+      "representative": {
+        "shortcode": "DZ2lYo6ojG9",
+        "creator": "jam.with.ai",
+        "caption": "AI, Machine Learning, and Reinforcement Learning are often used like they mean the same thing.\n\nThey do not.\n\nHere’s the simplest way to understand them:\n\nARTIFICIAL INTELLIGENCE\nis the broad goal of making machines behave intelligently. It can include understanding, planning, decision-making, and solving problems.\nAI does not always need to learn.\n\nA system can also follow fixed rules, such as:\n\n",
+        "source": "creator:jam.with.ai"
+      },
+      "members": [
+        "DcPx2eIReGP",
+        "DbxkMCTxIzM",
+        "DbuTpJMCbuV",
+        "DbYEfVAps4B",
+        "DZ2lYo6ojG9",
+        "DZ1hbrlufvo",
+        "DV2PSH2Ee3T",
+        "DTsmI6nDX4q",
+        "DYckvaqgWR4",
+        "DYoIF78DEjm",
+        "DdooT8dgL-r"
       ]
     },
     {
@@ -10977,45 +11056,6 @@
       ]
     },
     {
-      "key": "agent|llm|python|rag",
-      "label": "🚀 The Only Agentic AI Cheat Sheet You’ll Ever Need Agentic AI is revolutionizing how we build intelligent systems — from",
-      "count": 11,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "datasciencebrain",
-          2
-        ],
-        [
-          "ds_ai_ketan",
-          2
-        ],
-        [
-          "gauravgoyalai",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DP2ykonAbDT",
-        "creator": "tajamul.codes",
-        "caption": "🚀 The Only Agentic AI Cheat Sheet You’ll Ever Need\n\nAgentic AI is revolutionizing how we build intelligent systems — from autonomous task execution to multi-agent collaboration.\nWhether you’re an AI Engineer, Data Scientist, or just exploring the future of AI, mastering Agentic AI is becoming essential.\n\nHere’s what you’ll find inside 👇\n⚙️ AI Agent Types — Reactive, Planning & Collaborative\n🧠 Lead",
-        "source": "creator:tajamul.codes"
-      },
-      "members": [
-        "DRGiliuE1iE",
-        "DasP3I1y4gY",
-        "DZxYhrTSYVf",
-        "DZT1Uy0PtRG",
-        "DbuSAKgx-Ah",
-        "DP2ykonAbDT",
-        "DbZwaSLifKI",
-        "DV81YnEiN_S",
-        "DboJ-BFgMSM",
-        "DcMC5zCjyzs",
-        "DdWyNsZk0T9"
-      ]
-    },
-    {
       "key": "api|interview question",
       "label": "100 Java Interview Questions Every Developer Should Know Java Basics (1–20) 1",
       "count": 10,
@@ -11051,44 +11091,6 @@
         "CpX8Q31j8-S",
         "DNgD2ClIzzK",
         "Cz0l84oRBlk"
-      ]
-    },
-    {
-      "key": "agent|llm|machine learning",
-      "label": "AI, Machine Learning, and Reinforcement Learning are often used like they mean the same thing",
-      "count": 10,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "gauravgoyalai",
-          2
-        ],
-        [
-          "techwith.ram",
-          2
-        ],
-        [
-          "jam.with.ai",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DZ2lYo6ojG9",
-        "creator": "jam.with.ai",
-        "caption": "AI, Machine Learning, and Reinforcement Learning are often used like they mean the same thing.\n\nThey do not.\n\nHere’s the simplest way to understand them:\n\nARTIFICIAL INTELLIGENCE\nis the broad goal of making machines behave intelligently. It can include understanding, planning, decision-making, and solving problems.\nAI does not always need to learn.\n\nA system can also follow fixed rules, such as:\n\n",
-        "source": "creator:jam.with.ai"
-      },
-      "members": [
-        "DcPx2eIReGP",
-        "DbxkMCTxIzM",
-        "DbuTpJMCbuV",
-        "DbYEfVAps4B",
-        "DZ2lYo6ojG9",
-        "DZ1hbrlufvo",
-        "DV2PSH2Ee3T",
-        "DTsmI6nDX4q",
-        "DYckvaqgWR4",
-        "DYoIF78DEjm"
       ]
     },
     {
@@ -12980,6 +12982,42 @@
       ]
     },
     {
+      "key": "agent|llm|python",
+      "label": "A new ICLR paper found that the standard way of combining AI models is basically a badly run meeting — and fixing the me",
+      "count": 8,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "gauravgoyalai",
+          2
+        ],
+        [
+          "techwith.ram",
+          2
+        ],
+        [
+          "hackproduct",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DbmlGMhCAGZ",
+        "creator": "theartificialintelligens",
+        "caption": "A new ICLR paper found that the standard way of combining AI models is basically a badly run meeting — and fixing the meeting beats adding more attendees.\n\nThe default approach (Mixture-of-Agents) sends every query to every model in the pool and merges all responses. That means a legal model votes on anatomy questions and a finance model weighs in on Python — pure noise, at full token cost.\n\nGraph",
+        "source": "creator:theartificialintelligens"
+      },
+      "members": [
+        "DcXvRBjRWkd",
+        "DcVO7KyRxF0",
+        "DXWqECljsrp",
+        "DZl9jP1iXsp",
+        "DXRa4buCaR_",
+        "DQJ0CuLCGEL",
+        "DbmlGMhCAGZ",
+        "DdsgHG2iBAu"
+      ]
+    },
+    {
       "key": "azure|databricks",
       "label": "Azure Data Engineer Glossary Part 1 🕵️‍♂️ Update: Azure Active Directory (AAD) is newly called as Azure Entra ID",
       "count": 8,
@@ -14132,41 +14170,6 @@
         "DalKBmTk6oB",
         "DcaZIe-jR6S",
         "Dam-1BQjRAy"
-      ]
-    },
-    {
-      "key": "agent|llm|python",
-      "label": "A new ICLR paper found that the standard way of combining AI models is basically a badly run meeting — and fixing the me",
-      "count": 7,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "gauravgoyalai",
-          2
-        ],
-        [
-          "techwith.ram",
-          2
-        ],
-        [
-          "hackproduct",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DbmlGMhCAGZ",
-        "creator": "theartificialintelligens",
-        "caption": "A new ICLR paper found that the standard way of combining AI models is basically a badly run meeting — and fixing the meeting beats adding more attendees.\n\nThe default approach (Mixture-of-Agents) sends every query to every model in the pool and merges all responses. That means a legal model votes on anatomy questions and a finance model weighs in on Python — pure noise, at full token cost.\n\nGraph",
-        "source": "creator:theartificialintelligens"
-      },
-      "members": [
-        "DcXvRBjRWkd",
-        "DcVO7KyRxF0",
-        "DXWqECljsrp",
-        "DZl9jP1iXsp",
-        "DXRa4buCaR_",
-        "DQJ0CuLCGEL",
-        "DbmlGMhCAGZ"
       ]
     },
     {
@@ -25032,6 +25035,37 @@
       ]
     },
     {
+      "key": "agent|api|llm|machine learning|python|rag",
+      "label": "AI Tools Ni Use Cheyala Leda Build Cheyala",
+      "count": 3,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "kiransagar.pyy",
+          1
+        ],
+        [
+          "jam.with.ai",
+          1
+        ],
+        [
+          "pythonlifetelugu",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DbkNBBDTiDd",
+        "creator": "kiransagar.pyy",
+        "caption": "AI Tools Ni Use Cheyala Leda Build Cheyala?\n\nCareer start chestunnappudu first AI tools use cheyadam better. Strong foundation vachaka AI applications build cheyadam start cheyyali. Direct ga AI models build cheyadam beginners ki kashtam.\n\nIndia lo most companies ki immediate requirement AI researchers kaadu, AI ni use chesi business problems solve cheyagalige developers and engineers. Kiran Sagar",
+        "source": "creator:pythonlifetelugu"
+      },
+      "members": [
+        "DbkNBBDTiDd",
+        "DVY0tS-iKPT",
+        "Dd01aKXCSfB"
+      ]
+    },
+    {
       "key": "api|backend|coding|database|distributed|microservice|system design",
       "label": "AI can write code",
       "count": 3,
@@ -33513,32 +33547,6 @@
       "members": [
         "DXguryszn2h",
         "DWi492uie-s"
-      ]
-    },
-    {
-      "key": "agent|api|llm|machine learning|python|rag",
-      "label": "AI Tools Ni Use Cheyala Leda Build Cheyala",
-      "count": 2,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "kiransagar.pyy",
-          1
-        ],
-        [
-          "jam.with.ai",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DbkNBBDTiDd",
-        "creator": "kiransagar.pyy",
-        "caption": "AI Tools Ni Use Cheyala Leda Build Cheyala?\n\nCareer start chestunnappudu first AI tools use cheyadam better. Strong foundation vachaka AI applications build cheyadam start cheyyali. Direct ga AI models build cheyadam beginners ki kashtam.\n\nIndia lo most companies ki immediate requirement AI researchers kaadu, AI ni use chesi business problems solve cheyagalige developers and engineers. Kiran Sagar",
-        "source": "creator:pythonlifetelugu"
-      },
-      "members": [
-        "DbkNBBDTiDd",
-        "DVY0tS-iKPT"
       ]
     },
     {
@@ -83798,6 +83806,27 @@
       ]
     },
     {
+      "key": "weak:actual hype output tools",
+      "label": "AI tools: Hype vs",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "theaiagents",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdYpSfmCGdm",
+        "creator": "theaiagents",
+        "caption": "AI tools: Hype vs. Actual Output. 👀\nSome of the best AI tools right now are still being massively overlooked",
+        "source": "saved"
+      },
+      "members": [
+        "DdYpSfmCGdm"
+      ]
+    },
+    {
       "key": "weak:concept doom kang turned",
       "label": "AI turned a Doom vs",
       "count": 1,
@@ -123845,6 +123874,27 @@
       ]
     },
     {
+      "key": "agent|api|aws|azure|coding|embedding|gcp|interview question|llm|python|rag|sql",
+      "label": "Comment HERO to get the book that teaches all 140+ of these end to end 👇 140+ Gen AI concepts every AI engineer must kno",
+      "count": 1,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "datasciencebrain",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "Dd0N4iymMsW",
+        "creator": "datasciencebrain",
+        "caption": "Comment HERO to get the book that teaches all 140+ of these end to end 👇\n\n140+ Gen AI concepts every AI engineer must know, from tokens and embeddings to agents, MCP, evals and LLM security.\n\nSave this for your next interview, and send it to a friend who's learning AI.\n\nWant to go beyond the definitions? Gen AI: Zero to Hero teaches every concept with code, real projects and interview answers. Ful",
+        "source": "saved"
+      },
+      "members": [
+        "Dd0N4iymMsW"
+      ]
+    },
+    {
       "key": "weak:analytics engineering resources roadmap",
       "label": "Comment LEARN for Roadmap and Resources for Analytics Engineering",
       "count": 1,
@@ -137912,6 +137962,27 @@
       },
       "members": [
         "DE98yxJNFbg"
+      ]
+    },
+    {
+      "key": "weak:built comes iphone powerful",
+      "label": "Did you know your iPhone comes with a powerful, built-in line of defense against theft",
+      "count": 1,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "artificialntellligence",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdkPigfHe18",
+        "creator": "artificialntellligence",
+        "caption": "Did you know your iPhone comes with a powerful, built-in line of defense against theft? Using the native Shortcuts app, you can build an automated workflow that triggers the moment a thief plugs in the charger. Instantly, your device can turn off Airplane Mode, turn cellular data back on, take a discrete front-camera photo, and email you both the snapshot and its exact GPS coordinates.\n\nWhile this",
+        "source": "saved"
+      },
+      "members": [
+        "DdkPigfHe18"
       ]
     },
     {
@@ -223700,6 +223771,27 @@
       ]
     },
     {
+      "key": "weak:managing office playing upward",
+      "label": "Managing upward isn’t about playing office politics or kissing up",
+      "count": 1,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "_pani_puri__",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdnonOeqaRn",
+        "creator": "_pani_puri__",
+        "caption": "Managing upward isn’t about playing office politics or kissing up. It’s about reducing friction for someone who has ten other fires to put out.\nWhen you make your leader’s job easier, your autonomy, visibility, and career growth naturally skyrocket.\nHere are the 10 cheat codes to manage your leaders effectively:\n1. Lead with the bottom line (BLUF): Start every email and conversation with the verdi",
+        "source": "saved"
+      },
+      "members": [
+        "DdnonOeqaRn"
+      ]
+    },
+    {
       "key": "weak:daily manam restaurants tine",
       "label": "Manam daily tine restaurants Anni unnay list lo😢",
       "count": 1,
@@ -294764,6 +294856,27 @@
       ]
     },
     {
+      "key": "weak:guess helpful jobhunt weird",
+      "label": "That’s a bit weird but helpful i guess",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "studywithsavannah_",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DcSIh8ZOVcc",
+        "creator": "studywithsavannah_",
+        "caption": "That’s a bit weird but helpful i guess??? 😭 #jobhunt #careeradvice",
+        "source": "saved"
+      },
+      "members": [
+        "DcSIh8ZOVcc"
+      ]
+    },
+    {
       "key": "weak:developers genai meet wrap",
       "label": "That’s a wrap on the GenAI Developers Meet by @singlestoredb and @devrelsquad",
       "count": 1,
@@ -306836,6 +306949,27 @@
       },
       "members": [
         "DcY5CRRTWeh"
+      ]
+    },
+    {
+      "key": "aws|distributed|interview question|system design",
+      "label": "These 20 system design laws explain more about why real systems break than any textbook 🤯 The core distributed systems c",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "techwithprateek",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdoZgCQS2W4",
+        "creator": "techwithprateek",
+        "caption": "These 20 system design laws explain more about why real systems break than any textbook 🤯\n\nThe core distributed systems concepts, one line each:\n\n⚡ CAP: pick 2, the network decides when\n⚡ Little’s Law: load drives latency\n⚡ Amdahl’s: the serial part caps your speedup\n⚡ Gustafson’s: bigger problems parallelize better\n⚡ USL: past a point, more nodes = less throughput\n⚡ Conway’s: architecture mirrors",
+        "source": "saved"
+      },
+      "members": [
+        "DdoZgCQS2W4"
       ]
     },
     {
@@ -423305,6 +423439,6 @@
       ]
     }
   ],
-  "total_posts": 43235,
-  "unique_topics": 19442
+  "total_posts": 43252,
+  "unique_topics": 19448
 }

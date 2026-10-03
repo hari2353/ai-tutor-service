@@ -1,6 +1,6 @@
 # Mining worklist (crawl)
 
-61394 posts · 23768 gaps · 17475 partial · 1992 covered
+61418 posts · 23774 gaps · 17486 partial · 1992 covered
 
 ## Gaps
 
@@ -23772,6 +23772,12 @@
 - [ ] 🚀 LLM & Fine-Tuning — Complete Notes 🧠 Want to understand how LLMs are **trained, adapted, and fine-tuned for real-world — @theagenticaiengineer — mining/posts/DdPdOfsDiI3/notes.md
 - [ ] OpenTerminal is a free Bloomberg Terminal alternative that runs on public market data — no paid APIs needed — @gittrend.io — mining/posts/DdLBNl1Dq_S/notes.md
 - [ ] Someone just open-sourced an entire AI agency — 230+ specialized AI agents, completely free — @theautomationguy.ai — mining/posts/DdJyHWnGl4w/notes.md
+- [ ] 🫡🔥 Ranabaali – The Story of an Unsung Hero — @btechbadithulu — mining/posts/DeBHo2oRkIA/notes.md
+- [ ] Everyone's hyping Jev vs LLMs right now — @datasciencebrain — mining/posts/DdsgHG2iBAu/notes.md
+- [ ] Comment HERO to get the book that teaches all 140+ of these end to end 👇 140+ Gen AI concepts every AI engineer must kno — @datasciencebrain — mining/posts/Dd0N4iymMsW/notes.md
+- [ ] 🛠️ Addy Osmani open-sourced 25 skills that make your AI agent code like a senior — @fullstackparody — mining/posts/Ddl772hDREy/notes.md
+- [ ] Managing upward isn’t about playing office politics or kissing up — @_pani_puri__ — mining/posts/DdnonOeqaRn/notes.md
+- [ ] Did you know your iPhone comes with a powerful, built-in line of defense against theft — @artificialntellligence — mining/posts/DdkPigfHe18/notes.md
 
 ## Partial
 
@@ -41250,3 +41256,14 @@
 - [ ] Most developers know Monolith vs Microservices — @bytesizediaries — mining/posts/DdNujL6xxKS/notes.md
 - [ ] 14x faster and 90% cheaper LLM inference ⚡ 100% open-source KV cache management — @dailydoseofds_ — mining/posts/Dc-eJ7_iSLB/notes.md
 - [ ] Your job search gets easier when you use the right tool for each stage — @nikita.chepuri — mining/posts/DdEo3CrTJ9j/notes.md
+- [ ] Anyone can build a RAG demo — @datasciencebrain — mining/posts/Dd5X-6WGH1n/notes.md
+- [ ] 📟 A real foundation model that fits in 14MB — @fullstackparody — mining/posts/DdjJQDFjc9w/notes.md
+- [ ] The real skill in 2027 is systems thinking — @bhawna.io — mining/posts/DdgmEKfh_QF/notes.md
+- [ ] 10 patterns to help you build better AI agents How should your agent plan, use tools, share work, and check its answers — @jam.with.ai — mining/posts/DdooT8dgL-r/notes.md
+- [ ] AI tools: Hype vs — @theaiagents — mining/posts/DdYpSfmCGdm/notes.md
+- [ ] That’s a bit weird but helpful i guess — @studywithsavannah_ — mining/posts/DcSIh8ZOVcc/notes.md
+- [ ] To improve at real work, AI agents need thousands of realistic jobs to practise on — @theartificialintelligens — mining/posts/DdneNfjgbs2/notes.md
+- [ ] These 20 system design laws explain more about why real systems break than any textbook 🤯 The core distributed systems c — @techwithprateek — mining/posts/DdoZgCQS2W4/notes.md
+- [ ] A Google team has published what may be the strongest claim yet in autonomous AI research: a multi-agent system that tak — @theartificialintelligens — mining/posts/Ddf-L-Xgfz6/notes.md
+- [ ] 🤖 **AI Career Roadmap Notes — Quick Guide — @pythonlifetelugu — mining/posts/Dd01aKXCSfB/notes.md
+- [ ] 🧠 This MCP server cuts your AI agent’s token usage by 99% on your codebase — @fullstackparody — mining/posts/Ddq_d1bDV_Z/notes.md

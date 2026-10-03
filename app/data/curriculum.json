@@ -333,7 +333,7 @@
       "icon": "\ud83e\udd16",
       "phase": "A",
       "prereqs": [],
-      "hours": 81.5,
+      "hours": 84.0,
       "modules": [
         {
           "id": "T07-agent-loop-from-scratch",
@@ -501,6 +501,19 @@
           "sprint_week": 4
         },
         {
+          "id": "T07-selective-orchestration",
+          "slug": "selective-orchestration",
+          "title": "Selective Multi-Agent Orchestration: Routing, Abstention, Fallbacks",
+          "hours": 2.5,
+          "tags": [
+            "architecture",
+            "production",
+            "critical"
+          ],
+          "order": 12,
+          "status": "todo"
+        },
+        {
           "id": "T07-production-agent-loops",
           "slug": "production-agent-loops",
           "title": "Production Loops: Budgets, Resume, Kill Switches, Streaming",
@@ -508,7 +521,7 @@
           "tags": [
             "production"
           ],
-          "order": 12,
+          "order": 13,
           "status": "todo"
         },
         {
@@ -519,7 +532,7 @@
           "tags": [
             "security"
           ],
-          "order": 13,
+          "order": 14,
           "status": "todo"
         },
         {
@@ -531,7 +544,7 @@
             "production",
             "cost"
           ],
-          "order": 14,
+          "order": 15,
           "status": "todo"
         },
         {
@@ -543,7 +556,7 @@
             "production",
             "critical"
           ],
-          "order": 15,
+          "order": 16,
           "status": "todo"
         },
         {
@@ -555,7 +568,7 @@
             "prompting",
             "critical"
           ],
-          "order": 16,
+          "order": 17,
           "status": "todo"
         },
         {
@@ -567,7 +580,7 @@
             "production",
             "critical"
           ],
-          "order": 17,
+          "order": 18,
           "status": "todo"
         },
         {
@@ -579,7 +592,7 @@
             "security",
             "critical"
           ],
-          "order": 18,
+          "order": 19,
           "status": "todo"
         },
         {
@@ -591,7 +604,7 @@
             "trust",
             "critical"
           ],
-          "order": 19,
+          "order": 20,
           "status": "todo"
         },
         {
@@ -603,7 +616,7 @@
             "trust",
             "critical"
           ],
-          "order": 20,
+          "order": 21,
           "status": "todo"
         },
         {
@@ -615,7 +628,7 @@
             "trust",
             "critical"
           ],
-          "order": 21,
+          "order": 22,
           "status": "todo"
         },
         {
@@ -627,7 +640,7 @@
             "trust",
             "critical"
           ],
-          "order": 22,
+          "order": 23,
           "status": "todo"
         },
         {
@@ -639,7 +652,7 @@
             "trust",
             "critical"
           ],
-          "order": 23,
+          "order": 24,
           "status": "todo"
         },
         {
@@ -651,7 +664,7 @@
             "testing",
             "critical"
           ],
-          "order": 24,
+          "order": 25,
           "status": "todo"
         },
         {
@@ -664,7 +677,7 @@
             "harness",
             "critical"
           ],
-          "order": 25,
+          "order": 26,
           "status": "todo",
           "sprint_order": 29,
           "sprint_week": 10
@@ -679,7 +692,7 @@
             "harness",
             "critical"
           ],
-          "order": 26,
+          "order": 27,
           "status": "todo",
           "sprint_order": 30,
           "sprint_week": 10
@@ -693,7 +706,7 @@
             "harness",
             "critical"
           ],
-          "order": 27,
+          "order": 28,
           "status": "todo"
         },
         {
@@ -705,7 +718,7 @@
             "harness",
             "critical"
           ],
-          "order": 28,
+          "order": 29,
           "status": "todo"
         },
         {
@@ -717,7 +730,7 @@
             "harness",
             "critical"
           ],
-          "order": 29,
+          "order": 30,
           "status": "todo"
         },
         {
@@ -730,7 +743,7 @@
             "context",
             "critical"
           ],
-          "order": 30,
+          "order": 31,
           "status": "todo"
         },
         {
@@ -743,7 +756,7 @@
             "capstone",
             "critical"
           ],
-          "order": 31,
+          "order": 32,
           "status": "todo",
           "sprint_order": 27,
           "sprint_week": 9
@@ -1139,7 +1152,7 @@
       "icon": "\ud83c\udfd7\ufe0f",
       "phase": "A",
       "prereqs": [],
-      "hours": 45.5,
+      "hours": 48.0,
       "modules": [
         {
           "id": "T10-distributed-fundamentals",
@@ -1331,6 +1344,19 @@
             "critical"
           ],
           "order": 14,
+          "status": "todo"
+        },
+        {
+          "id": "T10-tail-latency-slos",
+          "slug": "tail-latency-slos",
+          "title": "Tail Latency and Percentile SLO Engineering",
+          "hours": 2.5,
+          "tags": [
+            "craft",
+            "observability",
+            "critical"
+          ],
+          "order": 15,
           "status": "todo"
         }
       ]
@@ -6216,7 +6242,7 @@
   ],
   "totals": {
     "tracks": 36,
-    "modules": 463,
-    "hours": 1068.5
+    "modules": 465,
+    "hours": 1073.5
   }
 }

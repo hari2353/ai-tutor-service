@@ -1,6 +1,6 @@
 # Curriculum gap shortlist (distilled)
 
-from 19,420 raw clusters -> 835 real topics (377 gaps, 410 partial, 48 covered)
+from 19,420 raw clusters -> 849 real topics (381 gaps, 420 partial, 48 covered)
 
 ## GAPS - genuinely missing from the 454 modules
 
@@ -192,6 +192,8 @@ from 19,420 raw clusters -> 835 real topics (377 gaps, 410 partial, 48 covered)
     nearest: T10-resume-systems — Your 4 Flagship Systems as Formal Design Docs
 - **☕ TOP 25 JAVA CONCEPTS Java is one of the most trusted programming languages in the world** ×8 — @sde_ii_labs (rep: mining/posts/DZ1o5jBN3N4/)
     nearest: T02-p16-knapsack-unbounded — Unbounded Knapsack DP
+- **A new ICLR paper found that the standard way of combining AI models is basically a badly run meeting — and fixing the me** ×8 — @theartificialintelligens (rep: mining/posts/DbmlGMhCAGZ/)
+    nearest: T26-vla-robotics — Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied
 - **🔥 THE ULTIMATE PYTHON ROADMAP 2025 🔥 Want to go from absolute beginner → job-ready Python developer** ×8 — @datasciencebrain (rep: mining/posts/DPGLWbsk6XL/)
     nearest: T20-rust-vs-go — Rust vs Go vs Python: The Honest Selection Criteria
 - **🏆Exmaples for all 20 NumPy Array Methods🏆 Before you read further, please like this reel💗, save it for future🔶 & share i** ×8 — @datasciencebrain (rep: mining/posts/C4PSAtPrFwq/)
@@ -207,11 +209,9 @@ from 19,420 raw clusters -> 835 real topics (377 gaps, 410 partial, 48 covered)
 - **Important Full Forms Asked in Full Stack Developer Interviews Master these commonly asked full forms to improve your int** ×8 — @pythonlifetelugu (rep: mining/posts/Da47rXsiZ5Y/)
     nearest: T07-react-pattern-raw — ReAct Implemented Raw + Plan-Execute + Reflexion
 - **OWASP Top 10 Explained (2026–2027) Kiran Sagar Founder of PythonLife provided 100+ Free IT Courses in Telugu** ×8 — @kiransagar.pyy (rep: mining/posts/Db5ihEfE4vN/)
-    nearest: T07-explainability — Explainability & Attribution: Citations, Traces, SHAP/LIME, 
+    nearest: T07-explainability — Explainability & Attribution: Citations, Traces, SHAP/LIME,
 - **If you’re preparing for a tech job, you don’t need 50 random YouTube channels** ×7 — @codewithupasana (rep: mining/posts/DT1vSrcEUxa/)
     nearest: T07-langgraph-durable — LangGraph II: Checkpointers, interrupt()/HITL, Durable Resum
-- **A new ICLR paper found that the standard way of combining AI models is basically a badly run meeting — and fixing the me** ×7 — @theartificialintelligens (rep: mining/posts/DbmlGMhCAGZ/)
-    nearest: T26-vla-robotics — Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied
 - **Continue reading 👇 Becoming a machine learning engineer is absolutely possible even if you don’t have a CS degree** ×7 — @codingmermaid.ai (rep: mining/posts/C3ISlf5t27A/)
     nearest: T07-context-engineering — Context Engineering: Budgets, Compaction, Context Editing, S
 - **👉 Notebooks 👈 Github Link - https://github** ×7 — @datasciencescoop (rep: mining/posts/CLBhdvXA7rI/)
@@ -640,6 +640,8 @@ from 19,420 raw clusters -> 835 real topics (377 gaps, 410 partial, 48 covered)
     nearest: T07-agent-loop-from-scratch — The Agent Loop From Scratch (no framework)
 - **Get started with algorithmic trading** ×2 — @codingmermaid.ai (rep: mining/posts/DIT4hqaoaNj/)
     nearest: T14-principal-competencies — Scope, Ambiguity, Influence Without Authority, Tech Strategy
+- **Claude Hackathon Winner Setup This setup turned Claude from a chatbot into a coding teammate** ×2 — @jganesh.ai (rep: mining/posts/DVphDO6DgXN/)
+    nearest: T28-spec-driven-dev — Spec-Driven Development: Plan → Approve → Build → Verify
 - **Machine Learning Number Patterns You Must Know Understanding these numeric patterns is essential for solving Machine Lea** ×1 — @pythonlifetelugu (rep: mining/posts/DbKYvkCifnY/)
     nearest: T14-company-specific — Amazon LPs, Google, Meta, Microsoft, Netflix, AI Startups
 - **FAANG/MAANG Interview Case Study questions for Data Analyst Roles 🔥** ×1 — @edubhav (rep: mining/posts/DbnRuE5k_5c/)
@@ -648,6 +650,8 @@ from 19,420 raw clusters -> 835 real topics (377 gaps, 410 partial, 48 covered)
     nearest: T04-backprop-derivation — Backprop Derived: Chain Rule, Jacobians, Vanishing/Exploding
 - **I started my career as a Software Engineer at Microsoft, working on a PaaS product on Azure** ×1 — @shivanjaliverse (rep: mining/posts/DTVLuNQirCC/)
     nearest: T25-ai-product — Pricing & Positioning AI Products; Why Most AI Features Don'
+- **p50 vs p95 vs p99 Latency — averages don’t tell the whole story** ×1 — @interviewroadmap (rep: mining/posts/DdfjIpeTKvK/)
+    nearest: T10-estimation — Back-of-Envelope: Guesstimates, Latency/Throughput/Storage M
 - **7 YouTubers who will teach you AI better than any paid course in 2026** ×1 — @hasantoxr (rep: mining/posts/DWqeKskFPDu/)
     nearest: T26-frontier-landscape — The Frontier Landscape: Labs, Model Families, and Reading a 
 - **Few of the amazing free mock interviews sites that I used during my preparation** ×1 — @code_with_deeksha (rep: mining/posts/C3u2XY-xw_j/)
@@ -688,6 +692,8 @@ from 19,420 raw clusters -> 835 real topics (377 gaps, 410 partial, 48 covered)
     nearest: T07-hallucination — Hallucination: Taxonomy, Detection, and What Actually Reduce
 - **🚀These specialised job platforms for diverse opportunities: 1️⃣ jobicy** ×1 — @thepocketpro_ (rep: mining/posts/C6aTzqpRl5q/)
     nearest: T10-ml-designs — 15 ML System Designs (feed ranking, ads CTR, fraud)
+- **Did you know your iPhone comes with a powerful, built-in line of defense against theft** ×1 — @artificialntellligence (rep: mining/posts/DdkPigfHe18/)
+    nearest: T10-resume-systems — Your 4 Flagship Systems as Formal Design Docs
 - **Save for your future reference Less crowded treks of Nepal 1** ×1 — @drmayurpradhan (rep: mining/posts/DDrQ9gKS_xE/)
     nearest: T28-agent-skills-arch — Skill-Mediated Agents: Architectural Patterns & Reference Ar
 - **✨Shampoo Recommendations for Healthy Hair + How to Use** ×1 — @doctorshailya (rep: mining/posts/DEwsebnTJiK/)
@@ -696,6 +702,8 @@ from 19,420 raw clusters -> 835 real topics (377 gaps, 410 partial, 48 covered)
     nearest: T07-harness-evals — Evaluating the Harness Itself: Injection Resistance, Timeout
 - **Hidden gems, epic views, and food that hits different** ×1 — @whats_hot_mumbai (rep: mining/posts/DAVrFFZT9ts/)
     nearest: T17-clickhouse — ClickHouse: MergeTree, Parts, Sparse Index, Why It's Fast
+- **Managing upward isn’t about playing office politics or kissing up** ×1 — @_pani_puri__ (rep: mining/posts/DdnonOeqaRn/)
+    nearest: T25-strategy — Strategy: Porter, Moats, Build-vs-Buy, Platform vs Product,
 - **Prompts mentioned below, It exposes your Emotional pattern, money, career, relationship loops🍀 Trust me, it will blow yo** ×1 — @thevermavision (rep: mining/posts/DOY69wJktDQ/)
     nearest: T10-genai-designs — 20 GenAI/Agent Designs (RAG@10M, LLM gateway, agent platform
 - **⚠️The ultimate resources for preparing your data science interviews 📊 ⬇️Save this post for later if you’re in a hurry or** ×1 — @codingmermaid.ai (rep: mining/posts/C-dFs5JNVfd/)
@@ -761,10 +769,10 @@ from 19,420 raw clusters -> 835 real topics (377 gaps, 410 partial, 48 covered)
 
 ## PARTIAL - related module exists, angle may differ
 
-- ~15 Excel Formulas That Surprise 5+ Year Users 1 ×1216 → T18-excel-analyst — Excel for Data Analysts: LET, LAMBDA, Dynamic Arrays, XLOOKU (42%)
-- ~When I came to the US in 2018, I had zero ML experience ×394 → T10-principal-layer — Multi-Tenancy, Cost Modeling, Migration Strategy, RFC Writin (33%)
+- ~15 Excel Formulas That Surprise 5+ Year Users 1 ×1217 → T18-excel-analyst — Excel for Data Analysts: LET, LAMBDA, Dynamic Arrays, XLOOKU (42%)
+- ~When I came to the US in 2018, I had zero ML experience ×395 → T10-principal-layer — Multi-Tenancy, Cost Modeling, Migration Strategy, RFC Writin (33%)
 - ~Understand these 3 things before you begin this journey ×373 → T28-claude-architect — The Claude Architect Model: Operating as the Architect, Not  (39%)
-- ~The Future of Humanoid Robotics just Begins ×295 → T26-vla-robotics — Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied (42%)
+- ~The Future of Humanoid Robotics just Begins ×296 → T26-vla-robotics — Vision-Language-Action Models: GR00T, RT-2, π0, and Embodied (42%)
 - ~🚀 These 8 Machine Learning projects are running in production at Microsoft, Amazon, and American Express right now ×275 → T14-company-specific — Amazon LPs, Google, Meta, Microsoft, Netflix, AI Startups (44%)
 - ~These are the SOLID Principles every developer must know before a low-level design interview ×236 → T21-grasp-dry-kiss — GRASP, DRY/KISS/YAGNI, Demeter, Composition over Inheritance (43%)
 - ~Top 30 Linux Interview Questions 1 ×233 → T29-tcp-performance — Congestion Control, Window Scaling, Nagle, Keepalive, Backlo (55%)
@@ -773,8 +781,8 @@ from 19,420 raw clusters -> 835 real topics (377 gaps, 410 partial, 48 covered)
 - ~Have you ever conducted an A/B testing ×169 → T14-negotiation — Compensation Negotiation & Offer Evaluation (41%)
 - ~If you’re a data scientist, how do you know you’re effective in your work ×149 → T10-design-method — Designing From Scratch: Requirements → Constraints → API → D (42%)
 - ~🚀 SQL for Data Analysis: The Ultimate Data Cleaning Cheat Sheet Let’s be honest — 80% of data analysis is cleaning messy ×143 → T18-excel-analyst — Excel for Data Analysts: LET, LAMBDA, Dynamic Arrays, XLOOKU (37%)
-- ~Prompt engineering isn’t dead ×129 → T19-llm-testing — Testing LLM Systems: Non-Determinism, Golden Trajectories, J (53%)
-- ~🔥 STOP Picking Random Metrics ×120 → T10-resume-systems — Your 4 Flagship Systems as Formal Design Docs (41%)
+- ~The real skill in 2027 is systems thinking ×131 → T10-principal-layer — Multi-Tenancy, Cost Modeling, Migration Strategy, RFC Writin (42%)
+- ~🔥 STOP Picking Random Metrics ×121 → T10-resume-systems — Your 4 Flagship Systems as Formal Design Docs (41%)
 - ~Puzzle Solving Tricks | Aptitude Shortcut Placement & competitive exams lo puzzles fast ga solve cheyyadaniki ee simple  ×116 → T15-aptitude-puzzles — Placement Aptitude: Seating, Blood Relations, Direction Sens (39%)
 - ~🚨👀 Another huge week in AI — here’s what’s new in the last 7 days: 1 ×98 → T07-agent-zero-to-prod — Zero → Production: The Complete Multi-Agent System, End to E (31%)
 - ~To prevent this financial disaster, databases rely on ACID Properties and Concurrency Control ×94 → T17-clickhouse — ClickHouse: MergeTree, Parts, Sparse Index, Why It's Fast (38%)
@@ -792,14 +800,14 @@ from 19,420 raw clusters -> 835 real topics (377 gaps, 410 partial, 48 covered)
 - ~There are several websites where you can practice data science by applying your skills and working on real-world project ×42 → T27-observability-debug — Debugging From Traces & Logs Alone (When You Can't Attach) (31%)
 - ~🚀 Monotonic Queue in Java | Master Sliding Window Problems in O(n) A Monotonic Queue is a special double-ended queue (De ×38 → T02-p20-monotonic-stack — Monotonic Stack (39%)
 - ~The Flask lightweight web application framework has hit release 2 ×36 → T30-web-attacks — XSS, CSRF, CORS, Clickjacking, SSRF — Mechanism, Exploit, an (32%)
-- ~OpenAI introduced GPT-5 ×34 → T07-framework-matrix — Framework Matrix: LangGraph vs ADK vs OpenAI SDK vs CrewAI v (33%)
+- ~OpenAI introduced GPT-5 ×35 → T07-framework-matrix — Framework Matrix: LangGraph vs ADK vs OpenAI SDK vs CrewAI v (33%)
 - ~How to make your AI burn less money while you’re building apps ×34 → T07-langgraph-durable — LangGraph II: Checkpointers, interrupt()/HITL, Durable Resum (31%)
 - ~React JS Roadmap: 1 ×33 → T07-react-pattern-raw — ReAct Implemented Raw + Plan-Execute + Reflexion (50%)
 - ~🚀 PREFIX SUM: THE SHORTCUT EVERY CODER SHOULD LEARN ⚡ Want to answer range sum queries in O(1) instead of O(n) ×32 → T06-embeddings-choice — Embedding Models: Dimensions, Matryoshka, Multilingual, Cost (32%)
 - ~Most developers jump straight into coding ×29 → T13-technical-writing — ADRs, RFCs, Design Docs (35%)
+- ~🚨👀 Another huge week in AI ×27 → T01-profiling — py-spy, cProfile, Flamegraphs, Performance Method (37%)
 - ~I wasted 1 ×26 → T13-vibe-coding — AI-Assisted Coding: CLAUDE.md, Skills, Subagents, Spec-Drive (55%)
 - ~📌 Only NumPy Cheat Sheet You’ll Ever Need ×26 → T07-risk-taxonomy — Risk Taxonomy & Permission Resolution: read_only → financial (44%)
-- ~🚨👀 Another huge week in AI ×26 → T01-profiling — py-spy, cProfile, Flamegraphs, Performance Method (37%)
 - ~Essential Coding Resources You Need to Bookmark ⭐️ Want to learn coding but don’t know where to start ×26 → T32-text-classification — Text Classification: Naive Bayes → Linear → Fine-Tuned Trans (32%)
 - ~🧵 Threading Design Mistakes in Java ⸻ 🧩 1️⃣ Creating Threads Inside Threads Just because you can doesn’t mean you should ×25 → T28-spec-driven-dev — Spec-Driven Development: Plan → Approve → Build → Verify (32%)
 - ~Most MCP tutorials you’ll find are already out of date ×24 → T07-mcp-deep-dive — MCP Deep Dive + FastMCP Server & Client From Scratch (38%)
@@ -808,8 +816,8 @@ from 19,420 raw clusters -> 835 real topics (377 gaps, 410 partial, 48 covered)
 - ~Have been preparing for AWS ❓❓ Three playlists to lessen your work 😌 1 ×23 → T13-incidents — Incident Response, Blameless Postmortems, On-Call (34%)
 - ~Python basics become easier when you know what each part is used for ×23 → T10-resume-systems — Your 4 Flagship Systems as Formal Design Docs (34%)
 - ~Classic Vector RAG: • Split doc into chunks • Embed each chunk • Store in vector DB • Retrieve top-k via cosine similari ×23 → T06-semantic-search — Semantic Search: Lexical → Vector → Hybrid → Learned Ranking (30%)
+- ~🧠 Monotonic Stack Pattern One of the most powerful DSA patterns for coding interviews ×22 → T02-p20-monotonic-stack — Monotonic Stack (57%)
 - ~Starting Monday with hard topics ×22 → C-AZ-functions — Azure Functions: Plans, Durable Functions, Bindings, Cold St (39%)
-- ~🧠 Monotonic Stack Pattern One of the most powerful DSA patterns for coding interviews ×21 → T02-p20-monotonic-stack — Monotonic Stack (57%)
 - ~🚀 INSIDE "new Object()" One line of code ×21 → T33-js-deep — JavaScript Deep: Event Loop, Microtasks, Closures, Prototype (46%)
 - ~You don’t pick the agent pattern ×20 → T07-react-pattern-raw — ReAct Implemented Raw + Plan-Execute + Reflexion (53%)
 - ~🤖 Build Your First AI Agent in Just 30 Minutes ⏱️ Think AI agents are complicated ×20 → T07-agent-zero-to-prod — Zero → Production: The Complete Multi-Agent System, End to E (46%)
@@ -836,16 +844,16 @@ from 19,420 raw clusters -> 835 real topics (377 gaps, 410 partial, 48 covered)
 - ~This is not just a scaling problem ×12 → T14-design-communication — The 45-Minute System Design Communication Framework (55%)
 - ~🔗 Stack Using Linked List in Java | Dynamic LIFO Implementation 🚀 A Stack using Linked List is a dynamic implementation  ×12 → T02-p06-ll-reversal — In-Place Linked List Reversal (41%)
 - ~🔒 SYNCHRONIZATION IN JAVA When multiple threads access the same data, problems can occur ×12 → T11-spring-boot — Spring Boot 3: DI Internals, WebFlux, Data, Security, Spring (37%)
+- ~🚀 The Only Agentic AI Cheat Sheet You’ll Ever Need Agentic AI is revolutionizing how we build intelligent systems — from ×12 → C-AWS-lambda — Lambda Deep: Execution Model, Cold Starts, SnapStart, Concur (37%)
 - ~Save this Post for later ×11 → T22-crypto-primitives — Hashes, Merkle Trees, Digital Signatures, ECDSA — Build Them (55%)
 - ~Check this 👇🏻⚡️@thelonercodergirl Most asked SQL interview questions 🤩👊 1 ×11 → T17-mongodb — MongoDB: WiredTiger, Replica Sets, Concerns, Sharding, Race  (53%)
 - ~Most developers pick the wrong CI/CD tool ×11 → T07-mcp-deep-dive — MCP Deep Dive + FastMCP Server & Client From Scratch (44%)
 - ~What does bubble even mean ×11 → T07-langgraph-durable — LangGraph II: Checkpointers, interrupt()/HITL, Durable Resum (41%)
-- ~1️⃣ RAG vs Fine-Tuning RAG gives the model external information at runtime ×11 → T06-semantic-caching — Semantic Caching: Exact + Semantic + Prefix Layers, vCache,  (39%)
 
 ## Dropped by filter
 
-- 18369: singleton (<3 posts, not saved)
-- 107: hype phrase
+- 18364: singleton (<3 posts, not saved)
+- 110: hype phrase
 - 89: hype/meme creator
-- 33: no topic text
+- 34: no topic text
 - 2: no tokens

@@ -33,6 +33,7 @@ TRACKS = [
         "agent-memory | Agent Memory: Working, Episodic, Semantic, Procedural | 3 | memory",
         "context-engineering | Context Engineering: Budgets, Compaction, Context Editing, Subagents | 3 | memory,context",
         "multi-agent-topologies | Multi-Agent Topologies (and When NOT To) | 2.5 | architecture",
+        "selective-orchestration | Selective Multi-Agent Orchestration: Routing, Abstention, Fallbacks | 2.5 | architecture,production,critical",
         "production-agent-loops | Production Loops: Budgets, Resume, Kill Switches, Streaming | 3 | production",
         "agent-safety | Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails | 2.5 | security",
         "agent-cost-routing | Prompt Caching, Model Routing, Fallback Chains, Cost Governance | 1.5 | production,cost",
@@ -104,6 +105,7 @@ TRACKS = [
         "tech-selection | Choosing the Right System: Decision Frameworks, Scorecards, Reversible vs One-Way Doors | 2.5 | craft,critical",
         "poc-to-prod | POC → Prototype → MVP → Production: What Changes at Each Gate | 2.5 | delivery,critical",
         "case-studies | Real Case Studies: Outages, Migrations, and Architectures That Shipped | 3 | practice,critical",
+        "tail-latency-slos | Tail Latency and Percentile SLO Engineering | 2.5 | craft,observability,critical",
     ]),
     dict(id="T17", dir="17-databases", title="Databases: SQL, NoSQL, Vector", icon="🗄️", phase="A", prereqs=[], modules=[
         "storage-engines | B+Tree vs LSM-Tree: Compaction, Write/Read/Space Amplification | 2.5 | internals,critical",

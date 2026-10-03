@@ -1,17 +1,17 @@
 # Topic worklist (deduped)
 
-43235 useful posts -> **19442 unique topics** (11516 gaps, 7224 partial)
+43252 useful posts -> **19448 unique topics** (11519 gaps, 7227 partial)
 
 ## Gap topics, by frequency
 
 - **🚀Get 180% hike in Salary with Data Science job - link in bio 👨‍🎓 Subscribe to our YouTube Channel to become Ma** ×1266 — @datasciencebrain (rep: mining/posts/Cz7yiBkr1LJ/)
-- **15 Excel Formulas That Surprise 5+ Year Users 1** ×1216 — @kethakiproperties (rep: mining/posts/DcOEXEik4vt/)
+- **15 Excel Formulas That Surprise 5+ Year Users 1** ×1217 — @kethakiproperties (rep: mining/posts/DcOEXEik4vt/)
 - **✨Is freelancing the future of work** ×1069 — @entrepreneursonig (rep: mining/posts/DBHGs1ToCBp/)
 - **📌⬇️ Save and Read through here if you don’t know where to start with tech or programming** ×777 — @pythonlifetelugu (rep: mining/posts/CxhrhA8ATHE/)
 - **HR Interview Questions | Quick Guide Prepare these common HR questions to crack your interview** ×396 — @pythonlifetelugu (rep: mining/posts/DbvKoFRiTFX/)
 - **Understand these 3 things before you begin this journey** ×373 — @umerhaddii007 (rep: mining/posts/C2CvZXqtQHb/)
 - **Download The Ultimate ChatGPT Prompts Handbook (Link is in Bio) if you want Advance and done for you ChatGPT P** ×330 — @theaiguyhere (rep: mining/posts/DHvbeI9CFkh/)
-- **The Future of Humanoid Robotics just Begins** ×295 — @kethakiproperties (rep: mining/posts/C4sF0KeJjJH/)
+- **The Future of Humanoid Robotics just Begins** ×296 — @kethakiproperties (rep: mining/posts/C4sF0KeJjJH/)
 - **From Sam Altman's blog** ×285 — @theartificialintelligence (rep: mining/posts/DOTdRmnCTwg/)
 - **🚀 These 8 Machine Learning projects are running in production at Microsoft, Amazon, and American Express right** ×275 — @datasciencescoop (rep: mining/posts/DSpI4abjf8G/)
 - **On July 11, 2025, India etched its name in medical history by successfully conducting the world’s first telero** ×236 — @evolving.ai (rep: mining/posts/DMDfGNVtrFf/)
@@ -209,16 +209,16 @@
 
 - ~How do you start web development ×3093
 - ~I asked ChatGPT the most common question “How to start programming”… This was the response… Starting programmi ×1235
-- ~Comment “GUIDE” and I’ll help you make the projects that can get you hired ×720
+- ~Comment “GUIDE” and I’ll help you make the projects that can get you hired ×722
 - ~50 SQL Questions you need to cover before an interview 1 ×472
-- ~When I came to the US in 2018, I had zero ML experience ×394
+- ~When I came to the US in 2018, I had zero ML experience ×395
 - ~🚀 Learn these coding topics sincerely ×282
 - ~These are the SOLID Principles every developer must know before a low-level design interview ×236
 - ~Anthropic introduced Claude Fable 5 ×195
 - ~Top 20 HR Interview Questions & Answers (2026) 1 ×193
 - ~Have you ever conducted an A/B testing ×169
 - ~🚀 SQL for Data Analysis: The Ultimate Data Cleaning Cheat Sheet Let’s be honest — 80% of data analysis is clea ×143
-- ~Prompt engineering isn’t dead ×129
+- ~The real skill in 2027 is systems thinking ×131
 - ~🔥 STOP Picking Random Metrics ×121
 - ~1 ×119
 - ~Here are five unique fullstack project ideas: Node ×118
