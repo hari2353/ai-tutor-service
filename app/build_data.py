@@ -14,6 +14,210 @@ import re
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "app" / "data"
 
+# Curated, low-cost tools and learning sources kept separate from the interview
+# curriculum. "Free" means open source, free tier, or free content; each row
+# states the operational caveat so the catalog does not promise zero cost.
+FREE_STACK = [
+    {
+        "category": "Free books and learning",
+        "title": "Free Programming Books",
+        "repo": "EbookFoundation/free-programming-books",
+        "url": "https://github.com/EbookFoundation/free-programming-books",
+        "use": "Books and course material across programming, systems, data, and AI.",
+        "why": "Replace paid introductory books with a curated free library.",
+        "caveat": "Check each book's license and edition before redistribution.",
+    },
+    {
+        "category": "Free books and learning",
+        "title": "Free Courses",
+        "repo": "free-courses/free-courses.github.io",
+        "url": "https://github.com/free-courses/free-courses.github.io",
+        "use": "Index of free courses and learning resources.",
+        "why": "Useful starting point when a topic does not need a paid bootcamp.",
+        "caveat": "Verify the destination course, certificate price, and current availability.",
+    },
+    {
+        "category": "Free books and learning",
+        "title": "Computer Science Video Courses",
+        "repo": "Developer-Y/cs-video-courses",
+        "url": "https://github.com/Developer-Y/cs-video-courses",
+        "use": "University-style computer science video courses.",
+        "why": "Covers fundamentals without a recurring subscription.",
+        "caveat": "Links can change; use the provider's official channel when possible.",
+    },
+    {
+        "category": "Free books and learning",
+        "title": "Microsoft ML for Beginners",
+        "repo": "microsoft/ML-For-Beginners",
+        "url": "https://github.com/microsoft/ML-For-Beginners",
+        "use": "Structured machine-learning lessons, projects, and quizzes.",
+        "why": "A free Microsoft curriculum that fits the tutor's ML foundation track.",
+        "caveat": "Use it as a supplement, not a substitute for the tutor's production depth.",
+    },
+    {
+        "category": "Free books and learning",
+        "title": "Microsoft Generative AI for Beginners",
+        "repo": "microsoft/generative-ai-for-beginners",
+        "url": "https://github.com/microsoft/generative-ai-for-beginners",
+        "use": "Hands-on generative-AI lessons and examples.",
+        "why": "A free, practical bridge from fundamentals to LLM applications.",
+        "caveat": "Cloud examples may still incur provider charges; prefer local or free-tier settings.",
+    },
+    {
+        "category": "Free APIs and developer services",
+        "title": "Public APIs",
+        "repo": "public-apis/public-apis",
+        "url": "https://github.com/public-apis/public-apis",
+        "use": "Catalog of public APIs for prototypes and learning projects.",
+        "why": "Reduces the need to buy an API before validating an idea.",
+        "caveat": "Review rate limits, privacy terms, uptime, and commercial-use rules per API.",
+    },
+    {
+        "category": "Free APIs and developer services",
+        "title": "Free for Developers",
+        "repo": "ripienaar/free-for-dev",
+        "url": "https://github.com/ripienaar/free-for-dev",
+        "use": "Free tiers for hosting, databases, monitoring, storage, and developer tools.",
+        "why": "A practical map for keeping prototypes inside a zero-cloud-spend budget.",
+        "caveat": "Free tiers change; set billing alerts and never put production secrets in a demo service.",
+    },
+    {
+        "category": "Free APIs and developer services",
+        "title": "JSON Server",
+        "repo": "typicode/json-server",
+        "url": "https://github.com/typicode/json-server",
+        "use": "Instant local REST API from a JSON file.",
+        "why": "Avoids paying for a hosted mock API while building frontend exercises.",
+        "caveat": "Development-only by default; do not expose it as a production backend.",
+    },
+    {
+        "category": "Office and productivity alternatives",
+        "title": "LibreOffice",
+        "repo": "LibreOffice/core",
+        "url": "https://github.com/LibreOffice/core",
+        "use": "Open-source word processing, spreadsheets, presentations, and office documents.",
+        "why": "Microsoft Office itself is proprietary; LibreOffice is the open-source office replacement.",
+        "caveat": "Check Microsoft Office file-format compatibility for complex documents before switching fully.",
+    },
+    {
+        "category": "Office and productivity alternatives",
+        "title": "AppFlowy",
+        "repo": "AppFlowy-IO/AppFlowy",
+        "url": "https://github.com/AppFlowy-IO/AppFlowy",
+        "use": "Open-source notes, tasks, and workspace alternative to Notion.",
+        "why": "Can reduce per-user productivity-suite costs and keep data under your control.",
+        "caveat": "Self-hosting still needs storage, backups, and maintenance.",
+    },
+    {
+        "category": "Office and productivity alternatives",
+        "title": "Penpot",
+        "repo": "penpot/penpot",
+        "url": "https://github.com/penpot/penpot",
+        "use": "Open-source design and prototyping alternative to Figma.",
+        "why": "Useful for UI work without a paid design-editor subscription.",
+        "caveat": "Confirm collaboration and export needs before replacing a team-wide design workflow.",
+    },
+    {
+        "category": "Office and productivity alternatives",
+        "title": "n8n",
+        "repo": "n8n-io/n8n",
+        "url": "https://github.com/n8n-io/n8n",
+        "use": "Workflow automation across APIs, email, databases, and AI tools.",
+        "why": "Self-hosting can avoid per-task automation charges from Zapier-like services.",
+        "caveat": "Review n8n's current license and hosting terms for commercial use.",
+    },
+    {
+        "category": "Office and productivity alternatives",
+        "title": "Cal.com",
+        "repo": "calcom/cal.com",
+        "url": "https://github.com/calcom/cal.com",
+        "use": "Open scheduling platform and Calendly alternative.",
+        "why": "Free for simple personal scheduling, with self-hosting options for more control.",
+        "caveat": "Calendar integrations and managed hosting may have separate limits or costs.",
+    },
+    {
+        "category": "Office and productivity alternatives",
+        "title": "Bitwarden Server",
+        "repo": "bitwarden/server",
+        "url": "https://github.com/bitwarden/server",
+        "use": "Open-source password-manager server.",
+        "why": "The free plan can replace a paid password-manager subscription for many personal uses.",
+        "caveat": "Backups and account recovery are your responsibility when self-hosting credentials.",
+    },
+    {
+        "category": "Legal media and streaming tools",
+        "title": "Jellyfin",
+        "repo": "jellyfin/jellyfin",
+        "url": "https://github.com/jellyfin/jellyfin",
+        "use": "Self-hosted media server for legally owned or licensed media.",
+        "why": "Can replace a personal media-management subscription for your own collection.",
+        "caveat": "It does not provide free copyrighted movies or shows; use only content you are allowed to access.",
+    },
+    {
+        "category": "Legal media and streaming tools",
+        "title": "PeerTube",
+        "repo": "Chocobozzz/PeerTube",
+        "url": "https://github.com/Chocobozzz/PeerTube",
+        "use": "Federated, open-source video platform.",
+        "why": "A legal alternative for publishing and discovering community-hosted video.",
+        "caveat": "Availability depends on the instance and its content rights; this is not a piracy catalog.",
+    },
+    {
+        "category": "Legal media and streaming tools",
+        "title": "yt-dlp",
+        "repo": "yt-dlp/yt-dlp",
+        "url": "https://github.com/yt-dlp/yt-dlp",
+        "use": "Command-line audio/video downloader for sites that permit downloading.",
+        "why": "Useful for offline copies of your own media, public-domain material, and permitted downloads.",
+        "caveat": "Follow copyright law, site terms, and creator permissions; do not use it to bypass paid access.",
+    },
+    {
+        "category": "Local AI and image generation",
+        "title": "Ollama",
+        "repo": "ollama/ollama",
+        "url": "https://github.com/ollama/ollama",
+        "use": "Run supported language models locally on Windows, macOS, or Linux.",
+        "why": "Reduces recurring AI subscriptions and API bills for private experiments.",
+        "caveat": "Models need disk, RAM, and sometimes GPU memory; model licenses vary.",
+    },
+    {
+        "category": "Local AI and image generation",
+        "title": "Fooocus",
+        "repo": "lllyasviel/Fooocus",
+        "url": "https://github.com/lllyasviel/Fooocus",
+        "use": "Local image-generation workflow focused on simple prompting.",
+        "why": "The saved Instagram post identified it as a local alternative to Midjourney-style generation.",
+        "caveat": "Model and output licenses vary; an 8 GB GPU may require reduced settings.",
+    },
+    {
+        "category": "Local AI and image generation",
+        "title": "ComfyUI",
+        "repo": "Comfy-Org/ComfyUI",
+        "url": "https://github.com/comfyanonymous/ComfyUI",
+        "use": "Node-based local image and video-generation workflows.",
+        "why": "More control than hosted creative tools and useful for learning inference pipelines.",
+        "caveat": "Workflows, custom nodes, and model downloads are separate supply-chain and license decisions.",
+    },
+    {
+        "category": "Local AI and image generation",
+        "title": "IOPaint",
+        "repo": "Sanster/IOPaint",
+        "url": "https://github.com/Sanster/IOPaint",
+        "use": "Local inpainting, object removal, background removal, and image restoration.",
+        "why": "Open-source alternative to paid generative-fill and photo-editing features.",
+        "caveat": "GPU and model requirements vary; validate outputs before using them commercially.",
+    },
+    {
+        "category": "Local AI and image generation",
+        "title": "Whisper",
+        "repo": "openai/whisper",
+        "url": "https://github.com/openai/whisper",
+        "use": "Local multilingual speech recognition and transcription.",
+        "why": "Can replace recurring transcription charges for personal and permitted work.",
+        "caveat": "Review the model and data licenses and protect sensitive recordings.",
+    },
+]
+
 # ---------------------------------------------------------------------------
 # SPEC: track -> (id, title, icon, hours, phase, prereqs, [modules])
 # A module is "slug | Title | hours | tags"
@@ -135,6 +339,7 @@ TRACKS = [
         "otel-genai | OpenTelemetry GenAI Semantic Conventions + Agent Span Design | 2.5 | observability,critical",
         "obs-platforms | LangSmith / Langfuse / Phoenix / Laminar Compared | 1 | observability",
         "classic-obs | RED/USE, SLO/SLI/Error Budgets, Prometheus/Grafana, Alert Design | 2.5 | observability",
+        "prompt-regression-gates | Prompt Regression Gates: Golden Cases, Slices, Thresholds, Auto-Revert | 2.5 | eval,critical",
     ]),
     dict(id="T14", dir="14-behavioral-principal", title="Behavioral & Principal", icon="🎯", phase="A", prereqs=[], modules=[
         "star-bank | 30-Story STAR Bank Mined From Your Resume | 3 | behavioral,critical",
@@ -142,6 +347,7 @@ TRACKS = [
         "design-communication | The 45-Minute System Design Communication Framework | 1.5 | behavioral,critical",
         "company-specific | Amazon LPs, Google, Meta, Microsoft, Netflix, AI Startups | 1.5 | behavioral",
         "negotiation | Compensation Negotiation & Offer Evaluation | 1 | career",
+        "interview-debrief-loop | Interview Debrief Loop: Evidence, Gaps, Promotion, Repeat | 2 | behavioral,critical",
     ]),
     dict(id="T15", dir="15-interview-simulator", title="Interview Simulator", icon="⚔️", phase="A", prereqs=[], modules=[
         "round-coding | Boss: Coding Round (45 min, 2 problems) | 1 | boss",
@@ -153,6 +359,7 @@ TRACKS = [
         "round-full-loop | Boss: Full Onsite Loop (5 rounds) | 4 | boss,final",
         "hr-round-basics | The 50-Question HR Round: Introduction, Goals, Failure, Teamwork, Salary, Closing | 1.5 | behavioral,critical",
         "aptitude-puzzles | Placement Aptitude: Seating, Blood Relations, Direction Sense, Ranking, Ranking Tricks | 1.5 | aptitude",
+        "resume-ats-evidence | Resume ATS Evidence: Match Terms Without Inflating Claims | 2 | career,critical",
     ]),
     dict(id="T02", dir="02-dsa-21-patterns", title="DSA: 21 Patterns", icon="🧩", phase="A", prereqs=[], modules=[
         "p01-two-pointers | Two Pointers | 2 | pattern",
@@ -203,6 +410,7 @@ TRACKS = [
         "multimodal | ViT, CLIP, Whisper, VLM Architectures | 2 | internals",
         "bert-encoders | Encoder Models: BERT, Bi-Encoders vs Cross-Encoders, When an Encoder Beats an LLM | 2 | internals,critical",
         "transfer-distillation | Transfer Learning & Distillation: Feature Extraction, Full FT, Teacher-Student | 2 | training,critical",
+        "inference-cost-routing | Inference Cost Routing: Quality Tiers, Budgets, Batch, and Break-Even Math | 2.5 | inference,cost,critical",
     ]),
     dict(id="T01", dir="01-python-swe", title="Python & SWE Craft", icon="🐍", phase="B", prereqs=[], modules=[
         "data-model | CPython Data Model, Dunder, Descriptors, Metaclasses, MRO | 2.5 | language",
@@ -723,7 +931,7 @@ def build() -> dict:
 
 
 VARS = {"curriculum": "CURRICULUM", "flashcards": "FLASHCARDS",
-        "drills": "DRILLS", "problems": "PROBLEMS"}
+        "drills": "DRILLS", "problems": "PROBLEMS", "free_stack": "FREE_STACK"}
 
 
 def emit(name: str, payload: dict) -> None:
@@ -856,6 +1064,7 @@ def merge_fragments(name: str, payload: dict) -> tuple[int, int]:
 def main() -> None:
     DATA.mkdir(parents=True, exist_ok=True)
     emit("curriculum", build())
+    emit("free_stack", {"version": "1.0", "resources": FREE_STACK})
     merged = []
     for name in ("flashcards", "drills", "problems"):
         p = DATA / f"{name}.json"

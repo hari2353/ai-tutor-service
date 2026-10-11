@@ -1,6 +1,6 @@
 # Mining worklist (crawl)
 
-61418 posts · 23774 gaps · 17486 partial · 1992 covered
+61446 posts · 23779 gaps · 17495 partial · 1994 covered
 
 ## Gaps
 
@@ -4441,7 +4441,6 @@
 - [ ] 50 Important Excel Formulas Every Professional Should Know 1 — @pythonlifetelugu — mining/posts/DbAr-LDCZD5/notes.md
 - [ ] Data Analyst vs Linux Administrator – Career Comparison (2026) Data Analyst| Linux Administrator Analyzes business data| — @pythonlifetelugu — mining/posts/DbArmBOCRVP/notes.md
 - [ ] SQL Roadmap (Beginner to Advanced) Master SQL step by step to become a Data Analyst, Backend Developer, Database Enginee — @pythonlifetelugu — mining/posts/DbAqVs_CWDl/notes.md
-- [ ] 30 Desktop Shortcut Keys Every Windows User Should Know 1 — @pythonlifetelugu — mining/posts/DbApskXibXh/notes.md
 - [ ] 🚀 PythonLife – Full Stack Python Development with AI 📅 Start: 21st July 2026 🕖 Mon–Sat | 8:00–10:00 PM 📚 Course Features — @pythonlifetelugu — mining/posts/DbAkn85pgcO/notes.md
 - [ ] Highest Paying Tech Careers (2026) Explore some of the highest-paying career paths in the technology industry — @pythonlifetelugu — mining/posts/DbAM82rCQWD/notes.md
 - [ ] 🚀 PythonLife – Full Stack Python Development with AI 📅 Start: 21st July 2026 🕖 Mon–Sat | 8:00–10:00 PM 📚 Course Features — @pythonlifetelugu — mining/posts/Da-1jRwCYVJ/notes.md
@@ -8987,7 +8986,6 @@
 - [ ] Tough times create tough humans Follow @webbyvaris for more dev content — @webbyvaris — mining/posts/DLW91eHyW0F/notes.md
 - [ ] 🚨 16 Billion Passwords Leaked — @webbyvaris — mining/posts/DLKVi3_yz8w/notes.md
 - [ ] Anyway AI gonna replace us — @webbyvaris — mining/posts/DLH9R00S0TA/notes.md
-- [ ] Instagram — @webbyvaris — mining/posts/DK9UAuxyK23/notes.md
 - [ ] Never thought I’d do this… but here I am, my first time speaking publicly at WordCamp Brisbane 2025 🎤🔥 A part of me alwa — @webbyvaris — mining/posts/DK4hFZhOvgx/notes.md
 - [ ] Apple’s obsession with detail is unreal 🍏 From iPhones to MacBooks, the corners match perfectly — @webbyvaris — mining/posts/DKpAhFCSorv/notes.md
 - [ ] Launch day of the Nintendo Switch 2 — @webbyvaris — mining/posts/DKhBqLiSUvO/notes.md
@@ -18957,7 +18955,6 @@
 - [ ] Best Career Choice For Absolute Beginners… — @cloud_x_berry — mining/posts/DZsGXJlTCsh/notes.md
 - [ ] Machine Learning Algorithms Will Finally Make Sense After This- Part 2 In this video, we break down machine learning in  — @cloud_x_berry — mining/posts/DZhpRvnzFlL/notes.md
 - [ ] How about Farming — @cloud_x_berry — mining/posts/DZaRO4ozF84/notes.md
-- [ ] This Tiny Hole Protects Millions of Passengers- Do you know why — @cloud_x_berry — mining/posts/DZMnz46k02p/notes.md
 - [ ] Follow @cloud_x_berry for more info laptop market share, lenovo vs hp vs dell, apple laptop market share, asus laptop sa — @cloud_x_berry — mining/posts/DZJ512VT6_f/notes.md
 - [ ] Follow @cloud_x_berry for more info intel i3 vs i5 vs i7 vs i9, intel processor comparison, best intel cpu for programmi — @cloud_x_berry — mining/posts/DZCjSPST2L2/notes.md
 - [ ] Follow @cloud_x_berry for more info HTML, CSS, UI/UX, Javascript — @cloud_x_berry — mining/posts/DY6dMEtTgKw/notes.md
@@ -23778,6 +23775,14 @@
 - [ ] 🛠️ Addy Osmani open-sourced 25 skills that make your AI agent code like a senior — @fullstackparody — mining/posts/Ddl772hDREy/notes.md
 - [ ] Managing upward isn’t about playing office politics or kissing up — @_pani_puri__ — mining/posts/DdnonOeqaRn/notes.md
 - [ ] Did you know your iPhone comes with a powerful, built-in line of defense against theft — @artificialntellligence — mining/posts/DdkPigfHe18/notes.md
+- [ ] 📩 Comment me "AI" type karo to get the PDF covering all 20 GenAI concepts and roadmap every AI Engineer should know in 2 — @academy_thc — mining/posts/Dd8_wxLtaqF/notes.md
+- [ ] Kubernetes meets LLM inference 🚀 Google, NVIDIA, IBM, and Red Hat are all backing the same open-source project to make i — @dailydoseofds_ — mining/posts/Dd8RO1TFHo8/notes.md
+- [ ] 🚨 YouTuber PewDiePie’s quest to take on Big Tech continues — @evolving.ai — mining/posts/DeB4MOOgIu9/notes.md
+- [ ] Product company interview ki prepare avuthunnara — @kiransagar.pyy — mining/posts/Dd3PXh5E4x7/notes.md
+- [ ] All the links are pinned in the comments — @okaashish — mining/posts/DdbXMlljxqn/notes.md
+- [ ] On September 23, Stanford and NVIDIA released CLM-8B, a Contrastive Language Model — @arnitly — mining/posts/Dd2UVU_sVNH/notes.md
+- [ ] 🤖 **Generative AI Important Concepts — Must Know — @pythonlifetelugu — mining/posts/Dd3BNV9iVSq/notes.md
+- [ ] 100+ IT companies list mee daggara undali — @kiransagar.pyy — mining/posts/Dd3HDGekz2z/notes.md
 
 ## Partial
 
@@ -27729,6 +27734,7 @@
 - [ ] Top 20 High-Paying Skills to Learn in 2026 1 — @pythonlifetelugu — mining/posts/DbAqzymCb6O/notes.md
 - [ ] Top 5 Coding Projects Every Developer Should Build 1 — @pythonlifetelugu — mining/posts/DbAqlmWiegH/notes.md
 - [ ] Top 30 Linux Interview Questions 1 — @pythonlifetelugu — mining/posts/DbAp8i6CYRD/notes.md
+- [ ] 30 Desktop Shortcut Keys Every Windows User Should Know 1 — @pythonlifetelugu — mining/posts/DbApskXibXh/notes.md
 - [ ] Master the Basics of Data Analysis from beginner to advanced — @pythonlifetelugu — mining/posts/DbAo9FpCSjx/notes.md
 - [ ] Master the OSI Model and understand how network communication works — @pythonlifetelugu — mining/posts/Da_3w_FCcOY/notes.md
 - [ ] Master the Top 50 SQL Queries with step-by-step explanations and practical examples — @pythonlifetelugu — mining/posts/Da-lX__CeBs/notes.md
@@ -28981,7 +28987,6 @@
 - [ ] Data-structures and Algorithms have been easier — @gkcs__ — mining/posts/Cv497_vofXY/notes.md
 - [ ] Data structures and algorithms, simplified — @gkcs__ — mining/posts/CuuG2eFNlq8/notes.md
 - [ ] What are your thoughts on "brain drain" — @gkcs__ — mining/posts/CuSJHTSIPLl/notes.md
-- [ ] Short explanation of "Why System Design — @gkcs__ — mining/posts/CtErJjmIR5V/notes.md
 - [ ] How do you stop hackers from destroying your app — @gkcs__ — mining/posts/Cs5nWEpKRHb/notes.md
 - [ ] To build a product, the requirements of the system must be met from a technical perspective — @gkcs__ — mining/posts/CsYZWhMotfO/notes.md
 - [ ] Problems are complex when you dig into them — @gkcs__ — mining/posts/CsDoN71rZ3W/notes.md
@@ -31218,6 +31223,7 @@
 - [ ] Sleeping is just waste of time — @webbyvaris — mining/posts/DLMryxoxoxv/notes.md
 - [ ] Enough is enough — @webbyvaris — mining/posts/DLCmPmDSkey/notes.md
 - [ ] Software engineer mental health is another level — @webbyvaris — mining/posts/DK9WzFoSujr/notes.md
+- [ ] Instagram — @webbyvaris — mining/posts/DK9UAuxyK23/notes.md
 - [ ] Let’s call this “Monday problems” 🤗 Follow @webbyvaris for more coding content — @webbyvaris — mining/posts/DK1tJpISOXv/notes.md
 - [ ] It’s all about growth — @webbyvaris — mining/posts/DKzYFAuyGiH/notes.md
 - [ ] How AI models like ChatGPT get access to your website content — @webbyvaris — mining/posts/DKuAPFBSZt_/notes.md
@@ -38223,6 +38229,7 @@
 - [ ] What’s your Thoughts — @cloud_x_berry — mining/posts/DZScR0sTsKg/notes.md
 - [ ] If Python disappeared tomorrow, what language would replace it — @cloud_x_berry — mining/posts/DZRWCVuzGAc/notes.md
 - [ ] IS Facebook is still the king of Social Media — @cloud_x_berry — mining/posts/DZOz2hBzHlA/notes.md
+- [ ] This Tiny Hole Protects Millions of Passengers- Do you know why — @cloud_x_berry — mining/posts/DZMnz46k02p/notes.md
 - [ ] Follow @cloud_x_berry for more info — @cloud_x_berry — mining/posts/DZAZuOpzUJ1/notes.md
 - [ ] Follow @cloud_x_berry for more info — @cloud_x_berry — mining/posts/DY_TgXcTbl2/notes.md
 - [ ] Follow @cloud_x_berry for more info — @cloud_x_berry — mining/posts/DYztMGYT103/notes.md
@@ -41267,3 +41274,10 @@
 - [ ] A Google team has published what may be the strongest claim yet in autonomous AI research: a multi-agent system that tak — @theartificialintelligens — mining/posts/Ddf-L-Xgfz6/notes.md
 - [ ] 🤖 **AI Career Roadmap Notes — Quick Guide — @pythonlifetelugu — mining/posts/Dd01aKXCSfB/notes.md
 - [ ] 🧠 This MCP server cuts your AI agent’s token usage by 99% on your codebase — @fullstackparody — mining/posts/Ddq_d1bDV_Z/notes.md
+- [ ] 🔥 **CI/CD Simple Notes — Easy Ga Learn Avvandi — @pythonlifetelugu — mining/posts/DeRFTVKCZeK/notes.md
+- [ ] Quick fix first: the essay came out in March 2026, not “just now — @startup.snack — mining/posts/DePjNgBjLkE/notes.md
+- [ ] Give Claude a real memory of your life first, your work, goals, what you’re stuck on — @shubhamnalingupta — mining/posts/Db4pqw6zytW/notes.md
+- [ ] 🔑 452 free LLM APIs, one directory, zero credit cards — @fullstackparody — mining/posts/DeB_xCxDT_F/notes.md
+- [ ] Comment ‘REPO’ and I’ll DM a full article breaking down each GitHub and how to use them — @buildwithneej — mining/posts/Ddt16ilkRGB/notes.md
+- [ ] MUST-KNOW AI Inference Concepts For Interviews — @vishakha.sadhwani — mining/posts/Dd4MBuxkxE6/notes.md
+- [ ] Claude Skills had a massive September — @kumail.si — mining/posts/Dd_wlJNqYVv/notes.md

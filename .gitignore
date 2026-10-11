@@ -8,6 +8,9 @@ target/
 # operational data from the job-hunter agent, not curriculum: a live queue of
 # real listings being targeted. Stays on disk, stays out of history.
 interview_prep_queue.json
+# Local job-hunt handoffs and imported company prep are operational evidence.
+tutor_manifest.json
+mocks/company/inbox/
 
 # OneDrive / Windows shell droppings
 desktop.ini

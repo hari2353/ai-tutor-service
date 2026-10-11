@@ -1594,7 +1594,7 @@
       "icon": "\ud83d\udd2c",
       "phase": "A",
       "prereqs": [],
-      "hours": 14.0,
+      "hours": 16.5,
       "modules": [
         {
           "id": "T08-eval-harness",
@@ -1681,6 +1681,18 @@
           ],
           "order": 6,
           "status": "todo"
+        },
+        {
+          "id": "T08-prompt-regression-gates",
+          "slug": "prompt-regression-gates",
+          "title": "Prompt Regression Gates: Golden Cases, Slices, Thresholds, Auto-Revert",
+          "hours": 2.5,
+          "tags": [
+            "eval",
+            "critical"
+          ],
+          "order": 7,
+          "status": "todo"
         }
       ]
     },
@@ -1692,7 +1704,7 @@
       "icon": "\ud83c\udfaf",
       "phase": "A",
       "prereqs": [],
-      "hours": 9.0,
+      "hours": 11.0,
       "modules": [
         {
           "id": "T14-star-bank",
@@ -1759,6 +1771,18 @@
           ],
           "order": 4,
           "status": "todo"
+        },
+        {
+          "id": "T14-interview-debrief-loop",
+          "slug": "interview-debrief-loop",
+          "title": "Interview Debrief Loop: Evidence, Gaps, Promotion, Repeat",
+          "hours": 2.0,
+          "tags": [
+            "behavioral",
+            "critical"
+          ],
+          "order": 5,
+          "status": "todo"
         }
       ]
     },
@@ -1770,7 +1794,7 @@
       "icon": "\u2694\ufe0f",
       "phase": "A",
       "prereqs": [],
-      "hours": 13.0,
+      "hours": 15.0,
       "modules": [
         {
           "id": "T15-round-coding",
@@ -1871,6 +1895,18 @@
             "aptitude"
           ],
           "order": 8,
+          "status": "todo"
+        },
+        {
+          "id": "T15-resume-ats-evidence",
+          "slug": "resume-ats-evidence",
+          "title": "Resume ATS Evidence: Match Terms Without Inflating Claims",
+          "hours": 2.0,
+          "tags": [
+            "career",
+            "critical"
+          ],
+          "order": 9,
           "status": "todo"
         }
       ]
@@ -2227,7 +2263,7 @@
       "icon": "\ud83e\udde0",
       "phase": "A",
       "prereqs": [],
-      "hours": 38.0,
+      "hours": 40.5,
       "modules": [
         {
           "id": "T05-autoregression",
@@ -2416,6 +2452,19 @@
             "critical"
           ],
           "order": 15,
+          "status": "todo"
+        },
+        {
+          "id": "T05-inference-cost-routing",
+          "slug": "inference-cost-routing",
+          "title": "Inference Cost Routing: Quality Tiers, Budgets, Batch, and Break-Even Math",
+          "hours": 2.5,
+          "tags": [
+            "inference",
+            "cost",
+            "critical"
+          ],
+          "order": 16,
           "status": "todo"
         }
       ]
@@ -6242,7 +6291,7 @@
   ],
   "totals": {
     "tracks": 36,
-    "modules": 465,
-    "hours": 1073.5
+    "modules": 469,
+    "hours": 1082.5
   }
 }

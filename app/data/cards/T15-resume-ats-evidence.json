@@ -1,0 +1,12 @@
+{"flashcards":[
+{"id":"T15-resume-ats-evidence-c1","topic":"Resume ATS Evidence","q":"What is evidence matching?","a":"Mapping a JD capability to a truthful claim with mechanism, scale/result, ownership, and tradeoff proof.","module":"T15-resume-ats-evidence"},
+{"id":"T15-resume-ats-evidence-c2","topic":"Resume ATS Evidence","q":"Keyword match versus evidence match?","a":"Keyword match finds text; evidence match links the term to work you can explain and defend.","module":"T15-resume-ats-evidence"},
+{"id":"T15-resume-ats-evidence-c3","topic":"Resume ATS Evidence","q":"What proof dimensions should a strong bullet cover?","a":"Mechanism, scale, result, ownership, and tradeoff.","module":"T15-resume-ats-evidence"},
+{"id":"T15-resume-ats-evidence-c4","topic":"Resume ATS Evidence","q":"What are the workflow score weights?","a":"0.4 term, 0.3 mechanism, 0.2 result, and 0.1 ownership; lab policy, not ATS law.","module":"T15-resume-ats-evidence"},
+{"id":"T15-resume-ats-evidence-c5","topic":"Resume ATS Evidence","q":"What do resume numbers require?","a":"Metric definition, baseline, comparison, time window, and denominator.","module":"T15-resume-ats-evidence"},
+{"id":"T15-resume-ats-evidence-c6","topic":"Resume ATS Evidence","q":"How should team exposure be represented?","a":"Separate wrote, designed, reviewed, consumed, and delegated; exposure is not implementation ownership.","module":"T15-resume-ats-evidence"},
+{"id":"T15-resume-ats-evidence-c7","topic":"Resume ATS Evidence","q":"What should a parser return besides a score?","a":"Sections, source spans, normalized terms, phrase matches, confidence, provenance, and version.","module":"T15-resume-ats-evidence"},
+{"id":"T15-resume-ats-evidence-c8","topic":"Resume ATS Evidence","q":"How do you handle a missing JD requirement?","a":"Classify absent, adjacent, or unverified and create a learning/confirmation action without implying experience.","module":"T15-resume-ats-evidence"},
+{"id":"T15-resume-ats-evidence-c9","topic":"Resume ATS Evidence","q":"What is the evidence ledger for?","a":"Generating role variants consistently and preventing metric, ownership, or technology contradictions.","module":"T15-resume-ats-evidence"},
+{"id":"T15-resume-ats-evidence-c10","topic":"Resume ATS Evidence","q":"What do job-prep packs prove?","a":"Market demand signals and likely topics, not that the candidate personally has the listed experience.","module":"T15-resume-ats-evidence"}
+]}

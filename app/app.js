@@ -9,6 +9,7 @@ const C   = window.CURRICULUM  || {tracks:[], levels:[], badges:[], xp_table:{}}
 const FC  = (window.FLASHCARDS || {}).flashcards || [];
 const DR  = (window.DRILLS     || {}).drills     || [];
 const PR  = (window.PROBLEMS   || {}).problems   || [];
+const FS  = (window.FREE_STACK || {}).resources || [];
 const KEY = "ai-tutor-state-v2";
 
 /* ---------------- state ---------------- */
@@ -484,6 +485,36 @@ V.badges = () => {
       g.onclick = () => grantBadge(b.id); c.appendChild(g); }
     wrap.appendChild(c);
   });
+  return wrap;
+};
+
+V["free-stack"] = () => {
+  const wrap = el("div", "grid");
+  const intro = el("div", "card hi");
+  intro.innerHTML = `<h2>◆ FREE STACK // LOWER THE BILL</h2>
+    <p class="muted">Curated from your saved Instagram posts and official repository links.
+    Use the labels honestly: open source is not automatically free to host, and free media
+    tools do not grant rights to copyrighted content.</p>`;
+  wrap.appendChild(intro);
+
+  const categories = [...new Set(FS.map(r => r.category))];
+  for(const category of categories){
+    const section = el("div", "free-section");
+    section.innerHTML = `<div class="row"><h2>${esc(category)}</h2>
+      <span class="muted">${FS.filter(r => r.category === category).length} resources</span></div>`;
+    const grid = el("div", "grid g2");
+    FS.filter(r => r.category === category).forEach(r => {
+      const c = el("article", "card");
+      c.innerHTML = `<div class="row"><h3>${esc(r.title)}</h3><span class="tag">${esc(r.repo)}</span></div>
+        <p>${esc(r.use)}</p>
+        <p class="muted"><b>Why:</b> ${esc(r.why)}</p>
+        <p class="dimmer"><b>Caveat:</b> ${esc(r.caveat)}</p>
+        <a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">open repository ↗</a>`;
+      grid.appendChild(c);
+    });
+    section.appendChild(grid); wrap.appendChild(section);
+  }
+  if(!FS.length) wrap.appendChild(el("div", "empty", "No free-stack resources generated yet."));
   return wrap;
 };
 

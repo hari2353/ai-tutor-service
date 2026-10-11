@@ -50,6 +50,13 @@ powershell -ExecutionPolicy Bypass -File skills\install.ps1
 
 The last two close the loop: prep against a real JD → interview → debrief → the plan updates itself from real evidence. Any topic asked in two or more interviews gets auto-promoted into the sprint.
 
+The job-hunt service can hand its generated prep packs into this repository
+without changing curriculum automatically. Set `AI_TUTOR_ROOT=F:\\ai-tutor-service`
+in `F:\\job-hunt-ai\\.env`; each scheduled job-hunt run writes a local
+`interview_prep\\tutor_manifest.json` and imports records into
+`mocks\\company\\inbox\\`. Review that evidence, then use `/tutor-company` or
+`/tutor-debrief` to make deliberate curriculum changes.
+
 ---
 
 ## Layout
@@ -61,7 +68,7 @@ CONTENT-STATUS.md  auto-generated burn-down (the honest number)
 LEARNING-PATH.md   prerequisite-ordered reading path (auto-generated)
 skills/          the 12 /tutor-* skills (source of truth) + install.ps1
 app/             the gamified tutor (index.html + engine + generated data)
-  build_data.py  TRACKS spec -> .json/.js + CONTENT-STATUS.md
+  build_data.py  TRACKS + Free Stack spec -> .json/.js + CONTENT-STATUS.md
   tests/run.ps1  full suite on Windows (run.sh for bash)
 curriculum/      theory — deep dives, one .md per concept, 36 tracks incl. clouds
 clouds/          AWS · Azure · GCP service atlases + changelogs
@@ -124,6 +131,13 @@ then run:
 ```bash
 python app/build_data.py
 ```
+
+The app's **Free Stack** tab is a separate, read-only catalog of free books,
+free APIs, free tiers, open-source Office/productivity replacements, legal
+self-hosted media tools, and local AI/image-generation tools mined from the
+saved Instagram corpus. It deliberately records a caveat for every entry:
+free software may still need hosting, storage, GPU time, or license review, and
+media tools do not grant rights to copyrighted content.
 
 That regenerates both `.json` (source of truth) and `.js` (what the app loads from `file://`). Flashcards/drills/problems are written as per-module fragments under `app/data/{cards,drillsets,problemsets}/` and merged by id — fragments are validated at merge time, so a malformed row fails loudly instead of rendering blank in the app. **The app will not see new content until this runs.** Or just say `/tutor-add` and Claude does it.
 

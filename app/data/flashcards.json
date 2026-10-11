@@ -40460,6 +40460,286 @@
       "q": "How do you investigate a deployment-linked tail regression?",
       "a": "Compare canary/control and correlate version-, route-, region-, dependency-, and trace-linked tail data with queue depth, saturation, retries, and GC. A global p99 proves a symptom, not its cause.",
       "module": "T10-tail-latency-slos"
+    },
+    {
+      "id": "T05-inference-cost-routing-c1",
+      "topic": "Inference Cost Routing",
+      "q": "What dimensions should an inference router consider?",
+      "a": "Capability, risk, latency, tenant/data policy, token budget, quality evidence, and cost.",
+      "module": "T05-inference-cost-routing"
+    },
+    {
+      "id": "T05-inference-cost-routing-c2",
+      "topic": "Inference Cost Routing",
+      "q": "What is the self-hosted cost per million tokens formula?",
+      "a": "GPU dollars/hour divided by tokens/second times 3600, multiplied by 1,000,000, then adjusted for idle and operations.",
+      "module": "T05-inference-cost-routing"
+    },
+    {
+      "id": "T05-inference-cost-routing-c3",
+      "topic": "Inference Cost Routing",
+      "q": "Why measure cost per successful task?",
+      "a": "Retries, repairs, cache misses, review, and failed outputs can make cheap tokens expensive per successful outcome.",
+      "module": "T05-inference-cost-routing"
+    },
+    {
+      "id": "T05-inference-cost-routing-c4",
+      "topic": "Inference Cost Routing",
+      "q": "When is batch inference appropriate?",
+      "a": "For large independent work where delay is acceptable and asynchronous object-storage results suffice.",
+      "module": "T05-inference-cost-routing"
+    },
+    {
+      "id": "T05-inference-cost-routing-c5",
+      "topic": "Inference Cost Routing",
+      "q": "What Bedrock batch limitations matter for agents?",
+      "a": "AWS documents that Bedrock batch does not support tool calling or structured output via response_format.",
+      "module": "T05-inference-cost-routing"
+    },
+    {
+      "id": "T05-inference-cost-routing-c6",
+      "topic": "Inference Cost Routing",
+      "q": "How do you bound a fallback chain?",
+      "a": "Cap candidates, attempts, dollars, and wall-clock time; stop on permanent or policy errors.",
+      "module": "T05-inference-cost-routing"
+    },
+    {
+      "id": "T05-inference-cost-routing-c7",
+      "topic": "Inference Cost Routing",
+      "q": "Why can more batching increase cost per task?",
+      "a": "Past KV-cache or bandwidth capacity it can cause preemption, recomputation, queueing, and SLO violations.",
+      "module": "T05-inference-cost-routing"
+    },
+    {
+      "id": "T05-inference-cost-routing-c8",
+      "topic": "Inference Cost Routing",
+      "q": "What must failover never override?",
+      "a": "Authorization, data residency, risk classification, and approved-provider policy.",
+      "module": "T05-inference-cost-routing"
+    },
+    {
+      "id": "T05-inference-cost-routing-c9",
+      "topic": "Inference Cost Routing",
+      "q": "What metrics evaluate a router?",
+      "a": "Route accuracy, abstention precision, success, cost per success, p50/p95/p99 latency, fallback, tokens, and cache hits.",
+      "module": "T05-inference-cost-routing"
+    },
+    {
+      "id": "T05-inference-cost-routing-c10",
+      "topic": "Inference Cost Routing",
+      "q": "What is the outer spend bulkhead?",
+      "a": "Hard per-request and per-tenant attempt and cost budgets outside provider retry wrappers.",
+      "module": "T05-inference-cost-routing"
+    },
+    {
+      "id": "T08-prompt-regression-gates-c1",
+      "topic": "Prompt Regression Gates",
+      "q": "What are the five parts of a prompt regression gate?",
+      "a": "Versioned cases, runner, scorers, report, and release predicate over aggregate and slice results.",
+      "module": "T08-prompt-regression-gates"
+    },
+    {
+      "id": "T08-prompt-regression-gates-c2",
+      "topic": "Prompt Regression Gates",
+      "q": "What three versions accompany an eval score?",
+      "a": "Dataset version, prompt version, and model/config version.",
+      "module": "T08-prompt-regression-gates"
+    },
+    {
+      "id": "T08-prompt-regression-gates-c3",
+      "topic": "Prompt Regression Gates",
+      "q": "When should a scorer be deterministic?",
+      "a": "For JSON validity, required fields, IDs, regexes, and tool traces.",
+      "module": "T08-prompt-regression-gates"
+    },
+    {
+      "id": "T08-prompt-regression-gates-c4",
+      "topic": "Prompt Regression Gates",
+      "q": "Why gate per slice as well as overall?",
+      "a": "A large aggregate can hide a small but critical locale or safety slice regressing badly.",
+      "module": "T08-prompt-regression-gates"
+    },
+    {
+      "id": "T08-prompt-regression-gates-c5",
+      "topic": "Prompt Regression Gates",
+      "q": "What is a rough sample target near an 80% pass rate?",
+      "a": "About 250 cases per slice for roughly a 5-point margin at 95% confidence; 20 is smoke coverage.",
+      "module": "T08-prompt-regression-gates"
+    },
+    {
+      "id": "T08-prompt-regression-gates-c6",
+      "topic": "Prompt Regression Gates",
+      "q": "What is a held-out eval slice?",
+      "a": "Cases not exposed during active prompt tuning, used to estimate generalization.",
+      "module": "T08-prompt-regression-gates"
+    },
+    {
+      "id": "T08-prompt-regression-gates-c7",
+      "topic": "Prompt Regression Gates",
+      "q": "Why separate provider errors from quality failures?",
+      "a": "An outage is not evidence that the prompt produced a bad answer; mixing them creates false regressions.",
+      "module": "T08-prompt-regression-gates"
+    },
+    {
+      "id": "T08-prompt-regression-gates-c8",
+      "topic": "Prompt Regression Gates",
+      "q": "What does auto-revert need besides a threshold?",
+      "a": "Pinned baseline, preserved failed report, capped rollback attempts, and human alerting.",
+      "module": "T08-prompt-regression-gates"
+    },
+    {
+      "id": "T08-prompt-regression-gates-c9",
+      "topic": "Prompt Regression Gates",
+      "q": "Why can a gate flake?",
+      "a": "The threshold may be tighter than sampling noise; add headroom or increase sample size.",
+      "module": "T08-prompt-regression-gates"
+    },
+    {
+      "id": "T08-prompt-regression-gates-c10",
+      "topic": "Prompt Regression Gates",
+      "q": "How should a golden set be refreshed?",
+      "a": "Add incident replays and new-feature slices, sample current traffic, and refresh quarterly at minimum.",
+      "module": "T08-prompt-regression-gates"
+    },
+    {
+      "id": "T14-interview-debrief-loop-c1",
+      "topic": "Interview Debrief Loop",
+      "q": "What should a debrief capture?",
+      "a": "Exact question, pushback, answer, round, company/date, diagnosis, evidence gap, topic, and next action.",
+      "module": "T14-interview-debrief-loop"
+    },
+    {
+      "id": "T14-interview-debrief-loop-c2",
+      "topic": "Interview Debrief Loop",
+      "q": "What are the four miss types?",
+      "a": "Knowledge, structure, evidence, and retrieval/nerves.",
+      "module": "T14-interview-debrief-loop"
+    },
+    {
+      "id": "T14-interview-debrief-loop-c3",
+      "topic": "Interview Debrief Loop",
+      "q": "Why preserve pushback?",
+      "a": "It exposes the hidden requirement the answer failed to satisfy, such as ownership, denominator, mechanism, or tradeoff.",
+      "module": "T14-interview-debrief-loop"
+    },
+    {
+      "id": "T14-interview-debrief-loop-c4",
+      "topic": "Interview Debrief Loop",
+      "q": "What is the smallest fix for one miss?",
+      "a": "A targeted card, timed drill, evidence-confirmation task, or story edit, not automatically a new module.",
+      "module": "T14-interview-debrief-loop"
+    },
+    {
+      "id": "T14-interview-debrief-loop-c5",
+      "topic": "Interview Debrief Loop",
+      "q": "When should a topic be promoted?",
+      "a": "One miss creates an artifact; the same concept in two interviews becomes a priority; repeated story failure triggers rewrite work.",
+      "module": "T14-interview-debrief-loop"
+    },
+    {
+      "id": "T14-interview-debrief-loop-c6",
+      "topic": "Interview Debrief Loop",
+      "q": "What is a measurable next action?",
+      "a": "Record a 90-second answer with a baseline and rejected alternative, then grade it against anchors.",
+      "module": "T14-interview-debrief-loop"
+    },
+    {
+      "id": "T14-interview-debrief-loop-c7",
+      "topic": "Interview Debrief Loop",
+      "q": "How do you distinguish nerves from knowledge?",
+      "a": "Compare untimed written, timed spoken, and pressure-drill performance.",
+      "module": "T14-interview-debrief-loop"
+    },
+    {
+      "id": "T14-interview-debrief-loop-c8",
+      "topic": "Interview Debrief Loop",
+      "q": "How should generated prep packs be treated?",
+      "a": "As demand evidence for likely topics, not proof of personal experience or verified external facts.",
+      "module": "T14-interview-debrief-loop"
+    },
+    {
+      "id": "T14-interview-debrief-loop-c9",
+      "topic": "Interview Debrief Loop",
+      "q": "Why keep missing metrics as [CONFIRM]?",
+      "a": "A plausible denominator cannot be inferred from a headline; inventing it fails under follow-up.",
+      "module": "T14-interview-debrief-loop"
+    },
+    {
+      "id": "T14-interview-debrief-loop-c10",
+      "topic": "Interview Debrief Loop",
+      "q": "What completes the loop?",
+      "a": "A later timed drill or real interview tests the same follow-up and provides new evidence.",
+      "module": "T14-interview-debrief-loop"
+    },
+    {
+      "id": "T15-resume-ats-evidence-c1",
+      "topic": "Resume ATS Evidence",
+      "q": "What is evidence matching?",
+      "a": "Mapping a JD capability to a truthful claim with mechanism, scale/result, ownership, and tradeoff proof.",
+      "module": "T15-resume-ats-evidence"
+    },
+    {
+      "id": "T15-resume-ats-evidence-c2",
+      "topic": "Resume ATS Evidence",
+      "q": "Keyword match versus evidence match?",
+      "a": "Keyword match finds text; evidence match links the term to work you can explain and defend.",
+      "module": "T15-resume-ats-evidence"
+    },
+    {
+      "id": "T15-resume-ats-evidence-c3",
+      "topic": "Resume ATS Evidence",
+      "q": "What proof dimensions should a strong bullet cover?",
+      "a": "Mechanism, scale, result, ownership, and tradeoff.",
+      "module": "T15-resume-ats-evidence"
+    },
+    {
+      "id": "T15-resume-ats-evidence-c4",
+      "topic": "Resume ATS Evidence",
+      "q": "What are the workflow score weights?",
+      "a": "0.4 term, 0.3 mechanism, 0.2 result, and 0.1 ownership; lab policy, not ATS law.",
+      "module": "T15-resume-ats-evidence"
+    },
+    {
+      "id": "T15-resume-ats-evidence-c5",
+      "topic": "Resume ATS Evidence",
+      "q": "What do resume numbers require?",
+      "a": "Metric definition, baseline, comparison, time window, and denominator.",
+      "module": "T15-resume-ats-evidence"
+    },
+    {
+      "id": "T15-resume-ats-evidence-c6",
+      "topic": "Resume ATS Evidence",
+      "q": "How should team exposure be represented?",
+      "a": "Separate wrote, designed, reviewed, consumed, and delegated; exposure is not implementation ownership.",
+      "module": "T15-resume-ats-evidence"
+    },
+    {
+      "id": "T15-resume-ats-evidence-c7",
+      "topic": "Resume ATS Evidence",
+      "q": "What should a parser return besides a score?",
+      "a": "Sections, source spans, normalized terms, phrase matches, confidence, provenance, and version.",
+      "module": "T15-resume-ats-evidence"
+    },
+    {
+      "id": "T15-resume-ats-evidence-c8",
+      "topic": "Resume ATS Evidence",
+      "q": "How do you handle a missing JD requirement?",
+      "a": "Classify absent, adjacent, or unverified and create a learning/confirmation action without implying experience.",
+      "module": "T15-resume-ats-evidence"
+    },
+    {
+      "id": "T15-resume-ats-evidence-c9",
+      "topic": "Resume ATS Evidence",
+      "q": "What is the evidence ledger for?",
+      "a": "Generating role variants consistently and preventing metric, ownership, or technology contradictions.",
+      "module": "T15-resume-ats-evidence"
+    },
+    {
+      "id": "T15-resume-ats-evidence-c10",
+      "topic": "Resume ATS Evidence",
+      "q": "What do job-prep packs prove?",
+      "a": "Market demand signals and likely topics, not that the candidate personally has the listed experience.",
+      "module": "T15-resume-ats-evidence"
     }
   ]
 }

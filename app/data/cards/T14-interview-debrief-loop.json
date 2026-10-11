@@ -1,0 +1,12 @@
+{"flashcards":[
+{"id":"T14-interview-debrief-loop-c1","topic":"Interview Debrief Loop","q":"What should a debrief capture?","a":"Exact question, pushback, answer, round, company/date, diagnosis, evidence gap, topic, and next action.","module":"T14-interview-debrief-loop"},
+{"id":"T14-interview-debrief-loop-c2","topic":"Interview Debrief Loop","q":"What are the four miss types?","a":"Knowledge, structure, evidence, and retrieval/nerves.","module":"T14-interview-debrief-loop"},
+{"id":"T14-interview-debrief-loop-c3","topic":"Interview Debrief Loop","q":"Why preserve pushback?","a":"It exposes the hidden requirement the answer failed to satisfy, such as ownership, denominator, mechanism, or tradeoff.","module":"T14-interview-debrief-loop"},
+{"id":"T14-interview-debrief-loop-c4","topic":"Interview Debrief Loop","q":"What is the smallest fix for one miss?","a":"A targeted card, timed drill, evidence-confirmation task, or story edit, not automatically a new module.","module":"T14-interview-debrief-loop"},
+{"id":"T14-interview-debrief-loop-c5","topic":"Interview Debrief Loop","q":"When should a topic be promoted?","a":"One miss creates an artifact; the same concept in two interviews becomes a priority; repeated story failure triggers rewrite work.","module":"T14-interview-debrief-loop"},
+{"id":"T14-interview-debrief-loop-c6","topic":"Interview Debrief Loop","q":"What is a measurable next action?","a":"Record a 90-second answer with a baseline and rejected alternative, then grade it against anchors.","module":"T14-interview-debrief-loop"},
+{"id":"T14-interview-debrief-loop-c7","topic":"Interview Debrief Loop","q":"How do you distinguish nerves from knowledge?","a":"Compare untimed written, timed spoken, and pressure-drill performance.","module":"T14-interview-debrief-loop"},
+{"id":"T14-interview-debrief-loop-c8","topic":"Interview Debrief Loop","q":"How should generated prep packs be treated?","a":"As demand evidence for likely topics, not proof of personal experience or verified external facts.","module":"T14-interview-debrief-loop"},
+{"id":"T14-interview-debrief-loop-c9","topic":"Interview Debrief Loop","q":"Why keep missing metrics as [CONFIRM]?","a":"A plausible denominator cannot be inferred from a headline; inventing it fails under follow-up.","module":"T14-interview-debrief-loop"},
+{"id":"T14-interview-debrief-loop-c10","topic":"Interview Debrief Loop","q":"What completes the loop?","a":"A later timed drill or real interview tests the same follow-up and provides new evidence.","module":"T14-interview-debrief-loop"}
+]}

@@ -1,0 +1,12 @@
+{"flashcards":[
+{"id":"T08-prompt-regression-gates-c1","topic":"Prompt Regression Gates","q":"What are the five parts of a prompt regression gate?","a":"Versioned cases, runner, scorers, report, and release predicate over aggregate and slice results.","module":"T08-prompt-regression-gates"},
+{"id":"T08-prompt-regression-gates-c2","topic":"Prompt Regression Gates","q":"What three versions accompany an eval score?","a":"Dataset version, prompt version, and model/config version.","module":"T08-prompt-regression-gates"},
+{"id":"T08-prompt-regression-gates-c3","topic":"Prompt Regression Gates","q":"When should a scorer be deterministic?","a":"For JSON validity, required fields, IDs, regexes, and tool traces.","module":"T08-prompt-regression-gates"},
+{"id":"T08-prompt-regression-gates-c4","topic":"Prompt Regression Gates","q":"Why gate per slice as well as overall?","a":"A large aggregate can hide a small but critical locale or safety slice regressing badly.","module":"T08-prompt-regression-gates"},
+{"id":"T08-prompt-regression-gates-c5","topic":"Prompt Regression Gates","q":"What is a rough sample target near an 80% pass rate?","a":"About 250 cases per slice for roughly a 5-point margin at 95% confidence; 20 is smoke coverage.","module":"T08-prompt-regression-gates"},
+{"id":"T08-prompt-regression-gates-c6","topic":"Prompt Regression Gates","q":"What is a held-out eval slice?","a":"Cases not exposed during active prompt tuning, used to estimate generalization.","module":"T08-prompt-regression-gates"},
+{"id":"T08-prompt-regression-gates-c7","topic":"Prompt Regression Gates","q":"Why separate provider errors from quality failures?","a":"An outage is not evidence that the prompt produced a bad answer; mixing them creates false regressions.","module":"T08-prompt-regression-gates"},
+{"id":"T08-prompt-regression-gates-c8","topic":"Prompt Regression Gates","q":"What does auto-revert need besides a threshold?","a":"Pinned baseline, preserved failed report, capped rollback attempts, and human alerting.","module":"T08-prompt-regression-gates"},
+{"id":"T08-prompt-regression-gates-c9","topic":"Prompt Regression Gates","q":"Why can a gate flake?","a":"The threshold may be tighter than sampling noise; add headroom or increase sample size.","module":"T08-prompt-regression-gates"},
+{"id":"T08-prompt-regression-gates-c10","topic":"Prompt Regression Gates","q":"How should a golden set be refreshed?","a":"Add incident replays and new-feature slices, sample current traffic, and refresh quarterly at minimum.","module":"T08-prompt-regression-gates"}
+]}

@@ -33311,6 +33311,230 @@
       "q": "A latency SLO is repeatedly burned after adding retries. What is the likely mechanism?",
       "a": "Retries amplified dependency work and queueing, increasing the tail. Propagate deadlines, cap retries with jitter and a fleet budget, and add bulkheads or load shedding.",
       "difficulty": "staff"
+    },
+    {
+      "id": "T05-inference-cost-routing-d1",
+      "module": "T05-inference-cost-routing",
+      "q": "Route a strict JSON tool-calling request when the cheapest provider only supports free-form batch output.",
+      "a": "Do not use that batch path; choose a compatible online provider or abstain. Contract compatibility beats price.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T05-inference-cost-routing-d2",
+      "module": "T05-inference-cost-routing",
+      "q": "Compute cost per million tokens for $2.50/hour and 5,000 tokens/second.",
+      "a": "2.50 / (5000 * 3600) * 1,000,000, approximately $0.14 per million tokens before other costs.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T05-inference-cost-routing-d3",
+      "module": "T05-inference-cost-routing",
+      "q": "Why is a local per-pod retry budget insufficient across 500 pods?",
+      "a": "Each pod can stay below its local limit while aggregate retries multiply across the fleet; use shared quota/gateway accounting or conservative limits.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T05-inference-cost-routing-d4",
+      "module": "T05-inference-cost-routing",
+      "q": "A cheaper model lowers token cost 40% but doubles repair calls. What do you measure?",
+      "a": "Cost per successful task, quality by slice, repair count, latency, and downstream human correction, not token price alone.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T05-inference-cost-routing-d5",
+      "module": "T05-inference-cost-routing",
+      "q": "Design a route for a high-risk destructive action during the primary provider outage.",
+      "a": "Use an allowlisted compatible model with structured validation and human approval, or abstain; never downgrade policy for availability.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T05-inference-cost-routing-d6",
+      "module": "T05-inference-cost-routing",
+      "q": "What is the difference between routing and failover?",
+      "a": "Routing selects among healthy candidates by capability/economics; failover preserves policy when a chosen dependency fails.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T05-inference-cost-routing-d7",
+      "module": "T05-inference-cost-routing",
+      "q": "Why might self-hosting lose for spiky low-volume traffic?",
+      "a": "Idle GPU capacity, cold starts, operations, and model upgrade ownership can exceed API spend.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T05-inference-cost-routing-d8",
+      "module": "T05-inference-cost-routing",
+      "q": "What is the first kill switch you add to a new router?",
+      "a": "A hard per-request and per-tenant spend/attempt budget outside retries, with an alert when it fires.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T08-prompt-regression-gates-d1",
+      "module": "T08-prompt-regression-gates",
+      "q": "Design a gate that catches an 8-point regression in a German safety slice while overall quality improves.",
+      "a": "Use a mandatory German safety slice threshold and max-drop rule in addition to the aggregate threshold; fail the candidate.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T08-prompt-regression-gates-d2",
+      "module": "T08-prompt-regression-gates",
+      "q": "Classify JSON validity, groundedness, and tone as deterministic or judge-scored.",
+      "a": "JSON validity is deterministic; groundedness and tone are judge-scored only if calibrated against human labels.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T08-prompt-regression-gates-d3",
+      "module": "T08-prompt-regression-gates",
+      "q": "Why should a 1-point drop on a 20-case slice not automatically block a release?",
+      "a": "The sample noise is large; 20 cases support smoke detection, not fine-grained estimates. Require more cases or a catastrophic-failure rule.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-prompt-regression-gates-d4",
+      "module": "T08-prompt-regression-gates",
+      "q": "A prompt scores 99% on the active set and 82% on held-out. Diagnose.",
+      "a": "Likely overfitting to the active set, though also check distribution mismatch and dataset versions.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-prompt-regression-gates-d5",
+      "module": "T08-prompt-regression-gates",
+      "q": "Write the release predicate for overall >= .90, critical slices >= .85, and no slice drop > .05.",
+      "a": "Pass only if every condition is true against a pinned baseline, with minimum sample counts enforced.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-prompt-regression-gates-d6",
+      "module": "T08-prompt-regression-gates",
+      "q": "A provider outage causes every case to fail. What should the gate report?",
+      "a": "An infrastructure/provider failure with no quality verdict, not a prompt regression; preserve the report and stop the gate.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T08-prompt-regression-gates-d7",
+      "module": "T08-prompt-regression-gates",
+      "q": "Design auto-revert protection against oscillation between two prompt versions.",
+      "a": "Pin the last accepted artifact, cap rollback attempts, do not re-gate the revert as a new candidate, and page an owner.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T08-prompt-regression-gates-d8",
+      "module": "T08-prompt-regression-gates",
+      "q": "When should you not build a formal prompt gate?",
+      "a": "For a low-stakes, single-user prompt where manual review is cheaper and no release decision depends on the result.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T14-interview-debrief-loop-d1",
+      "module": "T14-interview-debrief-loop",
+      "q": "Turn \u201cI was weak in system design\u201d into a useful debrief record.",
+      "a": "Capture the exact question, pushback, answer, miss type, linked module, and one timed next action with a pass condition.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T14-interview-debrief-loop-d2",
+      "module": "T14-interview-debrief-loop",
+      "q": "Classify a candidate who knew the answer in writing but rambled live.",
+      "a": "Structure or retrieval/nerves, verified with a timed spoken re-answer; do not assign a new knowledge module first.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T14-interview-debrief-loop-d3",
+      "module": "T14-interview-debrief-loop",
+      "q": "An interviewer asks \u201cwhat did you personally write?\u201d after a good architecture answer. What gap is exposed?",
+      "a": "Ownership/evidence. Add wrote/designed/reviewed/delegated boundaries to the story and rehearse the specific follow-up.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T14-interview-debrief-loop-d4",
+      "module": "T14-interview-debrief-loop",
+      "q": "Two interviews ask about the same missing denominator. What should happen?",
+      "a": "Normalize the concept, promote the pattern, and prioritize source verification or an honest measurement limitation.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T14-interview-debrief-loop-d5",
+      "module": "T14-interview-debrief-loop",
+      "q": "Why should you not turn every prep-pack question into a curriculum module?",
+      "a": "Prep packs indicate demand, but one generated question may be noisy; use a card/drill unless repeated or high-risk.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T14-interview-debrief-loop-d6",
+      "module": "T14-interview-debrief-loop",
+      "q": "Design a 7-day fix for a missing ETL bottleneck explanation.",
+      "a": "Retrieve source evidence, write mechanism and baseline, record a 90-second answer, self-grade, repeat under follow-up pressure, then retest.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T14-interview-debrief-loop-d7",
+      "module": "T14-interview-debrief-loop",
+      "q": "What should an AI debriefer never silently invent?",
+      "a": "Personal ownership, measurements, interviewer verdicts, confidential details, or missing denominators.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T14-interview-debrief-loop-d8",
+      "module": "T14-interview-debrief-loop",
+      "q": "How do you know the loop improved readiness?",
+      "a": "The same follow-up is answered accurately, directly, with evidence under a timed drill or in a later interview.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T15-resume-ats-evidence-d1",
+      "module": "T15-resume-ats-evidence",
+      "q": "A JD says MCP and the resume says FastMCP. What do you do?",
+      "a": "Map it if the source supports actual MCP/FastMCP implementation; retain the evidence span and state the personal role.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T15-resume-ats-evidence-d2",
+      "module": "T15-resume-ats-evidence",
+      "q": "A resume says \u201cimproved performance\u201d with no metric. What proof dimension is missing?",
+      "a": "Result measurement, and likely baseline/window. Add a verified number or state the limitation honestly.",
+      "difficulty": "warmup"
+    },
+    {
+      "id": "T15-resume-ats-evidence-d3",
+      "module": "T15-resume-ats-evidence",
+      "q": "Score a bullet with term=1, mechanism=1, result=0, ownership=1 using the module weights.",
+      "a": "0.4 + 0.3 + 0 + 0.1 = 0.8, but the missing result still needs review because the score is a triage heuristic.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-resume-ats-evidence-d4",
+      "module": "T15-resume-ats-evidence",
+      "q": "Why preserve \u201ccontinuous batching\u201d as a phrase?",
+      "a": "The phrase names a serving mechanism; isolated words can match unrelated text and lose technical meaning.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-resume-ats-evidence-d5",
+      "module": "T15-resume-ats-evidence",
+      "q": "The JD asks for a tool your teammate built. How do you tailor the resume?",
+      "a": "Describe your true design, integration, review, or consumption role; never change it to \u201cbuilt\u201d.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-resume-ats-evidence-d6",
+      "module": "T15-resume-ats-evidence",
+      "q": "What happens when a corrected metric invalidates two tailored resumes?",
+      "a": "Update the ledger, regenerate variants, diff contradictions, and update cards/drills tied to the old claim.",
+      "difficulty": "mid"
+    },
+    {
+      "id": "T15-resume-ats-evidence-d7",
+      "module": "T15-resume-ats-evidence",
+      "q": "Why is an ATS percentage not a hiring probability?",
+      "a": "Parser behavior is vendor-specific and match does not measure truth, ownership, depth, or interview performance.",
+      "difficulty": "staff"
+    },
+    {
+      "id": "T15-resume-ats-evidence-d8",
+      "module": "T15-resume-ats-evidence",
+      "q": "Design a safe resume-to-JD system boundary.",
+      "a": "Matching can suggest terms and gaps; human approval controls claims, metrics, confidentiality, and final export.",
+      "difficulty": "staff"
     }
   ]
 }

@@ -207,7 +207,7 @@
     {
       "key": "rag",
       "label": "15 Excel Formulas That Surprise 5+ Year Users 1",
-      "count": 1217,
+      "count": 1219,
       "gap_verdict": "GAP",
       "top_creators": [
         [
@@ -343,7 +343,7 @@
     {
       "key": "python",
       "label": "📌⬇️ Save and Read through here if you don’t know where to start with tech or programming",
-      "count": 777,
+      "count": 778,
       "gap_verdict": "GAP",
       "top_creators": [
         [
@@ -411,7 +411,7 @@
     {
       "key": "agent",
       "label": "Comment “GUIDE” and I’ll help you make the projects that can get you hired",
-      "count": 722,
+      "count": 723,
       "gap_verdict": "partial",
       "top_creators": [
         [
@@ -1283,7 +1283,7 @@
     {
       "key": "agent|coding",
       "label": "Anthropic introduced Claude Fable 5",
-      "count": 195,
+      "count": 197,
       "gap_verdict": "partial",
       "top_creators": [
         [
@@ -4980,6 +4980,69 @@
       ]
     },
     {
+      "key": "api|llm",
+      "label": "How to make your AI burn less money while you’re building apps",
+      "count": 35,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "evolving.ai",
+          4
+        ],
+        [
+          "airesearches",
+          3
+        ],
+        [
+          "theartificialintelligence",
+          3
+        ]
+      ],
+      "representative": {
+        "shortcode": "DYIJKhUORYA",
+        "creator": "codingmermaid.ai",
+        "caption": "How to make your AI burn less money while you’re building apps. \n\nAs a data scientist and AI founder, here are techniques I use a lot when running LLM APIs for my clients using Anthropic’s and OpenAI’s models.\n\n1. Prompt Caching\n\nThis technique helps tore and reuse the results of expensive prompt computations instead of reprocessing them every time. The model saves the processed state of a repeate",
+        "source": "creator:codingmermaid.ai"
+      },
+      "members": [
+        "DYIJKhUORYA",
+        "DR-ehuLErqS",
+        "DXCiLJ5kmLi",
+        "DcaRDlkxFG6",
+        "DYUwtEcP1C1",
+        "DX4xyUXAAt9",
+        "DXYtDjumnaZ",
+        "DY6FZkPO1Jy",
+        "DRye5Gigok3",
+        "DMnnvfrTtrO",
+        "C4kFNsdLniN",
+        "DHJXgyENpQE",
+        "DGQNEjzApHc",
+        "DBqwUyrsGdl",
+        "C1PU57lMyLB",
+        "DNn5TPuJOzK",
+        "C_OJlYTzjXN",
+        "C5EGByZSDHE",
+        "DaKxLyMhlkD",
+        "DQBK-rJiWD5",
+        "Da2bhFXk3Bv",
+        "Dcysi3Ak6xJ",
+        "DQ7D0LlE_iT",
+        "DQEDnXIgXwq",
+        "DHWT4aoBSac",
+        "DRKquT8gblh",
+        "DQ3aJS7CJlv",
+        "C8gYCjnC4kY",
+        "DO5JsD3jfX_",
+        "DNQckB8NTk-",
+        "DBO2UxbtYA_",
+        "DU0wWgJjGVf",
+        "DQZgS0PDHWn",
+        "DcoDgvLxgw7",
+        "DeB_xCxDT_F"
+      ]
+    },
+    {
       "key": "agent|api|coding",
       "label": "OpenAI introduced GPT-5",
       "count": 35,
@@ -5165,68 +5228,6 @@
         "DR7IM2IDFOx",
         "DRRB7ZRE9Oq",
         "DQo9RW6E7BQ"
-      ]
-    },
-    {
-      "key": "api|llm",
-      "label": "How to make your AI burn less money while you’re building apps",
-      "count": 34,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "evolving.ai",
-          4
-        ],
-        [
-          "airesearches",
-          3
-        ],
-        [
-          "theartificialintelligence",
-          3
-        ]
-      ],
-      "representative": {
-        "shortcode": "DYIJKhUORYA",
-        "creator": "codingmermaid.ai",
-        "caption": "How to make your AI burn less money while you’re building apps. \n\nAs a data scientist and AI founder, here are techniques I use a lot when running LLM APIs for my clients using Anthropic’s and OpenAI’s models.\n\n1. Prompt Caching\n\nThis technique helps tore and reuse the results of expensive prompt computations instead of reprocessing them every time. The model saves the processed state of a repeate",
-        "source": "creator:codingmermaid.ai"
-      },
-      "members": [
-        "DYIJKhUORYA",
-        "DR-ehuLErqS",
-        "DXCiLJ5kmLi",
-        "DcaRDlkxFG6",
-        "DYUwtEcP1C1",
-        "DX4xyUXAAt9",
-        "DXYtDjumnaZ",
-        "DY6FZkPO1Jy",
-        "DRye5Gigok3",
-        "DMnnvfrTtrO",
-        "C4kFNsdLniN",
-        "DHJXgyENpQE",
-        "DGQNEjzApHc",
-        "DBqwUyrsGdl",
-        "C1PU57lMyLB",
-        "DNn5TPuJOzK",
-        "C_OJlYTzjXN",
-        "C5EGByZSDHE",
-        "DaKxLyMhlkD",
-        "DQBK-rJiWD5",
-        "Da2bhFXk3Bv",
-        "Dcysi3Ak6xJ",
-        "DQ7D0LlE_iT",
-        "DQEDnXIgXwq",
-        "DHWT4aoBSac",
-        "DRKquT8gblh",
-        "DQ3aJS7CJlv",
-        "C8gYCjnC4kY",
-        "DO5JsD3jfX_",
-        "DNQckB8NTk-",
-        "DBO2UxbtYA_",
-        "DU0wWgJjGVf",
-        "DQZgS0PDHWn",
-        "DcoDgvLxgw7"
       ]
     },
     {
@@ -18542,6 +18543,35 @@
       ]
     },
     {
+      "key": "devops|docker|kubernetes|python",
+      "label": "Linux Commands Cheat Sheet Kiran Sagar Founder of PythonLife provided 100+ Free IT Courses in Telugu",
+      "count": 5,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "pythonlifetelugu",
+          3
+        ],
+        [
+          "kiransagar.pyy",
+          2
+        ]
+      ],
+      "representative": {
+        "shortcode": "DbvPnd0Ezx0",
+        "creator": "kiransagar.pyy",
+        "caption": "Linux Commands Cheat Sheet\n\nKiran Sagar Founder of PythonLife provided 100+ Free IT Courses in Telugu.\n\nNavigation Commands\n\npwd  # Current directory\nls  # List files\nls -la  # Detailed list\ncd dir  # Change directory\ncd .. # Go back\ncd ~  Home directory\n\nFile & Directory Commands\n\nmkdir test  Create directory\nrmdir test  Remove empty directory\ntouch file.txt  Create file\ncp a.txt b.txt  Copy file",
+        "source": "creator:pythonlifetelugu"
+      },
+      "members": [
+        "DbvPnd0Ezx0",
+        "DbvPe06k0_W",
+        "DbsRnaIicr4",
+        "DWlTR7NjZF_",
+        "DeRFTVKCZeK"
+      ]
+    },
+    {
       "key": "algorithm|interview question",
       "label": "ML Interview Question Series Interviewer: Walk me through how gradient descent works, How would you decide on an appropr",
       "count": 5,
@@ -21884,34 +21914,6 @@
         "CtdOqfLtrQT",
         "CtMMzO_tO-4",
         "Cs-BREeIUlj"
-      ]
-    },
-    {
-      "key": "devops|docker|kubernetes|python",
-      "label": "Linux Commands Cheat Sheet Kiran Sagar Founder of PythonLife provided 100+ Free IT Courses in Telugu",
-      "count": 4,
-      "gap_verdict": "GAP",
-      "top_creators": [
-        [
-          "kiransagar.pyy",
-          2
-        ],
-        [
-          "pythonlifetelugu",
-          2
-        ]
-      ],
-      "representative": {
-        "shortcode": "DbvPnd0Ezx0",
-        "creator": "kiransagar.pyy",
-        "caption": "Linux Commands Cheat Sheet\n\nKiran Sagar Founder of PythonLife provided 100+ Free IT Courses in Telugu.\n\nNavigation Commands\n\npwd  # Current directory\nls  # List files\nls -la  # Detailed list\ncd dir  # Change directory\ncd .. # Go back\ncd ~  Home directory\n\nFile & Directory Commands\n\nmkdir test  Create directory\nrmdir test  Remove empty directory\ntouch file.txt  Create file\ncp a.txt b.txt  Copy file",
-        "source": "creator:pythonlifetelugu"
-      },
-      "members": [
-        "DbvPnd0Ezx0",
-        "DbvPe06k0_W",
-        "DbsRnaIicr4",
-        "DWlTR7NjZF_"
       ]
     },
     {
@@ -39164,6 +39166,32 @@
       ]
     },
     {
+      "key": "agent|embedding|llm|rag|transformer",
+      "label": "If you can’t answer these 25 questions, you are not ready for an AI engineering interview",
+      "count": 2,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "bashi_fuirkashi",
+          1
+        ],
+        [
+          "academy_thc",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DbbAxcSz9Ey",
+        "creator": "bashi_fuirkashi",
+        "caption": "If you can’t answer these 25 questions, you are not ready for an AI engineering interview.\n\nThese cover roughly 80% of what actually gets asked.\n\nLLMs and RAG\n\n1. Walk me through a production RAG pipeline and tell me where quality actually breaks\n2. Keyword search, vector search, or both, and why add a reranker\n3. You are chunking a 300 page report where page 1 says all figures are in thousands. H",
+        "source": "creator:bashi_fuirkashi"
+      },
+      "members": [
+        "DbbAxcSz9Ey",
+        "Dd8_wxLtaqF"
+      ]
+    },
+    {
       "key": "weak:after partner trust years",
       "label": "If you don't trust your partner after 12 years of marriage and choose to believe what AI is telling you, it's not an AI ",
       "count": 2,
@@ -42469,6 +42497,32 @@
       "members": [
         "DXRVam0iRCh",
         "DU6E--HiOc7"
+      ]
+    },
+    {
+      "key": "coding|interview question|python|sql|system design",
+      "label": "Product company interview ki prepare avuthunnara",
+      "count": 2,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "iamsaumyaawasthi",
+          1
+        ],
+        [
+          "kiransagar.pyy",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "Dd3PXh5E4x7",
+        "creator": "kiransagar.pyy",
+        "caption": "Product company interview ki prepare avuthunnara? Ee strategy miss cheyyodhu. DSA, problem-solving, core CS concepts, SQL, projects, system design basics and behavioral questions meeda focus cheyyandi. Previous interview questions practice chesi, mock interviews tho communication and problem-solving skills improve cheskondi.\n\nKiran Sagar is a tech educator, senior technical trainer, and entreprene",
+        "source": "saved"
+      },
+      "members": [
+        "DZSVGqggFtc",
+        "Dd3PXh5E4x7"
       ]
     },
     {
@@ -124546,6 +124600,27 @@
       ]
     },
     {
+      "key": "agent|api|kubernetes",
+      "label": "Comment ‘REPO’ and I’ll DM a full article breaking down each GitHub and how to use them",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "buildwithneej",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "Ddt16ilkRGB",
+        "creator": "buildwithneej",
+        "caption": "Comment ‘REPO’ and I’ll DM a full article breaking down each GitHub and how to use them!\n\nAbout 43,000 stars landed on these 5 GitHub repos in 7 days. jev-ultrafast is a web agent from Browser Use built on Jev, TypeSafe’s new decision model. Give it a goal and it picks each click from a numbered list of what’s on the page, and in the maker’s demo it finishes a real Google Flights search in 7.1 sec",
+        "source": "saved"
+      },
+      "members": [
+        "Ddt16ilkRGB"
+      ]
+    },
+    {
       "key": "weak:free resume score template",
       "label": "Comment “ Resume “ to get template link and Free ATS score checker link",
       "count": 1,
@@ -192124,27 +192199,6 @@
       ]
     },
     {
-      "key": "agent|embedding|llm|rag|transformer",
-      "label": "If you can’t answer these 25 questions, you are not ready for an AI engineering interview",
-      "count": 1,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "bashi_fuirkashi",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DbbAxcSz9Ey",
-        "creator": "bashi_fuirkashi",
-        "caption": "If you can’t answer these 25 questions, you are not ready for an AI engineering interview.\n\nThese cover roughly 80% of what actually gets asked.\n\nLLMs and RAG\n\n1. Walk me through a production RAG pipeline and tell me where quality actually breaks\n2. Keyword search, vector search, or both, and why add a reranker\n3. You are chunking a 300 page report where page 1 says all figures are in thousands. H",
-        "source": "creator:bashi_fuirkashi"
-      },
-      "members": [
-        "DbbAxcSz9Ey"
-      ]
-    },
-    {
       "key": "weak:change could india thing",
       "label": "If you could change just ONE thing about India today, what would it be",
       "count": 1,
@@ -213691,6 +213745,27 @@
       ]
     },
     {
+      "key": "aws|kubernetes|llm|snowflake",
+      "label": "Kubernetes meets LLM inference 🚀 Google, NVIDIA, IBM, and Red Hat are all backing the same open-source project to make i",
+      "count": 1,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "dailydoseofds_",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "Dd8RO1TFHo8",
+        "creator": "dailydoseofds_",
+        "caption": "Kubernetes meets LLM inference 🚀\n\nGoogle, NVIDIA, IBM, and Red Hat are all backing the same open-source project to make it work.\n\nThe problem: LLM inference does not scale the way normal web services do, and the usual Kubernetes answer makes it worse.\n\nRun one vLLM or SGLang server and the KV cache is a clean win. A shared prefix skips past recomputation entirely.\n\nPut a standard Kubernetes Servic",
+        "source": "saved"
+      },
+      "members": [
+        "Dd8RO1TFHo8"
+      ]
+    },
+    {
       "key": "interview question|kubernetes",
       "label": "Kubernetes notes with interview questions Interested people dm us",
       "count": 1,
@@ -222466,6 +222541,27 @@
       },
       "members": [
         "C8dFXqCP8jU"
+      ]
+    },
+    {
+      "key": "devops|llm|mlops|system design",
+      "label": "MUST-KNOW AI Inference Concepts For Interviews",
+      "count": 1,
+      "gap_verdict": "partial",
+      "top_creators": [
+        [
+          "vishakha.sadhwani",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "Dd4MBuxkxE6",
+        "creator": "vishakha.sadhwani",
+        "caption": "MUST-KNOW AI Inference Concepts For Interviews!\n\nAI inference can look simple from the outside.\n\nYou send an input, the model gives you an answer. But underneath that simple interaction is an entire system involving GPUs, memory, inference engines, caching, optimization, and scaling.\n\nIf you’re moving from using AI models to actually understanding how they run, these are the concepts I’d want to h",
+        "source": "saved"
+      },
+      "members": [
+        "Dd4MBuxkxE6"
       ]
     },
     {
@@ -292609,6 +292705,27 @@
       ]
     },
     {
+      "key": "backend|coding|database|distributed|docker|kafka|kubernetes",
+      "label": "Tech You Know",
+      "count": 1,
+      "gap_verdict": "covered",
+      "top_creators": [
+        [
+          "codewithupasana",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DdiciQCmmOv",
+        "creator": "codewithupasana",
+        "caption": "Tech You Know. But Don’t Really Understand. 👀\n\nYou’ve probably used Kafka, Redis, Kubernetes, database indexes, load balancers, CDNs, Docker…\n\nYou know what they do.\n\nBut the real engineering question is:\n\n👉 What actually happens underneath?\n\nHow does Kafka store and track messages?\nWhy is Redis so fast?\nHow does Kubernetes know when a pod has crashed?\nWhat does a database index actually do?\nHow d",
+        "source": "saved"
+      },
+      "members": [
+        "DdiciQCmmOv"
+      ]
+    },
+    {
       "key": "weak:billionaire cuban mark tech",
       "label": "Tech billionaire Mark Cuban on what he sees as the next big job for students to pursue",
       "count": 1,
@@ -310672,7 +310789,7 @@
       "key": "weak:hole millions protects tiny",
       "label": "This Tiny Hole Protects Millions of Passengers- Do you know why",
       "count": 1,
-      "gap_verdict": "GAP",
+      "gap_verdict": "partial",
       "top_creators": [
         [
           "cloud_x_berry",
@@ -401557,27 +401674,6 @@
       ]
     },
     {
-      "key": "coding|interview question|python|sql|system design",
-      "label": "🚀 FAANG interviews aren't just about DSA",
-      "count": 1,
-      "gap_verdict": "partial",
-      "top_creators": [
-        [
-          "iamsaumyaawasthi",
-          1
-        ]
-      ],
-      "representative": {
-        "shortcode": "DZSVGqggFtc",
-        "creator": "iamsaumyaawasthi",
-        "caption": "🚀 FAANG interviews aren't just about DSA.\n\nIf you're preparing for Software Engineer roles, these are the most frequently asked topics that recruiters and interviewers expect you to know beyond coding questions.\n\n✅ DBMS\n✅ OOPS\n✅ Computer Networks\n✅ Operating Systems\n✅ Language Fundamentals (Java/C++/Python)\n✅ Linux\n✅ Git\n✅ SQL\n✅ Puzzles\n✅ Projects & Behavioral\n\nSave this checklist and use it as yo",
-        "source": "creator:iamsaumyaawasthi"
-      },
-      "members": [
-        "DZSVGqggFtc"
-      ]
-    },
-    {
       "key": "api|backend|docker|embedding|llm|postgres|python|rag|sql",
       "label": "🚀 FastAPI सीख रहे हो",
       "count": 1,
@@ -412393,6 +412489,27 @@
       ]
     },
     {
+      "key": "weak:pewdiepie quest take youtuber",
+      "label": "🚨 YouTuber PewDiePie’s quest to take on Big Tech continues",
+      "count": 1,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "evolving.ai",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "DeB4MOOgIu9",
+        "creator": "evolving.ai",
+        "caption": "🚨 YouTuber PewDiePie’s quest to take on Big Tech continues.\n\nAfter building his own GPU setup and launching Odysseus, he has now unveiled Ajax, a fine-tuned Qwen3.5-9B model built to run locally and handle things like browsing, email and calendar tasks.\n\nHe also used Heretic to remove many refusal patterns, while saying he kept limits around harmful requests.\n\nThe biggest controversy came during t",
+        "source": "saved"
+      },
+      "members": [
+        "DeB4MOOgIu9"
+      ]
+    },
+    {
       "key": "weak:iphone screen sees wwdc",
       "label": "🚨 Your iPhone can now read your screen and act on what it sees",
       "count": 1,
@@ -415372,6 +415489,27 @@
       },
       "members": [
         "C-da3CeuT-D"
+      ]
+    },
+    {
+      "key": "agent|database|embedding|llm|python|rag|transformer",
+      "label": "🤖 **Generative AI Important Concepts — Must Know",
+      "count": 1,
+      "gap_verdict": "GAP",
+      "top_creators": [
+        [
+          "pythonlifetelugu",
+          1
+        ]
+      ],
+      "representative": {
+        "shortcode": "Dd3BNV9iVSq",
+        "creator": "pythonlifetelugu",
+        "caption": "🤖 **Generative AI Important Concepts — Must Know! 🔥**\n\nGenerative AI nerchukuntunnara? **LLMs, Tokens, Transformers, Embeddings, Attention, Prompt Engineering & Context Window** concepts ni first clear ga understand cheskondi. 🚀\n\nNext **RAG, Vector Databases, Fine-Tuning, Tool Calling, AI Agents, MCP & LLM Evaluation** lanti important concepts ni practical examples tho learn cheyyandi. 💻🔥\n\nPythonL",
+        "source": "saved"
+      },
+      "members": [
+        "Dd3BNV9iVSq"
       ]
     },
     {
@@ -423439,6 +423577,6 @@
       ]
     }
   ],
-  "total_posts": 43252,
-  "unique_topics": 19448
+  "total_posts": 43268,
+  "unique_topics": 19454
 }

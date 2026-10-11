@@ -116,3 +116,13 @@ def test_parse_module_shape():
     m = bd.parse_module("slug | Title Here | 2.5 | a,b", "T00", 7)
     assert m["id"] == "T00-slug" and m["hours"] == 2.5
     assert m["tags"] == ["a", "b"] and m["order"] == 7
+
+
+def test_free_stack_catalog_has_safe_resource_contract():
+    assert len(bd.FREE_STACK) >= 20
+    required = {"category", "title", "repo", "url", "use", "why", "caveat"}
+    for resource in bd.FREE_STACK:
+        assert required <= resource.keys()
+        assert resource["url"].startswith("https://")
+        assert resource["repo"].count("/") == 1
+        assert resource["caveat"]

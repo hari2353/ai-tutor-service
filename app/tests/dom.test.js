@@ -102,7 +102,7 @@ function stub(id) { const n = new Node("div"); n.id = id; document._byId[id] = n
  "hud-streak", "hud-due", "tabs", "app", "foot-stats"].forEach(stub);
 
 // tab buttons, as index.html declares them
-const TABS = ["dash", "tracks", "cards", "drills", "problems", "boss", "badges", "save"];
+const TABS = ["dash", "tracks", "cards", "drills", "problems", "free-stack", "boss", "badges", "save"];
 TABS.forEach(v => {
   const b = new Node("button"); b.dataset.view = v; document._byId.tabs.appendChild(b);
 });
@@ -120,7 +120,7 @@ global.confirm = () => true;
 global.alert = () => {};
 
 // ---------------------------------------------------------------- load data + app
-["curriculum", "flashcards", "drills", "problems"].forEach(n =>
+ ["curriculum", "flashcards", "drills", "problems", "free_stack"].forEach(n =>
   require(path.join(ROOT, "app", "data", n + ".js")));
 
 // ---------------------------------------------------------------- run

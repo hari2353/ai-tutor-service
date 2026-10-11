@@ -1,13 +1,13 @@
 # Topic worklist (deduped)
 
-43252 useful posts -> **19448 unique topics** (11519 gaps, 7227 partial)
+43268 useful posts -> **19454 unique topics** (11521 gaps, 7230 partial)
 
 ## Gap topics, by frequency
 
 - **🚀Get 180% hike in Salary with Data Science job - link in bio 👨‍🎓 Subscribe to our YouTube Channel to become Ma** ×1266 — @datasciencebrain (rep: mining/posts/Cz7yiBkr1LJ/)
-- **15 Excel Formulas That Surprise 5+ Year Users 1** ×1217 — @kethakiproperties (rep: mining/posts/DcOEXEik4vt/)
+- **15 Excel Formulas That Surprise 5+ Year Users 1** ×1219 — @kethakiproperties (rep: mining/posts/DcOEXEik4vt/)
 - **✨Is freelancing the future of work** ×1069 — @entrepreneursonig (rep: mining/posts/DBHGs1ToCBp/)
-- **📌⬇️ Save and Read through here if you don’t know where to start with tech or programming** ×777 — @pythonlifetelugu (rep: mining/posts/CxhrhA8ATHE/)
+- **📌⬇️ Save and Read through here if you don’t know where to start with tech or programming** ×778 — @pythonlifetelugu (rep: mining/posts/CxhrhA8ATHE/)
 - **HR Interview Questions | Quick Guide Prepare these common HR questions to crack your interview** ×396 — @pythonlifetelugu (rep: mining/posts/DbvKoFRiTFX/)
 - **Understand these 3 things before you begin this journey** ×373 — @umerhaddii007 (rep: mining/posts/C2CvZXqtQHb/)
 - **Download The Ultimate ChatGPT Prompts Handbook (Link is in Bio) if you want Advance and done for you ChatGPT P** ×330 — @theaiguyhere (rep: mining/posts/DHvbeI9CFkh/)
@@ -161,6 +161,7 @@
 - **Higgsfield Seedance 2** ×5 — @innovation (rep: mining/posts/DcCxC5EE_Hi/)
 - **In options trading, gamma is a second-order Greek that measures the rate of delta change with respect to chang** ×5 — @uncover.quantum (rep: mining/posts/DF7yKYmI7qY/)
 - **JavaScript Complete Handbook 🚀 JavaScript is much more than just a scripting language—it’s the backbone of mod** ×5 — @iamnikspatle (rep: mining/posts/DbA3QQgk-0f/)
+- **Linux Commands Cheat Sheet Kiran Sagar Founder of PythonLife provided 100+ Free IT Courses in Telugu** ×5 — @pythonlifetelugu (rep: mining/posts/DbvPnd0Ezx0/)
 - **ML Interview Question Series Interviewer: Walk me through how gradient descent works, How would you decide on ** ×5 — @abhi_techhub (rep: mining/posts/DSuoHWrgps8/)
 - **Microsoft is partnering with Atom Computing to develop the world's most powerful quantum computer** ×5 — @evolving.ai (rep: mining/posts/C_x4huVs8g2/)
 - **Most people learn RAG backwards** ×5 — @codedsoul_05 (rep: mining/posts/DbHGKjADiw0/)
@@ -200,7 +201,6 @@
 - **Jensen Huang showed a data center chip for the GB200 NVL72 system** ×4 — @uncover.quantum (rep: mining/posts/DEhtSsBIgfT/)
 - **Kind of wild that Will Smith eating spaghetti is still the go-to reference point for AI progress 😂🍝 But it’s s** ×4 — @datasciencebrain (rep: mining/posts/DUoqG1gCIUW/)
 - **Krdo tag 😮‍💨** ×4 — @whatshotdelhi (rep: mining/posts/DRcmX0JgR1p/)
-- **Linux Commands Cheat Sheet Kiran Sagar Founder of PythonLife provided 100+ Free IT Courses in Telugu** ×4 — @kiransagar.pyy (rep: mining/posts/DbvPnd0Ezx0/)
 - **Mark Zuckerberg says Meta is ready to spend aggressively on AI, even if it means losing hundreds of billions** ×4 — @airesearches (rep: mining/posts/DPJOo3DDftF/)
 - **Mind = BLOWN** ×4 — @evolving.ai (rep: mining/posts/DO423psCQ9B/)
 - **Most people answer “Stack”, and they’re partially right** ×4 — @uncover.quantum (rep: mining/posts/DZP6JhIMPju/)
@@ -209,12 +209,12 @@
 
 - ~How do you start web development ×3093
 - ~I asked ChatGPT the most common question “How to start programming”… This was the response… Starting programmi ×1235
-- ~Comment “GUIDE” and I’ll help you make the projects that can get you hired ×722
+- ~Comment “GUIDE” and I’ll help you make the projects that can get you hired ×723
 - ~50 SQL Questions you need to cover before an interview 1 ×472
 - ~When I came to the US in 2018, I had zero ML experience ×395
 - ~🚀 Learn these coding topics sincerely ×282
 - ~These are the SOLID Principles every developer must know before a low-level design interview ×236
-- ~Anthropic introduced Claude Fable 5 ×195
+- ~Anthropic introduced Claude Fable 5 ×197
 - ~Top 20 HR Interview Questions & Answers (2026) 1 ×193
 - ~Have you ever conducted an A/B testing ×169
 - ~🚀 SQL for Data Analysis: The Ultimate Data Cleaning Cheat Sheet Let’s be honest — 80% of data analysis is clea ×143
@@ -246,9 +246,9 @@
 - ~Trigger warning: 1 - You probably suck at SQL, but convinced yourself you’re an expert ×43
 - ~🚀 Monotonic Queue in Java | Master Sliding Window Problems in O(n) A Monotonic Queue is a special double-ended ×38
 - ~The Flask lightweight web application framework has hit release 2 ×36
+- ~How to make your AI burn less money while you’re building apps ×35
 - ~OpenAI introduced GPT-5 ×35
 - ~1 ×34
-- ~How to make your AI burn less money while you’re building apps ×34
 - ~🚀 PREFIX SUM: THE SHORTCUT EVERY CODER SHOULD LEARN ⚡ Want to answer range sum queries in O(1) instead of O(n) ×32
 - ~Most candidates immediately jump to the logical explanation of tokenizer fallback ×30
 - ~Most developers jump straight into coding ×29
