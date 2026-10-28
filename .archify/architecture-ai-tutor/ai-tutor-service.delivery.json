@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "7d83be5c-7a8d-4bf0-96cc-0cb6dbfb9c14",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "F:\\ai-tutor-service\\.archify\\architecture-ai-tutor\\candidate.json",
+  "output": "F:\\ai-tutor-service\\.archify\\architecture-ai-tutor\\ai-tutor-service.html",
+  "specification": {
+    "sha256": "9972b0b49d2d7c7bef3dde5138ecfc24b912dfe7097c38f25d61ed0584f4896b",
+    "bytes": 5392
+  },
+  "artifact": {
+    "sha256": "506a3147323c24019af03cb5d4036703c0be313cfeae24fa078ed6d9e59e391b",
+    "bytes": 768487
+  }
+}

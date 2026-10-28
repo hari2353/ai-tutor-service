@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "AI Tutor Service: Browser Runtime and Content Pipeline",
+    "subtitle": "Static browser application backed by generated learning data and local progress",
+    "output": "ai-tutor-service.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/hari2353/ai-tutor-service.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "8d53cc92662c5ad32b37d660d1dd63ff445c866a"
+    }
+  },
+  "components": [
+    { "id": "authored-content", "type": "external", "label": "Authored curriculum", "sublabel": "Markdown + fragments", "pos": [40, 120], "size": [160, 64], "sources": [{ "path": "README.md", "line": 55, "end_line": 77, "label": "repository layout" }] },
+    { "id": "content-indexer", "type": "backend", "label": "build_data.py", "sublabel": "Offline content indexer", "pos": [340, 120], "size": [160, 64], "sources": [{ "path": "app/build_data.py", "line": 789, "end_line": 872, "label": "aggregate generation" }] },
+    { "id": "generated-bundle", "type": "database", "label": "Generated data bundle", "sublabel": "JSON + file:// JS globals", "pos": [640, 120], "size": [180, 64], "sources": [{ "path": "app/build_data.py", "line": 723, "end_line": 731, "label": "runtime bundle" }] },
+    { "id": "learning-path", "type": "backend", "label": "learning_path.py", "sublabel": "Prerequisite-ordered docs", "pos": [960, 120], "size": [180, 64], "sources": [{ "path": "app/learning_path.py", "line": 22, "end_line": 105, "label": "path generation" }] },
+    { "id": "browser-shell", "type": "frontend", "label": "Browser shell", "sublabel": "app/index.html + style.css", "pos": [40, 310], "size": [180, 64], "sources": [{ "path": "app/index.html", "line": 44, "end_line": 66, "label": "static shell" }] },
+    { "id": "tutor-engine", "type": "frontend", "label": "Tutor engine", "sublabel": "app.js: quests, views, XP", "pos": [320, 310], "size": [190, 64], "sources": [{ "path": "app/app.js", "line": 8, "end_line": 35, "label": "inputs and state" }, { "path": "app/app.js", "line": 512, "end_line": 547, "label": "render loop" }] },
+    { "id": "browser-state", "type": "database", "label": "Browser progress", "sublabel": "localStorage: ai-tutor-state-v2", "pos": [600, 310], "size": [210, 64], "sources": [{ "path": "app/app.js", "line": 15, "end_line": 35, "label": "state persistence" }] },
+    { "id": "tutor-skills", "type": "external", "label": "Tutor skills", "sublabel": "Claude workflow control plane", "pos": [860, 310], "size": [180, 64], "sources": [{ "path": "skills/README.md", "line": 3, "end_line": 28, "label": "skill workflows" }] },
+    { "id": "progress-export", "type": "external", "label": "Progress export", "sublabel": "progress/progress.json", "pos": [600, 470], "size": [190, 64], "sources": [{ "path": "app/app.js", "line": 490, "end_line": 509, "label": "JSON export/import" }] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Offline repository pipeline", "wraps": ["authored-content", "content-indexer", "generated-bundle", "learning-path"] },
+    { "kind": "region", "label": "Browser-local runtime", "wraps": ["browser-shell", "tutor-engine", "browser-state", "progress-export"] }
+  ],
+  "connections": [
+    { "id": "content-to-indexer", "from": "authored-content", "to": "content-indexer", "label": "parse and validate", "variant": "emphasis" },
+    { "id": "indexer-to-bundle", "from": "content-indexer", "to": "generated-bundle", "label": "emit JSON + JS" },
+    { "id": "curriculum-to-path", "from": "generated-bundle", "to": "learning-path", "label": "read curriculum.json", "variant": "dashed", "fromSide": "right", "toSide": "left" },
+    { "id": "bundle-to-shell", "from": "generated-bundle", "to": "browser-shell", "label": "load file:// assets", "fromSide": "bottom", "toSide": "top" },
+    { "id": "shell-to-engine", "from": "browser-shell", "to": "tutor-engine", "label": "mount UI", "variant": "emphasis" },
+    { "id": "bundle-to-engine", "from": "generated-bundle", "to": "tutor-engine", "label": "window.CURRICULUM / cards / drills", "fromSide": "bottom", "toSide": "top" },
+    { "id": "engine-to-state", "from": "tutor-engine", "to": "browser-state", "label": "save progress", "variant": "default" },
+    { "id": "state-to-engine", "from": "browser-state", "to": "tutor-engine", "label": "load and render", "variant": "dashed", "fromSide": "top", "toSide": "bottom" },
+    { "id": "engine-to-export", "from": "tutor-engine", "to": "progress-export", "label": "export JSON", "fromSide": "bottom", "toSide": "top" },
+    { "id": "skills-to-content", "from": "tutor-skills", "to": "authored-content", "label": "author modules / fragments", "variant": "dashed", "fromSide": "left", "toSide": "right" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Runtime", "items": ["No server or build step is required to open the app.", "The browser reads generated JavaScript globals and renders locally."] },
+    { "dot": "emerald", "title": "Content contract", "items": ["TRACKS/CLOUDS and fragments are authored inputs.", "build_data.py must run before new content appears in the browser."] },
+    { "dot": "violet", "title": "State boundary", "items": ["XP, completion, SM-2 cards, drills, badges, and streaks live in localStorage.", "Save/Load is the explicit machine-transfer path."] }
+  ]
+}
