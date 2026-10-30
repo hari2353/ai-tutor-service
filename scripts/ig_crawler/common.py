@@ -73,7 +73,13 @@ def short_to_media_id(code: str) -> str:
     return str(n)
 
 
-CHROME_PATH = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+import sys as _sys
+_CHROME_CANDIDATES = [
+    r"C:\Program Files\Google\Chrome\Application\chrome.exe",   # Windows
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",  # macOS
+]
+CHROME_PATH = next((p for p in _CHROME_CANDIDATES if pathlib.Path(p).exists()),
+                   _CHROME_CANDIDATES[0])
 
 
 def launch():
