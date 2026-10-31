@@ -315,6 +315,9 @@ COMMON BUG      loss trends down but generation is garbage -> check target shift
 - [KellerJordan/modded-nanogpt](https://github.com/kellerjordan/modded-nanogpt) — accessed 2026-07-28
 - [How the NanoGPT Speedrun WR dropped by 20% in 3 months](https://www.lesswrong.com/posts/j3gp8tebQiFJqzBgg/how-the-nanogpt-speedrun-wr-dropped-by-20-in-3-months) — accessed 2026-07-28
 - [NanoGPT Speedrun — Prime Intellect](https://app.primeintellect.ai/speedrun/nanogpt) — accessed 2026-07-28
+- [Stanford CS336 — Language Modeling from Scratch (lecture videos)](https://www.youtube.com/@StanfordOnline/playlists) — the canonical modern companion course to this module's arc: tokenization → transformer internals → scaling → systems (accessed 2026-10-31)
+- Visual explainers worth bookmarking alongside this build: [Transformer Explainer](https://poloclub.github.io/transformer-explainer/), [Brendan Bycroft's LLM Visualization](https://brendanbycroft.github.io/llm/), [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/) (accessed 2026-10-31)
+- [datasciencebrain — "8 Papers That Put You Ahead of 95% of AI Engineering Candidates" (Attention, CoT, InstructGPT, RAG, ReAct, LoRA, Lost in the Middle, FlashAttention)](https://www.instagram.com/p/De6XQgPkZXP/) — accessed 2026-10-31
 
 ## Changelog
 - 2026-07-28 — created

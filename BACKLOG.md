@@ -35,3 +35,22 @@
   zero next-loop value (PLAN v0.3 tension table, honored).
 - Auto-generating mocks or progress data to fill dashboards — synthetic scores would
   poison the only honest feedback loop in the system.
+
+## D. IG-mining follow-ups (2026-10-31)
+
+### D.1 New modules needing labs (py first, then go/java/rust/ts)
+- `T02-design-problems-caches` (LRU/LFU/ring buffer/rate limiter) — lab 37-lru-cache scaffolded in py
+- `T02-adv-dp-matrix` (interval/string DP + grid sims)
+- `T15-build-projects` (15 builds + 10 warmups + proof-of-work)
+
+### D.2 Content gaps identified (researcher review, 2026-10-31)
+- AI Safety & Red-Teaming (dedicated module) — currently scattered across T07-14, T06-19, T30
+- Responsible AI / Bias / Fairness / Model Cards — no dedicated module
+- AI Governance & Compliance (EU AI Act, risk tiers) — no module
+- Federated Learning / On-Device AI — missing
+- Differential Privacy — only 2 incidental mentions
+- Constitutional AI / RLAIF — thin (1 mention in T05-10)
+- Graph RAG & Agentic RAG — no dedicated modules (incidental in T06)
+- Multimodal RAG — only in T26-05
+- Synthetic Data Generation — no dedicated module
+- Continuous / Online Learning — missing

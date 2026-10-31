@@ -34,3 +34,4 @@ opencode.json
 # app/data/*.js and *.json ARE tracked on purpose: the app loads them from
 # file:// with no build step, so a fresh clone must open by double-click
 # without anyone running Python first.
+.venv-mac/

@@ -826,6 +826,8 @@ rider request ──▶ matching service ───────┘ query nearby c
 
 ## Interview questions
 
+One extra compact note — two designs that appear on Google-style most-asked sheets but don't merit their own deep sections here: **Design Hit Counter** (1M hits/sec, last 5 minutes) is the Metrics/Monitoring section here at interview scale — a ring of second-buckets with expiry, sum-and-prune on read; the only graded twist is hot-key contention (per-key sharding). **Design Parking Lot** is not an infra design at all: it's an allocation state machine — car types × slot types × nearest-to-exit querying, which is the Proximity Service section's geo-index plus the Ticket Booking section's double-booking guard in OO-clothing; the trap is showing class diagrams instead of the concurrency story.
+
 ### Q1 — You've been asked "design Twitter" for the third time this month. How do you avoid sounding rehearsed?
 **Testing:** whether you can distinguish having the answer from deriving it live.
 **Answer:** Lead with the derivation, not the destination. State the clarifying question that actually matters (follower distribution) before naming the hybrid-fanout pattern, so the interviewer watches you arrive at it rather than announce it. If you already know the number that forces the celebrity problem, ask for it early and let the answer produce the architecture in real time.

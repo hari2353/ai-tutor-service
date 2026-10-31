@@ -333,7 +333,7 @@
       "icon": "\ud83e\udd16",
       "phase": "A",
       "prereqs": [],
-      "hours": 84.0,
+      "hours": 86.5,
       "modules": [
         {
           "id": "T07-agent-loop-from-scratch",
@@ -536,6 +536,19 @@
           "status": "todo"
         },
         {
+          "id": "T07-ai-safety-redteam",
+          "slug": "ai-safety-redteam",
+          "title": "AI Safety & Red-Teaming: Jailbreaks, Safety Benchmarks, Alignment, Constitutional AI",
+          "hours": 2.5,
+          "tags": [
+            "security",
+            "safety",
+            "critical"
+          ],
+          "order": 15,
+          "status": "todo"
+        },
+        {
           "id": "T07-agent-cost-routing",
           "slug": "agent-cost-routing",
           "title": "Prompt Caching, Model Routing, Fallback Chains, Cost Governance",
@@ -544,7 +557,7 @@
             "production",
             "cost"
           ],
-          "order": 15,
+          "order": 16,
           "status": "todo"
         },
         {
@@ -556,7 +569,7 @@
             "production",
             "critical"
           ],
-          "order": 16,
+          "order": 17,
           "status": "todo"
         },
         {
@@ -568,7 +581,7 @@
             "prompting",
             "critical"
           ],
-          "order": 17,
+          "order": 18,
           "status": "todo"
         },
         {
@@ -580,7 +593,7 @@
             "production",
             "critical"
           ],
-          "order": 18,
+          "order": 19,
           "status": "todo"
         },
         {
@@ -592,7 +605,7 @@
             "security",
             "critical"
           ],
-          "order": 19,
+          "order": 20,
           "status": "todo"
         },
         {
@@ -604,7 +617,7 @@
             "trust",
             "critical"
           ],
-          "order": 20,
+          "order": 21,
           "status": "todo"
         },
         {
@@ -616,7 +629,7 @@
             "trust",
             "critical"
           ],
-          "order": 21,
+          "order": 22,
           "status": "todo"
         },
         {
@@ -628,7 +641,7 @@
             "trust",
             "critical"
           ],
-          "order": 22,
+          "order": 23,
           "status": "todo"
         },
         {
@@ -640,7 +653,7 @@
             "trust",
             "critical"
           ],
-          "order": 23,
+          "order": 24,
           "status": "todo"
         },
         {
@@ -652,7 +665,7 @@
             "trust",
             "critical"
           ],
-          "order": 24,
+          "order": 25,
           "status": "todo"
         },
         {
@@ -664,7 +677,7 @@
             "testing",
             "critical"
           ],
-          "order": 25,
+          "order": 26,
           "status": "todo"
         },
         {
@@ -677,7 +690,7 @@
             "harness",
             "critical"
           ],
-          "order": 26,
+          "order": 27,
           "status": "todo",
           "sprint_order": 29,
           "sprint_week": 10
@@ -692,7 +705,7 @@
             "harness",
             "critical"
           ],
-          "order": 27,
+          "order": 28,
           "status": "todo",
           "sprint_order": 30,
           "sprint_week": 10
@@ -706,7 +719,7 @@
             "harness",
             "critical"
           ],
-          "order": 28,
+          "order": 29,
           "status": "todo"
         },
         {
@@ -718,7 +731,7 @@
             "harness",
             "critical"
           ],
-          "order": 29,
+          "order": 30,
           "status": "todo"
         },
         {
@@ -730,7 +743,7 @@
             "harness",
             "critical"
           ],
-          "order": 30,
+          "order": 31,
           "status": "todo"
         },
         {
@@ -743,7 +756,7 @@
             "context",
             "critical"
           ],
-          "order": 31,
+          "order": 32,
           "status": "todo"
         },
         {
@@ -756,7 +769,7 @@
             "capstone",
             "critical"
           ],
-          "order": 32,
+          "order": 33,
           "status": "todo",
           "sprint_order": 27,
           "sprint_week": 9
@@ -909,7 +922,7 @@
       "icon": "\ud83d\udcda",
       "phase": "A",
       "prereqs": [],
-      "hours": 42.5,
+      "hours": 49.5,
       "modules": [
         {
           "id": "T06-chunking",
@@ -1140,6 +1153,42 @@
             "critical"
           ],
           "order": 18,
+          "status": "todo"
+        },
+        {
+          "id": "T06-graph-rag",
+          "slug": "graph-rag",
+          "title": "GraphRAG: Knowledge Graphs, Community Summaries, Global vs Local Queries",
+          "hours": 2.5,
+          "tags": [
+            "advanced",
+            "retrieval"
+          ],
+          "order": 19,
+          "status": "todo"
+        },
+        {
+          "id": "T06-agentic-rag",
+          "slug": "agentic-rag",
+          "title": "Agentic RAG: Agent Loops, Query Planning, Self-Correction, Multi-Hop",
+          "hours": 2.5,
+          "tags": [
+            "advanced",
+            "retrieval"
+          ],
+          "order": 20,
+          "status": "todo"
+        },
+        {
+          "id": "T06-multimodal-rag",
+          "slug": "multimodal-rag",
+          "title": "Multimodal RAG: Images, Audio, Video, Tables in Retrieval",
+          "hours": 2.0,
+          "tags": [
+            "advanced",
+            "retrieval"
+          ],
+          "order": 21,
           "status": "todo"
         }
       ]
@@ -1794,7 +1843,7 @@
       "icon": "\u2694\ufe0f",
       "phase": "A",
       "prereqs": [],
-      "hours": 15.0,
+      "hours": 17.0,
       "modules": [
         {
           "id": "T15-round-coding",
@@ -1908,6 +1957,18 @@
           ],
           "order": 9,
           "status": "todo"
+        },
+        {
+          "id": "T15-build-projects",
+          "slug": "build-projects",
+          "title": "Build Projects That Interviewers Believe: 15 AI Builds + 10 Coding Warmups",
+          "hours": 2.0,
+          "tags": [
+            "interview",
+            "practice"
+          ],
+          "order": 10,
+          "status": "todo"
         }
       ]
     },
@@ -1919,7 +1980,7 @@
       "icon": "\ud83e\udde9",
       "phase": "A",
       "prereqs": [],
-      "hours": 57.0,
+      "hours": 61.5,
       "modules": [
         {
           "id": "T02-p01-two-pointers",
@@ -2252,6 +2313,30 @@
           ],
           "order": 29,
           "status": "todo"
+        },
+        {
+          "id": "T02-design-problems-caches",
+          "slug": "design-problems-caches",
+          "title": "Design Cache Problems: LRU/LFU Cache, Ring Buffer, Rate Limiter \u2014 Classic Interview Design Problems",
+          "hours": 2.0,
+          "tags": [
+            "advanced",
+            "interview"
+          ],
+          "order": 30,
+          "status": "todo"
+        },
+        {
+          "id": "T02-adv-dp-matrix",
+          "slug": "adv-dp-matrix",
+          "title": "Interval & String DP + Grid Simulation: Burst Balloons, Matrix Chain, Decode Ways, Spiral Matrix \u2014 Google Most-Asked Long Tail",
+          "hours": 2.5,
+          "tags": [
+            "advanced",
+            "blind75"
+          ],
+          "order": 31,
+          "status": "todo"
         }
       ]
     },
@@ -2263,7 +2348,7 @@
       "icon": "\ud83e\udde0",
       "phase": "A",
       "prereqs": [],
-      "hours": 40.5,
+      "hours": 42.5,
       "modules": [
         {
           "id": "T05-autoregression",
@@ -2386,6 +2471,19 @@
           "status": "todo"
         },
         {
+          "id": "T05-constitutional-ai",
+          "slug": "constitutional-ai",
+          "title": "Constitutional AI, RLAIF, and GRPO: Alignment Beyond RLHF",
+          "hours": 2.0,
+          "tags": [
+            "training",
+            "alignment",
+            "critical"
+          ],
+          "order": 10,
+          "status": "todo"
+        },
+        {
           "id": "T05-finetuning",
           "slug": "finetuning",
           "title": "LoRA/QLoRA/DoRA + the RAG-vs-FT-vs-Prompt Decision Tree",
@@ -2394,7 +2492,7 @@
             "training",
             "critical"
           ],
-          "order": 10,
+          "order": 11,
           "status": "todo"
         },
         {
@@ -2405,7 +2503,7 @@
           "tags": [
             "inference"
           ],
-          "order": 11,
+          "order": 12,
           "status": "todo"
         },
         {
@@ -2416,7 +2514,7 @@
           "tags": [
             "internals"
           ],
-          "order": 12,
+          "order": 13,
           "status": "todo"
         },
         {
@@ -2427,7 +2525,7 @@
           "tags": [
             "internals"
           ],
-          "order": 13,
+          "order": 14,
           "status": "todo"
         },
         {
@@ -2439,7 +2537,7 @@
             "internals",
             "critical"
           ],
-          "order": 14,
+          "order": 15,
           "status": "todo"
         },
         {
@@ -2451,7 +2549,7 @@
             "training",
             "critical"
           ],
-          "order": 15,
+          "order": 16,
           "status": "todo"
         },
         {
@@ -2464,7 +2562,7 @@
             "cost",
             "critical"
           ],
-          "order": 16,
+          "order": 17,
           "status": "todo"
         }
       ]
@@ -2794,7 +2892,7 @@
       "icon": "\ud83d\udcc8",
       "phase": "B",
       "prereqs": [],
-      "hours": 29.0,
+      "hours": 33.0,
       "modules": [
         {
           "id": "T03-linear-models",
@@ -2946,6 +3044,32 @@
             "critical"
           ],
           "order": 12,
+          "status": "todo"
+        },
+        {
+          "id": "T03-synthetic-data",
+          "slug": "synthetic-data",
+          "title": "Synthetic Data Generation: LLM-Generated Training Data, Augmentation, and Quality",
+          "hours": 2.0,
+          "tags": [
+            "data",
+            "training",
+            "advanced"
+          ],
+          "order": 13,
+          "status": "todo"
+        },
+        {
+          "id": "T03-continuous-learning",
+          "slug": "continuous-learning",
+          "title": "Continuous & Online Learning: Concept Drift, Incremental Updates, Feedback Loops",
+          "hours": 2.0,
+          "tags": [
+            "production",
+            "ml",
+            "advanced"
+          ],
+          "order": 14,
           "status": "todo"
         }
       ]
@@ -3295,7 +3419,7 @@
       "icon": "\ud83d\udee1\ufe0f",
       "phase": "B",
       "prereqs": [],
-      "hours": 41.0,
+      "hours": 43.0,
       "modules": [
         {
           "id": "T12-docker",
@@ -3505,6 +3629,19 @@
           ],
           "order": 17,
           "status": "todo"
+        },
+        {
+          "id": "T12-differential-privacy",
+          "slug": "differential-privacy",
+          "title": "Differential Privacy: Epsilon, Mechanisms, and the Privacy-Utility Tradeoff",
+          "hours": 2.0,
+          "tags": [
+            "security",
+            "privacy",
+            "critical"
+          ],
+          "order": 18,
+          "status": "todo"
         }
       ]
     },
@@ -3518,7 +3655,7 @@
       "prereqs": [
         "T08"
       ],
-      "hours": 23.0,
+      "hours": 25.0,
       "modules": [
         {
           "id": "T09-tracking-registry",
@@ -3644,6 +3781,19 @@
             "critical"
           ],
           "order": 10,
+          "status": "todo"
+        },
+        {
+          "id": "T09-federated-learning",
+          "slug": "federated-learning",
+          "title": "Federated Learning & On-Device AI: Training Without Centralizing Data",
+          "hours": 2.0,
+          "tags": [
+            "privacy",
+            "training",
+            "advanced"
+          ],
+          "order": 11,
           "status": "todo"
         }
       ]
@@ -5515,7 +5665,7 @@
       "icon": "\ud83d\udcbc",
       "phase": "B",
       "prereqs": [],
-      "hours": 16.5,
+      "hours": 19.0,
       "modules": [
         {
           "id": "T25-product-thinking",
@@ -5609,6 +5759,19 @@
             "critical"
           ],
           "order": 7,
+          "status": "todo"
+        },
+        {
+          "id": "T25-responsible-ai",
+          "slug": "responsible-ai",
+          "title": "Responsible AI, Bias, Fairness, Model Cards & AI Governance",
+          "hours": 2.5,
+          "tags": [
+            "ethics",
+            "governance",
+            "critical"
+          ],
+          "order": 8,
           "status": "todo"
         }
       ]
@@ -6291,7 +6454,7 @@
   ],
   "totals": {
     "tracks": 36,
-    "modules": 469,
-    "hours": 1082.5
+    "modules": 482,
+    "hours": 1111.0
   }
 }

@@ -240,6 +240,7 @@ TRACKS = [
         "selective-orchestration | Selective Multi-Agent Orchestration: Routing, Abstention, Fallbacks | 2.5 | architecture,production,critical",
         "production-agent-loops | Production Loops: Budgets, Resume, Kill Switches, Streaming | 3 | production",
         "agent-safety | Prompt Injection, OWASP LLM Top 10, Tool Permissions, Guardrails | 2.5 | security",
+        "ai-safety-redteam | AI Safety & Red-Teaming: Jailbreaks, Safety Benchmarks, Alignment, Constitutional AI | 2.5 | security,safety,critical",
         "agent-cost-routing | Prompt Caching, Model Routing, Fallback Chains, Cost Governance | 1.5 | production,cost",
         "structured-output | Structured Output: JSON Schema, Constrained Decoding, Repair Loops | 2 | production,critical",
         "prompting-techniques | Zero-Shot, Few-Shot, CoT, Self-Consistency: What Actually Moves Accuracy | 2 | prompting,critical",
@@ -292,6 +293,9 @@ TRACKS = [
         "data-structuring | Structuring Source Data: Tables, Code, PDFs, Hierarchies, Knowledge Graphs | 2.5 | ingest",
         "text-preprocessing | Tokenization vs Stemming vs Lemmatization, Stopwords, Normalization, TF-IDF | 2 | ingest,critical",
         "poisoned-rag-defense | RAG Poisoning Defense: Trust, Isolation, Provenance, and Validity Gates | 3 | security,critical",
+        "graph-rag | GraphRAG: Knowledge Graphs, Community Summaries, Global vs Local Queries | 2.5 | advanced,retrieval",
+        "agentic-rag | Agentic RAG: Agent Loops, Query Planning, Self-Correction, Multi-Hop | 2.5 | advanced,retrieval",
+        "multimodal-rag | Multimodal RAG: Images, Audio, Video, Tables in Retrieval | 2 | advanced,retrieval",
     ]),
     dict(id="T10", dir="10-system-design", title="System Design", icon="🏗️", phase="A", prereqs=[], modules=[
         "distributed-fundamentals | CAP/PACELC, Consistency Models, Replication, Partitioning | 3 | fundamentals,critical",
@@ -360,6 +364,7 @@ TRACKS = [
         "hr-round-basics | The 50-Question HR Round: Introduction, Goals, Failure, Teamwork, Salary, Closing | 1.5 | behavioral,critical",
         "aptitude-puzzles | Placement Aptitude: Seating, Blood Relations, Direction Sense, Ranking, Ranking Tricks | 1.5 | aptitude",
         "resume-ats-evidence | Resume ATS Evidence: Match Terms Without Inflating Claims | 2 | career,critical",
+        "build-projects | Build Projects That Interviewers Believe: 15 AI Builds + 10 Coding Warmups | 2 | interview,practice",
     ]),
     dict(id="T02", dir="02-dsa-21-patterns", title="DSA: 21 Patterns", icon="🧩", phase="A", prereqs=[], modules=[
         "p01-two-pointers | Two Pointers | 2 | pattern",
@@ -392,6 +397,8 @@ TRACKS = [
         "graph-mst-flow | MST (Kruskal/Prim), Max-Flow/Min-Cut, Bipartite Matching | 2.5 | graphs",
         "graph-scc | SCC (Tarjan/Kosaraju), Bridges, Articulation Points, 2-SAT | 2 | graphs",
         "graph-applied | Graphs in the Wild: Dependency Resolution, GraphRAG, Embeddings, PageRank | 2 | graphs",
+        "design-problems-caches | Design Cache Problems: LRU/LFU Cache, Ring Buffer, Rate Limiter — Classic Interview Design Problems | 2 | advanced,interview",
+        "adv-dp-matrix | Interval & String DP + Grid Simulation: Burst Balloons, Matrix Chain, Decode Ways, Spiral Matrix — Google Most-Asked Long Tail | 2.5 | advanced,blind75",
     ]),
     dict(id="T05", dir="05-llm-internals", title="LLM Internals", icon="🧠", phase="A", prereqs=[], modules=[
         "autoregression | Autoregression: Next-Token Prediction, Teacher Forcing, Exposure Bias | 2 | internals,critical",
@@ -404,6 +411,7 @@ TRACKS = [
         "sampling | Temperature, Top-k/p, Min-p, Beam, Speculative Decoding | 2 | inference",
         "inference-serving | KV Cache Math, PagedAttention, Continuous Batching, vLLM/SGLang | 3 | inference,critical",
         "alignment | SFT → RLHF/PPO → DPO/ORPO/KTO → GRPO & RL Reasoning | 3 | training",
+        "constitutional-ai | Constitutional AI, RLAIF, and GRPO: Alignment Beyond RLHF | 2 | training,alignment,critical",
         "finetuning | LoRA/QLoRA/DoRA + the RAG-vs-FT-vs-Prompt Decision Tree | 3 | training,critical",
         "quantization | GPTQ/AWQ/GGUF/FP8/INT4 and Quality-vs-Cost Curves | 2 | inference",
         "embeddings-training | Contrastive Training, Matryoshka, Domain Adaptation, Rerankers | 2 | internals",
@@ -456,7 +464,9 @@ TRACKS = [
         "eda | EDA: Distributions, Correlation Heatmaps, Outliers, the Questions to Ask First | 2 | practice,critical",
         "statistics-inference | Hypothesis Testing: Null Hypothesis, p-value, t-test, ANOVA, Chi-Square, Power | 2.5 | fundamentals,critical",
         "anomaly-detection | Anomaly Detection: Statistical, Isolation Forest, Autoencoder, and the Pipeline | 2.5 | models,critical",
-    ]),
+            "synthetic-data | Synthetic Data Generation: LLM-Generated Training Data, Augmentation, and Quality | 2 | data,training,advanced",
+        "continuous-learning | Continuous & Online Learning: Concept Drift, Incremental Updates, Feedback Loops | 2 | production,ml,advanced",
+]),
     dict(id="T04", dir="04-deep-learning", title="Deep Learning", icon="🔥", phase="B", prereqs=["T03"], modules=[
         "neural-net-math | The Neuron → Forward Propagation → Loss → Backpropagation, By Hand | 3 | fundamentals,critical",
         "backprop-derivation | Backprop Derived: Chain Rule, Jacobians, Vanishing/Exploding Gradients | 2.5 | fundamentals,critical",
@@ -507,6 +517,7 @@ TRACKS = [
         "secrets | Secret Management & Rotation, JWT TTL Caching | 1.5 | security",
         "owasp | OWASP Top 10 + OWASP LLM Top 10, SQL Injection Deep | 2.5 | security,critical",
         "authz | RBAC/ABAC/ReBAC, Multi-Tenant Isolation, Zero Trust | 2 | security",
+        "differential-privacy | Differential Privacy: Epsilon, Mechanisms, and the Privacy-Utility Tradeoff | 2 | security,privacy,critical",
     ]),
     dict(id="T09", dir="09-mlops-llmops", title="MLOps / LLMOps", icon="🔁", phase="B", prereqs=["T08"], modules=[
         "tracking-registry | MLflow/W&B, Model + Prompt Registries, DVC/LakeFS | 2 | platform",
@@ -520,6 +531,7 @@ TRACKS = [
         "data-drift | Data & Concept Drift: PSI/KS/KL Detection, Shift Types, Retraining Triggers | 2.5 | production,critical",
         "huggingface-ecosystem | Hugging Face + LangChain: transformers, datasets, PEFT, and Where Each Belongs | 2 | platform",
         "bedrock-vs-sagemaker | Bedrock vs SageMaker vs Self-Hosted: The Honest Selection Matrix | 2 | serving,critical",
+        "federated-learning | Federated Learning & On-Device AI: Training Without Centralizing Data | 2 | privacy,training,advanced",
     ]),
     dict(id="T13", dir="13-sde-craft-vibe-coding", title="SDE Craft & Vibe Coding", icon="✨", phase="B", prereqs=[], modules=[
         "git-advanced | Git: Rebase, Bisect, Worktrees, Trunk-Based Dev | 1 | craft",
@@ -703,6 +715,7 @@ TRACKS = [
         "unit-economics | Unit Economics, CAC/LTV, Margins, and the Cost of an AI Feature | 2 | finance,critical",
         "ai-product | Pricing & Positioning AI Products; Why Most AI Features Don't Ship | 2 | product,critical",
         "influence | Writing the One-Pager, the Business Case, and Getting Funded | 2 | leadership,critical",
+        "responsible-ai | Responsible AI, Bias, Fairness, Model Cards & AI Governance | 2.5 | ethics,governance,critical",
     ]),
     # ---------------------------------------------------------------- JD-driven (Expedia Marketing Content ML)
     dict(id="T32", dir="32-applied-nlp-marketing-ml", title="Applied NLP & Marketing ML", icon="📣", phase="A", prereqs=["T03"], modules=[

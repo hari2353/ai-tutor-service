@@ -328,6 +328,7 @@ NEVER FORGET    serving tricks manage whatever KV cache size the ARCHITECTURE pr
 - [SGLang vs vLLM in 2026: Benchmarks, Architecture, and When to Use Each](https://particula.tech/blog/sglang-vs-vllm-inference-engine-comparison) — accessed 2026-07-26
 - [vLLM release notes / v0.23.0 changelog summary](https://fazm.ai/t/vllm-release-april-2026-release-notes) — accessed 2026-07-26
 - [LLM Inference SLO Engineering: TTFT, ITL, and P99 Latency Budgets — Spheron Blog](https://www.spheron.network/blog/llm-inference-slo-ttft-itl-latency-budget-guide-2026/) — accessed 2026-07-26
+- [datasciencebrain — "7 LLM Optimization Techniques Every AI Engineer Should Know" (Quantization, Distillation, KV Caching, Continuous Batching, Speculative Decoding, Tensor/Pipeline Parallelism)](https://www.instagram.com/p/DemU7U7meZc/) — accessed 2026-10-31
 
 ## Changelog
 - 2026-07-26 — created

@@ -697,6 +697,7 @@ WHEN NOT TO
 - [Cognition — Don't Build Multi-Agents](https://cognition.com/blog/dont-build-multi-agents) — single-threaded linear agents, dedicated compression model, handoff loss; June 2025, accessed 2026-07-26
 - [Governance Decay: How Context Compaction Silently Erases Safety Constraints in Long-Horizon LLM Agents](https://arxiv.org/abs/2606.22528) — compaction as a safety surface; accessed 2026-07-26
 - [Attention Is All You Need](https://arxiv.org/abs/1706.03762) — the n² attention structure being reasoned about; accessed 2026-07-26
+- [datasciencebrain — "headroom: cut LLM inference costs by up to 95% via compressing tool outputs, logs, files and RAG chunks before they reach the LLM (Python library, proxy, MCP server)"](https://www.instagram.com/p/DeeKN1njFiL/) — concrete implementation of the "tool-result truncation at the tool" strategy (accessed 2026-10-31)
 
 ## Changelog
 - 2026-07-26 — created

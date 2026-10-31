@@ -347,6 +347,7 @@ WHEN NOT TO USE   personalized answers (same text, different truth per user)
 - [Prompt caching — OpenAI API Documentation](https://developers.openai.com/api/docs/guides/prompt-caching) — accessed 2026-08-01
 - [Semantic Cache for LLMs: When to Ship, When to Skip (2026) — Respan](https://www.respan.ai/articles/semantic-cache-llm) — accessed 2026-08-01
 - [LLM Semantic Caching: The 95% Hit Rate Myth — DEV Community](https://dev.to/gauravdagde/llm-semantic-caching-the-95-hit-rate-myth-and-what-production-data-actually-shows-8ga) — accessed 2026-08-01
+- [datasciencebrain — "Build a Semantic Cache That Cut an Agent's LLM Bill by 53%" (Chroma + Gemini, threshold 0.82, 60-question replay)](https://www.instagram.com/p/DeVz6IUmNBq/) — accessed 2026-10-31
 
 ## Changelog
 - 2026-08-01 — created

@@ -173,6 +173,8 @@ def build_few_shot_prompt(query, example_pool, embed_fn, k=4):
 | CoT prompting shows no benefit on a small or distilled model | Below the capability threshold where CoT's benefit is emergent | Don't force CoT on small models by default; measure whether it helps for your specific model size before assuming it will |
 | Prompt engineering effort plateaus with no further accuracy gains despite continued iteration | Bottleneck has moved to retrieval or eval quality, not prompt wording | Re-diagnose upstream: check retrieval precision/recall and eval set validity before iterating further on the prompt |
 
+**The 2026 output-format ladder (Karpathy's four moves).** One practitioner addition to the format lever worth knowing by name: instead of accepting prose, escalate the *rendering* of the answer — (1) ask for the explanation **in ASD-STE100**, Simplified Technical English, the aerospace-industry controlled-language spec (~900 approved words, ≤20 words per instruction, active voice) — phrased as "80% of the way to ASD-STE100" because the full spec is too stringent for general writing; (2) **ask for a diagram instead of text** ("don't explain it — draw the vector-DB write path"); (3) **ask for the output in HTML** to get an interactive page (calculators, dashboards, anything with numbers); (4) ask for a **bespoke explainer video** (e.g. 3b1b-style with TTS narration). Ranked in that order — Karpathy's post ends each step with "but even better" — and the underlying principle is the one this module keeps landing on: models are abundant, *checking their work* is the bottleneck, so ask for the format that is cheapest for you to verify. Pairs with plan-mode-before-work and context engineering deciding what the agent reads.
+
 ---
 
 ## Tradeoffs & when NOT to use it
@@ -301,6 +303,8 @@ WHAT ACTUALLY MOVES PRODUCTION ACCURACY (ranked, the honest answer)
 - [Few Shot Prompting: What It Is + How to Use It (2026)](https://phrasly.ai/blog/few-shot-prompting/) — accessed 2026-08-01
 - [Test-Time Adaptation via Many-Shot Prompting: Benefits, Limits, and Pitfalls](https://arxiv.org/html/2603.05829) — accessed 2026-08-01
 - [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629) — accessed 2026-08-01
+- [Andrej Karpathy — writing in ASD-STE100, diagrams, HTML, explainer videos (Jan 2026 post, 360Labs.ai explainer)](https://www.instagram.com/p/DeMbiM3TeKf/) — the four output-format moves, ranked (accessed 2026-10-31)
 
 ## Changelog
 - 2026-08-01 — created
+- 2026-10-31 — added Karpathy's output-format ladder (ASD-STE100 / diagram / HTML / explainer video) to the production section
