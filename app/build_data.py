@@ -705,6 +705,7 @@ TRACKS = [
         "mrm | Model Risk Management: SR 11-7, Validation, Governance, the MRM Role | 2.5 | banking,critical",
         "ai-in-finance | AI in Finance: Fraud, Credit, AML, Explainability & Fair-Lending Constraints | 2.5 | ai,critical",
         "quant-python-stack | The Python Quant Stack: QuantLib, cvxpy, PyPortfolioOpt, arch, TA-Lib, Numba in Anger | 2.5 | finance,python,critical",
+        "quant-trading-interviews | Quant Trading Interviews: Math, Probability, Mental Math for Jane Street / Citadel / HRT | 2.5 | quant,interview,critical",
     ]),
     dict(id="T25", dir="25-product-business", title="Product Thinking & Business (MBA)", icon="💼", phase="B", prereqs=[], modules=[
         "product-thinking | Product Thinking for Engineers: Problem → Outcome → Solution | 2 | product,critical",

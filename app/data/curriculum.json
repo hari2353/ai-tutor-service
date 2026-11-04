@@ -5522,7 +5522,7 @@
       "prereqs": [
         "T03"
       ],
-      "hours": 29.0,
+      "hours": 31.5,
       "modules": [
         {
           "id": "T24-time-series-core",
@@ -5653,6 +5653,19 @@
             "critical"
           ],
           "order": 10,
+          "status": "todo"
+        },
+        {
+          "id": "T24-quant-trading-interviews",
+          "slug": "quant-trading-interviews",
+          "title": "Quant Trading Interviews: Math, Probability, Mental Math for Jane Street / Citadel / HRT",
+          "hours": 2.5,
+          "tags": [
+            "quant",
+            "interview",
+            "critical"
+          ],
+          "order": 11,
           "status": "todo"
         }
       ]
@@ -6454,7 +6467,7 @@
   ],
   "totals": {
     "tracks": 36,
-    "modules": 482,
-    "hours": 1111.0
+    "modules": 483,
+    "hours": 1113.5
   }
 }
