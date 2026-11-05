@@ -314,5 +314,7 @@ RETRIEVAL@K vs ANSWER QUALITY: RAGAS context recall = judge-estimated per
 - [LLM-as-a-judge: a complete guide to using LLMs for evaluations — Evidently AI](https://www.evidentlyai.com/llm-guide/llm-as-a-judge) — accessed 2026-07-28
 - [RAG Evaluation Metrics: Assessing Answer Relevancy, Faithfulness, Contextual Relevancy — Confident AI](https://www.confident-ai.com/blog/rag-evaluation-metrics-answer-relevancy-faithfulness-and-more) — accessed 2026-07-28
 
+- [meghana.ai — "100+ RAG Interview Questions" (105 Qs covering chunking, retrieval, reranking, embeddings, vector DBs, hybrid search, context precision/recall, faithfulness, response relevancy)](https://www.instagram.com/p/Deb66XNgeHv/) (accessed 2026-11-05)
+
 ## Changelog
 - 2026-07-28 — created

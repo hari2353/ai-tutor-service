@@ -102,7 +102,40 @@ Each of these came from a widely-shared AI-engineer loop prep sheet, and each on
 
 If the minutes are too short for a build block, the gamified-learning canon fills idle ones without an editor: **TensorFlow Playground** (build a neural net visually in-browser), **Transformer Explainer** (poloclub's next-token visualization), **Teachable Machine** (train a small image/audio model in minutes), **SQL Murder Mystery** (a full detective story solved with SQL joins), **CodeDash**-style Python adventure games, and **TrickGuard** (an AI-safety game — prompt your way past a model's guardrails). None of these replaces a build; they exist for pattern-intuition days and for the "I've never touched SQL" interview slice — 15 minutes of Murder Mystery beats an hour of passive tutorial for finding out how much SQL you actually know.
 
+## Project ideas bank (20 more, from sreemantideytech's 2026 list)
+
+If the 15 builds above don't fit your gap, these 20 are the next tier — each one
+maps to an existing module and proves a specific skill:
+
+| # | Project | Stack | Proves |
+|---|---|---|---|
+| 1 | Train a small GPT from scratch (tokenizer + attention + training loop) | PyTorch | T05-build-nanogpt |
+| 2 | Recommendation system (two-tower retrieval + ranker, MovieLens) | PyTorch, FAISS | T15-build-projects (semantic search) |
+| 3 | Fraud detection (imbalanced data, threshold tuning) | XGBoost, SHAP | T03-classical-ml |
+| 4 | Demand forecasting with MLOps (drift + retrain) | LightGBM, MLflow, Evidently | T09-mlops |
+| 5 | Resume-to-job matcher (embeddings + cross-encoder + FastAPI) | embeddings, cross-encoder, FastAPI | T15-build-projects (FastAPI endpoint) |
+| 6 | Semantic code search (code chunking + embeddings + reranker) | code chunking, embeddings, reranker | T15-build-projects (semantic search) |
+| 7 | Text-to-SQL agent (LangGraph, Postgres, SQL guardrails) | LangGraph, Postgres, SQL guardrails | T15-build-projects (FastAPI endpoint) |
+| 8 | Browser agent (Playwright, tool calling, success rate) | Playwright, tool calling | T07-agentic-ai |
+| 9 | Your own MCP server (MCP Python SDK, auth, tests) | MCP Python SDK, auth, tests | T07-mcp-deep-dive |
+| 10 | Coding agent that fixes failing tests (tool calling, sandbox, git) | tool calling, sandbox, git | T07-agentic-ai |
+| 11 | Distil a big model into a small one (synthetic data, LoRA, evals) | synthetic data, LoRA, evals | T03-synthetic-data, T05-finetuning |
+| 12 | Fine-tune Whisper for an Indian language (WER before/after) | Whisper, Hugging Face, WER | T26-voice-models |
+| 13 | LLM serving benchmark (vLLM, quantization, load testing) | vLLM, quantization, load testing | T05-inference-serving |
+| 14 | LLM router (classifier, two models, cost tracking) | classifier, two models, cost tracking | T07-inference-cost-routing |
+| 15 | Image search with CLIP (text + images in one space) | CLIP, vector index, Streamlit | T05-multimodal, T06-vector-index |
+| 16 | On-device object detection (YOLO, ONNX, quantization) | YOLO, ONNX, quantization | T04-deep-learning, T26-frontier-ai |
+| 17 | Real-time voice agent (Whisper, LLM, TTS, WebSockets) | Whisper, LLM, TTS, WebSockets | T26-voice-models |
+| 18 | Meeting assistant (transcribe, diarize, extract actions) | Whisper, speaker diarization, LLM | T26-voice-models |
+| 19 | Chart and table document Q&A (VLM, layout parsing, evals) | VLM, layout parsing, evals | T06-multimodal-rag |
+| 20 | AI slop detector (small LM, perplexity, scikit-learn) | small LM, perplexity, scikit-learn | T03-classical-ml, T08-eval |
+
+Each one is a one-evening exercise. Pick the one that fills your biggest gap.
+
+---
+
 And the answer to all of them is never just the code — rehearse the follow-up chain from the source sheet: time and space complexity, edge cases, error handling, testing, trade-offs. That list is what the "explain" half of the question is buying.
+
 
 ## Failure-mode project warm-ups (5 more, from aishwarya_srinivasan's 2026 list)
 
@@ -165,9 +198,11 @@ Building is the expensive half; converting it into interview currency is the par
 - [datasciencebrain — Zero-to-Hero 100-day GenAI plan — proof-of-work framing](https://www.instagram.com/p/DeUEdtxmOXL/) (accessed 2026-10-31)
 - [codewithupasana — 5 GitHub repos for the resource library](https://www.instagram.com/p/Dd8EJmMGjDp/) (accessed 2026-10-31)
 - [DdxhFHTR8cm — 6 gamified AI-learning sites: TensorFlow Playground, Transformer Explainer, Teachable Machine, SQL Murder Mystery, CodeDash, TrickGuard](https://www.instagram.com/reel/DdxhFHTR8cm/) (accessed 2026-10-31)
+- [sreemantideytech — "20 AI/ML Engineering Projects That Get You Hired" (20 project ideas with stacks, from GPT-from-scratch to AI slop detector)](https://www.instagram.com/p/De6QNkDEfrc/) (accessed 2026-11-05)
 - [aishwarya_srinivasan — "5 AI Projects to Build Before 2026 Ends" (Company Q&A w/ permission filter, support tracker w/ crash-resume, invoice checker w/ deterministic validation, customer data cleaner, ops dashboard w/ timeout-safe retries) + portfolio checklist](https://www.instagram.com/p/DeKWBPuE9Kj/) (accessed 2026-10-31)
 
 ## Changelog
 
 - 2026-10-31: Created — the interview-prep project menu and coding warm-ups were the batch's only genuine interview-side gap; rounds and resume modules already existed.
 - 2026-10-31: Added the gamified idle-minutes canon (playgrounds, Murder Mystery, TrickGuard) after the warm-ups table.
+- 2026-11-05: Added 20-project ideas bank from sreemantideytech carousel (all map to existing modules).
