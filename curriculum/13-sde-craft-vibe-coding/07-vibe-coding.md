@@ -476,6 +476,7 @@ DO NOT USE FOR: novel algorithms (loop can't close), concurrency debugging
 - `T27-reviewing-ai-code` — the ten LLM-specific code failure modes and the review checklist (this repo)
 - `T13-code-review` — blast radius, hidden coupling, and problem-selection review (this repo)
 - `T13-testing-practice` — what makes a test worth writing (this repo)
+- [aiswaryavenkitesh — "Forward Deployed Engineer Roadmap" (6 stages: customer discovery, APIs, rapid prototyping, AI agents, deployment, scaling)](https://www.instagram.com/p/DfAyYb1zhYq/) (accessed 2026-11-06)
 
 ## Changelog
 - 2026-08-05 — created

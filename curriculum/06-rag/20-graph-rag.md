@@ -102,6 +102,8 @@ CORPUS ──► LLM extracts (entity, relationship, description) triples
 
 ## Sources
 
+- [NVIDIA Auto Ontology — semantic layer for AI agents (graph-based reasoning over enterprise data, MCP server)](https://github.com/NVIDIA/auto-ontology) — accessed 2026-11-06
+
 - [Microsoft GraphRAG (GitHub, 20k+ stars)](https://github.com/microsoft/graphrag) — accessed 2026-10-31
 - [LightRAG: Simple and Fast Retrieval-Augmented Generation](https://github.com/HKUDS/LightRAG) — accessed 2026-10-31
 - [HippoRAG: Neurobiologically Inspired Long-Term Memory for LLMs](https://github.com/OSU-NLP-Group/HippoRAG) — accessed 2026-10-31
